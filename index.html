@@ -2385,24 +2385,86 @@
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script type="module">
+        /* ============================================================
+           FIREBASE — SDK modular (v12), carregado via ES module
+           ------------------------------------------------------------
+           Este bloco só inicializa o Firebase e expõe um punhado de
+           funções em window.__fb para o script principal (que é um
+           <script> clássico, não-module, cheio de onclick="..." inline
+           — por isso não dá pra converter ele inteiro em module) usar.
+           Scripts type="module" sempre rodam depois que o HTML termina
+           de ser parseado (como um <script defer>), então o script
+           principal NUNCA deve chamar window.__fb no nível superior —
+           só de dentro de handlers (clique, submit) ou do listener do
+           evento 'firebase-ready' abaixo, quando já é garantido que
+           este bloco já rodou.
+           ============================================================ */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+        import {
+            getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
+            signInWithEmailAndPassword, updateProfile, GoogleAuthProvider,
+            signInWithPopup, signOut
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+        import {
+            getFirestore, doc, getDoc, setDoc
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
+            authDomain: "trycktrack-eebae.firebaseapp.com",
+            projectId: "trycktrack-eebae",
+            storageBucket: "trycktrack-eebae.firebasestorage.app",
+            messagingSenderId: "240947780643",
+            appId: "1:240947780643:web:ad28805630df692934e596",
+            measurementId: "G-WTBYRSL5RR"
+        };
+
+        let ready = false;
+        try {
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+            try { getAnalytics(app); } catch (e) { /* analytics é opcional, ignora falha (ex: ad-blocker) */ }
+
+            window.__fb = {
+                ready: true,
+                onAuthStateChanged: (cb) => onAuthStateChanged(auth, cb),
+                signUp: async (email, password, name) => {
+                    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    if (name) await updateProfile(cred.user, { displayName: name });
+                    return cred.user;
+                },
+                signIn: (email, password) => signInWithEmailAndPassword(auth, email, password),
+                signInWithGoogle: () => signInWithPopup(auth, new GoogleAuthProvider()),
+                signOut: () => signOut(auth),
+                getProgress: async (uid) => {
+                    const snap = await getDoc(doc(db, 'users', uid));
+                    return snap.exists() ? (snap.data().rrProgress || null) : null;
+                },
+                setProgress: (uid, data) => setDoc(doc(db, 'users', uid), { rrProgress: data }, { merge: true })
+            };
+            ready = true;
+        } catch (e) {
+            console.error('Firebase não pôde ser inicializado:', e);
+            window.__fb = { ready: false };
+        }
+
+        window.dispatchEvent(new CustomEvent('firebase-ready', { detail: { ready } }));
+    </script>
     <script>
         /* ============================================================
-           FIREBASE — autenticação e sincronização de progresso
+           AUTENTICAÇÃO — UI e integração com window.__fb (Firebase)
            ------------------------------------------------------------
-           Preencha firebaseConfig com as credenciais do SEU projeto:
-           1. Crie um projeto em https://console.firebase.google.com
-           2. Adicione um "app da Web" (ícone </>) e copie o objeto de
-              configuração que aparece — cole ele em firebaseConfig
-              abaixo, substituindo os valores "COLE_AQUI".
-           3. No menu Authentication → Sign-in method, ative os
-              provedores "Email/senha" e "Google".
-           4. No menu Firestore Database, clique em "Criar banco de
-              dados" (modo produção) — é onde o progresso de leitura
-              fica salvo por conta.
-           5. Em Firestore → Regras, use algo como:
+           As credenciais do projeto Firebase ficam no bloco <script
+           type="module"> logo acima. Configuração do lado do Firebase
+           necessária para isto funcionar de ponta a ponta:
+           1. Console → Authentication → Sign-in method: ativar
+              "Email/senha" e "Google".
+           2. Console → Firestore Database: criar o banco (modo
+              produção).
+           3. Firestore → Regras:
                 rules_version = '2';
                 service cloud.firestore {
                   match /databases/{database}/documents {
@@ -2411,35 +2473,13 @@
                     }
                   }
                 }
-           Sem essas credenciais reais, a tela de login fica presa no
-           carregamento — o restante do app (dados, layout) continua
-           funcionando normalmente assim que a config for preenchida.
+           Se o Firebase falhar ao inicializar (rede bloqueada, config
+           inválida etc.), o app libera o acesso direto, sem tela de
+           login, para não travar o uso local.
            ============================================================ */
-        const firebaseConfig = {
-            apiKey: "COLE_AQUI",
-            authDomain: "COLE_AQUI.firebaseapp.com",
-            projectId: "COLE_AQUI",
-            storageBucket: "COLE_AQUI.appspot.com",
-            messagingSenderId: "COLE_AQUI",
-            appId: "COLE_AQUI"
-        };
-
-        let auth = null;
-        let db = null;
         let firebaseReady = false;
         let currentFirebaseUser = null;
         let authMode = 'signin'; // 'signin' | 'signup'
-
-        try {
-            if (firebaseConfig.apiKey !== 'COLE_AQUI') {
-                firebase.initializeApp(firebaseConfig);
-                auth = firebase.auth();
-                db = firebase.firestore();
-                firebaseReady = true;
-            }
-        } catch (e) {
-            console.error('Firebase não pôde ser inicializado:', e);
-        }
 
         function toggleAuthMode() {
             authMode = authMode === 'signin' ? 'signup' : 'signin';
@@ -2494,7 +2534,10 @@
                 'auth/weak-password': 'A senha precisa ter pelo menos 6 caracteres.',
                 'auth/too-many-requests': 'Muitas tentativas. Tente novamente em alguns minutos.',
                 'auth/network-request-failed': 'Falha de conexão. Verifique sua internet.',
-                'auth/popup-closed-by-user': 'Login cancelado.'
+                'auth/popup-closed-by-user': 'Login cancelado.',
+                'auth/configuration-not-found': 'O login por email/senha ainda não foi ativado no Firebase (Console → Authentication → Sign-in method).',
+                'auth/operation-not-allowed': 'Este método de login ainda não foi ativado no Firebase (Console → Authentication → Sign-in method).',
+                'auth/unauthorized-domain': 'Este domínio ainda não está autorizado no Firebase (Console → Authentication → Settings → Authorized domains).'
             };
             return map[code] || 'Não foi possível concluir. Tente novamente.';
         }
@@ -2511,15 +2554,14 @@
             submitBtn.textContent = authMode === 'signup' ? 'Criando conta...' : 'Entrando...';
             try {
                 if (authMode === 'signup') {
-                    const cred = await auth.createUserWithEmailAndPassword(email, password);
-                    if (name) await cred.user.updateProfile({ displayName: name });
+                    await window.__fb.signUp(email, password, name);
                 } else {
-                    await auth.signInWithEmailAndPassword(email, password);
+                    await window.__fb.signIn(email, password);
                 }
             } catch (e) {
-                showAuthError(authErrorMessage(e.code));
                 submitBtn.disabled = false;
-                updateAuthUI();
+                submitBtn.textContent = authMode === 'signup' ? 'Criar conta' : 'Entrar';
+                showAuthError(authErrorMessage(e.code));
             }
         }
 
@@ -2527,27 +2569,26 @@
             if (!firebaseReady) { showAuthError('Login ainda não configurado neste app.'); return; }
             hideAuthError();
             try {
-                const provider = new firebase.auth.GoogleAuthProvider();
-                await auth.signInWithPopup(provider);
+                await window.__fb.signInWithGoogle();
             } catch (e) {
                 if (e.code !== 'auth/popup-closed-by-user') showAuthError(authErrorMessage(e.code));
             }
         }
 
         function handleSignOut() {
-            if (!firebaseReady || !auth) return;
-            auth.signOut();
+            if (!firebaseReady) return;
+            window.__fb.signOut();
         }
 
         async function syncProgressFromCloud(uid) {
             try {
-                const doc = await db.collection('users').doc(uid).get();
-                if (doc.exists && doc.data().rrProgress) {
-                    saveProgressData(doc.data().rrProgress);
+                const cloudProgress = await window.__fb.getProgress(uid);
+                if (cloudProgress) {
+                    saveProgressData(cloudProgress);
                 } else {
                     const local = getProgressData();
                     if (Object.keys(local).length > 0) {
-                        await db.collection('users').doc(uid).set({ rrProgress: local }, { merge: true });
+                        await window.__fb.setProgress(uid, local);
                     }
                 }
             } catch (e) {
@@ -2559,7 +2600,7 @@
 
         function pushProgressToCloud(data) {
             if (!firebaseReady || !currentFirebaseUser) return;
-            db.collection('users').doc(currentFirebaseUser.uid).set({ rrProgress: data }, { merge: true })
+            window.__fb.setProgress(currentFirebaseUser.uid, data)
                 .catch(e => console.error('Falha ao salvar progresso na nuvem:', e));
         }
 
@@ -2581,22 +2622,44 @@
             if (nav) nav.hidden = true;
         }
 
-        if (firebaseReady) {
-            auth.onAuthStateChanged(function (user) {
-                currentFirebaseUser = user;
-                if (user) {
-                    showApp();
-                    syncProgressFromCloud(user.uid);
-                } else {
-                    showAuthScreen();
-                }
-            });
-        } else {
-            // Sem credenciais reais do Firebase — libera o app direto,
-            // sem tela de login, para não travar o uso local.
+        function releaseAppWithoutLogin() {
+            // Sem Firebase disponível (config inválida, rede bloqueada
+            // ou ainda carregando além do tempo esperado) — libera o
+            // app direto, sem tela de login, para não travar o uso local.
             document.getElementById('authLoading').hidden = true;
+            document.getElementById('authScreen').hidden = true;
             document.getElementById('appContainer').hidden = false;
         }
+
+        // O bloco <script type="module"> que inicializa o Firebase roda
+        // depois deste script (módulos são sempre deferidos), por isso
+        // toda a integração com window.__fb só pode começar aqui, a
+        // partir deste evento — nunca no nível superior do script.
+        window.addEventListener('firebase-ready', function (event) {
+            firebaseReady = !!(event.detail && event.detail.ready);
+            if (firebaseReady) {
+                window.__fb.onAuthStateChanged(function (user) {
+                    currentFirebaseUser = user;
+                    if (user) {
+                        showApp();
+                        syncProgressFromCloud(user.uid);
+                    } else {
+                        showAuthScreen();
+                    }
+                });
+            } else {
+                releaseAppWithoutLogin();
+            }
+        });
+
+        // Rede lenta, bloqueada, ou o módulo do Firebase falhou antes de
+        // conseguir disparar 'firebase-ready' — não deixa a pessoa presa
+        // na tela de carregamento pra sempre.
+        setTimeout(function () {
+            if (document.getElementById('authLoading') && !document.getElementById('authLoading').hidden) {
+                releaseAppWithoutLogin();
+            }
+        }, 5000);
 
         /* ============================================================
            USUÁRIO ATUAL
