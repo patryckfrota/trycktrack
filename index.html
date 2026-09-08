@@ -381,9 +381,160 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        
+        /* RAPID REVIEW CARDS */
+        #reviewTab {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-top: 4px;
+        }
 
-        
+        .rr-card {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 18px;
+            border-radius: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            overflow: hidden;
+            animation: rrCardIn 0.5s var(--ease-out) backwards;
+        }
+
+        .rr-card:nth-child(1) { animation-delay: 0.03s; }
+        .rr-card:nth-child(2) { animation-delay: 0.09s; }
+        .rr-card:nth-child(3) { animation-delay: 0.15s; }
+        .rr-card:nth-child(4) { animation-delay: 0.21s; }
+        .rr-card:nth-child(5) { animation-delay: 0.27s; }
+        .rr-card:nth-child(6) { animation-delay: 0.33s; }
+
+        @keyframes rrCardIn {
+            from { opacity: 0; transform: translateY(18px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .rr-card:active {
+            transform: scale(0.98);
+        }
+
+        .rr-card.highlighted {
+            background: linear-gradient(135deg, rgba(196, 181, 253, 0.15), rgba(196, 181, 253, 0.06));
+            border-color: var(--lavender-active);
+            box-shadow: 0 0 0 1px var(--lavender-active), 0 8px 24px var(--lavender-glow);
+            padding-top: 32px;
+        }
+
+        .rr-card-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(196, 181, 253, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--lavender-active);
+        }
+
+        .rr-card-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .rr-card-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .rr-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .rr-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .rr-card-badge {
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            padding: 3px 8px;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+        .rr-card-description {
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+
+        .rr-card-status {
+            margin-top: 2px;
+        }
+
+        .rr-progress-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--lavender-active);
+        }
+
+        .rr-progress-bar {
+            width: 100%;
+            height: 3px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .rr-progress-fill {
+            height: 100%;
+            background: var(--lavender-active);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.4s var(--ease);
+        }
+
+        .rr-card-arrow {
+            flex-shrink: 0;
+            align-self: center;
+            font-size: 22px;
+            color: var(--text-secondary);
+        }
+
+        .rr-continue-badge {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: var(--lavender-active);
+            color: var(--bg-main);
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s var(--ease);
+        }
+
+        .rr-card.highlighted .rr-continue-badge {
+            opacity: 1;
+        }
 
         .card-subtitle {
             font-size: 12px;
@@ -2799,12 +2950,18 @@
         function updateAllCardProgress() {
             document.querySelectorAll('.rr-card').forEach(card => {
                 const topicKey = card.getAttribute('data-topic');
+                const topic = RAPID_REVIEW_DATA[topicKey];
                 const progress = calculateProgress(topicKey);
                 const label = card.querySelector('.rr-progress-label');
                 const fill = card.querySelector('.rr-progress-fill');
+                const badge = card.querySelector('.rr-card-badge');
 
                 if (label) label.textContent = `${progress}% lido`;
                 if (fill) fill.style.width = `${progress}%`;
+                if (badge && topic) {
+                    const total = topic.sections.reduce((sum, s) => sum + s.subchapters.length, 0);
+                    badge.textContent = `${total} temas`;
+                }
             });
         }
 
