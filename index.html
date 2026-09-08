@@ -363,17 +363,7 @@
         }
 
         /* CARD */
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.15s var(--ease);
-            opacity: 0;
-            animation: slideUp 0.45s var(--ease-out) forwards;
-        }
+        
 
         .card:active {
             transform: scale(0.98);
@@ -391,22 +381,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card-area {
-            font-size: 11px;
-            color: var(--lavender-active);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
+        
 
-        .card-title {
-            font-size: 14px;
-            color: var(--text-main);
-            font-weight: 600;
-            line-height: 1.4;
-            margin-bottom: 4px;
-        }
+        
 
         .card-subtitle {
             font-size: 12px;
@@ -1706,26 +1683,121 @@
 
             <!-- RAPID REVIEW -->
             <div class="tab-content" id="reviewTab">
-                <div class="card" onclick="openReader('clinica-medica')">
-                    <div class="card-title">Clínica Médica</div>
+            <div class="rr-card" onclick="openReader('clinica-medica')" data-topic="clinica-medica">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7m-6-2h6m-6 4h6M8 9h.01M8 13h.01" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Clínica Médica</div>
+                        <div class="rr-card-badge">9 temas</div>
+                    </div>
+                    <div class="rr-card-description">Infectologia, Cardiologia, Pneumologia</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
                 </div>
-                <div class="card" onclick="openReader('go-completo')">
-                    <div class="card-title">Ginecologia e Obstetrícia</div>
-                </div>
-                <div class="card" onclick="openReader('psiquiatria')">
-                    <div class="card-title">Psiquiatria</div>
-                </div>
-                <div class="card" onclick="openReader('pediatria-completo')">
-                    <div class="card-title">Pediatria</div>
-                </div>
-                <div class="card" onclick="openReader('medicina-preventiva')">
-                    <div class="card-title">Medicina Preventiva</div>
-                </div>
-                <div class="card" onclick="openReader('cirurgia-geral')">
-                    <div class="card-title">Cirurgia Geral</div>
-                </div>
+                <div class="rr-card-arrow">›</div>
             </div>
-
+            
+            <div class="rr-card" onclick="openReader('go-completo')" data-topic="go-completo">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Ginecologia e Obstetrícia</div>
+                        <div class="rr-card-badge">2 temas</div>
+                    </div>
+                    <div class="rr-card-description">Pré-natal, Síndromes hipertensivas, Parto e puerpério</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('psiquiatria')" data-topic="psiquiatria">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm-3 8a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0zm-3 3c.83 0 1.5.672 1.5 1.5S13.83 18 12 18s-1.5-.672-1.5-1.5S11.17 15 12 15z" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Psiquiatria</div>
+                        <div class="rr-card-badge">4 temas</div>
+                    </div>
+                    <div class="rr-card-description">Transtornos de ansiedade, Psicoses, Depressão</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('pediatria-completo')" data-topic="pediatria-completo">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-7h8v2h-8zm0-2h8v2h-8zm0-2h8v2h-8z" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Pediatria</div>
+                        <div class="rr-card-badge">13 temas</div>
+                    </div>
+                    <div class="rr-card-description">Neonatologia, Crescimento e desenvolvimento, Imunizações</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('medicina-preventiva')" data-topic="medicina-preventiva">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.672 1.5-1.5S16.33 8 15.5 8 14 8.672 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.672 1.5-1.5S9.83 8 9 8 7.5 8.672 7.5 9.5 8.17 11 9 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H7.89c.8 2.04 2.78 3.5 5.11 3.5z" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Medicina Preventiva</div>
+                        <div class="rr-card-badge">7 temas</div>
+                    </div>
+                    <div class="rr-card-description">Vigilância em saúde, Promoção da saúde, Estratégias de SUS</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('cirurgia-geral')" data-topic="cirurgia-geral">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h4m0-18h6m-6 0v18m6-18c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2h4c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-4m0 7h6M9 10h6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Cirurgia Geral</div>
+                        <div class="rr-card-badge">0 temas</div>
+                    </div>
+                    <div class="rr-card-description">Trauma, Gastroenterologia, Abdome agudo</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            </div>
+            </div>
             <!-- QUESTÕES -->
             <div class="tab-content" id="questoesTab">
                 <div class="filter-tabs">
@@ -1996,6 +2068,9 @@
         }
 
         updateHeaderTitle('inicio');
+
+        // Inicializar progresso das cards quando a página carrega
+        setTimeout(() => updateAllCardProgress(), 300);
 
         /* ============================================================
            RAPID REVIEW — dados
@@ -2654,6 +2729,9 @@
             const chapter = topic.sections[sIdx].subchapters[subIdx];
             document.getElementById('readerFooterNum').textContent = chapter.num;
 
+            // Marcar capítulo como lido
+            markChapterAsRead(readerState.topicKey, chapter.num);
+
             const flat = flattenSubchapters(topic);
             const posIndex = flat.findIndex(f => f.sIdx === sIdx && f.subIdx === subIdx);
             const progressPct = ((posIndex + 1) / flat.length) * 100;
@@ -2670,13 +2748,96 @@
             });
         }
 
+        // ============================================================
+        // PROGRESS TRACKING — Rapid Review cards
+        // ============================================================
+
+        const PROGRESS_KEY = 'rrProgress';
+
+        function getProgressData() {
+            const stored = localStorage.getItem(PROGRESS_KEY);
+            return stored ? JSON.parse(stored) : {};
+        }
+
+        function saveProgressData(data) {
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+        }
+
+        function checkAndResetProgressAfter24h(topicKey) {
+            const data = getProgressData();
+            if (!data[topicKey]) {
+                data[topicKey] = { lastAccess: Date.now(), readChapters: [] };
+                saveProgressData(data);
+                return;
+            }
+
+            const lastAccess = data[topicKey].lastAccess || Date.now();
+            const now = Date.now();
+            const hoursSinceAccess = (now - lastAccess) / (1000 * 60 * 60);
+
+            // Reset após 24h sem voltar
+            if (hoursSinceAccess >= 24) {
+                data[topicKey] = { lastAccess: now, readChapters: [] };
+            } else {
+                data[topicKey].lastAccess = now;
+            }
+
+            saveProgressData(data);
+        }
+
+        function calculateProgress(topicKey) {
+            const topic = RAPID_REVIEW_DATA[topicKey];
+            if (!topic) return 0;
+
+            const data = getProgressData();
+            const read = (data[topicKey]?.readChapters || []).length;
+            const total = topic.sections.reduce((sum, s) => sum + s.subchapters.length, 0);
+
+            return total > 0 ? Math.round((read / total) * 100) : 0;
+        }
+
+        function updateAllCardProgress() {
+            document.querySelectorAll('.rr-card').forEach(card => {
+                const topicKey = card.getAttribute('data-topic');
+                const progress = calculateProgress(topicKey);
+                const label = card.querySelector('.rr-progress-label');
+                const fill = card.querySelector('.rr-progress-fill');
+
+                if (label) label.textContent = `${progress}% lido`;
+                if (fill) fill.style.width = `${progress}%`;
+            });
+        }
+
+        function highlightCurrentCard(topicKey) {
+            document.querySelectorAll('.rr-card').forEach(card => {
+                card.classList.remove('highlighted');
+            });
+            const current = document.querySelector(`[data-topic="${topicKey}"]`);
+            if (current) current.classList.add('highlighted');
+        }
+
+        function markChapterAsRead(topicKey, chapterNum) {
+            const data = getProgressData();
+            if (!data[topicKey]) {
+                data[topicKey] = { lastAccess: Date.now(), readChapters: [] };
+            }
+            if (!data[topicKey].readChapters.includes(chapterNum)) {
+                data[topicKey].readChapters.push(chapterNum);
+            }
+            saveProgressData(data);
+            updateAllCardProgress();
+        }
+
         function openReader(topicKey) {
+            checkAndResetProgressAfter24h(topicKey);
+            highlightCurrentCard(topicKey);
             readerState = { topicKey, sectionIndex: 0, subIndex: 0 };
             renderReaderContent();
             applyReaderFontSize(Number(localStorage.getItem(READER_FONT_KEY)) || 16);
             document.getElementById('readerContent').scrollTo({ top: 0 });
             updateReaderIndicator();
             document.getElementById('readerView').classList.add('active');
+            updateAllCardProgress();
         }
 
         function closeReader() {
