@@ -1770,32 +1770,20 @@
             }
         }
 
-        /* AUTENTICAÇÃO — tela de login/criação de conta */
+        /* AUTENTICAÇÃO — splash de abertura + tela de login/criação de conta
+           ------------------------------------------------------------
+           #authScreen fica visível desde o primeiro frame (é o próprio
+           splash: só a logo, centralizada). #authCard começa com a
+           classe .splash, que colapsa .auth-extra (formulário, botão
+           Google, etc.) a 0 e aumenta a logo — como só a logo "pesa"
+           no card, o flex centering do .auth-screen deixa ela sozinha
+           e centralizada na tela. Depois de um tempo mínimo (splash) +
+           a decisão de auth estar pronta, releaseAppWithoutLogin()/
+           revealLoginForm() removem essa classe: a logo encolhe para
+           o tamanho final e .auth-extra expande — tudo via transition
+           de CSS, sem JS orquestrando frame a frame. */
         .container[hidden] { display: none; }
         .bottom-nav[hidden] { display: none; }
-
-        .auth-loading {
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            max-width: 390px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-main);
-        }
-        .auth-loading[hidden] { display: none; }
-
-        .auth-spinner {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 3px solid var(--bg-tertiary);
-            border-top-color: var(--lavender-active);
-            animation: authSpin 0.8s linear infinite;
-        }
-        @keyframes authSpin { to { transform: rotate(360deg); } }
 
         .auth-screen {
             width: 100%;
@@ -1816,7 +1804,6 @@
         .auth-card {
             width: 100%;
             max-width: 340px;
-            animation: tabIn 0.4s var(--ease-out);
         }
 
         .auth-logo {
@@ -1825,15 +1812,38 @@
             justify-content: center;
             gap: 10px;
             margin-bottom: 32px;
+            transition: margin-bottom 0.5s var(--ease-out);
         }
-        .auth-logo .logo-icon img { width: 32px; height: 32px; display: block; }
-        .auth-logo .logo-wordmark { font-size: 18px; font-weight: 700; color: var(--text-main); }
+        .auth-logo .logo-icon img {
+            width: 32px;
+            height: 32px;
+            display: block;
+            transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out);
+        }
+        .auth-logo .logo-wordmark {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: font-size 0.5s var(--ease-out);
+        }
 
-        .auth-heading { text-align: center; margin-bottom: 24px; }
-        .auth-title { font-size: 22px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
-        .auth-subtitle { font-size: 13px; color: var(--text-secondary); }
+        .auth-card.splash .auth-logo { margin-bottom: 0; }
+        .auth-card.splash .auth-logo .logo-icon img { width: 64px; height: 64px; }
+        .auth-card.splash .auth-logo .logo-wordmark { font-size: 32px; }
 
-        .auth-form { display: flex; flex-direction: column; gap: 14px; }
+        .auth-extra {
+            max-height: 600px;
+            opacity: 1;
+            overflow: hidden;
+            transition: max-height 0.5s var(--ease-out), opacity 0.4s var(--ease-out) 0.15s;
+        }
+        .auth-card.splash .auth-extra {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s var(--ease-out), opacity 0.2s var(--ease-out);
+        }
+
+        .auth-form { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
 
         .auth-field { display: flex; flex-direction: column; gap: 6px; }
         .auth-field label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
@@ -1936,44 +1946,38 @@
     </style>
 </head>
 <body>
-    <div class="auth-loading" id="authLoading">
-        <div class="auth-spinner"></div>
-    </div>
-
-    <div class="auth-screen" id="authScreen" hidden>
-        <div class="auth-card">
+    <div class="auth-screen" id="authScreen">
+        <div class="auth-card splash" id="authCard">
             <div class="auth-logo">
                 <div class="logo-icon"><img src="icon-180.png" alt="Trycktrack"></div>
                 <span class="logo-wordmark">trycktrack</span>
             </div>
-            <div class="auth-heading">
-                <div class="auth-title" id="authTitle">Entrar</div>
-                <div class="auth-subtitle" id="authSubtitle">Continue seus estudos de onde parou</div>
-            </div>
-            <form class="auth-form" id="authForm" onsubmit="handleAuthSubmit(event)">
-                <div class="auth-field" id="authNameField" hidden>
-                    <label for="authName">Nome</label>
-                    <input class="auth-input" type="text" id="authName" autocomplete="name" placeholder="Seu nome">
+            <div class="auth-extra" id="authExtra">
+                <form class="auth-form" id="authForm" onsubmit="handleAuthSubmit(event)">
+                    <div class="auth-field" id="authNameField" hidden>
+                        <label for="authName">Nome</label>
+                        <input class="auth-input" type="text" id="authName" autocomplete="name" placeholder="Seu nome">
+                    </div>
+                    <div class="auth-field">
+                        <label for="authEmail">Email</label>
+                        <input class="auth-input" type="email" id="authEmail" autocomplete="email" placeholder="voce@email.com" required>
+                    </div>
+                    <div class="auth-field">
+                        <label for="authPassword">Senha</label>
+                        <input class="auth-input" type="password" id="authPassword" autocomplete="current-password" placeholder="••••••••" required minlength="6">
+                    </div>
+                    <div class="auth-error" id="authError" hidden></div>
+                    <button type="submit" class="auth-btn-primary" id="authSubmitBtn">Entrar</button>
+                </form>
+                <div class="auth-divider"><span>ou</span></div>
+                <button type="button" class="auth-btn-google" onclick="handleGoogleSignIn()">
+                    <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.5l-6.5-5.5C29.4 34.6 26.8 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8.1l-6.6 5.1C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.5C39.9 37.4 44 31.5 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>
+                    Continuar com Google
+                </button>
+                <div class="auth-switch">
+                    <span id="authSwitchText">Não tem conta?</span>
+                    <button type="button" class="auth-link" onclick="toggleAuthMode()" id="authSwitchBtn">Criar conta</button>
                 </div>
-                <div class="auth-field">
-                    <label for="authEmail">Email</label>
-                    <input class="auth-input" type="email" id="authEmail" autocomplete="email" placeholder="voce@email.com" required>
-                </div>
-                <div class="auth-field">
-                    <label for="authPassword">Senha</label>
-                    <input class="auth-input" type="password" id="authPassword" autocomplete="current-password" placeholder="••••••••" required minlength="6">
-                </div>
-                <div class="auth-error" id="authError" hidden></div>
-                <button type="submit" class="auth-btn-primary" id="authSubmitBtn">Entrar</button>
-            </form>
-            <div class="auth-divider"><span>ou</span></div>
-            <button type="button" class="auth-btn-google" onclick="handleGoogleSignIn()">
-                <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 14-5.5l-6.5-5.5C29.4 34.6 26.8 35.5 24 35.5c-5.3 0-9.7-3.4-11.3-8.1l-6.6 5.1C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.5 5.5C39.9 37.4 44 31.5 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>
-                Continuar com Google
-            </button>
-            <div class="auth-switch">
-                <span id="authSwitchText">Não tem conta?</span>
-                <button type="button" class="auth-link" onclick="toggleAuthMode()" id="authSwitchBtn">Criar conta</button>
             </div>
         </div>
     </div>
@@ -2264,7 +2268,7 @@
         </div>
 
         <!-- BOTTOM NAV -->
-        <div class="bottom-nav">
+        <div class="bottom-nav" hidden>
             <div class="nav-item active" onclick="mudarPagina('inicio')">
                 <div class="nav-icon-badge"><div class="nav-icon">
                     <svg class="icon-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1V10.5Z"/></svg>
@@ -2489,23 +2493,17 @@
 
         function updateAuthUI() {
             const nameField = document.getElementById('authNameField');
-            const title = document.getElementById('authTitle');
-            const subtitle = document.getElementById('authSubtitle');
             const submitBtn = document.getElementById('authSubmitBtn');
             const switchText = document.getElementById('authSwitchText');
             const switchBtn = document.getElementById('authSwitchBtn');
             hideAuthError();
             if (authMode === 'signup') {
                 nameField.hidden = false;
-                title.textContent = 'Criar conta';
-                subtitle.textContent = 'Comece a organizar seus estudos';
                 submitBtn.textContent = 'Criar conta';
                 switchText.textContent = 'Já tem conta?';
                 switchBtn.textContent = 'Entrar';
             } else {
                 nameField.hidden = true;
-                title.textContent = 'Entrar';
-                subtitle.textContent = 'Continue seus estudos de onde parou';
                 submitBtn.textContent = 'Entrar';
                 switchText.textContent = 'Não tem conta?';
                 switchBtn.textContent = 'Criar conta';
@@ -2613,7 +2611,6 @@
         }
 
         function showApp() {
-            document.getElementById('authLoading').hidden = true;
             document.getElementById('authScreen').hidden = true;
             document.getElementById('appContainer').hidden = false;
             const nav = document.querySelector('.bottom-nav');
@@ -2623,21 +2620,66 @@
         }
 
         function showAuthScreen() {
-            document.getElementById('authLoading').hidden = true;
             document.getElementById('appContainer').hidden = true;
             document.getElementById('authScreen').hidden = false;
             const nav = document.querySelector('.bottom-nav');
             if (nav) nav.hidden = true;
         }
 
+        // Tira a classe .splash do card: a logo encolhe pro tamanho
+        // final e .auth-extra (formulário, Google, etc.) se expande —
+        // toda a transição é feita em CSS a partir dessa única troca
+        // de classe.
+        function revealLoginForm() {
+            showAuthScreen();
+            document.getElementById('authCard').classList.remove('splash');
+        }
+
         function releaseAppWithoutLogin() {
             // Sem Firebase disponível (config inválida, rede bloqueada
-            // ou ainda carregando além do tempo esperado) — libera o
-            // app direto, sem tela de login, para não travar o uso local.
-            document.getElementById('authLoading').hidden = true;
-            document.getElementById('authScreen').hidden = true;
-            document.getElementById('appContainer').hidden = false;
+            // etc.) — libera o app direto, sem formulário de login, pra
+            // não travar o uso local. O splash ainda aparece por um
+            // instante (é a própria #authScreen), só não abre o form.
+            showApp();
         }
+
+        // ------------------------------------------------------------
+        // Splash de abertura: a #authScreen já nasce visível no HTML
+        // (só com a logo, via .auth-card.splash), então o "menos de um
+        // segundo" pedido é só isso renderizando antes de qualquer JS.
+        // Daqui pra frente, só decide o que vem DEPOIS do splash: some
+        // no app (usuário já logado / Firebase indisponível) ou abre o
+        // formulário completo (revealLoginForm). Espera as duas coisas
+        // — o tempo mínimo de splash E a autenticação resolvida — antes
+        // de agir, pra nunca "piscar" a decisão errada primeiro.
+        // ------------------------------------------------------------
+        const SPLASH_MIN_MS = 700;
+        let splashMinTimeDone = false;
+        let authDecision; // undefined | 'app' | 'login'
+
+        function proceedAfterSplash() {
+            if (!splashMinTimeDone || authDecision === undefined) return;
+            if (authDecision === 'app') {
+                showApp();
+            } else {
+                revealLoginForm();
+            }
+        }
+
+        setTimeout(function () {
+            splashMinTimeDone = true;
+            proceedAfterSplash();
+        }, SPLASH_MIN_MS);
+
+        // Rede lenta, bloqueada, ou o módulo do Firebase falhou antes de
+        // conseguir disparar 'firebase-ready' — não deixa a pessoa presa
+        // no splash pra sempre.
+        setTimeout(function () {
+            if (authDecision === undefined) {
+                authDecision = 'app';
+                proceedAfterSplash();
+            }
+        }, 5000);
 
         // O bloco <script type="module"> que inicializa o Firebase roda
         // depois deste script (módulos são sempre deferidos), por isso
@@ -2654,25 +2696,18 @@
                     // exemplo — e sobrescrever dados mais recentes.
                     currentFirebaseUser = user ? window.__fb.getCurrentUser() : null;
                     if (currentFirebaseUser) {
-                        showApp();
                         syncProgressFromCloud(currentFirebaseUser.uid);
+                        authDecision = 'app';
                     } else {
-                        showAuthScreen();
+                        authDecision = 'login';
                     }
+                    proceedAfterSplash();
                 });
             } else {
-                releaseAppWithoutLogin();
+                authDecision = 'app';
+                proceedAfterSplash();
             }
         });
-
-        // Rede lenta, bloqueada, ou o módulo do Firebase falhou antes de
-        // conseguir disparar 'firebase-ready' — não deixa a pessoa presa
-        // na tela de carregamento pra sempre.
-        setTimeout(function () {
-            if (document.getElementById('authLoading') && !document.getElementById('authLoading').hidden) {
-                releaseAppWithoutLogin();
-            }
-        }, 5000);
 
         /* ============================================================
            USUÁRIO ATUAL

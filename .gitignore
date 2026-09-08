@@ -2,3 +2,10 @@
 .auto-push.log
 .auto-push-stdout.log
 .auto-push-stderr.log
+
+# Scaffold gerado pelo Firebase CLI (Hosting) — não usamos, o app
+# continua publicado via GitHub Pages.
+.firebase/
+.firebaserc
+firebase.json
+public/
