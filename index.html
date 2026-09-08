@@ -1829,12 +1829,23 @@
             margin-bottom: 40px;
             transition: margin-bottom 0.5s var(--ease-out);
         }
-        .auth-logo .logo-icon img {
+        /* .logo-icon (o <div> que envolve a <img>) é compartilhado com
+           o cabeçalho do app e vem fixo em 43x43px com overflow:hidden
+           — sem sobrescrever o próprio wrapper aqui, ele cortava a
+           imagem maior por dentro (só o símbolo parecia recortado, o
+           texto ao lado não, porque não está dentro desse wrapper). */
+        .auth-logo .logo-icon {
             width: 54px;
             height: 54px;
-            display: block;
+            border-radius: 0;
+            overflow: visible;
             flex-shrink: 0;
             transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out);
+        }
+        .auth-logo .logo-icon img {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
         .auth-logo .logo-wordmark {
             font-size: 30px;
@@ -1849,7 +1860,7 @@
            recortes: 100vw pode ficar mais largo que a tela visível, e
            o vw calculado nunca chegava perto do valor pretendido. */
         .auth-card.splash .auth-logo { margin-bottom: 0; }
-        .auth-card.splash .auth-logo .logo-icon img {
+        .auth-card.splash .auth-logo .logo-icon {
             width: 68px;
             height: 68px;
         }
