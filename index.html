@@ -1805,13 +1805,23 @@
         .auth-card {
             width: 100%;
             max-width: 340px;
+            transition: transform 0.5s var(--ease-out), max-width 0.5s var(--ease-out);
+        }
+
+        /* No splash a logo sozinha pode usar a largura inteira da tela
+           (não fica presa aos 340px do formulário) e desce um pouco,
+           em vez de ficar cravada no centro exato. */
+        .auth-card.splash {
+            max-width: 100%;
+            transform: translateY(72px);
         }
 
         .auth-logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            max-width: 100%;
             margin-bottom: 40px;
             transition: margin-bottom 0.5s var(--ease-out);
         }
@@ -1819,18 +1829,28 @@
             width: 46px;
             height: 46px;
             display: block;
+            flex-shrink: 0;
             transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out);
         }
         .auth-logo .logo-wordmark {
             font-size: 26px;
             font-weight: 700;
             color: var(--text-main);
+            white-space: nowrap;
             transition: font-size 0.5s var(--ease-out);
         }
 
+        /* clamp() em vez de um valor fixo — cresce em telas largas mas
+           nunca estoura a largura em aparelhos estreitos (a causa do
+           corte reportado com o tamanho fixo anterior). */
         .auth-card.splash .auth-logo { margin-bottom: 0; }
-        .auth-card.splash .auth-logo .logo-icon img { width: 88px; height: 88px; }
-        .auth-card.splash .auth-logo .logo-wordmark { font-size: 44px; }
+        .auth-card.splash .auth-logo .logo-icon img {
+            width: clamp(64px, 20vw, 104px);
+            height: clamp(64px, 20vw, 104px);
+        }
+        .auth-card.splash .auth-logo .logo-wordmark {
+            font-size: clamp(30px, 10vw, 50px);
+        }
 
         .auth-extra {
             max-height: 600px;
