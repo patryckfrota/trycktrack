@@ -2439,6 +2439,7 @@
                 signIn: (email, password) => signInWithEmailAndPassword(auth, email, password),
                 signInWithGoogle: () => signInWithPopup(auth, new GoogleAuthProvider()),
                 signOut: () => signOut(auth),
+                getCurrentUser: () => auth.currentUser,
                 getProgress: async (uid) => {
                     const snap = await getDoc(doc(db, 'users', uid));
                     return snap.exists() ? (snap.data().rrProgress || null) : null;
@@ -2558,6 +2559,13 @@
                 } else {
                     await window.__fb.signIn(email, password);
                 }
+                // O listener de onAuthStateChanged pode ter disparado
+                // antes do updateProfile (nome) terminar — busca o
+                // usuário mais atualizado e re-renderiza para não
+                // mostrar o email no lugar do nome logo após o cadastro.
+                currentFirebaseUser = window.__fb.getCurrentUser();
+                renderCurrentUser();
+                updateHeaderTitle('inicio');
             } catch (e) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = authMode === 'signup' ? 'Criar conta' : 'Entrar';
@@ -2639,10 +2647,15 @@
             firebaseReady = !!(event.detail && event.detail.ready);
             if (firebaseReady) {
                 window.__fb.onAuthStateChanged(function (user) {
-                    currentFirebaseUser = user;
-                    if (user) {
+                    // Usa sempre o usuário mais atual (auth.currentUser)
+                    // em vez do objeto recebido aqui: este listener pode
+                    // disparar com uma referência antiga do usuário —
+                    // de antes de um updateProfile(nome) terminar, por
+                    // exemplo — e sobrescrever dados mais recentes.
+                    currentFirebaseUser = user ? window.__fb.getCurrentUser() : null;
+                    if (currentFirebaseUser) {
                         showApp();
-                        syncProgressFromCloud(user.uid);
+                        syncProgressFromCloud(currentFirebaseUser.uid);
                     } else {
                         showAuthScreen();
                     }
