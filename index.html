@@ -1805,14 +1805,20 @@
         .auth-card {
             width: 100%;
             max-width: 340px;
-            transition: transform 0.5s var(--ease-out), max-width 0.5s var(--ease-out);
+            margin-top: 76px;
+            transition: transform 0.5s var(--ease-out), max-width 0.5s var(--ease-out), margin-top 0.5s var(--ease-out);
         }
 
-        /* No splash a logo sozinha pode usar a largura inteira da tela
-           (não fica presa aos 340px do formulário) e desce um pouco,
-           em vez de ficar cravada no centro exato. */
+        /* No splash a logo sozinha ignora o padding lateral da tela
+           (usa a largura inteira do aparelho, não só os 340px do
+           formulário) e desce um pouco, em vez de ficar cravada no
+           centro exato. */
         .auth-card.splash {
-            max-width: 100%;
+            max-width: 100vw;
+            width: 100vw;
+            margin-top: 0;
+            margin-left: calc(50% - 50vw);
+            padding: 0 12px;
             transform: translateY(72px);
         }
 
@@ -1820,36 +1826,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 5px;
             max-width: 100%;
             margin-bottom: 40px;
             transition: margin-bottom 0.5s var(--ease-out);
         }
         .auth-logo .logo-icon img {
-            width: 46px;
-            height: 46px;
+            width: 62px;
+            height: 62px;
             display: block;
             flex-shrink: 0;
             transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out);
         }
         .auth-logo .logo-wordmark {
-            font-size: 26px;
+            font-size: 34px;
             font-weight: 700;
             color: var(--text-main);
             white-space: nowrap;
             transition: font-size 0.5s var(--ease-out);
         }
 
-        /* clamp() em vez de um valor fixo — cresce em telas largas mas
-           nunca estoura a largura em aparelhos estreitos (a causa do
-           corte reportado com o tamanho fixo anterior). */
+        /* clamp() com uma razão vw calibrada pra realmente ocupar quase
+           toda a largura do aparelho (testado em 360/375/390/430px) —
+           a versão anterior usava um vw baixo demais e nunca chegava
+           perto do teto em tela de celular. */
         .auth-card.splash .auth-logo { margin-bottom: 0; }
         .auth-card.splash .auth-logo .logo-icon img {
-            width: clamp(64px, 20vw, 104px);
-            height: clamp(64px, 20vw, 104px);
+            width: clamp(56px, 18vw, 84px);
+            height: clamp(56px, 18vw, 84px);
         }
         .auth-card.splash .auth-logo .logo-wordmark {
-            font-size: clamp(30px, 10vw, 50px);
+            font-size: clamp(40px, 14.5vw, 66px);
         }
 
         .auth-extra {
