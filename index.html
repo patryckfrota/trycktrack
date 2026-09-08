@@ -1626,6 +1626,7 @@
         }
 
         .sidebar-footer {
+            margin-top: auto;
             padding: 12px 12px 0;
             border-top: 1px solid var(--sidebar-border);
         }
@@ -1810,26 +1811,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 32px;
+            gap: 6px;
+            margin-bottom: 40px;
             transition: margin-bottom 0.5s var(--ease-out);
         }
         .auth-logo .logo-icon img {
-            width: 32px;
-            height: 32px;
+            width: 46px;
+            height: 46px;
             display: block;
             transition: width 0.5s var(--ease-out), height 0.5s var(--ease-out);
         }
         .auth-logo .logo-wordmark {
-            font-size: 18px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text-main);
             transition: font-size 0.5s var(--ease-out);
         }
 
         .auth-card.splash .auth-logo { margin-bottom: 0; }
-        .auth-card.splash .auth-logo .logo-icon img { width: 64px; height: 64px; }
-        .auth-card.splash .auth-logo .logo-wordmark { font-size: 32px; }
+        .auth-card.splash .auth-logo .logo-icon img { width: 88px; height: 88px; }
+        .auth-card.splash .auth-logo .logo-wordmark { font-size: 44px; }
 
         .auth-extra {
             max-height: 600px;
@@ -2347,10 +2348,6 @@
     <!-- SIDEBAR -->
     <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo-icon sidebar-logo-icon"><img src="icon-180.png" alt="Trycktrack"></div>
-            <span class="sidebar-app-name">TRYCKTRACK</span>
-        </div>
         <div class="sidebar-theme-section">
             <div class="sidebar-section-label">Aparência</div>
             <div class="theme-toggle" id="themeToggle">
@@ -2359,31 +2356,8 @@
                 <button class="theme-option" data-mode="off" onclick="setThemeMode('off')">Clara</button>
             </div>
         </div>
-        <nav class="sidebar-nav">
-            <div class="sidebar-item">
-                <span class="sidebar-item-icon">👤</span>
-                <span>Perfil</span>
-            </div>
-            <div class="sidebar-item">
-                <span class="sidebar-item-icon">⚙️</span>
-                <span>Configurações</span>
-            </div>
-            <div class="sidebar-item">
-                <span class="sidebar-item-icon">🔔</span>
-                <span>Notificações</span>
-            </div>
-            <div class="sidebar-item">
-                <span class="sidebar-item-icon">❓</span>
-                <span>Ajuda</span>
-            </div>
-            <div class="sidebar-item">
-                <span class="sidebar-item-icon">ℹ️</span>
-                <span>Sobre</span>
-            </div>
-        </nav>
         <div class="sidebar-footer">
             <div class="sidebar-item" onclick="handleSignOut()">
-                <span class="sidebar-item-icon">🚪</span>
                 <span>Sair</span>
             </div>
         </div>
