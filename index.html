@@ -8269,7 +8269,7 @@
 
         async function downloadConfiguredQuestionPdf(withAnswers) {
             const mode = activeQuestionConfigMode;
-            if (!['practice', 'full-exam'].includes(mode)) return;
+            if (!['practice', 'exam', 'full-exam'].includes(mode)) return;
             const progress = document.getElementById('questionPdfProgress');
             beginPdfDownloadProgress(progress);
             const questions = getConfiguredQuestionSet();
@@ -8278,14 +8278,15 @@
                 revealQuestionNotice('Não há questões para os filtros selecionados.');
                 return;
             }
-            const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : 'Guiado';
+            const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : (mode === 'exam' ? 'Simulado' : 'Guiado');
             try {
                 setPdfDownloadProgress(progress, 40, true);
                 // Com gabarito: mesmo layout com caixa lavanda do resultado de
-                // sessão (questão + explicação intercaladas). Sem gabarito: a
-                // prova em branco, para responder antes de conferir.
+                // sessão (questão + explicação intercaladas no Guiado/Imersão;
+                // gabarito resumido + explicações em bloco no Simulado). Sem
+                // gabarito: a prova em branco, para responder antes de conferir.
                 const bytes = withAnswers
-                    ? await TryckPdf.buildQuestionsResultPdf({ questions, answers: questions.map(q => q.answer), mode: 'practice', title })
+                    ? await TryckPdf.buildQuestionsResultPdf({ questions, answers: questions.map(q => q.answer), mode: mode === 'exam' ? 'exam' : 'practice', title })
                     : await TryckPdf.buildQuestionsPdf({ questions, title, includeAnswer: false });
                 setPdfDownloadProgress(progress, 96, true);
                 await waitForPdfProgressPaint();
@@ -8340,7 +8341,7 @@
             start.textContent = config.button;
             const pdfAction = document.getElementById('questionPdfAction');
             if (pdfButton) {
-                if (pdfAction) pdfAction.hidden = !['practice', 'full-exam'].includes(mode);
+                if (pdfAction) pdfAction.hidden = !['practice', 'exam', 'full-exam'].includes(mode);
                 pdfButton.textContent = mode === 'full-exam' ? 'Baixar prova em PDF' : 'Baixar lista em PDF';
             }
 
