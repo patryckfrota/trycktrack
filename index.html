@@ -5581,6 +5581,7 @@
                         <button class="question-start question-config-start" id="questionConfigStart" type="button" onclick="startQuestionSession()">Começar</button>
                         <div class="question-pdf-action" id="questionPdfAction" hidden>
                             <button class="question-pdf-button" id="questionConfigPdf" type="button" onclick="downloadConfiguredQuestionPdf()">Baixar lista em PDF</button>
+                            <button class="question-pdf-button" id="questionConfigPdfWithAnswers" type="button" onclick="downloadConfiguredQuestionPdf(true)">Baixar com gabarito em PDF</button>
                             <span class="pdf-progress-indicator" id="questionPdfProgress" aria-label="Progresso da geração do PDF" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span>
                         </div>
                     </section>
@@ -8266,7 +8267,7 @@
         }
 
 
-        async function downloadConfiguredQuestionPdf() {
+        async function downloadConfiguredQuestionPdf(withAnswers) {
             const mode = activeQuestionConfigMode;
             if (!['practice', 'full-exam'].includes(mode)) return;
             const progress = document.getElementById('questionPdfProgress');
@@ -8277,16 +8278,20 @@
                 revealQuestionNotice('Não há questões para os filtros selecionados.');
                 return;
             }
-            /* A prova impressa nunca leva gabarito, explicações ou comentários. */
-            const includeAnswer = false;
             const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : 'Guiado';
             try {
                 setPdfDownloadProgress(progress, 40, true);
-                const bytes = await TryckPdf.buildQuestionsPdf({ questions, title, includeAnswer });
+                // Com gabarito: mesmo layout com caixa lavanda do resultado de
+                // sessão (questão + explicação intercaladas). Sem gabarito: a
+                // prova em branco, para responder antes de conferir.
+                const bytes = withAnswers
+                    ? await TryckPdf.buildQuestionsResultPdf({ questions, answers: questions.map(q => q.answer), mode: 'practice', title })
+                    : await TryckPdf.buildQuestionsPdf({ questions, title, includeAnswer: false });
                 setPdfDownloadProgress(progress, 96, true);
                 await waitForPdfProgressPaint();
                 const fileTitle = title.replace(/[^\p{L}\p{N}]+/gu, '-');
-                TryckPdf.downloadBytes(bytes, `trycktrack-${fileTitle}.pdf`);
+                const suffix = withAnswers ? '-gabarito' : '';
+                TryckPdf.downloadBytes(bytes, `trycktrack-${fileTitle}${suffix}.pdf`);
                 setPdfDownloadProgress(progress, 100, false);
             } catch (err) {
                 console.error('Falha ao gerar PDF de questões', err);
