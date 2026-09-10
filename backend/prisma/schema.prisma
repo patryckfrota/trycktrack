@@ -1,0 +1,277 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExamTrack {
+  ENAMED
+  UEPA
+}
+
+enum AttemptKind {
+  DIAGNOSTIC
+  RECALIBRATION
+  FIXATION
+}
+
+enum PhaseStatus {
+  LOCKED
+  AVAILABLE
+  THEORY
+  QUESTIONS
+  COMPLETE
+}
+
+model User {
+  id           String              @id @default(cuid())
+  firebaseUid  String              @unique
+  email        String              @unique
+  displayName  String?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  trails       StudyTrail[]
+  attempts     AssessmentAttempt[]
+  performance  PerformanceRecord[]
+  osceSessions OsceSession[]
+}
+
+model Theme {
+  id               String              @id @default(cuid())
+  area             String
+  name             String
+  incidenceEnamed  Float
+  incidenceUepa    Float
+  metadata         Json?
+  createdAt        DateTime            @default(now())
+  phases           TrailPhase[]
+  performance      PerformanceRecord[]
+
+  @@unique([area, name])
+}
+
+model StudyTrail {
+  id                 String              @id @default(cuid())
+  userId             String
+  track              ExamTrack
+  diagnosticDoneAt   DateTime?
+  lastRecalibratedAt DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phases             TrailPhase[]
+  attempts           AssessmentAttempt[]
+
+  @@unique([userId, track])
+}
+
+model TrailPhase {
+  id            String       @id @default(cuid())
+  trailId       String
+  themeId       String
+  position      Int
+  priorityScore Float
+  progress      Int          @default(0)
+  status        PhaseStatus  @default(LOCKED)
+  unlockedAt    DateTime?
+  completedAt   DateTime?
+  trail         StudyTrail   @relation(fields: [trailId], references: [id], onDelete: Cascade)
+  theme         Theme        @relation(fields: [themeId], references: [id])
+
+  @@unique([trailId, themeId])
+  @@unique([trailId, position])
+}
+
+model AssessmentAttempt {
+  id               String             @id @default(cuid())
+  userId           String
+  trailId          String?
+  kind             AttemptKind
+  totalQuestions   Int
+  correctQuestions Int                @default(0)
+  startedAt        DateTime           @default(now())
+  completedAt      DateTime?
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trail            StudyTrail?        @relation(fields: [trailId], references: [id], onDelete: SetNull)
+  responses        AssessmentResponse[]
+}
+
+model AssessmentResponse {
+  id          String            @id @default(cuid())
+  attemptId   String
+  themeId     String?
+  area        String
+  correct     Boolean
+  createdAt   DateTime          @default(now())
+  attempt     AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+}
+
+model PerformanceRecord {
+  id         String      @id @default(cuid())
+  userId     String
+  themeId    String
+  source     AttemptKind
+  accuracy   Float
+  sampleSize Int
+  measuredAt DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  theme      Theme       @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@index([userId, themeId, measuredAt])
+}
+
+enum OsceMode {
+  EVALUATOR
+  CANDIDATE
+}
+
+enum OsceStationFormat {
+  ANAMNESE_FOCADA
+  EXAME_FISICO
+  RACIOCINIO_DIAGNOSTICO
+  CONDUTA
+  PROCEDIMENTO
+  COMUNICACAO
+  URGENCIA_EMERGENCIA
+  ESTACAO_COMPLETA
+}
+
+enum OsceStationStatus {
+  DRAFT
+  GENERATED
+  REVIEWED
+  APPROVED
+  ARCHIVED
+}
+
+enum OsceEventType {
+  STATION_STARTED
+  CANDIDATE_MESSAGE
+  PATIENT_RESPONSE
+  PHYSICAL_EXAM_REQUESTED
+  PHYSICAL_EXAM_RESULT
+  TEST_REQUESTED
+  TEST_RESULT_RELEASED
+  MEDICATION_ORDERED
+  PROCEDURE_PERFORMED
+  CLINICAL_DECISION
+  STATION_FINISHED
+  STATION_TIMEOUT
+}
+
+model OsceStation {
+  id                    String            @id @default(cuid())
+  subthemeId            String
+  format                OsceStationFormat
+  title                 String
+  status                OsceStationStatus @default(DRAFT)
+  version               Int               @default(1)
+  generationSource      String            @default("MANUAL")
+  schemaVersion         String            @default("1.0.0")
+  externalId            String?
+  fingerprint           String            @unique
+  importBatchId         String?
+  clinicalContentJson   Json?
+  evaluatorContentJson  Json?
+  modelName             String?
+  promptVersion         String?
+  guidelineVersion      String?
+  clinicalReviewDate    DateTime?
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  subtheme              OsceSubtheme      @relation(fields: [subthemeId], references: [id])
+  importBatch           OsceImportBatch?  @relation(fields: [importBatchId], references: [id], onDelete: SetNull)
+  sessions              OsceSession[]
+  @@index([subthemeId, format, status])
+  @@index([externalId, version])
+}
+
+model OsceImportBatch {
+  id             String        @id @default(cuid())
+  sourceName     String?
+  totalItems     Int
+  importedItems  Int
+  duplicateItems Int
+  createdAt      DateTime      @default(now())
+  stations       OsceStation[]
+}
+
+model OsceArea {
+  id       String       @id @default(cuid())
+  name     String       @unique
+  slug     String       @unique
+  order    Int
+  active   Boolean      @default(true)
+  themes   OsceTheme[]
+}
+
+model OsceTheme {
+  id        String         @id @default(cuid())
+  areaId    String
+  code      String
+  name      String
+  order     Int
+  active    Boolean        @default(true)
+  area      OsceArea       @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  subthemes OsceSubtheme[]
+  @@unique([areaId, code])
+  @@index([areaId, order])
+}
+
+model OsceSubtheme {
+  id          String        @id @default(cuid())
+  themeId     String
+  name        String
+  slug        String
+  description String?
+  order       Int
+  active      Boolean       @default(true)
+  theme       OsceTheme     @relation(fields: [themeId], references: [id], onDelete: Cascade)
+  stations    OsceStation[]
+  @@unique([themeId, slug])
+  @@index([themeId, order])
+}
+
+model OsceSession {
+  id          String          @id @default(cuid())
+  userId      String?
+  clientUserKey String
+  stationId   String
+  mode        OsceMode
+  startedAt   DateTime        @default(now())
+  finishedAt  DateTime?
+  debriefing  String?
+  summary     Json?
+  currentTaskIndex Int       @default(0)
+  taskAssessments Json?
+  finalRevealed   Boolean    @default(false)
+  resultDeliveredAt DateTime?
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  station     OsceStation     @relation(fields: [stationId], references: [id])
+  events      OsceEvent[]
+  checklist   OsceChecklistScore[]
+  @@index([clientUserKey, startedAt])
+}
+
+model OsceEvent {
+  id          String        @id @default(cuid())
+  sessionId   String
+  type        OsceEventType
+  payload     Json
+  createdAt   DateTime      @default(now())
+  session     OsceSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model OsceChecklistScore {
+  id             String      @id @default(cuid())
+  sessionId      String
+  category       String
+  item           String
+  points         Float
+  awardedPoints  Float
+  session        OsceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  @@index([sessionId, category])
+}

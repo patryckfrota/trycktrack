@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Trycktrack — Residência Médica",
+  "short_name": "Trycktrack",
+  "description": "Preparação para provas de residência médica.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#15161A",
+  "theme_color": "#15161A",
+  "icons": [
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo-clean-v2.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
