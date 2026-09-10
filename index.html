@@ -3232,6 +3232,54 @@
             color: var(--text-main);
         }
 
+        /* ---------- tutorial de primeiro acesso ---------- */
+        .onboarding-overlay {
+            position: fixed; inset: 0; z-index: 10020; display: grid; place-items: center;
+            padding: 20px; background: rgba(0,0,0,.7); opacity: 0; pointer-events: none;
+            transition: opacity .25s var(--ease);
+        }
+        .onboarding-overlay.active { opacity: 1; pointer-events: auto; }
+        .onboarding-card {
+            position: relative; width: min(400px, 100%); max-height: 86vh; overflow-y: auto;
+            padding: 28px 22px 22px; border: 1px solid var(--glass-card-border-strong);
+            border-radius: 26px; background: var(--sidebar-bg); color: var(--text-main);
+            box-shadow: 0 24px 70px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.12);
+        }
+        .onboarding-skip { position: absolute; top: 16px; right: 16px; border: 0; background: transparent; color: var(--text-secondary); font: 650 11px/1 var(--font-family-base); cursor: pointer; padding: 6px 8px; }
+        .onboarding-slide-icon { width: 52px; height: 52px; margin-bottom: 16px; display: grid; place-items: center; border-radius: 16px; background: var(--lavender-dark); color: var(--lavender-active); }
+        .onboarding-slide-icon svg { width: 26px; height: 26px; }
+        .onboarding-slide h2 { font-size: 19px; margin-bottom: 10px; line-height: 1.25; }
+        .onboarding-slide p { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+        .onboarding-menu-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+        .onboarding-menu-item { display: flex; align-items: flex-start; gap: 12px; }
+        .onboarding-menu-item .onboarding-menu-icon { flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--bg-tertiary); color: var(--lavender-active); }
+        .onboarding-menu-item .onboarding-menu-icon svg { width: 17px; height: 17px; }
+        .onboarding-menu-item strong { display: block; font-size: 13px; margin-bottom: 2px; }
+        .onboarding-menu-item span { color: var(--text-secondary); font-size: 11.5px; line-height: 1.4; }
+        .onboarding-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 26px; }
+        .onboarding-dots { display: flex; gap: 6px; }
+        .onboarding-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--border-color); transition: background .2s ease, transform .2s ease; }
+        .onboarding-dots span.active { background: var(--lavender-active); transform: scale(1.3); }
+        .onboarding-next { border: 0; padding: 11px 22px; border-radius: 13px; background: var(--lavender-active); color: #19171f; font: 750 12.5px/1 var(--font-family-base); cursor: pointer; }
+
+        /* ---------- banner "app novo" + feedback ---------- */
+        .feedback-banner { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 18px; padding: 15px; border-radius: 18px; border: 1px solid rgba(196,181,253,.3); background: var(--lavender-dark); position: relative; }
+        .feedback-banner-icon { flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: rgba(255,255,255,.08); color: var(--lavender-active); }
+        .feedback-banner-icon svg { width: 18px; height: 18px; }
+        .feedback-banner-copy { flex: 1; min-width: 0; }
+        .feedback-banner-copy strong { display: block; font-size: 12.5px; margin-bottom: 3px; color: var(--text-main); }
+        .feedback-banner-copy p { color: var(--text-secondary); font-size: 11.5px; line-height: 1.45; margin: 0 0 10px; }
+        .feedback-banner-actions { display: flex; gap: 8px; }
+        .feedback-banner-btn { border: 0; padding: 8px 13px; border-radius: 10px; background: var(--lavender-active); color: #19171f; font: 700 11px/1 var(--font-family-base); cursor: pointer; }
+        .feedback-banner-dismiss-btn { border: 1px solid var(--border-color); padding: 8px 13px; border-radius: 10px; background: transparent; color: var(--text-secondary); font: 650 11px/1 var(--font-family-base); cursor: pointer; }
+        .feedback-banner-close { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; font-size: 15px; line-height: 1; }
+        .feedback-modal-textarea { width: 100%; min-height: 130px; margin-top: 14px; padding: 13px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-secondary); color: var(--text-main); font: 400 13px/1.5 var(--font-family-base); resize: vertical; }
+        .feedback-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+        .feedback-modal-actions button { flex: 1; padding: 12px; border-radius: 13px; font: 700 12.5px/1 var(--font-family-base); cursor: pointer; }
+        .feedback-modal-cancel { border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary); }
+        .feedback-modal-submit { border: 0; background: var(--lavender-active); color: #19171f; }
+        .feedback-modal-status { margin-top: 12px; font-size: 11.5px; color: var(--lavender-active); min-height: 14px; }
+
         .profile-crop-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
         .profile-crop-header h3 { font-size: 17px; }
         .profile-crop-header p { margin-top: 4px; color: var(--text-secondary); font-size: 11px; line-height: 1.35; }
@@ -5465,6 +5513,7 @@
         <div class="content">
             <!-- INÍCIO -->
             <div class="tab-content active" id="inicioTab">
+                <div id="feedbackBannerSlot"></div>
                 <div id="enamedCountdown"></div>
                 <div id="inicioLastRead"></div>
             </div>
@@ -5870,6 +5919,11 @@
                 <span class="sidebar-item-copy"><strong>Ajuda</strong><small>Orientações para usar o app</small></span>
                 <span class="sidebar-item-chevron" aria-hidden="true">›</span>
             </button>
+            <button class="sidebar-item" type="button" onclick="openFeedbackModal()">
+                <span class="sidebar-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 8h8M8 12h5"/></svg></span>
+                <span class="sidebar-item-copy"><strong>Enviar sugestão</strong><small>Ajude a melhorar o app</small></span>
+                <span class="sidebar-item-chevron" aria-hidden="true">›</span>
+            </button>
             <button class="sidebar-item" type="button" onclick="openSidebarPanel('sobre')">
                 <span class="sidebar-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.7v5.2M12 7.5h.01"/></svg></span>
                 <span class="sidebar-item-copy"><strong>Sobre</strong><small>Conheça o Trycktrack</small></span>
@@ -5898,6 +5952,29 @@
         </header>
         <div class="sidebar-detail-body" id="sidebarDetailBody"></div>
     </section>
+
+    <div class="onboarding-overlay" id="onboardingOverlay" hidden>
+        <div class="onboarding-card" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
+            <button type="button" class="onboarding-skip" onclick="skipOnboarding()">Pular</button>
+            <div class="onboarding-slide" id="onboardingSlide"></div>
+            <div class="onboarding-footer">
+                <div class="onboarding-dots" id="onboardingDots"></div>
+                <button type="button" class="onboarding-next" id="onboardingNextBtn" onclick="nextOnboardingStep()">Avançar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-crop-backdrop" id="feedbackModalBackdrop" onclick="if(event.target === this) closeFeedbackModal()">
+        <section class="profile-crop-panel" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle">
+            <div class="profile-crop-header"><div><h3 id="feedbackModalTitle">Enviar sugestão</h3><p>O trycktrack é um app novo — seu retorno ajuda a melhorá-lo. Conte o que funcionou mal, o que faltou ou o que você gostaria de ver.</p></div><button type="button" class="sidebar-detail-close" onclick="closeFeedbackModal()" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+            <textarea class="feedback-modal-textarea" id="feedbackModalText" placeholder="Escreva sua sugestão, elogio ou problema encontrado..."></textarea>
+            <div class="feedback-modal-actions">
+                <button type="button" class="feedback-modal-cancel" onclick="closeFeedbackModal()">Cancelar</button>
+                <button type="button" class="feedback-modal-submit" id="feedbackModalSubmitBtn" onclick="submitFeedbackMessage()">Enviar</button>
+            </div>
+            <p class="feedback-modal-status" id="feedbackModalStatus"></p>
+        </section>
+    </div>
 
     <div class="profile-crop-backdrop" id="profileCropBackdrop" onclick="if(event.target === this) closeProfileCrop()">
         <section class="profile-crop-panel" role="dialog" aria-modal="true" aria-labelledby="profileCropTitle">
@@ -5935,7 +6012,7 @@
             signInWithPopup, signOut
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
         import {
-            getFirestore, doc, getDoc, setDoc
+            getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -5982,7 +6059,11 @@
                     const snap = await getDoc(doc(db, 'users', uid));
                     return snap.exists() ? (snap.data().questionHistory || null) : null;
                 },
-                setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true })
+                setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true }),
+                // Coleção própria (não debaixo de "users") para o dono do
+                // projeto conseguir ver todo o feedback recebido de uma vez
+                // só no Console do Firebase, em Firestore Database > feedback.
+                submitFeedback: (payload) => addDoc(collection(db, 'feedback'), { ...payload, createdAt: serverTimestamp() })
             };
             ready = true;
         } catch (e) {
@@ -6276,6 +6357,161 @@
             if (nav) nav.hidden = false;
             renderCurrentUser();
             updateHeaderTitle('inicio');
+            renderFeedbackBanner();
+            if (!hasSeenOnboarding()) openOnboarding();
+        }
+
+        /* ============================================================
+           TUTORIAL DE PRIMEIRO ACESSO — aparece uma vez (por dispositivo)
+           na primeira vez que o app abre: apresenta o menu e depois como
+           o app funciona. Pode ser revisto a qualquer momento em Ajuda.
+           ============================================================ */
+        const ONBOARDING_KEY = 'trycktrack-onboarding-done-v1';
+        function hasSeenOnboarding() {
+            try { return localStorage.getItem(ONBOARDING_KEY) === '1'; } catch (_) { return false; }
+        }
+        function markOnboardingSeen() {
+            try { localStorage.setItem(ONBOARDING_KEY, '1'); } catch (_) { /* sem storage disponível */ }
+        }
+
+        const ONBOARDING_SLIDES = [
+            {
+                icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16l16-8Z"/></svg>',
+                title: 'Bem-vindo ao trycktrack',
+                body: '<p>Seu espaço para revisar rápido, treinar questões e acompanhar sua evolução até a prova. Vamos te mostrar rapidinho como tudo funciona — leva menos de um minuto.</p>'
+            },
+            {
+                icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="5"/><line x1="18" y1="20" x2="18" y2="10"/></svg>',
+                title: 'O menu principal',
+                body: `<div class="onboarding-menu-list">
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1V10.5Z"/></svg></span><div><strong>Início</strong><span>Contagem para a prova, atalho para continuar de onde parou.</span></div></div>
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="4.2" cy="6" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="6" x2="20" y2="6"/><circle cx="4.2" cy="12" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="12" x2="20" y2="12"/><circle cx="4.2" cy="18" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="18" x2="20" y2="18"/></svg></span><div><strong>Trilhas</strong><span>Fases de estudo organizadas por objetivo, passo a passo.</span></div></div>
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 12.3 10.8 15 16 8.5"/></svg></span><div><strong>Questões</strong><span>Pratique no Guiado, Simulado, OSCE ou Imersão completa.</span></div></div>
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="5"/><line x1="18" y1="20" x2="18" y2="10"/></svg></span><div><strong>Dashboard</strong><span>Seu desempenho geral e o histórico de todas as sessões.</span></div></div>
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v5a6 6 0 0 0 12 0V3"/><path d="M3.7 3h2.6M15.7 3h2.6"/></svg></span><div><strong>Rapid Review</strong><span>Resumos rápidos por grande área, para revisar antes da prova.</span></div></div>
+                </div>`
+            },
+            {
+                icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-13h-7z"/></svg>',
+                title: 'Como o app funciona',
+                body: '<p>Leia os temas no <strong>Rapid Review</strong>, treine o que aprendeu nas <strong>Questões</strong> e acompanhe tudo no <strong>Dashboard</strong> — inclusive revisitando sessões antigas para rever o que errou. As <strong>Trilhas</strong> ajudam a organizar essa rotina por etapas.</p>'
+            },
+            {
+                icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+                title: 'Pronto para começar',
+                body: '<p>Você pode rever este tutorial quando quiser, em <strong>Perfil → Ajuda</strong>. Bons estudos!</p>',
+                last: true
+            }
+        ];
+        let onboardingStep = 0;
+
+        function openOnboarding() {
+            onboardingStep = 0;
+            renderOnboardingStep();
+            document.getElementById('onboardingOverlay').hidden = false;
+            requestAnimationFrame(() => document.getElementById('onboardingOverlay').classList.add('active'));
+        }
+
+        function renderOnboardingStep() {
+            const slide = ONBOARDING_SLIDES[onboardingStep];
+            document.getElementById('onboardingSlide').innerHTML = `<div class="onboarding-slide-icon">${slide.icon}</div><h2 id="onboardingTitle">${slide.title}</h2>${slide.body}`;
+            document.getElementById('onboardingDots').innerHTML = ONBOARDING_SLIDES.map((_, i) => `<span class="${i === onboardingStep ? 'active' : ''}"></span>`).join('');
+            document.getElementById('onboardingNextBtn').textContent = slide.last ? 'Começar a usar' : 'Avançar';
+            document.getElementById('onboardingSlide').closest('.onboarding-card').scrollTop = 0;
+        }
+
+        function nextOnboardingStep() {
+            if (onboardingStep < ONBOARDING_SLIDES.length - 1) {
+                onboardingStep += 1;
+                renderOnboardingStep();
+            } else {
+                closeOnboarding();
+            }
+        }
+
+        function skipOnboarding() { closeOnboarding(); }
+
+        function closeOnboarding() {
+            markOnboardingSeen();
+            const overlay = document.getElementById('onboardingOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => { overlay.hidden = true; }, 250);
+        }
+
+        /* ============================================================
+           BANNER "APP NOVO" + CAIXA DE SUGESTÃO — as mensagens enviadas
+           vão para a coleção "feedback" no Firestore, visível no Console
+           do Firebase (Firestore Database > feedback) para quem administra
+           o projeto.
+           ============================================================ */
+        const FEEDBACK_BANNER_KEY = 'trycktrack-feedback-banner-dismissed-v1';
+
+        function renderFeedbackBanner() {
+            const slot = document.getElementById('feedbackBannerSlot');
+            if (!slot) return;
+            let dismissed = false;
+            try { dismissed = localStorage.getItem(FEEDBACK_BANNER_KEY) === '1'; } catch (_) { /* ignora */ }
+            if (dismissed) { slot.innerHTML = ''; return; }
+            slot.innerHTML = `<div class="feedback-banner">
+                <button type="button" class="feedback-banner-close" onclick="dismissFeedbackBanner()" aria-label="Dispensar aviso">×</button>
+                <div class="feedback-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-13h-7z"/></svg></div>
+                <div class="feedback-banner-copy">
+                    <strong>O trycktrack é um app novo</strong>
+                    <p>Ainda estamos construindo e melhorando tudo. Se algo travou, ficou confuso ou faltou, seu retorno ajuda muito.</p>
+                    <div class="feedback-banner-actions">
+                        <button type="button" class="feedback-banner-btn" onclick="openFeedbackModal()">Enviar sugestão</button>
+                        <button type="button" class="feedback-banner-dismiss-btn" onclick="dismissFeedbackBanner()">Agora não</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function dismissFeedbackBanner() {
+            try { localStorage.setItem(FEEDBACK_BANNER_KEY, '1'); } catch (_) { /* ignora */ }
+            renderFeedbackBanner();
+        }
+
+        function openFeedbackModal() {
+            document.getElementById('sidebar')?.classList.remove('active');
+            document.getElementById('sidebarBackdrop')?.classList.remove('active');
+            document.getElementById('feedbackModalText').value = '';
+            document.getElementById('feedbackModalStatus').textContent = '';
+            document.getElementById('feedbackModalBackdrop').classList.add('active');
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModalBackdrop').classList.remove('active');
+        }
+
+        async function submitFeedbackMessage() {
+            const textEl = document.getElementById('feedbackModalText');
+            const statusEl = document.getElementById('feedbackModalStatus');
+            const message = textEl.value.trim();
+            if (!message) { statusEl.textContent = 'Escreva algo antes de enviar.'; return; }
+            const btn = document.getElementById('feedbackModalSubmitBtn');
+            btn.disabled = true;
+            statusEl.textContent = 'Enviando...';
+            const payload = {
+                message,
+                userEmail: currentFirebaseUser?.email || null,
+                userId: currentFirebaseUser?.uid || null,
+                page: document.querySelector('.tab-content.active')?.id || null,
+            };
+            try {
+                if (firebaseReady) {
+                    await window.__fb.submitFeedback(payload);
+                    statusEl.textContent = 'Obrigado! Sua sugestão foi enviada.';
+                    textEl.value = '';
+                    setTimeout(closeFeedbackModal, 1400);
+                } else {
+                    statusEl.textContent = 'Sem conexão com o servidor agora — tente novamente mais tarde.';
+                }
+            } catch (e) {
+                console.error('Falha ao enviar feedback:', e);
+                statusEl.textContent = 'Não foi possível enviar agora. Tente novamente.';
+            } finally {
+                btn.disabled = false;
+            }
         }
 
         function showAuthScreen() {
@@ -7910,7 +8146,7 @@
                 ajuda: {
                     title: 'Ajuda',
                     subtitle: 'Um guia para aproveitar melhor o app',
-                    html: `<div class="sidebar-detail-card"><h3>Como começar</h3><p>Comece pela tela inicial e escolha o próximo passo de acordo com seu momento de estudo.</p><ul><li>Use o menu inferior para alternar entre Início, Trilhas, Questões, Dashboard e Rapid Review.</li><li>Abra uma grande área para continuar de onde parou.</li><li>Use o menu lateral para acessar seu perfil e suas preferências.</li></ul></div><div class="sidebar-detail-card"><h3>Rapid Review</h3><p>Escolha uma grande área e leia os temas em sequência. O aplicativo registra seu progresso e tenta retomar a leitura no ponto em que você parou.</p><ul><li>Use <strong>Aa</strong> para ajustar o tamanho do texto.</li><li>Abra “Trocar o tema” para navegar diretamente entre os capítulos.</li><li>Use o botão de download quando quiser gerar uma versão para estudo offline ou impressão.</li></ul></div><div class="sidebar-detail-card"><h3>Banco de questões</h3><p>Escolha o modo de treino e configure os filtros disponíveis antes de iniciar uma sessão.</p><ul><li><strong>Guiado:</strong> veja a explicação após responder.</li><li><strong>Simulado:</strong> responda sem interrupções e confira o resultado ao final.</li><li><strong>OSCE:</strong> pratique estações clínicas estruturadas.</li><li><strong>Imersão:</strong> faça uma prova completa.</li></ul></div><div class="sidebar-detail-card"><h3>Trilhas de estudo</h3><p>As trilhas organizam fases de estudo por objetivo. Conforme você avança, novas etapas podem ser liberadas.</p></div><div class="sidebar-detail-card"><h3>Progresso e conta</h3><p>Quando estiver conectado, seu progresso pode ser sincronizado. No modo local, as preferências e os dados ficam salvos neste dispositivo.</p></div><div class="sidebar-detail-card"><h3>Quando algo não carregar</h3><ul><li>Atualize a página ou reabra o aplicativo.</li><li>Confira sua conexão com a internet.</li><li>Se o conteúdo continuar ausente, confirme se você está usando a versão mais recente.</li><li>Ao testar no celular, use o endereço da rede local ou o domínio publicado — “localhost” funciona apenas no computador que hospeda o app.</li></ul></div><div class="sidebar-detail-card"><h3>Precisa de suporte?</h3><p>Anote a tela em que o problema ocorreu, o dispositivo utilizado e o que você fez antes do erro. Essas informações ajudam a localizar a causa com mais rapidez.</p></div>`
+                    html: `<div class="sidebar-detail-card"><h3>Como começar</h3><p>Comece pela tela inicial e escolha o próximo passo de acordo com seu momento de estudo.</p><ul><li>Use o menu inferior para alternar entre Início, Trilhas, Questões, Dashboard e Rapid Review.</li><li>Abra uma grande área para continuar de onde parou.</li><li>Use o menu lateral para acessar seu perfil e suas preferências.</li></ul><button type="button" class="sidebar-photo-button" style="margin-top:12px" onclick="closeSidebarPanel(); openOnboarding()">Rever tutorial de primeiro acesso</button></div><div class="sidebar-detail-card"><h3>Rapid Review</h3><p>Escolha uma grande área e leia os temas em sequência. O aplicativo registra seu progresso e tenta retomar a leitura no ponto em que você parou.</p><ul><li>Use <strong>Aa</strong> para ajustar o tamanho do texto.</li><li>Abra “Trocar o tema” para navegar diretamente entre os capítulos.</li><li>Use o botão de download quando quiser gerar uma versão para estudo offline ou impressão.</li></ul></div><div class="sidebar-detail-card"><h3>Banco de questões</h3><p>Escolha o modo de treino e configure os filtros disponíveis antes de iniciar uma sessão.</p><ul><li><strong>Guiado:</strong> veja a explicação após responder.</li><li><strong>Simulado:</strong> responda sem interrupções e confira o resultado ao final.</li><li><strong>OSCE:</strong> pratique estações clínicas estruturadas.</li><li><strong>Imersão:</strong> faça uma prova completa.</li></ul></div><div class="sidebar-detail-card"><h3>Trilhas de estudo</h3><p>As trilhas organizam fases de estudo por objetivo. Conforme você avança, novas etapas podem ser liberadas.</p></div><div class="sidebar-detail-card"><h3>Progresso e conta</h3><p>Quando estiver conectado, seu progresso pode ser sincronizado. No modo local, as preferências e os dados ficam salvos neste dispositivo.</p></div><div class="sidebar-detail-card"><h3>Quando algo não carregar</h3><ul><li>Atualize a página ou reabra o aplicativo.</li><li>Confira sua conexão com a internet.</li><li>Se o conteúdo continuar ausente, confirme se você está usando a versão mais recente.</li><li>Ao testar no celular, use o endereço da rede local ou o domínio publicado — “localhost” funciona apenas no computador que hospeda o app.</li></ul></div><div class="sidebar-detail-card"><h3>Precisa de suporte?</h3><p>Anote a tela em que o problema ocorreu, o dispositivo utilizado e o que você fez antes do erro. Essas informações ajudam a localizar a causa com mais rapidez.</p></div>`
                 },
                 sobre: {
                     title: 'Sobre',
