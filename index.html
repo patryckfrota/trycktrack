@@ -1260,6 +1260,57 @@
         .question-player-count { color: var(--lavender-active); font-size: 11px; font-weight: 700; }
         .question-fontsize-btn { flex: 0 0 auto; width: 34px; height: 30px; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-secondary); color: var(--lavender-active); font: 700 13px/1 var(--font-family-base); cursor: pointer; }
         .question-fontsize-btn:active { transform: scale(.93); }
+        .question-results-back { flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-secondary); color: var(--lavender-active); cursor: pointer; }
+        .question-results-back[hidden] { display: none; }
+        .question-results-back svg { width: 16px; height: 16px; }
+        .question-results-back:active { transform: scale(.93); }
+
+        /* ---------- tela de desempenho: bolhas de vidro líquido ---------- */
+        .question-results-view { max-width: 560px; margin: 0 auto; }
+        .question-results-score { text-align: center; margin-bottom: 6px; }
+        .question-results-score strong { display: block; font-size: 34px; font-weight: 800; color: var(--text-main); }
+        .question-results-score span { display: block; margin-top: 4px; color: var(--text-secondary); font-size: 13px; }
+        .question-results-hint { text-align: center; color: var(--text-secondary); font-size: 11px; margin: 4px 0 22px; }
+        .question-results-pdf-btn { display: block; margin: 14px auto 0; border: 1px solid rgba(196,181,253,.4); border-radius: 10px; padding: 8px 16px; background: transparent; color: var(--lavender-active); font: 700 12px/1 var(--font-family-base); cursor: pointer; }
+        .question-results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 16px; padding: 4px; }
+        .result-bubble {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 800;
+            font-family: var(--font-family-base);
+            background:
+                radial-gradient(circle at 32% 28%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 38%),
+                radial-gradient(circle at 68% 78%, var(--bubble-tint-strong) 0%, transparent 62%),
+                radial-gradient(circle at 50% 50%, var(--bubble-tint-soft) 0%, var(--bubble-tint-base) 100%);
+            box-shadow:
+                inset 0 2px 5px rgba(255,255,255,.55),
+                inset 0 -6px 10px var(--bubble-shadow-inner),
+                0 6px 16px var(--bubble-shadow-outer);
+            transition: transform .16s ease;
+        }
+        .result-bubble:active { transform: scale(.92); }
+        .result-bubble span { text-shadow: 0 1px 3px rgba(0,0,0,.35); }
+        .result-bubble.correct {
+            --bubble-tint-strong: rgba(52,199,89,.85);
+            --bubble-tint-soft: rgba(52,199,89,.55);
+            --bubble-tint-base: rgba(22,120,55,.65);
+            --bubble-shadow-inner: rgba(20,90,45,.5);
+            --bubble-shadow-outer: rgba(52,199,89,.4);
+        }
+        .result-bubble.wrong {
+            --bubble-tint-strong: rgba(255,90,82,.85);
+            --bubble-tint-soft: rgba(255,90,82,.55);
+            --bubble-tint-base: rgba(150,30,25,.65);
+            --bubble-shadow-inner: rgba(120,20,15,.5);
+            --bubble-shadow-outer: rgba(255,90,82,.4);
+        }
         .question-player-progress { flex: 0 0 auto; height: 3px; background: var(--bg-tertiary); }
         .question-player-progress div { height: 100%; width: 0; background: var(--lavender-active); transition: width .35s ease; }
         .question-player-body { flex: 1 1 0; min-height: 0; overflow-y: auto; padding: 20px 16px 130px; -webkit-overflow-scrolling: touch; }
@@ -5698,18 +5749,26 @@
         <header class="question-player-header">
             <button class="question-player-back" onclick="closeQuestionPlayer()" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button>
             <div class="question-player-heading"><strong id="questionPlayerMode">Guiado</strong><span id="questionPlayerArea">Cirurgia Geral</span></div>
-            <button class="question-fontsize-btn" onclick="openQuestionFontSizeSheet()" aria-label="Alterar tamanho do texto">Aa</button>
+            <button class="question-fontsize-btn" id="questionFontsizeBtn" onclick="openQuestionFontSizeSheet()" aria-label="Alterar tamanho do texto">Aa</button>
+            <button class="question-results-back" id="questionResultsBackBtn" onclick="showQuestionResults()" aria-label="Voltar para o desempenho" title="Voltar para o desempenho" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
             <div class="question-player-count" id="questionPlayerCount">1/12</div>
         </header>
-        <div class="question-player-progress"><div id="questionPlayerProgress"></div></div>
+        <div class="question-player-progress" id="questionPlayerProgressWrap"><div id="questionPlayerProgress"></div></div>
         <main class="question-player-body" id="questionPlayerBody">
-            <div class="question-meta"><span id="questionSource">INEP</span><span id="questionNumber">Questão 1</span></div>
-            <div class="question-stem" id="questionStem"></div>
-            <div class="question-visual-warning" id="questionVisualWarning" hidden>Esta questão depende de um elemento visual do PDF original e está sinalizada para revisão.</div>
-            <div class="question-options" id="questionOptions"></div>
-            <div class="question-feedback" id="questionFeedback" hidden><strong id="questionFeedbackTitle"></strong><p id="questionFeedbackText"></p></div>
+            <div id="questionPlayQuestion">
+                <div class="question-meta"><span id="questionSource">INEP</span><span id="questionNumber">Questão 1</span></div>
+                <div class="question-stem" id="questionStem"></div>
+                <div class="question-visual-warning" id="questionVisualWarning" hidden>Esta questão depende de um elemento visual do PDF original e está sinalizada para revisão.</div>
+                <div class="question-options" id="questionOptions"></div>
+                <div class="question-feedback" id="questionFeedback" hidden><strong id="questionFeedbackTitle"></strong><p id="questionFeedbackText"></p></div>
+            </div>
+            <div class="question-results-view" id="questionResultsView" hidden>
+                <div class="question-results-score" id="questionResultsScore"></div>
+                <p class="question-results-hint">Toque em uma bolha para revisar a questão.</p>
+                <div class="question-results-grid" id="questionResultsGrid"></div>
+            </div>
         </main>
-        <footer class="question-player-footer"><button class="question-next" id="questionNext" onclick="advanceQuestion()" disabled>Próxima questão</button></footer>
+        <footer class="question-player-footer" id="questionPlayerFooter"><button class="question-next" id="questionNext" onclick="advanceQuestion()" disabled>Próxima questão</button></footer>
     </section>
 
     <!-- RAPID REVIEW — leitor padronizado por grande área -->
@@ -9042,12 +9101,86 @@
             if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
             lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
-            closeQuestionPlayer();
-            revealQuestionNotice(`Sessão concluída: ${correct} de ${session.questions.length} acertos.`, {
-                label: 'Baixar resultado em PDF',
-                onClick: () => downloadQuestionSessionResultPdf(lastCompletedQuestionSession),
-            });
+            activeQuestionSession = null;
+            showQuestionResults(lastCompletedQuestionSession);
             updateQuestionHubStats();
+        }
+
+        let activeResultsSession = null;
+
+        // Substitui o antigo aviso "Sessão concluída" por uma página de
+        // desempenho dentro do próprio player: uma bolha por questão, verde
+        // se acertou e vermelha se errou, cada uma abrindo a questão em modo
+        // de revisão (somente leitura).
+        function showQuestionResults(session) {
+            if (session) activeResultsSession = session;
+            if (!activeResultsSession) return;
+            const player = document.getElementById('questionPlayer');
+            player.hidden = false;
+            document.body.style.overflow = 'hidden';
+
+            document.getElementById('questionPlayQuestion').hidden = true;
+            document.getElementById('questionResultsView').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = true;
+            document.getElementById('questionPlayerFooter').hidden = true;
+            document.getElementById('questionFontsizeBtn').hidden = true;
+            document.getElementById('questionResultsBackBtn').hidden = true;
+            document.getElementById('questionPlayerCount').textContent = '';
+
+            const { questions, answers, mode } = activeResultsSession;
+            const correctCount = questions.reduce((sum, q, i) => sum + (isQuestionAnswerCorrect(q, answers[i]) ? 1 : 0), 0);
+            document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
+            document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
+            document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${questions.length}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
+            document.getElementById('questionResultsGrid').innerHTML = questions.map((q, i) => {
+                const correct = isQuestionAnswerCorrect(q, answers[i]);
+                return `<button type="button" class="result-bubble ${correct ? 'correct' : 'wrong'}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${correct ? 'acertou' : 'errou'}"><span>${i + 1}</span></button>`;
+            }).join('');
+            document.getElementById('questionPlayerBody').scrollTop = 0;
+        }
+
+        // Mostra uma questão específica do resultado em modo de revisão
+        // (opções já marcadas certo/errado, explicação visível, sem poder
+        // responder de novo). O botão no canto superior direito volta para
+        // a grade de bolhas.
+        function reviewQuestionResult(index) {
+            if (!activeResultsSession) return;
+            const { questions, answers, mode } = activeResultsSession;
+            const question = questions[index];
+            const answer = answers[index];
+
+            document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = true;
+            document.getElementById('questionPlayerFooter').hidden = true;
+            document.getElementById('questionFontsizeBtn').hidden = true;
+            document.getElementById('questionResultsBackBtn').hidden = false;
+
+            document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
+            document.getElementById('questionPlayerArea').textContent = question.area || '';
+            document.getElementById('questionPlayerCount').textContent = `${index + 1}/${questions.length}`;
+            document.getElementById('questionSource').textContent = question.source || '';
+            document.getElementById('questionNumber').textContent = `Questão ${question.number || index + 1}`;
+            document.getElementById('questionStem').textContent = question.stem;
+            document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
+
+            document.getElementById('questionOptions').innerHTML = question.questionType === 'discursive'
+                ? ''
+                : Object.entries(question.options || {}).map(([letter, text]) => {
+                    let cls = '';
+                    if (!question.annulled && letter === question.answer) cls = 'correct';
+                    else if (question.annulled && letter === answer) cls = 'correct';
+                    else if (letter === answer) cls = 'wrong';
+                    return `<div class="question-option ${cls}" style="cursor:default"><span class="question-option-letter">${letter}</span><span>${text}</span></div>`;
+                }).join('');
+
+            const correct = isQuestionAnswerCorrect(question, answer);
+            document.getElementById('questionFeedbackTitle').textContent = question.questionType === 'discursive'
+                ? 'Resposta esperada'
+                : (question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`));
+            document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
+            document.getElementById('questionFeedback').hidden = false;
+            document.getElementById('questionPlayerBody').scrollTop = 0;
         }
 
         function closeQuestionPlayer() {
@@ -9055,6 +9188,15 @@
             document.getElementById('questionPlayer').hidden = true;
             document.body.style.overflow = '';
             activeQuestionSession = null;
+            activeResultsSession = null;
+            // Restaura o player para o estado normal de "responder questão",
+            // caso tenha ficado na tela de desempenho/revisão.
+            document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = false;
+            document.getElementById('questionPlayerFooter').hidden = false;
+            document.getElementById('questionFontsizeBtn').hidden = false;
+            document.getElementById('questionResultsBackBtn').hidden = true;
         }
 
         function recordQuestionResult(question, correct) {
