@@ -5420,6 +5420,1587 @@ Distratores:
 A — Incorreta. Não se aguarda sorologia para notificar suspeita e não há indicação de internação automática em paciente sem sinais de gravidade.
 B — Incorreta. Corticosteroide não é tratamento inicial rotineiro da fase aguda e notificação não deve depender de confirmação.
 D — Incorreta. A assistência e vigilância não devem ser transferidas automaticamente a centro de referência; a atenção primária pode conduzir a maioria dos casos e articular encaminhamento quando necessário.`
+
+        ,'cm-infectologia-051': `Resposta correta — C. Em pessoa em situação de rua com tosse persistente, emagrecimento e alteração pulmonar, deve-se investigar tuberculose com teste rápido molecular do escarro, que também pesquisa resistência à rifampicina. Confirmada tuberculose sensível, inicia-se o esquema básico sem aguardar cultura. O tratamento diretamente observado pode ser executado por profissional ou pessoa capacitada que tenha vínculo com o paciente, sob supervisão periódica da equipe de saúde; a vulnerabilidade social exige cuidado flexível e coordenado, não abandono do TDO.
+
+Distratores:
+A — Incorreta. Resistência à rifampicina não se trata com o esquema básico usual, e a dificuldade de acesso reforça a necessidade de apoio ao tratamento.
+B — Incorreta. Suspeita de resistência requer avaliação especializada, mas não se deve aguardar passivamente cultura sem organizar cuidado e tratamento adequado.
+D — Incorreta. Tuberculose sensível não exige referência terciária, e estar em situação de rua não torna o TDO impossível.`
+
+        ,'cm-infectologia-052': `Resposta correta — C. Febre, mialgia intensa em panturrilhas, sufusão conjuntival, icterícia predominantemente direta, injúria renal e hipocalemia em contexto de saneamento precário formam um quadro clássico de leptospirose grave. A microaglutinação é método sorológico de referência; na primeira semana, PCR ou métodos diretos podem ter maior rendimento, conforme o momento da coleta.
+
+Distratores:
+A — Incorreta. Dengue pode causar febre e mialgia, mas não explica tão bem a combinação de sufusão conjuntival, icterícia intensa com transaminases apenas moderadamente elevadas, disfunção renal e hipocalemia.
+B — Incorreta. Hepatite B costuma apresentar elevação muito mais acentuada de aminotransferases e não produz tipicamente dor em panturrilhas e sufusão conjuntival.
+D — Incorreta. Febre amarela entra no diferencial de síndrome febril ictérica, mas os achados renais, a hipocalemia e a sufusão conjuntival favorecem leptospirose.`
+
+        ,'cm-infectologia-053': `Resposta correta — B. A epizootia em primatas não humanos indica circulação silvestre do vírus, mas não confirma etiologicamente o caso humano. O paciente deve ser notificado imediatamente como caso suspeito de febre amarela silvestre. Fora da fase inicial de viremia, a pesquisa de IgM por ELISA é apropriada, em especial a partir do sétimo dia; história vacinal é necessária para interpretar a sorologia.
+
+Distratores:
+A — Incorreta. Vínculo com uma epizootia aumenta muito a suspeita, porém não transforma automaticamente o paciente em caso humano confirmado.
+C — Incorreta. Não há evidência de transmissão urbana; IgG isolada indica exposição ou vacinação prévia e não confirma infecção aguda.
+D — Incorreta. A coleta não precisa aguardar obrigatoriamente o décimo dia, e vacinação prévia interfere na interpretação dos anticorpos, não podendo ser ignorada.`
+
+        ,'cm-infectologia-054': `Resposta correta — B. Febre prolongada, grande quantidade de escarro pútrido e fatores de risco para aspiração, como alcoolismo e alteração potencial da consciência pelo uso de drogas, são típicos de abscesso pulmonar por infecção polimicrobiana com anaeróbios. A conduta inicial é antibioticoterapia empírica com cobertura apropriada; investigação de obstrução, drenagem ou cirurgia ficam reservadas para situações selecionadas e falha terapêutica.
+
+Distratores:
+A — Incorreta. Tromboembolismo pulmonar não costuma causar expectoração pútrida abundante nem uma cavidade infecciosa.
+C — Incorreta. Neoplasia pode causar obstrução e abscesso secundário, mas não se deve deixar a infecção ativa sem tratamento enquanto se aguarda biópsia.
+D — Incorreta. Tuberculose é um diferencial de lesão cavitária crônica, porém escarro pútrido abundante e contexto de aspiração favorecem abscesso; não se deve aguardar cultura sem iniciar tratamento da infecção provável.
+
+Validação visual pendente — o enunciado depende da radiografia mencionada, mas a imagem não está preservada no banco. A explicação foi construída pelo quadro clínico e pelo gabarito e deve ser confirmada quando a radiografia original estiver disponível.`
+
+        ,'cm-infectologia-055': `Resposta correta — C. O teste rápido treponêmico reagente deve ser complementado por teste não treponêmico quantitativo, como VDRL, que estabelece título basal e permite seguimento. Diante de provável sífilis recente e alto risco de perda de seguimento, o tratamento não deve ser postergado: penicilina benzatina 2,4 milhões UI intramuscular em dose única. Também cabem notificação, aconselhamento, investigação de outras IST e repetição do teste de HIV após a janela imunológica.
+
+Distratores:
+A — Incorreta. Três doses semanais são usadas na sífilis tardia ou de duração ignorada, não na infecção recente proposta; função hepática não é requisito rotineiro para penicilina.
+B — Incorreta. Teste treponêmico permanece reagente após tratamento e não serve para controle de cura; o acompanhamento é feito com VDRL ou outro teste não treponêmico.
+D — Incorreta. Repetir o mesmo teste rápido não substitui o teste não treponêmico, e associar doxiciclina à penicilina não faz parte do esquema recomendado.`
+
+        ,'cm-infectologia-056': `Resposta correta — D. Febre, tosse produtiva, dor pleurítica e dispneia sugerem pneumonia bacteriana. Redução da expansibilidade, do frêmito e do murmúrio vesicular, associada à submacicez na base, caracteriza líquido pleural, indicando derrame parapneumônico.
+
+Distratores:
+A — Incorreta. Atelectasia pode reduzir murmúrio vesicular, mas costuma aumentar ou deslocar estruturas para o lado afetado e não explica tão bem o conjunto infeccioso com síndrome de derrame.
+B — Incorreta. Neoplasia é improvável em jovem previamente hígido com instalação febril em cinco dias.
+C — Incorreta. Pneumotórax causa hipersonoridade, e não submacicez, além de não combinar com tosse produtiva febril aguda.`
+
+        ,'cm-infectologia-057': `Resposta correta — C. A paciente tem síndrome meníngea, está lúcida, sem déficit focal, sem papiledema e sem história descrita de imunossupressão ou convulsão. Não há indicação clínica de neuroimagem antes da punção lombar. O líquor com celularidade, diferencial, proteína e glicose, além de Gram, cultura e testes etiológicos conforme disponibilidade, ajuda a distinguir meningite bacteriana de viral e orienta o tratamento; se houver forte suspeita bacteriana, antibiótico e dexametasona não devem ser atrasados pela coleta.
+
+Distratores:
+A — Incorreta. A via habitual e segura é a punção lombar; punção suboccipital não é indicada nesse cenário.
+B — Incorreta. Pneumococo aparece como diplococo Gram-positivo, não como bastonete Gram-negativo.
+D — Incorreta. Rigidez de nuca, Kernig e Brudzinski confirmam irritação meníngea, mas não são contraindicações à punção; faltam sinais que exigiriam imagem prévia.
+
+Validação visual concluída pelo texto disponível — a fundoscopia foi descrita como normal, sem papiledema, e os dados necessários à decisão estão preservados no enunciado.`
+
+        ,'cm-infectologia-058': `Resposta correta — B. Há choque séptico ou sepse com hipoperfusão por pneumonia aspirativa: hipotensão, alteração de consciência, lactato elevado, injúria renal e acidose. Após culturas e antibiótico, a prioridade é ressuscitação com cristaloide intravenoso, reavaliação frequente de perfusão e início de vasopressor se a hipotensão persistir apesar de volume adequado.
+
+Distratores:
+A — Incorreta. Injúria renal isolada não determina hemodiálise imediata; a prioridade é restaurar perfusão, tratando a causa, e avaliar indicações clássicas de terapia renal substitutiva.
+C — Incorreta. Hemoglobina de 8,5 g/dL, sem hemorragia ou isquemia descrita, não justifica transfusão automática de duas unidades e não corrige o choque distributivo.
+D — Incorreta. Corticoide pode ser considerado em choque refratário a volume e vasopressor, mas não precede a reposição volêmica inicial.`
+
+        ,'cm-infectologia-059': `Resposta correta — A. Febre, cefaleia, mialgia, exantema que envolve plantas e exposição a carrapatos em trilha sugerem febre maculosa. A sorologia por imunofluorescência indireta deve ser colhida na fase aguda e repetida em amostra pareada 14 a 21 dias depois. Como o atraso aumenta a mortalidade, a doxiciclina deve ser iniciada imediatamente, sem aguardar confirmação. Contatos assintomáticos não recebem profilaxia; devem ser orientados a observar sintomas.
+
+Distratores:
+B — Incorreta. Ceftriaxona não é o tratamento de escolha e não se indica profilaxia antibiótica para o namorado assintomático.
+C — Incorreta. Uma amostra precoce pode ser negativa; é necessário demonstrar soroconversão ou aumento de títulos em amostras pareadas, e o tratamento não pode esperar.
+D — Incorreta. A coleta inicial não precisa ser adiada até o sétimo dia, e ceftriaxona não substitui doxiciclina como terapia padrão.`
+
+        ,'cm-infectologia-060': `Resposta correta — A. O líquor linfocitário com proteína elevada e glicose baixa, associado a evolução subaguda, perda de peso, febre e alteração progressiva da consciência, é típico de meningite tuberculosa. A tinta nanquim negativa reduz a evidência de criptococose, embora não a exclua completamente em baixa carga fúngica.
+
+Distratores:
+B — Incorreta. Meningite bacteriana aguda costuma ter evolução mais rápida e líquor predominantemente neutrofílico, com aspecto clínico mais fulminante.
+C — Incorreta. Neurocriptococose pode produzir padrão semelhante, sobretudo em imunossuprimidos, mas não há imunossupressão conhecida e a tinta nanquim foi negativa; antígeno criptocócico seria mais sensível se a suspeita permanecesse.
+D — Incorreta. Meningite viral geralmente apresenta glicose preservada e evolução menos compatível com perda ponderal e rebaixamento progressivo.`
+
+        ,'cm-infectologia-061': `Resposta correta — A. Úlcera de inoculação seguida de nódulos em cadeia ao longo dos vasos linfáticos, em trabalhador de pet shop, caracteriza a forma linfocutânea da esporotricose. A exposição a gatos infectados e a matéria orgânica é epidemiologicamente relevante.
+
+Distratores:
+B — Incorreta. Cromoblastomicose costuma causar lesões verrucosas crônicas, geralmente em membros inferiores, sem padrão linfangítico ascendente típico.
+C — Incorreta. Leishmaniose tegumentar causa úlcera de bordas elevadas, mas a sequência de nódulos lineares e o contexto ocupacional com animais favorecem esporotricose.
+D — Incorreta. Paracoccidioidomicose costuma ter doença pulmonar e lesões mucosas, não esse padrão de inoculação linfocutânea localizada.`
+
+        ,'cm-infectologia-062': `Resposta correta — D. Febre, mialgia, cefaleia e prova do laço positiva em área sem casos prévios são compatíveis com caso suspeito de dengue. A conduta inclui classificação de risco, hidratação, hemograma conforme protocolo e orientação sobre sinais de alarme, além de notificação e intensificação do controle do Aedes pela vigilância.
+
+Distratores:
+A — Incorreta. Ageusia pode ocorrer na covid-19, mas prova do laço e contexto de arbovirose sustentam dengue; antibiótico e corticoide não são indicados rotineiramente em quadro leve.
+B — Incorreta. Chikungunya costuma destacar artralgia intensa; anti-inflamatórios devem ser evitados enquanto dengue não for excluída, pelo risco hemorrágico.
+C — Incorreta. Zika costuma produzir exantema pruriginoso, conjuntivite e febre baixa; buscar apenas gestantes não substitui a notificação e o manejo do paciente.`
+
+        ,'cm-infectologia-063': `Resposta correta — C. O episódio agudo de febre, exantema, conjuntivite e poliartralgia seguido de artrite persistente por quatro meses é típico da fase crônica da chikungunya. Quando há artrite inflamatória persistente e incapacitante apesar de analgésicos e anti-inflamatórios, pode-se indicar um fármaco modificador de doença, como metotrexato, após avaliação de contraindicações e acompanhamento apropriado.
+
+Distratores:
+A — Incorreta. Citomegalovirose não costuma produzir artrite crônica simétrica após síndrome exantemática desse padrão.
+B — Incorreta. Febre do Mayaro pode causar artralgia prolongada, mas a associação epidemiológica e clínica mais provável na questão é chikungunya; metotrexato não seria instituído apenas pelo rótulo sem avaliação da fase crônica.
+D — Incorreta. Dengue não costuma evoluir com poliartrite inflamatória persistente por meses.`
+
+        ,'cm-infectologia-064': `Resposta correta — B. Idoso no pós-operatório com delirium agudo, febre, taquicardia, taquipneia, hipotensão, hipoxemia e crepitações pulmonares tem provável pneumonia com sepse. Precisa de internação, investigação laboratorial e microbiológica, imagem e antimicrobianos intravenosos precoces, além de suporte e avaliação de disfunção orgânica.
+
+Distratores:
+A — Incorreta. Instabilidade hemodinâmica, alteração neurológica e necessidade de oxigênio tornam o tratamento ambulatorial inseguro.
+C — Incorreta. O abdome e a ferida estão sem sinais de foco; tomografia abdominal isolada e sintomáticos atrasariam o tratamento da sepse pulmonar.
+D — Incorreta. Delirium é provavelmente secundário à infecção e hipoxemia; tomografia de crânio e haloperidol não tratam a causa e não são a prioridade sem déficit focal ou trauma.`
+
+        ,'cm-infectologia-065': `Resposta correta — B. O líquido é exsudativo pelos critérios de Light: relação proteína pleural/sérica acima de 0,5 e relação LDH pleural/sérica acima de 0,6. Entretanto, o derrame é pequeno, livre, com pH 7,3, glicose preservada, Gram negativo e melhora clínica — características de derrame parapneumônico não complicado. Deve-se manter o antibiótico e acompanhar clínica e radiologicamente; drenagem não é necessária neste momento.
+
+Distratores:
+A — Incorreta. Drenagem é indicada em pus, Gram/cultura positivos, loculações, grande volume ou parâmetros de complicação como pH abaixo de 7,2; esses elementos não estão presentes.
+C — Incorreta. Há resposta clínica ao esquema inicial e não existe evidência de falha que justifique troca para levofloxacino.
+D — Incorreta. O quadro agudo neutrofílico e a melhora com antibiótico favorecem derrame parapneumônico; investigação de tuberculose não é a prioridade apresentada.`
+
+        ,'cm-infectologia-066': `Resposta correta — C. Em área endêmica com positividade coproscópica elevada, de 24%, a estratégia de controle amplia o tratamento para os casos positivos e seus conviventes, além das medidas de saneamento, educação em saúde e controle ambiental. Essa abordagem reduz reservatórios humanos e transmissão em um cenário de alta prevalência.
+
+Distratores:
+A — Incorreta. Tratar apenas os exames positivos é estratégia usada em cenários de menor positividade e seria insuficiente diante do inquérito apresentado.
+B — Incorreta. Tratamento coletivo indiscriminado de toda a comunidade não é automaticamente indicado apenas pelo percentual, pois exige avaliação programática e de contraindicações.
+D — Incorreta. Um segundo exame não é requisito para tratar quem já apresentou ovos de Schistosoma mansoni.`
+
+        ,'cm-infectologia-067': `Resposta correta — C. A paciente tem teste treponêmico rápido reagente, é assintomática e não há documentação do momento da infecção. Deve-se colher teste não treponêmico quantitativo para complementar o diagnóstico e estabelecer título basal. Sem evidência de infecção recente, o esquema é o de sífilis latente tardia ou de duração ignorada: penicilina benzatina 2,4 milhões UI intramuscular semanal por três semanas.
+
+Distratores:
+A — Incorreta. Sífilis secundária exige manifestações clínicas compatíveis; além disso, o teste não treponêmico é necessário para seguimento.
+B — Incorreta. Repetir outro teste treponêmico não fornece título para monitoramento e, em parceria exposta, não se deve adiar indevidamente o tratamento.
+D — Incorreta. Testagem para HIV deve ser oferecida, mas não define sífilis primária, que requer cancro ou contexto temporal compatível.`
+
+        ,'cm-infectologia-068': `Resposta correta — D. Em pessoa vivendo com HIV, perda de peso, tosse por três semanas, sudorese noturna, cavidades em lobo superior e baciloscopia com BAAR configuram tuberculose pulmonar ativa até prova em contrário. O teste rápido molecular confirma o complexo M. tuberculosis e pesquisa resistência à rifampicina; cultura e teste de sensibilidade são especialmente importantes em pessoas com HIV e para detectar outras resistências.
+
+Distratores:
+A — Incorreta. Criptococose pulmonar é possível na imunossupressão, mas não explica melhor a baciloscopia positiva e o padrão cavitário típico; sorologia isolada também não é a investigação proposta.
+B — Incorreta. Paracoccidioidomicose entra no diferencial regional, porém BAAR no escarro e cavitação apical favorecem tuberculose.
+C — Incorreta. Toxoplasmose costuma causar doença neurológica ou ocular em HIV avançado e não esse quadro pulmonar bacilífero.
+
+Validação visual concluída pelo texto disponível — o laudo preserva infiltrados e cavidades no lobo superior direito, achado suficiente para o raciocínio exigido.`
+
+        ,'cm-infectologia-069': `Resposta correta — C. Tosse crônica, febre, sudorese, emagrecimento, hemoptise e cavitações nos segmentos superiores caracterizam tuberculose pulmonar pós-primária ou de reativação. A maior tensão de oxigênio nos ápices favorece esse padrão, que apresenta maior carga bacilar e transmissibilidade.
+
+Distratores:
+A — Incorreta. O foco descrito é pulmonar, sem evidência de acometimento extrapulmonar predominante.
+B — Incorreta. Infecção latente é assintomática e não produz cavitações nem bacilos em atividade.
+D — Incorreta. Tuberculose primária costuma apresentar complexo primário, adenopatia hilar e consolidação, sendo menos típica a cavitação apical do adulto.`
+
+        ,'cm-infectologia-070': `Resposta correta — D. O teste rápido molecular positivo sem resistência à rifampicina permite iniciar imediatamente o esquema básico com rifampicina, isoniazida, pirazinamida e etambutol. Como o paciente pertence a população vulnerável e tem contexto que aumenta o risco de resistência e perda de seguimento, também se coleta cultura com teste de sensibilidade e se reavalia o esquema quando o resultado estiver disponível.
+
+Distratores:
+A — Incorreta. Aguardar cultura prolonga a transmissão e atrasa tratamento de tuberculose já confirmada molecularmente.
+B — Incorreta. Tuberculose sensível pode ser iniciada e acompanhada na rede de atenção, com referência conforme necessidade; não se espera cultura para começar.
+C — Incorreta. O esquema está correto, mas dispensar cultura e sensibilidade perde informação importante nesse contexto de vulnerabilidade e investigação de resistência.`
+
+        ,'cm-infectologia-071': `Resposta correta — D. Histerectomia abdominal eletiva com entrada controlada no trato genital é cirurgia limpa-contaminada. A profilaxia deve atingir concentração tecidual antes da incisão; para uma adulta, cefazolina 2 g intravenosa administrada até 60 minutos antes do procedimento é esquema habitual, com ajustes por peso e protocolo local.
+
+Distratores:
+A — Incorreta. Não há infecção estabelecida nem grande quebra de técnica que classifique a operação eletiva como contaminada, e a dose durante o ato é tardia.
+B — Incorreta. O momento e a dose estão adequados, mas a classificação como contaminada está errada.
+C — Incorreta. A classificação está correta, porém 1 g durante a cirurgia não garante profilaxia adequada antes da incisão.`
+
+        ,'cm-infectologia-072': `Resposta correta — C. Swab de vigilância positivo para bacilo Gram-negativo resistente a carbapenêmico, sem sintomas, febre ou leucocitose, indica colonização, não infecção. Não se administra antibiótico para erradicar colonização; devem-se aplicar precauções de contato, higiene rigorosa das mãos e medidas institucionais de controle de transmissão.
+
+Distratores:
+A — Incorreta. Colonização não exige transferência para centro de trauma e deslocar o paciente pode ampliar risco de disseminação.
+B — Incorreta. Antibiograma não é indicação de tratamento na ausência de infecção e o uso desnecessário aumenta pressão seletiva.
+D — Incorreta. A via de transmissão exige precaução de contato, não de gotículas; banho com clorexidina não substitui as medidas essenciais e não é rotina universal para descolonização de bacilos Gram-negativos.`
+
+        ,'cm-infectologia-073': `Resposta correta — C. Coleta capaz de gerar aerossóis em paciente com suspeita de SARS-CoV-2 exige respirador PFF2/N95 ou equivalente, proteção ocular ou facial, avental de mangas compridas, luvas e calçado fechado; o gorro integra a proteção descrita no protocolo da questão.
+
+Distratores:
+A — Incorreta. Avental de pano não oferece a barreira adequada para procedimento com risco de aerossol e o conjunto está incompleto.
+B — Incorreta. Máscara cirúrgica não substitui PFF2/N95 quando há geração de aerossóis, além de faltar luva.
+D — Incorreta. Máscara de tecido não é equipamento respiratório adequado para assistência com aerossóis.`
+
+        ,'cm-nefrologia-004': `Resposta correta — D. Hipotensão, enchimento capilar prolongado e uso de diurético, inibidor da ECA e anti-hipertensivo sugerem hipovolemia com injúria renal pré-renal e risco de piora hemodinâmica. A conduta imediata é suspender temporariamente enalapril, furosemida e anlodipino, administrar cristaloide com reavaliação clínica e laboratorial e investigar a causa da depleção.
+
+Distratores:
+A — Incorreta. Furosemida intravenosa agravaria hipovolemia, e diálise não é indicada sem complicação refratária específica.
+B — Incorreta. Manter enalapril e furosemida durante hipotensão pode perpetuar a injúria renal; gluconato de cálcio só é indicado diante de hipercalemia com alteração eletrocardiográfica ou situação equivalente.
+C — Incorreta. Restrição hídrica e manutenção do diurético são contrárias ao quadro de hipoperfusão.
+
+Validação visual pendente — o quadro laboratorial mencionado no enunciado não foi preservado no banco. A alternativa correta é sustentada pelos dados hemodinâmicos, mas eletrólitos e função renal precisam ser conferidos na imagem original.`
+
+        ,'cm-nefrologia-005': `Resposta correta — B. Lactente com poliúria, desidratação, déficit de crescimento, osteopenia e raquitismo resistente à vitamina D sugere tubulopatia proximal, como síndrome de Fanconi com acidose tubular renal proximal. A perda urinária de bicarbonato causa acidose metabólica com ânion gap normal e hipercloremia; frequentemente também há hipocalemia.
+
+Distratores:
+A — Incorreta. Alcalose hipoclorêmica ocorre tipicamente com perdas gástricas persistentes, mas não explica poliúria, raquitismo e tubulopatia.
+C — Incorreta. Não há mecanismo respiratório primário para o conjunto apresentado.
+D — Incorreta. A acidose é hiperclorêmica, porém a acidose tubular proximal tende à perda de potássio, não à hipercalemia.`
+
+        ,'cm-nefrologia-006': `Resposta correta — A. Síndrome nefrótica é definida por proteinúria maciça, em geral acima de 3,5 g/24 horas no adulto, associada a hipoalbuminemia. O edema é consequência da redução da pressão oncótica e da retenção renal de sódio. Os valores de proteinúria de 3,6 g e albumina de 1,8 g/dL estabelecem a síndrome.
+
+Distratores:
+B — Incorreta. Hipertrigliceridemia é manifestação frequente, mas não substitui a hipoalbuminemia na definição sindrômica.
+C — Incorreta. Hematúria sugere componente nefrítico e triglicerídeos elevados, isoladamente, não definem síndrome nefrótica.
+D — Incorreta. Hipoalbuminemia é compatível, mas falta demonstrar proteinúria em faixa nefrótica.`
+
+        ,'cm-nefrologia-007': `Resposta correta — B. O quadro é pielonefrite complicada por choque séptico: febre, dor lombar, Giordano positivo, taquicardia, taquipneia e hipotensão grave. É necessário acesso venoso, expansão com cristaloide, coleta de hemoculturas e urocultura sem atrasar antibioticoterapia intravenosa precoce, monitorização e vasopressor se a hipotensão persistir.
+
+Distratores:
+A — Incorreta. Controle sintomático e encaminhamento ambulatorial deixam sem tratamento uma sepse com choque.
+C — Incorreta. O quadro é urinário alto, sem elementos que sustentem gonorreia como causa principal.
+D — Incorreta. Hipotensão de 70 × 40 mmHg exige internação e ressuscitação; antibiótico oral e alta são inseguros.
+
+Validação visual concluída pelo texto disponível — o exame de imagem foi descrito como negativo para cálculo, suficiente para afastar obstrução litiásica no raciocínio da questão.`
+
+        ,'cm-nefrologia-008': `Resposta correta — C. Dor lombar em cólica irradiada para flanco e fossa ilíaca, hematúria e ausência de febre ou leucocitose são típicas de ureterolitíase sem infecção. O manejo inicial inclui analgesia, preferencialmente com anti-inflamatório quando não contraindicado, antiemético e correção da desidratação; imagem e seguimento definem tamanho, localização e necessidade de intervenção.
+
+Distratores:
+A — Incorreta. Cirurgia urgente fica reservada para obstrução infectada, rim único obstruído, perda de função, dor refratária ou outras complicações.
+B — Incorreta. Leucocitúria discreta pode acompanhar o cálculo; ausência de nitrito, febre e repercussão sistêmica não sustenta antibioticoterapia automática.
+D — Incorreta. Urocultura pode ser solicitada se houver dúvida, mas o diagnóstico principal não é infecção urinária e analgesia isolada não define o acompanhamento do cálculo.`
+
+        ,'cm-nefrologia-010': `Resposta correta — B. Hematúria glomerular com dismorfismo eritrocitário, hipertensão, edema e proteinúria subnefrótica caracteriza síndrome nefrítica. Nefropatia por IgA é diagnóstico compatível e pode exigir biópsia para definição histológica, prognóstico e conduta conforme apresentação.
+
+Distratores:
+A — Incorreta. A proteinúria de 1,5 g/24 horas e albumina preservada não configuram síndrome nefrótica; amiloidose costuma cursar com proteinúria maciça.
+C — Incorreta. Nefropatia membranosa causa síndrome nefrótica, incompatível com a definição apresentada.
+D — Incorreta. Doença de lesões mínimas tipicamente produz síndrome nefrótica com sedimento pouco ativo, não hematúria dismórfica e hipertensão de padrão nefrítico.`
+
+        ,'cm-nefrologia-011': `Resposta correta — A. O paciente tem hiponatremia profunda e sintomática, com convulsões e edema cerebral, provavelmente por SIADH associada ao carcinoma de pequenas células. A prioridade é solução salina hipertônica a 3%, com monitorização seriada do sódio e interrupção após melhora clínica ou elevação inicial segura, evitando correção excessiva e desmielinização osmótica.
+
+Distratores:
+B — Incorreta. Dexametasona é usada em edema vasogênico por tumor cerebral, mas não corrige edema citotóxico causado por hiponatremia grave.
+C — Incorreta. Desmopressina pode ser utilizada para conter correção excessivamente rápida em situações selecionadas, mas não é o tratamento inicial da hiponatremia convulsiva.
+D — Incorreta. Restrição hídrica é útil no manejo crônico de SIADH, porém é lenta e insuficiente diante de sintomas neurológicos graves.`
+
+        ,'cm-nefrologia-012': `Resposta correta — A. Disúria, polaciúria, urgência e dor suprapúbica, sem febre, dor lombar ou corrimento vaginal, caracterizam cistite aguda não complicada. Em mulher jovem não gestante, nitrofurantoína é opção de primeira linha para tratamento empírico.
+
+Distratores:
+B — Não há sinais de pielonefrite, e norfloxacino não é escolha preferencial para cistite simples.
+C — Staphylococcus aureus é causa incomum de cistite comunitária e não há indicação de cobertura ampla.
+D — Não há cólica renal, obstrução ou sinais de infecção complicada que sustentem nefrolitíase.`
+
+        ,'cm-nefrologia-013': `Resposta correta — D. Proteinúria de 4 g/24 h, hipoalbuminemia, edema e hiperlipidemia definem síndrome nefrótica. Em mulher jovem no puerpério, FAN em alto título sustenta lúpus eritematoso sistêmico com nefrite lúpica.
+
+Distratores:
+A — Hiperglicemia isolada não comprova nefropatia diabética estabelecida nem explica o contexto autoimune.
+B — Síndrome nefrítica teria hematúria, hipertensão e perda de filtração mais proeminentes; Sjögren costuma causar doença tubulointersticial.
+C — Trombose de veia renal pode complicar síndrome nefrótica, mas não explica melhor o conjunto apresentado.`
+
+        ,'cm-nefrologia-014': `Resposta correta — D. A nefropatia diabética incipiente é detectada por albuminúria moderadamente aumentada, com relação albumina/creatinina urinária superior a 30 mg/g, confirmada em nova amostra após excluir causas transitórias. Creatinina e filtração ainda podem estar normais.
+
+Distratores:
+A — Proteinúria na fita costuma representar estágio mais avançado e tem menor sensibilidade para albuminúria inicial.
+B — Elevação da creatinina surge mais tarde, após perda relevante da função renal.
+C — TFG inferior a 45 mL/min/1,73 m² indica doença renal moderada a grave, não fase inicial.`
+
+        ,'cm-nefrologia-015': `Resposta correta — B. Pielonefrite com cálculo ureteral impactado, hipotensão e disfunção orgânica é sepse urinária com sistema coletor obstruído. Além de ressuscitação e antimicrobiano, exige descompressão emergencial por cateter duplo J ou nefrostomia para controle do foco.
+
+Distratores:
+A — Cristaloide integra a ressuscitação, mas não substitui o controle urgente do foco obstrutivo.
+C — Vasopressor é indicado se a hipotensão persistir após volume adequado, porém não resolve a obstrução infectada.
+D — A cobertura empírica deve priorizar bacilos Gram-negativos urinários e o perfil local, não basicamente Gram-positivos.`
+
+        ,'cm-nefrologia-016': `Resposta correta — D. Dor abdominal e efluente turvo em diálise peritoneal sugerem peritonite associada à diálise. Infecção por Pseudomonas tem maior risco de falha, requer cobertura com dois agentes ativos e pode exigir retirada do cateter, especialmente se houver infecção do túnel, refratariedade ou recidiva.
+
+Distratores:
+A — Febre pode faltar, mas dor abdominal e efluente turvo são manifestações típicas; sintomas sistêmicos não são invariavelmente raros.
+B — O critério usa mais de 100 leucócitos/µL, com mais de 50% de polimorfonucleares, e não exige mais de 250 PMN/mm³.
+C — A glicose do dialisato pode causar hiperglicemia e ganho de peso, e perdas proteicas podem contribuir para hipoalbuminemia.`
+
+        ,'cm-nefrologia-017': `Resposta correta — A. Há acidemia com bicarbonato baixo, indicando acidose metabólica. Pela fórmula de Winter, a PaCO₂ esperada seria cerca de 27 ± 2 mmHg; a medida de 48 mmHg está muito acima, demonstrando acidose respiratória concomitante por hipoventilação. Trata-se de acidose mista.
+
+Distratores:
+B — A compensação adequada exigiria queda da PaCO₂, não elevação para 48 mmHg.
+C — O distúrbio primário não é alcalose respiratória, pois a PaCO₂ está elevada.
+D — Alcalose respiratória compensatória exigiria PaCO₂ baixa; aqui existe retenção de CO₂.`
+
+        ,'cm-nefrologia-018': `Resposta correta — B. Mulher jovem com disúria, polaciúria, hematúria e dor suprapúbica, sem sinais vaginais ou sistêmicos, tem cistite aguda não complicada. O diagnóstico é clínico e permite antibioticoterapia empírica.
+
+Distratores:
+A — Urocultura não é obrigatória no primeiro episódio típico; é reservada para recorrência, falha, gestação ou complicação.
+C — Não há sinais de candidíase ou outra infecção fúngica.
+D — A ausência de corrimento, prurido ou achados vaginais torna bacterioscopia vaginal desnecessária.`
+
+        ,'cm-nefrologia-019': `Resposta correta — A. O potássio permanece em 6,1 mEq/L apesar das medidas de estabilização e transferência intracelular, configurando hipercalemia refratária em injúria renal aguda por rabdomiólise. É indicação clássica de terapia renal substitutiva, sobretudo após alterações eletrocardiográficas.
+
+Distratores:
+B — Ureia elevada isoladamente, sem sintomas urêmicos atribuíveis, não define diálise por um valor fixo.
+C — O bicarbonato melhorou de 14 para 20 mmol/L; a acidose não permaneceu refratária.
+D — Creatinina elevada isoladamente não determina diálise; importam as complicações clínicas e metabólicas.`
+
+        ,'cm-nefrologia-020': `Resposta correta — D. Edema, urina espumosa, proteinúria acima de 3,5 g/dia, hipoalbuminemia e hiperlipidemia formam síndrome nefrótica. Em paciente com neoplasia sólida, nefropatia membranosa é uma glomerulopatia paraneoplásica clássica.
+
+Distratores:
+A — Não há sinais de insuficiência hepática ou hipertensão portal, e a proteinúria maciça aponta para causa renal.
+B — Angioedema é agudo e geralmente não depressível, não explicando proteinúria e hipoalbuminemia.
+C — Insuficiência cardíaca pode causar edema, mas não explica a proteinúria nefrótica e o padrão laboratorial.`
+
+        ,'cm-nefrologia-021': `Resposta correta — D. Hipotensão, rubor e sibilância nos primeiros minutos da hemodiálise caracterizam reação de hipersensibilidade tipo A, anafilática ou anafilactoide, classicamente relacionada ao óxido de etileno usado na esterilização do circuito ou a componentes da membrana.
+
+Distratores:
+A — Embolia gasosa costuma causar dispneia, dor torácica e manifestações neurológicas, não o padrão de rubor e broncoespasmo.
+B — Síndrome de desequilíbrio dialítico cursa com cefaleia, náuseas, confusão ou convulsões por edema cerebral.
+C — Hipotensão por ultrafiltração depende de remoção de volume e não explica reação imediata com sibilância e flush.`
+
+        ,'cm-nefrologia-022': `Resposta correta — B. Edema, oligúria e proteinúria intensa com poucas hemácias em pré-escolar sugerem síndrome nefrótica idiopática, mais frequentemente doença de lesões mínimas. O tratamento inicial padrão é corticosteroide, após avaliar infecções e complicações.
+
+Distratores:
+A — Diurético pode ser usado com cautela em edema selecionado, mas não é o tratamento etiológico inicial.
+C — Não há evidência clínica ou urinária suficiente de infecção bacteriana.
+D — Anti-inflamatórios não esteroidais não tratam a síndrome e podem agravar perfusão e função renal.`
+
+        ,'cm-nefrologia-024': `Resposta correta — D. Disúria, polaciúria, tenesmo e ardor miccional em mulher jovem, sem febre, dor lombar, gestação ou anormalidade urológica, definem infecção urinária baixa não complicada.
+
+Distratores:
+A — Pielonefrite exige sinais de trato alto, como febre, dor lombar e punho-percussão dolorosa.
+B — Não há instabilidade, disfunção orgânica ou resposta sistêmica compatível com sepse.
+C — A paciente é sintomática, portanto não se trata de bacteriúria assintomática.`
+
+        ,'cm-pneumologia-001': `Resposta correta — D. Há tromboembolismo pulmonar de alto risco: obstrução no tronco pulmonar, hipotensão com necessidade de noradrenalina e sinais de hipoperfusão. Na ausência de contraindicação, a reperfusão imediata por trombólise sistêmica com alteplase é indicada.
+
+Distratores:
+A — Dupla antiagregação é tratamento de síndrome coronariana, não de TEP maciço.
+B — Enoxaparina anticoagula, mas isoladamente é insuficiente diante de instabilidade hemodinâmica.
+C — Heparina não fracionada é útil pela rápida reversibilidade, porém o caso exige também reperfusão imediata.`
+
+        ,'cm-pneumologia-002': `Resposta correta — D. Macicez à percussão e redução do murmúrio vesicular na base sugerem derrame pleural. A ultrassonografia confirma e delimita o líquido à beira-leito, orientando toracocentese diagnóstica para análise e investigação etiológica.
+
+Distratores:
+A — Ressonância não é o exame inicial e não há diagnóstico que justifique cirurgia imediata.
+B — Tomografia pode complementar a investigação, mas lobectomia não é conduta inicial para derrame não esclarecido.
+C — Drenagem torácica depende de pus, derrame parapneumônico complicado, hemotórax ou outra indicação específica.`
+
+        ,'cm-pneumologia-003': `Resposta correta — B. Redução da expansibilidade e do frêmito toracovocal, macicez à percussão e diminuição do murmúrio vesicular compõem o padrão clássico de derrame pleural.
+
+Distratores:
+A — Pneumotórax produz hipersonoridade, não macicez.
+C — Atelectasia pode causar macicez, mas costuma associar retração e desvio de estruturas para o lado afetado.
+D — Consolidação pneumônica geralmente aumenta o frêmito toracovocal e apresenta sopro tubário ou crepitações.`
+
+        ,'cm-pneumologia-004': `Resposta correta — C. Pela classificação funcional GOLD, estágio 3 corresponde a obstrução grave, com VEF1 entre 30% e 49% do previsto após broncodilatador, mantendo VEF1/CVF abaixo de 0,70. A tabela espirométrica citada não foi preservada na extração e requer conferência visual no PDF original.
+
+Distratores:
+A — GOLD 1 exige VEF1 igual ou superior a 80% do previsto.
+B — GOLD 2 corresponde a VEF1 entre 50% e 79% do previsto.
+D — GOLD 4 corresponde a VEF1 inferior a 30% do previsto.`
+
+        ,'cm-pneumologia-005': `Resposta correta — D. Confusão, cianose e desconforto respiratório em exacerbação infecciosa da DPOC indicam quadro grave e necessidade de internação. Corticoide sistêmico reduz tempo de recuperação e risco de falha terapêutica, associado a broncodilatadores, oxigênio controlado, antibiótico e avaliação ventilatória.
+
+Distratores:
+A — A gravidade e a alteração do sensório impedem acompanhamento ambulatorial.
+B — Corticoide inalatório não substitui o sistêmico na exacerbação grave.
+C — A internação é correta, mas corticoterapia apenas inalatória é insuficiente nesse contexto.`
+
+        ,'cm-pneumologia-006': `Resposta correta — B. A diretiva antecipada válida deve ser respeitada. Em dispneia refratária por doença oncológica avançada, morfina parenteral reduz a percepção de falta de ar e integra cuidados paliativos proporcionais, sem impor procedimento invasivo recusado pelo paciente.
+
+Distratores:
+A — Intubação contraria a vontade previamente expressa e não oferece proporcionalidade diante do quadro terminal.
+C — O derrame é pequeno e não explica a extensa insuficiência respiratória por linfangite carcinomatosa.
+D — Escalonar ventilação até intubação também viola a diretiva e não corresponde ao objetivo paliativo.`
+
+        ,'cm-pneumologia-007': `Resposta correta — C. Nódulo pulmonar sólido de 18 mm em tabagista tem risco relevante de malignidade e exige caracterização adicional. Entre as opções, tomografia com contraste permite avaliar morfologia, realce e relações anatômicas, orientando PET-CT ou obtenção de tecido conforme a probabilidade clínica.
+
+Distratores:
+A — Controle anual é inadequado para nódulo maior que 8 mm em paciente de risco.
+B — Lavado brônquico tem baixo rendimento para nódulo periférico isolado no lobo inferior.
+D — Biópsia percutânea pulmonar é guiada por tomografia, não habitualmente por ultrassonografia, salvo lesão periférica em contato pleural.`
+
+        ,'cm-pneumologia-008': `Resposta correta — A. Exposição ocupacional prolongada na construção civil, placas pleurais calcificadas e fibrose intersticial difusa formam o quadro típico de asbestose. As placas são marcadores de exposição ao amianto e a fibrose causa dispneia progressiva e padrão restritivo.
+
+Distratores:
+B — Paracoccidioidomicose costuma apresentar infiltrados, nódulos, cavitações e contexto rural, não placas pleurais calcificadas típicas.
+C — Intoxicação por chumbo causa manifestações hematológicas, gastrointestinais e neurológicas, não fibrose pleuropulmonar.
+D — DPOC relaciona-se sobretudo ao tabagismo e causa obstrução e hiperinsuflação, não esse padrão fibrótico.`
+
+        ,'cm-pneumologia-009': `Resposta correta — C. Nódulo solitário regular e calcificado sugere padrão benigno, especialmente se a calcificação for central, difusa, laminada ou em pipoca. Sem características suspeitas descritas, a conduta é acompanhamento ambulatorial e comparação com exames prévios.
+
+Distratores:
+A — Ressecção em cunha é invasiva e não se justifica sem suspeita significativa de malignidade.
+B — Broncoscopia tem baixo rendimento em nódulo periférico e não é necessária para lesão com aspecto benigno.
+D — Biópsia cirúrgica ou por agulha fica reservada para nódulos indeterminados ou de risco relevante.`
+
+        ,'cm-pneumologia-010': `Resposta correta — B. Espessamento e placas pleurais, derrame e provável doença relacionada ao amianto apontam para exposição ocupacional na construção civil. O amianto associa-se a placas pleurais, asbestose, câncer de pulmão e mesotelioma.
+
+Distratores:
+A — Agrotóxicos não produzem o padrão pleural característico descrito.
+C — Benzeno está ligado sobretudo a toxicidade medular e neoplasias hematológicas.
+D — Poeira de carvão causa pneumoconiose com opacidades parenquimatosas, não placas pleurais típicas do amianto.`
+
+        ,'cm-pneumologia-011': `Resposta correta — D. Síndrome infecciosa respiratória aguda com dor pleurítica, dispneia, redução do frêmito, submacicez e abolição do murmúrio na base indica pneumonia bacteriana complicada por derrame pleural parapneumônico.
+
+Distratores:
+A — Pneumonia viral é menos compatível com febre alta persistente, expectoração e derrame focal.
+B — A idade, a evolução de cinco dias e a febre tornam neoplasia com atelectasia muito improvável.
+C — Pneumotórax produziria hipersonoridade, e a apresentação não é típica de tuberculose aguda.`
+
+        ,'cm-pneumologia-012': `Resposta correta — B. Empiema é líquido pleural purulento ou com cultura positiva e costuma apresentar pH baixo, glicose baixa e LDH muito elevado, frequentemente acima de 1.000 UI/L. Requer drenagem e antibiótico.
+
+Distratores:
+A — pH superior a 7,2 favorece derrame não complicado; no empiema ele tende a ser inferior.
+C — A glicose costuma ser inferior a 60 mg/dL devido ao consumo celular e bacteriano.
+D — É exsudato, portanto a proteína não é tipicamente baixa como em transudato.`
+
+        ,'cm-pneumologia-013': `Resposta correta — B. Paciente neurológico grave, com Glasgow inferior a 8 e previsão de ventilação prolongada, pode se beneficiar de traqueostomia precoce até o sétimo dia, conforme a recomendação considerada pela questão, facilitando higiene brônquica, conforto e redução de sedação.
+
+Distratores:
+A — Esperar obrigatoriamente 14 dias não corresponde à recomendação de traqueostomia precoce no cenário apresentado.
+C — Cricotireoidostomia é acesso emergencial e temporário, inadequado como via de demora.
+D — Glasgow inferior a 8 e doença pulmonar grave impedem extubação segura para ventilação não invasiva.
+
+Validação visual: os achados relevantes das imagens foram descritos integralmente no enunciado; não há dependência residual da imagem para distinguir as alternativas.`
+
+        ,'cm-pneumologia-014': `Resposta correta — B. Tabagismo intenso, rouquidão, hemoptise, perda ponderal e pneumonia recorrente no mesmo território sugerem neoplasia pulmonar causando obstrução brônquica e pneumonia pós-obstrutiva. A macicez basal e o murmúrio abolido indicam derrame pleural associado.
+
+Distratores:
+A — Silicose exige exposição à sílica e padrão radiológico próprio; pneumotórax causaria hipersonoridade sem macicez basal por líquido.
+C — TEP não explica pneumonias recorrentes no mesmo local nem síndrome consumptiva progressiva.
+D — Não há asma, eosinofilia ou vasculite sistêmica que sustentem granulomatose eosinofílica com poliangiíte.`
+
+        ,'cm-pneumologia-015': `Resposta correta — B. Pneumonia bacteriana com derrame pleural demonstrado em radiografia, inclusive em incidência de Laurell, exige toracocentese diagnóstica para classificar o derrame e identificar necessidade de drenagem, salvo coleção mínima sem janela segura.
+
+Distratores:
+A — Tomografia pode ser útil em complicações, mas não substitui a análise inicial do líquido pleural acessível.
+C — Ultrassonografia auxilia a localizar e guiar a punção, porém a etapa decisiva é obter o líquido por toracocentese.
+D — Pesquisa de BAAR não é a prioridade em quadro agudo típico de pneumonia bacteriana com derrame.
+
+Validação visual: a consolidação e o derrame relevantes à decisão estão descritos no texto; a imagem não é indispensável para diferenciar as alternativas.`
+
+        ,'cm-pneumologia-016': `Resposta correta — A. Redução de expansibilidade, frêmito e sons respiratórios, com macicez inferior, indica derrame pleural esquerdo. Na radiografia espera-se opacificação basal ou do hemitórax, com apagamento do seio costofrênico e possível menisco.
+
+Distratores:
+B — Hipertransparência sugere pneumotórax ou hiperinsuflação, situações associadas a hipersonoridade.
+C — Linha pleural visível é sinal de pneumotórax.
+D — Linhas horizontais periféricas não representam o padrão radiográfico típico de derrame pleural.`
+
+        ,'cm-pneumologia-017': `Resposta correta — A. A paciente mantém exacerbação asmática grave após salbutamol inicial e corticoide, com pico de fluxo abaixo de 50% e hipoxemia. Deve permanecer sob monitorização, receber ipratrópio repetido associado ao beta-agonista e sulfato de magnésio intravenoso, além de oxigênio e reavaliação contínua.
+
+Distratores:
+B — Apenas repetir salbutamol mais tarde é insuficiente diante da resposta inadequada e dos marcadores de gravidade.
+C — Internação pode ser necessária, mas broncodilatadores de hora em hora não são a intensificação imediata adequada durante instabilidade no pronto atendimento.
+D — Ainda não há exaustão, rebaixamento, tórax silencioso ou falência ventilatória que imponha intubação imediata.`
+
+        ,'cm-reumatologia-001': `Resposta correta — B. Dor musculoesquelética difusa, sono não reparador, fadiga, exame sem sinovite e marcadores inflamatórios normais caracterizam fibromialgia. O diagnóstico é clínico e o manejo combina educação, exercício gradual, sono e intervenções farmacológicas selecionadas.
+
+Distratores:
+A — Polimiosite causa fraqueza muscular proximal objetiva e elevação de enzimas musculares, não dor difusa isolada.
+C — Síndrome da fadiga crônica privilegia fadiga incapacitante e mal-estar pós-esforço; a dor difusa à pressão favorece fibromialgia.
+D — Polimialgia reumática ocorre tipicamente após os 50 anos, com rigidez de cinturas e elevação de VHS ou PCR.`
+
+        ,'cm-reumatologia-002': `Resposta correta — A. Dor difusa crônica, fadiga, sintomas afetivos e síndromes funcionais associadas, com hiperalgesia à pressão e exames inflamatórios e tireoidianos normais, caracterizam fibromialgia.
+
+Distratores:
+B — TSH e T4 livre normais afastam hipotireoidismo subclínico.
+C — Fibromialgia é uma síndrome clínica reconhecida, não deve ser reduzida a transtorno psicossomático.
+D — Depressão pode coexistir e amplificar sintomas, mas não explica isoladamente a hiperalgesia difusa típica.`
+
+        ,'cm-reumatologia-004': `Resposta correta — B. Poliartrite simétrica de pequenas articulações, rigidez matinal prolongada, sinovite e reagentes inflamatórios elevados indicam artrite reumatoide, mesmo com fator reumatoide negativo. Metotrexato é o fármaco modificador de primeira linha na ausência de contraindicação.
+
+Distratores:
+A — Osteoartrite é mecânica, costuma poupar metacarpofalangeanas e não causa sinovite inflamatória sistêmica.
+C — Faltam fenômeno de Raynaud, esclerodactilia e alterações cutâneas de esclerose sistêmica.
+D — Não há manifestações sistêmicas ou imunológicas suficientes para lúpus, e cloroquina isolada não é a melhor escolha para este padrão.`
+
+        ,'cm-reumatologia-005': `Resposta correta — B. A poliartrite inflamatória simétrica e aditiva de pequenas e grandes articulações, com rigidez superior a duas horas, é típica de artrite reumatoide. Fator reumatoide pode ser positivo e metotrexato é tratamento modificador inicial habitual.
+
+Distratores:
+A — Esclerose sistêmica exige achados vasculares e cutâneos; creatinoquinase elevada apontaria para miopatia associada.
+C — Lúpus requer outros critérios, e o padrão pontilhado fino denso isolado não é marcador específico da doença.
+D — Doença mista exige quadro de sobreposição e anti-U1-RNP; azatioprina não é a primeira linha descrita para essa apresentação.`
+
+        ,'cm-reumatologia-006': `Resposta correta — B. Dor lombar iniciada antes dos 45 anos, rigidez prolongada, melhora com movimento e Schober muito reduzido sugerem espondiloartrite axial, apesar de alteração degenerativa concomitante. Provas inflamatórias e ressonância das sacroilíacas investigam sacroileíte ativa precoce.
+
+Distratores:
+A — O marcador é HLA-B27, não HLA-B37, e corticoide sistêmico não é tratamento rotineiro da doença axial.
+C — Ergonomia e anti-inflamatório sob demanda tratariam lombalgia mecânica, mas não esclarecem os sinais inflamatórios.
+D — Redução de peso e fisioterapia ajudam, porém opioides não são conduta específica preferencial.`
+
+        ,'cm-reumatologia-007': `Resposta correta — C. Lombalgia inflamatória em adulto jovem, com início insidioso, rigidez matinal, melhora com exercício e dor sacroilíaca, é típica de espondilite anquilosante, integrante das espondiloartrites axiais.
+
+Distratores:
+A — Artrite reativa costuma suceder infecção gastrointestinal ou geniturinária e pode ter uretrite ou conjuntivite.
+B — Artrite psoriática exigiria psoríase, alterações ungueais, dactilite ou outro elemento característico.
+D — Lúpus raramente causa sacroileíte e lombalgia axial inflamatória típica.
+
+Validação visual pendente: o painel de autoanticorpos mencionado não foi preservado na extração; o quadro clínico sustenta o gabarito, mas a tabela original deve ser conferida.`
+
+        ,'cm-reumatologia-009': `Resposta correta — A. Líquido sinovial com 120.000 leucócitos/mm³ e 95% de neutrófilos em monoartrite intensamente inflamada deve ser considerado artrite séptica até prova em contrário, mesmo em paciente com gota. São necessárias cultura e antibioticoterapia após coleta, com drenagem quando indicada.
+
+Distratores:
+B — Pseudogota pode inflamar intensamente, mas não deve ser presumida diante de contagem tão alta sem pesquisa de cristais e cultura.
+C — Gota pode coexistir com infecção; melhora anterior e novo quadro grave exigem excluir artrite séptica.
+D — Artrite gonocócica é possibilidade etiológica, mas “IST” não é a explicação sindrômica mais adequada sem outros dados.`
+
+        ,'cm-reumatologia-010': `Resposta correta — C. Febre, exantema, conjuntivite e poliartralgia aguda seguidos de artrite persistente por meses são típicos de chikungunya crônica. Em artrite inflamatória persistente e refratária, metotrexato pode ser empregado como modificador de doença.
+
+Distratores:
+A — Citomegalovirose não costuma produzir esse padrão epidêmico com artrite crônica persistente.
+B — Mayaro pode causar artralgia prolongada, mas o conjunto clássico e o gabarito epidemiológico favorecem chikungunya.
+D — Dengue pode causar mialgia e artralgia agudas, mas artrite crônica objetiva é incomum.`
+
+        ,'cm-reumatologia-011': `Resposta correta — A. Poliartrite em mulher jovem associada ao padrão de FAN apresentado é compatível com lúpus eritematoso sistêmico; o anti-DNA nativo é um autoanticorpo específico e se relaciona especialmente à atividade de nefrite lúpica.
+
+Distratores:
+B — Anti-CCP se associa à artrite reumatoide, mas não explica o padrão de FAN referido.
+C — Anti-Scl-70 se associa à esclerose sistêmica difusa, que exigiria manifestações cutâneas e vasculares.
+D — Anti-Ro pode ocorrer em Sjögren e lúpus, mas o conjunto solicitado pela questão aponta para anti-DNA e LES.
+
+Validação visual pendente: os resultados laboratoriais e o padrão de FAN citados não foram preservados no texto extraído e devem ser conferidos no PDF original.`
+
+        ,'cm-reumatologia-012': `Resposta correta — D. Poliartrite migratória, fenômeno de Raynaud, úlceras orais, citopenias e possível hemólise em mulher jovem formam forte suspeita de lúpus eritematoso sistêmico. O FAN é o exame inicial de alta sensibilidade para sustentar a investigação.
+
+Distratores:
+A — HLA-B27 investiga espondiloartrites, não esse quadro multissistêmico com citopenias.
+B — Fator reumatoide pode ser positivo em várias doenças e não explica úlceras, Raynaud e pancitopenia.
+C — ASLO apoia infecção estreptocócica recente e febre reumática, incompatível com o conjunto sistêmico.`
+
+        ,'cm-reumatologia-013': `Resposta correta — C. Esclerose sistêmica frequentemente causa atrofia e fibrose da musculatura lisa esofágica, levando a refluxo, regurgitação e disfagia, além de tosse ao deitar. A manometria documenta dismotilidade e redução da pressão do esfíncter inferior.
+
+Distratores:
+A — Pleurite não explica regurgitação e disfagia.
+B — A evolução crônica e a associação com alimentação e decúbito não sugerem angina instável.
+D — Doença intersticial causa dispneia e tosse, mas não explica os sintomas esofágicos predominantes.`
+
+        ,'cm-reumatologia-014': `Resposta correta — A. Dor difusa crônica, fadiga, sono ruim, queixa cognitiva, exame sem artrite e marcadores normais sugerem fibromialgia. Amitriptilina em baixa dose à noite pode melhorar sono e dor, associada a educação, exercício e manejo psicossocial.
+
+Distratores:
+B — Fluoxetina pode tratar depressão, mas isoladamente tem menor efeito analgésico e não é a opção preferida apresentada para dor e insônia.
+C — Prednisona não trata fibromialgia e expõe a efeitos adversos.
+D — Naproxeno contínuo tem benefício limitado na dor central e risco gastrointestinal, renal e cardiovascular.`
+
+        ,'cm-reumatologia-016': `Resposta correta — D. Púrpura palpável em membros inferiores, artralgia, dor abdominal e comprometimento renal após infecção respiratória formam a tétrade típica da vasculite por imunoglobulina A.
+
+Distratores:
+A — Kawasaki exige febre prolongada e sinais mucocutâneos, não púrpura com nefrite.
+B — Artrite idiopática juvenil não explica púrpura palpável, dor abdominal e hematúria.
+C — Lúpus é menos provável pela idade e pelo padrão clássico pós-infeccioso de vasculite por IgA.`
+
+        ,'cm-neurologia-001': `Resposta correta — D. O quadro é migrânea com aura e frequência que justifica profilaxia. Amitriptilina é adequada por também favorecer o sono; deve ser titulada conforme tolerância e acompanhada de medidas comportamentais.
+
+Distratores:
+A — Ibuprofeno é abortivo de crise e uso frequente pode causar cefaleia por abuso, não sendo profilaxia diária.
+B — Propranolol é profilático eficaz, mas broncoespasmo atual constitui contraindicação relevante.
+C — Sumatriptano trata a crise aguda e não deve ser usado diariamente como prevenção.`
+
+        ,'cm-neurologia-002': `Resposta correta — C. Episódios no primeiro terço da noite com gritos, sudorese, intensa ativação autonômica, difícil despertar e amnésia matinal caracterizam terror noturno, uma parassonia do sono não REM.
+
+Distratores:
+A — Sonambulismo envolve levantar e caminhar ou executar comportamentos complexos durante o sono.
+B — Insônia de manutenção é dificuldade de permanecer dormindo com despertares conscientes.
+D — Pesadelos ocorrem no sono REM, despertam a criança e costumam ser lembrados.`
+
+        ,'cm-neurologia-003': `Resposta correta — C. A instalação aguda e flutuante de desatenção e alteração psicomotora caracteriza delirium. Dor intensa não controlada por fratura é o principal precipitante presente, devendo ser tratada junto à busca de outras causas reversíveis.
+
+Distratores:
+A — Saturação de 94% sem sinais respiratórios não sustenta hipoxemia como gatilho principal.
+B — Hipertensão e diabetes aumentam vulnerabilidade, mas não são o precipitante agudo mais evidente.
+D — A glicemia de 120 mg/dL exclui hipoglicemia no momento.`
+
+        ,'cm-neurologia-004': `Resposta correta — A. Início súbito, progressão em degraus, fatores vasculares, disfunção executiva precoce, hiperreflexia e alteração da marcha caracterizam demência vascular por doença cerebrovascular acumulada.
+
+Distratores:
+B — Demência frontotemporal costuma iniciar mais cedo com alteração comportamental ou de linguagem.
+C — Corpúsculos de Lewy cursam com alucinações visuais, flutuação cognitiva, parkinsonismo e distúrbio do sono REM.
+D — Alzheimer geralmente começa de forma insidiosa e progressiva, com déficit de memória episódica predominante, não em degraus.`
+
+        ,'cm-neurologia-005': `Resposta correta — A. Perda de consciência, amnésia, trauma craniofacial e cervical e lesões de membros exigem tomografia de crânio, face e coluna cervical, além de radiografias das extremidades e observação clínica pela possibilidade de deterioração tardia.
+
+Distratores:
+B — Radiografia simples não exclui lesão intracraniana nem avalia adequadamente face e coluna cervical de alto risco.
+C — Falta avaliação cervical e alta domiciliar é insegura após inconsciência e amnésia.
+D — Radiografias de crânio e face têm baixa sensibilidade e não substituem tomografia.`
+
+        ,'cm-neurologia-006': `Resposta correta — A. Bradicinesia, tremor de repouso assimétrico, rigidez em roda dentada, fácies hipomímica e marcha em passos curtos definem doença de Parkinson. Em paciente de 65 anos com impacto funcional, levodopa associada a carbidopa oferece o melhor controle sintomático inicial.
+
+Distratores:
+B — Donepezila e memantina tratam síndromes demenciais, ausentes no caso.
+C — Propranolol é usado em tremor essencial; amantadina isolada não é a combinação inicial mais apropriada.
+D — Atorvastatina e baclofeno não tratam a síndrome parkinsoniana.`
+
+        ,'cm-neurologia-007': `Resposta correta — A. A tomografia já mostra hipodensidade em cerca de 40% do território da cerebral média, sinal de infarto extenso estabelecido. Envolvimento superior a um terço do território aumenta expressivamente o risco de transformação hemorrágica e, no critério histórico adotado pela questão, contraindica trombólise intravenosa.
+
+Distratores:
+B — O laudo foi obtido dentro de aproximadamente três horas do último momento assintomático, ainda na janela temporal usual.
+C — Hiperglicemia deve ser manejada, mas valor de 285 mg/dL não é contraindicação absoluta isolada à trombólise.
+D — Pressão de 170 × 100 mmHg está abaixo do limite de 185 × 110 mmHg exigido antes do trombolítico.`
+
+        ,'cm-neurologia-009': `Resposta correta — A. Cefaleia unilateral moderada a forte, prolongada, acompanhada de náusea e fonofobia e aliviada pelo sono é migrânea episódica. Com apenas duas crises mensais, cabe tratamento abortivo com sumatriptano no início e orientação sobre sono, alimentação, cafeína e atividade física.
+
+Distratores:
+B — Profilaxia diária e neuroimagem não são necessárias sem sinais de alarme ou alta frequência.
+C — Opioides devem ser evitados em migrânea; oxigênio é tratamento de cefaleia em salvas, cujo fenótipo é diferente.
+D — Já houve falha de analgésicos simples, e oxigênio não é indicado para migrânea.`
+
+        ,'cm-neurologia-011': `Resposta correta — B. Cefaleia súbita intensa e déficit de linguagem iniciado há 30 minutos são emergência cerebrovascular. A UBS deve acionar imediatamente o SAMU, estabilizar vias aéreas, respiração, circulação e glicemia e encaminhar a serviço com neuroimagem e protocolo de AVC.
+
+Distratores:
+A — Permanecer na UBS e solicitar imagem local atrasa tratamento tempo-dependente; redução oral indiscriminada da pressão pode ser prejudicial.
+C — Anti-hipertensivo sublingual pode causar queda abrupta e não deve atrasar transferência.
+D — Seguimento ambulatorial é inadequado diante de déficit neurológico agudo.
+
+Validação visual: embora a tabela de sinais vitais não tenha sido preservada, o déficit focal agudo já determina transferência emergencial; nenhum valor plausível entre as alternativas torna manejo ambulatorial seguro.`
+
+        ,'cm-neurologia-012': `Resposta correta — A. Dor glútea irradiada para perna, Lasègue positivo, déficit motor e alteração sensitiva indicam comprometimento radicular sensitivo-motor, provavelmente lombossacro. Entre as opções oferecidas, neuropatia periférica sensitivo-motora é a única que contempla ambos os componentes.
+
+Distratores:
+B — Há alteração sensitiva e a distribuição irradiada é distal, não apenas neuropatia motora proximal.
+C — A diminuição de força demonstra componente motor além do sensitivo.
+D — Neuropatia autonômica causa alterações vasomotoras, sudorese ou disfunções viscerais, não esse quadro radicular.`
+
+        ,'cm-neurologia-013': `Resposta correta — C. Hipertensão arterial, bradicardia e irregularidade respiratória formam a tríade de Cushing, resposta fisiológica clássica à hipertensão intracraniana grave e possível herniação.
+
+Distratores:
+A — Glasgow 3 indica coma profundo, mas não é específico de hipertensão intracraniana.
+B — Midríase pode ocorrer por lesão ocular, drogas ou lesão neurológica e, isoladamente, não confirma o diagnóstico.
+D — Ausência do reflexo córneo-palpebral indica disfunção de tronco, mas também não é específica da pressão intracraniana elevada.`
+
+        ,'cm-neurologia-014': `Resposta correta — C. A extensão do joelho é realizada pelo quadríceps, inervado pelo nervo femoral, com raiz-chave L3 na classificação motora ASIA. Contração apenas palpável corresponde ao grau 1.
+
+Distratores:
+A — Iliopsoas realiza flexão do quadril e sua raiz-chave é L2, não extensão do joelho.
+B — Bíceps femoral flexiona o joelho e pertence ao compartimento posterior.
+D — Obturador externo atua na rotação lateral do quadril e não é responsável pelo movimento testado.`
+
+        ,'cm-neurologia-015': `Resposta correta — C. Movimento ocular oscilatório rítmico corresponde a nistagmo. Em lactente de três meses, sobretudo com teste do reflexo vermelho inconclusivo, exige avaliação oftalmológica e neuropediátrica para investigar causa sensorial ou neurológica.
+
+Distratores:
+A — Catarata pode causar nistagmo sensorial, mas não pode ser diagnosticada apenas pelo movimento; repetir o teste sem encaminhar atrasa avaliação.
+B — Estrabismo é desalinhamento dos eixos oculares, não oscilação repetitiva.
+D — Xeroftalmia associa-se à deficiência de vitamina A e alterações de superfície ocular, não a nistagmo isolado.`
+
+        ,'cm-neurologia-016': `Resposta correta — A. Cefaleia pulsátil hemicraniana, com aura visual, foto e fonofobia e exame neurológico normal caracteriza migrânea com aura. Como analgésico simples oferece alívio apenas parcial, triptano é opção abortiva adequada no início da crise.
+
+Distratores:
+B — Cefaleia tensional costuma ser bilateral, em pressão e sem aura ou náusea importante.
+C — Cefaleia em salvas é muito intensa, curta, periocular e acompanhada de sinais autonômicos.
+D — Não há mudança recente, déficit ou outro sinal de alarme que sugira malformação vascular.`
+
+        ,'cm-neurologia-017': `Resposta correta — B. Parestesias ascendentes seguidas de fraqueza, arreflexia em membros inferiores e sintomas autonômicos após infecção são típicos da síndrome de Guillain-Barré. O LCR esperado mostra dissociação albuminocitológica.
+
+Distratores:
+A — Miastenia causa fraqueza fatigável, sem déficit sensitivo ou arreflexia.
+C — AVC causa déficit focal súbito, não neuropatia ascendente simétrica.
+D — Esclerose lateral amiotrófica preserva sensibilidade e não surge agudamente após infecção.`
+
+        ,'cm-neurologia-018': `Resposta correta — C. Cefaleia progressiva, vômitos, papiledema, rebaixamento e tríade de Cushing indicam hipertensão intracraniana. A primeira investigação é tomografia de crânio para identificar lesão expansiva, hidrocefalia ou hemorragia antes de qualquer punção.
+
+Distratores:
+A — Punção lombar está contraindicada diante de hipertensão intracraniana por risco de herniação.
+B — Eletroencefalograma não esclarece a causa estrutural prioritária.
+D — CD4 e carga viral são importantes depois, mas não substituem neuroimagem emergencial.`
+
+        ,'cm-neurologia-019': `Resposta correta — B. Pressão de 220 × 140 mmHg associada a cefaleia, vômitos, confusão e sonolência caracteriza emergência hipertensiva com encefalopatia. É necessária tomografia para excluir hemorragia e redução controlada da pressão com agente intravenoso titulável, como nitroprussiato no contexto da questão.
+
+Distratores:
+A — Punção liquórica antes de neuroimagem é inadequada, e betabloqueador isolado não é a melhor estratégia titulável.
+C — Furosemida não é tratamento primário sem congestão ou edema pulmonar.
+D — Ressonância é menos disponível na emergência e AAS pode ser perigoso antes de excluir hemorragia.`
+
+        ,'cm-neurologia-020': `Resposta correta — B. Criança maior de dois anos, Glasgow 15, exame normal, mecanismo leve e apenas um vômito isolado, sem sinais de fratura, tem risco muito baixo de lesão intracraniana e não necessita tomografia imediata; cabe observação e orientação.
+
+Distratores:
+A — Um único vômito isolado não impõe TC na ausência de outros fatores de risco.
+C — Idade por si só não justifica exposição à radiação.
+D — Radiografia de crânio não substitui TC quando esta é indicada e não melhora a avaliação desse trauma leve.`
+
+        ,'cm-neurologia-021': `Resposta correta — C. Sonolência diurna, anosmia, fadiga, apatia, constipação e alterações do sono pertencem ao espectro não motor e neuropsiquiátrico da doença de Parkinson, podendo anteceder ou acompanhar os sinais motores.
+
+Distratores:
+A — Não há febre, foco ou alteração laboratorial que sustente infecção.
+B — Os sintomas são reconhecidamente relacionados à própria neurodegeneração parkinsoniana.
+D — Nenhuma das medicações listadas é causa típica de parkinsonismo secundário com esse conjunto não motor.`
+
+        ,'cm-neurologia-022': `Resposta correta — B. Criança ribeirinha exposta a atividade garimpeira e consumo de peixes apresenta manifestações neurológicas sensitivas, motoras, cerebelares, cognitivas e de linguagem compatíveis com intoxicação crônica por metilmercúrio bioacumulado na cadeia alimentar.
+
+Distratores:
+A — Poliomielite causa paralisia flácida assimétrica, sem síndrome sensorial e cognitiva crônica.
+C — Guillain-Barré é agudo, geralmente pós-infeccioso e não explica dificuldades cognitivas progressivas.
+D — Organofosforados causam síndrome colinérgica aguda com secreções, miose, bradicardia e fasciculações.`
+
+        ,'cm-neurologia-023': `Resposta correta — C. Mudança recente do padrão de uma cefaleia antiga, agora diária, progressivamente mais intensa, holocraniana e com despertar noturno é sinal de alarme para causa secundária. Ressonância de encéfalo é indicada para investigar lesão estrutural.
+
+Distratores:
+A — Punção lombar não é o primeiro exame antes de excluir efeito de massa por neuroimagem.
+B — Reiniciar profilaxia sem investigar a mudança de padrão pode atrasar diagnóstico relevante.
+D — Trocar o profilático também não responde aos sinais de alarme atuais.`
+
+        ,'cm-neurologia-024': `Resposta correta — C. Bradicinesia, tremor de repouso assimétrico, rigidez em roda dentada, hipomimia, redução do balanço dos braços e sintomas não motores como anosmia, constipação e distúrbio do sono caracterizam doença de Parkinson.
+
+Distratores:
+A — Demência vascular exige declínio cognitivo e história cerebrovascular, ausentes.
+B — Tremor essencial é predominantemente postural e de ação, sem bradicinesia e rigidez.
+D — Alzheimer apresenta déficit cognitivo progressivo como manifestação central, negado no caso.`
+
+        ,'cm-neurologia-025': `Resposta correta — B. Déficit focal incapacitante iniciado há duas horas, tomografia sem hemorragia, pressão abaixo de 185 × 110 mmHg e ausência de contraindicação descrita indicam trombólise intravenosa com rtPA. Fibrilação atrial torna provável mecanismo cardioembólico.
+
+Distratores:
+A — Cardioversão não reperfunde o território cerebral e não é prioridade no paciente estável.
+C — Hiperglicemia deve ser corrigida cuidadosamente, mas bólus de insulina não substitui reperfusão e pode causar hipoglicemia.
+D — A pressão atual não exige nitroprussiato antes da trombólise e queda excessiva pode piorar a penumbra.`
+
+        ,'cm-neurologia-026': `Resposta correta — A. Abertura ocular espontânea vale 4, resposta verbal confusa vale 4 e obediência motora vale 6, totalizando Glasgow 14. Embora classificado como traumatismo cranioencefálico leve, perda de consciência, vômito e Glasgow abaixo de 15 indicam tomografia e avaliação seriada.
+
+Distratores:
+B — Glasgow 14 permanece na faixa de TCE leve, não moderado.
+C — A tomografia já está indicada pelos fatores de risco; não se deve apenas esperar duas horas.
+D — Além de classificar incorretamente como moderado, posterga exame indicado.`
+
+        ,'cm-neurologia-027': `Resposta correta — D. Em doença terminal com plano exclusivo de conforto, sintomas físicos intoleráveis, graves e refratários podem justificar sedação paliativa proporcional, com consentimento e documentação, para aliviar sofrimento sem intenção de abreviar a vida.
+
+Distratores:
+A — Investigar metástase não mudará conduta e contraria a proporcionalidade do cuidado definido.
+B — Apenas aguardar e orientar não alivia dispneia refratária.
+C — Hospitalização automática após oxigênio ignora medidas paliativas domiciliares e a meta de conforto.`
+
+        ,'cm-neurologia-028': `Resposta correta — D. Após benzodiazepínico e fenitoína sem cessar o estado de mal epiléptico, fenobarbital é opção subsequente no protocolo apresentado. Seu principal risco é depressão respiratória, além de hipotensão e sedação, exigindo suporte ventilatório e monitorização.
+
+Distratores:
+A — Tiopental é reservado para estado refratário em ambiente intensivo; seu risco dominante também inclui depressão cardiorrespiratória, não apenas arritmia.
+B — Midazolam pode ser usado em infusão no estado refratário, mas não causa tipicamente hipertensão intracraniana.
+C — Propofol também é opção em refratariedade e pode causar instabilidade, porém não é a sequência esperada pelo protocolo da questão.`
+
+        ,'revalida-2025-2-001': `Resposta correta — B. Dor lombar noturna, perda ponderal, antecedente de hepatocarcinoma e imunossupressão são sinais de alarme para metástase óssea. A cintilografia pesquisa acometimento multifocal do esqueleto; analgesia e repouso são medidas iniciais enquanto se completa a investigação oncológica.
+
+Distratores:
+A — Tomografia abdominal não é o exame mais apropriado para rastrear disseminação óssea, e fisioterapia antes de excluir metástase é imprudente.
+C — Radiografia pode ser inicial, mas tem baixa sensibilidade; opioide e corticoide sem confirmação não constituem a melhor conduta proposta.
+D — Não há quadro urinário, e ultrassom renal não investiga adequadamente dor óssea com sinais de malignidade.`
+
+        ,'revalida-2025-2-014': `Resposta correta — C. Sonolência, olhos encovados, mucosas secas, extremidades frias, pulso fraco e enchimento capilar lento indicam desidratação grave. No Plano C, lactente recebe cristaloide intravenoso; para 9 kg, a etapa de 30 mL/kg corresponde a 270 mL em uma hora.
+
+Distratores:
+A — Embora haja hipoperfusão, o volume de 180 mL corresponde a 20 mL/kg e não ao esquema completo solicitado pelo Plano C.
+B — Solução glicofisiológica não é o cristaloide isotônico inicial recomendado para expansão.
+D — O volume e a solução não correspondem ao Plano C, e 900 mL em duas horas seria inadequado.`
+
+        ,'revalida-2025-2-016': `Resposta correta — B. A vigilância do desenvolvimento inclui triagem específica para transtorno do espectro autista aos 18 e 24 meses; protocolos de acompanhamento também estruturam avaliações aos 9, 18 e 30 meses. Entre as alternativas, a opção B é a única compatível com a triagem precoce e independente de comorbidades associadas.
+
+Distratores:
+A — Dois e quatro meses são precoces demais para os instrumentos padronizados usuais.
+C — Não se deve restringir triagem a história familiar ou deficiência intelectual, e esperar até 36 meses atrasa diagnóstico.
+D — Iniciar apenas aos dois anos e seguir até seis anos perde a janela recomendada de rastreamento precoce.`
+
+        ,'revalida-2025-2-046': `Resposta correta — B. Vesículas orais associadas a lesões em mãos e pés caracterizam doença mão-pé-boca, geralmente por enterovírus. Embora costume ser autolimitada, pode raramente complicar com encefalite, miocardite ou pericardite, justificando orientação sobre sinais de alarme.
+
+Distratores:
+A — A maioria evolui de forma benigna e não requer internação rotineira.
+C — Mãos, pés e cavidade oral são precisamente as localizações típicas; nádegas também podem ser acometidas.
+D — A febre costuma ceder antes, mas as lesões podem persistir por sete a dez dias; a afirmação rígida não é a melhor orientação.`
+
+        ,'revalida-2025-2-057': `Resposta correta — A. Contratura cervical dolorosa cinco dias após introdução de haloperidol é distonia aguda induzida por antipsicótico. O tratamento imediato é anticolinérgico, como biperideno intramuscular, com suspensão ou ajuste do agente causal.
+
+Distratores:
+B — Acatisia produz inquietação e incapacidade de permanecer parado, não torcicolo espástico.
+C — Discinesia tardia surge após exposição prolongada e causa movimentos involuntários, sobretudo orofaciais.
+D — “Síndrome extrapiramidal” é genérico; prometazina pode ter ação anticolinérgica, mas biperideno é a opção específica apresentada.`
+
+        ,'revalida-2025-2-059': `Resposta correta — A. A criança tem infecção suspeita acompanhada de resposta sistêmica e alterações metabólicas, mas mantém pressão, perfusão e diurese adequadas, sem disfunção cardiovascular persistente. O quadro corresponde a sepse, ainda sem critérios descritos de choque séptico.
+
+Distratores:
+B — Choque séptico exige disfunção cardiovascular com hipotensão ou necessidade de vasoativo após ressuscitação.
+C — Não há falência de múltiplos sistemas estabelecida no enunciado.
+D — SIRS descreve resposta inflamatória e não incorpora adequadamente o contexto infeccioso com repercussão clínica.`
+
+        ,'revalida-2025-2-060': `Resposta correta — C. Mulher idosa com abaulamento doloroso e irredutível abaixo da região inguinal, vômitos e redução de flatos apresenta hérnia femoral encarcerada, condição mais comum em mulheres e com alto risco de estrangulamento.
+
+Distratores:
+A — Isquemia mesentérica causa dor abdominal intensa desproporcional, não massa inguinal irredutível.
+B — Hérnia inguinal indireta é menos típica nessa mulher idosa e sua localização anatômica difere da femoral.
+D — Neoplasia de cólon pode obstruir, mas não explica o abaulamento inguinal agudo e doloroso.`
+
+        ,'revalida-2025-2-061': `Resposta correta — C. A resposta adequada ao tratamento da sífilis é demonstrada pela queda de duas diluições do VDRL, equivalente a redução de quatro vezes do título, no seguimento apropriado. Na gestação, o controle deve ser mensal e o esquema precisa corresponder ao estágio clínico.
+
+Distratores:
+A — Tratamento reduz muito o risco, mas não garante ausência absoluta de repercussões fetais.
+B — Cicatriz sorológica é persistência de títulos baixos estáveis após tratamento adequado, não qualquer título menor ou igual a um quarto.
+D — FTA-Abs permanece reagente por muitos anos e não diferencia doença ativa de infecção tratada.`
+
+        ,'revalida-2025-2-062': `Resposta correta — D. Aos 52 anos, cabe avaliar risco cardiometabólico com perfil lipídico e glicemia, rastrear câncer colorretal por sangue oculto conforme estratégia disponível, ofertar testes para HIV, sífilis e hepatites e abordar intensivamente cessação do tabagismo.
+
+Distratores:
+A — Inclui exames sem indicação rotineira, como hemograma, creatinina e radiografia de tórax, além de rastreio prostático indiscriminado.
+B — PSA e toque retal exigem decisão compartilhada, e a alternativa omite componentes adequados do perfil lipídico e outras IST.
+C — O paciente já está na faixa etária de rastreamento colorretal e cardiometabólico; apenas aguardar é insuficiente.`
+
+        ,'revalida-2025-2-077': `Resposta correta — D. Lombalgia mecânica inespecífica há três semanas, sem déficit neurológico ou sinais de alarme, deve ser manejada com explicação de bom prognóstico, manutenção de atividade leve, analgesia e reavaliação em quatro a seis semanas.
+
+Distratores:
+A — Ressonância e encaminhamento imediato são desnecessários sem sinais de alarme.
+B — Radiografia não é indicada inicialmente e corticoide oral não trata lombalgia mecânica simples.
+C — Repouso prolongado atrasa recuperação, e antidepressivo tricíclico não é analgesia inicial para quadro agudo inespecífico.`
+
+        ,'revalida-2025-2-093': `Resposta correta — D. Diverticulite com abscesso localizado de aproximadamente 10 cm em paciente estável deve ser tratada com antibiótico e drenagem percutânea guiada por tomografia, quando tecnicamente acessível.
+
+Distratores:
+A — Laparotomia fica reservada para peritonite difusa, instabilidade ou falha do tratamento menos invasivo.
+B — Abscesso grande não deve receber apenas tratamento conservador com antibiótico.
+C — Colonoscopia é evitada na fase aguda pelo risco de perfuração e não é via de drenagem padrão.`
+
+        ,'revalida-2025-2-095': `Resposta correta — B. Pessoas privadas de liberdade são população de alto risco para tuberculose; tosse por duas semanas já exige investigação com radiografia e teste bacteriológico, preferencialmente teste rápido molecular, assegurando tratamento se confirmado.
+
+Distratores:
+A — Diagnóstico pode ser conduzido na rede sem internação clínica apenas por condição prisional.
+C — Não se indica internação social; tratamento diretamente observado pode ocorrer no sistema prisional.
+D — Nessa população de risco não se deve aguardar três semanas para iniciar investigação.`
+
+        ,'revalida-2024-1-007': `Resposta correta — D. Febre no quinto dia após cirurgia colorretal, associada a dor e distensão abdominal, mesmo com ferida superficial limpa, levanta suspeita de infecção profunda ou complicação intra-abdominal da anastomose.
+
+Distratores:
+A — Atelectasia não explica de forma confiável febre tardia no quinto dia e não há achados respiratórios.
+B — Não há sintomas urinários ou instrumentação descrita que tornem ITU a origem mais provável.
+C — Abscesso subfrênico é menos compatível com hemicolectomia esquerda e ausência de sinais localizados superiores.`
+
+        ,'revalida-2024-1-017': `Resposta correta — D. Sintomas respiratórios prévios, otalgia, febre e membrana timpânica hiperemiada e imóvel indicam otite média aguda bacteriana. Em adulta imunossuprimida e com evolução prolongada, amoxicilina com clavulanato é opção adequada.
+
+Distratores:
+A — Lúpus não causa uma entidade típica de “otite média crônica lúpica”, e antibiótico tópico não trata ouvido médio com membrana íntegra.
+B — Não há achados de infecção fúngica nem indicação de timpanotomia imediata.
+C — Otite externa causa dor à manipulação do pavilhão e alterações do conduto, não imobilidade timpânica bilateral.`
+
+        ,'revalida-2024-1-043': `Resposta correta — D. Sonolência, olhos fundos, ausência de lágrimas, pulso débil e enchimento capilar superior a cinco segundos indicam desidratação grave com choque. Deve-se realizar expansão rápida com solução fisiológica 20 mL/kg, reavaliando e repetindo até restaurar perfusão.
+
+Distratores:
+A — Reidratação oral é inadequada durante choque e alteração do nível de consciência.
+B — Gastróclise também é insuficiente diante de hipoperfusão grave.
+C — O esquema descrito não corresponde à expansão inicial repetida necessária no choque da criança dessa idade.`
+
+        ,'revalida-2024-1-050': `Resposta correta — B. Diabetes mellitus contribuiu para a aterosclerose e o evento cardiovascular, mas não integra necessariamente a cadeia causal direta imediata; por isso pode ser registrada como causa contributiva na Parte II da declaração de óbito.
+
+Distratores:
+A — Síndrome metabólica é condição de risco ampla e não deve ser escolhida como causa básica diante de doença etiológica mais definida.
+C — Infarto agudo é o evento terminal/intermediário, enquanto a causa básica seria a doença aterosclerótica que iniciou a cadeia.
+D — Doença arterial aterosclerótica é causa básica, não causa imediata; a imediata deve descrever o evento final.`
+
+        ,'revalida-2024-1-093': `Resposta correta — B. Em mulher de 26 anos com LSIL, a conduta preconizada no algoritmo citado é repetir a citologia em seis meses, pois grande parte das lesões regride espontaneamente e o seguimento identifica persistência.
+
+Distratores:
+A — Pesquisa de DNA-HPV não é a etapa indicada nesse algoritmo após LSIL citológica.
+C — Biópsia depende de alteração colposcópica e não é indicada diretamente para toda LSIL.
+D — “Ver e tratar” é reservado a situações de maior risco e não deve ser aplicado a lesão de baixo grau sem confirmação.`
+
+        ,'revalida-2024-1-094': `Resposta correta — B. Rouquidão, tosse característica, estridor em repouso, tiragem e agitação indicam crupe moderado a grave. Deve receber corticosteroide sistêmico e adrenalina nebulizada, com observação hospitalar pelo risco de recorrência e piora.
+
+Distratores:
+A — Beta-2 agonista atua em broncoespasmo de vias inferiores e não reduz edema subglótico.
+C — Intubação fica reservada para falência respiratória iminente, exaustão ou obstrução grave refratária.
+D — Corticoide inalatório e alta são insuficientes diante de estridor em repouso e cianose ao choro.`
+
+        ,'revalida-2024-1-099': `Resposta correta — D. Secreção purulenta copiosa, edema palpebral e início entre o segundo e o quinto dia de vida, com cervicite materna, sugerem oftalmia gonocócica. É emergência pelo risco de ulceração e cegueira, exigindo ceftriaxona sistêmica imediata e tratamento ocular conforme protocolo, sem aguardar cultura.
+
+Distratores:
+A — Colírio isolado e espera do swab são perigosos; há risco real de perda visual e disseminação.
+B — Conjuntivite bacteriana inespecífica não contempla a forte suspeita gonocócica nem exige apenas terapia tópica.
+C — Aguardar cinco dias permite progressão rápida da lesão corneana.`
+
+        ,'revalida-2024-1-100': `Resposta correta — B. Cal é agente alcalino e pode provocar queimadura ocular profunda. Após irrigação copiosa imediata e verificação do pH e remoção de partículas, o paciente necessita avaliação oftalmológica urgente em pronto-socorro.
+
+Distratores:
+A — Lubrificante e repouso não bastam para queimadura química.
+C — Oclusão retém o agente e impede monitorização, podendo agravar a lesão.
+D — Acompanhamento exclusivo na atenção básica é inadequado diante de dor e visão embaçada após álcali.`
+
+        ,'revalida-2024-1-102': `Resposta correta — B. Aos nove meses, a criança deve ter recebido duas doses de meningocócica C conjugada; aos quatro anos, duas doses e o reforço; e, na adolescência, uma dose da meningocócica ACWY conforme o calendário considerado pela questão.
+
+Distratores:
+A — Aos nove meses já são esperadas duas doses, não apenas uma.
+C — Acrescenta doses além do esquema infantil e adolescente previsto.
+D — Também subestima o esquema do lactente e inclui reforço adolescente não previsto nessa formulação.`
+
+        ,'revalida-2023-1-006': `Resposta correta — B. Hipertensão estágio 2 em idoso com fragilidade leve requer início imediato de combinação em baixas doses, como bloqueador de canal de cálcio com IECA, além de medidas não farmacológicas e reavaliação em até 30 dias, buscando inicialmente pressão abaixo de 140 × 90 mmHg.
+
+Distratores:
+A — Tratamento apenas não medicamentoso por meses é insuficiente no estágio 2.
+C — Espironolactona, metildopa e clonidina não são opções usuais de primeira linha para monoterapia inicial.
+D — Betabloqueador sem indicação específica não é preferencial, e seguimento apenas anual é inadequado no ajuste inicial.`
+
+        ,'revalida-2023-1-015': `Resposta correta — B. Estado de mal epiléptico neonatal persistente após fenobarbital requer escalonamento com fenitoína; se refratário, pode-se usar midazolam contínuo e, em ambiente intensivo, tiopental, sempre com suporte ventilatório e tratamento da infecção do sistema nervoso central.
+
+Distratores:
+A — Diazepam não é a melhor sequência após fenobarbital em neonato e tem maior risco de depressão respiratória e recorrência.
+C — Lorazepam após fenitoína não é o escalonamento indicado, e piridoxina fica reservada à suspeita de epilepsia dependente de vitamina B6.
+D — Nitrazepam não integra o protocolo agudo de estado de mal neonatal.`
+
+        ,'revalida-2023-1-025': `Resposta correta — D. Pelo esquema de estratificação adotado pela questão, antecedente de pólipo colorretal coloca o paciente em risco moderado, mesmo sendo hiperplásico pequeno, e mantém rastreamento periódico por pesquisa anual de sangue oculto nas fezes conforme a diretriz brasileira referida.
+
+Distratores:
+A — Colonoscopia anual é excessiva e não corresponde ao seguimento proposto para esse achado.
+B — Apesar da classificação de risco indicada, colonoscopia todos os anos não é recomendada.
+C — A estratégia de sangue oculto é compatível, mas a alternativa classifica o antecedente de pólipo como baixo risco, divergindo do algoritmo cobrado.`
+
+        ,'revalida-2023-1-058': `Resposta correta — B. Metaplasia escamosa, inflamação moderada e bacilos de Döderlein são achados benignos. Após citologias adequadas sem lesão, a paciente deve seguir rastreamento de rotina com novo exame em três anos.
+
+Distratores:
+A — Metaplasia fisiológica não requer cauterização.
+C — Repetição em seis meses é reservada a amostra insatisfatória ou alterações que exijam controle precoce.
+D — Döderlein representa lactobacilos da flora normal, não vaginose a ser tratada com metronidazol.`
+
+        ,'revalida-2023-1-060': `Resposta correta — D. A dieta contém frutas, verduras e fontes de carboidrato e gordura, mas arroz e feijão são apenas eventuais e o leite foi retirado. Sem substitutos proteicos adequados, há risco de deficiência de aminoácidos essenciais.
+
+Distratores:
+A — Há oferta variada e frequente de frutas, folhas e legumes, fontes de vitaminas.
+B — Castanhas, bolo, biscoito e azeite fornecem gorduras.
+C — Sucos, frutas, macarrão, bolo e biscoito fornecem carboidratos em abundância.`
+
+        ,'revalida-2023-1-063': `Resposta correta — D. Restrição de crescimento, microcefalia, petéquias, hepatoesplenomegalia, citopenias, colestase e calcificações periventriculares caracterizam citomegalovirose congênita sintomática. O tratamento é ganciclovir ou valganciclovir por seis meses, com seguimento auditivo especializado.
+
+Distratores:
+A — Sífilis congênita pode causar hepatoesplenomegalia, mas calcificações periventriculares e microcefalia favorecem CMV.
+B — Aciclovir trata herpes simples, não citomegalovírus, e dois meses é esquema inadequado.
+C — Penicilina procaína trataria sífilis, diagnóstico menos compatível com o conjunto neurológico e hematológico.`
+
+        ,'revalida-2023-1-066': `Resposta correta — C. Fala entrecortada, agitação, tiragem e saturação de 89% indicam exacerbação grave de asma. São necessários oxigênio, doses repetidas de beta-2 agonista, ipratrópio e prednisolona, com transferência; após estabilização, deve-se intensificar o controlador com corticoide inalatório e LABA.
+
+Distratores:
+A — A dose de corticoide sistêmico está excessiva e a alternativa não inclui adequadamente LABA no controle persistente.
+B — Dois jatos são insuficientes para crise grave, e o plano de manutenção permanece incompleto.
+D — Manter na unidade e conservar a dose controladora é inadequado diante de hipoxemia e controle prévio ruim.`
+
+        ,'revalida-2023-1-070': `Resposta correta — C. Antecedente de pré-eclâmpsia e descolamento placentário coloca a gestante em alto risco de recorrência. Ácido acetilsalicílico em baixa dose, iniciado idealmente entre 12 e 16 semanas, reduz risco de pré-eclâmpsia e complicações placentárias.
+
+Distratores:
+A — Hidralazina não é usada profilaticamente e não há hipertensão grave.
+B — Metildopa trata hipertensão crônica, mas a pressão atual não estabelece indicação e não previne pré-eclâmpsia.
+D — Enoxaparina terapêutica é indicada para tromboembolismo ou trombofilia específica, não pelo antecedente isolado.`
+
+        ,'revalida-2023-1-074': `Resposta correta — B. A medida seriada da altura uterina entre aproximadamente 24 e 38 semanas é método clínico de rastreamento para suspeitar restrição de crescimento e indicar ultrassonografia quando abaixo do esperado.
+
+Distratores:
+A — Restrição precoce é geralmente definida antes de 32 semanas, não 35.
+C — Com Doppler normal, a resolução costuma ocorrer antes ou em torno de 39 semanas, não após 40.
+D — Diástole zero é alteração da artéria umbilical, exige vigilância muito mais estreita e não se descreve como estágio 2 por artérias uterinas.`
+
+        ,'revalida-2023-1-098': `Questão anulada. O enunciado descreve carcinoma urotelial não músculo-invasivo, multifocal e de alto grau. A alternativa clinicamente mais defensável é B — tratamento intravesical com BCG após ressecção adequada e reavaliação urológica —, mas a questão foi anulada no gabarito oficial e não deve gerar pontuação.
+
+Análise das alternativas:
+A — Cistectomia total não é primeira conduta automática sem invasão muscular, embora possa ser considerada em doença de altíssimo risco selecionada.
+B — BCG intravesical é o tratamento adjuvante padrão para doença não músculo-invasiva de alto risco.
+C — Mitomicina em dose única é mais apropriada a tumores de baixo risco e não basta para doença multifocal de alto grau.
+D — Vigilância é necessária, mas programar nova ressecção trimestral como tratamento isolado não substitui BCG nem descreve adequadamente a segunda ressecção indicada em situações específicas.`
+
+        ,'revalida-2023-1-099': `Resposta correta — B. Em parada cardiorrespiratória materna com gestação de 34 semanas e ausência de retorno rápido da circulação, deve-se realizar cesariana de ressuscitação imediatamente, idealmente iniciada até quatro minutos, para favorecer a reanimação materna e possibilitar sobrevivência fetal.
+
+Distratores:
+A — Não se deve declarar morte fetal sem tentativa de extração quando há idade gestacional viável e parada recente.
+C — A intervenção não pode aguardar transferência de responsabilidade ao obstetra.
+D — Ultrassonografia atrasaria procedimento tempo-dependente e não modifica a indicação imediata.`
+
+        ,'revalida-2023-1-101': `Resposta correta — C. Estridor em repouso e tiragem após pródromo viral caracterizam crupe moderado. Dexametasona reduz edema subglótico e epinefrina nebulizada produz melhora rápida, exigindo observação após o uso.
+
+Distratores:
+A — Salmeterol não trata obstrução subglótica e antibiótico não é indicado em crupe viral.
+B — Salbutamol atua em broncoespasmo de vias inferiores, ausente no quadro.
+D — Nebulização com soro não substitui epinefrina quando há estridor em repouso.`
+
+        ,'revalida-2023-1-102': `Resposta correta — A. Adolescente obeso com dor intensa atraumática no quadril e impotência funcional tem perfil clássico de epifisiólise proximal do fêmur, devendo suspender apoio e receber avaliação ortopédica urgente.
+
+Distratores:
+B — Artrite séptica costuma cursar com febre, toxemia e marcadores inflamatórios, além de dor aguda intensa.
+C — Artrite idiopática juvenil exige artrite persistente e não apresenta esse padrão mecânico focal típico.
+D — Sinovite transitória é mais comum em crianças menores e geralmente segue infecção viral, com quadro menos associado à obesidade.`
+
+        ,'revalida-2023-1-105': `Resposta correta — A. Nódulo palpebral indolor persistente após fase inflamatória curta corresponde a calázio, reação granulomatosa por obstrução de glândula de Meibômio.
+
+Distratores:
+B — Hordéolo é infecção aguda dolorosa e eritematosa junto à margem palpebral.
+C — Canaliculite causa secreção e inflamação próxima ao ponto lacrimal medial.
+D — Dacriocistite causa dor e edema no canto medial inferior, sobre o saco lacrimal.`
+
+        ,'revalida-2022-2-021': `Resposta correta — B. A saúde suplementar deve promover acesso e qualidade assistencial, buscando melhores desfechos com uso adequado de recursos e cuidado centrado na experiência do paciente, conforme a diretriz da política citada.
+
+Distratores:
+A — A saúde suplementar não é criada como sistema complementar subordinado à APS do SUS; ela já possui organização própria regulada pela ANS.
+C — A política não pode postergar contratos e atendimento, especialmente durante emergência sanitária.
+D — Não se estabelece divisão em que apenas casos graves ficam com planos e leves são transferidos ao SUS.`
+
+        ,'revalida-2022-2-022': `Resposta correta — C. Mulher com 36 anos que fuma 20 cigarros por dia não deve usar contraceptivo combinado com estrogênio pelo risco cardiovascular. DIU de cobre é método altamente eficaz, de longa duração e sem estrogênio.
+
+Distratores:
+A — Somar anticoncepcional oral aumenta exposição hormonal e risco sem benefício contraceptivo.
+B — Anel vaginal também contém estrogênio e mantém a contraindicação.
+D — O injetável mensal é combinado e não deve ser mantido nessa fumante acima de 35 anos.`
+
+        ,'revalida-2022-2-028': `Resposta correta — B. Recém-nascido de mãe sem tratamento para sífilis, com avaliação clínica e complementar normal e VDRL não reagente, pode receber penicilina benzatina 50.000 UI/kg em dose única quando o seguimento está assegurado, conforme o cenário cobrado.
+
+Distratores:
+A — Apenas observação não é a conduta indicada diante de tratamento materno inexistente.
+C — Penicilina cristalina por dez dias é reservada a doença comprovada ou avaliação alterada/incompleta.
+D — Penicilina procaína por dez dias também corresponde a esquema de tratamento completo, desnecessário com toda a investigação normal no cenário descrito.`
+
+        ,'revalida-2022-2-032': `Resposta correta — D. Pressão diastólica de 110 mmHg persistente caracteriza hipertensão grave e determina internação para avaliação e manejo de pré-eclâmpsia com sinal de gravidade.
+
+Distratores:
+A — A quantidade de proteinúria não define gravidade nem indica isoladamente internação urgente.
+B — Creatinina de 0,9 mg/dL não representa insuficiência renal grave.
+C — DHL de 490 UI/L isoladamente não atinge critério típico de hemólise ou gravidade.`
+
+        ,'revalida-2022-2-033': `Resposta correta — A. Hipotonia na síndrome de Down pode reduzir a eficiência da sucção, mas não contraindica aleitamento. Deve-se oferecer o seio, apoiar pega e posicionamento e realizar ordenha frequente para preservar a produção; complementação pode ser necessária conforme o ganho ponderal.
+
+Distratores:
+B — Fórmula exclusiva elimina benefícios do leite materno e não previne broncoaspiração por si só.
+C — Se há coordenação entre sucção, deglutição e respiração, evitar o seio é injustificado.
+D — Hipotonia exige suporte especializado, não contraindicação automática da amamentação.`
+
+        ,'revalida-2022-2-036': `Resposta correta — B. O rastreamento citopatológico é recomendado dos 25 aos 64 anos para pessoas com colo uterino que já tiveram atividade sexual. Diante de HPV ou lesão de baixo grau, a conduta indicada para a faixa etária é repetir o exame em um ano.
+
+Distratores:
+A — O rastreamento não começa rotineiramente aos 15 anos, e colposcopia imediata não é necessária para toda lesão de baixo grau.
+C — Intervalo de três anos vale após exames de rotina negativos, não após LSIL.
+D — Lesão de baixo grau não recebe tratamento imediato sem avaliação de persistência ou confirmação.`
+
+        ,'revalida-2022-2-040': `Resposta correta — C. Intoxicação por clonazepam causa depressão do sistema nervoso central, hipotonia e hiporreflexia. A prioridade é suporte de via aérea, ventilação e circulação; flumazenil é antagonista específico, embora deva ser usado com cautela pelo risco de convulsões em usuários crônicos ou intoxicações mistas.
+
+Distratores:
+A — Clonazepam tem meia-vida longa e exige monitorização, não simples espera.
+B — Naloxona antagoniza opioides, e esvaziamento gástrico rotineiro não é indicado.
+D — Metadona agravaria depressão respiratória; lavagem gástrica também não é conduta padrão.`
+
+        ,'revalida-2022-2-044': `Resposta correta — B. No algoritmo inicial considerado pela questão para trauma vertebral, a radiografia simples é o exame de triagem para localizar fratura e desalinhamento em paciente estável, mantendo imobilização e avaliação neurológica.
+
+Distratores:
+A — Mielografia é invasiva e não é exame inicial no trauma agudo.
+C — Ressonância avalia medula e ligamentos, mas costuma ser complementar após avaliação óssea inicial.
+D — Tomografia tem maior sensibilidade e hoje é amplamente preferida em trauma de alto risco, mas não corresponde ao primeiro exame indicado pelo protocolo cobrado no gabarito.`
+
+        ,'revalida-2022-2-045': `Resposta correta — C. Fluoxetina 60 mg/dia é o antidepressivo com melhor evidência e aprovação para bulimia nervosa, reduzindo compulsões e comportamentos purgativos quando associada à terapia cognitivo-comportamental.
+
+Distratores:
+A — Citalopram 10 mg não é o regime de escolha e essa dose é baixa.
+B — Venlafaxina não é primeira linha estabelecida para bulimia e 37,5 mg é dose inicial baixa.
+D — Topiramato pode ser usado em situações selecionadas, mas não substitui rotineiramente o ISRS de primeira linha.`
+
+        ,'revalida-2022-2-046': `Resposta correta — D. Dependência de substâncias lícitas e obesidade com IMC de 33 kg/m² aumentam o risco gestacional e justificam avaliação especializada conforme a estratificação adotada. A idade de 36 anos isoladamente não torna verdadeiras as alternativas que inventam outros antecedentes.
+
+Distratores:
+A — Cirurgia uterina anterior não foi informada no caso.
+B — IMC de 19 kg/m² não é baixo peso, e a composição não corresponde aos critérios apresentados.
+C — Também acrescenta cirurgia uterina e situação conjugal insegura sem respaldo no enunciado.`
+
+        ,'revalida-2022-2-056': `Resposta correta — A. Em idosa com hipertensão sistólica persistente e sem comorbidades, diurético tiazídico é opção eficaz de primeira linha. A meta menos agressiva abaixo de 150 × 90 mmHg corresponde ao parâmetro etário adotado pela questão.
+
+Distratores:
+B — Estágio 2 confirmado não deve ser tratado apenas com mudança de estilo de vida.
+C — MAPA pode confirmar casos duvidosos, mas a hipertensão já foi repetidamente documentada; meta abaixo de 120 × 80 é excessiva.
+D — Combinação pode ser considerada em diretrizes atuais, mas a meta proposta pode ser agressiva para o referencial específico da questão.`
+
+        ,'revalida-2022-2-064': `Resposta correta — C. Prurido, lacrimejamento e bordas palpebrais ulceradas e crostosas caracterizam blefarite anterior, cujo agente bacteriano mais comum é Staphylococcus aureus.
+
+Distratores:
+A — Adenovírus causa conjuntivite folicular e hiperemia difusa, não crostas ulceradas predominantes na margem palpebral.
+B — Herpes simples costuma causar vesículas, ceratite dendrítica ou blefaroconjuntivite unilateral.
+D — Chlamydia causa conjuntivite folicular persistente e secreção mucopurulenta, não blefarite crostosa típica.
+
+Validação visual pendente: o enunciado descreve os achados essenciais, mas a fotografia original deve ser conferida separadamente.`
+
+        ,'revalida-2022-2-069': `Resposta correta — C. Em vítima prona com capacete fechado, dois socorristas estabilizam manualmente, retiram o capacete mantendo alinhamento, realizam rolamento em bloco para decúbito dorsal e então ajustam o colar cervical, sem flexão ou rotação da coluna.
+
+Distratores:
+A — Colocar o colar antes do rolamento pode ser inviável ou inadequado enquanto o paciente permanece prono.
+B — Rolar com o capacete pode dificultar alinhamento neutro e acesso à via aérea.
+D — Não é possível ajustar corretamente o colar antes de retirar o capacete fechado.`
+
+        ,'revalida-2022-2-083': `Resposta correta — C. Assimetria de ombros, proeminência escapular e teste de Adams positivo indicam escoliose estrutural. Radiografia panorâmica em ortostase permite medir o ângulo de Cobb, que orienta observação, órtese ou cirurgia.
+
+Distratores:
+A — História familiar não dispensa imagem e mensuração da curva.
+B — Lordose é alteração no plano sagital e não causa giba no teste de Adams.
+D — Teste de Adams positivo aponta rotação vertebral da escoliose, não espinha bífida.`
+
+        ,'revalida-2022-2-085': `Resposta correta — A. Como a endoscopia já está sendo realizada, o teste rápido da urease em fragmentos de biópsia é método prático para demonstrar H. pylori. O uso de inibidor de bomba pode reduzir sensibilidade e deve ser considerado na interpretação ou suspensão prévia quando possível.
+
+Distratores:
+B — Teste respiratório é excelente método não invasivo, mas não aproveita a endoscopia já indicada e também sofre interferência do IBP.
+C — O método validado em fezes é pesquisa de antígeno, não a formulação genérica proposta como melhor durante a endoscopia.
+D — Hematoxilina-eosina isolada é menos sensível para identificar a bactéria que colorações especiais ou urease.`
+
+        ,'revalida-2022-2-090': `Resposta correta — B. Rabdomiólise com CK acima de 10.000 U/L e mioglobinúria após adicionar tratamento para hipertrigliceridemia à rosuvastatina é típica da interação com genfibrozila, que aumenta exposição à estatina e risco de miotoxicidade.
+
+Distratores:
+A — Ezetimiba tem baixo risco de interação miotóxica e atua principalmente no LDL.
+C — Ácido nicotínico pode causar efeitos musculares, mas a associação clássica de maior risco descrita é com genfibrozila.
+D — Ômega-3 reduz triglicerídeos sem a mesma interação farmacocinética relevante com estatinas.`
+
+        ,'revalida-2022-2-094': `Resposta correta — D. Cólicas recorrentes após alimentos gordurosos, com intervalos assintomáticos, ausência de febre ou icterícia e exames normais caracterizam colelitíase sintomática. O tratamento definitivo é colecistectomia videolaparoscópica eletiva.
+
+Distratores:
+A — Coledocolitíase costuma causar icterícia ou alteração de enzimas canaliculares e requer confirmação antes de CPRE.
+B — Colecistite aguda provoca dor persistente, febre, leucocitose e Murphy positivo.
+C — Não há evidência de pólipo, e colangiorressonância não é a conduta terapêutica para cólica biliar típica.`
+
+        ,'revalida-2023-2-018': `Resposta correta — B. O IMC é aproximadamente 42,7 kg/m², preenchendo critério para cirurgia bariátrica após avaliação multiprofissional. O serviço deve discutir riscos, mudanças permanentes de hábitos, alternativas técnicas e envolver rede de apoio com consentimento da paciente.
+
+Distratores:
+A — O tempo proposto de tratamento conservador está incorreto e a paciente já tem indicação pelo IMC.
+C — Embora reconheça IMC elevado, posterga indevidamente o encaminhamento e impõe acompanhamento semanal não padronizado.
+D — Diabetes, hipertensão e dislipidemia reforçam, e não contraindicam, a indicação; depressão e tabagismo exigem avaliação e manejo.`
+
+        ,'revalida-2023-2-026': `Resposta correta — B. Sintomas visuais positivos seguidos de escotoma por 30 minutos e cefaleia unilateral pulsátil com náusea e fonofobia caracterizam migrânea com aura. Sem sinais de alarme ou déficit persistente, cabe tratamento sintomático e acompanhamento.
+
+Distratores:
+A — Tumor costuma causar padrão progressivo e sinais de hipertensão intracraniana, ausentes.
+C — Hemorragia subaracnóidea produz cefaleia súbita explosiva, não aura gradual típica.
+D — Pulso venoso espontâneo e fundo de olho sem papiledema desfavorecem hipertensão intracraniana.`
+
+        ,'revalida-2023-2-036': `Resposta correta — C. A Política Nacional de Práticas Integrativas e Complementares prevê atuação multiprofissional e implementação coerente com o nível de atenção e a realidade local, com forte inserção na atenção primária.
+
+Distratores:
+A — Acupuntura não é exclusiva da atenção especializada e pode ser ofertada na APS por profissional habilitado.
+B — A OMS recomenda e orienta, mas não regula diretamente quais práticas o município brasileiro pode implementar.
+D — Auriculoterapia não precisa estar em todos os níveis nem tem ênfase obrigatória na atenção terciária.`
+
+        ,'revalida-2023-2-037': `Resposta correta — D. A gestante tem direito a acompanhante de sua livre escolha durante trabalho de parto, parto e pós-parto imediato, podendo haver substituição ao longo do processo conforme sua vontade e as regras assistenciais justificadas.
+
+Distratores:
+A — Filmagem depende de autorização e normas de privacidade e segurança do serviço.
+B — Não há requisito de escolaridade para o acompanhante.
+C — O acompanhante não precisa ser parente nem possuir grau específico de parentesco.`
+
+        ,'revalida-2023-2-056': `Resposta correta — A. Em mulher de 28 anos com LSIL e citologia prévia normal, o algoritmo vigente na época da prova recomenda repetir a colpocitologia em seis meses, pois há alta taxa de regressão espontânea.
+
+Distratores:
+B — Colposcopia imediata não é necessária em toda LSIL nessa faixa etária pelo protocolo citado.
+C — Exérese da zona de transformação seria tratamento excessivo sem confirmação histológica de lesão de alto grau.
+D — Teste de DNA-HPV não substitui o seguimento citológico indicado nesse cenário.`
+
+        ,'revalida-2023-2-059': `Resposta correta — D. Aos nove anos, 29 kg e 1,36 m, a criança ainda não alcançou 1,45 m e deve usar assento de elevação no banco traseiro, voltada para frente, com cinto de três pontos corretamente posicionado.
+
+Distratores:
+A — O cinto diretamente no banco pode cruzar pescoço e abdome enquanto a estatura é insuficiente.
+B — Cadeirinha com cinto próprio é destinada a crianças menores e com limites específicos de peso e altura.
+C — Cadeirinha presa pelo cinto do veículo não oferece o ajuste descrito para essa faixa antropométrica.`
+
+        ,'revalida-2023-2-064': `Resposta correta — A. Após via aérea avançada durante RCP pediátrica, as compressões tornam-se contínuas e realiza-se uma ventilação a cada dois a três segundos, sem pausas coordenadas.
+
+Distratores:
+B — Relação 15:2 é usada por dois socorristas antes de via aérea avançada.
+C — Trauma sugere hemorragia, mas volume não substitui imediatamente RCP de alta qualidade e o tratamento do ritmo.
+D — Epinefrina é indicada na assistolia, mas a pergunta destaca a conduta ventilatória imediatamente após estabelecer via aérea avançada.`
+
+        ,'revalida-2023-2-066': `Resposta correta — C. Na impossibilidade de oferecer ou armazenar leite materno durante a ausência, utiliza-se fórmula infantil apropriada para lactentes. Pelo esquema considerado na questão, ao completar quatro meses sem leite materno disponível por período prolongado, inicia-se também alimentação complementar adequada.
+
+Distratores:
+A — Não contempla a alimentação complementar prevista no cenário a partir da faixa etária alcançada.
+B — Fórmula de seguimento é indicada para faixa etária posterior, não para lactente menor de seis meses.
+D — Combina alimentação complementar com fórmula de seguimento inadequada para a idade.`
+
+        ,'revalida-2023-2-068': `Resposta correta — B. Estatura abaixo de −3 desvios-padrão com peso proporcional e dois testes provocativos mostrando pico de GH abaixo do ponto de corte confirmam deficiência de hormônio do crescimento.
+
+Distratores:
+A — Hipotireoidismo exige alteração de TSH/T4 e costuma acompanhar desaceleração ponderal e outros sinais.
+C — Má absorção geralmente compromete primeiro o peso e produz sintomas gastrointestinais ou carenciais.
+D — Baixa estatura constitucional apresenta velocidade de crescimento e testes de GH preservados.`
+
+        ,'revalida-2023-2-069': `Resposta correta — B. O fenótipo clínico sugere síndrome de Down, associada a alta prevalência de cardiopatias congênitas. A avaliação neonatal deve incluir ecocardiograma, apoiado por exame cardiovascular, eletrocardiograma e radiografia quando previstos no protocolo.
+
+Distratores:
+A — Investigação contrastada do duodeno só é indicada se houver sinais de obstrução, como vômitos biliosos.
+C — O rastreamento neonatal pesquisa hipotireoidismo, não hipertireoidismo.
+D — Radiografia dinâmica cervical para instabilidade atlantoaxial não é exame neonatal imediato de rotina.`
+
+        ,'revalida-2023-2-070': `Resposta correta — A. Com histórico vacinal desconhecido aos 11 anos, inicia-se esquema de resgate: três doses de hepatite B e dT, febre amarela conforme indicação, duas doses de tríplice viral, esquema de HPV e uma dose de meningocócica ACWY segundo o calendário da época.
+
+Distratores:
+B — Tríplice viral em dose única e meningocócica C não completam o resgate indicado; três doses de HPV também não correspondem ao esquema rotineiro imunocompetente.
+C — Omite vacinação contra HPV.
+D — Pentavalente não é usada para resgate nessa idade, e as doses propostas de febre amarela e meningocócica C estão inadequadas.`
+
+        ,'revalida-2023-2-084': `Resposta correta — A. Hematúria macroscópica intermitente em idoso tabagista deve ser considerada neoplasia urotelial até prova em contrário. Cistoscopia visualiza e permite biopsiar a bexiga, enquanto imagem seccional avalia trato urinário e extensão; entre as opções, a combinação com ressonância é a adequada.
+
+Distratores:
+B — Cálculos prévios não permitem atribuir a nova hematúria à ureterolitíase, especialmente sem cólica típica.
+C — Hiperplasia prostática não explica adequadamente plenitude e hematúria de alto risco, e ultrassom transretal não avalia bexiga.
+D — Tuberculose geniturinária costuma causar sintomas irritativos, piúria estéril e contexto epidemiológico, não sendo a hipótese principal.`
+
+        ,'revalida-2023-2-087': `Resposta correta — A. Hipotensão, turgência jugular e bulhas hipofonéticas indicam tamponamento cardíaco traumático. Diante de parada presenciada no pronto-socorro, toracotomia de ressuscitação permite abrir o pericárdio, controlar lesão e realizar massagem cardíaca interna.
+
+Distratores:
+B — Massagem externa isolada é pouco eficaz enquanto o coração permanece comprimido pelo tamponamento.
+C — Toracostomia bilateral trata pneumotórax hipertensivo, mas o murmúrio está simétrico e a tríade aponta para tamponamento.
+D — Pericardiocentese pode temporizar, porém sangue coagulado traumático drena mal e, em parada, a abordagem cirúrgica é definitiva.`
+
+        ,'revalida-2023-2-095': `Resposta correta — D. Toda queimadura química ocular exige irrigação imediata e abundante com água ou cristaloide, sem esperar avaliação especializada, mantendo lavagem até normalizar o pH e removendo partículas retidas.
+
+Distratores:
+A — Oclusão retém o agente e impede irrigação contínua.
+B — Corticoide pode ser considerado depois por oftalmologista, mas nunca antes de descontaminação.
+C — Anestésico tópico pode facilitar a irrigação em formulação oftálmica apropriada, porém lidocaína líquida não substitui a lavagem.`
+
+        ,'revalida-2023-2-096': `Resposta correta — C. Dor noturna progressiva, anemia, dor vertebral focal e possível disfunção urinária são sinais de alarme para comprometimento neurológico ou lesão estrutural. É necessária imagem urgente da coluna, preferencialmente ressonância, para excluir compressão medular ou cauda equina.
+
+Distratores:
+A — Tratar como dor musculoesquelética simples ignora sinais de alarme.
+B — Testes radiculares negativos não excluem compressão central; encaminhamento sem imagem atrasa caracterização.
+D — Repouso e fisioterapia são inadequados antes de excluir causa grave.`
+
+        ,'revalida-2023-2-097': `Resposta correta — A. Lombalgia curta, recorrente, não irradiada e ligada a trabalho físico, sem sinais de alarme descritos, é provavelmente mecânico-postural. O tratamento inicial é conservador, com atividade, orientação ergonômica e analgesia por curto período.
+
+Distratores:
+B — Embora possa ser chamada inespecífica, a alternativa apenas dispensa exames e não apresenta a conduta terapêutica solicitada.
+C — Não há sinal de alerta que justifique ressonância.
+D — Repouso deve ser evitado; manutenção de atividade favorece recuperação.`
+
+        ,'revalida-2023-2-099': `Resposta correta — C. Dor ocular crônica, hiperemia, perda de campo periférico e aumento da escavação papilar sugerem glaucoma. Deve-se medir pressão intraocular e suspender ou substituir amitriptilina, cuja ação anticolinérgica pode precipitar elevação pressórica em predispostos.
+
+Distratores:
+A — Não há hemorragias, exsudatos ou alterações vasculares de retinopatia diabética.
+B — Suplementos antioxidantes são usados em degeneração macular relacionada à idade selecionada, não glaucoma.
+D — Escavação papilar glaucomatosa e perda periférica não sugerem primariamente tumor retrorbitário.`
+
+        ,'revalida-2023-2-101': `Resposta correta — A. Febre, faringite, linfonodomegalia cervical e linfócitos atípicos formam o quadro clássico de mononucleose infecciosa. A sorologia para o vírus Epstein-Barr confirma a etiologia e ajuda a distinguir infecção aguda de contato prévio.
+
+Distratores:
+B — Biópsia linfonodal é reservada para adenomegalia persistente ou com características suspeitas de neoplasia, não para apresentação típica e aguda.
+C — Mielograma não é necessário diante de linfocitose reacional com linfócitos atípicos e quadro clínico compatível.
+D — Tomografia cervical não confirma a etiologia e acrescenta radiação sem indicação neste contexto.`
+
+        ,'revalida-2023-2-102': `Resposta correta — B. Déficit motor do tríceps e alteração sensitiva no território cervical inferior localizam a lesão na transição C7–T1. Entre as alternativas, fratura de C7 com subluxação C7–T1 é a que melhor explica os achados neurológicos.
+
+Distratores:
+A — Fratura de Jefferson compromete C1 e não produz isoladamente o padrão segmentar descrito em C7.
+C — Fratura isolada do processo transverso de C3 não corresponde ao nível do déficit motor e sensitivo.
+D — Fratura do enforcado envolve C2, geralmente por hiperextensão, e tampouco explica o padrão neurológico cervical inferior.`
+
+        ,'revalida-2023-2-103': `Resposta correta — D. Na intoxicação isolada por benzodiazepínico com ventilação e estabilidade hemodinâmica preservadas, a conduta é suporte, monitorização clínica e avaliação laboratorial dirigida. O flumazenil deve ser evitado quando há possibilidade de uso crônico, ingestão mista ou risco convulsivo.
+
+Distratores:
+A — Dosagem sérica de benzodiazepínico raramente muda a conduta imediata, que é guiada pelo estado clínico e pela proteção de via aérea.
+B — Lavagem gástrica não é rotina, sobretudo com tempo de ingestão incerto e redução do nível de consciência, pelo risco de aspiração.
+C — Carvão ativado também não deve ser administrado sem via aérea protegida e tem benefício limitado fora da janela precoce.`
+
+        ,'revalida-2023-2-105': `Resposta correta — A. Assimetria dos ombros e gibosidade ao teste de Adams, com membros inferiores de mesmo comprimento, sugerem escoliose estrutural. A radiografia panorâmica da coluna em ortostatismo confirma a curvatura e permite medir o ângulo de Cobb.
+
+Distratores:
+B — Escanometria é indicada para avaliar discrepância de comprimento dos membros, ausente no caso.
+C — Ultrassonografia não é o exame de escolha para caracterizar e graduar escoliose.
+D — Ressonância não é exame inicial de rotina; fica reservada para sinais neurológicos, curvas atípicas ou suspeita de alteração medular.`
+
+        ,'revalida-2026-1-017': `Resposta correta — C. O quadro sugere obstrução de via aérea superior por hipertrofia adenoideana associada a distúrbio respiratório do sono. A nasofibroscopia visualiza diretamente a adenoide e confirma o grau de obstrução anatômica da nasofaringe.
+
+Distratores:
+A — Testes alérgicos não confirmam a causa obstrutiva e não há descrição predominante de sintomas de rinite alérgica.
+B — A radiografia de cavum pode estimar hipertrofia adenoideana, porém é menos precisa que a visualização endoscópica direta.
+D — A polissonografia é o padrão-ouro para confirmar e graduar a apneia obstrutiva do sono, mas não identifica diretamente a causa anatômica; a redação permite essa ressalva, embora o gabarito cadastrado priorize a confirmação da obstrução adenoideana por nasofibroscopia.`
+
+        ,'revalida-2026-1-025': `Resposta correta — C. Na epistaxe anterior sem instabilidade, a abordagem inicial é manter o paciente sentado e inclinado para a frente, comprimir continuamente a porção cartilaginosa do nariz por 10 a 15 minutos e associar vasoconstritor tópico quando disponível.
+
+Distratores:
+A — Inclinar a cabeça para trás favorece deglutição ou aspiração de sangue e dificulta estimar o sangramento.
+B — Tamponamento posterior é medida para sangramento posterior ou refratário, não primeira escolha em epistaxe anterior estável.
+D — Tratamento cirúrgico ou endovascular é reservado para hemorragia persistente apesar das medidas locais e do tamponamento.`
+
+        ,'revalida-2026-1-049': `Resposta correta — D. Morte decorrente de queda no trabalho é óbito por causa externa: o corpo deve ser encaminhado ao IML, responsável pela declaração de óbito. O serviço de saúde deve notificar o acidente de trabalho no Sinan, e a empresa deve emitir a Comunicação de Acidente de Trabalho (CAT), pois são registros distintos.
+
+Distratores:
+A — O médico assistente não deve emitir a declaração de óbito por causa externa, e o registro na declaração não substitui a notificação ao Sinan.
+B — O IML emite a declaração, mas não assume automaticamente as obrigações de notificação do serviço nem de emissão da CAT pela empresa.
+C — A notificação no Sinan não substitui a CAT, e a declaração deve ser emitida pelo serviço médico-legal.`
+
+        ,'revalida-2026-1-070': `Resposta correta — A. Temperaturas mais elevadas aceleram a replicação viral dentro do Aedes aegypti e encurtam o período de incubação extrínseco. Assim, o mosquito torna-se infectante mais cedo e pode transmitir o vírus durante maior parcela de sua vida.
+
+Distratores:
+B — O aquecimento não induz necessariamente mutação que transfira a transmissão para outras espécies de mosquito.
+C — A temperatura pode acelerar o ciclo do vetor, mas a alternativa não explica diretamente o aumento da competência vetorial, determinado pela capacidade de adquirir, manter e transmitir o vírus.
+D — Redução da densidade vetorial tenderia a diminuir a transmissão; além disso, competência vetorial não é preservada por esse mecanismo.`
+
+        ,'revalida-2026-1-095': `Resposta correta — D. Dor insidiosa no quadril, claudicação em menino de 7 anos, limitação de abdução e rotação interna e achatamento do núcleo epifisário caracterizam doença de Legg-Calvé-Perthes, uma necrose avascular da cabeça femoral infantil.
+
+Distratores:
+A — Epifisiólise proximal do fêmur ocorre sobretudo em adolescentes, frequentemente com obesidade, e mostra deslizamento epifisário.
+B — Artrite idiopática juvenil costuma produzir sinovite e rigidez, não achatamento focal do núcleo epifisário.
+C — Sinovite transitória é aguda e autolimitada, geralmente após infecção viral, sem deformidade epifisária persistente.`
+
+        ,'revalida-2022-1-001': `Resposta correta — D. A exposição ao arco de solda causa fotoqueratite por radiação ultravioleta, com hiperemia, dor e sensação de areia. Entre as opções, irrigar com soro fisiológico é a medida inicial segura antes da avaliação especializada, além de afastar eventual material superficial.
+
+Distratores:
+A — Curativo oclusivo compressivo não trata a lesão ultravioleta e pode aumentar desconforto ou ocultar evolução.
+B — Não há corpo estranho identificado; manipulação com pinça sem indicação pode lesar a córnea.
+C — Associação empírica de antimicrobiano e corticoide não é medida inicial; corticoide tópico sem avaliação oftalmológica pode retardar cicatrização e agravar infecção.`
+
+        ,'revalida-2022-1-002': `Resposta correta — D. A paciente consegue caminhar e não apresenta dor óssea localizada nos pontos avaliados pelas regras de Ottawa, tornando fratura menos provável. A entorse pode ser tratada inicialmente com proteção ou imobilização funcional, analgesia anti-inflamatória quando não houver contraindicação e progressão conforme melhora.
+
+Distratores:
+A — Sem critérios de Ottawa, radiografia imediata não é obrigatória.
+B — Calor na fase aguda pode aumentar edema; medidas de proteção e controle inflamatório são mais adequadas.
+C — Mobilização e reabilitação precoces são úteis após controle inicial, mas parecer ortopédico imediato não é necessário em entorse simples.`
+
+        ,'revalida-2022-1-004': `Resposta correta — D. O INCA recomenda rastreamento mamográfico populacional para mulheres de 50 a 69 anos, com mamografia a cada dois anos. Fora dessa faixa, a decisão deve considerar avaliação clínica e indicações individualizadas.
+
+Distratores:
+A — A faixa de 45 a 69 anos e periodicidade anual não correspondem à recomendação organizada do INCA.
+B — O limite superior de 79 anos e rastreamento anual não são o programa populacional recomendado.
+C — Iniciar aos 40 anos amplia a população além da faixa preconizada pelo INCA para rastreamento de rotina.`
+
+        ,'revalida-2022-1-008': `Resposta correta — A. Em mulher de 26 anos com citologia mostrando lesão intraepitelial escamosa de baixo grau, a recomendação vigente no contexto da prova é repetir a citologia em seis meses, pois muitas lesões regridem espontaneamente e a persistência orienta investigação posterior.
+
+Distratores:
+B — Intervalo de um ano não corresponde à recomendação indicada para essa faixa etária no protocolo cobrado.
+C — Tipagem viral não substitui o seguimento citológico inicial proposto nesse cenário.
+D — Colposcopia imediata não é necessária após um único LSIL nessa paciente, salvo situações especiais ou persistência da alteração.`
+
+        ,'revalida-2022-1-013': `Resposta correta — D. Para ASC-US em mulher de 32 anos, o protocolo vigente no contexto da prova orienta repetir a citologia em seis meses. Se a alteração persistir, indica-se colposcopia para avaliação dirigida.
+
+Distratores:
+A — Repetir imediatamente não permite o intervalo recomendado para observar regressão de alteração transitória.
+B — O intervalo proposto é inadequado e cirurgia não é indicada apenas pela persistência de ASC-US sem investigação colposcópica.
+C — Encaminhamento imediato à colposcopia após o primeiro ASC-US não é a conduta inicial de rotina nessa faixa etária.`
+
+        ,'revalida-2022-1-015': `Resposta correta — C. Pressão de 160 × 110 mmHg repetida caracteriza hipertensão grave na gestação a termo. Deve-se obter acesso venoso, colher exames para avaliar gravidade e síndrome HELLP, administrar sulfato de magnésio para profilaxia de eclâmpsia e resolver a gestação após estabilização materna.
+
+Distratores:
+A — Cesariana não é obrigatória apenas pela hipertensão grave ou por uma cesárea prévia; a via depende das condições obstétricas.
+B — Apenas observar e reavaliar omite sulfato de magnésio e o manejo imediato da gravidade.
+D — Cesárea anterior isolada não determina cirurgia de urgência, e a alternativa também omite prevenção de convulsões.`
+
+        ,'revalida-2022-1-022': `Resposta correta — B. Prematuro de 33 semanas que respira ou chora e mantém boa atividade pode receber cuidados iniciais junto à mãe: secagem rápida, campos aquecidos, proteção térmica da cabeça e posicionamento sobre tórax ou abdome materno, com vigilância da temperatura e da respiração.
+
+Distratores:
+A — Em recém-nascido vigoroso, o clampeamento tardio, e não imediato, reduz riscos como hemorragia intraventricular e enterocolite necrosante.
+C — Saco plástico e touca são medidas térmicas úteis no prematuro não vigoroso, mas hipertermia acima de 37,5 °C também é prejudicial; busca-se normotermia.
+D — Aspiração rotineira de boca e narinas não é indicada em recém-nascido vigoroso e pode provocar bradicardia ou trauma.`
+
+        ,'revalida-2022-1-031': `Resposta correta — C. Hipotensão, turgência jugular, desvio traqueal, ausência de murmúrio e hipertimpanismo após trauma definem pneumotórax hipertensivo. O diagnóstico é clínico: realiza-se descompressão imediata, sem aguardar radiografia, seguida de drenagem pleural fechada no hemitórax acometido.
+
+Distratores:
+A — A radiografia atrasaria tratamento de emergência, e a punção isolada não é terapia definitiva.
+B — Embora a drenagem seja necessária, não se deve esperar confirmação radiográfica em paciente instável.
+D — Drenagem pleural aberta não é a técnica indicada, e o segundo espaço não é o local descrito para o dreno definitivo.`
+
+        ,'revalida-2022-1-032': `Resposta correta — D. Trauma renal grau III em paciente hemodinamicamente estável, sem extravasamento urinário nem outras lesões, é tratado de forma não operatória com repouso, acompanhamento clínico e hematócrito seriado; a alternativa inclui antibiótico e é a melhor opção apresentada.
+
+Distratores:
+A — Angiografia com embolização é reservada para sangramento arterial ativo, pseudoaneurisma ou deterioração persistente, não descritos.
+B — Hematúria maciça isolada não obriga cirurgia quando o paciente está estável e a tomografia mostra lesão grau III sem complicação.
+C — Irrigação vesical trata retenção por coágulos, mas não constitui o manejo principal da lesão renal parenquimatosa.`
+
+        ,'revalida-2022-1-037': `Resposta correta — A. Cálculo de 1,2 cm na junção ureteropiélica, com alta densidade de 1.500 UH, tem baixa probabilidade de eliminação espontânea e menor resposta à litotripsia extracorpórea. A ureterorrenoscopia permite fragmentação e retirada endoscópica eficaz.
+
+Distratores:
+B — Pielolitotomia aberta ou laparoscópica é mais invasiva e não é primeira escolha para esse cálculo acessível por endoscopia.
+C — A elevada densidade e o tamanho reduzem a efetividade da litotripsia extracorpórea.
+D — Terapia expulsora é mais útil para cálculos ureterais menores; hidratação forçada não expulsa cálculo de 1,2 cm.`
+
+        ,'revalida-2022-1-043': `Resposta correta — C. Lesão cervicofacial crônica, endurecida, com fístulas e grânulos de enxofre contendo bacilos gram-positivos filamentosos caracteriza actinomicose. A clindamicina tem atividade contra Actinomyces e outros anaeróbios da flora oral e pode ser usada por período prolongado, associada ao controle do foco dentário.
+
+Distratores:
+A — Oxacilina cobre estafilococos sensíveis, mas não oferece cobertura adequada ao processo polimicrobiano anaeróbio e ao Actinomyces.
+B — Cefalexina não é opção preferencial para actinomicose profunda e crônica.
+D — Levofloxacino apresenta cobertura inadequada para Actinomyces e anaeróbios orais.`
+
+        ,'revalida-2022-1-045': `Resposta correta — B. Confusão, sonolência e papiledema com pressão de 220 × 130 mmHg configuram emergência hipertensiva com encefalopatia. É necessário anti-hipertensivo intravenoso titulável, como nitroprussiato, reduzindo a pressão de forma controlada — aproximadamente 20% a 25% inicialmente, até cerca de 160 × 100–110 mmHg.
+
+Distratores:
+A — Clonidina oral tem início e titulação inadequados para lesão aguda de órgão-alvo, e redução de 50% seria perigosa.
+C — Nitroglicerina é preferida em síndrome coronariana ou edema agudo pulmonar, não como primeira escolha para encefalopatia hipertensiva isolada.
+D — Captopril sublingual produz queda imprevisível e não é recomendado; a meta proposta também é excessiva.`
+
+        ,'revalida-2022-1-047': `Resposta correta — B. Em crise asmática grave, a PaCO₂ deveria estar reduzida pela hiperventilação. Um valor aparentemente normal de 44 mmHg, diante de grande esforço respiratório e hipoxemia persistente, indica fadiga ventilatória e risco de elevação iminente do CO₂, justificando proteção precoce da via aérea.
+
+Distratores:
+A — Hipoxemia isolada pode ser tratada com oxigênio e terapia broncodilatadora; o sinal de maior gravidade é a falha ventilatória sugerida pelo CO₂ não reduzido.
+C — Pneumonia exige antimicrobiano e contribui para a exacerbação, mas não determina por si só intubação.
+D — Sibilância e taquipneia indicam obstrução, porém não são isoladamente critérios suficientes para ventilação invasiva.`
+
+        ,'revalida-2022-1-061': `Resposta correta — B. Tabagismo relevante, sintomas respiratórios crônicos e relação VEF1/CVF pós-broncodilatador de 0,70 sem reversibilidade sustentam diagnóstico de DPOC no critério utilizado pela prova. VEF1 de 80% do previsto informa gravidade funcional, mas não exclui obstrução.
+
+Distratores:
+A — Ausência de reversibilidade favorece DPOC, não asma, embora reversibilidade isolada não diferencie completamente as doenças.
+C — O exame foi tecnicamente adequado e já demonstra obstrução persistente; não há motivo descrito para exigir repetição.
+D — VEF1 preservado ou pouco reduzido pode ocorrer em DPOC leve e não anula a redução da relação VEF1/CVF.`
+
+        ,'revalida-2022-1-069': `Resposta correta — A. Febre prolongada, hepatoesplenomegalia, emagrecimento e pancitopenia em morador de área rural sugerem leishmaniose visceral. A imunofluorescência indireta é método sorológico acessível, e título igual ou superior a 1:80 é considerado reagente no critério cobrado pela prova.
+
+Distratores:
+B — Aspirado esplênico tem alta sensibilidade, mas apresenta maior risco hemorrágico, especialmente com plaquetopenia, e não é o método mais utilizado de rotina.
+C — PCR pode apresentar alta sensibilidade; não é corretamente descrita como inferior de forma geral à visualização direta.
+D — Hipergamaglobulinemia com inversão albumina/globulina apoia o diagnóstico, mas é inespecífica.`
+
+        ,'revalida-2022-1-091': `Resposta correta — B. Sintomas quase diários, despertares noturnos frequentes, limitação e exacerbações apesar de corticoide inalatório caracterizam asma persistente moderada não controlada. Deve-se revisar técnica e adesão e intensificar o controlador para dose moderada, conforme a etapa terapêutica indicada.
+
+Distratores:
+A — Frequência diária e sintomas noturnos afastam asma intermitente.
+C — O quadro excede asma persistente leve e já não responde ao esquema de baixa dose.
+D — Há mau controle, mas os dados não definem asma persistente grave antes de confirmar adesão, técnica e resposta ao tratamento otimizado.`
+
+        ,'revalida-2025-1-014': `Resposta correta — B. Objeto metálico circular com duplo contorno em criança é sugestivo de bateria tipo botão. Trata-se de emergência, pois a corrente elétrica e o conteúdo alcalino podem causar necrose nasal rapidamente; é necessária remoção imediata em centro com suporte otorrinolaringológico, por visualização apropriada.
+
+Distratores:
+A — Encaminhamento ambulatorial atrasa a retirada de um corpo estranho que pode causar dano em poucas horas.
+C — Lavagem ou aspiração pode deslocar a bateria e não assegura remoção controlada.
+D — Rinoscopia eletiva é tardia; a abordagem deve ser imediata.`
+
+        ,'revalida-2025-1-022': `Resposta correta — A. Febre, mastite e ponto de flutuação indicam abscesso mamário lactacional. Deve-se drenar a coleção e manter o esvaziamento da mama; em geral, a amamentação pode continuar em ambas as mamas, inclusive na afetada, se não houver contato da boca com secreção purulenta.
+
+Distratores:
+B — Punção guiada pode ser alternativa em abscessos selecionados, mas não há necessidade de suspender a amamentação na mama afetada como regra.
+C — Abscesso formado exige drenagem; ferver leite não é recomendado nem necessário.
+D — O quadro infeccioso com flutuação não exige mamografia antes da drenagem, e suspensão da lactação favorece estase.`
+
+        ,'revalida-2025-1-061': `Resposta correta — D. Lombalgia há um mês, relacionada a esforço, sem febre, perda ponderal, trauma, déficit neurológico ou Lasègue positivo não apresenta sinais de alarme. Não se indicam exames de imagem inicialmente; deve-se manter atividade e exercício, com analgesia por curto período.
+
+Distratores:
+A — Irradiação isolada, sem déficit ou sinais de alarme, não justifica ressonância imediata.
+B — Radiografia e corticoide sistêmico não são indicados na lombalgia mecânica inespecífica descrita.
+C — Repouso no leito atrasa recuperação, e corticoide sistêmico não é tratamento rotineiro nesse cenário.`
+
+        ,'revalida-2025-1-067': `Resposta correta — B. Aos 14 anos, com caracteres sexuais secundários presentes, ainda pode haver variação fisiológica até a menarca. No critério adotado pela prova, orienta-se aguardar até os 16 anos, acompanhando a progressão puberal e investigando se a menstruação não ocorrer ou se surgirem sinais anormais.
+
+Distratores:
+A — A presença de desenvolvimento mamário e pubiano, sem outros sinais de alarme, não exige investigação imediata no protocolo cobrado.
+C — Teste com progesterona não é exame inicial para uma adolescente ainda dentro do limite etário considerado.
+D — Ultrassonografia e dosagens hormonais ficam reservadas para amenorreia primária estabelecida ou desenvolvimento puberal anormal.`
+
+        ,'revalida-2025-1-078': `Resposta correta — A. A toxoplasmose congênita associa-se classicamente a hidrocefalia, coriorretinite e calcificações intracranianas, podendo também causar hepatoesplenomegalia, icterícia e alterações plaquetárias. A alternativa A é a única que reúne o padrão etiológico pretendido; “plaquetose” no texto importado parece ser falha de transcrição, pois o achado esperado é plaquetopenia.
+
+Distratores:
+B — Rubéola congênita associa-se a catarata, cardiopatia e surdez; rash em “blueberry muffin” pode ocorrer, mas úlceras e alteração liquórica não formam o padrão típico proposto.
+C — Rinite serossanguinolenta e pseudoparalisia de Parrot são manifestações de sífilis congênita, não herpes simples.
+D — Catarata e persistência do canal arterial ou estenose pulmonar são clássicas da rubéola, não do citomegalovírus.`
+
+        ,'revalida-2025-1-079': `Resposta correta — B. Laceração ocular com extravasamento de conteúdo gelatinoso após projétil metálico indica ruptura do globo com saída de vítreo. Deve-se evitar qualquer pressão ou manipulação, proteger com escudo rígido, iniciar antibiótico sistêmico de amplo espectro, verificar profilaxia antitetânica e encaminhar imediatamente à oftalmologia.
+
+Distratores:
+A — Irrigação e reavaliação tardia podem ampliar a extrusão de conteúdo intraocular; trata-se de urgência cirúrgica.
+C — Corticoide tópico não deve ser iniciado, e radiografia é inferior à tomografia para corpo estranho; a proteção isolada não corrige essas falhas.
+D — Curativo oclusivo exerce pressão sobre o globo aberto, e antibiótico tópico é insuficiente para prevenir endoftalmite.`
+
+        ,'revalida-2025-1-094': `Resposta correta — B. Trauma facial grave com obstrução rapidamente progressiva, hipoxemia crítica, bradicardia e impossibilidade previsível de intubação convencional configura cenário “não intuba, não oxigena”. A cricotireoidotomia estabelece acesso cirúrgico imediato à via aérea.
+
+Distratores:
+A — Traqueostomia é mais demorada e tecnicamente complexa, não sendo a primeira via cirúrgica na emergência extrema.
+C — As lesões extensas de face, mandíbula e cavidade oral tornam a intubação orotraqueal difícil e atrasariam oxigenação definitiva.
+D — Intubação nasotraqueal é contraindicada ou inadequada em trauma facial grave e não deve ser tentada em paciente criticamente hipóxico.`
+
+        ,'revalida-2024-1-077': `Resposta esperada:
+a) Examinar hidratação e perfusão/pressão arterial; pesquisar edema e sinais inflamatórios articulares, exantema, sangramentos e sinais neurológicos. Entre os achados relevantes, aceitam-se especialmente artrite ou edema periarticular e sinais de gravidade/desidratação.
+b) Chikungunya, pela febre alta de início agudo associada a poliartralgia intensa e incapacitante e exantema pruriginoso.
+c) Dengue e Zika são os principais diferenciais; também podem ser considerados outras arboviroses, leptospirose e doenças exantemáticas conforme epidemiologia.
+d) Hidratação; repouso relativo; analgesia inicial com paracetamol ou dipirona; evitar ácido acetilsalicílico e anti-inflamatórios até excluir dengue; orientar sinais de alarme e retorno; acompanhar persistência da artralgia e reabilitar quando necessário. Não há antiviral específico.
+e) Notificação do caso conforme fluxo epidemiológico e investigação/controle vetorial no território, incluindo eliminação de criadouros e orientação comunitária.`
+
+        ,'revalida-2024-1-078': `Resposta esperada:
+a) Não. Há apenas 2 cm de dilatação, colo médio e duas contrações curtas em 10 minutos, compatíveis com fase latente/pródromos, sem padrão de fase ativa.
+b) Não há indicação imediata de internação: mãe e feto estão bem, bolsa íntegra, frequência cardíaca fetal tranquilizadora, a gestante mora perto e dispõe de transporte. Pode receber orientação e retornar com evolução ou sinais de alerta.
+c) Três opções: banho morno ou chuveiro; deambulação e mudanças de posição/bola; massagem lombossacra e técnicas de respiração/relaxamento. Apoio contínuo também auxilia.
+d) Retornar diante de perda de líquido sugestiva de rotura das membranas, sangramento vaginal, redução dos movimentos fetais, febre ou contrações regulares, mais intensas e frequentes. Consideram-se os dois primeiros sinais citados pelo candidato.`
+
+        ,'revalida-2024-1-079': `Resposta esperada:
+a) Exacerbação grave de asma, refratária ao tratamento inicial. Sustentam a classificação: taquipneia importante; tiragens intercostal e de fúrcula; saturação de 89% e PaO₂ de 55 mmHg; sibilância difusa persistente; taquicardia; e PaCO₂ que chegou a 40 mmHg, valor inadequadamente normal diante da hiperventilação e sugestivo de fadiga.
+b) Administrar oxigênio para manter saturação adequada; repetir ou manter beta-2 agonista inalatório em doses frequentes/contínuas; repetir ipratrópio nas primeiras horas; manter corticoide sistêmico; administrar sulfato de magnésio intravenoso; monitorizar continuamente e encaminhar para unidade intensiva, preparando suporte ventilatório e intubação se houver exaustão, alteração da consciência ou piora gasométrica.
+c) Cinco fatores possíveis: técnica inalatória inadequada; baixa adesão ou ausência de controlador; exposição a fumaça de tabaco/poluição; alérgenos; infecção viral; uso excessivo de broncodilatador de resgate; comorbidades como rinite, obesidade ou refluxo; exacerbação grave prévia/internação em UTI.`
+
+        ,'revalida-2024-1-080': `Resposta esperada:
+a) A rouquidão iniciada logo após a tireoidectomia sugere lesão do nervo laríngeo recorrente, com paresia ou paralisia de prega vocal; deve ser avaliada por laringoscopia.
+b) As câimbras e parestesias decorrem de hipocalcemia por hipoparatireoidismo pós-operatório. As manobras de Chvostek e Trousseau ajudam a demonstrar hiperexcitabilidade neuromuscular.
+c) O quadro sugere hipoparatireoidismo/hipocalcemia, tratado com reposição de cálcio e vitamina D ativa (calcitriol), com correção intravenosa se sintomática grave. Pele seca, cansaço, alopecia e ganho ponderal também sugerem hipotireoidismo pós-tireoidectomia, confirmado por TSH elevado e T4 livre reduzido e tratado com levotiroxina.
+Observação de integridade: a tabela laboratorial citada no enunciado não foi preservada na extração do PDF. A confirmação dos diagnósticos e da intensidade da reposição depende dos valores de cálcio, fósforo, PTH, TSH e T4 livre do original.`
+
+        ,'revalida-2024-1-081': `Resposta esperada:
+a) Doença de Alzheimer é a causa mais provável: demência insidiosa e progressiva, prejuízo inicial de memória episódica, atrofia hipocampal/cortical posterior e depósito cerebral de beta-amiloide.
+b) A hipertensão arterial sistêmica é a doença crônica não transmissível que aumenta o risco de comprometimento vascular e demência; diabetes também contribui como fator vascular.
+c) Três outras causas possíveis: demência vascular; demência com corpos de Lewy; demência frontotemporal. Também podem ser citadas doença de Parkinson com demência e causas potencialmente reversíveis, conforme justificativa.
+d) Inibidores de acetilcolinesterase como donepezila, rivastigmina ou galantamina e o antagonista NMDA memantina são opções aprovadas; bastam dois nomes adequados.`
+
+        ,'revalida-2023-1-004': `Resposta esperada:
+a) Neoplasia maligna do esôfago distal, mais provavelmente adenocarcinoma, diante de disfagia progressiva para sólidos e depois líquidos, perda ponderal, anemia, DRGE e lesão ulceroinfiltrativa a 34 cm da arcada.
+b) Endoscopia digestiva alta com múltiplas biópsias da lesão para exame anatomopatológico. Após confirmação, o estadiamento inclui tomografia de tórax e abdome, ecoendoscopia e, em situações selecionadas, PET-CT.
+c) Quatro possibilidades conforme estágio e condição clínica: ressecção endoscópica em doença superficial selecionada; esofagectomia com linfadenectomia; quimiorradioterapia neoadjuvante seguida de cirurgia em doença localmente avançada ressecável; quimiorradioterapia definitiva quando cirurgia não é indicada; tratamento sistêmico e medidas paliativas, como prótese esofágica ou suporte nutricional, na doença avançada.`
+
+        ,'revalida-2023-1-010': `Resposta esperada:
+a) Hérnia hiatal por deslizamento, ou tipo I, pois a junção esofagogástrica está acima do pinçamento diafragmático.
+b) Esôfago de Barrett: substituição do epitélio escamoso distal por epitélio colunar com metaplasia intestinal.
+c) Adenocarcinoma de esôfago.
+d) Medidas comportamentais: perder peso; cessar tabagismo; evitar refeições volumosas; não deitar por 2 a 3 horas após comer; elevar a cabeceira; reduzir alimentos e bebidas que individualmente desencadeiam sintomas, incluindo álcool; evitar roupas apertadas e organizar horários alimentares. A medida farmacológica principal é inibidor da bomba de prótons em dose adequada, inicialmente por cerca de oito semanas e depois conforme controle e necessidade de manutenção. O Barrett sem displasia requer seguimento endoscópico, não ablação rotineira.`
+
+        ,'revalida-2023-1-019': `Resposta esperada:
+a) Investigar práticas e exposições sexuais recentes, número e sexo de parceiros, uso de preservativo, data da última relação, tratamentos prévios/uso de antibióticos, sintomas no parceiro, outras IST prévias, disúria/úlceras/dor testicular e alergias medicamentosas. Bastam cinco itens pertinentes.
+b) Neisseria gonorrhoeae e Chlamydia trachomatis.
+c) Na abordagem sindrômica sem laboratório, tratar simultaneamente gonococo e clamídia: ceftriaxona intramuscular em dose única associada a azitromicina oral em dose única, nas doses do protocolo vigente à época, além de manejo das parcerias e abstinência até completar o tratamento.
+d) Na persistência com adesão e sem reexposição, investigar e tratar uretrite por Mycoplasma genitalium; Trichomonas vaginalis também deve ser considerado conforme prevalência e exposição, com tratamento específico.
+e) Conferir hepatite B, HPV e hepatite A quando indicada pelo perfil de risco. Oferecer testes para HIV, sífilis, hepatite B e hepatite C.`
+
+        ,'revalida-2023-1-053': `Resposta esperada:
+a) Vaginose bacteriana.
+b) Três critérios de Amsel: corrimento fino, homogêneo, branco-acinzentado; pH vaginal acima de 4,5; teste das aminas positivo após KOH; presença de clue cells à microscopia. O diagnóstico requer pelo menos três dos quatro.
+c) Gardnerella vaginalis é o microrganismo mais associado, em contexto de disbiose vaginal polimicrobiana com redução de lactobacilos.
+d) Fatores de recorrência incluem múltiplos ou novo parceiro sexual, duchas vaginais, tabagismo, ausência de preservativo e persistência da disbiose. Não é considerada uma IST clássica e o tratamento rotineiro do parceiro masculino não reduz recorrência.`
+
+        ,'revalida-2023-1-065': `Resposta esperada:
+a) Candidíase mamilar/mamária e dermatite irritativa ou maceração por umidade; vasoespasmo mamilar é diferencial para dor em agulhadas, sobretudo se houver mudança de cor.
+b) Na candidíase, ardor, prurido, mamilo eritematoso e brilhante e dor em pontadas persistente após mamadas são favorecidos por umidade constante, fissuras e eventual uso prévio de antibiótico. Corrigir fatores locais e tratar a mãe com antifúngico tópico; avaliar e tratar candidíase oral do lactente simultaneamente quando presente, mantendo amamentação. Na dermatite/maceração, protetores úmidos, leite em contato prolongado, fricção ou produtos irritantes lesionam a barreira; retirar o irritante, manter área seca, trocar protetores com frequência e usar medidas de proteção cutânea compatíveis com amamentação. Se houver palidez/cianose seguida de rubor desencadeada por frio, considerar vasoespasmo, aquecer a mama e avaliar nifedipino nos casos persistentes.
+c) Corrigir pega e posição; manter aleitamento em livre demanda e esvaziamento efetivo; evitar sabonetes, álcool e outros irritantes nos mamilos; lavar as mãos; manter mamilos secos e trocar protetores sempre que molhados; higienizar utensílios que entram em contato com a boca ou a mama; procurar reavaliação se houver febre, área endurecida ou ausência de melhora.`
+
+        ,'revalida-2022-2-001': `Resposta esperada:
+1) O médico deve explicar ao marido que não se interrompe suporte apenas por solicitação familiar antes de definir irreversibilidade e cumprir o protocolo legal. A vontade previamente manifestada pela paciente deve ser considerada, mas é necessário avaliar morte encefálica ou terminalidade, registrar a decisão e discutir proporcionalidade terapêutica com a equipe e a família. Confirmada morte encefálica, a pessoa está legalmente morta e o suporte pode ser suspenso após comunicação e procedimentos previstos, preservando eventual doação de órgãos.
+2) Manter intervenções inúteis e desproporcionais apenas para prolongar o processo de morrer denomina-se distanásia ou obstinação terapêutica. Limitar tratamento fútil e permitir evolução natural, com conforto, é ortotanásia; provocar deliberadamente a morte seria eutanásia e não é permitido.
+3) Iniciar protocolo de determinação de morte encefálica: excluir causas reversíveis/confundidoras, assegurar pré-requisitos clínicos, realizar dois exames clínicos por médicos capacitados, teste de apneia e exame complementar que demonstre ausência de atividade ou perfusão cerebral. A finalidade é comprovar de modo seguro e legal a cessação irreversível das funções encefálicas e possibilitar comunicação familiar e avaliação para doação.
+4) Exames complementares aceitos incluem angiografia cerebral, Doppler transcraniano, eletroencefalograma e cintilografia cerebral; métodos equivalentes validados podem variar conforme a norma vigente.`
+
+        ,'revalida-2022-2-002': `Resposta esperada:
+1) Quatro fatores de risco: idade avançada; história familiar de câncer colorretal ou síndrome hereditária; adenomas prévios; doença inflamatória intestinal de longa duração. Também são pertinentes obesidade, sedentarismo, tabagismo, álcool, dieta rica em carnes processadas/vermelhas e diabetes.
+2) Como a mãe foi diagnosticada aos 50 anos, as filhas são familiares de primeiro grau de paciente com diagnóstico antes dos 60. Devem iniciar colonoscopia aos 40 anos ou dez anos antes da idade do diagnóstico do familiar — o que ocorrer primeiro — e repeti-la em geral a cada cinco anos, ajustando conforme achados e avaliação genética/familiar.`
+
+        ,'revalida-2022-2-003': `Resposta esperada:
+1) Anemia ferropriva, provavelmente importante, associada a deficiência nutricional. Pica por gelo, palidez, taquicardia, cansaço, prematuridade, desmame precoce e vulnerabilidade alimentar reforçam a hipótese.
+2) Hemograma: hemoglobina e hematócrito reduzidos; microcitose com VCM baixo; hipocromia com HCM/CHCM baixas; RDW elevado; reticulócitos baixos ou inadequadamente normais e anisopoquilocitose. Plaquetose reativa pode ocorrer.
+3) Primeiro esgotam-se os estoques: ferritina cai, ainda sem anemia. Depois há deficiência de ferro para eritropoese: ferro sérico e saturação de transferrina diminuem, capacidade total de ligação/transferrina aumenta e protoporfirina eritrocitária sobe. Por fim, caem hemoglobina/hematócrito e surgem microcitose e hipocromia. Ferritina pode ficar falsamente normal ou alta na inflamação.
+4) Três causas pertinentes: baixa ingestão de ferro e alimentação pouco diversificada; prematuridade com menores reservas; interrupção precoce do aleitamento e introdução alimentar inadequada. Também pesquisar perdas digestivas/parasitose, excesso de leite de vaca e má absorção.`
+
+        ,'revalida-2022-2-004': `Resposta esperada:
+1) Parada secundária da dilatação: após progressão inicial na fase ativa, a dilatação permanece inalterada pelo período definido no partograma.
+2) Reavaliar dinâmica uterina, apresentação/posição fetal e possibilidade de desproporção cefalopélvica; oferecer suporte, mobilidade e esvaziamento vesical; realizar amniotomia se bolsa íntegra e não houver contraindicação; corrigir hipodinamia com ocitocina titulada e monitorização materno-fetal. Se houver desproporção, sofrimento fetal ou ausência de progressão apesar de condução adequada, indicar cesariana.
+Observação de integridade: o partograma referido não foi preservado na extração. A confirmação do intervalo sem dilatação e das condições da bolsa/dinâmica exige a imagem original.`
+
+        ,'revalida-2022-2-005': `Resposta esperada:
+1) Realizar rastreamentos compatíveis com idade, sexo e risco, evitando “check-up” indiscriminado. Para colo uterino, citologia dos 25 aos 64 anos; após dois exames anuais normais, repetir a cada três anos. Aferir pressão e avaliar risco cardiovascular; rastrear diabetes e dislipidemia conforme protocolo etário e fatores de risco. Pelo INCA, mamografia populacional bienal começa aos 50 anos, e rastreamento colorretal populacional também depende da faixa e do programa local; aos 45 anos e risco habitual, não se indicam automaticamente exames de imagem ou marcadores tumorais sem recomendação específica.
+2) Explicar benefícios, falsos positivos, sobrediagnóstico, radiação/procedimentos subsequentes e ausência de benefício comprovado do exame pedido. Decidir de forma compartilhada e não solicitar teste sem indicação apenas para tranquilização, mantendo acompanhamento e reavaliando se surgirem sintomas ou risco novo.
+3) Essa proteção contra intervenções desnecessárias caracteriza prevenção quaternária. Os rastreamentos apropriados em assintomáticos são prevenção secundária.`
+
+        ,'revalida-2023-2-001': `Resposta esperada:
+a) Fibrilação atrial, caracterizada por ritmo irregularmente irregular, variação de B1 e ausência de onda “a” jugular; o ECG deve mostrar ausência de ondas P organizadas e intervalos RR irregulares.
+b) Três fatores presentes: idade avançada, hipertensão arterial e diabetes mellitus. Sexo feminino aumenta o risco tromboembólico, embora não seja causa isolada da arritmia.
+c) A queixa principal representa isquemia arterial aguda do membro superior, provavelmente embólica. As quatro condutas prioritárias são: encaminhamento hospitalar/avaliação vascular urgente; anticoagulação imediata com heparina se não houver contraindicação; analgesia e proteção do membro, mantendo-o dependente e aquecido sem compressão; confirmação/localização com Doppler ou angiotomografia sem atrasar revascularização. Diante de déficit sensitivo-motor ou ameaça ao membro, realizar embolectomia/revascularização urgente.`
+
+        ,'revalida-2023-2-002': `Resposta esperada:
+a) Infarto agudo do miocárdio com supradesnivelamento de ST em parede anterosseptal/anterior, com seis horas de evolução.
+b) Sete medidas imediatas: acionar regulação e transferência para serviço com reperfusão; monitorização cardíaca e desfibrilador disponível; obter acesso venoso e colher exames sem atrasar transporte; oferecer oxigênio porque a saturação é 86%; administrar ácido acetilsalicílico mastigável; associar segundo antiagregante, como clopidogrel; iniciar anticoagulação conforme estratégia; usar nitrato se não houver contraindicação e analgesia se dor persistir; definir reperfusão imediata por angioplastia primária ou fibrinólise conforme tempo e disponibilidade. Consideram-se as sete primeiras medidas pertinentes.
+c) Transporte em ambulância de suporte avançado, com monitorização contínua, equipe habilitada e capacidade de tratar arritmias/parada, nunca por meios próprios.`
+
+        ,'revalida-2023-2-021': `Resposta esperada:
+a) Três fatores presentes: idade de 68 anos, tabagismo e diabetes mellitus de início recente; obesidade e etilismo também podem ser discutidos, embora tabagismo e diabetes recente sejam mais característicos.
+b) CA 19-9 auxilia na avaliação prognóstica/carga tumoral e no acompanhamento de resposta ao tratamento ou detecção de recorrência. Não confirma sozinho o diagnóstico e pode elevar-se por colestase.
+c) É o sinal de Courvoisier-Terrier: vesícula palpável, aumentada e indolor associada a icterícia obstrutiva, sugerindo obstrução maligna distal da via biliar.
+d) Condutas clínicas: alívio de prurido/dor, suporte nutricional e tratamento oncológico sistêmico; descompressão biliar endoscópica com prótese quando indicada. Como há invasão duodenal e vascular mesentérica, a lesão parece irressecável. Opções cirúrgicas paliativas incluem derivação biliodigestiva, gastrojejunostomia para prevenir/tratar obstrução duodenal e bloqueio esplâncnico ou procedimentos de suporte; duodenopancreatectomia seria reservada apenas se estadiamento demonstrasse ressecabilidade, o que o caso não sugere.`
+
+        ,'revalida-2023-2-050': `Resposta esperada:
+a) Síndrome dos ovários policísticos.
+b) Três critérios presentes: oligo/anovulação com amenorreia prolongada; hiperandrogenismo clínico com hirsutismo e acne; morfologia ovariana policística/aumento do volume ovariano ao ultrassom. Outras causas relevantes foram excluídas pelos exames apresentados.
+c) Três diferenciais: hiperplasia adrenal congênita não clássica; hiperprolactinemia; disfunção tireoidiana. Também considerar síndrome de Cushing e tumor secretor de androgênio quando evolução for rápida ou houver virilização.
+d) Três complicações: infertilidade anovulatória; resistência insulínica/diabetes tipo 2 e síndrome metabólica; hiperplasia e câncer de endométrio por exposição estrogênica sem oposição. Também há maior risco de dislipidemia, apneia do sono e complicações gestacionais.`
+
+        ,'revalida-2023-2-061': `Resposta esperada:
+a) Crise asmática muito grave, com risco iminente de insuficiência respiratória. Justificam: agitação alternando com sonolência; fala apenas em palavras; frequência respiratória de 60; frequência cardíaca de 156; saturação de 88%–89%; tiragens e batimento de aletas; redução difusa do murmúrio; resposta insuficiente ao salbutamol; antecedente de UTI.
+b) O tratamento não deve esperar exames. Manter oximetria contínua; realizar gasometria por gravidade, alteração de consciência e má resposta, observando retenção de CO₂; radiografia apenas se houver suspeita de pneumonia, pneumotórax, corpo estranho ou evolução atípica. Após estabilização, espirometria e avaliação de controle podem ser programadas, não durante a crise.
+c) Quatro condutas imediatas: oxigênio suplementar para corrigir hipoxemia; salbutamol repetido ou contínuo associado a ipratrópio; corticoide sistêmico precoce; sulfato de magnésio intravenoso. Simultaneamente, monitorizar em ambiente intensivo e preparar ventilação/intubação se houver exaustão, piora da consciência, silêncio auscultatório ou elevação do CO₂.`
+
+        ,'revalida-2022-1-028': `Resposta esperada:
+a) Pielonefrite aguda na gestação. Febre, queda do estado geral, dor lombar e punho-percussão positiva, após cistite recente sem urocultura de controle, sustentam infecção urinária alta.
+b) Internar; colher urina tipo I, urocultura com antibiograma, hemograma, função renal e hemoculturas se houver repercussão sistêmica; iniciar hidratação cautelosa, antitérmico e antibiótico intravenoso seguro na gestação, como ceftriaxona ou cefalosporina equivalente, ajustando à cultura. Monitorizar mãe e feto. Após melhora clínica por 24–48 horas, completar em geral 10–14 dias por via oral e realizar urocultura de controle; considerar profilaxia até o parto em recorrência.
+c) Três complicações: sepse/choque séptico; trabalho de parto e nascimento prematuros; insuficiência respiratória/SDRA. Também podem ocorrer anemia, insuficiência renal, baixo peso e recorrência.`
+
+        ,'revalida-2022-1-042': `Resposta esperada:
+Ações realizadas: identificação repetida da paciente com pulseira e conferência antes do transporte e na chegada ao centro cirúrgico; registro visível da alergia; obtenção de consentimento, embora de modo apressado e sem evidência de processo informativo adequado.
+Ações que deveriam ter ocorrido: consentimento informado com antecedência e oportunidade para dúvidas; demarcação da mama/lado direito com participação da paciente; checagem pré-anestésica de identidade, procedimento, sítio, alergia, equipamentos e risco; “time out” com toda a equipe antes da incisão; confirmação de antibioticoprofilaxia quando indicada; garantia prévia de fios, instrumentais e materiais necessários; comunicação das etapas críticas; contagem de compressas, agulhas e instrumentos; identificação de espécimes e “sign out” antes de sair da sala.
+O protocolo de cirurgia segura da OMS/PNSP deve ser usado nos momentos antes da indução, antes da incisão e antes de a paciente deixar a sala. A falta do fio deveria ter sido detectada antes do início, evitando dano estético prevenível.`
+
+        ,'revalida-2022-1-075': `Resposta esperada:
+a) Hipoglicemia grave com neuroglicopenia. Sudorese, tremor, taquicardia, tontura, confusão e disartria em usuário recente de insulina, após reduzir alimentação e aumentar exercício, são típicos; disfunção renal pode prolongar a ação da insulina.
+b) Glicemia capilar imediata à beira do leito, sem atrasar tratamento se a suspeita for forte. Depois, confirmar glicemia plasmática e avaliar função renal, eletrólitos e fatores precipitantes.
+c) Como está confuso e não pode ingerir com segurança, administrar glicose intravenosa, cerca de 20–25 g, usando solução disponível, e repetir glicemia em 10–15 minutos. Repetir se necessário e manter infusão/alimentação após recuperar consciência. Se não houver acesso venoso, usar glucagon intramuscular ou subcutâneo. Observar por risco de recorrência e rever dose de insulina, dieta, exercício e função renal.`
+
+        ,'revalida-2022-1-082': `Resposta esperada:
+a) Lesão por esforço repetitivo/distúrbio osteomuscular relacionado ao trabalho (LER/DORT), provavelmente síndrome dolorosa de membro superior por sobrecarga. Há relação temporal e coletiva com digitação contínua, jornadas excessivas e ausência de pausas.
+b) Avaliar história ocupacional detalhada, exame musculoesquelético e neurológico, capacidade funcional e diferenciais; solicitar exames apenas quando necessários. Tratar com analgesia, fisioterapia/exercícios graduais e medidas de ergonomia, evitando imobilização prolongada. Orientar pausas, alternância de tarefas, ajuste do posto e redução temporária da sobrecarga; emitir relatório e afastamento se incapacidade. Notificar no Sinan, orientar emissão de CAT quando cabível e articular vigilância em saúde do trabalhador/CEREST para avaliar o ambiente e acompanhar a trabalhadora e o coletivo exposto.
+c) Dois problemas biopsicossociais: sobrecarga física e organização laboral sem pausas; exploração com horas extras não remuneradas e medo de desemprego. Também há adoecimento coletivo, precarização e possível sofrimento psíquico.`
+
+        ,'revalida-2022-1-105': `Resposta esperada:
+a) Glomerulonefrite aguda pós-estreptocócica: síndrome nefrítica com hematúria escura, oligúria, edema e hipertensão cerca de duas semanas após faringite.
+b) Urina com hematúria, hemácias dismórficas/cilindros hemáticos e proteinúria geralmente não nefrótica; creatinina e ureia podem subir; complemento C3 reduzido com normalização em semanas; ASLO ou anti-DNase B elevados; possível hipercalemia e hiponatremia dilucional.
+c) Controlar peso, diurese, pressão, eletrólitos e função renal; restringir sal e, se oligúria/edema, líquidos. Usar furosemida para sobrecarga e anti-hipertensivo se necessário. Tratar infecção estreptocócica ainda presente ou erradicar colonização com penicilina, embora isso não reverta a nefrite. Internar se hipertensão grave, edema pulmonar, hipercalemia ou insuficiência renal.
+d) Em crianças, a evolução não complicada é excelente, com melhora de edema/pressão e diurese em dias, recuperação renal e normalização do C3 em 6–8 semanas; hematúria microscópica pode persistir por meses.`
+
+        ,'revalida-2025-1-101': `Resposta esperada:
+a) Oferecer prevenção combinada: aconselhamento e preservativos/lubrificantes; testagem periódica para HIV, sífilis e hepatites e rastreamento de gonorreia/clamídia conforme práticas; vacinação contra hepatite B e HPV se esquema incompleto; PrEP pelo risco continuado e PEP após exposições elegíveis; redução de danos e abordagem de álcool sem julgamento; orientação e tratamento das parcerias quando houver IST.
+b) Antes da PrEP, confirmar teste de HIV não reagente e excluir infecção aguda ou exposição muito recente que exija PEP; avaliar função renal, sorologias para hepatites B e C, gestação e IST, além de revisar vacinação e interações. Se houver suspeita de infecção aguda pelo HIV, solicitar teste molecular e não iniciar PrEP isolada até esclarecimento.
+c) Excluir gestação e investigar cervicite/infecção atual por gonococo e clamídia e doença inflamatória pélvica. Oferecer exame ginecológico e testes conforme risco. História de múltiplas parcerias sem infecção ativa não contraindica DIU; uma IST identificada deve ser tratada antes ou conforme protocolo de inserção segura.`
+
+        ,'revalida-2025-1-102': `Resposta esperada:
+a) Métodos com estrogênio — pílula combinada, adesivo e anel — são contraindicados por trombose recente, tabagismo após 35 anos e risco cardiovascular. Priorizar método reversível de longa duração sem estrogênio. O DIU com levonorgestrel é boa opção e pode reduzir sangramento associado ao anticoagulante; implante de etonogestrel ou pílula somente de progestagênio também podem ser considerados. DIU de cobre é eficaz, mas pode aumentar sangramento; injetável trimestral exige cautela pelo perfil trombótico/metabólico. Preservativo deve ser associado para IST. Respeitar preferência e elegibilidade individual.
+b) Abordar cessação do tabagismo com apoio farmacológico/comportamental; aconselhar atividade física e alimentação para obesidade; revisar cardiopatia, trombose e anticoagulação com equipe assistente; aferir pressão e rastrear diabetes/dislipidemia; avaliar saúde mental e desejo reprodutivo. Orientar sinais de sangramento e trombose e evitar suspensão autônoma do anticoagulante.`
+
+        ,'revalida-2025-1-103': `Resposta esperada:
+a) Há hipoxemia, com saturação de 91%, mas pH, bicarbonato e PaCO₂ ainda não mostram acidose ou retenção de CO₂. A PaCO₂ baixa/limítrofe é compatível com hiperventilação; a ausência de hipercapnia sugere que ainda não há falência ventilatória, embora o quadro clínico permaneça grave e exija vigilância.
+b) Três medidas: oxigênio suplementar para manter saturação adequada; associar ipratrópio e continuar salbutamol em doses repetidas; administrar corticoide sistêmico precocemente. Pela resposta incompleta, considerar sulfato de magnésio intravenoso e monitorização intensiva.
+c) Não há indicação imediata obrigatória de intubação: a criança está agitada, mas não com coma/exaustão, e não há hipercapnia ou acidose. Deve-se preparar via aérea e intubar se houver rebaixamento progressivo, silêncio respiratório, fadiga, hipoxemia refratária ou elevação de PaCO₂.
+d) Três critérios de internação: persistência de sinais de gravidade após tratamento inicial; necessidade de oxigênio/saturação baixa; resposta incompleta a broncodilatadores. Também pesam exacerbações frequentes, baixa adesão, dificuldade de acesso, antecedente de UTI e complicação infecciosa.`
+
+        ,'revalida-2025-1-104': `Resposta esperada:
+a) Doença hemorroidária interna grau III, pois o prolapso ocorre ao esforço e precisa de redução manual, associada a hematoquezia.
+b) Classificação de Goligher: grau I — sangra sem prolapso; grau II — prolapsa e reduz espontaneamente; grau III — prolapsa e requer redução manual; grau IV — prolapso irredutível. O paciente é grau III.
+c) Três condutas clínicas: aumentar fibras e líquidos; corrigir constipação e evitar esforço/tempo prolongado no vaso; medidas sintomáticas de curto prazo, como banho de assento e analgesia. Orientar atividade e hábitos intestinais; investigar sangramento conforme idade e risco, sem atribuí-lo automaticamente às hemorroidas.
+d) Para grau III sintomático persistente, pode-se realizar ligadura elástica em casos selecionados; doença volumosa, recorrente ou com componente externo importante indica hemorroidectomia, que é a conduta cirúrgica definitiva.`
+
+        ,'revalida-2025-1-105': `Resposta esperada:
+a) Sim. Teste rápido reagente para HBsAg é investigação inicial e deve ser complementado para confirmar e caracterizar a infecção, com anti-HBc e/ou HBV-DNA. HBsAg persistente por seis meses define cronicidade; outros marcadores distinguem fase e replicação.
+b) Sim. Anti-HCV reagente demonstra exposição, não necessariamente infecção ativa. Solicitar HCV-RNA por método molecular para confirmar viremia; não é necessário repetir com outro teste sorológico do mesmo tipo.
+c) Hemograma e plaquetas; AST/ALT, bilirrubinas, fosfatase alcalina/GGT, albumina e INR para lesão e função hepática; creatinina para tratamento; ultrassonografia e elastografia ou índices como APRI/FIB-4 para fibrose/cirrose; HBV-DNA, HBeAg/anti-HBe e anti-HBc para hepatite B; HCV-RNA para hepatite C. Rastrear HIV e hepatite A e avaliar carcinoma hepatocelular quando houver cirrose/indicação.
+d) Evitar álcool e medicamentos/hepatotóxicos sem orientação, encaminhando para avaliação e tratamento. Não compartilhar lâminas, escovas ou material perfurocortante e usar preservativo conforme risco; cobrir feridas. Testar contatos domiciliares e sexuais para hepatites B e C e vacinar os suscetíveis contra hepatite B; não existe vacina contra hepatite C.`
     };
 
     const explanationAliases = {
@@ -5430,13 +7011,27 @@ D — Incorreta. A assistência e vigilância não devem ser transferidas automa
         'obstetricia-inep-002': 'pediatria-inep-002',
         'obstetricia-inep-015': 'ginecologia-inep-016',
         'obstetricia-inep-020': 'prev-inep-092',
-        'obstetricia-inep-025': 'prev-inep-091'
+        'obstetricia-inep-025': 'prev-inep-091',
+        'revalida-2025-2-012': 'ginecologia-inep-016',
+        'revalida-2022-2-019': 'revalida-2023-1-105'
     };
 
     const bank = window.TRYCKTRACK_QUESTION_BANK || [];
     bank.forEach(question => {
         const canonicalId = explanationAliases[question.id] || question.id;
         if (explanations[canonicalId]) question.explanation = explanations[canonicalId];
+    });
+
+    // Questões cujo enunciado faz referência indispensável a imagem que não
+    // foi preservada na extração devem permanecer separadas para conferência.
+    const visualReviewOverrides = new Set(['cm-infectologia-054', 'cm-nefrologia-004', 'cm-pneumologia-004', 'cm-reumatologia-007', 'cm-reumatologia-011', 'revalida-2024-1-080', 'revalida-2022-2-004']);
+    bank.forEach(question => {
+        if (visualReviewOverrides.has(question.id)) question.needsVisualReview = true;
+    });
+
+    const annulledQuestionOverrides = new Set(['revalida-2023-1-098']);
+    bank.forEach(question => {
+        if (annulledQuestionOverrides.has(question.id)) question.annulled = true;
     });
 
     // Reutiliza o comentário nas cópias da mesma questão presentes em
@@ -5464,6 +7059,108 @@ D — Incorreta. A assistência e vigilância não devem ser transferidas automa
         if (!question.explanation) {
             const reused = explanationByFingerprint.get(questionFingerprint(question));
             if (reused) question.explanation = reused;
+        }
+    });
+
+    // As cópias das provas completas sofreram pequenas diferenças de OCR no
+    // enunciado. Reutiliza a explicação somente quando gabarito e alternativas
+    // coincidem letra por letra e a semelhança lexical do enunciado é >= 90%.
+    // Esse limite deliberadamente conservador impede aproximar casos apenas
+    // parecidos e mantém a análise dos distratores ligada às mesmas letras.
+    const optionSignature = question => Object.entries(question.options || {})
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([letter, text]) => `${letter}:${normalizeQuestionText(text)}`)
+        .join('|');
+    const stemTokenSet = question => new Set(
+        normalizeQuestionText(question.stem).split(' ').filter(token => token.length > 2)
+    );
+    const tokenJaccard = (left, right) => {
+        let intersection = 0;
+        left.forEach(token => { if (right.has(token)) intersection += 1; });
+        return intersection / Math.max(1, left.size + right.size - intersection);
+    };
+    const explainedByOptions = new Map();
+    bank.forEach(question => {
+        if (!question.explanation) return;
+        const key = `${question.answer || ''}||${optionSignature(question)}`;
+        const candidates = explainedByOptions.get(key) || [];
+        candidates.push({ question, tokens: stemTokenSet(question) });
+        explainedByOptions.set(key, candidates);
+    });
+    bank.forEach(question => {
+        if (question.explanation) return;
+        const key = `${question.answer || ''}||${optionSignature(question)}`;
+        const candidates = explainedByOptions.get(key) || [];
+        const tokens = stemTokenSet(question);
+        let best = null;
+        candidates.forEach(candidate => {
+            const score = tokenJaccard(tokens, candidate.tokens);
+            if (!best || score > best.score) best = { ...candidate, score };
+        });
+        if (best?.score >= 0.9) {
+            question.explanation = best.question.explanation;
+            if (best.question.needsVisualReview) question.needsVisualReview = true;
+        }
+    });
+
+    // Segunda passagem para alternativas que também contêm pequenos ruídos
+    // de OCR. Exige simultaneamente: mesmo gabarito, mesmas letras, >= 85% no
+    // enunciado, >= 75% em cada alternativa e >= 82% na média delas. A análise
+    // desse intervalo confirmou tratar-se de cópias com trechos adicionais ou
+    // caracteres corrompidos, e não de casos clínicos apenas semelhantes.
+    const optionLetterKey = question => `${question.answer || ''}||${Object.keys(question.options || {}).sort().join('')}`;
+    const fuzzyTextTokenSet = value => new Set(
+        normalizeQuestionText(value).split(' ').filter(token => token.length > 1)
+    );
+    const fuzzySources = new Map();
+    bank.forEach(question => {
+        if (!question.explanation) return;
+        const key = optionLetterKey(question);
+        const candidates = fuzzySources.get(key) || [];
+        candidates.push({
+            question,
+            stemTokens: fuzzyTextTokenSet(question.stem),
+            optionTokens: Object.fromEntries(Object.entries(question.options || {}).map(([letter, text]) => [letter, fuzzyTextTokenSet(text)]))
+        });
+        fuzzySources.set(key, candidates);
+    });
+    bank.forEach(question => {
+        if (question.explanation) return;
+        const candidates = fuzzySources.get(optionLetterKey(question)) || [];
+        const stemTokens = fuzzyTextTokenSet(question.stem);
+        const optionTokens = Object.fromEntries(Object.entries(question.options || {}).map(([letter, text]) => [letter, fuzzyTextTokenSet(text)]));
+        let best = null;
+        candidates.forEach(candidate => {
+            const stemScore = tokenJaccard(stemTokens, candidate.stemTokens);
+            const optionScores = Object.keys(optionTokens).map(letter => tokenJaccard(optionTokens[letter], candidate.optionTokens[letter] || new Set()));
+            const minimumOptionScore = Math.min(...optionScores);
+            const averageOptionScore = optionScores.reduce((sum, score) => sum + score, 0) / Math.max(1, optionScores.length);
+            const combinedScore = (stemScore * 0.7) + (averageOptionScore * 0.3);
+            if (!best || combinedScore > best.combinedScore) best = { candidate, stemScore, minimumOptionScore, averageOptionScore, combinedScore };
+        });
+        if (best && best.stemScore >= 0.85 && best.minimumOptionScore >= 0.75 && best.averageOptionScore >= 0.82) {
+            question.explanation = best.candidate.question.explanation;
+            if (best.candidate.question.needsVisualReview) question.needsVisualReview = true;
+        }
+    });
+
+    // Terceira passagem para provas que acrescentaram um cabeçalho temático
+    // extenso ao enunciado. Aqui as quatro alternativas continuam idênticas,
+    // letra por letra; por isso uma sobreposição lexical de 75% é suficiente
+    // para reconhecer a mesma questão sem confundi-la com caso apenas similar.
+    bank.forEach(question => {
+        if (question.explanation) return;
+        const key = `${question.answer || ''}||${optionSignature(question)}`;
+        const candidates = explainedByOptions.get(key) || [];
+        const tokens = fuzzyTextTokenSet(question.stem);
+        let best = null;
+        candidates.forEach(candidate => {
+            const score = tokenJaccard(tokens, fuzzyTextTokenSet(candidate.question.stem));
+            if (!best || score > best.score) best = { candidate, score };
+        });
+        if (best?.score >= 0.75) {
+            question.explanation = best.candidate.question.explanation;
+            if (best.candidate.question.needsVisualReview) question.needsVisualReview = true;
         }
     });
 
