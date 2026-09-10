@@ -21,6 +21,9 @@
     <script src="questions-revalida.js"></script>
     <script src="question-explanations.js"></script>
     <script src="osce-stations.js"></script>
+    <script src="vendor/pdf-lib.min.js"></script>
+    <script src="vendor/fontkit.umd.min.js"></script>
+    <script src="pdf-export.js"></script>
     <script>
         /* Aplica o tema o mais cedo possível (antes do CSS pintar a
            tela) para não piscar o tema errado por uma fração de
@@ -370,6 +373,9 @@
 
         .greeting-name {
             font-weight: 800;
+            /* o salto de peso (regular -> 800) some com o espaço visual do
+               HTML entre "Olá," e o nome — reforça a separação. */
+            margin-left: 4px;
         }
 
         .greeting-sub {
@@ -760,6 +766,7 @@
         .question-start:active { transform: scale(.97); filter: brightness(1.06); }
         .question-coming { display: none; padding: 11px 14px; border-radius: 14px; background: var(--lavender-dark); color: var(--lavender-active); font-size: 12px; line-height: 1.4; text-align: center; }
         .question-coming.visible { display: block; animation: tabIn .3s var(--ease-out); }
+        .question-coming-action { display: block; margin: 8px auto 0; border: 1px solid rgba(196,181,253,.4); border-radius: 10px; padding: 7px 14px; background: transparent; color: var(--lavender-active); font: 700 12px/1 var(--font-family-base); cursor: pointer; }
 
         /* DASHBOARD */
         #metricasTab { padding: 8px 16px 120px; }
@@ -3397,13 +3404,16 @@
         }
         .question-print-column {
             min-width: 0;
-            overflow: visible;
+            height: 100%;
+            overflow: hidden;
         }
-        .question-print-item {
-            margin: 0 0 5mm;
+        .question-print-frag {
             break-inside: avoid;
             page-break-inside: avoid;
             color: #202027;
+        }
+        .question-print-frag-last {
+            margin-bottom: 5mm;
         }
         .question-print-number {
             margin: 0 0 1.4mm;
@@ -3421,18 +3431,11 @@
             line-height: 1.35;
             white-space: pre-wrap;
         }
-        .question-print-options {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-size: 8.7pt;
-            line-height: 1.3;
-        }
         .question-print-option {
             display: block;
             margin: 0 0 1.1mm;
-            break-inside: avoid;
-            page-break-inside: avoid;
+            font-size: 8.7pt;
+            line-height: 1.3;
         }
         .question-print-option strong {
             display: inline-block;
@@ -5899,7 +5902,13 @@
                     const snap = await getDoc(doc(db, 'users', uid));
                     return snap.exists() ? (snap.data().rrProgress || null) : null;
                 },
-                setProgress: (uid, data) => setDoc(doc(db, 'users', uid), { rrProgress: data }, { merge: true })
+                setProgress: (uid, data) => setDoc(doc(db, 'users', uid), { rrProgress: data }, { merge: true }),
+                getProfilePhoto: async (uid) => {
+                    const snap = await getDoc(doc(db, 'users', uid));
+                    return snap.exists() ? (snap.data().profilePhoto || '') : '';
+                },
+                setProfilePhoto: (uid, dataUrl) => setDoc(doc(db, 'users', uid), { profilePhoto: dataUrl }, { merge: true }),
+                deleteProfilePhoto: (uid) => setDoc(doc(db, 'users', uid), { profilePhoto: '' }, { merge: true })
             };
             ready = true;
         } catch (e) {
@@ -6061,6 +6070,27 @@
                 .catch(e => console.error('Falha ao salvar progresso na nuvem:', e));
         }
 
+        async function syncProfilePhotoFromCloud(uid) {
+            try {
+                const cloudPhoto = await window.__fb.getProfilePhoto(uid);
+                if (cloudPhoto) {
+                    localStorage.setItem(PROFILE_PHOTO_STORAGE_KEY, cloudPhoto);
+                } else {
+                    const local = getStoredProfilePhoto();
+                    if (local) await window.__fb.setProfilePhoto(uid, local);
+                }
+            } catch (e) {
+                console.error('Falha ao sincronizar foto de perfil:', e);
+            }
+            renderCurrentUser();
+        }
+
+        function pushProfilePhotoToCloud(dataUrl) {
+            if (!firebaseReady || !currentFirebaseUser) return;
+            window.__fb.setProfilePhoto(currentFirebaseUser.uid, dataUrl)
+                .catch(e => console.error('Falha ao salvar foto de perfil na nuvem:', e));
+        }
+
         function animateSplashIntoApp() {
             // A marca do splash e a marca do cabeçalho são independentes.
             // Isso evita que a animação atravesse cards ou o conteúdo inicial.
@@ -6158,6 +6188,7 @@
                     currentFirebaseUser = user ? window.__fb.getCurrentUser() : null;
                     if (currentFirebaseUser) {
                         syncProgressFromCloud(currentFirebaseUser.uid);
+                        syncProfilePhotoFromCloud(currentFirebaseUser.uid);
                         authDecision = 'app';
                     } else {
                         authDecision = 'login';
@@ -6273,7 +6304,9 @@
             if (!profileCropState) return;
             const canvas = document.getElementById('profileCropCanvas');
             try {
-                localStorage.setItem(PROFILE_PHOTO_STORAGE_KEY, canvas.toDataURL('image/jpeg', .86));
+                const dataUrl = canvas.toDataURL('image/jpeg', .86);
+                localStorage.setItem(PROFILE_PHOTO_STORAGE_KEY, dataUrl);
+                pushProfilePhotoToCloud(dataUrl);
                 closeProfileCrop();
                 renderCurrentUser();
                 openSidebarPanel('perfil');
@@ -6310,6 +6343,10 @@
 
         function removeProfilePhoto() {
             localStorage.removeItem(PROFILE_PHOTO_STORAGE_KEY);
+            if (firebaseReady && currentFirebaseUser) {
+                window.__fb.deleteProfilePhoto(currentFirebaseUser.uid)
+                    .catch(e => console.error('Falha ao remover foto de perfil na nuvem:', e));
+            }
             renderCurrentUser();
             openSidebarPanel('perfil');
         }
@@ -7330,104 +7367,6 @@
             return chunks.length ? chunks : [''];
         }
 
-        function createRapidPrintPage(root, topic, pageIndex, includeHeader) {
-            const page = document.createElement('section');
-            page.className = `rapid-print-page${includeHeader ? ' has-header' : ''}`;
-            const title = topic.title || topic.area || 'Rapid Review';
-            page.innerHTML = `${includeHeader ? `<header class="rapid-print-header"><img src="logo-clean-v2.png" alt="Trycktrack"><div class="rapid-print-header-copy"><div class="rapid-print-brand">trycktrack</div><div class="rapid-print-title">${escapeQuestionPdfText(title)}</div><p class="rapid-print-subtitle">Material de revisão rápida · ${escapeQuestionPdfText(topic.area || '')}</p></div></header>` : ''}<main class="rapid-print-content"></main><footer class="rapid-print-footer"><span>trycktrack · ${escapeQuestionPdfText(title)}</span><span class="rapid-print-page-number">${pageIndex + 1}</span></footer>`;
-            root.appendChild(page);
-            return page;
-        }
-
-        function rapidPrintNodes(html) {
-            const holder = document.createElement('div');
-            holder.innerHTML = html || '';
-            return [...holder.childNodes].filter(node => node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent.trim()));
-        }
-
-        async function rapidPrintWaitForImages(node) {
-            const images = [...(node.querySelectorAll ? node.querySelectorAll('img') : [])];
-            if (!images.length) return;
-            await Promise.all(images.map(image => image.complete ? Promise.resolve() : new Promise(resolve => {
-                image.addEventListener('load', resolve, { once: true });
-                image.addEventListener('error', resolve, { once: true });
-            })));
-        }
-
-        async function prepareRapidReviewPrint(topic, progress) {
-            document.querySelectorAll('.rapid-print-root, .a4-print-root').forEach(node => node.remove());
-            const root = document.createElement('div');
-            root.className = 'rapid-print-root';
-            root.setAttribute('aria-hidden', 'true');
-            document.body.appendChild(root);
-            await document.fonts?.ready;
-
-            const pages = [];
-            let page = createRapidPrintPage(root, topic, 0, true);
-            pages.push(page);
-            let content = page.querySelector('.rapid-print-content');
-
-            const newPage = () => {
-                page = createRapidPrintPage(root, topic, pages.length, false);
-                pages.push(page);
-                content = page.querySelector('.rapid-print-content');
-            };
-            const fits = node => node.getBoundingClientRect().bottom <= content.getBoundingClientRect().bottom + 0.5;
-
-            for (let sectionIndex = 0; sectionIndex < topic.sections.length; sectionIndex += 1) {
-                const section = topic.sections[sectionIndex];
-                if (sectionIndex > 0) newPage();
-
-                const part = document.createElement('h2');
-                part.className = 'rapid-print-part';
-                part.textContent = section.title || '';
-                content.appendChild(part);
-
-                for (const chapter of section.subchapters || []) {
-                    const heading = document.createElement('h3');
-                    heading.className = 'rapid-print-chapter';
-                    heading.textContent = `${chapter.num || ''} ${chapter.title || ''}`.trim();
-                    const nodes = rapidPrintNodes(chapter.bodyHtml);
-
-                    if (!nodes.length) {
-                        content.appendChild(heading);
-                        if (!fits(heading) && content.children.length > 1) {
-                            heading.remove();
-                            newPage();
-                            content.appendChild(heading);
-                        }
-                        continue;
-                    }
-
-                    const first = nodes.shift();
-                    content.appendChild(heading);
-                    content.appendChild(first);
-                    await rapidPrintWaitForImages(first);
-                    if (!fits(first) && content.children.length > 2) {
-                        first.remove();
-                        heading.remove();
-                        newPage();
-                        content.appendChild(heading);
-                        content.appendChild(first);
-                    }
-
-                    for (const node of nodes) {
-                        content.appendChild(node);
-                        await rapidPrintWaitForImages(node);
-                        if (!fits(node) && content.children.length > 1) {
-                            node.remove();
-                            newPage();
-                            content.appendChild(node);
-                        }
-                    }
-                }
-                setPdfDownloadProgress(progress, ((sectionIndex + 1) / topic.sections.length) * 92, true);
-                await waitForPdfProgressPaint();
-            }
-
-            root.querySelectorAll('.rapid-print-page-number').forEach((node, index) => { node.textContent = `${index + 1} / ${pages.length}`; });
-            return { root, pages };
-        }
 
         async function downloadRapidReviewPdf() {
             const topic = RAPID_REVIEW_DATA[readerState.topicKey];
@@ -7438,17 +7377,18 @@
                 setPdfDownloadProgress(progress, 0, false);
                 return;
             }
-            const { root } = await prepareRapidReviewPrint(topic, progress);
-            setPdfDownloadProgress(progress, 96, true);
-            await waitForPdfProgressPaint();
-            const cleanup = () => {
-                root.remove();
+            try {
+                setPdfDownloadProgress(progress, 40, true);
+                const bytes = await TryckPdf.buildRapidReviewPdf({ topic });
+                setPdfDownloadProgress(progress, 96, true);
+                await waitForPdfProgressPaint();
+                const fileTitle = (topic.title || topic.area || 'rapid-review').replace(/[^\p{L}\p{N}]+/gu, '-');
+                TryckPdf.downloadBytes(bytes, `trycktrack-${fileTitle}.pdf`);
                 setPdfDownloadProgress(progress, 100, false);
-                window.removeEventListener('afterprint', cleanup);
-            };
-            window.addEventListener('afterprint', cleanup, { once: true });
-            setPdfDownloadProgress(progress, 100, true);
-            window.print();
+            } catch (err) {
+                console.error('Falha ao gerar PDF do Rapid Review', err);
+                setPdfDownloadProgress(progress, 0, false);
+            }
         }
 
         function openReader(topicKey) {
@@ -7787,12 +7727,12 @@
                 perfil: {
                     title: 'Perfil',
                     subtitle: 'Seus dados e sua conta',
-                    html: `<div class="sidebar-detail-card"><div class="sidebar-profile"><div class="sidebar-profile-avatar" id="sidebarDetailAvatar">${profilePhotoMarkup}</div><div class="sidebar-profile-copy"><strong>${escapeHtml(displayName)}</strong><span>${escapeHtml(email)}</span></div></div><div class="sidebar-photo-actions"><label class="sidebar-photo-button" for="sidebarPhotoInput">Escolher foto</label><input id="sidebarPhotoInput" type="file" accept="image/*" hidden onchange="handleProfilePhotoChange(this)"><button type="button" class="sidebar-photo-remove" onclick="removeProfilePhoto()">Remover foto</button></div><p class="sidebar-photo-note">A foto é salva neste dispositivo e usada no seu perfil e avatar. Escolha uma imagem quadrada para um melhor resultado.</p></div><div class="sidebar-detail-card"><h3>Dados do perfil</h3><div class="sidebar-setting-row"><div><strong>Nome exibido</strong><br><span>${escapeHtml(displayName)}</span></div></div><div class="sidebar-setting-row" style="margin-top:12px"><div><strong>Email da conta</strong><br><span>${escapeHtml(email)}</span></div></div></div><div class="sidebar-detail-card"><h3>Seu espaço de estudo</h3><p>Seu progresso, preferências e leituras ficam associados a esta conta quando o acesso está conectado.</p><ul><li>Rapid Reviews lidos e último ponto de leitura;</li><li>histórico de sessões e desempenho;</li><li>preferências de tema e tamanho de fonte.</li></ul></div><div class="sidebar-detail-card"><h3>Conta conectada</h3><p>${currentFirebaseUser ? 'Sua conta está conectada e pronta para sincronizar o progresso.' : 'Você está usando o modo local. Ao conectar uma conta, seus dados poderão acompanhar você em outros dispositivos.'}</p></div><div class="sidebar-detail-card"><h3>Privacidade</h3><p>Você pode controlar a foto, as preferências locais e o uso da sua conta. Para solicitar acesso, correção ou exclusão de dados pessoais, utilize o canal de contato do projeto.</p></div>`
+                    html: `<div class="sidebar-detail-card"><div class="sidebar-profile"><div class="sidebar-profile-avatar" id="sidebarDetailAvatar">${profilePhotoMarkup}</div><div class="sidebar-profile-copy"><strong>${escapeHtml(displayName)}</strong><span>${escapeHtml(email)}</span></div></div><div class="sidebar-photo-actions"><label class="sidebar-photo-button" for="sidebarPhotoInput">Escolher foto</label><input id="sidebarPhotoInput" type="file" accept="image/*" hidden onchange="handleProfilePhotoChange(this)"><button type="button" class="sidebar-photo-remove" onclick="removeProfilePhoto()">Remover foto</button></div><p class="sidebar-photo-note">${currentFirebaseUser ? 'A foto fica salva na sua conta e sincroniza entre dispositivos.' : 'A foto é salva neste dispositivo. Conecte uma conta para sincronizá-la entre dispositivos.'} Escolha uma imagem quadrada para um melhor resultado.</p></div><div class="sidebar-detail-card"><h3>Dados do perfil</h3><div class="sidebar-setting-row"><div><strong>Nome exibido</strong><br><span>${escapeHtml(displayName)}</span></div></div><div class="sidebar-setting-row" style="margin-top:12px"><div><strong>Email da conta</strong><br><span>${escapeHtml(email)}</span></div></div></div><div class="sidebar-detail-card"><h3>Seu espaço de estudo</h3><p>Seu progresso, preferências e leituras ficam associados a esta conta quando o acesso está conectado.</p><ul><li>Rapid Reviews lidos e último ponto de leitura;</li><li>histórico de sessões e desempenho;</li><li>preferências de tema e tamanho de fonte.</li></ul></div><div class="sidebar-detail-card"><h3>Conta conectada</h3><p>${currentFirebaseUser ? 'Sua conta está conectada e pronta para sincronizar o progresso.' : 'Você está usando o modo local. Ao conectar uma conta, seus dados poderão acompanhar você em outros dispositivos.'}</p></div><div class="sidebar-detail-card"><h3>Privacidade</h3><p>Você pode controlar a foto, as preferências locais e o uso da sua conta. Para solicitar acesso, correção ou exclusão de dados pessoais, utilize o canal de contato do projeto.</p></div>`
                 },
                 configuracoes: {
                     title: 'Configurações',
                     subtitle: 'Controles do aplicativo',
-                    html: `<div class="sidebar-detail-card"><div class="sidebar-setting-row"><div><strong>Aparência</strong><br><span>Escolha o tema do aplicativo</span></div><span>${escapeHtml(themeName)}</span></div><div class="sidebar-setting-actions"><button type="button" data-theme-panel-mode="system" class="${themeMode === 'system' ? 'active' : ''}" onclick="setThemeMode('system'); openSidebarPanel('configuracoes')">Sistema</button><button type="button" data-theme-panel-mode="on" class="${themeMode === 'on' ? 'active' : ''}" onclick="setThemeMode('on'); openSidebarPanel('configuracoes')">Escura</button><button type="button" data-theme-panel-mode="off" class="${themeMode === 'off' ? 'active' : ''}" onclick="setThemeMode('off'); openSidebarPanel('configuracoes')">Clara</button></div></div><div class="sidebar-detail-card"><h3>Tamanho geral da interface</h3><div class="sidebar-setting-actions"><button type="button" class="${globalFontScale === .9 ? 'active' : ''}" onclick="setGlobalFontScale(.9); openSidebarPanel('configuracoes')">A−</button><button type="button" class="${globalFontScale === 1 ? 'active' : ''}" onclick="setGlobalFontScale(1); openSidebarPanel('configuracoes')">Padrão</button><button type="button" class="${globalFontScale === 1.1 ? 'active' : ''}" onclick="setGlobalFontScale(1.1); openSidebarPanel('configuracoes')">A+</button><button type="button" class="${globalFontScale === 1.2 ? 'active' : ''}" onclick="setGlobalFontScale(1.2); openSidebarPanel('configuracoes')">A++</button></div></div><div class="sidebar-detail-card"><h3>Tamanho do texto</h3><div class="sidebar-setting-actions"><button type="button" onclick="closeSidebarPanel(); openFontSizeSheet()">Rapid Review · Aa</button><button type="button" onclick="closeSidebarPanel(); openQuestionFontSizeSheet()">Questões · Aa</button></div></div>`
+                    html: `<div class="sidebar-detail-card"><div class="sidebar-setting-row"><div><strong>Aparência</strong><br><span>Escolha o tema do aplicativo</span></div><span>${escapeHtml(themeName)}</span></div><div class="sidebar-setting-actions"><button type="button" data-theme-panel-mode="system" class="${themeMode === 'system' ? 'active' : ''}" onclick="setThemeMode('system'); openSidebarPanel('configuracoes')">Sistema</button><button type="button" data-theme-panel-mode="on" class="${themeMode === 'on' ? 'active' : ''}" onclick="setThemeMode('on'); openSidebarPanel('configuracoes')">Escura</button><button type="button" data-theme-panel-mode="off" class="${themeMode === 'off' ? 'active' : ''}" onclick="setThemeMode('off'); openSidebarPanel('configuracoes')">Clara</button></div></div><div class="sidebar-detail-card"><h3>Tamanho do Texto</h3><div class="sidebar-setting-actions"><button type="button" class="${globalFontScale === .9 ? 'active' : ''}" onclick="setGlobalFontScale(.9); openSidebarPanel('configuracoes')">A−</button><button type="button" class="${globalFontScale === 1 ? 'active' : ''}" onclick="setGlobalFontScale(1); openSidebarPanel('configuracoes')">Padrão</button><button type="button" class="${globalFontScale === 1.1 ? 'active' : ''}" onclick="setGlobalFontScale(1.1); openSidebarPanel('configuracoes')">A+</button><button type="button" class="${globalFontScale === 1.2 ? 'active' : ''}" onclick="setGlobalFontScale(1.2); openSidebarPanel('configuracoes')">A++</button></div></div>`
                 },
                 ajuda: {
                     title: 'Ajuda',
@@ -8325,70 +8265,6 @@
             }, { once: true });
         }
 
-        function questionPrintMarkup(question, index, includeAnswer) {
-            const options = Object.entries(question.options || {}).map(([letter, text]) => `<li class="question-print-option"><strong>${escapeQuestionPdfText(letter)})</strong>${escapeQuestionPdfText(text)}</li>`).join('');
-            const answer = includeAnswer && question.answer
-                ? `<div class="a4-question-answer"><strong>Gabarito: ${escapeQuestionPdfText(question.answer)}</strong>${question.explanation ? ` — ${escapeQuestionPdfText(question.explanation)}` : ''}</div>`
-                : '';
-            const body = question.questionType === 'discursive'
-                ? '<div class="a4-discursive-note">Questão discursiva — responda no espaço de sua preferência.</div>'
-                : `<ul class="question-print-options">${options}</ul>`;
-            return `<article class="question-print-item"><div class="question-print-number">Questão ${String(index + 1).padStart(2, '0')} · ${escapeQuestionPdfText(question.source || '')}</div><p class="question-print-stem">${escapeQuestionPdfText(question.stem)}</p>${body}${answer}</article>`;
-        }
-
-        function createQuestionPrintPage(root, title, subtitle, pageIndex, includeHeader) {
-            const page = document.createElement('section');
-            page.className = `question-print-page${includeHeader ? ' has-header' : ''}`;
-            page.innerHTML = `${includeHeader ? `<header class="question-print-header"><img src="logo-clean-v2.png" alt="Trycktrack"><div><div class="question-print-brand">trycktrack</div><div class="question-print-title">${escapeQuestionPdfText(title)}</div><p class="question-print-subtitle">${escapeQuestionPdfText(subtitle)}</p></div></header>` : ''}<div class="question-print-columns"><div class="question-print-column"></div><div class="question-print-column"></div></div><footer class="question-print-footer"><span>trycktrack · ${escapeQuestionPdfText(title)}</span><span class="question-print-footer-page">${pageIndex + 1}</span></footer>`;
-            root.appendChild(page);
-            return page;
-        }
-
-        async function prepareQuestionPrint(questions, title, includeAnswer) {
-            document.querySelectorAll('.question-print-root, .a4-print-root').forEach(node => node.remove());
-            const root = document.createElement('div');
-            root.className = 'question-print-root';
-            root.setAttribute('aria-hidden', 'true');
-            document.body.appendChild(root);
-            await document.fonts?.ready;
-
-            const pages = [];
-            let page = createQuestionPrintPage(root, title, includeAnswer ? 'Lista de questões com gabarito e comentários.' : 'Caderno de prova — responda antes de consultar o resultado.', 0, true);
-            pages.push(page);
-            let columnIndex = 0;
-            let column = page.querySelectorAll('.question-print-column')[columnIndex];
-
-            for (let index = 0; index < questions.length; index += 1) {
-                const candidate = document.createElement('div');
-                candidate.innerHTML = questionPrintMarkup(questions[index], index, includeAnswer);
-                const item = candidate.firstElementChild;
-                column.appendChild(item);
-                const columnBottom = column.getBoundingClientRect().bottom;
-                const itemBottom = item.getBoundingClientRect().bottom;
-                const fits = itemBottom <= columnBottom + 0.5;
-                if (!fits && column.childElementCount > 1) {
-                    column.removeChild(item);
-                    if (columnIndex === 0) {
-                        columnIndex = 1;
-                        column = page.querySelectorAll('.question-print-column')[columnIndex];
-                        column.appendChild(item);
-                    } else {
-                        page = createQuestionPrintPage(root, title, '', pages.length, false);
-                        pages.push(page);
-                        columnIndex = 0;
-                        column = page.querySelectorAll('.question-print-column')[columnIndex];
-                        column.appendChild(item);
-                    }
-                }
-                if (item.querySelectorAll('img').length) {
-                    await Promise.all([...item.querySelectorAll('img')].map(image => image.complete ? Promise.resolve() : new Promise(resolve => { image.addEventListener('load', resolve, { once: true }); image.addEventListener('error', resolve, { once: true }); })));
-                }
-                if (index % 10 === 0) await waitForPdfProgressPaint();
-            }
-
-            root.querySelectorAll('.question-print-footer-page').forEach((node, index) => { node.textContent = `${index + 1} / ${pages.length}`; });
-            return { root, pages };
-        }
 
         async function downloadConfiguredQuestionPdf() {
             const mode = activeQuestionConfigMode;
@@ -8404,17 +8280,35 @@
             /* A prova impressa nunca leva gabarito, explicações ou comentários. */
             const includeAnswer = false;
             const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : 'Guiado';
-            const { root, pages } = await prepareQuestionPrint(questions, title, includeAnswer);
-            setPdfDownloadProgress(progress, 96, true);
-            await waitForPdfProgressPaint();
-            const cleanup = () => {
-                root.remove();
+            try {
+                setPdfDownloadProgress(progress, 40, true);
+                const bytes = await TryckPdf.buildQuestionsPdf({ questions, title, includeAnswer });
+                setPdfDownloadProgress(progress, 96, true);
+                await waitForPdfProgressPaint();
+                const fileTitle = title.replace(/[^\p{L}\p{N}]+/gu, '-');
+                TryckPdf.downloadBytes(bytes, `trycktrack-${fileTitle}.pdf`);
                 setPdfDownloadProgress(progress, 100, false);
-                window.removeEventListener('afterprint', cleanup);
-            };
-            window.addEventListener('afterprint', cleanup, { once: true });
-            setPdfDownloadProgress(progress, 100, true);
-            window.print();
+            } catch (err) {
+                console.error('Falha ao gerar PDF de questões', err);
+                setPdfDownloadProgress(progress, 0, false);
+                revealQuestionNotice('Não foi possível gerar o PDF. Tente novamente.');
+            }
+        }
+
+        async function downloadQuestionSessionResultPdf(session) {
+            if (!session || !session.questions?.length) return;
+            revealQuestionNotice('Gerando PDF...');
+            try {
+                const title = session.mode === 'exam' ? 'Simulado' : 'Guiado';
+                const bytes = await TryckPdf.buildQuestionsResultPdf({
+                    questions: session.questions, answers: session.answers, mode: session.mode, title,
+                });
+                const fileTitle = title.replace(/[^\p{L}\p{N}]+/gu, '-');
+                TryckPdf.downloadBytes(bytes, `trycktrack-resultado-${fileTitle}.pdf`);
+            } catch (err) {
+                console.error('Falha ao gerar PDF do resultado', err);
+                revealQuestionNotice('Não foi possível gerar o PDF do resultado. Tente novamente.');
+            }
         }
 
         function openQuestionConfig(mode) {
@@ -8711,16 +8605,25 @@
             button.classList.add('active');
         }
 
-        function revealQuestionNotice(message) {
+        function revealQuestionNotice(message, action) {
             const notice = document.getElementById('questionComing');
             if (!notice) return;
             notice.textContent = message;
+            if (action) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'question-coming-action';
+                btn.textContent = action.label;
+                btn.onclick = action.onClick;
+                notice.appendChild(btn);
+            }
             notice.classList.remove('visible');
             void notice.offsetWidth;
             notice.classList.add('visible');
         }
 
         let activeQuestionSession = null;
+        let lastCompletedQuestionSession = null;
 
         async function startOsceSession() {
             const stationId = document.getElementById('questionConfigStation')?.value;
@@ -9132,8 +9035,12 @@
             if (session.trailDiagnostic) completeTrailDiagnostic(session.trailDiagnostic, session);
             if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
+            lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
             closeQuestionPlayer();
-            revealQuestionNotice(`Sessão concluída: ${correct} de ${session.questions.length} acertos.`);
+            revealQuestionNotice(`Sessão concluída: ${correct} de ${session.questions.length} acertos.`, {
+                label: 'Baixar resultado em PDF',
+                onClick: () => downloadQuestionSessionResultPdf(lastCompletedQuestionSession),
+            });
             updateQuestionHubStats();
         }
 
