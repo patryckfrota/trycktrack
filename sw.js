@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trycktrack-v4';
+const CACHE_NAME = 'trycktrack-v5';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
@@ -20,7 +20,14 @@ const APP_SHELL = [
   './question-explanations.js',
   './osce-stations.js',
   './assets/logo-enamed-sigla.png',
-  './assets/logo-uepa-sigla.png'
+  './assets/logo-uepa-sigla.png',
+  './pdf-export.js',
+  './vendor/pdf-lib.min.js',
+  './vendor/fontkit.umd.min.js',
+  './vendor/fonts/Inter-Regular.ttf',
+  './vendor/fonts/Inter-Medium.ttf',
+  './vendor/fonts/Inter-SemiBold.ttf',
+  './vendor/fonts/Inter-Bold.ttf'
 ];
 
 self.addEventListener('install', event => {
