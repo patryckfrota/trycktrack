@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trycktrack-v5';
+const CACHE_NAME = 'trycktrack-v6';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
@@ -31,8 +31,11 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install', event => {
+  // Sem skipWaiting() aqui: um service worker novo instala e fica
+  // "esperando" até o app pedir pra assumir (mensagem SKIP_WAITING, vinda
+  // do botão "Atualizar agora"). Isso é o que permite mostrar o aviso
+  // dentro do app em vez de trocar a versão em uso sem avisar ninguém.
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -41,6 +44,13 @@ self.addEventListener('activate', event => {
       keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
     )).then(() => self.clients.claim())
   );
+});
+
+// O botão "Atualizar agora" do app manda essa mensagem para o worker que
+// está esperando — só então ele assume (skipWaiting) e dispara o
+// 'controllerchange' que o app usa pra recarregar a página já na versão nova.
+self.addEventListener('message', event => {
+  if (event.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', event => {
