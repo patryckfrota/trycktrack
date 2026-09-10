@@ -1,4 +1,4 @@
-const CACHE_NAME = 'trycktrack-v2';
+const CACHE_NAME = 'trycktrack-v4';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
@@ -18,6 +18,7 @@ const APP_SHELL = [
   './questions-clinica-medica.js',
   './questions-revalida.js',
   './question-explanations.js',
+  './osce-stations.js',
   './assets/logo-enamed-sigla.png',
   './assets/logo-uepa-sigla.png'
 ];
