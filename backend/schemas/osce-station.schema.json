@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trycktrack.app/schemas/osce-station-1.0.0.json",
+  "title": "Trycktrack OSCE Station",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "metadata", "scenario", "doorInstructions", "patientScript", "physicalExam", "complementaryTests", "evolution", "tasks", "finalAnswer"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "externalId": { "type": "string", "minLength": 1 },
+    "metadata": {
+      "type": "object", "additionalProperties": false,
+      "required": ["areaSlug", "themeCode", "subthemeSlug", "format", "title", "estimatedMinutes"],
+      "properties": {
+        "areaSlug": { "type": "string" }, "themeCode": { "enum": ["A", "B"] }, "subthemeSlug": { "type": "string" },
+        "format": { "enum": ["ANAMNESE_FOCADA", "EXAME_FISICO", "RACIOCINIO_DIAGNOSTICO", "CONDUTA", "PROCEDIMENTO", "COMUNICACAO", "URGENCIA_EMERGENCIA", "ESTACAO_COMPLETA"] },
+        "title": { "type": "string" }, "version": { "type": "integer", "minimum": 1 }, "difficulty": { "type": "string" }, "estimatedMinutes": { "type": "integer", "minimum": 1, "maximum": 60 }
+      }
+    },
+    "scenario": { "type": "object", "required": ["environment"], "properties": { "environment": { "type": "string" }, "materials": { "type": "array", "items": { "type": "string" } } } },
+    "doorInstructions": { "type": "object", "required": ["chiefComplaint"], "properties": { "patientName": { "type": "string" }, "age": {}, "chiefComplaint": { "type": "string" }, "triageData": { "type": "object" } } },
+    "patientScript": { "type": "object", "required": ["profile", "openingStatement", "responses"], "properties": { "profile": { "type": "object" }, "openingStatement": { "type": "string" }, "responses": { "type": "array", "items": { "type": "object", "required": ["trigger", "response"], "properties": { "trigger": { "type": "string" }, "response": { "type": "string" }, "releaseRule": { "type": "string" } } } }, "hiddenInformation": { "type": "array", "items": { "type": "string" } } } },
+    "physicalExam": { "type": "array", "items": { "type": "object", "required": ["system", "request", "findings"], "properties": { "system": { "type": "string" }, "request": { "type": "string" }, "findings": { "type": "array", "items": { "type": "string" } } } } },
+    "complementaryTests": { "type": "array", "items": { "type": "object", "required": ["id", "name", "releaseRule", "result"], "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "releaseRule": { "type": "string" }, "result": { "type": "string" } } } },
+    "evolution": { "type": "array", "items": { "type": "object", "required": ["trigger", "change"], "properties": { "trigger": { "type": "string" }, "change": { "type": "string" } } } },
+    "tasks": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/task" } },
+    "finalAnswer": { "type": "object", "required": ["expectedDiagnosis", "expectedManagement", "explanation"], "properties": { "expectedDiagnosis": { "type": "string" }, "expectedManagement": { "type": "array", "items": { "type": "string" } }, "criticalErrors": { "type": "array", "items": { "type": "string" } }, "explanation": { "type": "string" } } }
+  },
+  "$defs": {
+    "task": { "type": "object", "additionalProperties": false, "required": ["id", "title", "candidateInstructions", "checklist", "answerKey"], "properties": { "id": { "type": "string" }, "title": { "type": "string" }, "candidateInstructions": { "type": "string" }, "answerKey": { "type": "string" }, "checklist": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["id", "axis", "description", "points"], "properties": { "id": { "type": "string" }, "axis": { "enum": ["COMMUNICATION", "HISTORY", "PHYSICAL_EXAM", "DIAGNOSTIC_REASONING", "MANAGEMENT"] }, "description": { "type": "string" }, "points": { "type": "number", "exclusiveMinimum": 0 }, "critical": { "type": "boolean" } } } } } }
+  }
+}

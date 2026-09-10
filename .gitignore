@@ -2,6 +2,9 @@
 .auto-push.log
 .auto-push-stdout.log
 .auto-push-stderr.log
+.env
+.env.*
+!.env.example
 
 # Scaffold gerado pelo Firebase CLI (Hosting) — não usamos, o app
 # continua publicado via GitHub Pages.
