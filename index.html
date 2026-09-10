@@ -3280,6 +3280,34 @@
         .feedback-modal-submit { border: 0; background: var(--lavender-active); color: #19171f; }
         .feedback-modal-status { margin-top: 12px; font-size: 11.5px; color: var(--lavender-active); min-height: 14px; }
 
+        /* ---------- aviso discreto de atualização do PWA ---------- */
+        .update-banner {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            z-index: 10040;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: max(14px, calc(env(safe-area-inset-top, 0px) + 8px));
+            padding: 9px 9px 9px 15px;
+            max-width: min(360px, calc(100% - 32px));
+            border-radius: 100px;
+            border: 1px solid var(--glass-card-border-strong);
+            background: var(--sidebar-bg);
+            box-shadow: 0 14px 34px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.12);
+            color: var(--text-main);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -14px);
+            transition: opacity .25s var(--ease), transform .25s var(--ease);
+        }
+        .update-banner.visible { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+        .update-banner-dot { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: var(--lavender-active); box-shadow: 0 0 0 4px rgba(196,181,253,.18); }
+        .update-banner-text { font-size: 12px; font-weight: 650; white-space: nowrap; }
+        .update-banner-btn { flex: 0 0 auto; border: 0; padding: 8px 14px; border-radius: 100px; background: var(--lavender-active); color: #19171f; font: 750 11.5px/1 var(--font-family-base); cursor: pointer; }
+        .update-banner-btn:active { transform: scale(.95); }
+
         .profile-crop-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
         .profile-crop-header h3 { font-size: 17px; }
         .profile-crop-header p { margin-top: 4px; color: var(--text-secondary); font-size: 11px; line-height: 1.35; }
@@ -5952,6 +5980,12 @@
         </header>
         <div class="sidebar-detail-body" id="sidebarDetailBody"></div>
     </section>
+
+    <div class="update-banner" id="updateBanner" role="status" aria-live="polite">
+        <span class="update-banner-dot" aria-hidden="true"></span>
+        <span class="update-banner-text">Nova versão disponível</span>
+        <button type="button" class="update-banner-btn" id="updateBannerBtn">Atualizar agora</button>
+    </div>
 
     <div class="onboarding-overlay" id="onboardingOverlay" hidden>
         <div class="onboarding-card" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
@@ -9713,12 +9747,81 @@
                 });
             }
 
+            /* ============================================================
+               ATUALIZAÇÃO AUTOMÁTICA DO PWA
+               ------------------------------------------------------------
+               O usuário instala o app uma vez ("Adicionar à tela de
+               início") e, a partir daí, toda nova versão é baixada sozinha
+               em segundo plano. O service worker novo fica "esperando"
+               (sw.js não chama skipWaiting no install) até o usuário tocar
+               em "Atualizar agora" — só aí ele assume e a página recarrega
+               já na versão nova. Funciona igual em iOS e Android: é tudo
+               API padrão de Service Worker, nada específico de plataforma.
+               ============================================================ */
+            let pendingUpdateWorker = null;
+
+            function showUpdateBanner(worker) {
+                pendingUpdateWorker = worker;
+                document.getElementById('updateBanner')?.classList.add('visible');
+            }
+
+            function applyPendingUpdate() {
+                if (!pendingUpdateWorker) return;
+                document.getElementById('updateBanner')?.classList.remove('visible');
+                pendingUpdateWorker.postMessage('SKIP_WAITING');
+            }
+
+            // Botão preso via addEventListener (não onclick inline) porque
+            // esta função vive dentro da IIFE do PWA, fora do escopo global
+            // que os atributos onclick="" do HTML enxergam.
+            document.getElementById('updateBannerBtn')?.addEventListener('click', applyPendingUpdate);
+
             function registerServiceWorker() {
                 if (!('serviceWorker' in navigator)) return;
                 // Service Workers exigem HTTPS (ou localhost durante desenvolvimento).
                 if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+
                 navigator.serviceWorker.register('./sw.js', { scope: './' })
+                    .then(registration => {
+                        // Um SW novo pode já estar "esperando" de uma checagem
+                        // anterior (ex.: a aba ficou aberta) — mostra o aviso na hora.
+                        if (registration.waiting && navigator.serviceWorker.controller) {
+                            showUpdateBanner(registration.waiting);
+                        }
+
+                        // Dispara sempre que um SW novo termina de baixar/instalar.
+                        registration.addEventListener('updatefound', () => {
+                            const installing = registration.installing;
+                            if (!installing) return;
+                            installing.addEventListener('statechange', () => {
+                                // "installed" + já existe um controller ativo = é uma
+                                // ATUALIZAÇÃO (a primeira instalação não tem controller ainda).
+                                if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showUpdateBanner(installing);
+                                }
+                            });
+                        });
+
+                        // "Ao abrir o app, verifique se há uma nova versão": os
+                        // navegadores já checam sozinhos, mas com um intervalo
+                        // próprio — força a checagem imediata aqui, e de novo
+                        // sempre que o app volta ao primeiro plano.
+                        registration.update().catch(() => {});
+                        document.addEventListener('visibilitychange', () => {
+                            if (document.visibilityState === 'visible') registration.update().catch(() => {});
+                        });
+                    })
                     .catch(error => console.warn('Não foi possível registrar o modo offline:', error));
+
+                // Assim que o novo worker assume (depois do SKIP_WAITING), a
+                // página já tem um "dono" novo no meio do caminho — recarrega
+                // para garantir que todo o JS em memória também é o da versão nova.
+                let refreshingAfterUpdate = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (refreshingAfterUpdate) return;
+                    refreshingAfterUpdate = true;
+                    window.location.reload();
+                });
             }
 
             persistUrlParameters();
