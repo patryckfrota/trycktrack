@@ -811,6 +811,15 @@
         .dashboard-area-track { height: 5px; border-radius: 6px; overflow: hidden; background: var(--bg-tertiary); }
         .dashboard-area-fill { height: 100%; width: 0; border-radius: inherit; background: var(--lavender-active); transition: width .65s var(--ease-out); }
         .dashboard-empty { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px dashed var(--border-color); border-radius: 17px; color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
+        .dashboard-history-list { display: flex; flex-direction: column; gap: 8px; }
+        .dashboard-history-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 13px 14px; border: 1px solid var(--border-color); border-radius: 15px; background: var(--bg-secondary); cursor: pointer; text-align: left; font-family: var(--font-family-base); transition: transform .16s ease, border-color .16s ease; }
+        .dashboard-history-item:active { transform: scale(.985); }
+        .dashboard-history-item-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .dashboard-history-item-main strong { font-size: 12.5px; color: var(--text-main); font-weight: 700; }
+        .dashboard-history-item-main span { font-size: 10.5px; color: var(--text-secondary); }
+        .dashboard-history-item-score { flex: 0 0 auto; padding: 6px 11px; border-radius: 100px; font-size: 12px; font-weight: 800; }
+        .dashboard-history-item-score.good { background: rgba(52,199,89,.15); color: #34c759; }
+        .dashboard-history-item-score.bad { background: rgba(255,90,82,.15); color: #ff5a52; }
         .dashboard-empty-icon { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; background: var(--lavender-dark); color: var(--lavender-active); }
         .dashboard-empty-icon svg { width: 18px; height: 18px; }
 
@@ -5747,7 +5756,7 @@
 
     <section class="question-player" id="questionPlayer" hidden>
         <header class="question-player-header">
-            <button class="question-player-back" onclick="closeQuestionPlayer()" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button class="question-player-back" onclick="handleQuestionPlayerBack()" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button>
             <div class="question-player-heading"><strong id="questionPlayerMode">Guiado</strong><span id="questionPlayerArea">Cirurgia Geral</span></div>
             <button class="question-fontsize-btn" id="questionFontsizeBtn" onclick="openQuestionFontSizeSheet()" aria-label="Alterar tamanho do texto">Aa</button>
             <button class="question-results-back" id="questionResultsBackBtn" onclick="showQuestionResults()" aria-label="Voltar para o desempenho" title="Voltar para o desempenho" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
@@ -5968,7 +5977,12 @@
                     return snap.exists() ? (snap.data().profilePhoto || '') : '';
                 },
                 setProfilePhoto: (uid, dataUrl) => setDoc(doc(db, 'users', uid), { profilePhoto: dataUrl }, { merge: true }),
-                deleteProfilePhoto: (uid) => setDoc(doc(db, 'users', uid), { profilePhoto: '' }, { merge: true })
+                deleteProfilePhoto: (uid) => setDoc(doc(db, 'users', uid), { profilePhoto: '' }, { merge: true }),
+                getQuestionHistory: async (uid) => {
+                    const snap = await getDoc(doc(db, 'users', uid));
+                    return snap.exists() ? (snap.data().questionHistory || null) : null;
+                },
+                setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true })
             };
             ready = true;
         } catch (e) {
@@ -6126,8 +6140,14 @@
 
         function pushProgressToCloud(data) {
             if (!firebaseReady || !currentFirebaseUser) return;
-            window.__fb.setProgress(currentFirebaseUser.uid, data)
-                .catch(e => console.error('Falha ao salvar progresso na nuvem:', e));
+            // setDoc() do Firestore pode lançar de forma SÍNCRONA (antes de
+            // devolver uma Promise) se algum campo vier "undefined" — sem
+            // o try/catch aqui, isso quebraria quem chamou esta função no
+            // meio da execução, antes de terminar o que estava fazendo.
+            try {
+                window.__fb.setProgress(currentFirebaseUser.uid, data)
+                    .catch(e => console.error('Falha ao salvar progresso na nuvem:', e));
+            } catch (e) { console.error('Falha ao salvar progresso na nuvem:', e); }
         }
 
         async function syncProfilePhotoFromCloud(uid) {
@@ -6147,8 +6167,100 @@
 
         function pushProfilePhotoToCloud(dataUrl) {
             if (!firebaseReady || !currentFirebaseUser) return;
-            window.__fb.setProfilePhoto(currentFirebaseUser.uid, dataUrl)
-                .catch(e => console.error('Falha ao salvar foto de perfil na nuvem:', e));
+            try {
+                window.__fb.setProfilePhoto(currentFirebaseUser.uid, dataUrl)
+                    .catch(e => console.error('Falha ao salvar foto de perfil na nuvem:', e));
+            } catch (e) { console.error('Falha ao salvar foto de perfil na nuvem:', e); }
+        }
+
+        /* ============================================================
+           HISTÓRICO DE SESSÕES DE QUESTÕES — guarda um retrato leve de
+           cada sessão concluída (Guiado/Simulado/Imersão) com data/hora de
+           início, para poder reabrir e revisar acertos/erros depois, na
+           aba Dashboard. Sincroniza com a conta do mesmo jeito que a foto
+           de perfil e o progresso do Rapid Review.
+           ============================================================ */
+        const QUESTION_HISTORY_KEY = 'trycktrack-question-history-v1';
+        const QUESTION_HISTORY_MAX = 30; // limite para não inchar o localStorage/Firestore
+
+        function getQuestionHistory() {
+            try { return JSON.parse(localStorage.getItem(QUESTION_HISTORY_KEY) || '[]'); }
+            catch (_) { return []; }
+        }
+
+        function saveQuestionHistory(list) {
+            try { localStorage.setItem(QUESTION_HISTORY_KEY, JSON.stringify(list)); }
+            catch (_) { /* armazenamento indisponível/cheio — segue sem persistir */ }
+        }
+
+        function buildQuestionHistoryEntry(session, correctCount) {
+            const areas = [...new Set(session.questions.map(q => q.area).filter(Boolean))];
+            return {
+                id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+                mode: session.mode,
+                startedAt: session.startedAt || new Date().toISOString(),
+                finishedAt: new Date().toISOString(),
+                correct: correctCount,
+                total: session.questions.length,
+                area: areas.length === 1 ? areas[0] : (areas.length ? 'Áreas mistas' : ''),
+                // retrato leve: só os campos usados na grade de bolhas e na
+                // revisão, não o objeto inteiro da questão. O Firestore
+                // rejeita "undefined" (falha síncrona!), então tudo aqui
+                // recebe um valor padrão explícito.
+                questions: session.questions.map(q => ({
+                    number: q.number ?? null, area: q.area ?? '', source: q.source ?? '', stem: q.stem ?? '',
+                    options: q.options ?? {}, answer: q.answer ?? null, explanation: q.explanation ?? '',
+                    questionType: q.questionType ?? null, annulled: !!q.annulled, needsVisualReview: !!q.needsVisualReview,
+                })),
+                answers: session.answers.map(a => a ?? null),
+            };
+        }
+
+        function appendQuestionHistory(entry) {
+            const list = [entry, ...getQuestionHistory()].slice(0, QUESTION_HISTORY_MAX);
+            saveQuestionHistory(list);
+            pushQuestionHistoryToCloud(list);
+            return list;
+        }
+
+        function pushQuestionHistoryToCloud(list) {
+            if (!firebaseReady || !currentFirebaseUser) return;
+            try {
+                window.__fb.setQuestionHistory(currentFirebaseUser.uid, list)
+                    .catch(e => console.error('Falha ao salvar histórico de questões na nuvem:', e));
+            } catch (e) { console.error('Falha ao salvar histórico de questões na nuvem:', e); }
+        }
+
+        async function syncQuestionHistoryFromCloud(uid) {
+            try {
+                const cloud = await window.__fb.getQuestionHistory(uid);
+                if (cloud && cloud.length) {
+                    saveQuestionHistory(cloud);
+                } else {
+                    const local = getQuestionHistory();
+                    if (local.length) await window.__fb.setQuestionHistory(uid, local);
+                }
+            } catch (e) {
+                console.error('Falha ao sincronizar histórico de questões:', e);
+            }
+            renderDashboard();
+        }
+
+        function openQuestionHistoryEntry(id) {
+            const entry = getQuestionHistory().find(item => item.id === id);
+            if (!entry) return;
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            showQuestionResults(entry);
+        }
+
+        function formatQuestionHistoryDate(iso) {
+            try {
+                const date = new Date(iso);
+                const dateLabel = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                const timeLabel = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                return `${dateLabel} · ${timeLabel}`;
+            } catch (_) { return ''; }
         }
 
         function animateSplashIntoApp() {
@@ -6249,6 +6361,7 @@
                     if (currentFirebaseUser) {
                         syncProgressFromCloud(currentFirebaseUser.uid);
                         syncProfilePhotoFromCloud(currentFirebaseUser.uid);
+                        syncQuestionHistoryFromCloud(currentFirebaseUser.uid);
                         authDecision = 'app';
                     } else {
                         authDecision = 'login';
@@ -8042,7 +8155,7 @@
             const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o diagnóstico.'); return; }
-            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailDiagnostic: trailId };
+            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailDiagnostic: trailId, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -8052,7 +8165,7 @@
             const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o simulado.'); return; }
-            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailRecalibration: trailId };
+            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailRecalibration: trailId, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -8074,7 +8187,7 @@
             }
             const questions = trailQuestionsForArea(phase.area, 10);
             if (!questions.length) { revealQuestionNotice(`Ainda não há questões importadas de ${phase.area}.`); return; }
-            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailPhase: { trailId, phaseId } };
+            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailPhase: { trailId, phaseId }, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -8221,10 +8334,25 @@
                 return `<div class="dashboard-area"><div class="dashboard-area-top"><span class="dashboard-area-name">${name}</span><span class="dashboard-area-value">${areaAnswered ? `${value}% · ${areaAnswered} questões` : 'Sem respostas'}</span></div><div class="dashboard-area-track"><div class="dashboard-area-fill" style="width:${value}%"></div></div></div>`;
             }).join('');
 
-            const rrData = getProgressData();
-            const readThemes = Object.values(rrData).reduce((sum, topic) => sum + (Array.isArray(topic.readChapters) ? topic.readChapters.length : 0), 0);
+            const history = getQuestionHistory();
             const recent = document.getElementById('dashboardRecent');
-            recent.querySelector('span').textContent = answered || readThemes ? `${answered} questões respondidas e ${readThemes} temas revisados até agora.` : 'Sua primeira sessão aparecerá aqui.';
+            if (!history.length) {
+                recent.className = 'dashboard-empty';
+                recent.innerHTML = '<div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 8h8M8 12h5"/></svg></div><span>Sua primeira sessão aparecerá aqui.</span>';
+            } else {
+                recent.className = 'dashboard-history-list';
+                recent.innerHTML = history.map(entry => {
+                    const modeLabel = entry.mode === 'exam' ? 'Simulado' : 'Guiado';
+                    const pct = entry.total ? Math.round((entry.correct / entry.total) * 100) : 0;
+                    return `<button type="button" class="dashboard-history-item" onclick="openQuestionHistoryEntry('${entry.id}')">
+                        <div class="dashboard-history-item-main">
+                            <strong>${escapeHtml(modeLabel)} · ${escapeHtml(entry.area || 'Áreas mistas')}</strong>
+                            <span>${formatQuestionHistoryDate(entry.startedAt)}</span>
+                        </div>
+                        <div class="dashboard-history-item-score ${pct >= 60 ? 'good' : 'bad'}">${entry.correct}/${entry.total}</div>
+                    </button>`;
+                }).join('');
+            }
         }
 
         function filtrar(btn) {
@@ -9012,7 +9140,7 @@
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode || 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], examId: isFullExam ? selectedExam : null };
+            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode || 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -9102,8 +9230,10 @@
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
             lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
             activeQuestionSession = null;
+            appendQuestionHistory(buildQuestionHistoryEntry(session, correct));
             showQuestionResults(lastCompletedQuestionSession);
             updateQuestionHubStats();
+            renderDashboard();
         }
 
         let activeResultsSession = null;
@@ -9181,6 +9311,19 @@
             document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
             document.getElementById('questionFeedback').hidden = false;
             document.getElementById('questionPlayerBody').scrollTop = 0;
+        }
+
+        // O botão "voltar" do topo é sensível ao contexto: durante a revisão
+        // de uma questão específica, ele deve voltar para a grade de
+        // desempenho (não fechar o player inteiro) — só fecha de fato quando
+        // já está na grade (ou respondendo normalmente).
+        function handleQuestionPlayerBack() {
+            const reviewing = !document.getElementById('questionResultsBackBtn').hidden;
+            if (reviewing) {
+                showQuestionResults();
+            } else {
+                closeQuestionPlayer();
+            }
         }
 
         function closeQuestionPlayer() {
