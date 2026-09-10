@@ -12,3 +12,12 @@
 .firebaserc
 firebase.json
 public/
+
+# Backend (Node/Prisma) — dependências e artefatos gerados, nunca
+# versionados. node_modules por si só já passava de 270MB.
+node_modules/
+backend/tmp/
+
+# Artefatos de build/captura de PDF (gerados a cada execução local).
+tmp/
+output/
