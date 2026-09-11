@@ -18,6 +18,13 @@ public/
 node_modules/
 backend/tmp/
 
+# Cloud Functions (geração de estações OSCE via Gemini). A chave da IA
+# nunca é um arquivo local — fica só no Secret Manager do Firebase.
+functions/node_modules/
+functions/.env*
+firebase-debug.log
+firebase-debug.*.log
+
 # Artefatos de build/captura de PDF (gerados a cada execução local).
 tmp/
 output/
