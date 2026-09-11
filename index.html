@@ -706,6 +706,8 @@
         .osce-evaluator-section h3 { margin: 0 0 12px; font-size: 14px; color: var(--text-main); }
         .osce-evaluator-section p, .osce-evaluator-section li { color: var(--text-secondary); line-height: 1.55; }
         .osce-evaluator-section ul { margin: 0; padding-left: 20px; }
+        .osce-candidate-resources { margin: 4px 0 16px; }
+        .osce-candidate-resources #osceCandidateResourceOutput:not(:empty) { margin-top: 10px; }
         .osce-quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
         .osce-quick-actions button { min-height: 46px; border: 1px solid rgba(196,181,253,.34); border-radius: 14px; background: rgba(196,181,253,.08); color: var(--text-main); font-weight: 600; cursor: pointer; }
         #osceResourceOutput { margin-top: 12px; }
@@ -9700,6 +9702,34 @@ Regras obrigatórias:
             else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
         }
 
+        // Igual numa prova real: a porta só mostra a queixa e a tarefa. Sinais
+        // vitais, exame físico e exames complementares só aparecem quando o
+        // candidato "solicita" durante a tarefa — nunca o checklist/gabarito.
+        function candidateResourceMarkup(station) {
+            const content = station?.evaluatorContentJson || {};
+            const testCount = (content.complementaryTests || []).length;
+            return `<div class="osce-candidate-resources"><div class="osce-quick-actions"><button type="button" onclick="showCandidateResource('vitals')">Sinais vitais</button><button type="button" onclick="showCandidateResource('physical')">Exame físico</button><button type="button" onclick="showCandidateResource('tests')">Exames (${testCount})</button></div><div id="osceCandidateResourceOutput"></div></div>`;
+        }
+
+        function showCandidateResource(kind) {
+            const output = document.getElementById('osceCandidateResourceOutput');
+            const station = activeOsceSession?.station;
+            if (!output || !station) return;
+            const content = station.evaluatorContentJson || {};
+            let label, entries;
+            if (kind === 'vitals') {
+                label = 'Sinais vitais / triagem';
+                entries = Object.entries(station.doorInstructions?.triageData || {}).map(([key, value]) => `${key}: ${value}`);
+            } else if (kind === 'physical') {
+                label = 'Achados ao exame físico';
+                entries = (content.physicalExam || []).map(item => `${item.system}: ${(item.findings || []).join(' · ')}`);
+            } else {
+                label = 'Resultados de exames';
+                entries = (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`);
+            }
+            output.innerHTML = `<div class="osce-resource-card"><small>${escapeHtml(label)}</small>${osceTextList(entries.length ? entries : ['Nenhuma informação disponível para esta estação.'])}</div>`;
+        }
+
         function renderOsceTask(station, taskIndex) {
             const task = station?.tasks?.[taskIndex];
             if (!task) return;
@@ -9709,7 +9739,7 @@ Regras obrigatórias:
             if (existing) existing.remove();
             const section = document.createElement('section');
             section.className = 'osce-task-active';
-            section.innerHTML = `<span class="question-config-kicker">Tarefa ${taskIndex + 1} de ${station.tasks.length}</span><h3>${escapeHtml(task.title)}</h3><p>${escapeHtml(task.instructions || 'Conclua esta tarefa sem consultar o checklist.')}</p><button class="question-start" type="button" onclick="completeOsceTask(this)">Encerrar tarefa</button></section>`;
+            section.innerHTML = `<span class="question-config-kicker">Tarefa ${taskIndex + 1} de ${station.tasks.length}</span><h3>${escapeHtml(task.title)}</h3><p>${escapeHtml(task.instructions || 'Conclua esta tarefa sem consultar o checklist.')}</p>${candidateResourceMarkup(station)}<button class="question-start" type="button" onclick="completeOsceTask(this)">Encerrar tarefa</button></section>`;
             card.appendChild(section);
         }
 
