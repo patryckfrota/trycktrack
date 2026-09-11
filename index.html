@@ -745,6 +745,21 @@
         @media (max-width: 560px) { .osce-case-grid, .osce-quick-actions { grid-template-columns: 1fr; } .osce-door-card { padding: 18px; border-radius: 22px; } }
         .osce-station-status { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); font-size: 12px; line-height: 1.45; }
         .osce-station-status strong { color: var(--text-main); display: block; margin-bottom: 3px; }
+        .osce-ai-step { display: grid; gap: 8px; margin-top: 2px; }
+        .osce-ai-step[hidden] { display: none; }
+        .osce-ai-generate-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            min-height: 46px; border: 1px solid rgba(196,181,253,.45); border-radius: 13px;
+            background: linear-gradient(135deg, rgba(196,181,253,.22), rgba(139,107,224,.12));
+            color: var(--lavender-active); font: 700 13px/1 var(--font-family-base); cursor: pointer;
+            transition: opacity .16s ease, transform .16s ease;
+        }
+        .osce-ai-generate-btn:active { transform: scale(.98); }
+        .osce-ai-generate-btn:disabled { opacity: .6; cursor: default; }
+        .osce-ai-generate-btn.is-loading .osce-ai-generate-icon { animation: osceAiSpin 1s linear infinite; }
+        .osce-ai-generate-icon { display: inline-block; }
+        @keyframes osceAiSpin { to { transform: rotate(360deg); } }
+        .osce-ai-hint { color: var(--text-secondary); font-size: 10.5px; line-height: 1.4; text-align: center; }
         .question-pdf-action {
             display: grid;
             gap: 11px;
@@ -4602,7 +4617,7 @@
             .question-mode, .question-mode.question-mode-osce { min-height: 172px; }
             .question-config-view { padding: 24px; }
             .question-config-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
-            .question-config-fields .osce-mode-choice, .question-config-fields .osce-station-status, .question-config-fields .question-config-field-slider { grid-column: 1 / -1; }
+            .question-config-fields .osce-mode-choice, .question-config-fields .osce-station-status, .question-config-fields .question-config-field-slider, .question-config-fields .osce-ai-step { grid-column: 1 / -1; }
             .question-config-start { max-width: 360px; margin-left: auto; margin-right: auto; }
             .trail-hub, .question-hub, .dashboard, #reviewTab { max-width: 1120px; margin-left: auto; margin-right: auto; }
             .trail-switch-button { min-height: 112px; padding: 18px 22px; }
@@ -6219,6 +6234,9 @@
         import {
             getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+        import {
+            getFunctions, httpsCallable
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -6235,6 +6253,7 @@
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
             const db = getFirestore(app);
+            const functions = getFunctions(app, 'southamerica-east1');
             try { getAnalytics(app); } catch (e) { /* analytics é opcional, ignora falha (ex: ad-blocker) */ }
 
             window.__fb = {
@@ -6265,6 +6284,9 @@
                     return snap.exists() ? (snap.data().questionHistory || null) : null;
                 },
                 setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true }),
+                // Gera uma estação OSCE inédita com a API do Gemini. A chave da IA
+                // fica só no servidor (Cloud Function); o app nunca a recebe.
+                generateOsceStation: (payload) => httpsCallable(functions, 'generateOsceStation')(payload).then(result => result.data),
                 // Coleção própria (não debaixo de "users") para o dono do
                 // projeto conseguir ver todo o feedback recebido de uma vez
                 // só no Console do Firebase, em Firestore Database > feedback.
@@ -9005,7 +9027,7 @@
                 const exams = questionExamOptions();
                 body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigExam">Edição da prova</label><select id="questionConfigExam">${exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('')}</select></div></div>`;
             } else if (mode === 'osce') {
-                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields"><div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div><div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div><div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div><div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div><select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select></div><div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>`;
+                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields"><div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div><div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div><div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div><div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div><select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select><div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, com a API do Gemini.</span></div></div><div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>`;
                 activeOsceMode = 'CANDIDATE';
                 loadOsceStations();
             } else {
@@ -9042,23 +9064,33 @@
             : (window.location.port === '8945' ? `${window.location.protocol}//${window.location.hostname}:3001` : '');
         const osceFetch = (path, options) => fetch(`${OSCE_API_BASE}${path}`, options);
         let activeOsceMode = 'CANDIDATE';
+        // Catálogo curricular completo do OSCE (mesmas área/tema/subtema/
+        // formato do backend, em backend/src/osceMatrix.js) — usado para a
+        // pessoa escolher QUALQUER assunto e gerar uma estação nova com IA,
+        // mesmo sem nenhuma estação estática cadastrada para ele ainda.
+        const OSCE_CURRICULUM_MATRIX = [{"name":"Atenção Primária à Saúde","slug":"atencao-primaria-a-saude","themes":[{"code":"A","subthemes":[{"name":"Saúde e doença (prevenção primária, secundária, terceária e quarternária e modelos do processo saúde e doença) + Sistema de Saúde Suplementar - Agência Nacional de Saúde Suplementar.","slug":"a-1"},{"name":"Ética médica (Princípios e diretrizes do código de ética médica e sua aplicação).","slug":"a-2"},{"name":"Sistema Único de Saúde - SUS + Leis Orgânicas de Saúde (diretrizes do SUS, lei 8080 e lei 8142).","slug":"a-3"},{"name":"Dinâmica de transmissão e distribuição de doenças e Vigilância em Saúde com ênfase em Vigilância epidemiológica (Doenças de notificação compulsoria no Brasil, SINAN e Ficha de Notificação de agravo - preenchimento e fluxo de informação, Vigilâcia Epidemiológica - conceito, importancia e atuação).","slug":"a-4"},{"name":"Transição epidemiológica, demográfica e nutricional.","slug":"a-5"},{"name":"Aspectos biológicos e fisiologia do envelhecimento (diferença entre senilidade e senescência e suas implicações clínicas, envelhecimento saudável)","slug":"a-6"},{"name":"Avaliacao global do Idoso (exame físico do idoso, MEEM, Escala de Depressão Geriatrica, e outras ferramentas de avaliação).","slug":"a-7"},{"name":"Instabilidade postural e quedas (critérios diagnósticos, manifestações clínicas e os métodos de avaliação para a instabilidade postural em idosos e fatores de risco para quedas.).","slug":"a-8"},{"name":"Violência e maus-tratos contra os idosos.","slug":"a-9"},{"name":"Sindrome Gripal (conceito da síndrome gripal, características clínicas e diagnosticos diferenciais e plano terapeutico.).","slug":"a-10"},{"name":"Rastreamento de doenças na APS I (foco em neoplasias: colo de útero, mama, próstata, colorretal).","slug":"a-11"},{"name":"Rastreamento de doenças na APS II (foco em HAS, DM, Dislipidemia, Obesidade).","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Atenção Primária à Saúde e Estratégia de Saúde da Família (Promoção à saúde, Atributos da APS, composição e atribuições da equipe de SF.).","slug":"b-1"},{"name":"Medicina de Família e Comunidade e Programa Mais Médicos.","slug":"b-2"},{"name":"Análise de métodos diagnósticos e Estudos epidemiológicos (Sensibilidade, especificidade, valor preditivo positivo e negativo, prevalência e incidência.).","slug":"b-3"},{"name":"Medicina legal (principais documentos médicos).","slug":"b-4"},{"name":"Medicina baseada em evidências, revisão sistemática e meta-análise.","slug":"b-5"},{"name":"Visitas Domiciliares e Atenção Domiciliar na ESF.","slug":"b-6"},{"name":"Complexidade e Integralidade na APS e DCNT.","slug":"b-7"},{"name":"DM e HAS Centrada na Pessoa.","slug":"b-8"},{"name":"Violência e maus-tratos contra a criança e a adolescente.","slug":"b-9"},{"name":"Vacinação (indicações, contra-indicações, efeitos adversos, faixa etária).","slug":"b-10"},{"name":"Violência Sexual e Autoprovocada + Doencas de notificação compulsória.","slug":"b-11"},{"name":"Saúde do Trabalhador + CAT.","slug":"b-12"}]}]},{"name":"Cirurgia","slug":"cirurgia","themes":[{"code":"A","subthemes":[{"name":"Abdome agudo inflamatório e suas complicações (apendicite, colicistite, diverticulite)","slug":"a-1"},{"name":"Hérnias de Parede Abdominal","slug":"a-2"},{"name":"Complicações e cuidados pós-operatórias; Infecção em cirurgia - Hematoma - Seroma - Deiscência - Evisceração.","slug":"a-3"},{"name":"Resposta endócrino metabólica ao trauma","slug":"a-4"},{"name":"Cuidados pré-operatórios; Risco cirúrgico (ASA - Goldman)","slug":"a-5"},{"name":"Afecções hepáticas: diagnósgtico/tratamento/complicações (Hipertensão portal; nódulos e abcessos hepáticos;)","slug":"a-6"},{"name":"Afecções da árvore biliar: colecistolitíase, coledocolitíase, íleo biliar, colangiocarcinoma","slug":"a-7"},{"name":"Afecções do pâncreas (Pancreatite aguda e crônica, pseudocisto, neoplasias císticas, adenocarcinoma): diagnóstico/tratamento/complicações","slug":"a-8"},{"name":"Câncer de cólon e reto (Diagnóstico clinico, laboratorial, radiologico e Condução clínica.","slug":"a-9"},{"name":"Condutas intervencionistas em derrame pleural Toracocentese","slug":"a-10"},{"name":"Tipos de fios, suturas e feridas.","slug":"a-11"},{"name":"Doenças orificiais: Doença hemorroidária, fissura anal, fístula anal, abscesso anorretal","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"ATLS- Aspectos históricos, exame primário e secundário, fase de cada um dos exames, aspectos intervencionistas no exameprimário e secundário","slug":"b-1"},{"name":"Cicatrização","slug":"b-2"},{"name":"Via áerea cirurgica","slug":"b-3"},{"name":"Trauma torácico (Pneumotórax aberto, fechado e hipertensivo, hemotórax, contusão pulmonar, tórax instável e tamponamento cardíaco)","slug":"b-4"},{"name":"Trauma abdominal e pélvico","slug":"b-5"},{"name":"Acesso venoso central","slug":"b-6"},{"name":"Queimaduras / síndrome compartimental","slug":"b-7"},{"name":"DAOP + Obstrução arterial aguda; Aneurisma de aorta","slug":"b-8"},{"name":"Insuficiência venosa crônica; Trombose Venosa Profunda - TVP","slug":"b-9"},{"name":"Noções de anestesia periférica","slug":"b-10"},{"name":"Urgências urológicas: Torção testicular, priapismo, urolitíase e orquiedpidimite","slug":"b-11"},{"name":"Abdome agudo em pediatria: intussuscepção, vólvulo, má rotação intestinal","slug":"b-12"}]}]},{"name":"Clínica Médica","slug":"clinica-medica","themes":[{"code":"A","subthemes":[{"name":"Asma e DPOC (Exame físico e exames complementares, incluindo espirometria, Tratamento da DPOC pelo ABE do GOLD, tratamento da exacerbação)","slug":"a-1"},{"name":"Diabetes mellitus - Classificação, diagnóstico, tratamento e complicações","slug":"a-2"},{"name":"Dengue, Zika, Chikungunya e Febre Amarela","slug":"a-3"},{"name":"Doenças do Pericárdio, Miocardites e Endocardites","slug":"a-4"},{"name":"HIV e Criptococosse","slug":"a-5"},{"name":"Cirrose e complicações (PBE, Asciste, Encefalopatia hepática, Síndrome hepatorrenal)","slug":"a-6"},{"name":"Doenças Eritematodescamativas (Psoríase, Dermatite Atópica)","slug":"a-7"},{"name":"Injúria Renal Aguda e Doença Renal Crônica","slug":"a-8"},{"name":"Doenças Tubulointersticiais e Glomerulares","slug":"a-9"},{"name":"Infecção de Trato Urinário, Nefrolitíase","slug":"a-10"},{"name":"Síndrome metabólica e dislipidemias","slug":"a-11"},{"name":"Doenças da hipófise e da tireóide - Rastreio de nódulos tireóidianos","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Insuficiencia cardíaca e valvopatias","slug":"b-1"},{"name":"Hipertensão arterial sistêmica, Emergências Hipertensivas, Encefalopatia hipertensiva, Crise hipertensiva, Conceitos fundamentais e condução clínica","slug":"b-2"},{"name":"Cefaleia na urgência / Principais cefaleias primárias: Cefaleia tensional, enxaqueca e cefaleias em salva","slug":"b-3"},{"name":"Tuberculose e Hanseníase (epidemiologia, fatores de risco, características do bacilo de koch, mecanismos de infecção e latência, tuberculose extrapulmonar, prevenção e controle, propedêutica clínica, diagnóstico e tratamento).","slug":"b-4"},{"name":"DRGE e Dispepsia (Dispepsia funcional, gastrites - incluindo quadro clínico, fisiopatologia, diagnóstico e tratamento)","slug":"b-5"},{"name":"Doenças inflamatórias intestinais (doença de crohn, retocolite ulcerativa)","slug":"b-6"},{"name":"Hemoragias digestivas (alta, média e baixa)","slug":"b-7"},{"name":"TVP e Tromboembolismo pulmonar (fatores de risco, exames complementares, tratamento e profilaxia)","slug":"b-8"},{"name":"Anemias (carenciais, hemolíticas e de doença crônica)","slug":"b-9"},{"name":"Neoplasias Hematológicas (Linfoma e Leucemia - Avaliação inicial e triagem laboratorial)","slug":"b-10"},{"name":"Pneumonias Bacterianas, virais e atípicas.","slug":"b-11"},{"name":"Poliartrites: Artrite Reumatóiide e Osteoartrite","slug":"b-12"}]}]},{"name":"Ginecologia e Obstetrícia","slug":"ginecologia-e-obstetricia","themes":[{"code":"A","subthemes":[{"name":"Assistência pré-natal","slug":"a-1"},{"name":"O parto: assistência clínica, mecanismos, períodos e manobras","slug":"a-2"},{"name":"Amenorreia primária e secundária","slug":"a-3"},{"name":"Síndrome dos ovários policísticos","slug":"a-4"},{"name":"Neoplasias mamárias e rastreio","slug":"a-5"},{"name":"Incontinência urinária e distopias genitais","slug":"a-6"},{"name":"Climatério","slug":"a-7"},{"name":"Pré-natal de alto risco (Diabetes e Gemelaridade)","slug":"a-8"},{"name":"Prematuridade (Trabalho de parto prematuro, amniorr​​exe prematura)","slug":"a-9"},{"name":"Restrição de crescimento fetal intrauterino (CIUR)","slug":"a-10"},{"name":"Infecções na gestação (Toxoplasmose, Citomegalovirus, Rubéola, Herpes e Sífilis)","slug":"a-11"},{"name":"Modificações locais e sistêmicas no organismo materno na gravidez","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Anticoncepção","slug":"b-1"},{"name":"HPV, neoplasias cervicais e rastreio","slug":"b-2"},{"name":"Doença inflamatória pélvica","slug":"b-3"},{"name":"Sangramento Uterino Anormal","slug":"b-4"},{"name":"Endometriose","slug":"b-5"},{"name":"Vulvovaginites, cervicites (Cândidiase, tricomoníase, vaginose bacteriana, vaginite atrófica - incluir tratamento na gestante)","slug":"b-6"},{"name":"Infecções sexualmente transmissíveis ( sífilis, herpes genital, cancro mole, gonorreia, linfogranuloma venéreo, donovanose)","slug":"b-7"},{"name":"Síndromes hipertensivas da gestação (Pré-Eclâmpsia , Pré-Eclâmpsia superposta, Eclâmpsia, Hipertensão crônica e gestacional)","slug":"b-8"},{"name":"Vitalidade fetal - Cardiotocografia e ultrassonografias na gestação","slug":"b-9"},{"name":"Sangramentos de primeira metade da gestação (gravidez ectópica, gravidez molar, abortamento)","slug":"b-10"},{"name":"Sangramentos de segunda metade da gestação (descolamento prematuro de placenta, placenta prévia, rotura uterina, vasa prévia)","slug":"b-11"},{"name":"Puerpério","slug":"b-12"}]}]},{"name":"Pediatria","slug":"pediatria","themes":[{"code":"A","subthemes":[{"name":"Imunizações","slug":"a-1"},{"name":"Diarréia aguda e desidratação. Parasitose.","slug":"a-2"},{"name":"Aleitamento materno, introdução alimentar e alergia alimentar.","slug":"a-3"},{"name":"Infecções congênitas: toxoplasmose, rubéola, sífilis, citomegalovírus, herpes simples, Zika vírus.","slug":"a-4"},{"name":"Icterícia neonatal","slug":"a-5"},{"name":"Assistência ao recem nascido na sala de parto > ou igual a 34 semanas","slug":"a-6"},{"name":"Anafilaxia. Dermatite atópica.","slug":"a-7"},{"name":"Infecção de vias aéreas superiores","slug":"a-8"},{"name":"Doenças exantemáticas (Sarampo, Rubéola, Eritema infeccioso, Exantema súbito, Mononucleose infecciosa, Varicela, Escarlatina, Doença de Kawasaki, Síndrome mão pé boca)","slug":"a-9"},{"name":"Infecção do trato urinário","slug":"a-10"},{"name":"Crescimento e desenvolvimento da criança até 5 anos.","slug":"a-11"},{"name":"GNDA e Síndrome nefrótica.","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Suporte básico e Suporte avançado de vida","slug":"b-1"},{"name":"Asma na criança + rinite alérgica","slug":"b-2"},{"name":"Meningites e meningoencefalites","slug":"b-3"},{"name":"Convulsões na criança","slug":"b-4"},{"name":"Pneumonia adquirida na comunidade/ Bronquiolite","slug":"b-5"},{"name":"TDAH e autismo","slug":"b-6"},{"name":"Patologias dermatológicas: impetigo/ectima, erisipela/celulite, foliculite/furunculose, síndrome da pele escaldada, estrófulo, escabiose, Tinea, Pitiríase alba, Pitiríase Versicolor e Molusco.","slug":"b-7"},{"name":"Anemias: anemia ferropriva, anemia megaloblástica e falciforme","slug":"b-8"},{"name":"Sepse em pediatria.(Reconhecer SEPSE, entender os conceitos e abordagem)","slug":"b-9"},{"name":"Febre reumática.","slug":"b-10"},{"name":"Crescimento e desenvolvimento puberal do adolescente (fisiologia da puberdade normal, exame físico e estadiamento puberal, diferenciar desenvolvimento puberal fisiológico do patológico, baseado nas alterações clínicas e exames complementares, síndrome da adolescencia normal).Puberdade precoce.","slug":"b-11"},{"name":"Febre sem sinais localizatórios","slug":"b-12"}]}]},{"name":"Urgência e Emergência / Saúde Mental","slug":"urgencia-e-emergencia-saude-mental","themes":[{"code":"A","subthemes":[{"name":"Suporte básico de vida e avançado: PALS e ACLS","slug":"a-1"},{"name":"Lesão renal aguda (Pré Renal, Renal e Pós Renal)","slug":"a-2"},{"name":"Psicopatologia e exame do estado mental- principais conceitos de psicopatologia, exame do estado mental, incluindo as manifestações clínicas nas principais desordens (esquizofrenia, transtornos afetivos e transtornos de ansiedade).","slug":"a-3"},{"name":"Sindrome respiratória aguda grave","slug":"a-4"},{"name":"Insuficiência respiratória (tipo I – hipoxêmica / tipo II – hipercápnica/ Mista)","slug":"a-5"},{"name":"Vias aéreas básica/ avançada (Extra glótica + Via aérea definitiva)","slug":"a-6"},{"name":"Cuidados paliativos e manejo da dor","slug":"a-7"},{"name":"Psicofarmacologia - antidepressivos (tricíclicos, inibidores da MAO, atípicos, moduladores de serotonina, Inibidores seletivos de recaptação de serotonina).","slug":"a-8"},{"name":"Emergências em Psiquiatria (tentativa de auto-extermínio, crise de ansiedade e surto psicótico)","slug":"a-9"},{"name":"Esquizofrenia e outros transtornos psicóticos (transtorno delirante, esquizoafetivo, psicótico)","slug":"a-10"},{"name":"Distúrbios do equilíbrio acidobásico","slug":"a-11"},{"name":"Intoxicações exógenas agudas","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Transtornos de Ansiedade (generalizada, pânico, fobias, TOC), Transtornos alimentares (bulimia, anorexia, compulsão)","slug":"b-1"},{"name":"Transtornos do humor (depressão maior, bipolar)","slug":"b-2"},{"name":"Choque septico e hipovolemico","slug":"b-3"},{"name":"Síndromes coronárianas agudas","slug":"b-4"},{"name":"Transtornos de personalidade (paranoide, esquizoide, antissocial, boderline, histriônica)","slug":"b-5"},{"name":"Insuficiencia cardíaca descompensada e Edema agudo pulmonar","slug":"b-6"},{"name":"Arritimias cardíacas","slug":"b-7"},{"name":"Transtornos mentais orgânicos (Delirium, Demência, Alzheimer, Parkinson)","slug":"b-8"},{"name":"Drogas vasoativas na urgência e emergência. Principais drogas vasoativas, Mecanismos de ação em receptores/doses/diluições, Vasopressores: Noradrenalina/Adrenalina/Vasopressina, Vasodilatadores:Nitroglicerina/Nitroprussiato de Sódio, Inotrópicos:Dobutamina/ Milrinone/ Levosimendan","slug":"b-9"},{"name":"Acidente com animais peçonhentos (ofídicos, aracnídeos, escorpiônicos) e Choque anafilático.","slug":"b-10"},{"name":"Cetoacidose diabética","slug":"b-11"},{"name":"AVE","slug":"b-12"}]}]}];
+        const OSCE_CURRICULUM_FORMATS = ["ANAMNESE_FOCADA","EXAME_FISICO","RACIOCINIO_DIAGNOSTICO","CONDUTA","PROCEDIMENTO","COMUNICACAO","URGENCIA_EMERGENCIA","ESTACAO_COMPLETA"];
+
         let osceStationsCache = [];
 
         // A biblioteca local deixa o OSCE disponível no app publicado, no celular e offline.
         // O backend continua opcional para a futura versão com sincronização entre usuários.
+        function findOsceCurriculumArea(areaSlug) {
+            return OSCE_CURRICULUM_MATRIX.find(area => area.slug === areaSlug) || null;
+        }
+
+        function findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug) {
+            const area = findOsceCurriculumArea(areaSlug);
+            const theme = area?.themes.find(item => item.code === themeCode);
+            return theme?.subthemes.find(item => item.slug === subthemeSlug) || null;
+        }
+
         function normalizeLocalOsceStation(source, index) {
             const metadata = source?.metadata || {};
-            const areaMap = { 'clinica-medica': 'Clínica Médica' };
-            const subthemeMap = {
-                'clinica-medica:A:a-1': 'Asma e DPOC',
-                'clinica-medica:A:a-2': 'Diabetes mellitus',
-                'clinica-medica:A:a-3': 'Dengue, Zika, Chikungunya e Febre Amarela',
-                'clinica-medica:B:b-1': 'Insuficiência cardíaca e valvopatias',
-                'clinica-medica:B:b-2': 'Hipertensão arterial sistêmica e emergências hipertensivas',
-                'clinica-medica:B:b-3': 'Cefaleia na urgência e cefaleias primárias'
-            };
+            const area = findOsceCurriculumArea(metadata.areaSlug);
+            const subthemeEntry = findOsceCurriculumSubtheme(metadata.areaSlug, metadata.themeCode, metadata.subthemeSlug);
             const theme = `Tema ${metadata.themeCode || ''}`.trim();
-            const subtheme = subthemeMap[`${metadata.areaSlug}:${metadata.themeCode}:${metadata.subthemeSlug}`] || metadata.subthemeSlug || 'Subtema';
+            const subtheme = subthemeEntry?.name || metadata.subthemeSlug || 'Subtema';
             const tasks = (source?.tasks || []).map(task => ({
                 id: task.id,
                 title: task.title || 'Tarefa da estação',
@@ -9068,7 +9100,7 @@
             }));
             return {
                 id: source.externalId || `osce-local-${index + 1}`,
-                area: areaMap[metadata.areaSlug] || metadata.areaSlug || 'Área não informada',
+                area: area?.name || metadata.areaSlug || 'Área não informada',
                 theme,
                 subtheme,
                 format: metadata.format || 'ESTACAO_COMPLETA',
@@ -9129,6 +9161,15 @@
             select.disabled = true;
         }
 
+        function truncateText(value, max) {
+            const text = String(value || '');
+            return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
+        }
+
+        // As opções vêm do catálogo curricular completo (OSCE_CURRICULUM_MATRIX),
+        // não só do que já existe na biblioteca estática — assim dá para pedir
+        // uma estação de IA sobre QUALQUER assunto do edital, mesmo sem nenhum
+        // caso cadastrado ainda para ele.
         async function loadOsceStations() {
             const status = document.getElementById('osceStationStatus');
             if (!status || activeQuestionConfigMode !== 'osce') return;
@@ -9137,55 +9178,97 @@
                 const themeSelect = document.getElementById('questionConfigTheme');
                 const subthemeSelect = document.getElementById('questionConfigSubtheme');
                 const formatSelect = document.getElementById('questionConfigFormat');
-                if (!osceStationsCache.length) {
-                    osceStationsCache = getLocalOsceStations();
-                    if (!osceStationsCache.length && OSCE_API_BASE) {
-                        const response = await osceFetch('/api/osce/stations');
-                        if (!response.ok) throw new Error('API indisponível');
-                        const payload = await response.json();
-                        osceStationsCache = Array.isArray(payload.stations) ? payload.stations : [];
-                    }
+                if (!osceStationsCache.length) osceStationsCache = getLocalOsceStations();
+
+                if (areaSelect.dataset.filled !== '1') {
+                    areaSelect.innerHTML = '<option value="">Selecione a área</option>' + OSCE_CURRICULUM_MATRIX.map(area => `<option value="${area.slug}">${escapeHtml(area.name)}</option>`).join('');
+                    areaSelect.dataset.filled = '1';
                 }
-                const areaValue = areaSelect?.value || '';
-                const themeValue = themeSelect?.value || '';
-                const subthemeValue = subthemeSelect?.value || '';
+
+                const areaSlug = areaSelect?.value || '';
+                const themeCode = themeSelect?.value || '';
+                const subthemeSlug = subthemeSelect?.value || '';
                 const formatValue = formatSelect?.value || '';
-                const matching = (filters = {}) => osceStationsCache.filter(station => Object.entries(filters).every(([key, value]) => !value || station[key] === value));
-                const areaOptions = [...new Set(osceStationsCache.map(station => station.area).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
-                if (!areaValue) {
-                    areaSelect.innerHTML = '<option value="">Selecione a área</option>' + areaOptions.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
-                    setOsceStep('osceThemeStep', false); setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false);
+
+                if (!areaSlug) {
+                    setOsceStep('osceThemeStep', false); setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false);
                     resetOsceSelect('questionConfigTheme', 'Selecione o tema'); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato');
-                    status.innerHTML = osceStationsCache.length ? '<strong>Escolha uma área</strong>As opções seguintes mostram apenas estações cadastradas.' : '<strong>Nenhuma estação disponível</strong>O banco ainda não possui estações para treinar.';
+                    status.innerHTML = '<strong>Escolha uma área</strong>Depois escolha o tema, o subtema e o formato da estação.';
                     return;
                 }
-                const areaStations = matching({ area: areaValue });
-                const themeOptions = [...new Set(areaStations.map(station => station.theme).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+                const area = findOsceCurriculumArea(areaSlug);
                 themeSelect.disabled = false;
-                themeSelect.innerHTML = '<option value="">Selecione o tema</option>' + themeOptions.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
-                if (themeValue && themeOptions.includes(themeValue)) themeSelect.value = themeValue;
+                themeSelect.innerHTML = '<option value="">Selecione o tema</option>' + (area?.themes || []).map(theme => `<option value="${theme.code}">Tema ${theme.code}</option>`).join('');
+                if (themeCode) themeSelect.value = themeCode;
                 setOsceStep('osceThemeStep', true);
-                if (!themeValue) { setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tema</strong>'; return; }
-                const themeStations = matching({ area: areaValue, theme: themeValue });
-                const subthemeOptions = [...new Set(themeStations.map(station => station.subtheme).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+                if (!themeCode) { setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tema</strong>'; return; }
+
+                const theme = area?.themes.find(item => item.code === themeCode);
                 subthemeSelect.disabled = false;
-                subthemeSelect.innerHTML = '<option value="">Selecione o subtema</option>' + subthemeOptions.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
-                if (subthemeValue && subthemeOptions.includes(subthemeValue)) subthemeSelect.value = subthemeValue;
+                subthemeSelect.innerHTML = '<option value="">Selecione o subtema</option>' + (theme?.subthemes || []).map(sub => `<option value="${sub.slug}" title="${escapeHtml(sub.name)}">${escapeHtml(truncateText(sub.name, 78))}</option>`).join('');
+                if (subthemeSlug) subthemeSelect.value = subthemeSlug;
                 setOsceStep('osceSubthemeStep', true);
-                if (!subthemeValue) { setOsceStep('osceFormatStep', false); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o subtema</strong>'; return; }
-                const subthemeStations = matching({ area: areaValue, theme: themeValue, subtheme: subthemeValue });
-                const formatOptions = [...new Set(subthemeStations.map(station => station.format).filter(Boolean))].sort();
+                if (!subthemeSlug) { setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o subtema</strong>'; return; }
+
                 formatSelect.disabled = false;
-                formatSelect.innerHTML = '<option value="">Selecione o formato</option>' + formatOptions.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value.replaceAll('_', ' '))}</option>`).join('');
-                if (formatValue && formatOptions.includes(formatValue)) formatSelect.value = formatValue;
+                formatSelect.innerHTML = '<option value="">Selecione o formato</option>' + OSCE_CURRICULUM_FORMATS.map(value => `<option value="${value}">${escapeHtml(value.replaceAll('_', ' '))}</option>`).join('');
+                if (formatValue) formatSelect.value = formatValue;
                 setOsceStep('osceFormatStep', true);
-                if (!formatValue) { status.innerHTML = '<strong>Agora escolha o formato</strong>'; return; }
-                const filtered = matching({ area: areaValue, theme: themeValue, subtheme: subthemeValue, format: formatValue });
+                if (!formatValue) { setOsceStep('osceAiStep', false); status.innerHTML = '<strong>Agora escolha o formato</strong>'; return; }
+
+                setOsceStep('osceAiStep', true);
+                const subthemeEntry = findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug);
+                const themeLabel = `Tema ${themeCode}`;
+                const matches = osceStationsCache.filter(station => station.area === area?.name && station.theme === themeLabel && station.subtheme === subthemeEntry?.name && station.format === formatValue);
                 const stationSelect = document.getElementById('questionConfigStation');
-                if (stationSelect) stationSelect.innerHTML = filtered.length ? `<option value="${filtered[0].id}">${filtered[0].id}</option>` : '<option value="">Nenhuma estação carregada</option>';
-                status.innerHTML = filtered.length ? `<strong>${filtered.length} estação(ões) encontrada(s)</strong>Pronto para iniciar a estação.` : '<strong>Nenhuma estação disponível</strong>Não há uma estação cadastrada para esta combinação.';
+                if (matches.length) {
+                    if (stationSelect) stationSelect.innerHTML = `<option value="${matches[0].id}">${matches[0].id}</option>`;
+                    status.innerHTML = `<strong>${matches.length} estação(ões) já cadastrada(s)</strong>Pronto para iniciar, ou gere uma estação nova e inédita com IA.`;
+                } else {
+                    if (stationSelect) stationSelect.innerHTML = '<option value="">Nenhuma estação carregada</option>';
+                    status.innerHTML = '<strong>Nenhuma estação cadastrada ainda para esse assunto</strong>Gere uma estação com IA para treinar.';
+                }
             } catch (_) {
-                status.innerHTML = '<strong>Biblioteca OSCE indisponível</strong>Não foi possível carregar as estações incorporadas ao aplicativo.';
+                status.innerHTML = '<strong>Biblioteca OSCE indisponível</strong>Não foi possível carregar o catálogo de estações.';
+            }
+        }
+
+        async function generateOsceStationWithAI() {
+            const status = document.getElementById('osceStationStatus');
+            const button = document.getElementById('osceAiGenerateBtn');
+            const areaSlug = document.getElementById('questionConfigArea')?.value || '';
+            const themeCode = document.getElementById('questionConfigTheme')?.value || '';
+            const subthemeSlug = document.getElementById('questionConfigSubtheme')?.value || '';
+            const format = document.getElementById('questionConfigFormat')?.value || '';
+            const area = findOsceCurriculumArea(areaSlug);
+            const subthemeEntry = findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug);
+            if (!area || !themeCode || !subthemeEntry || !format) {
+                revealQuestionNotice('Escolha área, tema, subtema e formato antes de gerar a estação.');
+                return;
+            }
+            if (!window.__fb?.ready || !window.__fb?.getCurrentUser?.()) {
+                revealQuestionNotice('Faça login para gerar uma estação com IA.');
+                return;
+            }
+            if (button) { button.disabled = true; button.classList.add('is-loading'); }
+            if (status) status.innerHTML = '<strong>Gerando estação com IA…</strong>Isso pode levar alguns segundos.';
+            try {
+                const raw = await window.__fb.generateOsceStation({
+                    areaSlug, areaName: area.name, themeCode, themeName: `Tema ${themeCode}`,
+                    subthemeSlug, subthemeName: subthemeEntry.name, format
+                });
+                const station = normalizeLocalOsceStation(raw, osceStationsCache.length);
+                osceStationsCache.unshift(station);
+                const stationSelect = document.getElementById('questionConfigStation');
+                if (stationSelect) stationSelect.innerHTML = `<option value="${station.id}">${station.id}</option>`;
+                if (status) status.innerHTML = `<strong>Estação gerada</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+            } catch (error) {
+                console.error('Falha ao gerar estação OSCE com IA:', error);
+                if (status) status.innerHTML = '<strong>Não foi possível gerar a estação</strong>Tente novamente em instantes.';
+                revealQuestionNotice('Não foi possível gerar a estação com IA agora.');
+            } finally {
+                if (button) { button.disabled = false; button.classList.remove('is-loading'); }
             }
         }
 
