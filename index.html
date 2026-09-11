@@ -571,7 +571,17 @@
         .question-mode strong { display: block; font-size: 14px; margin-bottom: 5px; }
         .question-mode span { display: block; max-width: 130px; color: var(--text-secondary); font-size: 11px; line-height: 1.35; }
         .question-mode-check { display: none; }
-        .question-config-view { margin-top: 16px; padding: 16px; border: 1px solid var(--border-color); border-radius: 22px; background: var(--bg-secondary); animation: tabIn .28s ease both; }
+        .question-config-view {
+            margin-top: 16px;
+            padding: 18px;
+            border: 1px solid var(--glass-card-border);
+            border-radius: 22px;
+            background: var(--glass-card-bg);
+            box-shadow: var(--glass-card-shadow);
+            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            animation: tabIn .28s ease both;
+        }
         .question-config-view { width: 100%; box-sizing: border-box; }
         .question-config-back { display: inline-flex; align-items: center; gap: 6px; border: 0; padding: 0; background: transparent; color: var(--text-secondary); font: 600 12px/1 var(--font-family-base); cursor: pointer; }
         .question-config-back svg { width: 17px; height: 17px; }
@@ -579,10 +589,41 @@
         .question-config-heading span { color: var(--lavender-active); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
         .question-config-heading h3 { margin: 6px 0 5px; color: var(--text-main); font-size: 21px; line-height: 1.2; }
         .question-config-heading p { color: var(--text-secondary); font-size: 13px; line-height: 1.45; }
-        .question-config-fields { display: grid; gap: 12px; }
+        .question-config-fields { display: grid; gap: 14px; }
+        .question-config-divider {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 6px 0 -2px;
+            padding-top: 16px;
+            border-top: 1px solid var(--glass-card-border);
+            color: var(--lavender-active);
+            font-size: 10px;
+            font-weight: 750;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+        }
+        .question-config-fields > .question-config-divider:first-child { margin-top: 0; padding-top: 0; border-top: none; }
         .question-config-field { display: grid; gap: 7px; }
         .question-config-field label { color: var(--text-secondary); font-size: 11px; font-weight: 650; }
-        .question-config-field select { width: 100%; min-height: 46px; border: 1px solid var(--border-color); border-radius: 13px; padding: 0 13px; background: var(--bg-tertiary); color: var(--text-main); font: 500 13px/1 var(--font-family-base); }
+        .question-config-field select {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            min-height: 46px;
+            border: 1px solid var(--glass-card-border);
+            border-radius: 13px;
+            padding: 0 38px 0 14px;
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c4b5fd' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 15px,
+                rgba(var(--nav-glass-rgb), .045);
+            color: var(--text-main);
+            font: 500 13px/1 var(--font-family-base);
+            transition: border-color .16s ease, background-color .16s ease;
+        }
+        .question-config-field select:hover { border-color: rgba(196,181,253,.4); }
+        .question-config-field select:focus { outline: none; border-color: rgba(196,181,253,.6); box-shadow: 0 0 0 3px rgba(196,181,253,.16); }
         .question-config-start { margin-top: 18px; }
         .osce-mode-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 14px; }
         .osce-mode-choice button { border: 1px solid var(--border-color); border-radius: 12px; padding: 11px 10px; background: var(--bg-secondary); color: var(--text-secondary); font: 600 12px/1.2 var(--font-family-base); cursor: pointer; }
@@ -8832,7 +8873,17 @@
             } else {
                 const themes = questionThemeOptions();
                 const years = questionYearOptions();
-                body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div><div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme"><option value="Todas">Todos</option></select></div><div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div><div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div><div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div><div class="question-config-field"><label for="questionConfigCount">Quantidade</label><select id="questionConfigCount"><option value="5">5 questões</option><option value="10">10 questões</option><option value="12" selected>12 questões</option><option value="20">20 questões</option><option value="30">30 questões</option><option value="50">50 questões</option></select></div></div>`;
+                body.innerHTML = `<div class="question-config-fields">
+                    <div class="question-config-divider">Conteúdo</div>
+                    <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-divider">Filtros</div>
+                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-divider">Quantidade</div>
+                    <div class="question-config-field"><label for="questionConfigCount">Número de questões</label><select id="questionConfigCount"><option value="5">5 questões</option><option value="10">10 questões</option><option value="12" selected>12 questões</option><option value="20">20 questões</option><option value="30">30 questões</option><option value="50">50 questões</option></select></div>
+                </div>`;
             }
             view.hidden = false;
             view.scrollIntoView({ behavior: 'smooth', block: 'start' });
