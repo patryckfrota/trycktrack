@@ -687,10 +687,57 @@
         .osce-timer { color: var(--text-main); font: 700 clamp(28px, 7vw, 42px)/1 ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", sans-serif; letter-spacing: .04em; }
         .osce-timer-track { height: 7px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.12); box-shadow: inset 0 1px 2px rgba(0,0,0,.25); }
         .osce-timer-fill { height: 100%; width: 0%; border-radius: inherit; background: linear-gradient(90deg, var(--lavender-active), #e4dcff); box-shadow: 0 0 14px rgba(196,181,253,.55); transition: width .9s linear; }
-        .osce-result-grid { display: grid; gap: 10px; margin: 18px 0; }
+        .osce-result-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 0 0 18px; }
         .osce-result-card { padding: 14px 16px; border: 1px solid rgba(196,181,253,.2); border-radius: 16px; background: rgba(255,255,255,.055); }
         .osce-result-card small { display: block; margin-bottom: 5px; color: var(--lavender-active); font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
         .osce-result-card strong { color: var(--text-main); font-size: 14px; line-height: 1.45; }
+        .osce-result-card-percent { display: block; margin-top: 3px; color: var(--text-secondary); font-size: 11.5px; }
+
+        /* Cartão de pontuação em destaque, no topo do resultado. */
+        .osce-score-hero {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            margin: 4px 0 18px; padding: 22px 18px; border-radius: 22px;
+            border: 1px solid rgba(196,181,253,.32);
+            background: linear-gradient(150deg, rgba(196,181,253,.16), rgba(255,255,255,.04));
+            text-align: center;
+        }
+        .osce-score-hero-label { color: var(--lavender-active); font-size: 10.5px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+        .osce-score-hero-value { margin-top: 4px; color: var(--text-main); font-size: 34px; font-weight: 800; letter-spacing: -.02em; }
+        .osce-score-hero-value span { margin-left: 4px; color: var(--text-secondary); font-size: 17px; font-weight: 650; }
+        .osce-score-hero-percent { margin-top: 2px; color: var(--text-secondary); font-size: 12.5px; }
+
+        /* Gabarito e explicação do caso — uma única seção estruturada,
+           nunca mais um dump genérico de campos do JSON. */
+        .osce-answer-key {
+            margin-top: 6px; padding: 18px; border-radius: 20px;
+            border: 1px solid rgba(196,181,253,.24);
+            background: rgba(196,181,253,.06);
+        }
+        .osce-answer-key > .question-config-kicker { display: block; margin-bottom: 14px; }
+        .osce-answer-section { margin-top: 14px; }
+        .osce-answer-section:first-of-type { margin-top: 0; }
+        .osce-answer-section small { display: block; margin-bottom: 5px; color: var(--lavender-active); font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+        .osce-answer-section strong { color: var(--text-main); font-size: 14.5px; line-height: 1.45; }
+        .osce-answer-section p { margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+        .osce-answer-section ul { margin: 0; padding-left: 18px; color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+        .osce-answer-section ul li { margin-bottom: 4px; }
+        .osce-answer-section-critical small { color: #ff8a80; }
+        .osce-answer-section-critical ul { color: #f4b8b3; }
+        .osce-answer-lock-note { margin-top: 16px; color: var(--text-secondary); font-size: 12px; text-align: center; }
+
+        /* Chat com a paciente-padrão (modo avaliando). */
+        .osce-patient-chat { margin-top: 16px; padding: 16px; border-radius: 20px; border: 1px solid rgba(196,181,253,.22); background: rgba(255,255,255,.04); }
+        .osce-patient-chat > .question-config-kicker { display: block; margin-bottom: 12px; }
+        .osce-chat-log { display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; padding-right: 2px; }
+        .osce-chat-msg { max-width: 85%; padding: 9px 13px; border-radius: 16px; }
+        .osce-chat-msg strong { display: block; margin-bottom: 2px; font-size: 10px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+        .osce-chat-msg p { margin: 0; font-size: 13px; line-height: 1.45; }
+        .osce-chat-msg-patient { align-self: flex-start; background: rgba(255,255,255,.08); color: var(--text-main); border-bottom-left-radius: 4px; }
+        .osce-chat-msg-candidate { align-self: flex-end; background: var(--lavender-active); color: #19171f; border-bottom-right-radius: 4px; }
+        .osce-chat-form { display: flex; gap: 8px; margin-top: 12px; }
+        .osce-chat-form input { flex: 1; min-width: 0; min-height: 42px; padding: 0 14px; border: 1px solid rgba(196,181,253,.3); border-radius: 12px; background: rgba(255,255,255,.05); color: var(--text-main); font: 500 13px var(--font-family-base); }
+        .osce-chat-form input:focus { outline: none; border-color: rgba(196,181,253,.6); }
+        .osce-chat-form button { flex: 0 0 auto; padding: 0 16px; border: 0; border-radius: 12px; background: var(--lavender-active); color: #19171f; font: 700 12.5px var(--font-family-base); cursor: pointer; }
         .osce-door-card { position: relative; width: min(760px, calc(100% - 32px)); margin: 18px auto 0; padding: 28px; border: 1px solid rgba(255,255,255,.22); border-radius: 30px; background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(196,181,253,.08) 28%, rgba(31,33,39,.62) 72%); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.3), 0 24px 70px rgba(0,0,0,.28); backdrop-filter: blur(26px) saturate(150%); overflow: hidden; }
         .osce-door-card::before { display: none; }
         .osce-door-card > * { position: relative; z-index: 1; }
@@ -9635,25 +9682,36 @@ Regras obrigatórias:
 
         function formatOsceTime(seconds) { const value = Math.max(0, Number(seconds) || 0); return `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`; }
 
-        function osceResultMarkup(value) {
-            if (value === null || value === undefined || value === '') return '<p>Nenhum resultado detalhado disponível.</p>';
-            if (typeof value !== 'object') return `<p>${escapeHtml(osceReadableValue(value))}</p>`;
-            const labels = { totalPoints: 'Pontuação total', maxPoints: 'Pontuação máxima', percent: 'Desempenho', performanceByAxis: 'Desempenho por eixo', answerKey: 'Gabarito', finalAnswer: 'Resposta final', taskId: 'Tarefa', title: 'Tema', answerKey: 'Gabarito da tarefa' };
-            const axisLabels = { COMMUNICATION: 'Comunicação', HISTORY: 'Anamnese', PHYSICAL_EXAM: 'Exame físico', DIAGNOSTIC_REASONING: 'Raciocínio diagnóstico', MANAGEMENT: 'Conduta' };
-            const formatLabel = key => labels[key] || axisLabels[key] || key.replaceAll('_', ' ').replace(/\b\w/g, char => char.toUpperCase());
-            const formatAxisValue = stats => {
-                if (!stats || typeof stats !== 'object') return osceReadableValue(stats);
-                const points = Number(stats.points || 0);
-                const maxPoints = Number(stats.maxPoints || 0);
-                const percent = stats.percent ?? (maxPoints ? Math.round(points / maxPoints * 100) : 0);
-                return `${points} de ${maxPoints} pontos · ${percent}%`;
-            };
-            return `<div class="osce-result-grid">${Object.entries(value).map(([key, item]) => {
-                if (key === 'performanceByAxis' && item && typeof item === 'object') {
-                    return `<div class="osce-result-card"><small>${escapeHtml(formatLabel(key))}</small><div class="osce-result-grid">${Object.entries(item).map(([axis, stats]) => `<div class="osce-result-card"><small>${escapeHtml(formatLabel(axis))}</small><strong>${escapeHtml(formatAxisValue(stats))}</strong></div>`).join('')}</div></div>`;
-                }
-                return `<div class="osce-result-card"><small>${escapeHtml(formatLabel(key))}</small><strong>${escapeHtml(osceReadableValue(item))}</strong></div>`;
-            }).join('')}</div>`;
+        const OSCE_AXIS_LABELS = { COMMUNICATION: 'Comunicação', HISTORY: 'Anamnese', PHYSICAL_EXAM: 'Exame físico', DIAGNOSTIC_REASONING: 'Raciocínio diagnóstico', MANAGEMENT: 'Conduta' };
+
+        // Só cuida da pontuação (total + desempenho por eixo). O gabarito e a
+        // explicação do caso têm sua própria seção estruturada, em
+        // osceFinalAnswerMarkup — nunca mais um dump genérico de chave/valor.
+        function osceResultMarkup(summary) {
+            if (!summary) return '<p>Nenhum resultado detalhado disponível.</p>';
+            const { totalPoints = 0, maxPoints = 0, percent = 0, performanceByAxis = {} } = summary;
+            const axisEntries = Object.entries(performanceByAxis).filter(([, stats]) => stats?.maxPoints);
+            return `<div class="osce-score-hero">
+                <span class="osce-score-hero-label">Pontuação final</span>
+                <strong class="osce-score-hero-value">${escapeHtml(String(totalPoints))}<span>/ ${escapeHtml(String(maxPoints))}</span></strong>
+                <span class="osce-score-hero-percent">${escapeHtml(String(percent))}% de aproveitamento</span>
+            </div>
+            ${axisEntries.length ? `<div class="osce-result-grid">${axisEntries.map(([axis, stats]) => `<div class="osce-result-card"><small>${escapeHtml(OSCE_AXIS_LABELS[axis] || axis)}</small><strong>${escapeHtml(String(stats.points))} de ${escapeHtml(String(stats.maxPoints))}</strong><span class="osce-result-card-percent">${escapeHtml(String(stats.percent ?? 0))}%</span></div>`).join('')}</div>` : ''}`;
+        }
+
+        // Cartão único e estruturado com o gabarito/explicação do caso — em
+        // português, com rótulos fixos (nunca a chave em inglês do JSON).
+        function osceFinalAnswerMarkup(finalAnswer) {
+            if (!finalAnswer || typeof finalAnswer !== 'object') return '';
+            const { expectedDiagnosis, expectedManagement, criticalErrors, explanation } = finalAnswer;
+            const sections = [
+                expectedDiagnosis ? `<div class="osce-answer-section"><small>Diagnóstico esperado</small><strong>${escapeHtml(expectedDiagnosis)}</strong></div>` : '',
+                Array.isArray(expectedManagement) && expectedManagement.length ? `<div class="osce-answer-section"><small>Conduta esperada</small>${osceTextList(expectedManagement)}</div>` : '',
+                Array.isArray(criticalErrors) && criticalErrors.length ? `<div class="osce-answer-section osce-answer-section-critical"><small>Erros críticos</small>${osceTextList(criticalErrors)}</div>` : '',
+                explanation ? `<div class="osce-answer-section"><small>Explicação do caso</small><p>${escapeHtml(explanation)}</p></div>` : ''
+            ].filter(Boolean);
+            if (!sections.length) return '';
+            return `<div class="osce-answer-key"><span class="question-config-kicker">Gabarito e elucidação do caso</span>${sections.join('')}</div>`;
         }
 
         function beginOsceStation() {
@@ -9664,7 +9722,10 @@ Regras obrigatórias:
             const timer = document.getElementById('osceTimer');
             const fill = document.getElementById('osceTimerFill');
             osceTimer = setInterval(() => { remaining -= 1; if (timer) timer.textContent = formatOsceTime(remaining); if (fill) fill.style.width = `${Math.min(100, Math.max(0, ((limit - remaining) / limit) * 100))}%`; if (remaining <= 0) finishOsceStation(); }, 1000);
-            if (activeOsceSession?.mode === 'CANDIDATE') renderOsceTask(activeOsceSession.station, activeOsceSession.currentTaskIndex || 0);
+            if (activeOsceSession?.mode === 'CANDIDATE') {
+                renderPatientChat(activeOsceSession.station);
+                renderOsceTask(activeOsceSession.station, activeOsceSession.currentTaskIndex || 0);
+            }
             if (activeOsceSession?.mode === 'EVALUATOR') {
                 document.querySelector('.osce-task-active')?.remove();
                 renderEvaluatorChecklist(activeOsceSession.station);
@@ -9728,6 +9789,70 @@ Regras obrigatórias:
                 entries = (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`);
             }
             output.innerHTML = `<div class="osce-resource-card"><small>${escapeHtml(label)}</small>${osceTextList(entries.length ? entries : ['Nenhuma informação disponível para esta estação.'])}</div>`;
+        }
+
+        const OSCE_CHAT_STOPWORDS = new Set(['a','o','as','os','de','da','do','das','dos','em','com','para','por','sobre','que','e','ou','se','um','uma','no','na','nos','nas','ao','aos','à','às','é','foi','ser','tem','há','esta','está','isso','isto','qual','quais','como','voce','você']);
+
+        function normalizeOsceChatText(text) {
+            return String(text || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s]/g, ' ');
+        }
+
+        function osceChatWords(text) {
+            return normalizeOsceChatText(text).split(/\s+/).filter(word => word.length >= 2 && !OSCE_CHAT_STOPWORDS.has(word));
+        }
+
+        // Casa a pergunta digitada com o "trigger" mais parecido do roteiro da
+        // paciente (sem IA — comparação de palavras-chave). Os triggers são
+        // frases longas ("Pergunta sobre início, duração..."), então exigir
+        // um % alto de palavras em comum penaliza demais perguntas curtas e
+        // objetivas — o critério aqui é: pelo menos duas palavras em comum,
+        // ou uma palavra só se ela for suficientemente específica (>= 4
+        // letras, não um termo genérico).
+        function matchPatientResponse(responses, question) {
+            const qWords = osceChatWords(question);
+            if (!qWords.length) return null;
+            let best = null, bestMatched = [];
+            for (const item of responses || []) {
+                const tWords = osceChatWords(item.trigger);
+                if (!tWords.length) continue;
+                const matched = qWords.filter(word => tWords.some(t => t.includes(word) || word.includes(t)));
+                if (matched.length > bestMatched.length) { bestMatched = matched; best = item; }
+            }
+            const hasStrongWord = bestMatched.some(word => word.length >= 4);
+            if (bestMatched.length >= 2 || (bestMatched.length >= 1 && hasStrongWord)) return best;
+            return null;
+        }
+
+        function renderPatientChat(station) {
+            const card = document.querySelector('.osce-door-card');
+            if (!card || card.querySelector('.osce-patient-chat')) return;
+            const script = station?.evaluatorContentJson?.patientScript || {};
+            const opening = script.openingStatement || '';
+            const section = document.createElement('section');
+            section.className = 'osce-patient-chat';
+            section.innerHTML = `<span class="question-config-kicker">Converse com a paciente</span>
+                <div class="osce-chat-log" id="osceChatLog">${opening ? `<div class="osce-chat-msg osce-chat-msg-patient"><strong>Paciente</strong><p>${escapeHtml(opening)}</p></div>` : ''}</div>
+                <form class="osce-chat-form" onsubmit="return sendOscePatientMessage(event)">
+                    <input type="text" id="osceChatInput" placeholder="Pergunte algo à paciente…" autocomplete="off">
+                    <button type="submit">Perguntar</button>
+                </form>`;
+            card.appendChild(section);
+        }
+
+        function sendOscePatientMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('osceChatInput');
+            const question = input?.value.trim();
+            if (!question) return false;
+            const log = document.getElementById('osceChatLog');
+            log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-candidate"><strong>Você</strong><p>${escapeHtml(question)}</p></div>`);
+            const responses = activeOsceSession?.station?.evaluatorContentJson?.patientScript?.responses || [];
+            const match = matchPatientResponse(responses, question);
+            const answer = match?.response || 'Desculpa, não entendi bem. Pode perguntar de outro jeito?';
+            log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-patient"><strong>Paciente</strong><p>${escapeHtml(answer)}</p></div>`);
+            log.scrollTop = log.scrollHeight;
+            input.value = '';
+            return false;
         }
 
         function renderOsceTask(station, taskIndex) {
@@ -9818,7 +9943,7 @@ Regras obrigatórias:
                 maxPoints,
                 percent: maxPoints ? Math.round(points / maxPoints * 100) : 0,
                 performanceByAxis: axis,
-                gabarito: session.station?.evaluatorContentJson?.finalAnswer || {}
+                finalAnswer: session.station?.evaluatorContentJson?.finalAnswer || null
             };
         }
 
@@ -9829,9 +9954,9 @@ Regras obrigatórias:
                 const summary = localOsceSummary(activeOsceSession);
                 const card = document.querySelector('.osce-door-card');
                 if (activeOsceSession.mode === 'CANDIDATE') {
-                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}<p>O gabarito foi visualizado e esta sessão está bloqueada para alterações.</p>`;
+                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
                 } else if (card) {
-                    card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}<p>O resultado está pronto para ser apresentado ao candidato.</p></section>`);
+                    card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
                 }
                 return;
             }
@@ -9843,7 +9968,7 @@ Regras obrigatórias:
                 const result = await reveal.json();
                 if (reveal.ok) {
                     const card = document.querySelector('.osce-door-card');
-                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(result.summary)}<p>O gabarito foi visualizado e esta sessão está bloqueada para alterações.</p>`;
+                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(result.summary)}${osceFinalAnswerMarkup(result.summary?.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
                 }
             } else revealQuestionNotice('Estação encerrada. Resultado pronto para o avaliador entregar ao candidato.');
         }
