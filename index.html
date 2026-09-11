@@ -6235,8 +6235,8 @@
             getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
         import {
-            getFunctions, httpsCallable
-        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-functions.js";
+            getAI, getGenerativeModel, GoogleAIBackend, Schema
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-ai.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -6253,8 +6253,67 @@
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
             const db = getFirestore(app);
-            const functions = getFunctions(app, 'southamerica-east1');
             try { getAnalytics(app); } catch (e) { /* analytics é opcional, ignora falha (ex: ad-blocker) */ }
+
+            // Firebase AI Logic — chama o Gemini direto do navegador (plano
+            // Spark, sem custo e sem servidor próprio). A chave da API não
+            // existe no cliente: o Firebase faz a ponte com o Gemini usando
+            // a configuração do próprio projeto. "responseSchema" obriga o
+            // modelo a devolver exatamente os campos da estação OSCE.
+            const AXES = ['COMMUNICATION', 'HISTORY', 'PHYSICAL_EXAM', 'DIAGNOSTIC_REASONING', 'MANAGEMENT'];
+            const checklistItemAiSchema = Schema.object({
+                properties: {
+                    id: Schema.string(),
+                    axis: Schema.enumString({ enum: AXES }),
+                    description: Schema.string(),
+                    points: Schema.number(),
+                    critical: Schema.boolean()
+                }
+            });
+            const taskAiSchema = Schema.object({
+                properties: {
+                    id: Schema.string(),
+                    title: Schema.string(),
+                    candidateInstructions: Schema.string(),
+                    checklist: Schema.array({ items: checklistItemAiSchema }),
+                    answerKey: Schema.string()
+                }
+            });
+            const osceContentAiSchema = Schema.object({
+                properties: {
+                    title: Schema.string(),
+                    difficulty: Schema.enumString({ enum: ['BÁSICA', 'INTERMEDIÁRIA', 'AVANÇADA'] }),
+                    estimatedMinutes: Schema.integer(),
+                    scenario: Schema.object({ properties: { environment: Schema.string(), materials: Schema.array({ items: Schema.string() }) } }),
+                    doorInstructions: Schema.object({ properties: {
+                        patientName: Schema.string(), age: Schema.string(), chiefComplaint: Schema.string(), triageSummary: Schema.string()
+                    } }),
+                    patientScript: Schema.object({ properties: {
+                        profile: Schema.object({ properties: {
+                            behavior: Schema.string(), tone: Schema.string(), emotionalState: Schema.string(),
+                            understanding: Schema.string(), concerns: Schema.string(), baseline: Schema.string()
+                        } }),
+                        openingStatement: Schema.string(),
+                        responses: Schema.array({ items: Schema.object({ properties: { trigger: Schema.string(), response: Schema.string(), releaseRule: Schema.string() } }) }),
+                        hiddenInformation: Schema.array({ items: Schema.string() })
+                    } }),
+                    physicalExam: Schema.array({ items: Schema.object({ properties: { system: Schema.string(), request: Schema.string(), findings: Schema.array({ items: Schema.string() }) } }) }),
+                    complementaryTests: Schema.array({ items: Schema.object({ properties: { id: Schema.string(), name: Schema.string(), releaseRule: Schema.string(), result: Schema.string() } }) }),
+                    evolution: Schema.array({ items: Schema.object({ properties: { trigger: Schema.string(), change: Schema.string() } }) }),
+                    tasks: Schema.array({ items: taskAiSchema }),
+                    finalAnswer: Schema.object({ properties: {
+                        expectedDiagnosis: Schema.string(),
+                        expectedManagement: Schema.array({ items: Schema.string() }),
+                        criticalErrors: Schema.array({ items: Schema.string() }),
+                        explanation: Schema.string()
+                    } })
+                }
+            });
+            const ai = getAI(app, { backend: new GoogleAIBackend() });
+            const osceModel = getGenerativeModel(ai, {
+                model: 'gemini-3.7-flash',
+                generationConfig: { responseMimeType: 'application/json', responseSchema: osceContentAiSchema, temperature: 0.95 }
+            });
 
             window.__fb = {
                 ready: true,
@@ -6284,9 +6343,13 @@
                     return snap.exists() ? (snap.data().questionHistory || null) : null;
                 },
                 setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true }),
-                // Gera uma estação OSCE inédita com a API do Gemini. A chave da IA
-                // fica só no servidor (Cloud Function); o app nunca a recebe.
-                generateOsceStation: (payload) => httpsCallable(functions, 'generateOsceStation')(payload).then(result => result.data),
+                // Gera o conteúdo clínico de uma estação OSCE inédita com o
+                // Gemini (Firebase AI Logic, direto do navegador). Devolve o
+                // objeto já no formato pedido pelo responseSchema.
+                generateOsceStationContent: async (prompt) => {
+                    const result = await osceModel.generateContent(prompt);
+                    return JSON.parse(result.response.text());
+                },
                 // Coleção própria (não debaixo de "users") para o dono do
                 // projeto conseguir ver todo o feedback recebido de uma vez
                 // só no Console do Firebase, em Firestore Database > feedback.
@@ -9234,6 +9297,27 @@
             }
         }
 
+        function buildOsceGenerationPrompt({ areaName, themeName, subthemeName, format, difficulty }) {
+            return `Você é um especialista em educação médica brasileira, criador de estações de OSCE (Objective Structured Clinical Examination) para prova de residência médica (padrão Revalida/Enamed).
+
+Crie UMA estação OSCE inédita, em português do Brasil, sobre o seguinte tema curricular:
+- Área: ${areaName}
+- Tema: ${themeName}
+- Subtema/assunto: ${subthemeName}
+- Formato da estação: ${format}
+- Dificuldade alvo: ${difficulty || 'INTERMEDIÁRIA'}
+
+Regras obrigatórias:
+1. O paciente é fictício (nome, idade e detalhes inventados) — nunca use pessoas reais.
+2. O caso deve ser clinicamente coerente e conservador, alinhado a diretrizes brasileiras/internacionais amplamente aceitas para o tema.
+3. Adapte o foco das tarefas e do checklist ao formato pedido (ex.: EXAME_FISICO foca em exame físico; COMUNICACAO foca em habilidades de comunicação; CONDUTA foca em decisão terapêutica).
+4. Gere entre 1 e 3 tarefas ("tasks"), cada uma com 4 a 8 itens de checklist, distribuídos entre os eixos COMMUNICATION, HISTORY, PHYSICAL_EXAM, DIAGNOSTIC_REASONING e MANAGEMENT. Pelo menos um item do checklist geral deve ter "critical": true (erro que compromete a segurança do paciente).
+5. "patientScript.responses" deve ter pelo menos 8 pares de pergunta-esperada/resposta cobrindo história, sintomas associados, gravidade, medicações, antecedentes e expectativas do paciente.
+6. Preencha "complementaryTests" apenas se fizer sentido clínico para o formato/tema.
+7. "doorInstructions.triageSummary" deve resumir os sinais vitais/triagem em uma frase (ex.: "PA 128/78 mmHg, FC 118 bpm, SpO2 90% em ar ambiente").
+8. Responda em português, com linguagem natural de prontuário/simulação clínica.`;
+        }
+
         async function generateOsceStationWithAI() {
             const status = document.getElementById('osceStationStatus');
             const button = document.getElementById('osceAiGenerateBtn');
@@ -9254,10 +9338,38 @@
             if (button) { button.disabled = true; button.classList.add('is-loading'); }
             if (status) status.innerHTML = '<strong>Gerando estação com IA…</strong>Isso pode levar alguns segundos.';
             try {
-                const raw = await window.__fb.generateOsceStation({
-                    areaSlug, areaName: area.name, themeCode, themeName: `Tema ${themeCode}`,
-                    subthemeSlug, subthemeName: subthemeEntry.name, format
+                const prompt = buildOsceGenerationPrompt({
+                    areaName: area.name, themeName: `Tema ${themeCode}`, subthemeName: subthemeEntry.name, format
                 });
+                let content;
+                try {
+                    content = await window.__fb.generateOsceStationContent(prompt);
+                } catch (firstError) {
+                    console.warn('Primeira tentativa de gerar estação falhou, tentando novamente:', firstError);
+                    content = await window.__fb.generateOsceStationContent(prompt);
+                }
+                const raw = {
+                    schemaVersion: '1.0.0',
+                    externalId: `ai-${areaSlug}-${themeCode}-${subthemeSlug}-${Date.now()}`,
+                    metadata: {
+                        areaSlug, themeCode, subthemeSlug, format,
+                        title: content.title, version: 1,
+                        difficulty: content.difficulty, estimatedMinutes: content.estimatedMinutes
+                    },
+                    scenario: content.scenario,
+                    doorInstructions: {
+                        patientName: content.doorInstructions?.patientName,
+                        age: content.doorInstructions?.age,
+                        chiefComplaint: content.doorInstructions?.chiefComplaint,
+                        triageData: { Resumo: content.doorInstructions?.triageSummary || '' }
+                    },
+                    patientScript: content.patientScript,
+                    physicalExam: content.physicalExam,
+                    complementaryTests: content.complementaryTests,
+                    evolution: content.evolution,
+                    tasks: content.tasks,
+                    finalAnswer: content.finalAnswer
+                };
                 const station = normalizeLocalOsceStation(raw, osceStationsCache.length);
                 osceStationsCache.unshift(station);
                 const stationSelect = document.getElementById('questionConfigStation');
