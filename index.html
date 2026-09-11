@@ -6237,6 +6237,9 @@
         import {
             getAI, getGenerativeModel, GoogleAIBackend, Schema
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-ai.js";
+        import {
+            initializeAppCheck, ReCaptchaEnterpriseProvider
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app-check.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -6254,6 +6257,22 @@
             const auth = getAuth(app);
             const db = getFirestore(app);
             try { getAnalytics(app); } catch (e) { /* analytics é opcional, ignora falha (ex: ad-blocker) */ }
+
+            // App Check — protege o Gemini (Firebase AI Logic) contra uso fora
+            // do app de verdade. Em localhost/127.0.0.1, ativa o provedor de
+            // depuração: no primeiro acesso local ele imprime um token no
+            // console do navegador que precisa ser registrado uma vez em
+            // Firebase Console > Segurança > App Check > Apps > (⋮) > Gerenciar
+            // tokens de depuração. Em produção (domínio publicado) usa o
+            // reCAPTCHA Enterprise normalmente, sem nenhuma ação do usuário.
+            const isLocalDev = ['localhost', '127.0.0.1'].includes(location.hostname);
+            if (isLocalDev) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+            try {
+                initializeAppCheck(app, {
+                    provider: new ReCaptchaEnterpriseProvider('6Le1A7UtAAAAAIsWegRTlJoIq9m1HBUg2_Tf9wJt'),
+                    isTokenAutoRefreshEnabled: true
+                });
+            } catch (e) { console.warn('App Check não pôde ser inicializado:', e); }
 
             // Firebase AI Logic — chama o Gemini direto do navegador (plano
             // Spark, sem custo e sem servidor próprio). A chave da API não
