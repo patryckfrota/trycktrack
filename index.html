@@ -7896,26 +7896,94 @@
         // ============================================================
 
         const ENAMED_TARGET_DATE = new Date('2026-09-13T13:00:00-03:00').getTime();
-        // "topic" aponta para uma grande área do Rapid Review (mesmas chaves
-        // de RAPID_REVIEW_DATA/openReader) — tocar no card abre a leitura
-        // daquele assunto. Quando não há um tema de Rapid Review equivalente
-        // (ex.: o próprio exame), aponta para a aba de Trilhas.
+        // Cada card abre seu próprio artigo (painel de detalhes reaproveitado
+        // de "Sobre"/"Termos"), não o Rapid Review inteiro. O texto de
+        // "article" é rascunho — troque pelo conteúdo definitivo depois.
         const MED_UPDATES = [
-            { tag: 'AHA 2023', title: 'Hipertensão arterial', text: 'Classificação e metas terapêuticas revisadas para adultos.', topic: 'clinica-medica' },
-            { tag: 'Sepsis-3', title: 'Choque séptico', text: 'Critérios de lactato e uso de vasopressor revisados na prática.', topic: 'clinica-medica' },
-            { tag: 'GOLD 2024', title: 'DPOC', text: 'Grupos de tratamento inicial e escalonamento atualizados.', topic: 'clinica-medica' },
-            { tag: 'OMS', title: 'Saúde mental', text: 'Novas diretrizes de rastreio para transtornos de ansiedade.', topic: 'psiquiatria' },
-            { tag: 'FEBRASGO', title: 'Pré-natal', text: 'Recomendações revisadas de suplementação e rastreio.', topic: 'go-completo' },
-            { tag: 'SBP', title: 'Imunização', text: 'Calendário vacinal infantil com novas atualizações.', topic: 'pediatria-completo' },
-            { tag: 'ADA 2024', title: 'Diabetes tipo 2', text: 'Metas glicêmicas e classes terapêuticas de primeira linha.', topic: 'clinica-medica' },
-            { tag: 'INEP', title: 'Revalida', text: 'Edição mais recente com foco em habilidades clínicas.', topic: null }
+            {
+                tag: 'AHA 2023', title: 'Hipertensão arterial',
+                text: 'Classificação e metas terapêuticas revisadas para adultos.',
+                article: {
+                    subtitle: 'Classificação e metas — American Heart Association',
+                    body: `<div class="sidebar-detail-card"><h3>O que mudou</h3><p>As diretrizes mais recentes reforçam a classificação da hipertensão arterial em estágios, com limiares de diagnóstico mais baixos do que os usados historicamente. O objetivo é identificar precocemente pacientes em risco cardiovascular elevado, antes de complicações estabelecidas.</p></div><div class="sidebar-detail-card"><h3>Por que isso importa na prova</h3><p>Bancas costumam cobrar a classificação por estágios e a diferenciação entre hipertensão do jaleco branco, mascarada e sustentada — situações que exigem medidas fora do consultório (MAPA ou MRPA) para confirmação diagnóstica.</p></div><div class="sidebar-detail-card"><h3>Conduta inicial</h3><p>Mudança de estilo de vida é recomendada para todos os estágios. A decisão de iniciar terapia farmacológica considera o estágio, o risco cardiovascular global e a presença de comorbidades como diabetes e doença renal crônica.</p></div>`
+                }
+            },
+            {
+                tag: 'Sepsis-3', title: 'Choque séptico',
+                text: 'Critérios de lactato e uso de vasopressor revisados na prática.',
+                article: {
+                    subtitle: 'Critérios diagnósticos — consenso Sepsis-3',
+                    body: `<div class="sidebar-detail-card"><h3>Definição atual</h3><p>Sepse é definida como disfunção orgânica ameaçadora à vida causada por uma resposta desregulada do hospedeiro à infecção. O choque séptico é um subgrupo com anormalidades circulatórias e metabólicas graves o suficiente para aumentar substancialmente a mortalidade.</p></div><div class="sidebar-detail-card"><h3>Critérios operacionais</h3><p>Na prática, o choque séptico é reconhecido pela necessidade de vasopressor para manter pressão arterial média adequada, associada a lactato sérico elevado, mesmo após reposição volêmica adequada.</p></div><div class="sidebar-detail-card"><h3>Manejo inicial</h3><p>O pacote da primeira hora prioriza coleta de culturas, início precoce de antibioticoterapia, ressuscitação volêmica guiada e reavaliação frequente da perfusão tecidual.</p></div>`
+                }
+            },
+            {
+                tag: 'GOLD 2024', title: 'DPOC',
+                text: 'Grupos de tratamento inicial e escalonamento atualizados.',
+                article: {
+                    subtitle: 'Estratégia de tratamento — GOLD',
+                    body: `<div class="sidebar-detail-card"><h3>Classificação por grupos</h3><p>O documento organiza o tratamento inicial da DPOC estável por grupos, considerando principalmente a carga de sintomas e o histórico de exacerbações, em vez de basear a terapia farmacológica isoladamente no grau de obstrução espirométrica.</p></div><div class="sidebar-detail-card"><h3>Escalonamento</h3><p>O ajuste terapêutico ao longo do seguimento leva em conta a resposta clínica, sintomas persistentes e novas exacerbações, com critérios objetivos para adicionar ou trocar classes de broncodilatadores e considerar terapia anti-inflamatória.</p></div><div class="sidebar-detail-card"><h3>Pontos de atenção</h3><p>Vacinação, cessação do tabagismo e reabilitação pulmonar continuam sendo pilares não farmacológicos com impacto relevante em desfechos clínicos.</p></div>`
+                }
+            },
+            {
+                tag: 'OMS', title: 'Saúde mental',
+                text: 'Novas diretrizes de rastreio para transtornos de ansiedade.',
+                article: {
+                    subtitle: 'Rastreio e cuidado — Organização Mundial da Saúde',
+                    body: `<div class="sidebar-detail-card"><h3>Rastreio ampliado</h3><p>Recomendações recentes reforçam a importância do rastreio ativo de transtornos de ansiedade na atenção primária, especialmente em populações com maior vulnerabilidade psicossocial.</p></div><div class="sidebar-detail-card"><h3>Abordagem escalonada</h3><p>O cuidado é organizado em níveis de intensidade crescente — orientação e intervenções breves como primeira linha, com encaminhamento para terapia especializada ou tratamento farmacológico conforme gravidade e resposta inicial.</p></div><div class="sidebar-detail-card"><h3>Integração com a atenção primária</h3><p>Fortalecer a capacidade de equipes generalistas para identificar e manejar casos leves a moderados é uma estratégia central para ampliar o acesso ao cuidado em saúde mental.</p></div>`
+                }
+            },
+            {
+                tag: 'FEBRASGO', title: 'Pré-natal',
+                text: 'Recomendações revisadas de suplementação e rastreio.',
+                article: {
+                    subtitle: 'Assistência pré-natal — FEBRASGO',
+                    body: `<div class="sidebar-detail-card"><h3>Suplementação</h3><p>As recomendações atuais revisam a indicação de suplementos de rotina na gestação, com atenção especial a ácido fólico, ferro e vitamina D conforme o perfil de risco de cada gestante.</p></div><div class="sidebar-detail-card"><h3>Rastreio de rotina</h3><p>O calendário de exames e rastreios ao longo dos trimestres é organizado por objetivo clínico: identificação precoce de síndromes hipertensivas, diabetes gestacional e infecções verticalmente transmissíveis.</p></div><div class="sidebar-detail-card"><h3>Individualização do cuidado</h3><p>Gestações de alto risco exigem intensificação da vigilância clínica e laboratorial, com encaminhamento oportuno para serviços de referência quando indicado.</p></div>`
+                }
+            },
+            {
+                tag: 'SBP', title: 'Imunização',
+                text: 'Calendário vacinal infantil com novas atualizações.',
+                article: {
+                    subtitle: 'Calendário vacinal — Sociedade Brasileira de Pediatria',
+                    body: `<div class="sidebar-detail-card"><h3>O que revisar</h3><p>O calendário vacinal infantil é atualizado periodicamente quanto a esquemas, doses de reforço e faixas etárias — pontos frequentemente cobrados em provas de residência.</p></div><div class="sidebar-detail-card"><h3>Situações especiais</h3><p>Crianças com esquemas incompletos, prematuros e pacientes imunocomprometidos podem exigir ajustes específicos de calendário, com atenção redobrada às contraindicações de vacinas de vírus vivo.</p></div><div class="sidebar-detail-card"><h3>Comunicação com a família</h3><p>Orientar sobre eventos adversos esperados e reforçar a importância da completude vacinal são partes essenciais da consulta pediátrica de rotina.</p></div>`
+                }
+            },
+            {
+                tag: 'ADA 2024', title: 'Diabetes tipo 2',
+                text: 'Metas glicêmicas e classes terapêuticas de primeira linha.',
+                article: {
+                    subtitle: 'Padrões de cuidado — American Diabetes Association',
+                    body: `<div class="sidebar-detail-card"><h3>Metas individualizadas</h3><p>As metas de controle glicêmico são individualizadas conforme idade, tempo de doença, comorbidades e risco de hipoglicemia, em vez de um alvo único para todos os pacientes.</p></div><div class="sidebar-detail-card"><h3>Escolha terapêutica</h3><p>A seleção da terapia de primeira linha considera cada vez mais a presença de doença cardiovascular, renal ou insuficiência cardíaca estabelecida, priorizando classes com benefício comprovado nesses cenários.</p></div><div class="sidebar-detail-card"><h3>Acompanhamento</h3><p>Rastreio regular de complicações micro e macrovasculares continua sendo parte essencial do seguimento a longo prazo.</p></div>`
+                }
+            },
+            {
+                tag: 'INEP', title: 'Revalida',
+                text: 'Edição mais recente com foco em habilidades clínicas.',
+                article: {
+                    subtitle: 'Sobre o exame — INEP',
+                    body: `<div class="sidebar-detail-card"><h3>Estrutura do exame</h3><p>O Revalida avalia conhecimentos teóricos e habilidades clínicas práticas, incluindo estações de simulação com pacientes padronizados — por isso o treino no formato OSCE é tão relevante na preparação.</p></div><div class="sidebar-detail-card"><h3>O que priorizar nos estudos</h3><p>Raciocínio clínico aplicado, comunicação com o paciente e conduta baseada em diretrizes atuais costumam pesar mais do que memorização isolada de dados.</p></div><div class="sidebar-detail-card"><h3>Como o app ajuda</h3><p>Use as Trilhas para organizar sua preparação por etapas e o modo OSCE para treinar estações clínicas estruturadas.</p></div>`
+                }
+            }
         ];
 
         function openMedUpdateCard(index) {
             const item = MED_UPDATES[index];
-            if (!item) return;
-            if (item.topic) openReader(item.topic);
-            else mudarPagina('trilhas');
+            if (!item?.article) return;
+            document.getElementById('sidebar')?.classList.remove('active');
+            document.getElementById('sidebarBackdrop')?.classList.remove('active');
+            const panel = document.getElementById('sidebarDetailPanel');
+            const backdrop = document.getElementById('sidebarDetailBackdrop');
+            const title = document.getElementById('sidebarDetailTitle');
+            const subtitle = document.getElementById('sidebarDetailSubtitle');
+            const body = document.getElementById('sidebarDetailBody');
+            if (!panel || !backdrop || !title || !subtitle || !body) return;
+            title.textContent = item.title;
+            subtitle.textContent = item.article.subtitle;
+            body.innerHTML = item.article.body;
+            applyGlobalFontScale(Number(localStorage.getItem('trycktrack-global-font-scale')) || 1);
+            panel.classList.add('active');
+            backdrop.classList.add('active');
+            panel.setAttribute('aria-hidden', 'false');
         }
 
         function renderMedUpdatesCarousel() {
