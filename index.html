@@ -1597,23 +1597,19 @@
         .med-updates-block { margin-bottom: 18px; }
         .med-updates-heading { margin: 0 0 10px 2px; color: var(--text-main); font-size: 15px; font-weight: 650; }
         .med-carousel-viewport {
-            overflow: hidden;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
             -webkit-mask-image: linear-gradient(to right, transparent, #000 22px, #000 calc(100% - 22px), transparent);
             mask-image: linear-gradient(to right, transparent, #000 22px, #000 calc(100% - 22px), transparent);
         }
+        .med-carousel-viewport::-webkit-scrollbar { display: none; }
         .med-carousel-track {
             display: flex;
             width: max-content;
             gap: 12px;
-            animation: medCarouselScroll 34s linear infinite;
-        }
-        .med-carousel-viewport:hover .med-carousel-track,
-        .med-carousel-track.paused {
-            animation-play-state: paused;
-        }
-        @keyframes medCarouselScroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
         }
         .med-update-card {
             box-sizing: border-box;
@@ -1631,7 +1627,10 @@
             box-shadow: var(--glass-card-shadow);
             backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
             -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            cursor: pointer;
+            transition: transform .15s ease;
         }
+        .med-update-card:active { transform: scale(.96); }
         .med-update-tag {
             padding: 3px 8px;
             border-radius: 100px;
@@ -1651,9 +1650,6 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .med-carousel-track { animation: none; }
         }
         [data-theme="light"] .exam-countdown-card { background: linear-gradient(140deg, rgba(211,199,246,.68), rgba(255,255,255,.88) 72%); border-color: rgba(113,83,175,.3); box-shadow: 0 14px 28px rgba(63,47,95,.09), inset 0 1px rgba(255,255,255,.8); }
         [data-theme="light"] .exam-countdown-unit { background: rgba(255,255,255,.44); border-color: rgba(111,83,170,.16); }
@@ -7900,23 +7896,64 @@
         // ============================================================
 
         const ENAMED_TARGET_DATE = new Date('2026-09-13T13:00:00-03:00').getTime();
+        // "topic" aponta para uma grande área do Rapid Review (mesmas chaves
+        // de RAPID_REVIEW_DATA/openReader) — tocar no card abre a leitura
+        // daquele assunto. Quando não há um tema de Rapid Review equivalente
+        // (ex.: o próprio exame), aponta para a aba de Trilhas.
         const MED_UPDATES = [
-            { tag: 'AHA 2023', title: 'Hipertensão arterial', text: 'Classificação e metas terapêuticas revisadas para adultos.' },
-            { tag: 'Sepsis-3', title: 'Choque séptico', text: 'Critérios de lactato e uso de vasopressor revisados na prática.' },
-            { tag: 'GOLD 2024', title: 'DPOC', text: 'Grupos de tratamento inicial e escalonamento atualizados.' },
-            { tag: 'OMS', title: 'Saúde mental', text: 'Novas diretrizes de rastreio para transtornos de ansiedade.' },
-            { tag: 'FEBRASGO', title: 'Pré-natal', text: 'Recomendações revisadas de suplementação e rastreio.' },
-            { tag: 'SBP', title: 'Imunização', text: 'Calendário vacinal infantil com novas atualizações.' },
-            { tag: 'ADA 2024', title: 'Diabetes tipo 2', text: 'Metas glicêmicas e classes terapêuticas de primeira linha.' },
-            { tag: 'INEP', title: 'Revalida', text: 'Edição mais recente com foco em habilidades clínicas.' }
+            { tag: 'AHA 2023', title: 'Hipertensão arterial', text: 'Classificação e metas terapêuticas revisadas para adultos.', topic: 'clinica-medica' },
+            { tag: 'Sepsis-3', title: 'Choque séptico', text: 'Critérios de lactato e uso de vasopressor revisados na prática.', topic: 'clinica-medica' },
+            { tag: 'GOLD 2024', title: 'DPOC', text: 'Grupos de tratamento inicial e escalonamento atualizados.', topic: 'clinica-medica' },
+            { tag: 'OMS', title: 'Saúde mental', text: 'Novas diretrizes de rastreio para transtornos de ansiedade.', topic: 'psiquiatria' },
+            { tag: 'FEBRASGO', title: 'Pré-natal', text: 'Recomendações revisadas de suplementação e rastreio.', topic: 'go-completo' },
+            { tag: 'SBP', title: 'Imunização', text: 'Calendário vacinal infantil com novas atualizações.', topic: 'pediatria-completo' },
+            { tag: 'ADA 2024', title: 'Diabetes tipo 2', text: 'Metas glicêmicas e classes terapêuticas de primeira linha.', topic: 'clinica-medica' },
+            { tag: 'INEP', title: 'Revalida', text: 'Edição mais recente com foco em habilidades clínicas.', topic: null }
         ];
+
+        function openMedUpdateCard(index) {
+            const item = MED_UPDATES[index];
+            if (!item) return;
+            if (item.topic) openReader(item.topic);
+            else mudarPagina('trilhas');
+        }
 
         function renderMedUpdatesCarousel() {
             const container = document.getElementById('medUpdatesCarousel');
             if (!container || container.dataset.rendered) return;
             container.dataset.rendered = 'true';
-            const cardsHtml = MED_UPDATES.map(item => `<div class="med-update-card"><span class="med-update-tag">${escapeHtml(item.tag)}</span><strong class="med-update-title">${escapeHtml(item.title)}</strong><span class="med-update-text">${escapeHtml(item.text)}</span></div>`).join('');
-            container.innerHTML = `<div class="med-updates-block"><h2 class="med-updates-heading">Atualizações médicas</h2><div class="med-carousel-viewport"><div class="med-carousel-track">${cardsHtml}${cardsHtml}</div></div></div>`;
+            const cardsHtml = MED_UPDATES.map((item, index) => `<div class="med-update-card" onclick="openMedUpdateCard(${index})"><span class="med-update-tag">${escapeHtml(item.tag)}</span><strong class="med-update-title">${escapeHtml(item.title)}</strong><span class="med-update-text">${escapeHtml(item.text)}</span></div>`).join('');
+            container.innerHTML = `<div class="med-updates-block"><h2 class="med-updates-heading">Atualizações médicas</h2><div class="med-carousel-viewport" id="medCarouselViewport"><div class="med-carousel-track" id="medCarouselTrack">${cardsHtml}${cardsHtml}</div></div></div>`;
+            startMedCarouselAutoScroll();
+        }
+
+        // Rolagem automática feita via JS (scrollLeft), não CSS animation —
+        // assim o carrossel continua sendo um elemento com scroll de verdade,
+        // que a pessoa pode arrastar com o dedo normalmente. Toques pausam o
+        // avanço automático por um instante para não "brigar" com o gesto.
+        function startMedCarouselAutoScroll() {
+            const viewport = document.getElementById('medCarouselViewport');
+            const track = document.getElementById('medCarouselTrack');
+            if (!viewport || !track) return;
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            let paused = false;
+            let resumeTimer = null;
+            const pause = () => { paused = true; clearTimeout(resumeTimer); };
+            const scheduleResume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false; }, 1400); };
+            viewport.addEventListener('pointerdown', pause);
+            viewport.addEventListener('touchstart', pause, { passive: true });
+            ['pointerup', 'pointercancel', 'touchend', 'mouseleave'].forEach(evt => viewport.addEventListener(evt, scheduleResume));
+            function step() {
+                if (!paused && viewport.isConnected) {
+                    const half = track.scrollWidth / 2;
+                    if (half > 0) {
+                        viewport.scrollLeft += 0.5;
+                        if (viewport.scrollLeft >= half) viewport.scrollLeft -= half;
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
         }
 
         let enamedCountdownTimer = null;
