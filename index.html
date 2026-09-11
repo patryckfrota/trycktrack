@@ -1521,6 +1521,69 @@
         .exam-countdown-unit { padding: 10px 4px 9px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(7,8,11,.16); text-align: center; }
         .exam-countdown-number { display: block; font-size: 23px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1; }
         .exam-countdown-label { display: block; margin-top: 5px; color: var(--text-secondary); font-size: 9px; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
+
+        /* CARROSSEL DE ATUALIZAÇÕES MÉDICAS — tela inicial */
+        .med-updates-block { margin-bottom: 18px; }
+        .med-updates-heading { margin: 0 0 10px 2px; color: var(--text-main); font-size: 15px; font-weight: 650; }
+        .med-carousel-viewport {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 22px, #000 calc(100% - 22px), transparent);
+            mask-image: linear-gradient(to right, transparent, #000 22px, #000 calc(100% - 22px), transparent);
+        }
+        .med-carousel-track {
+            display: flex;
+            width: max-content;
+            gap: 12px;
+            animation: medCarouselScroll 34s linear infinite;
+        }
+        .med-carousel-viewport:hover .med-carousel-track,
+        .med-carousel-track.paused {
+            animation-play-state: paused;
+        }
+        @keyframes medCarouselScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .med-update-card {
+            box-sizing: border-box;
+            flex: 0 0 auto;
+            width: 136px;
+            height: 136px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 7px;
+            padding: 14px;
+            border: 1px solid var(--glass-card-border);
+            border-radius: 18px;
+            background: var(--glass-card-bg);
+            box-shadow: var(--glass-card-shadow);
+            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+        }
+        .med-update-tag {
+            padding: 3px 8px;
+            border-radius: 100px;
+            background: rgba(196,181,253,.14);
+            color: var(--lavender-active);
+            font-size: 9px;
+            font-weight: 750;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+        .med-update-title { color: var(--text-main); font-size: 12.5px; font-weight: 700; line-height: 1.25; }
+        .med-update-text {
+            color: var(--text-secondary);
+            font-size: 10.5px;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .med-carousel-track { animation: none; }
+        }
         [data-theme="light"] .exam-countdown-card { background: linear-gradient(140deg, rgba(211,199,246,.68), rgba(255,255,255,.88) 72%); border-color: rgba(113,83,175,.3); box-shadow: 0 14px 28px rgba(63,47,95,.09), inset 0 1px rgba(255,255,255,.8); }
         [data-theme="light"] .exam-countdown-unit { background: rgba(255,255,255,.44); border-color: rgba(111,83,170,.16); }
 
@@ -5647,6 +5710,7 @@
             <div class="tab-content active" id="inicioTab">
                 <div id="feedbackBannerSlot"></div>
                 <div id="enamedCountdown"></div>
+                <div id="medUpdatesCarousel"></div>
                 <div id="inicioLastRead"></div>
             </div>
 
@@ -6935,7 +6999,7 @@
         updateHeaderTitle('inicio');
 
         // Inicializar progresso das cards quando a página carrega
-        setTimeout(() => { updateAllCardProgress(); renderLastReadCard(); startEnamedCountdown(); }, 300);
+        setTimeout(() => { updateAllCardProgress(); renderLastReadCard(); startEnamedCountdown(); renderMedUpdatesCarousel(); }, 300);
 
         /* ============================================================
            RAPID REVIEW — dados
@@ -7756,6 +7820,25 @@
         // ============================================================
 
         const ENAMED_TARGET_DATE = new Date('2026-09-13T13:00:00-03:00').getTime();
+        const MED_UPDATES = [
+            { tag: 'AHA 2023', title: 'Hipertensão arterial', text: 'Classificação e metas terapêuticas revisadas para adultos.' },
+            { tag: 'Sepsis-3', title: 'Choque séptico', text: 'Critérios de lactato e uso de vasopressor revisados na prática.' },
+            { tag: 'GOLD 2024', title: 'DPOC', text: 'Grupos de tratamento inicial e escalonamento atualizados.' },
+            { tag: 'OMS', title: 'Saúde mental', text: 'Novas diretrizes de rastreio para transtornos de ansiedade.' },
+            { tag: 'FEBRASGO', title: 'Pré-natal', text: 'Recomendações revisadas de suplementação e rastreio.' },
+            { tag: 'SBP', title: 'Imunização', text: 'Calendário vacinal infantil com novas atualizações.' },
+            { tag: 'ADA 2024', title: 'Diabetes tipo 2', text: 'Metas glicêmicas e classes terapêuticas de primeira linha.' },
+            { tag: 'INEP', title: 'Revalida', text: 'Edição mais recente com foco em habilidades clínicas.' }
+        ];
+
+        function renderMedUpdatesCarousel() {
+            const container = document.getElementById('medUpdatesCarousel');
+            if (!container || container.dataset.rendered) return;
+            container.dataset.rendered = 'true';
+            const cardsHtml = MED_UPDATES.map(item => `<div class="med-update-card"><span class="med-update-tag">${escapeHtml(item.tag)}</span><strong class="med-update-title">${escapeHtml(item.title)}</strong><span class="med-update-text">${escapeHtml(item.text)}</span></div>`).join('');
+            container.innerHTML = `<div class="med-updates-block"><h2 class="med-updates-heading">Atualizações médicas</h2><div class="med-carousel-viewport"><div class="med-carousel-track">${cardsHtml}${cardsHtml}</div></div></div>`;
+        }
+
         let enamedCountdownTimer = null;
 
         function renderEnamedCountdown() {
