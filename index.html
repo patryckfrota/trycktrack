@@ -624,6 +624,42 @@
         }
         .question-config-field select:hover { border-color: rgba(196,181,253,.4); }
         .question-config-field select:focus { outline: none; border-color: rgba(196,181,253,.6); box-shadow: 0 0 0 3px rgba(196,181,253,.16); }
+        .question-config-field-slider label { display: flex; align-items: center; justify-content: space-between; }
+        .question-config-slider-value { color: var(--lavender-active); font-size: 13px; font-weight: 750; }
+        .question-config-slider-hint { color: var(--text-secondary); font-size: 10.5px; line-height: 1.4; }
+        .question-config-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(to right, var(--lavender-active) 0%, var(--lavender-active) var(--range-pct, 0%), rgba(196,181,253,.14) var(--range-pct, 0%), rgba(196,181,253,.14) 100%);
+            outline: none;
+            cursor: pointer;
+            margin: 4px 0;
+        }
+        .question-config-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--lavender-active);
+            border: 3px solid var(--bg-secondary);
+            box-shadow: 0 2px 8px rgba(0,0,0,.35);
+            cursor: pointer;
+        }
+        .question-config-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--bg-secondary);
+            border-radius: 50%;
+            background: var(--lavender-active);
+            box-shadow: 0 2px 8px rgba(0,0,0,.35);
+            cursor: pointer;
+        }
+        .question-config-slider::-moz-range-track { height: 8px; border-radius: 999px; background: rgba(196,181,253,.14); }
+        .question-config-slider::-moz-range-progress { height: 8px; border-radius: 999px; background: var(--lavender-active); }
         .question-config-start { margin-top: 18px; }
         .osce-mode-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 14px; }
         .osce-mode-choice button { border: 1px solid var(--border-color); border-radius: 12px; padding: 11px 10px; background: var(--bg-secondary); color: var(--text-secondary); font: 600 12px/1.2 var(--font-family-base); cursor: pointer; }
@@ -709,44 +745,55 @@
         @media (max-width: 560px) { .osce-case-grid, .osce-quick-actions { grid-template-columns: 1fr; } .osce-door-card { padding: 18px; border-radius: 22px; } }
         .osce-station-status { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-secondary); font-size: 12px; line-height: 1.45; }
         .osce-station-status strong { color: var(--text-main); display: block; margin-bottom: 3px; }
-        .question-pdf-action { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 10px; }
-        .question-pdf-button { flex: 1; min-width: 0; min-height: 42px; border: 1px solid rgba(139,107,224,.42); border-radius: 13px; background: transparent; color: var(--lavender-active); font: 650 12px/1 var(--font-family-base); cursor: pointer; }
-        .question-pdf-button:active { transform: scale(.985); }
+        .question-pdf-action {
+            display: grid;
+            gap: 11px;
+            width: 100%;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid var(--glass-card-border);
+        }
+        .question-pdf-label { color: var(--text-secondary); font-size: 10px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+        .question-pdf-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .question-pdf-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 44px;
+            border: 1px solid rgba(139,107,224,.38);
+            border-radius: 13px;
+            background: rgba(196,181,253,.06);
+            color: var(--lavender-active);
+            font: 650 12px/1.2 var(--font-family-base);
+            text-align: center;
+            padding: 8px 10px;
+            cursor: pointer;
+            transition: background .16s ease, border-color .16s ease, transform .16s ease;
+        }
+        .question-pdf-button svg { width: 15px; height: 15px; flex: 0 0 auto; }
+        .question-pdf-button:hover { border-color: rgba(196,181,253,.55); background: rgba(196,181,253,.1); }
+        .question-pdf-button:active { transform: scale(.97); }
         .pdf-progress-indicator {
             --pdf-progress: 0%;
-            flex: 0 0 22px;
-            width: 22px;
-            height: 22px;
-            display: inline-block;
-            border-radius: 50%;
-            background: rgba(196,181,253,.16);
-            position: relative;
-            opacity: .42;
-            transition: background .2s linear, opacity .2s ease, transform .2s ease;
+            display: block;
+            height: 3px;
+            border-radius: 3px;
+            background: rgba(196,181,253,.14);
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .2s ease;
         }
         .pdf-progress-indicator::after {
             content: "";
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: var(--bg-main);
+            display: block;
+            height: 100%;
+            width: var(--pdf-progress);
+            border-radius: inherit;
+            background: var(--lavender-active);
+            transition: width .25s ease;
         }
-        .pdf-progress-indicator.is-active { opacity: 1; transform: scale(1.08); }
-        .pdf-progress-indicator.is-active {
-            background: rgba(196,181,253,.16);
-            animation: none !important;
-        }
-        .pdf-progress-indicator.is-active::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border: 2px solid transparent;
-            border-top-color: var(--lavender-active);
-            border-right-color: var(--lavender-active);
-            border-radius: 50%;
-            animation: pdfRingSpin .8s linear infinite !important;
-            z-index: 1;
-        }
+        .pdf-progress-indicator.is-active { opacity: 1; }
         @keyframes pdfRingSpin { to { transform: rotate(360deg); } }
         #questionAreaTitle, #questionAreaFilters, #questionSubareaPanel, #questionExamPanel, .question-count-control { display: none !important; }
 
@@ -4492,7 +4539,7 @@
             .question-mode, .question-mode.question-mode-osce { min-height: 172px; }
             .question-config-view { padding: 24px; }
             .question-config-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
-            .question-config-fields .osce-mode-choice, .question-config-fields .osce-station-status { grid-column: 1 / -1; }
+            .question-config-fields .osce-mode-choice, .question-config-fields .osce-station-status, .question-config-fields .question-config-field-slider { grid-column: 1 / -1; }
             .question-config-start { max-width: 360px; margin-left: auto; margin-right: auto; }
             .trail-hub, .question-hub, .dashboard, #reviewTab { max-width: 1120px; margin-left: auto; margin-right: auto; }
             .trail-switch-button { min-height: 112px; padding: 18px 22px; }
@@ -5774,8 +5821,11 @@
                         <div id="questionConfigBody"></div>
                         <button class="question-start question-config-start" id="questionConfigStart" type="button" onclick="startQuestionSession()">Começar</button>
                         <div class="question-pdf-action" id="questionPdfAction" hidden>
-                            <button class="question-pdf-button" id="questionConfigPdf" type="button" onclick="downloadConfiguredQuestionPdf()">Baixar lista em PDF</button>
-                            <button class="question-pdf-button" id="questionConfigPdfWithAnswers" type="button" onclick="downloadConfiguredQuestionPdf(true)">Baixar com gabarito em PDF</button>
+                            <span class="question-pdf-label">Baixar em PDF</span>
+                            <div class="question-pdf-buttons">
+                                <button class="question-pdf-button" id="questionConfigPdf" type="button" onclick="downloadConfiguredQuestionPdf()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>Baixar lista</button>
+                                <button class="question-pdf-button" id="questionConfigPdfWithAnswers" type="button" onclick="downloadConfiguredQuestionPdf(true)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>Baixar com gabarito</button>
+                            </div>
                             <span class="pdf-progress-indicator" id="questionPdfProgress" aria-label="Progresso da geração do PDF" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span>
                         </div>
                     </section>
@@ -8834,6 +8884,15 @@
             }
         }
 
+        function updateQuestionCountSlider(el) {
+            const min = Number(el.min) || 1;
+            const max = Number(el.max) || 100;
+            const pct = ((Number(el.value) - min) / (max - min)) * 100;
+            el.style.setProperty('--range-pct', `${pct}%`);
+            const label = document.getElementById('questionConfigCountValue');
+            if (label) label.textContent = el.value;
+        }
+
         function openQuestionConfig(mode) {
             activeQuestionConfigMode = mode;
             document.querySelectorAll('.question-mode').forEach(item => item.classList.toggle('active', item.dataset.questionMode === mode));
@@ -8843,7 +8902,6 @@
             const title = document.getElementById('questionConfigTitle');
             const description = document.getElementById('questionConfigDescription');
             const start = document.getElementById('questionConfigStart');
-            const pdfButton = document.getElementById('questionConfigPdf');
             if (!view || !body || !title || !description || !start) return;
 
             const config = {
@@ -8857,10 +8915,7 @@
             description.textContent = config.description;
             start.textContent = config.button;
             const pdfAction = document.getElementById('questionPdfAction');
-            if (pdfButton) {
-                if (pdfAction) pdfAction.hidden = !['practice', 'exam', 'full-exam'].includes(mode);
-                pdfButton.textContent = mode === 'full-exam' ? 'Baixar prova em PDF' : 'Baixar lista em PDF';
-            }
+            if (pdfAction) pdfAction.hidden = !['practice', 'exam', 'full-exam'].includes(mode);
 
             const areas = questionAreaOptions().map(area => `<option value="${area}">${area}</option>`).join('');
             if (mode === 'full-exam') {
@@ -8882,7 +8937,11 @@
                     <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
                     <div class="question-config-divider">Quantidade</div>
-                    <div class="question-config-field"><label for="questionConfigCount">Número de questões</label><select id="questionConfigCount"><option value="5">5 questões</option><option value="10">10 questões</option><option value="12" selected>12 questões</option><option value="20">20 questões</option><option value="30">30 questões</option><option value="50">50 questões</option></select></div>
+                    <div class="question-config-field question-config-field-slider">
+                        <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>
+                        <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
+                        <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
+                    </div>
                 </div>`;
             }
             view.hidden = false;
