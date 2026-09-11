@@ -809,6 +809,12 @@
         .osce-ai-generate-icon { display: inline-block; }
         @keyframes osceAiSpin { to { transform: rotate(360deg); } }
         .osce-ai-hint { color: var(--text-secondary); font-size: 10.5px; line-height: 1.4; text-align: center; }
+        .osce-library-picker { display: grid; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--glass-card-border); }
+        .osce-library-picker[hidden] { display: none; }
+        .osce-library-picker label { color: var(--text-secondary); font-size: 11px; font-weight: 650; }
+        .osce-library-picker select { width: 100%; min-height: 44px; border: 1px solid var(--glass-card-border); border-radius: 12px; padding: 0 12px; background: rgba(var(--nav-glass-rgb), .045); color: var(--text-main); font: 500 13px var(--font-family-base); }
+        .osce-library-use-btn { min-height: 42px; border: 1px solid rgba(139,107,224,.38); border-radius: 12px; background: rgba(196,181,253,.06); color: var(--lavender-active); font: 650 12px var(--font-family-base); cursor: pointer; }
+        .osce-library-use-btn:active { transform: scale(.98); }
         .question-pdf-action {
             display: grid;
             gap: 11px;
@@ -6281,7 +6287,7 @@
             signInWithPopup, signOut
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
         import {
-            getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp
+            getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp, arrayUnion
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -6332,7 +6338,16 @@
                 // Coleção própria (não debaixo de "users") para o dono do
                 // projeto conseguir ver todo o feedback recebido de uma vez
                 // só no Console do Firebase, em Firestore Database > feedback.
-                submitFeedback: (payload) => addDoc(collection(db, 'feedback'), { ...payload, createdAt: serverTimestamp() })
+                submitFeedback: (payload) => addDoc(collection(db, 'feedback'), { ...payload, createdAt: serverTimestamp() }),
+                // Biblioteca compartilhada de estações OSCE geradas por IA,
+                // uma coleção agrupada por área/tema/subtema/formato — assim
+                // qualquer pessoa pode reaproveitar um caso já gerado por
+                // outra, sem gastar cota nova do Groq.
+                getOsceLibrary: async (bucketId) => {
+                    const snap = await getDoc(doc(db, 'osceLibrary', bucketId));
+                    return snap.exists() ? (snap.data().stations || []) : [];
+                },
+                saveOsceToLibrary: (bucketId, station) => setDoc(doc(db, 'osceLibrary', bucketId), { stations: arrayUnion(station) }, { merge: true })
             };
             ready = true;
         } catch (e) {
@@ -9069,7 +9084,7 @@
                 const exams = questionExamOptions();
                 body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigExam">Edição da prova</label><select id="questionConfigExam">${exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('')}</select></div></div>`;
             } else if (mode === 'osce') {
-                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields"><div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div><div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div><div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div><div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div><select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select><div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, com a API do Gemini.</span></div></div><div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>`;
+                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields"><div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div><div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div><div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div><div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div><select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select><div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação.</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div></div><div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>`;
                 activeOsceMode = 'CANDIDATE';
                 loadOsceStations();
             } else {
@@ -9271,6 +9286,7 @@
                     if (stationSelect) stationSelect.innerHTML = '<option value="">Nenhuma estação carregada</option>';
                     status.innerHTML = '<strong>Nenhuma estação cadastrada ainda para esse assunto</strong>Gere uma estação com IA para treinar.';
                 }
+                refreshOsceLibraryPicker(osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, formatValue));
             } catch (_) {
                 status.innerHTML = '<strong>Biblioteca OSCE indisponível</strong>Não foi possível carregar o catálogo de estações.';
             }
@@ -9408,6 +9424,51 @@ Regras obrigatórias:
 8. Responda em português, com linguagem natural de prontuário/simulação clínica.`;
         }
 
+        // Biblioteca compartilhada: cada combinação área/tema/subtema/formato
+        // vira um "balde" no Firestore com as estações já geradas por
+        // qualquer pessoa — reaproveitável quando a cota da IA acabar ou
+        // quando alguém preferir simplesmente escolher uma já pronta.
+        function osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, format) {
+            return `${areaSlug}__${themeCode}__${subthemeSlug}__${format}`;
+        }
+
+        let osceLibraryCache = [];
+
+        function selectStationFromLibrary(station) {
+            const normalized = normalizeLocalOsceStation(station, osceStationsCache.length);
+            osceStationsCache.unshift(normalized);
+            const stationSelect = document.getElementById('questionConfigStation');
+            if (stationSelect) stationSelect.innerHTML = `<option value="${normalized.id}">${normalized.id}</option>`;
+            return normalized;
+        }
+
+        async function refreshOsceLibraryPicker(bucketId) {
+            const wrap = document.getElementById('osceLibraryPicker');
+            const select = document.getElementById('osceLibrarySelect');
+            if (!wrap || !select) return;
+            osceLibraryCache = [];
+            wrap.hidden = true;
+            if (!window.__fb?.ready) return;
+            try {
+                osceLibraryCache = await window.__fb.getOsceLibrary(bucketId);
+            } catch (error) {
+                console.warn('Não foi possível carregar a biblioteca de estações OSCE:', error);
+                return;
+            }
+            if (!osceLibraryCache.length) return;
+            select.innerHTML = osceLibraryCache.map((item, index) => `<option value="${index}">${escapeHtml(item.metadata?.title || `Estação ${index + 1}`)}</option>`).join('');
+            wrap.hidden = false;
+        }
+
+        function useOsceLibraryStation() {
+            const select = document.getElementById('osceLibrarySelect');
+            const status = document.getElementById('osceStationStatus');
+            const raw = osceLibraryCache[Number(select?.value)];
+            if (!raw) return;
+            const station = selectStationFromLibrary(raw);
+            if (status) status.innerHTML = `<strong>Estação escolhida</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+        }
+
         async function generateOsceStationWithAI() {
             const status = document.getElementById('osceStationStatus');
             const button = document.getElementById('osceAiGenerateBtn');
@@ -9425,6 +9486,7 @@ Regras obrigatórias:
                 revealQuestionNotice('Faça login para gerar uma estação com IA.');
                 return;
             }
+            const bucketId = osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, format);
             if (button) { button.disabled = true; button.classList.add('is-loading'); }
             if (status) status.innerHTML = '<strong>Gerando estação com IA…</strong>Isso pode levar alguns segundos.';
             try {
@@ -9460,15 +9522,23 @@ Regras obrigatórias:
                     tasks: content.tasks,
                     finalAnswer: content.finalAnswer
                 };
-                const station = normalizeLocalOsceStation(raw, osceStationsCache.length);
-                osceStationsCache.unshift(station);
-                const stationSelect = document.getElementById('questionConfigStation');
-                if (stationSelect) stationSelect.innerHTML = `<option value="${station.id}">${station.id}</option>`;
+                const station = selectStationFromLibrary(raw);
                 if (status) status.innerHTML = `<strong>Estação gerada</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+                // Salva na biblioteca compartilhada em segundo plano — se
+                // falhar (ex.: regras do Firestore), a estação já gerada
+                // continua funcionando normalmente, só não fica salva pra
+                // reaproveitar depois.
+                window.__fb.saveOsceToLibrary(bucketId, raw).catch(error => console.warn('Não foi possível salvar a estação na biblioteca:', error));
             } catch (error) {
                 console.error('Falha ao gerar estação OSCE com IA:', error);
-                if (status) status.innerHTML = '<strong>Não foi possível gerar a estação</strong>Tente novamente em instantes.';
-                revealQuestionNotice('Não foi possível gerar a estação com IA agora.');
+                await refreshOsceLibraryPicker(bucketId);
+                if (osceLibraryCache.length) {
+                    const fallback = selectStationFromLibrary(osceLibraryCache[Math.floor(Math.random() * osceLibraryCache.length)]);
+                    if (status) status.innerHTML = `<strong>Cota da IA esgotada por agora</strong>Usando uma estação já gerada: “${escapeHtml(fallback.title)}”.`;
+                } else {
+                    if (status) status.innerHTML = '<strong>Não foi possível gerar a estação</strong>Tente novamente em instantes.';
+                    revealQuestionNotice('Não foi possível gerar a estação com IA agora.');
+                }
             } finally {
                 if (button) { button.disabled = false; button.classList.remove('is-loading'); }
             }
