@@ -9669,25 +9669,35 @@ Regras obrigatórias:
             }
         }
 
-        function renderEvaluatorChecklist(station) {
+        function renderEvaluatorChecklist(station, taskIndex = 0) {
             const card = document.querySelector('.osce-door-card');
             const tasks = station?.evaluatorContentJson?.tasks || station?.content?.evaluation?.tasks || [];
             if (!card || !tasks.length) return;
+            card.querySelector('.osce-task-active')?.remove();
+            const task = tasks[taskIndex];
+            if (!task) return;
+            activeOsceSession.currentTaskIndex = taskIndex;
+            const isLast = taskIndex >= tasks.length - 1;
             const section = document.createElement('section'); section.className = 'osce-task-active';
-            section.innerHTML = `<span class="question-config-kicker">Checklist do avaliador</span>${tasks.map((task, taskIndex) => `<fieldset><legend>Tarefa ${taskIndex + 1}: ${escapeHtml(task.title || task.name || '')}</legend>${(task.checklist || []).map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${taskIndex}-${itemIndex}`; const name = `evaluator-${taskIndex}-${itemIndex}`; return `<div class="osce-evaluator-item"><span class="osce-evaluator-criterion">${escapeHtml(item.description || item.item || item.criterion || item.title || 'Item de avaliação')}</span><div class="osce-status-options"><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</fieldset>`).join('')}<button class="question-start" type="button" onclick="saveEvaluatorChecklist()">Salvar marcações</button>`;
+            section.innerHTML = `<span class="question-config-kicker">Checklist do avaliador · Tarefa ${taskIndex + 1} de ${tasks.length}</span><fieldset><legend>${escapeHtml(task.title || task.name || '')}</legend>${(task.checklist || []).map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${taskIndex}-${itemIndex}`; const name = `evaluator-${taskIndex}-${itemIndex}`; return `<div class="osce-evaluator-item"><span class="osce-evaluator-criterion">${escapeHtml(item.description || item.item || item.criterion || item.title || 'Item de avaliação')}</span><div class="osce-status-options"><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</fieldset><button class="question-start" type="button" onclick="saveEvaluatorChecklist(${taskIndex})">${isLast ? 'Salvar e concluir avaliação' : 'Salvar e avançar'}</button>`;
             card.appendChild(section);
         }
 
-        async function saveEvaluatorChecklist() {
+        async function saveEvaluatorChecklist(taskIndex) {
             if (!activeOsceSession?.sessionId) return;
             const checklist = [...new Set([...document.querySelectorAll('[data-evaluator-item]')].map(input => input.dataset.evaluatorItem))].map(id => { const selected = document.querySelector(`[data-evaluator-item="${CSS.escape(id)}"]:checked`); return { id, status: selected?.value || 'NOT_DONE' }; });
+            const tasks = activeOsceSession.station?.evaluatorContentJson?.tasks || activeOsceSession.station?.content?.evaluation?.tasks || [];
+            const nextTaskIndex = (taskIndex ?? activeOsceSession.currentTaskIndex ?? 0) + 1;
             if (activeOsceSession.isLocal) {
-                activeOsceSession.evaluatorChecklist.all = checklist;
-                revealQuestionNotice('Marcações salvas neste dispositivo. A pontuação permanece oculta até o final.');
+                const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
+                activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
+                if (nextTaskIndex >= tasks.length) finishOsceStation();
+                else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
                 return;
             }
-            await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/checklist`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskIndex: activeOsceSession.currentTaskIndex || 0, checklist }) });
-            revealQuestionNotice('Marcações salvas. A pontuação permanece oculta até o final.');
+            await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/checklist`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskIndex: taskIndex ?? activeOsceSession.currentTaskIndex ?? 0, checklist }) });
+            if (nextTaskIndex >= tasks.length) finishOsceStation();
+            else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
         }
 
         function renderOsceTask(station, taskIndex) {
