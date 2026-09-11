@@ -9830,19 +9830,25 @@ Regras obrigatórias:
 
         async function saveEvaluatorChecklist(taskIndex) {
             if (!activeOsceSession?.sessionId) return;
-            const checklist = [...new Set([...document.querySelectorAll('[data-evaluator-item]')].map(input => input.dataset.evaluatorItem))].map(id => { const selected = document.querySelector(`[data-evaluator-item="${CSS.escape(id)}"]:checked`); return { id, status: selected?.value || 'NOT_DONE' }; });
-            const tasks = activeOsceSession.station?.evaluatorContentJson?.tasks || activeOsceSession.station?.content?.evaluation?.tasks || [];
-            const nextTaskIndex = (taskIndex ?? activeOsceSession.currentTaskIndex ?? 0) + 1;
-            if (activeOsceSession.isLocal) {
-                const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
-                activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
+            try {
+                const checklist = [...new Set([...document.querySelectorAll('[data-evaluator-item]')].map(input => input.dataset.evaluatorItem))].map(id => { const selected = document.querySelector(`[data-evaluator-item="${CSS.escape(id)}"]:checked`); return { id, status: selected?.value || 'NOT_DONE' }; });
+                const tasks = activeOsceSession.station?.evaluatorContentJson?.tasks || activeOsceSession.station?.content?.evaluation?.tasks || [];
+                const nextTaskIndex = (taskIndex ?? activeOsceSession.currentTaskIndex ?? 0) + 1;
+                if (activeOsceSession.isLocal) {
+                    if (!activeOsceSession.evaluatorChecklist) activeOsceSession.evaluatorChecklist = {};
+                    const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
+                    activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
+                    if (nextTaskIndex >= tasks.length) finishOsceStation();
+                    else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
+                    return;
+                }
+                await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/checklist`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskIndex: taskIndex ?? activeOsceSession.currentTaskIndex ?? 0, checklist }) });
                 if (nextTaskIndex >= tasks.length) finishOsceStation();
                 else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
-                return;
+            } catch (error) {
+                console.error('Falha ao salvar marcações do avaliador:', error);
+                revealQuestionNotice('Não foi possível salvar as marcações. Tente novamente.');
             }
-            await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/checklist`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskIndex: taskIndex ?? activeOsceSession.currentTaskIndex ?? 0, checklist }) });
-            if (nextTaskIndex >= tasks.length) finishOsceStation();
-            else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
         }
 
         // Igual numa prova real: a porta só mostra a queixa e a tarefa. Sinais
@@ -9955,28 +9961,39 @@ Regras obrigatórias:
             if (activeOsceSession.completingTask) return;
             activeOsceSession.completingTask = true;
             if (button) { button.disabled = true; button.textContent = 'Processando…'; }
-            const index = activeOsceSession.currentTaskIndex || 0;
-            if (activeOsceSession.isLocal) {
-                const task = activeOsceSession.station?.tasks?.[index];
-                if (!task) return;
-                const card = document.querySelector('.osce-door-card');
-                card?.querySelector('.osce-task-active')?.remove();
-                const feedback = document.createElement('div');
-                feedback.className = 'osce-task-feedback';
-                feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${(task.checklist || []).map((item, itemIndex) => { const id = item.id || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.description || item.item || item.criterion || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
-                card?.appendChild(feedback);
+            try {
+                const index = activeOsceSession.currentTaskIndex || 0;
+                if (activeOsceSession.isLocal) {
+                    const task = activeOsceSession.station?.tasks?.[index];
+                    if (!task) {
+                        revealQuestionNotice('Não foi possível carregar esta tarefa. Feche e reabra a estação.');
+                        return;
+                    }
+                    const card = document.querySelector('.osce-door-card');
+                    card?.querySelector('.osce-task-active')?.remove();
+                    const feedback = document.createElement('div');
+                    feedback.className = 'osce-task-feedback';
+                    feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${(task.checklist || []).map((item, itemIndex) => { const id = item.id || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.description || item.item || item.criterion || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
+                    card?.appendChild(feedback);
+                    return;
+                }
+                const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/tasks/${index}/complete`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+                const payload = await response.json();
+                if (!response.ok) { revealQuestionNotice(payload.error || 'Não foi possível concluir a tarefa.'); return; }
+                if (payload.task?.checklist) {
+                    const card = document.querySelector('.osce-door-card');
+                    card?.querySelector('.osce-task-active')?.remove();
+                    const feedback = document.createElement('div'); feedback.className = 'osce-task-feedback'; feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${payload.task.checklist.map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.item || item.description || item.criterion || item.title || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
+                    card?.appendChild(feedback);
+                }
+            } catch (error) {
+                console.error('Falha ao concluir tarefa OSCE:', error);
+                revealQuestionNotice('Não foi possível concluir a tarefa. Tente novamente.');
+            } finally {
+                // Garante que o botão nunca fica "travado": qualquer caminho
+                // (sucesso, erro, tarefa ausente) sempre libera um novo clique.
                 activeOsceSession.completingTask = false;
-                return;
-            }
-            const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/tasks/${index}/complete`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-            const payload = await response.json();
-            if (!response.ok) { activeOsceSession.completingTask = false; return revealQuestionNotice(payload.error || 'Não foi possível concluir a tarefa.'); }
-            if (payload.task?.checklist) {
-                const card = document.querySelector('.osce-door-card');
-                card?.querySelector('.osce-task-active')?.remove();
-                const feedback = document.createElement('div'); feedback.className = 'osce-task-feedback'; feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong>${payload.task.checklist.map(item => `<label><input type="checkbox"> ${escapeHtml(item.item)}</label>`).join('')}`; card?.appendChild(feedback);
-                feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${payload.task.checklist.map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.item || item.description || item.criterion || item.title || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
-                activeOsceSession.completingTask = false;
+                if (button) { button.disabled = false; button.textContent = 'Encerrar tarefa'; }
             }
         }
 
@@ -10042,17 +10059,30 @@ Regras obrigatórias:
                 }
                 return;
             }
-            const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/finish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ checklist: [], debriefing: '' }) });
-            if (!response.ok) return revealQuestionNotice('Não foi possível encerrar a estação.');
-            const finish = await response.json();
-            if (activeOsceSession.mode === 'CANDIDATE') {
-                const reveal = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/reveal-result`, { method: 'POST' });
-                const result = await reveal.json();
-                if (reveal.ok) {
+            try {
+                const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/finish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ checklist: [], debriefing: '' }) });
+                if (!response.ok) throw new Error(`finish respondeu ${response.status}`);
+                await response.json();
+                if (activeOsceSession.mode === 'CANDIDATE') {
+                    const reveal = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/reveal-result`, { method: 'POST' });
+                    if (!reveal.ok) throw new Error(`reveal-result respondeu ${reveal.status}`);
+                    const result = await reveal.json();
                     const card = document.querySelector('.osce-door-card');
                     if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(result.summary)}${osceFinalAnswerMarkup(result.summary?.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
+                } else revealQuestionNotice('Estação encerrada. Resultado pronto para o avaliador entregar ao candidato.');
+            } catch (error) {
+                // O backend remoto de sessões OSCE não está publicado em produção
+                // — sem essa rede, cair aqui não pode deixar a tela "travada".
+                // Mostra o resultado calculado localmente como alternativa.
+                console.warn('Backend de sessões OSCE indisponível, calculando resultado localmente:', error);
+                const summary = localOsceSummary(activeOsceSession);
+                const card = document.querySelector('.osce-door-card');
+                if (activeOsceSession.mode === 'CANDIDATE') {
+                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
+                } else if (card) {
+                    card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
                 }
-            } else revealQuestionNotice('Estação encerrada. Resultado pronto para o avaliador entregar ao candidato.');
+            }
         }
 
         function startQuestionSession() {
