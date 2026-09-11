@@ -6234,12 +6234,6 @@
         import {
             getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-        import {
-            getAI, getGenerativeModel, GoogleAIBackend, Schema
-        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-ai.js";
-        import {
-            initializeAppCheck, ReCaptchaEnterpriseProvider
-        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app-check.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -6257,82 +6251,6 @@
             const auth = getAuth(app);
             const db = getFirestore(app);
             try { getAnalytics(app); } catch (e) { /* analytics é opcional, ignora falha (ex: ad-blocker) */ }
-
-            // App Check — protege o Gemini (Firebase AI Logic) contra uso fora
-            // do app de verdade. Em localhost/127.0.0.1, ativa o provedor de
-            // depuração: no primeiro acesso local ele imprime um token no
-            // console do navegador que precisa ser registrado uma vez em
-            // Firebase Console > Segurança > App Check > Apps > (⋮) > Gerenciar
-            // tokens de depuração. Em produção (domínio publicado) usa o
-            // reCAPTCHA Enterprise normalmente, sem nenhuma ação do usuário.
-            const isLocalDev = ['localhost', '127.0.0.1'].includes(location.hostname);
-            if (isLocalDev) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-            try {
-                initializeAppCheck(app, {
-                    provider: new ReCaptchaEnterpriseProvider('6Le1A7UtAAAAAIsWegRTlJoIq9m1HBUg2_Tf9wJt'),
-                    isTokenAutoRefreshEnabled: true
-                });
-            } catch (e) { console.warn('App Check não pôde ser inicializado:', e); }
-
-            // Firebase AI Logic — chama o Gemini direto do navegador (plano
-            // Spark, sem custo e sem servidor próprio). A chave da API não
-            // existe no cliente: o Firebase faz a ponte com o Gemini usando
-            // a configuração do próprio projeto. "responseSchema" obriga o
-            // modelo a devolver exatamente os campos da estação OSCE.
-            const AXES = ['COMMUNICATION', 'HISTORY', 'PHYSICAL_EXAM', 'DIAGNOSTIC_REASONING', 'MANAGEMENT'];
-            const checklistItemAiSchema = Schema.object({
-                properties: {
-                    id: Schema.string(),
-                    axis: Schema.enumString({ enum: AXES }),
-                    description: Schema.string(),
-                    points: Schema.number(),
-                    critical: Schema.boolean()
-                }
-            });
-            const taskAiSchema = Schema.object({
-                properties: {
-                    id: Schema.string(),
-                    title: Schema.string(),
-                    candidateInstructions: Schema.string(),
-                    checklist: Schema.array({ items: checklistItemAiSchema }),
-                    answerKey: Schema.string()
-                }
-            });
-            const osceContentAiSchema = Schema.object({
-                properties: {
-                    title: Schema.string(),
-                    difficulty: Schema.enumString({ enum: ['BÁSICA', 'INTERMEDIÁRIA', 'AVANÇADA'] }),
-                    estimatedMinutes: Schema.integer(),
-                    scenario: Schema.object({ properties: { environment: Schema.string(), materials: Schema.array({ items: Schema.string() }) } }),
-                    doorInstructions: Schema.object({ properties: {
-                        patientName: Schema.string(), age: Schema.string(), chiefComplaint: Schema.string(), triageSummary: Schema.string()
-                    } }),
-                    patientScript: Schema.object({ properties: {
-                        profile: Schema.object({ properties: {
-                            behavior: Schema.string(), tone: Schema.string(), emotionalState: Schema.string(),
-                            understanding: Schema.string(), concerns: Schema.string(), baseline: Schema.string()
-                        } }),
-                        openingStatement: Schema.string(),
-                        responses: Schema.array({ items: Schema.object({ properties: { trigger: Schema.string(), response: Schema.string(), releaseRule: Schema.string() } }) }),
-                        hiddenInformation: Schema.array({ items: Schema.string() })
-                    } }),
-                    physicalExam: Schema.array({ items: Schema.object({ properties: { system: Schema.string(), request: Schema.string(), findings: Schema.array({ items: Schema.string() }) } }) }),
-                    complementaryTests: Schema.array({ items: Schema.object({ properties: { id: Schema.string(), name: Schema.string(), releaseRule: Schema.string(), result: Schema.string() } }) }),
-                    evolution: Schema.array({ items: Schema.object({ properties: { trigger: Schema.string(), change: Schema.string() } }) }),
-                    tasks: Schema.array({ items: taskAiSchema }),
-                    finalAnswer: Schema.object({ properties: {
-                        expectedDiagnosis: Schema.string(),
-                        expectedManagement: Schema.array({ items: Schema.string() }),
-                        criticalErrors: Schema.array({ items: Schema.string() }),
-                        explanation: Schema.string()
-                    } })
-                }
-            });
-            const ai = getAI(app, { backend: new GoogleAIBackend() });
-            const osceModel = getGenerativeModel(ai, {
-                model: 'gemini-3.7-flash',
-                generationConfig: { responseMimeType: 'application/json', responseSchema: osceContentAiSchema, temperature: 0.95 }
-            });
 
             window.__fb = {
                 ready: true,
@@ -6362,13 +6280,6 @@
                     return snap.exists() ? (snap.data().questionHistory || null) : null;
                 },
                 setQuestionHistory: (uid, list) => setDoc(doc(db, 'users', uid), { questionHistory: list }, { merge: true }),
-                // Gera o conteúdo clínico de uma estação OSCE inédita com o
-                // Gemini (Firebase AI Logic, direto do navegador). Devolve o
-                // objeto já no formato pedido pelo responseSchema.
-                generateOsceStationContent: async (prompt) => {
-                    const result = await osceModel.generateContent(prompt);
-                    return JSON.parse(result.response.text());
-                },
                 // Coleção própria (não debaixo de "users") para o dono do
                 // projeto conseguir ver todo o feedback recebido de uma vez
                 // só no Console do Firebase, em Firestore Database > feedback.
@@ -9316,6 +9227,117 @@
             }
         }
 
+        // Groq (modelos open-source, nível gratuito sem cartão). A chave fica
+        // visível no código do site — risco assumido é só alguém consumir a
+        // cota gratuita, sem risco de fatura; se abusarem, é só gerar outra
+        // chave em console.groq.com.
+        const GROQ_API_KEY = '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';
+        const GROQ_MODEL = 'openai/gpt-oss-120b';
+
+        const OSCE_CONTENT_JSON_SCHEMA = {
+            type: 'object',
+            properties: {
+                title: { type: 'string' },
+                difficulty: { type: 'string', enum: ['BÁSICA', 'INTERMEDIÁRIA', 'AVANÇADA'] },
+                estimatedMinutes: { type: 'integer' },
+                scenario: {
+                    type: 'object',
+                    properties: { environment: { type: 'string' }, materials: { type: 'array', items: { type: 'string' } } },
+                    required: ['environment', 'materials']
+                },
+                doorInstructions: {
+                    type: 'object',
+                    properties: { patientName: { type: 'string' }, age: { type: 'string' }, chiefComplaint: { type: 'string' }, triageSummary: { type: 'string' } },
+                    required: ['patientName', 'age', 'chiefComplaint', 'triageSummary']
+                },
+                patientScript: {
+                    type: 'object',
+                    properties: {
+                        profile: {
+                            type: 'object',
+                            properties: {
+                                behavior: { type: 'string' }, tone: { type: 'string' }, emotionalState: { type: 'string' },
+                                understanding: { type: 'string' }, concerns: { type: 'string' }, baseline: { type: 'string' }
+                            },
+                            required: ['behavior', 'tone', 'emotionalState', 'understanding', 'concerns', 'baseline']
+                        },
+                        openingStatement: { type: 'string' },
+                        responses: {
+                            type: 'array',
+                            items: { type: 'object', properties: { trigger: { type: 'string' }, response: { type: 'string' }, releaseRule: { type: 'string' } }, required: ['trigger', 'response', 'releaseRule'] }
+                        },
+                        hiddenInformation: { type: 'array', items: { type: 'string' } }
+                    },
+                    required: ['profile', 'openingStatement', 'responses', 'hiddenInformation']
+                },
+                physicalExam: {
+                    type: 'array',
+                    items: { type: 'object', properties: { system: { type: 'string' }, request: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } } }, required: ['system', 'request', 'findings'] }
+                },
+                complementaryTests: {
+                    type: 'array',
+                    items: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, releaseRule: { type: 'string' }, result: { type: 'string' } }, required: ['id', 'name', 'releaseRule', 'result'] }
+                },
+                evolution: {
+                    type: 'array',
+                    items: { type: 'object', properties: { trigger: { type: 'string' }, change: { type: 'string' } }, required: ['trigger', 'change'] }
+                },
+                tasks: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string' }, title: { type: 'string' }, candidateInstructions: { type: 'string' },
+                            checklist: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        id: { type: 'string' },
+                                        axis: { type: 'string', enum: ['COMMUNICATION', 'HISTORY', 'PHYSICAL_EXAM', 'DIAGNOSTIC_REASONING', 'MANAGEMENT'] },
+                                        description: { type: 'string' }, points: { type: 'number' }, critical: { type: 'boolean' }
+                                    },
+                                    required: ['id', 'axis', 'description', 'points', 'critical']
+                                }
+                            },
+                            answerKey: { type: 'string' }
+                        },
+                        required: ['id', 'title', 'candidateInstructions', 'checklist', 'answerKey']
+                    }
+                },
+                finalAnswer: {
+                    type: 'object',
+                    properties: {
+                        expectedDiagnosis: { type: 'string' }, expectedManagement: { type: 'array', items: { type: 'string' } },
+                        criticalErrors: { type: 'array', items: { type: 'string' } }, explanation: { type: 'string' }
+                    },
+                    required: ['expectedDiagnosis', 'expectedManagement', 'criticalErrors', 'explanation']
+                }
+            },
+            required: ['title', 'difficulty', 'estimatedMinutes', 'scenario', 'doorInstructions', 'patientScript', 'physicalExam', 'complementaryTests', 'evolution', 'tasks', 'finalAnswer']
+        };
+
+        async function callGroqForOsceStation(prompt) {
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_API_KEY}` },
+                body: JSON.stringify({
+                    model: GROQ_MODEL,
+                    messages: [{ role: 'user', content: prompt }],
+                    temperature: 0.9,
+                    response_format: { type: 'json_schema', json_schema: { name: 'osce_station_content', strict: false, schema: OSCE_CONTENT_JSON_SCHEMA } }
+                })
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => '');
+                throw new Error(`Groq API respondeu ${response.status}: ${text.slice(0, 300)}`);
+            }
+            const data = await response.json();
+            const text = data.choices?.[0]?.message?.content;
+            if (!text) throw new Error('Resposta do Groq sem conteúdo.');
+            return JSON.parse(text);
+        }
+
         function buildOsceGenerationPrompt({ areaName, themeName, subthemeName, format, difficulty }) {
             return `Você é um especialista em educação médica brasileira, criador de estações de OSCE (Objective Structured Clinical Examination) para prova de residência médica (padrão Revalida/Enamed).
 
@@ -9362,10 +9384,10 @@ Regras obrigatórias:
                 });
                 let content;
                 try {
-                    content = await window.__fb.generateOsceStationContent(prompt);
+                    content = await callGroqForOsceStation(prompt);
                 } catch (firstError) {
                     console.warn('Primeira tentativa de gerar estação falhou, tentando novamente:', firstError);
-                    content = await window.__fb.generateOsceStationContent(prompt);
+                    content = await callGroqForOsceStation(prompt);
                 }
                 const raw = {
                     schemaVersion: '1.0.0',
