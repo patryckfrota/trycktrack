@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#15161A">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -625,7 +625,9 @@
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c4b5fd' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center / 15px,
                 rgba(var(--nav-glass-rgb), .045);
             color: var(--text-main);
-            font: 500 13px/1 var(--font-family-base);
+            /* 16px: abaixo disso o Safari do iOS força zoom ao focar —
+               ver nota em .auth-input. */
+            font: 500 16px/1 var(--font-family-base);
             transition: border-color .16s ease, background-color .16s ease;
         }
         .question-config-field select:hover { border-color: rgba(196,181,253,.4); }
@@ -741,7 +743,7 @@
         .osce-chat-msg-patient { align-self: flex-start; background: rgba(255,255,255,.08); color: var(--text-main); border-bottom-left-radius: 4px; }
         .osce-chat-msg-candidate { align-self: flex-end; background: var(--lavender-active); color: #19171f; border-bottom-right-radius: 4px; }
         .osce-chat-form { display: flex; gap: 8px; margin-top: 12px; }
-        .osce-chat-form input { flex: 1; min-width: 0; min-height: 42px; padding: 0 14px; border: 1px solid rgba(196,181,253,.3); border-radius: 12px; background: rgba(255,255,255,.05); color: var(--text-main); font: 500 13px var(--font-family-base); }
+        .osce-chat-form input { flex: 1; min-width: 0; min-height: 42px; padding: 0 14px; border: 1px solid rgba(196,181,253,.3); border-radius: 12px; background: rgba(255,255,255,.05); color: var(--text-main); font: 500 16px var(--font-family-base); }
         .osce-chat-form input:focus { outline: none; border-color: rgba(196,181,253,.6); }
         .osce-chat-form button { flex: 0 0 auto; padding: 0 16px; border: 0; border-radius: 12px; background: var(--lavender-active); color: #19171f; font: 700 12.5px var(--font-family-base); cursor: pointer; }
         .osce-door-card { position: relative; width: min(760px, calc(100% - 32px)); margin: 18px auto 0; padding: 28px; border: 1px solid rgba(255,255,255,.22); border-radius: 30px; background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(196,181,253,.08) 28%, rgba(31,33,39,.62) 72%); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.3), 0 24px 70px rgba(0,0,0,.28); backdrop-filter: blur(26px) saturate(150%); overflow: hidden; }
@@ -818,7 +820,7 @@
         .osce-library-picker { display: grid; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--glass-card-border); }
         .osce-library-picker[hidden] { display: none; }
         .osce-library-picker label { color: var(--text-secondary); font-size: 11px; font-weight: 650; }
-        .osce-library-picker select { width: 100%; min-height: 44px; border: 1px solid var(--glass-card-border); border-radius: 12px; padding: 0 12px; background: rgba(var(--nav-glass-rgb), .045); color: var(--text-main); font: 500 13px var(--font-family-base); }
+        .osce-library-picker select { width: 100%; min-height: 44px; border: 1px solid var(--glass-card-border); border-radius: 12px; padding: 0 12px; background: rgba(var(--nav-glass-rgb), .045); color: var(--text-main); font: 500 16px var(--font-family-base); }
         .osce-library-use-btn { min-height: 42px; border: 1px solid rgba(139,107,224,.38); border-radius: 12px; background: rgba(196,181,253,.06); color: var(--lavender-active); font: 650 12px var(--font-family-base); cursor: pointer; }
         .osce-library-use-btn:active { transform: scale(.98); }
         .question-pdf-action {
@@ -3510,7 +3512,7 @@
         .feedback-banner-btn { border: 0; padding: 8px 13px; border-radius: 10px; background: var(--lavender-active); color: #19171f; font: 700 11px/1 var(--font-family-base); cursor: pointer; }
         .feedback-banner-dismiss-btn { border: 1px solid var(--border-color); padding: 8px 13px; border-radius: 10px; background: transparent; color: var(--text-secondary); font: 650 11px/1 var(--font-family-base); cursor: pointer; }
         .feedback-banner-close { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; font-size: 15px; line-height: 1; }
-        .feedback-modal-textarea { width: 100%; min-height: 130px; margin-top: 14px; padding: 13px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-secondary); color: var(--text-main); font: 400 13px/1.5 var(--font-family-base); resize: vertical; }
+        .feedback-modal-textarea { width: 100%; min-height: 130px; margin-top: 14px; padding: 13px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-secondary); color: var(--text-main); font: 400 16px/1.5 var(--font-family-base); resize: vertical; }
         .feedback-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
         .feedback-modal-actions button { flex: 1; padding: 12px; border-radius: 13px; font: 700 12.5px/1 var(--font-family-base); cursor: pointer; }
         .feedback-modal-cancel { border: 1px solid var(--border-color); background: transparent; color: var(--text-secondary); }
@@ -4385,7 +4387,11 @@
             border: 1px solid var(--border-color);
             background: var(--bg-secondary);
             color: var(--text-main);
-            font-size: 14px;
+            /* 16px, não 14px: abaixo de 16px o Safari do iOS dá zoom
+               automático ao focar o campo — some com o zoom manual do
+               resto da página junto (removemos o maximum-scale do
+               viewport para reabilitar pinça-para-ampliar). */
+            font-size: 16px;
             font-family: inherit;
             transition: border-color 0.2s var(--ease);
         }
@@ -6015,7 +6021,7 @@
                         </select>
                     </div>
 
-                    <div class="question-coming" id="questionComing">A interface está pronta. Agora adicionaremos as questões reais e suas explicações.</div>
+                    <div class="question-coming" id="questionComing" role="status" aria-live="polite">A interface está pronta. Agora adicionaremos as questões reais e suas explicações.</div>
                 </div>
             </div>
 
@@ -6261,7 +6267,7 @@
                 <button type="button" class="feedback-modal-cancel" onclick="closeFeedbackModal()">Cancelar</button>
                 <button type="button" class="feedback-modal-submit" id="feedbackModalSubmitBtn" onclick="submitFeedbackMessage()">Enviar</button>
             </div>
-            <p class="feedback-modal-status" id="feedbackModalStatus"></p>
+            <p class="feedback-modal-status" id="feedbackModalStatus" role="status" aria-live="polite"></p>
         </section>
     </div>
 
@@ -9344,7 +9350,7 @@
                     <div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div>
                     <select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select>
                     <div class="question-config-divider">Estação</div>
-                    <div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>
+                    <div class="osce-station-status" id="osceStationStatus" role="status" aria-live="polite"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>
                     <div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, gerado com IA (Groq).</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div>
                 </div>`;
                 activeOsceMode = 'CANDIDATE';
@@ -10351,9 +10357,32 @@ Regras obrigatórias:
             const next = document.getElementById('questionNext');
             next.disabled = true;
             next.textContent = session.index === total - 1 ? 'Finalizar sessão' : 'Próxima questão';
-            document.getElementById('questionOptions').innerHTML = question.questionType === 'discursive'
-                ? '<div class="question-discursive"><span>Questão discursiva</span><p>Estruture sua resposta no papel ou mentalmente. Depois, abra a resposta esperada para conferir os pontos essenciais.</p><button class="question-option question-discursive-action" onclick="answerQuestion(\'discursive\')"><span class="question-option-letter">✓</span><span>Ver resposta esperada</span></button></div>'
-                : Object.entries(question.options).map(([letter, text]) => `<button class="question-option" onclick="answerQuestion('${letter}')"><span class="question-option-letter">${letter}</span><span>${text}</span></button>`).join('');
+            const optionsContainer = document.getElementById('questionOptions');
+            if (question.questionType === 'discursive') {
+                // Markup fixo, sem dado da questão dentro — innerHTML aqui não corre risco.
+                optionsContainer.innerHTML = '<div class="question-discursive"><span>Questão discursiva</span><p>Estruture sua resposta no papel ou mentalmente. Depois, abra a resposta esperada para conferir os pontos essenciais.</p><button class="question-option question-discursive-action" onclick="answerQuestion(\'discursive\')"><span class="question-option-letter">✓</span><span>Ver resposta esperada</span></button></div>';
+            } else {
+                // Construído via DOM + textContent (não innerHTML com string
+                // interpolada) — o texto da alternativa vem do banco de
+                // questões, que já teve alguns casos com "<", ">" e "&"
+                // crus ou pré-escapados. Isso garante que qualquer um desses
+                // caracteres sempre aparece como texto, nunca é interpretado
+                // como HTML, sem depender de o dado estar "limpo".
+                optionsContainer.innerHTML = '';
+                Object.entries(question.options).forEach(([letter, text]) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'question-option';
+                    button.onclick = () => answerQuestion(letter);
+                    const letterEl = document.createElement('span');
+                    letterEl.className = 'question-option-letter';
+                    letterEl.textContent = letter;
+                    const textEl = document.createElement('span');
+                    textEl.textContent = text;
+                    button.append(letterEl, textEl);
+                    optionsContainer.appendChild(button);
+                });
+            }
             document.getElementById('questionPlayerBody').scrollTop = 0;
         }
 
@@ -10492,15 +10521,28 @@ Regras obrigatórias:
             document.getElementById('questionStem').textContent = question.stem;
             document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
 
-            document.getElementById('questionOptions').innerHTML = question.questionType === 'discursive'
-                ? ''
-                : Object.entries(question.options || {}).map(([letter, text]) => {
+            const reviewOptionsContainer = document.getElementById('questionOptions');
+            reviewOptionsContainer.innerHTML = '';
+            if (question.questionType !== 'discursive') {
+                // Mesma razão da renderização normal: construído via DOM +
+                // textContent, não innerHTML com string interpolada.
+                Object.entries(question.options || {}).forEach(([letter, text]) => {
                     let cls = '';
                     if (!question.annulled && letter === question.answer) cls = 'correct';
                     else if (question.annulled && letter === answer) cls = 'correct';
                     else if (letter === answer) cls = 'wrong';
-                    return `<div class="question-option ${cls}" style="cursor:default"><span class="question-option-letter">${letter}</span><span>${text}</span></div>`;
-                }).join('');
+                    const optionEl = document.createElement('div');
+                    optionEl.className = cls ? `question-option ${cls}` : 'question-option';
+                    optionEl.style.cursor = 'default';
+                    const letterEl = document.createElement('span');
+                    letterEl.className = 'question-option-letter';
+                    letterEl.textContent = letter;
+                    const textEl = document.createElement('span');
+                    textEl.textContent = text;
+                    optionEl.append(letterEl, textEl);
+                    reviewOptionsContainer.appendChild(optionEl);
+                });
+            }
 
             const correct = isQuestionAnswerCorrect(question, answer);
             document.getElementById('questionFeedbackTitle').textContent = question.questionType === 'discursive'
@@ -10656,6 +10698,29 @@ Regras obrigatórias:
             });
         }
 
+        // Vários cards/itens de navegação são <div onclick="..."> em vez de
+        // <button> — herdados de quando a marcação foi escrita rápido e
+        // nunca revisitados. Convertê-los todos para <button> mudaria
+        // estilo padrão do navegador (borda, fundo, fonte) em muitos
+        // componentes já estilizados; em vez disso, esta função dá a eles
+        // o mesmo tratamento (role="button", tabindex, Enter/Espaço) que
+        // .sidebar-profile-header já usava manualmente — assim funcionam
+        // com teclado e leitor de tela sem versionar o CSS de novo.
+        // Backdrops (fecham ao clicar fora) ficam de fora de propósito:
+        // não são um controle para tabular até, são só a área de fechar.
+        function enhanceClickableDivsForKeyboard(root) {
+            (root || document).querySelectorAll('div[onclick]').forEach(el => {
+                if (el.hasAttribute('role') || /backdrop/i.test(el.className)) return;
+                el.setAttribute('role', 'button');
+                if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+                el.addEventListener('keydown', event => {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    el.click();
+                });
+            });
+        }
+
         function setupCardReveal() {
             const content = document.querySelector('.content');
             // observeCardReveals mexe em classes dentro da própria árvore
@@ -10668,7 +10733,16 @@ Regras obrigatórias:
             const scheduleReveal = () => {
                 if (revealScheduled) return;
                 revealScheduled = true;
-                requestAnimationFrame(() => { revealScheduled = false; observeCardReveals(); });
+                requestAnimationFrame(() => {
+                    revealScheduled = false;
+                    observeCardReveals();
+                    // Mesma rajada coalescida: qualquer <div onclick> novo
+                    // renderizado dentro de .content (cards de atualização,
+                    // lista de capítulos, "última leitura"...) já sai com
+                    // suporte a teclado, sem precisar chamar isso em cada
+                    // função de render separadamente.
+                    enhanceClickableDivsForKeyboard(content || document.body);
+                });
             };
             new MutationObserver(scheduleReveal)
                 .observe(content || document.body, { childList: true, subtree: true });
@@ -10681,6 +10755,10 @@ Regras obrigatórias:
             syncRapidReviewMenu();
             renderTrails();
             setupCardReveal();
+            // Cobre o que está fora de .content desde o primeiro parse
+            // (nav inferior, avatar, rodapé do leitor) — o resto (dentro
+            // de .content) já é pego pelo observer acima.
+            enhanceClickableDivsForKeyboard(document);
         });
     </script>
     <script>
