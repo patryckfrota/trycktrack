@@ -9200,7 +9200,7 @@
                     <select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select>
                     <div class="question-config-divider">Estação</div>
                     <div class="osce-station-status" id="osceStationStatus"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>
-                    <div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação.</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div>
+                    <div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, gerado com IA (Groq).</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div>
                 </div>`;
                 activeOsceMode = 'CANDIDATE';
                 loadOsceStations();
@@ -9605,7 +9605,7 @@ Regras obrigatórias:
             }
             const bucketId = osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, format);
             if (button) { button.disabled = true; button.classList.add('is-loading'); }
-            if (status) status.innerHTML = '<strong>Gerando estação com IA…</strong>Isso pode levar alguns segundos.';
+            if (status) status.innerHTML = '<strong>Gerando estação com IA (Groq)…</strong>Isso pode levar alguns segundos.';
             try {
                 const prompt = buildOsceGenerationPrompt({
                     areaName: area.name, themeName: `Tema ${themeCode}`, subthemeName: subthemeEntry.name, format
@@ -9640,7 +9640,7 @@ Regras obrigatórias:
                     finalAnswer: content.finalAnswer
                 };
                 const station = selectStationFromLibrary(raw);
-                if (status) status.innerHTML = `<strong>Estação gerada</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+                if (status) status.innerHTML = `<strong>Estação gerada com IA (Groq)</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
                 // Salva na biblioteca compartilhada em segundo plano — se
                 // falhar (ex.: regras do Firestore), a estação já gerada
                 // continua funcionando normalmente, só não fica salva pra
