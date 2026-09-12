@@ -9901,6 +9901,17 @@ Regras obrigatórias:
 
         let activeOsceSession = null;
         let osceTimer = null;
+        // renderOsceDoor substitui TODO o conteúdo de #questionPlayer (a
+        // mesma seção usada pelo player normal de questões) pela própria
+        // marcação do OSCE — inclusive o cabeçalho e o rodapé com os IDs
+        // que renderQuestionPlayer/showQuestionResults esperam encontrar.
+        // Sem restaurar essa estrutura ao sair, a próxima sessão de
+        // Guiado/Simulado chama document.getElementById(...).textContent
+        // num elemento que não existe mais, estoura um TypeError no meio
+        // de renderQuestionPlayer e a tela fica travada mostrando o
+        // gabarito da última estação de OSCE. Capturado uma única vez,
+        // aqui, antes de qualquer função ter chance de sobrescrever.
+        const QUESTION_PLAYER_PRISTINE_HTML = document.getElementById('questionPlayer')?.innerHTML || '';
 
         function osceReadableValue(value) {
             if (value === null || value === undefined || value === '') return '';
@@ -10215,7 +10226,19 @@ Regras obrigatórias:
             if (payload.final) finishOsceStation(); else renderOsceTask(activeOsceSession.station, payload.nextTaskIndex);
         }
 
-        function closeOsceSession() { clearInterval(osceTimer); activeOsceSession = null; document.getElementById('questionPlayer')?.setAttribute('hidden', ''); document.body.style.overflow = ''; }
+        function closeOsceSession() {
+            clearInterval(osceTimer);
+            activeOsceSession = null;
+            const player = document.getElementById('questionPlayer');
+            if (player) {
+                player.setAttribute('hidden', '');
+                // Devolve #questionPlayer à estrutura original que
+                // renderOsceDoor substituiu — ver comentário em
+                // QUESTION_PLAYER_PRISTINE_HTML.
+                player.innerHTML = QUESTION_PLAYER_PRISTINE_HTML;
+            }
+            document.body.style.overflow = '';
+        }
 
         function localOsceSummary(session) {
             const axis = {};
