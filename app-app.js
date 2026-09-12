@@ -1,0 +1,2099 @@
+        /* ============================================================
+           PAINÉIS DO MENU LATERAL
+           Um único painel reutilizável mantém Perfil, Configurações,
+           Ajuda e Sobre com a mesma linguagem visual, sem duplicar
+           modais nem misturar conteúdo dessas áreas na tela principal.
+           ============================================================ */
+        function closeSidebarPanel() {
+            const panel = document.getElementById('sidebarDetailPanel');
+            const backdrop = document.getElementById('sidebarDetailBackdrop');
+            if (!panel || !backdrop) return;
+            panel.classList.remove('active');
+            backdrop.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        }
+
+        function applyGlobalFontScale(scale) {
+            const safeScale = Math.max(.9, Math.min(1.2, Number(scale) || 1));
+            localStorage.setItem('trycktrack-global-font-scale', String(safeScale));
+            const excluded = '.reader-view, .question-player, .fontsize-sheet, .profile-crop-backdrop, .question-print-root, .rapid-print-root';
+            const textElements = document.querySelectorAll('#appContainer *, #sidebar *, #sidebarDetailPanel *');
+            textElements.forEach(element => {
+                if (element.closest(excluded) || element.matches('svg, path, img, input[type="range"]')) return;
+                if (!element.matches('h1,h2,h3,h4,h5,h6,p,span,strong,small,label,button,a,li,select,option,legend')) return;
+                if (!element.dataset.globalFontBase) {
+                    const base = parseFloat(getComputedStyle(element).fontSize);
+                    if (!Number.isFinite(base)) return;
+                    element.dataset.globalFontBase = String(base);
+                }
+                element.style.fontSize = `${parseFloat(element.dataset.globalFontBase) * safeScale}px`;
+            });
+        }
+
+        function setGlobalFontScale(scale) {
+            applyGlobalFontScale(scale);
+        }
+
+        function openSidebarPanel(panelKey) {
+            const panel = document.getElementById('sidebarDetailPanel');
+            const backdrop = document.getElementById('sidebarDetailBackdrop');
+            const title = document.getElementById('sidebarDetailTitle');
+            const subtitle = document.getElementById('sidebarDetailSubtitle');
+            const body = document.getElementById('sidebarDetailBody');
+            if (!panel || !backdrop || !title || !subtitle || !body) return;
+
+            document.getElementById('sidebar')?.classList.remove('active');
+            document.getElementById('sidebarBackdrop')?.classList.remove('active');
+
+            const user = getCurrentUser();
+            const displayName = [user.firstName, user.secondName].filter(Boolean).join(' ') || 'Estudante';
+            const email = currentFirebaseUser?.email || 'Conta local do aplicativo';
+            const initials = ((user.firstName?.[0] || '') + (user.secondName?.[0] || '')).toUpperCase() || 'E';
+            const themeMode = getStoredThemeMode();
+            const globalFontScale = Number(localStorage.getItem('trycktrack-global-font-scale')) || 1;
+            const themeName = { system: 'Sistema', on: 'Escura', off: 'Clara' }[themeMode] || 'Sistema';
+            const profilePhoto = getStoredProfilePhoto();
+            const profilePhotoMarkup = profilePhoto
+                ? `<img src="${escapeHtml(profilePhoto)}" alt="Foto do perfil">`
+                : `<span>${escapeHtml(initials)}</span>`;
+
+            const panels = {
+                perfil: {
+                    title: 'Perfil',
+                    subtitle: 'Seus dados e sua conta',
+                    html: `<div class="sidebar-detail-card"><div class="sidebar-profile"><div class="sidebar-profile-avatar" id="sidebarDetailAvatar">${profilePhotoMarkup}</div><div class="sidebar-profile-copy"><strong>${escapeHtml(displayName)}</strong><span>${escapeHtml(email)}</span></div></div><div class="sidebar-photo-actions"><label class="sidebar-photo-button" for="sidebarPhotoInput">Escolher foto</label><input id="sidebarPhotoInput" type="file" accept="image/*" hidden onchange="handleProfilePhotoChange(this)"><button type="button" class="sidebar-photo-remove" onclick="removeProfilePhoto()">Remover foto</button></div><p class="sidebar-photo-note">${currentFirebaseUser ? 'A foto fica salva na sua conta e sincroniza entre dispositivos.' : 'A foto é salva neste dispositivo. Conecte uma conta para sincronizá-la entre dispositivos.'} Escolha uma imagem quadrada para um melhor resultado.</p></div><div class="sidebar-detail-card"><h3>Dados do perfil</h3><div class="sidebar-setting-row"><div><strong>Nome exibido</strong><br><span>${escapeHtml(displayName)}</span></div></div><div class="sidebar-setting-row" style="margin-top:12px"><div><strong>Email da conta</strong><br><span>${escapeHtml(email)}</span></div></div></div><div class="sidebar-detail-card"><h3>Seu espaço de estudo</h3><p>Seu progresso, preferências e leituras ficam associados a esta conta quando o acesso está conectado.</p><ul><li>Rapid Reviews lidos e último ponto de leitura;</li><li>histórico de sessões e desempenho;</li><li>preferências de tema e tamanho de fonte.</li></ul></div><div class="sidebar-detail-card"><h3>Conta conectada</h3><p>${currentFirebaseUser ? 'Sua conta está conectada e pronta para sincronizar o progresso.' : 'Você está usando o modo local. Ao conectar uma conta, seus dados poderão acompanhar você em outros dispositivos.'}</p></div><div class="sidebar-detail-card"><h3>Privacidade</h3><p>Você pode controlar a foto, as preferências locais e o uso da sua conta. Para solicitar acesso, correção ou exclusão de dados pessoais, utilize o canal de contato do projeto.</p></div>`
+                },
+                configuracoes: {
+                    title: 'Configurações',
+                    subtitle: 'Controles do aplicativo',
+                    html: `<div class="sidebar-detail-card"><div class="sidebar-setting-row"><div><strong>Aparência</strong><br><span>Escolha o tema do aplicativo</span></div><span>${escapeHtml(themeName)}</span></div><div class="sidebar-setting-actions"><button type="button" data-theme-panel-mode="system" class="${themeMode === 'system' ? 'active' : ''}" onclick="setThemeMode('system'); openSidebarPanel('configuracoes')">Sistema</button><button type="button" data-theme-panel-mode="on" class="${themeMode === 'on' ? 'active' : ''}" onclick="setThemeMode('on'); openSidebarPanel('configuracoes')">Escura</button><button type="button" data-theme-panel-mode="off" class="${themeMode === 'off' ? 'active' : ''}" onclick="setThemeMode('off'); openSidebarPanel('configuracoes')">Clara</button></div></div><div class="sidebar-detail-card"><h3>Tamanho do Texto</h3><div class="sidebar-setting-actions"><button type="button" class="${globalFontScale === .9 ? 'active' : ''}" onclick="setGlobalFontScale(.9); openSidebarPanel('configuracoes')">A−</button><button type="button" class="${globalFontScale === 1 ? 'active' : ''}" onclick="setGlobalFontScale(1); openSidebarPanel('configuracoes')">Padrão</button><button type="button" class="${globalFontScale === 1.1 ? 'active' : ''}" onclick="setGlobalFontScale(1.1); openSidebarPanel('configuracoes')">A+</button><button type="button" class="${globalFontScale === 1.2 ? 'active' : ''}" onclick="setGlobalFontScale(1.2); openSidebarPanel('configuracoes')">A++</button></div></div>`
+                },
+                ajuda: {
+                    title: 'Ajuda',
+                    subtitle: 'Um guia para aproveitar melhor o app',
+                    html: `<div class="sidebar-detail-card"><h3>Como começar</h3><p>Comece pela tela inicial e escolha o próximo passo de acordo com seu momento de estudo.</p><ul><li>Use o menu inferior para alternar entre Início, Trilhas, Questões, Dashboard e Rapid Review.</li><li>Abra uma grande área para continuar de onde parou.</li><li>Use o menu lateral para acessar seu perfil e suas preferências.</li></ul><button type="button" class="sidebar-photo-button" style="margin-top:12px" onclick="closeSidebarPanel(); openOnboarding()">Rever tutorial de primeiro acesso</button></div><div class="sidebar-detail-card"><h3>Rapid Review</h3><p>Escolha uma grande área e leia os temas em sequência. O aplicativo registra seu progresso e tenta retomar a leitura no ponto em que você parou.</p><ul><li>Use <strong>Aa</strong> para ajustar o tamanho do texto.</li><li>Abra “Trocar o tema” para navegar diretamente entre os capítulos.</li><li>Use o botão de download quando quiser gerar uma versão para estudo offline ou impressão.</li></ul></div><div class="sidebar-detail-card"><h3>Banco de questões</h3><p>Escolha o modo de treino e configure os filtros disponíveis antes de iniciar uma sessão.</p><ul><li><strong>Guiado:</strong> veja a explicação após responder.</li><li><strong>Simulado:</strong> responda sem interrupções e confira o resultado ao final.</li><li><strong>OSCE:</strong> pratique estações clínicas estruturadas.</li><li><strong>Imersão:</strong> faça uma prova completa.</li></ul></div><div class="sidebar-detail-card"><h3>Trilhas de estudo</h3><p>As trilhas organizam fases de estudo por objetivo. Conforme você avança, novas etapas podem ser liberadas.</p></div><div class="sidebar-detail-card"><h3>Progresso e conta</h3><p>Quando estiver conectado, seu progresso pode ser sincronizado. No modo local, as preferências e os dados ficam salvos neste dispositivo.</p></div><div class="sidebar-detail-card"><h3>Quando algo não carregar</h3><ul><li>Atualize a página ou reabra o aplicativo.</li><li>Confira sua conexão com a internet.</li><li>Se o conteúdo continuar ausente, confirme se você está usando a versão mais recente.</li><li>Ao testar no celular, use o endereço da rede local ou o domínio publicado — “localhost” funciona apenas no computador que hospeda o app.</li></ul></div><div class="sidebar-detail-card"><h3>Precisa de suporte?</h3><p>Anote a tela em que o problema ocorreu, o dispositivo utilizado e o que você fez antes do erro. Essas informações ajudam a localizar a causa com mais rapidez.</p></div>`
+                },
+                sobre: {
+                    title: 'Sobre',
+                    subtitle: 'Um espaço para estudar com clareza',
+                    html: `<div class="sidebar-detail-card"><h3>Trycktrack</h3><p>O Trycktrack é um ambiente de preparação para residência médica criado para transformar um grande volume de conteúdo em uma rotina de estudo mais organizada, visual e contínua. Também foi pensado para apoiar a preparação das provas teóricas e práticas do internato.</p></div><div class="sidebar-detail-card"><h3>Uma experiência construída para o seu ritmo</h3><p>O aplicativo combina leitura, prática e acompanhamento para que você saiba o que estudar, onde retomar e como evoluir ao longo da preparação.</p></div><div class="sidebar-detail-card"><h3>O que você encontra</h3><ul><li><strong>Rapid Reviews:</strong> resumos estruturados por grandes áreas e temas.</li><li><strong>Questões:</strong> diferentes formatos de treino, provas e explicações.</li><li><strong>Trilhas:</strong> caminhos de estudo organizados por objetivo.</li><li><strong>OSCE:</strong> estações práticas para raciocínio clínico e comunicação.</li><li><strong>Dashboard:</strong> visão do seu progresso e desempenho.</li></ul></div><div class="sidebar-detail-card"><h3>Conteúdo que evolui com você</h3><p>Os materiais, questões e estações podem ser atualizados, revisados e ampliados para acompanhar as necessidades da preparação e as referências educacionais utilizadas.</p></div><div class="sidebar-detail-card"><h3>Privacidade e autonomia</h3><p>Suas preferências de aparência, progresso local e foto de perfil permanecem sob seu controle. Quando uma conta estiver conectada, os dados permitidos podem ser sincronizados para manter sua experiência entre dispositivos.</p></div><div class="sidebar-detail-card"><h3>Nosso compromisso</h3><p>Oferecer uma experiência consistente, acessível e cuidadosa para que cada sessão de estudo seja mais objetiva — sem substituir diretrizes oficiais, supervisão ou avaliação profissional.</p></div>`
+                },
+                termos: {
+                    title: 'Termos de uso',
+                    subtitle: 'Regras de utilização do aplicativo',
+                    html: `<div class="sidebar-detail-card"><h3>1. Aceitação</h3><p>Ao acessar e utilizar o Trycktrack, você concorda com estas condições de uso. Caso não concorde com alguma delas, interrompa a utilização do aplicativo.</p></div><div class="sidebar-detail-card"><h3>2. Finalidade educacional</h3><p>O Trycktrack é uma ferramenta de apoio à preparação acadêmica, incluindo provas teóricas e práticas do internato e exames de residência médica. Ele não substitui aulas, supervisão médica, diretrizes oficiais, protocolos institucionais ou avaliação profissional.</p></div><div class="sidebar-detail-card"><h3>3. Conta e segurança</h3><p>Você é responsável pelas informações fornecidas, pela confidencialidade da senha e pelas atividades realizadas na sua conta. Não compartilhe credenciais nem permita o uso da sua conta por terceiros.</p></div><div class="sidebar-detail-card"><h3>4. Conteúdo clínico</h3><p>Questões, Rapid Reviews, trilhas e estações OSCE devem ser utilizados como material de estudo. Informações médicas podem ser revisadas e atualizadas; confirme condutas, doses e recomendações em fontes oficiais e atuais antes de aplicá-las na prática.</p></div><div class="sidebar-detail-card"><h3>5. Uso adequado</h3><ul><li>Não tente acessar, copiar, modificar ou explorar áreas restritas do aplicativo.</li><li>Não use o Trycktrack para diagnosticar ou tratar pessoas.</li><li>Não publique, redistribua ou comercialize materiais sem autorização.</li><li>Não utilize o aplicativo para prejudicar outros usuários ou comprometer seu funcionamento.</li></ul></div><div class="sidebar-detail-card"><h3>6. Privacidade e LGPD</h3><p>O tratamento de dados pessoais deve observar a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), especialmente os princípios de finalidade, necessidade, transparência, segurança e prevenção. O Trycktrack deve utilizar apenas os dados necessários para autenticação, funcionamento, sincronização do progresso e personalização da experiência.</p><p>Quando aplicável, o titular pode solicitar confirmação de tratamento, acesso, correção, atualização, eliminação de dados tratados com base em consentimento, informação sobre compartilhamento e revogação do consentimento, observadas as hipóteses legais de conservação. Solicitações relacionadas a dados devem ser encaminhadas ao responsável indicado pelo projeto.</p><p>Não envie informações de pacientes, prontuários ou outros dados sensíveis reais para o aplicativo. A foto de perfil e preferências salvas localmente permanecem no dispositivo até que você as remova ou limpe os dados do navegador.</p></div><div class="sidebar-detail-card"><h3>7. Segurança dos dados</h3><p>São adotadas medidas técnicas e administrativas compatíveis com o projeto para reduzir riscos de acesso indevido, perda ou alteração. Nenhum serviço conectado à internet é totalmente livre de riscos; mantenha seus dispositivos e credenciais protegidos.</p></div><div class="sidebar-detail-card"><h3>8. Propriedade intelectual</h3><p>A identidade visual, o código, a organização da plataforma e os materiais próprios do Trycktrack pertencem aos seus respectivos titulares. O acesso ao aplicativo não transfere direitos de propriedade intelectual ao usuário.</p></div><div class="sidebar-detail-card"><h3>9. Disponibilidade</h3><p>Podem ocorrer indisponibilidades temporárias para manutenção, atualização, falhas de conexão ou limitações de serviços externos. O aplicativo pode funcionar parcialmente no modo local, mas alguns recursos dependem de internet e autenticação.</p></div><div class="sidebar-detail-card"><h3>10. Atualizações</h3><p>Os recursos, conteúdos e estes termos podem ser aprimorados ou alterados para manter o aplicativo seguro, útil e compatível com novas plataformas. A versão mais recente ficará disponível nesta seção.</p></div><div class="sidebar-detail-card"><h3>11. Dúvidas e solicitações</h3><p>Se você encontrar um erro, conteúdo desatualizado ou dificuldade de acesso, registre a tela afetada, o dispositivo utilizado e os passos que levaram ao problema. Para exercer direitos relacionados aos seus dados pessoais, utilize o canal de contato informado pelo responsável pelo projeto.</p></div>`
+                }
+            };
+
+            const selected = panels[panelKey] || panels.sobre;
+            title.textContent = selected.title;
+            subtitle.textContent = selected.subtitle;
+            body.innerHTML = selected.html;
+            applyGlobalFontScale(Number(localStorage.getItem('trycktrack-global-font-scale')) || 1);
+            panel.classList.add('active');
+            backdrop.classList.add('active');
+            panel.setAttribute('aria-hidden', 'false');
+        }
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeSidebarPanel();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyGlobalFontScale(Number(localStorage.getItem('trycktrack-global-font-scale')) || 1);
+        });
+
+        /* ============================================================
+           TEMA (claro/escuro) — Sistema / Ligado / Desligado
+           "Ligado"/"Desligado" se referem ao modo escuro:
+           - system → segue prefers-color-scheme do SO/navegador,
+             e continua acompanhando em tempo real se ele mudar
+           - on     → força escuro
+           - off    → força claro
+           ============================================================ */
+        const THEME_STORAGE_KEY = 'trycktrack-theme-mode';
+        const systemDarkQuery = window.matchMedia('(prefers-color-scheme: light)');
+
+        function resolveTheme(mode) {
+            if (mode === 'on') return 'dark';
+            if (mode === 'off') return 'light';
+            return systemDarkQuery.matches ? 'light' : 'dark';
+        }
+
+        function applyTheme(mode) {
+            const resolved = resolveTheme(mode);
+            document.documentElement.setAttribute('data-theme', resolved);
+
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) {
+                metaTheme.setAttribute('content', resolved === 'light' ? '#F3F2F6' : '#15161A');
+            }
+
+            document.querySelectorAll('.theme-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+        }
+
+        function setThemeMode(mode) {
+            localStorage.setItem(THEME_STORAGE_KEY, mode);
+            applyTheme(mode);
+        }
+
+        function getStoredThemeMode() {
+            return localStorage.getItem(THEME_STORAGE_KEY) || 'system';
+        }
+
+        // Reage a mudanças de tema do sistema em tempo real, mas só quando
+        // o modo escolhido é "Sistema" — nos outros modos, o app ignora
+        // o SO de propósito (é uma escolha forçada pelo usuário).
+        systemDarkQuery.addEventListener('change', () => {
+            if (getStoredThemeMode() === 'system') applyTheme('system');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => applyTheme(getStoredThemeMode()));
+
+        const tabMap = {
+            'inicio': 'inicioTab',
+            'trilhas': 'trilhasTab',
+            'review': 'reviewTab',
+            'questoes': 'questoesTab',
+            'metricas': 'metricasTab'
+        };
+        const paginas = ['inicio', 'trilhas', 'questoes', 'metricas', 'review'];
+
+        // Trilhas agora estão disponíveis. O bloqueio acontece dentro
+        // da própria trilha, fase a fase, conforme a progressão real.
+        const PAGINAS_BLOQUEADAS = [];
+
+        const TRAIL_STORAGE_KEY = 'trycktrack-dynamic-trails-v1';
+        let activeTrailPhase = null;
+        const TRAIL_CATALOG = {
+            enamed: {
+                name: 'Trilha Enamed',
+                logo: 'assets/logo-enamed-sigla.png',
+                description: 'Prioriza incidência nacional e o seu desempenho.',
+                phases: [
+                    { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Cardiologia, Infectologia e Pneumologia', incidence: 96 },
+                    { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Pré-natal, parto e urgências obstétricas', incidence: 88 },
+                    { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Neonatologia, crescimento e imunizações', incidence: 84 },
+                    { id: 'cirurgia', title: 'Cirurgia Geral', area: 'Cirurgia Geral', topicKey: 'cirurgia-geral', focus: 'Trauma, abdome agudo e emergências', incidence: 80 },
+                    { id: 'preventiva', title: 'Medicina Preventiva', area: 'Medicina Preventiva', topicKey: 'medicina-preventiva', focus: 'SUS, vigilância e epidemiologia', incidence: 76 }
+                ]
+            },
+            uepa: {
+                name: 'Trilha UEPA',
+                logo: 'assets/logo-uepa-sigla.png',
+                description: 'Organiza o estudo com a matriz de prioridade UEPA.',
+                phases: [
+                    { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Clínica aplicada e emergências', incidence: 91 },
+                    { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Atenção à criança e neonatologia', incidence: 90 },
+                    { id: 'preventiva', title: 'Medicina Preventiva', area: 'Medicina Preventiva', topicKey: 'medicina-preventiva', focus: 'APS, SUS e saúde coletiva', incidence: 87 },
+                    { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Assistência pré-natal e parto', incidence: 82 },
+                    { id: 'cirurgia', title: 'Cirurgia Geral', area: 'Cirurgia Geral', topicKey: 'cirurgia-geral', focus: 'Trauma e cuidados perioperatórios', incidence: 74 }
+                ]
+            }
+        };
+
+        function getTrailState() {
+            try { return JSON.parse(localStorage.getItem(TRAIL_STORAGE_KEY) || '{"active":"enamed","tracks":{}}'); }
+            catch (_) { return { active: 'enamed', tracks: {} }; }
+        }
+
+        function saveTrailState(state) {
+            localStorage.setItem(TRAIL_STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function getTrailTrack(state, trailId) {
+            state.tracks = state.tracks || {};
+            if (!state.tracks[trailId]) state.tracks[trailId] = { diagnosis: null, phaseProgress: {}, recalibrations: [] };
+            return state.tracks[trailId];
+        }
+
+        // calculatePathPriority não é mais definida aqui — vem de
+        // shared/trail-priority.js via window.calculatePathPriority,
+        // exposta pelo <script type="module"> do Firebase (que sempre
+        // termina de rodar antes do DOMContentLoaded, então já está
+        // disponível em qualquer handler/callback deste script clássico).
+        // Mesmo arquivo que o backend usa — ver comentário lá.
+        function getTrailPlan(trailId, track) {
+            const catalog = TRAIL_CATALOG[trailId];
+            if (!track.diagnosis) return catalog.phases;
+            const byId = Object.fromEntries(catalog.phases.map(item => [item.id, item]));
+            const orderedIds = track.orderedPhaseIds || window.calculatePathPriority({ topics: catalog.phases, results: track.diagnosis.results }).map(item => item.id);
+            return orderedIds.map(id => byId[id]).filter(Boolean);
+        }
+
+        function renderTrails() {
+            const hub = document.getElementById('trailHub');
+            if (!hub) return;
+            const state = getTrailState();
+            const trailId = state.active || 'enamed';
+            const track = getTrailTrack(state, trailId);
+            saveTrailState(state);
+            const catalog = TRAIL_CATALOG[trailId];
+            const plan = getTrailPlan(trailId, track);
+            const completed = Object.values(track.phaseProgress || {}).filter(value => value >= 100).length;
+            const diagnosticDone = !!track.diagnosis;
+
+            const diagnosisCard = {
+                id: 'diagnostico', title: 'Diagnóstico inicial global', focus: '20 questões distribuídas entre as cinco grandes áreas', progress: diagnosticDone ? 100 : 0,
+                unlocked: true, action: diagnosticDone ? 'Diagnóstico concluído' : 'Iniciar diagnóstico'
+            };
+            const recalibrationRequired = diagnosticDone && completed >= 2 && !(track.recalibrations || []).length && completed < plan.length;
+            const phases = [diagnosisCard, ...plan.map((phase, index) => {
+                const beforeRecalibration = recalibrationRequired && index >= completed;
+                const priorComplete = diagnosticDone && !beforeRecalibration && plan.slice(0, index).every(item => (track.phaseProgress[item.id] || 0) >= 100);
+                const progress = Number(track.phaseProgress[phase.id] || 0);
+                return { ...phase, progress, unlocked: priorComplete || progress > 0, action: progress >= 100 ? 'Concluída' : progress >= 50 ? 'Iniciar bateria' : 'Abrir Rapid Review' };
+            })];
+            if (recalibrationRequired) {
+                phases.splice(completed + 1, 0, {
+                    id: 'recalibragem', title: 'Simulado de recalibragem',
+                    focus: '20 questões gerais para reorganizar as próximas fases', progress: 0,
+                    unlocked: true, action: 'Iniciar simulado', recalibration: true
+                });
+            }
+
+            hub.innerHTML = `
+                <div class="trail-hub-header">
+                    <span class="beta-pill">Beta</span>
+                </div>
+                <div class="trail-switch">
+                    ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}"></button>`).join('')}
+                </div>
+                <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${diagnosticDone ? `${completed} de ${plan.length} fases concluídas. Próximas fases priorizadas pelo seu diagnóstico.` : 'Comece pelo diagnóstico para personalizar automaticamente a ordem das fases.'}</span></div>
+                <div class="trail-path">
+                    ${phases.map((phase, index) => {
+                        const locked = !phase.unlocked;
+                        const isDiagnosis = phase.id === 'diagnostico';
+                        const isRecalibration = !!phase.recalibration;
+                        const icon = locked
+                            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'
+                            : phase.progress >= 100
+                                ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>'
+                                : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+                        const click = locked ? '' : isDiagnosis ? `onclick="startTrailDiagnostic('${trailId}')"` : isRecalibration ? `onclick="startTrailRecalibration('${trailId}')"` : `onclick="startTrailPhase('${trailId}','${phase.id}')"`;
+                        const step = isDiagnosis ? 'Etapa 0 · calibração' : isRecalibration ? 'Ponto de recalibragem' : `Fase ${index} · ${phase.progress >= 50 ? 'bateria de fixação' : 'Rapid Review'}`;
+                        return `<article class="trail-phase${locked ? ' locked' : ''}" ${click}>
+                            <span class="trail-phase-marker"></span>
+                            <div class="trail-phase-content"><div class="trail-phase-kicker">${step}</div><h3>${phase.title}</h3><p>${phase.focus}</p><div class="trail-phase-progress"><span style="width:${phase.progress}%"></span></div></div>
+                            <span class="trail-phase-action" aria-label="${locked ? 'Fase bloqueada' : phase.action}">${icon}</span>
+                        </article>`;
+                    }).join('')}
+                </div>`;
+        }
+
+        function selectTrail(trailId) {
+            const state = getTrailState();
+            state.active = trailId;
+            getTrailTrack(state, trailId);
+            saveTrailState(state);
+            renderTrails();
+        }
+
+        function randomSample(items, count) {
+            const copy = [...items];
+            for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
+            return copy.slice(0, count);
+        }
+
+        function trailQuestionsForArea(area, count) {
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const matching = area === 'Ginecologia e Obstetrícia' ? bank.filter(q => ['Ginecologia', 'Obstetrícia'].includes(q.area)) : bank.filter(q => q.area === area);
+            return randomSample(matching, count);
+        }
+
+        async function startTrailDiagnostic(trailId) {
+            const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
+            const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
+            if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o diagnóstico.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailDiagnostic: trailId, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        async function startTrailRecalibration(trailId) {
+            const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
+            const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
+            if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o simulado.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailRecalibration: trailId, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        async function startTrailPhase(trailId, phaseId) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            const phase = getTrailPlan(trailId, track).find(item => item.id === phaseId);
+            if (!phase) return;
+            const progress = Number(track.phaseProgress[phaseId] || 0);
+            if (progress >= 100) return;
+            if (progress < 50) {
+                track.phaseProgress[phaseId] = 50;
+                saveTrailState(state);
+                activeTrailPhase = { trailId, phaseId };
+                openReader(phase.topicKey);
+                return;
+            }
+            const questions = trailQuestionsForArea(phase.area, 10);
+            if (!questions.length) { revealQuestionNotice(`Ainda não há questões importadas de ${phase.area}.`); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailPhase: { trailId, phaseId }, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        function completeTrailDiagnostic(trailId, session) {
+            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.diagnosis = { completedAt: Date.now(), results };
+            track.orderedPhaseIds = window.calculatePathPriority({ topics: TRAIL_CATALOG[trailId].phases, results }).map(item => item.id);
+            saveTrailState(state);
+            renderTrails();
+        }
+
+        function completeTrailRecalibration(trailId, session) {
+            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            const completedIds = Object.entries(track.phaseProgress || {}).filter(([, progress]) => progress >= 100).map(([id]) => id);
+            const ranking = window.calculatePathPriority({ topics: TRAIL_CATALOG[trailId].phases, results }).map(item => item.id);
+            const previous = track.orderedPhaseIds || [];
+            track.orderedPhaseIds = [...previous.filter(id => completedIds.includes(id)), ...ranking.filter(id => !completedIds.includes(id))];
+            track.recalibrations = [...(track.recalibrations || []), { completedAt: Date.now(), results }];
+            saveTrailState(state);
+            renderTrails();
+        }
+
+        function completeTrailPhase(trailPhase) {
+            if (!trailPhase) return;
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailPhase.trailId);
+            track.phaseProgress[trailPhase.phaseId] = 100;
+            saveTrailState(state);
+            renderTrails();
+        }
+
+        function animarProgresso(tab) {
+            tab.querySelectorAll('.progress-fill').forEach(bar => {
+                const target = bar.getAttribute('data-progress') || 0;
+                bar.style.width = '0%';
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        bar.style.width = target + '%';
+                    });
+                });
+            });
+        }
+
+        function mudarPagina(pagina) {
+            if (PAGINAS_BLOQUEADAS.includes(pagina)) {
+                const index = paginas.indexOf(pagina);
+                const navItems = document.querySelectorAll('.nav-item');
+                const item = navItems[index];
+                if (item) {
+                    item.classList.remove('shake');
+                    void item.offsetWidth; // reinicia a animação se already em curso
+                    item.classList.add('shake');
+                    setTimeout(() => item.classList.remove('shake'), 400);
+                }
+                return;
+            }
+
+            const atual = document.querySelector('.tab-content.active');
+            if (atual && atual.id === tabMap[pagina]) return;
+
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+
+            const navItems = document.querySelectorAll('.nav-item');
+            const index = paginas.indexOf(pagina);
+
+            const novaTab = document.getElementById(tabMap[pagina]);
+            novaTab.classList.add('active');
+            if (index >= 0) navItems[index].classList.add('active');
+
+            document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+            animarProgresso(novaTab);
+            updateHeaderTitle(pagina);
+            if (pagina === 'inicio') renderLastReadCard();
+            if (pagina === 'trilhas') renderTrails();
+            if (pagina === 'review') syncRapidReviewMenu();
+            if (pagina === 'metricas') renderDashboard();
+            // Prefetch silencioso: Questões e Trilhas são as duas telas de
+            // onde uma sessão pode começar, então já adianta o download de
+            // question-explanations.js aqui — na hora de responder a
+            // primeira questão, o arquivo já chegou.
+            if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
+        }
+
+        const DASHBOARD_AREAS = [
+            ['clinica-medica', 'Clínica Médica'],
+            ['go-completo', 'Ginecologia e Obstetrícia'],
+            ['pediatria-completo', 'Pediatria'],
+            ['cirurgia-geral', 'Cirurgia Geral'],
+            ['medicina-preventiva', 'Medicina Preventiva'],
+            ['psiquiatria', 'Psiquiatria']
+        ];
+        let dashboardPeriodDays = 7;
+
+        function getQuestionStats() {
+            try {
+                return JSON.parse(localStorage.getItem('trycktrack-question-stats') || '{}');
+            } catch (_) {
+                return {};
+            }
+        }
+
+        function setDashboardPeriod(button, days) {
+            dashboardPeriodDays = days;
+            button.parentElement.querySelectorAll('button').forEach(item => item.classList.remove('active'));
+            button.classList.add('active');
+            renderDashboard();
+        }
+
+        function renderDashboard() {
+            const stats = getQuestionStats();
+            const answered = Number(stats.answered || 0);
+            const correct = Number(stats.correct || 0);
+            const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+            const minutes = Number(stats.studyMinutes || 0);
+            const streak = Number(stats.streak || 0);
+
+            const score = document.getElementById('dashboardScore');
+            const ring = document.getElementById('dashboardScoreRing');
+            if (!score || !ring) return;
+            score.textContent = answered ? `${accuracy}%` : '0%';
+            ring.style.setProperty('--score', accuracy);
+            document.getElementById('dashboardQuestions').textContent = answered.toLocaleString('pt-BR');
+            document.getElementById('dashboardTime').textContent = minutes >= 60 ? `${Math.floor(minutes / 60)}h${minutes % 60 ? ` ${minutes % 60}m` : ''}` : `${minutes}m`;
+            document.getElementById('dashboardStreak').textContent = streak;
+            document.getElementById('dashboardHeadline').textContent = answered ? (accuracy >= 80 ? 'Ótimo desempenho' : accuracy >= 60 ? 'Evolução consistente' : 'Vamos fortalecer a base') : 'Pronto para começar';
+            document.getElementById('dashboardInsight').textContent = answered ? `${correct} acertos em ${answered} questões respondidas.` : 'Responda questões para construir uma análise personalizada.';
+
+            // Casa cada dia por data (não por posição no array) — stats.daily
+            // só ganha uma entrada nos dias em que houve estudo, então
+            // indexar por posição deslocava o gráfico inteiro assim que
+            // havia um intervalo sem responder nada.
+            const dailyByDate = new Map((Array.isArray(stats.daily) ? stats.daily : []).map(item => [item.date, Number(item.count || 0)]));
+            const today = new Date();
+            const countForDaysAgo = (daysAgo) => {
+                const date = new Date(today);
+                date.setDate(date.getDate() - daysAgo);
+                return dailyByDate.get(date.toISOString().slice(0, 10)) || 0;
+            };
+            let chartValues, dayLabels;
+            if (dashboardPeriodDays === 7) {
+                dayLabels = Array.from({ length: 7 }, (_, i) => {
+                    const date = new Date(today); date.setDate(date.getDate() - (6 - i));
+                    return date.toLocaleDateString('pt-BR', { weekday: 'narrow' });
+                });
+                chartValues = Array.from({ length: 7 }, (_, i) => countForDaysAgo(6 - i));
+            } else {
+                // 30 dias em 10 baldes de 3 dias — mantém a mesma densidade
+                // visual de antes (10 barras), agora somando dias reais em
+                // vez de indexar posições que não correspondiam a nada.
+                const BUCKETS = 10, BUCKET_SIZE = 3;
+                dayLabels = []; chartValues = [];
+                for (let bucket = BUCKETS - 1; bucket >= 0; bucket--) {
+                    let sum = 0;
+                    const bucketEndDaysAgo = bucket * BUCKET_SIZE;
+                    for (let offset = 0; offset < BUCKET_SIZE; offset++) sum += countForDaysAgo(bucketEndDaysAgo + offset);
+                    const endDate = new Date(today); endDate.setDate(endDate.getDate() - bucketEndDaysAgo);
+                    dayLabels.push(String(endDate.getDate()));
+                    chartValues.push(sum);
+                }
+            }
+            const maxValue = Math.max(1, ...chartValues);
+            const chart = document.getElementById('dashboardChart');
+            chart.innerHTML = chartValues.map((value, index) => `<div class="dashboard-day"><div class="dashboard-bar-track"><div class="dashboard-bar" style="height:${Math.max(3, Math.round((value / maxValue) * 100))}%"></div></div><label>${dayLabels[index]}</label></div>`).join('');
+            document.getElementById('dashboardChartLabel').textContent = dashboardPeriodDays === 7 ? 'Últimos 7 dias' : 'Últimos 30 dias';
+
+            const byArea = stats.byArea || {};
+            document.getElementById('dashboardAreas').innerHTML = DASHBOARD_AREAS.map(([key, name]) => {
+                const area = byArea[key] || {};
+                const areaAnswered = Number(area.answered || 0);
+                const areaCorrect = Number(area.correct || 0);
+                const value = areaAnswered ? Math.round((areaCorrect / areaAnswered) * 100) : 0;
+                return `<div class="dashboard-area"><div class="dashboard-area-top"><span class="dashboard-area-name">${name}</span><span class="dashboard-area-value">${areaAnswered ? `${value}% · ${areaAnswered} questões` : 'Sem respostas'}</span></div><div class="dashboard-area-track"><div class="dashboard-area-fill" style="width:${value}%"></div></div></div>`;
+            }).join('');
+
+            const history = getQuestionHistory();
+            const recent = document.getElementById('dashboardRecent');
+            if (!history.length) {
+                recent.className = 'dashboard-empty';
+                recent.innerHTML = '<div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 8h8M8 12h5"/></svg></div><span>Sua primeira sessão aparecerá aqui.</span>';
+            } else {
+                recent.className = 'dashboard-history-list';
+                recent.innerHTML = history.map(entry => {
+                    const modeLabel = entry.mode === 'exam' ? 'Simulado' : 'Guiado';
+                    const pct = entry.total ? Math.round((entry.correct / entry.total) * 100) : 0;
+                    return `<button type="button" class="dashboard-history-item" onclick="openQuestionHistoryEntry('${entry.id}')">
+                        <div class="dashboard-history-item-main">
+                            <strong>${escapeHtml(modeLabel)} · ${escapeHtml(entry.area || 'Áreas mistas')}</strong>
+                            <span>${formatQuestionHistoryDate(entry.startedAt)}</span>
+                        </div>
+                        <div class="dashboard-history-item-score ${pct >= 60 ? 'good' : 'bad'}">${entry.correct}/${entry.total}</div>
+                    </button>`;
+                }).join('');
+            }
+        }
+
+        function filtrar(btn) {
+            btn.parentElement.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        let activeQuestionConfigMode = null;
+
+        function questionAreaOptions() {
+            return ['Todas', 'Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva', 'Psiquiatria'];
+        }
+
+        function questionExamOptions() {
+            return [...new Map((window.TRYCKTRACK_QUESTION_BANK || [])
+                .filter(question => question.examId)
+                .map(question => [question.examId, { id: question.examId, name: question.examName }])).values()];
+        }
+
+        function questionThemeOptions() {
+            return [...new Set((window.TRYCKTRACK_QUESTION_BANK || []).map(question => question.area).filter(Boolean))].sort();
+        }
+
+        function questionYearOptions() {
+            return [...new Set((window.TRYCKTRACK_QUESTION_BANK || []).flatMap(question => getQuestionYears(question)))].sort().reverse();
+        }
+
+        function getQuestionYears(question) {
+            if (Array.isArray(question?.examYears) && question.examYears.length) return question.examYears;
+            const match = String(question?.examName || question?.source || '').match(/20\d{2}/g);
+            return match ? [...new Set(match)] : [];
+        }
+
+        function updateQuestionConfigSubtopics() {
+            const theme = document.getElementById('questionConfigTheme')?.value;
+            const select = document.getElementById('questionConfigSubtheme');
+            if (!select) return;
+            const subthemes = [...new Set((window.TRYCKTRACK_QUESTION_BANK || [])
+                .filter(question => !theme || theme === 'Todas' || question.area === theme)
+                .map(question => question.subarea)
+                .filter(Boolean))].sort();
+            select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${item}">${item}</option>`).join('');
+        }
+
+        function getConfiguredQuestionSet() {
+            const mode = activeQuestionConfigMode;
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            if (mode === 'full-exam') {
+                const examId = document.getElementById('questionConfigExam')?.value;
+                return bank.filter(question => question.examId === examId);
+            }
+            const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
+            const subtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
+            const institution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
+            const year = document.getElementById('questionConfigYear')?.value || 'Todos';
+            const board = document.getElementById('questionConfigBoard')?.value || 'Todas';
+            let questions = bank.filter(question => {
+                const questionYears = getQuestionYears(question);
+                const source = String(question.source || '');
+                return (theme === 'Todas' || question.area === theme)
+                    && (subtheme === 'Todas' || question.subarea === subtheme)
+                    && (institution === 'Todas' || source.includes(institution))
+                    && (year === 'Todos' || questionYears.includes(year))
+                    && (board === 'Todas' || source.includes(board));
+            });
+            const count = Number(document.getElementById('questionConfigCount')?.value || 12);
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+            return questions.slice(0, Math.min(count, questions.length));
+        }
+
+        // pdf-lib + fontkit + pdf-export.js somam 1,25MB e só servem no
+        // momento em que alguém baixa um PDF — não fazem sentido no
+        // carregamento inicial do app. Carregados sob demanda, uma única
+        // vez (chamadas seguintes reaproveitam a mesma promise/resultado).
+        let pdfLibsLoadingPromise = null;
+        function loadScriptOnce(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error(`Falha ao carregar ${src}`));
+                document.head.appendChild(script);
+            });
+        }
+        function ensurePdfLibsLoaded() {
+            if (window.TryckPdf) return Promise.resolve();
+            if (!pdfLibsLoadingPromise) {
+                pdfLibsLoadingPromise = loadScriptOnce('vendor/pdf-lib.min.js')
+                    .then(() => loadScriptOnce('vendor/fontkit.umd.min.js'))
+                    .then(() => loadScriptOnce('pdf-export.js'))
+                    .catch(error => { pdfLibsLoadingPromise = null; throw error; });
+            }
+            return pdfLibsLoadingPromise;
+        }
+
+        // question-explanations.js (829KB) só importa pra quem chega a
+        // responder uma questão — mutando question.explanation direto nos
+        // itens de window.TRYCKTRACK_QUESTION_BANK já carregado. Chamado
+        // de dois jeitos: como prefetch silencioso ao abrir Questões/
+        // Trilhas (mudarPagina) e, de forma garantida, antes de qualquer
+        // sessão de questões realmente começar — se o prefetch já tiver
+        // terminado (caso comum), essa segunda chamada não espera nada.
+        let questionExplanationsLoadingPromise = null;
+        function ensureQuestionExplanationsLoaded() {
+            if (window.TRYCKTRACK_QUESTION_EXPLANATIONS) return Promise.resolve();
+            if (!questionExplanationsLoadingPromise) {
+                questionExplanationsLoadingPromise = loadScriptOnce('question-explanations.js')
+                    .catch(error => { questionExplanationsLoadingPromise = null; throw error; });
+            }
+            return questionExplanationsLoadingPromise;
+        }
+
+        function escapeQuestionPdfText(value) {
+            return String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+        }
+
+        function setPdfDownloadProgress(element, progress, active = true) {
+            if (!element) return;
+            const value = Math.max(0, Math.min(100, Math.round(progress)));
+            element.style.setProperty('--pdf-progress', `${value}%`);
+            element.setAttribute('aria-valuenow', String(value));
+            element.classList.toggle('is-active', active);
+        }
+
+        function beginPdfDownloadProgress(element) {
+            setPdfDownloadProgress(element, 0, true);
+        }
+
+        function waitForPdfProgressPaint() {
+            return new Promise(resolve => window.requestAnimationFrame(() => window.requestAnimationFrame(resolve)));
+        }
+
+        function stopPdfDownloadProgressWhenPrinted(element) {
+            if (!element) return;
+            window.addEventListener('afterprint', () => {
+                window.setTimeout(() => setPdfDownloadProgress(element, 100, false), 900);
+            }, { once: true });
+        }
+
+
+        async function downloadConfiguredQuestionPdf(withAnswers) {
+            const mode = activeQuestionConfigMode;
+            if (!['practice', 'exam', 'full-exam'].includes(mode)) return;
+            const progress = document.getElementById('questionPdfProgress');
+            beginPdfDownloadProgress(progress);
+            const questions = getConfiguredQuestionSet();
+            if (!questions.length) {
+                setPdfDownloadProgress(progress, 0, false);
+                revealQuestionNotice('Não há questões para os filtros selecionados.');
+                return;
+            }
+            const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : (mode === 'exam' ? 'Simulado' : 'Guiado');
+            try {
+                setPdfDownloadProgress(progress, 15, true);
+                await ensurePdfLibsLoaded();
+                setPdfDownloadProgress(progress, 40, true);
+                // Com gabarito: mesmo layout com caixa lavanda do resultado de
+                // sessão (questão + explicação intercaladas no Guiado/Imersão;
+                // gabarito resumido + explicações em bloco no Simulado). Sem
+                // gabarito: a prova em branco, para responder antes de conferir.
+                const bytes = withAnswers
+                    ? await TryckPdf.buildQuestionsResultPdf({ questions, answers: questions.map(q => q.answer), mode: mode === 'exam' ? 'exam' : 'practice', title })
+                    : await TryckPdf.buildQuestionsPdf({ questions, title, includeAnswer: false });
+                setPdfDownloadProgress(progress, 96, true);
+                await waitForPdfProgressPaint();
+                const fileTitle = title.replace(/[^\p{L}\p{N}]+/gu, '-');
+                const suffix = withAnswers ? '-gabarito' : '';
+                TryckPdf.downloadBytes(bytes, `trycktrack-${fileTitle}${suffix}.pdf`);
+                setPdfDownloadProgress(progress, 100, false);
+            } catch (err) {
+                console.error('Falha ao gerar PDF de questões', err);
+                setPdfDownloadProgress(progress, 0, false);
+                revealQuestionNotice('Não foi possível gerar o PDF. Tente novamente.');
+            }
+        }
+
+        async function downloadQuestionSessionResultPdf(session) {
+            if (!session || !session.questions?.length) return;
+            revealQuestionNotice('Gerando PDF...');
+            try {
+                await ensurePdfLibsLoaded();
+                const title = session.mode === 'exam' ? 'Simulado' : 'Guiado';
+                const bytes = await TryckPdf.buildQuestionsResultPdf({
+                    questions: session.questions, answers: session.answers, mode: session.mode, title,
+                });
+                const fileTitle = title.replace(/[^\p{L}\p{N}]+/gu, '-');
+                TryckPdf.downloadBytes(bytes, `trycktrack-resultado-${fileTitle}.pdf`);
+            } catch (err) {
+                console.error('Falha ao gerar PDF do resultado', err);
+                revealQuestionNotice('Não foi possível gerar o PDF do resultado. Tente novamente.');
+            }
+        }
+
+        function updateQuestionCountSlider(el) {
+            const min = Number(el.min) || 1;
+            const max = Number(el.max) || 100;
+            const pct = ((Number(el.value) - min) / (max - min)) * 100;
+            el.style.setProperty('--range-pct', `${pct}%`);
+            const label = document.getElementById('questionConfigCountValue');
+            if (label) label.textContent = el.value;
+        }
+
+        function openQuestionConfig(mode) {
+            activeQuestionConfigMode = mode;
+            document.querySelectorAll('.question-mode').forEach(item => item.classList.toggle('active', item.dataset.questionMode === mode));
+            const view = document.getElementById('questionConfigView');
+            const body = document.getElementById('questionConfigBody');
+            const kicker = document.getElementById('questionConfigKicker');
+            const title = document.getElementById('questionConfigTitle');
+            const description = document.getElementById('questionConfigDescription');
+            const start = document.getElementById('questionConfigStart');
+            if (!view || !body || !title || !description || !start) return;
+
+            const config = {
+                practice: { title: 'Guiado', description: 'Escolha a área e o número de questões. Você verá a correção após cada resposta.', button: 'Começar prática' },
+                exam: { title: 'Simulado', description: 'Monte uma sessão com tempo e resultado liberado somente ao finalizar.', button: 'Começar simulado' },
+                osce: { title: 'OSCE', description: 'Selecione o foco da estação e treine a sequência clínica com checklist.', button: 'Iniciar estação' },
+                'full-exam': { title: 'Imersão', description: 'Escolha uma edição do Revalida e responda a prova completa em uma única sessão.', button: 'Começar prova' }
+            }[mode];
+            kicker.textContent = mode === 'full-exam' ? 'Simulado oficial' : 'Configuração da modalidade';
+            title.textContent = config.title;
+            description.textContent = config.description;
+            start.textContent = config.button;
+            const pdfAction = document.getElementById('questionPdfAction');
+            if (pdfAction) pdfAction.hidden = !['practice', 'exam', 'full-exam'].includes(mode);
+
+            const areas = questionAreaOptions().map(area => `<option value="${area}">${area}</option>`).join('');
+            if (mode === 'full-exam') {
+                const exams = questionExamOptions();
+                body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigExam">Edição da prova</label><select id="questionConfigExam">${exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('')}</select></div></div>`;
+            } else if (mode === 'osce') {
+                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields">
+                    <div class="question-config-divider">Assunto</div>
+                    <div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div>
+                    <div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div>
+                    <div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div>
+                    <div class="question-config-divider">Formato</div>
+                    <div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div>
+                    <select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select>
+                    <div class="question-config-divider">Estação</div>
+                    <div class="osce-station-status" id="osceStationStatus" role="status" aria-live="polite"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>
+                    <div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, gerado com IA (Groq).</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div>
+                </div>`;
+                activeOsceMode = 'CANDIDATE';
+                loadOsceStations();
+            } else {
+                const themes = questionThemeOptions();
+                const years = questionYearOptions();
+                body.innerHTML = `<div class="question-config-fields">
+                    <div class="question-config-divider">Conteúdo</div>
+                    <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-divider">Filtros</div>
+                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-divider">Quantidade</div>
+                    <div class="question-config-field question-config-field-slider">
+                        <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>
+                        <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
+                        <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
+                    </div>
+                </div>`;
+            }
+            view.hidden = false;
+            view.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function closeQuestionConfig() {
+            activeQuestionConfigMode = null;
+            document.getElementById('questionConfigView')?.setAttribute('hidden', '');
+            document.querySelectorAll('.question-mode').forEach(item => item.classList.remove('active'));
+        }
+
+        let activeOsceMode = 'CANDIDATE';
+        // Catálogo curricular completo do OSCE (mesmas área/tema/subtema/
+        // formato do backend, em backend/src/osceMatrix.js) — usado para a
+        // pessoa escolher QUALQUER assunto e gerar uma estação nova com IA,
+        // mesmo sem nenhuma estação estática cadastrada para ele ainda.
+        const OSCE_CURRICULUM_MATRIX = [{"name":"Atenção Primária à Saúde","slug":"atencao-primaria-a-saude","themes":[{"code":"A","subthemes":[{"name":"Saúde e doença (prevenção primária, secundária, terceária e quarternária e modelos do processo saúde e doença) + Sistema de Saúde Suplementar - Agência Nacional de Saúde Suplementar.","slug":"a-1"},{"name":"Ética médica (Princípios e diretrizes do código de ética médica e sua aplicação).","slug":"a-2"},{"name":"Sistema Único de Saúde - SUS + Leis Orgânicas de Saúde (diretrizes do SUS, lei 8080 e lei 8142).","slug":"a-3"},{"name":"Dinâmica de transmissão e distribuição de doenças e Vigilância em Saúde com ênfase em Vigilância epidemiológica (Doenças de notificação compulsoria no Brasil, SINAN e Ficha de Notificação de agravo - preenchimento e fluxo de informação, Vigilâcia Epidemiológica - conceito, importancia e atuação).","slug":"a-4"},{"name":"Transição epidemiológica, demográfica e nutricional.","slug":"a-5"},{"name":"Aspectos biológicos e fisiologia do envelhecimento (diferença entre senilidade e senescência e suas implicações clínicas, envelhecimento saudável)","slug":"a-6"},{"name":"Avaliacao global do Idoso (exame físico do idoso, MEEM, Escala de Depressão Geriatrica, e outras ferramentas de avaliação).","slug":"a-7"},{"name":"Instabilidade postural e quedas (critérios diagnósticos, manifestações clínicas e os métodos de avaliação para a instabilidade postural em idosos e fatores de risco para quedas.).","slug":"a-8"},{"name":"Violência e maus-tratos contra os idosos.","slug":"a-9"},{"name":"Sindrome Gripal (conceito da síndrome gripal, características clínicas e diagnosticos diferenciais e plano terapeutico.).","slug":"a-10"},{"name":"Rastreamento de doenças na APS I (foco em neoplasias: colo de útero, mama, próstata, colorretal).","slug":"a-11"},{"name":"Rastreamento de doenças na APS II (foco em HAS, DM, Dislipidemia, Obesidade).","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Atenção Primária à Saúde e Estratégia de Saúde da Família (Promoção à saúde, Atributos da APS, composição e atribuições da equipe de SF.).","slug":"b-1"},{"name":"Medicina de Família e Comunidade e Programa Mais Médicos.","slug":"b-2"},{"name":"Análise de métodos diagnósticos e Estudos epidemiológicos (Sensibilidade, especificidade, valor preditivo positivo e negativo, prevalência e incidência.).","slug":"b-3"},{"name":"Medicina legal (principais documentos médicos).","slug":"b-4"},{"name":"Medicina baseada em evidências, revisão sistemática e meta-análise.","slug":"b-5"},{"name":"Visitas Domiciliares e Atenção Domiciliar na ESF.","slug":"b-6"},{"name":"Complexidade e Integralidade na APS e DCNT.","slug":"b-7"},{"name":"DM e HAS Centrada na Pessoa.","slug":"b-8"},{"name":"Violência e maus-tratos contra a criança e a adolescente.","slug":"b-9"},{"name":"Vacinação (indicações, contra-indicações, efeitos adversos, faixa etária).","slug":"b-10"},{"name":"Violência Sexual e Autoprovocada + Doencas de notificação compulsória.","slug":"b-11"},{"name":"Saúde do Trabalhador + CAT.","slug":"b-12"}]}]},{"name":"Cirurgia","slug":"cirurgia","themes":[{"code":"A","subthemes":[{"name":"Abdome agudo inflamatório e suas complicações (apendicite, colicistite, diverticulite)","slug":"a-1"},{"name":"Hérnias de Parede Abdominal","slug":"a-2"},{"name":"Complicações e cuidados pós-operatórias; Infecção em cirurgia - Hematoma - Seroma - Deiscência - Evisceração.","slug":"a-3"},{"name":"Resposta endócrino metabólica ao trauma","slug":"a-4"},{"name":"Cuidados pré-operatórios; Risco cirúrgico (ASA - Goldman)","slug":"a-5"},{"name":"Afecções hepáticas: diagnósgtico/tratamento/complicações (Hipertensão portal; nódulos e abcessos hepáticos;)","slug":"a-6"},{"name":"Afecções da árvore biliar: colecistolitíase, coledocolitíase, íleo biliar, colangiocarcinoma","slug":"a-7"},{"name":"Afecções do pâncreas (Pancreatite aguda e crônica, pseudocisto, neoplasias císticas, adenocarcinoma): diagnóstico/tratamento/complicações","slug":"a-8"},{"name":"Câncer de cólon e reto (Diagnóstico clinico, laboratorial, radiologico e Condução clínica.","slug":"a-9"},{"name":"Condutas intervencionistas em derrame pleural Toracocentese","slug":"a-10"},{"name":"Tipos de fios, suturas e feridas.","slug":"a-11"},{"name":"Doenças orificiais: Doença hemorroidária, fissura anal, fístula anal, abscesso anorretal","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"ATLS- Aspectos históricos, exame primário e secundário, fase de cada um dos exames, aspectos intervencionistas no exameprimário e secundário","slug":"b-1"},{"name":"Cicatrização","slug":"b-2"},{"name":"Via áerea cirurgica","slug":"b-3"},{"name":"Trauma torácico (Pneumotórax aberto, fechado e hipertensivo, hemotórax, contusão pulmonar, tórax instável e tamponamento cardíaco)","slug":"b-4"},{"name":"Trauma abdominal e pélvico","slug":"b-5"},{"name":"Acesso venoso central","slug":"b-6"},{"name":"Queimaduras / síndrome compartimental","slug":"b-7"},{"name":"DAOP + Obstrução arterial aguda; Aneurisma de aorta","slug":"b-8"},{"name":"Insuficiência venosa crônica; Trombose Venosa Profunda - TVP","slug":"b-9"},{"name":"Noções de anestesia periférica","slug":"b-10"},{"name":"Urgências urológicas: Torção testicular, priapismo, urolitíase e orquiedpidimite","slug":"b-11"},{"name":"Abdome agudo em pediatria: intussuscepção, vólvulo, má rotação intestinal","slug":"b-12"}]}]},{"name":"Clínica Médica","slug":"clinica-medica","themes":[{"code":"A","subthemes":[{"name":"Asma e DPOC (Exame físico e exames complementares, incluindo espirometria, Tratamento da DPOC pelo ABE do GOLD, tratamento da exacerbação)","slug":"a-1"},{"name":"Diabetes mellitus - Classificação, diagnóstico, tratamento e complicações","slug":"a-2"},{"name":"Dengue, Zika, Chikungunya e Febre Amarela","slug":"a-3"},{"name":"Doenças do Pericárdio, Miocardites e Endocardites","slug":"a-4"},{"name":"HIV e Criptococosse","slug":"a-5"},{"name":"Cirrose e complicações (PBE, Asciste, Encefalopatia hepática, Síndrome hepatorrenal)","slug":"a-6"},{"name":"Doenças Eritematodescamativas (Psoríase, Dermatite Atópica)","slug":"a-7"},{"name":"Injúria Renal Aguda e Doença Renal Crônica","slug":"a-8"},{"name":"Doenças Tubulointersticiais e Glomerulares","slug":"a-9"},{"name":"Infecção de Trato Urinário, Nefrolitíase","slug":"a-10"},{"name":"Síndrome metabólica e dislipidemias","slug":"a-11"},{"name":"Doenças da hipófise e da tireóide - Rastreio de nódulos tireóidianos","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Insuficiencia cardíaca e valvopatias","slug":"b-1"},{"name":"Hipertensão arterial sistêmica, Emergências Hipertensivas, Encefalopatia hipertensiva, Crise hipertensiva, Conceitos fundamentais e condução clínica","slug":"b-2"},{"name":"Cefaleia na urgência / Principais cefaleias primárias: Cefaleia tensional, enxaqueca e cefaleias em salva","slug":"b-3"},{"name":"Tuberculose e Hanseníase (epidemiologia, fatores de risco, características do bacilo de koch, mecanismos de infecção e latência, tuberculose extrapulmonar, prevenção e controle, propedêutica clínica, diagnóstico e tratamento).","slug":"b-4"},{"name":"DRGE e Dispepsia (Dispepsia funcional, gastrites - incluindo quadro clínico, fisiopatologia, diagnóstico e tratamento)","slug":"b-5"},{"name":"Doenças inflamatórias intestinais (doença de crohn, retocolite ulcerativa)","slug":"b-6"},{"name":"Hemoragias digestivas (alta, média e baixa)","slug":"b-7"},{"name":"TVP e Tromboembolismo pulmonar (fatores de risco, exames complementares, tratamento e profilaxia)","slug":"b-8"},{"name":"Anemias (carenciais, hemolíticas e de doença crônica)","slug":"b-9"},{"name":"Neoplasias Hematológicas (Linfoma e Leucemia - Avaliação inicial e triagem laboratorial)","slug":"b-10"},{"name":"Pneumonias Bacterianas, virais e atípicas.","slug":"b-11"},{"name":"Poliartrites: Artrite Reumatóiide e Osteoartrite","slug":"b-12"}]}]},{"name":"Ginecologia e Obstetrícia","slug":"ginecologia-e-obstetricia","themes":[{"code":"A","subthemes":[{"name":"Assistência pré-natal","slug":"a-1"},{"name":"O parto: assistência clínica, mecanismos, períodos e manobras","slug":"a-2"},{"name":"Amenorreia primária e secundária","slug":"a-3"},{"name":"Síndrome dos ovários policísticos","slug":"a-4"},{"name":"Neoplasias mamárias e rastreio","slug":"a-5"},{"name":"Incontinência urinária e distopias genitais","slug":"a-6"},{"name":"Climatério","slug":"a-7"},{"name":"Pré-natal de alto risco (Diabetes e Gemelaridade)","slug":"a-8"},{"name":"Prematuridade (Trabalho de parto prematuro, amniorr​​exe prematura)","slug":"a-9"},{"name":"Restrição de crescimento fetal intrauterino (CIUR)","slug":"a-10"},{"name":"Infecções na gestação (Toxoplasmose, Citomegalovirus, Rubéola, Herpes e Sífilis)","slug":"a-11"},{"name":"Modificações locais e sistêmicas no organismo materno na gravidez","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Anticoncepção","slug":"b-1"},{"name":"HPV, neoplasias cervicais e rastreio","slug":"b-2"},{"name":"Doença inflamatória pélvica","slug":"b-3"},{"name":"Sangramento Uterino Anormal","slug":"b-4"},{"name":"Endometriose","slug":"b-5"},{"name":"Vulvovaginites, cervicites (Cândidiase, tricomoníase, vaginose bacteriana, vaginite atrófica - incluir tratamento na gestante)","slug":"b-6"},{"name":"Infecções sexualmente transmissíveis ( sífilis, herpes genital, cancro mole, gonorreia, linfogranuloma venéreo, donovanose)","slug":"b-7"},{"name":"Síndromes hipertensivas da gestação (Pré-Eclâmpsia , Pré-Eclâmpsia superposta, Eclâmpsia, Hipertensão crônica e gestacional)","slug":"b-8"},{"name":"Vitalidade fetal - Cardiotocografia e ultrassonografias na gestação","slug":"b-9"},{"name":"Sangramentos de primeira metade da gestação (gravidez ectópica, gravidez molar, abortamento)","slug":"b-10"},{"name":"Sangramentos de segunda metade da gestação (descolamento prematuro de placenta, placenta prévia, rotura uterina, vasa prévia)","slug":"b-11"},{"name":"Puerpério","slug":"b-12"}]}]},{"name":"Pediatria","slug":"pediatria","themes":[{"code":"A","subthemes":[{"name":"Imunizações","slug":"a-1"},{"name":"Diarréia aguda e desidratação. Parasitose.","slug":"a-2"},{"name":"Aleitamento materno, introdução alimentar e alergia alimentar.","slug":"a-3"},{"name":"Infecções congênitas: toxoplasmose, rubéola, sífilis, citomegalovírus, herpes simples, Zika vírus.","slug":"a-4"},{"name":"Icterícia neonatal","slug":"a-5"},{"name":"Assistência ao recem nascido na sala de parto > ou igual a 34 semanas","slug":"a-6"},{"name":"Anafilaxia. Dermatite atópica.","slug":"a-7"},{"name":"Infecção de vias aéreas superiores","slug":"a-8"},{"name":"Doenças exantemáticas (Sarampo, Rubéola, Eritema infeccioso, Exantema súbito, Mononucleose infecciosa, Varicela, Escarlatina, Doença de Kawasaki, Síndrome mão pé boca)","slug":"a-9"},{"name":"Infecção do trato urinário","slug":"a-10"},{"name":"Crescimento e desenvolvimento da criança até 5 anos.","slug":"a-11"},{"name":"GNDA e Síndrome nefrótica.","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Suporte básico e Suporte avançado de vida","slug":"b-1"},{"name":"Asma na criança + rinite alérgica","slug":"b-2"},{"name":"Meningites e meningoencefalites","slug":"b-3"},{"name":"Convulsões na criança","slug":"b-4"},{"name":"Pneumonia adquirida na comunidade/ Bronquiolite","slug":"b-5"},{"name":"TDAH e autismo","slug":"b-6"},{"name":"Patologias dermatológicas: impetigo/ectima, erisipela/celulite, foliculite/furunculose, síndrome da pele escaldada, estrófulo, escabiose, Tinea, Pitiríase alba, Pitiríase Versicolor e Molusco.","slug":"b-7"},{"name":"Anemias: anemia ferropriva, anemia megaloblástica e falciforme","slug":"b-8"},{"name":"Sepse em pediatria.(Reconhecer SEPSE, entender os conceitos e abordagem)","slug":"b-9"},{"name":"Febre reumática.","slug":"b-10"},{"name":"Crescimento e desenvolvimento puberal do adolescente (fisiologia da puberdade normal, exame físico e estadiamento puberal, diferenciar desenvolvimento puberal fisiológico do patológico, baseado nas alterações clínicas e exames complementares, síndrome da adolescencia normal).Puberdade precoce.","slug":"b-11"},{"name":"Febre sem sinais localizatórios","slug":"b-12"}]}]},{"name":"Urgência e Emergência / Saúde Mental","slug":"urgencia-e-emergencia-saude-mental","themes":[{"code":"A","subthemes":[{"name":"Suporte básico de vida e avançado: PALS e ACLS","slug":"a-1"},{"name":"Lesão renal aguda (Pré Renal, Renal e Pós Renal)","slug":"a-2"},{"name":"Psicopatologia e exame do estado mental- principais conceitos de psicopatologia, exame do estado mental, incluindo as manifestações clínicas nas principais desordens (esquizofrenia, transtornos afetivos e transtornos de ansiedade).","slug":"a-3"},{"name":"Sindrome respiratória aguda grave","slug":"a-4"},{"name":"Insuficiência respiratória (tipo I – hipoxêmica / tipo II – hipercápnica/ Mista)","slug":"a-5"},{"name":"Vias aéreas básica/ avançada (Extra glótica + Via aérea definitiva)","slug":"a-6"},{"name":"Cuidados paliativos e manejo da dor","slug":"a-7"},{"name":"Psicofarmacologia - antidepressivos (tricíclicos, inibidores da MAO, atípicos, moduladores de serotonina, Inibidores seletivos de recaptação de serotonina).","slug":"a-8"},{"name":"Emergências em Psiquiatria (tentativa de auto-extermínio, crise de ansiedade e surto psicótico)","slug":"a-9"},{"name":"Esquizofrenia e outros transtornos psicóticos (transtorno delirante, esquizoafetivo, psicótico)","slug":"a-10"},{"name":"Distúrbios do equilíbrio acidobásico","slug":"a-11"},{"name":"Intoxicações exógenas agudas","slug":"a-12"}]},{"code":"B","subthemes":[{"name":"Transtornos de Ansiedade (generalizada, pânico, fobias, TOC), Transtornos alimentares (bulimia, anorexia, compulsão)","slug":"b-1"},{"name":"Transtornos do humor (depressão maior, bipolar)","slug":"b-2"},{"name":"Choque septico e hipovolemico","slug":"b-3"},{"name":"Síndromes coronárianas agudas","slug":"b-4"},{"name":"Transtornos de personalidade (paranoide, esquizoide, antissocial, boderline, histriônica)","slug":"b-5"},{"name":"Insuficiencia cardíaca descompensada e Edema agudo pulmonar","slug":"b-6"},{"name":"Arritimias cardíacas","slug":"b-7"},{"name":"Transtornos mentais orgânicos (Delirium, Demência, Alzheimer, Parkinson)","slug":"b-8"},{"name":"Drogas vasoativas na urgência e emergência. Principais drogas vasoativas, Mecanismos de ação em receptores/doses/diluições, Vasopressores: Noradrenalina/Adrenalina/Vasopressina, Vasodilatadores:Nitroglicerina/Nitroprussiato de Sódio, Inotrópicos:Dobutamina/ Milrinone/ Levosimendan","slug":"b-9"},{"name":"Acidente com animais peçonhentos (ofídicos, aracnídeos, escorpiônicos) e Choque anafilático.","slug":"b-10"},{"name":"Cetoacidose diabética","slug":"b-11"},{"name":"AVE","slug":"b-12"}]}]}];
+        const OSCE_CURRICULUM_FORMATS = ["ANAMNESE_FOCADA","EXAME_FISICO","RACIOCINIO_DIAGNOSTICO","CONDUTA","PROCEDIMENTO","COMUNICACAO","URGENCIA_EMERGENCIA","ESTACAO_COMPLETA"];
+
+        let osceStationsCache = [];
+
+        // A biblioteca local deixa o OSCE disponível no app publicado, no celular e offline.
+        // O backend continua opcional para a futura versão com sincronização entre usuários.
+        function findOsceCurriculumArea(areaSlug) {
+            return OSCE_CURRICULUM_MATRIX.find(area => area.slug === areaSlug) || null;
+        }
+
+        function findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug) {
+            const area = findOsceCurriculumArea(areaSlug);
+            const theme = area?.themes.find(item => item.code === themeCode);
+            return theme?.subthemes.find(item => item.slug === subthemeSlug) || null;
+        }
+
+        function normalizeLocalOsceStation(source, index) {
+            const metadata = source?.metadata || {};
+            const area = findOsceCurriculumArea(metadata.areaSlug);
+            const subthemeEntry = findOsceCurriculumSubtheme(metadata.areaSlug, metadata.themeCode, metadata.subthemeSlug);
+            const theme = `Tema ${metadata.themeCode || ''}`.trim();
+            const subtheme = subthemeEntry?.name || metadata.subthemeSlug || 'Subtema';
+            const tasks = (source?.tasks || []).map(task => ({
+                id: task.id,
+                title: task.title || 'Tarefa da estação',
+                instructions: task.candidateInstructions || task.instructions || '',
+                checklist: task.checklist || [],
+                answerKey: task.answerKey || ''
+            }));
+            return {
+                id: source.externalId || `osce-local-${index + 1}`,
+                area: area?.name || metadata.areaSlug || 'Área não informada',
+                theme,
+                subtheme,
+                format: metadata.format || 'ESTACAO_COMPLETA',
+                title: metadata.title || 'Estação OSCE',
+                version: metadata.version || 1,
+                timeLimitSeconds: Math.max(1, Number(metadata.estimatedMinutes || 8)) * 60,
+                doorInstructions: source.doorInstructions || {},
+                tasks,
+                evaluatorContentJson: {
+                    scenario: source.scenario || {},
+                    patientScript: source.patientScript || {},
+                    physicalExam: source.physicalExam || [],
+                    complementaryTests: source.complementaryTests || [],
+                    evolution: source.evolution || [],
+                    tasks,
+                    finalAnswer: source.finalAnswer || {}
+                },
+                isLocal: true
+            };
+        }
+
+        function getLocalOsceStations() {
+            const source = Array.isArray(window.TRYCKTRACK_OSCE_STATIONS) ? window.TRYCKTRACK_OSCE_STATIONS : [];
+            return source.map(normalizeLocalOsceStation);
+        }
+
+        function stationById(id) {
+            return osceStationsCache.find(station => station.id === id);
+        }
+
+        function selectOsceMode(button) {
+            activeOsceMode = button.dataset.osceMode || 'CANDIDATE';
+            document.querySelectorAll('[data-osce-mode]').forEach(item => item.classList.toggle('active', item === button));
+        }
+
+        function uniqueOsceValues(key, filters = {}) {
+            return [...new Set(osceStationsCache.filter(station => Object.entries(filters).every(([field, value]) => !value || station[field] === value)).map(station => station[key]).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+        }
+
+        function fillOsceSelect(id, values, placeholder) {
+            const select = document.getElementById(id);
+            if (!select) return;
+            const current = select.value;
+            select.innerHTML = `<option value="">${placeholder}</option>` + values.map(value => `<option value="${String(value).replace(/"/g, '&quot;')}">${value}</option>`).join('');
+            if (values.includes(current)) select.value = current;
+        }
+
+        function setOsceStep(stepId, visible) {
+            const step = document.getElementById(stepId);
+            if (step) step.hidden = !visible;
+        }
+
+        function resetOsceSelect(id, placeholder) {
+            const select = document.getElementById(id);
+            if (!select) return;
+            select.innerHTML = `<option value="">${placeholder}</option>`;
+            select.value = '';
+            select.disabled = true;
+        }
+
+        function truncateText(value, max) {
+            const text = String(value || '');
+            return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
+        }
+
+        // As opções vêm do catálogo curricular completo (OSCE_CURRICULUM_MATRIX),
+        // não só do que já existe na biblioteca estática — assim dá para pedir
+        // uma estação de IA sobre QUALQUER assunto do edital, mesmo sem nenhum
+        // caso cadastrado ainda para ele.
+        async function loadOsceStations() {
+            const status = document.getElementById('osceStationStatus');
+            if (!status || activeQuestionConfigMode !== 'osce') return;
+            try {
+                const areaSelect = document.getElementById('questionConfigArea');
+                const themeSelect = document.getElementById('questionConfigTheme');
+                const subthemeSelect = document.getElementById('questionConfigSubtheme');
+                const formatSelect = document.getElementById('questionConfigFormat');
+                if (!osceStationsCache.length) osceStationsCache = getLocalOsceStations();
+
+                if (areaSelect.dataset.filled !== '1') {
+                    areaSelect.innerHTML = '<option value="">Selecione a área</option>' + OSCE_CURRICULUM_MATRIX.map(area => `<option value="${area.slug}">${escapeHtml(area.name)}</option>`).join('');
+                    areaSelect.dataset.filled = '1';
+                }
+
+                const areaSlug = areaSelect?.value || '';
+                const themeCode = themeSelect?.value || '';
+                const subthemeSlug = subthemeSelect?.value || '';
+                const formatValue = formatSelect?.value || '';
+
+                if (!areaSlug) {
+                    setOsceStep('osceThemeStep', false); setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false);
+                    resetOsceSelect('questionConfigTheme', 'Selecione o tema'); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato');
+                    status.innerHTML = '<strong>Escolha uma área</strong>Depois escolha o tema, o subtema e o formato da estação.';
+                    return;
+                }
+
+                const area = findOsceCurriculumArea(areaSlug);
+                themeSelect.disabled = false;
+                themeSelect.innerHTML = '<option value="">Selecione o tema</option>' + (area?.themes || []).map(theme => `<option value="${theme.code}">Tema ${theme.code}</option>`).join('');
+                if (themeCode) themeSelect.value = themeCode;
+                setOsceStep('osceThemeStep', true);
+                if (!themeCode) { setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tema</strong>'; return; }
+
+                const theme = area?.themes.find(item => item.code === themeCode);
+                subthemeSelect.disabled = false;
+                subthemeSelect.innerHTML = '<option value="">Selecione o subtema</option>' + (theme?.subthemes || []).map(sub => `<option value="${sub.slug}" title="${escapeHtml(sub.name)}">${escapeHtml(truncateText(sub.name, 78))}</option>`).join('');
+                if (subthemeSlug) subthemeSelect.value = subthemeSlug;
+                setOsceStep('osceSubthemeStep', true);
+                if (!subthemeSlug) { setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o subtema</strong>'; return; }
+
+                formatSelect.disabled = false;
+                formatSelect.innerHTML = '<option value="">Selecione o formato</option>' + OSCE_CURRICULUM_FORMATS.map(value => `<option value="${value}">${escapeHtml(value.replaceAll('_', ' '))}</option>`).join('');
+                if (formatValue) formatSelect.value = formatValue;
+                setOsceStep('osceFormatStep', true);
+                if (!formatValue) { setOsceStep('osceAiStep', false); status.innerHTML = '<strong>Agora escolha o formato</strong>'; return; }
+
+                setOsceStep('osceAiStep', true);
+                const subthemeEntry = findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug);
+                const themeLabel = `Tema ${themeCode}`;
+                const matches = osceStationsCache.filter(station => station.area === area?.name && station.theme === themeLabel && station.subtheme === subthemeEntry?.name && station.format === formatValue);
+                const stationSelect = document.getElementById('questionConfigStation');
+                if (matches.length) {
+                    if (stationSelect) stationSelect.innerHTML = `<option value="${matches[0].id}">${matches[0].id}</option>`;
+                    status.innerHTML = `<strong>${matches.length} estação(ões) já cadastrada(s)</strong>Pronto para iniciar, ou gere uma estação nova e inédita com IA.`;
+                } else {
+                    if (stationSelect) stationSelect.innerHTML = '<option value="">Nenhuma estação carregada</option>';
+                    status.innerHTML = '<strong>Nenhuma estação cadastrada ainda para esse assunto</strong>Gere uma estação com IA para treinar.';
+                }
+                refreshOsceLibraryPicker(osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, formatValue));
+            } catch (_) {
+                status.innerHTML = '<strong>Biblioteca OSCE indisponível</strong>Não foi possível carregar o catálogo de estações.';
+            }
+        }
+
+        // A geração de estações passa por um proxy (cloudflare-worker/) em
+        // vez de chamar a Groq direto do navegador — a chave da API não
+        // pode viver aqui, porque qualquer visitante consegue lê-la e
+        // consumir a cota diária compartilhada de todo mundo. O Worker
+        // guarda a chave como secret e só a usa depois de conferir que
+        // quem chamou está logado (token do Firebase).
+        const OSCE_PROXY_URL = 'https://trycktrack-osce-proxy.patryckfrota-trycktrack.workers.dev';
+
+        async function callGroqForOsceStation(prompt) {
+            const idToken = await window.__fb?.getIdToken?.();
+            if (!idToken) throw new Error('Faça login para gerar uma estação com IA.');
+            const response = await fetch(OSCE_PROXY_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
+                body: JSON.stringify({ prompt })
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => '');
+                throw new Error(`Proxy da Groq respondeu ${response.status}: ${text.slice(0, 300)}`);
+            }
+            const data = await response.json();
+            const text = data.choices?.[0]?.message?.content;
+            if (!text) throw new Error('Resposta do Groq sem conteúdo.');
+            return JSON.parse(text);
+        }
+
+        function buildOsceGenerationPrompt({ areaName, themeName, subthemeName, format, difficulty }) {
+            return `Você é um especialista em educação médica brasileira, criador de estações de OSCE (Objective Structured Clinical Examination) para prova de residência médica (padrão Revalida/Enamed).
+
+Crie UMA estação OSCE inédita, em português do Brasil, sobre o seguinte tema curricular:
+- Área: ${areaName}
+- Tema: ${themeName}
+- Subtema/assunto: ${subthemeName}
+- Formato da estação: ${format}
+- Dificuldade alvo: ${difficulty || 'INTERMEDIÁRIA'}
+
+Regras obrigatórias:
+1. O paciente é fictício (nome, idade e detalhes inventados) — nunca use pessoas reais.
+2. O caso deve ser clinicamente coerente e conservador, alinhado a diretrizes brasileiras/internacionais amplamente aceitas para o tema.
+3. Adapte o foco das tarefas e do checklist ao formato pedido (ex.: EXAME_FISICO foca em exame físico; COMUNICACAO foca em habilidades de comunicação; CONDUTA foca em decisão terapêutica).
+4. Gere entre 1 e 3 tarefas ("tasks"), cada uma com 4 a 8 itens de checklist, distribuídos entre os eixos COMMUNICATION, HISTORY, PHYSICAL_EXAM, DIAGNOSTIC_REASONING e MANAGEMENT. Pelo menos um item do checklist geral deve ter "critical": true (erro que compromete a segurança do paciente).
+5. "patientScript.responses" deve ter pelo menos 8 pares de pergunta-esperada/resposta cobrindo história, sintomas associados, gravidade, medicações, antecedentes e expectativas do paciente.
+6. Preencha "complementaryTests" apenas se fizer sentido clínico para o formato/tema.
+7. "doorInstructions.triageSummary" deve resumir os sinais vitais/triagem em uma frase (ex.: "PA 128/78 mmHg, FC 118 bpm, SpO2 90% em ar ambiente").
+8. Responda em português, com linguagem natural de prontuário/simulação clínica.`;
+        }
+
+        // Biblioteca compartilhada: cada combinação área/tema/subtema/formato
+        // vira um "balde" no Firestore com as estações já geradas por
+        // qualquer pessoa — reaproveitável quando a cota da IA acabar ou
+        // quando alguém preferir simplesmente escolher uma já pronta.
+        function osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, format) {
+            return `${areaSlug}__${themeCode}__${subthemeSlug}__${format}`;
+        }
+
+        let osceLibraryCache = [];
+
+        // Checagem estrutural mínima antes de gravar na biblioteca
+        // compartilhada: garante que a resposta da IA tem os campos que o
+        // resto do app espera (a chamada ao Groq usa strict: false, então
+        // nada obriga isso) e que o documento não é absurdamente grande.
+        // Não é validação clínica — só impede lixo estrutural de entrar
+        // num acervo que outras pessoas vão usar para estudar.
+        const OSCE_LIBRARY_REQUIRED_FIELDS = ['schemaVersion', 'externalId', 'metadata', 'doorInstructions', 'patientScript', 'tasks', 'finalAnswer'];
+        const OSCE_LIBRARY_MAX_BYTES = 250000;
+
+        function isValidOsceLibraryPayload(raw) {
+            if (!raw || typeof raw !== 'object') return false;
+            if (!OSCE_LIBRARY_REQUIRED_FIELDS.every(field => raw[field] != null)) return false;
+            if (!Array.isArray(raw.tasks) || !raw.tasks.length) return false;
+            if (!raw.tasks.every(task => Array.isArray(task?.checklist) && task.checklist.length)) return false;
+            try { return new Blob([JSON.stringify(raw)]).size <= OSCE_LIBRARY_MAX_BYTES; }
+            catch (_) { return false; }
+        }
+
+        function selectStationFromLibrary(station) {
+            const normalized = normalizeLocalOsceStation(station, osceStationsCache.length);
+            osceStationsCache.unshift(normalized);
+            const stationSelect = document.getElementById('questionConfigStation');
+            if (stationSelect) stationSelect.innerHTML = `<option value="${normalized.id}">${normalized.id}</option>`;
+            return normalized;
+        }
+
+        async function refreshOsceLibraryPicker(bucketId) {
+            const wrap = document.getElementById('osceLibraryPicker');
+            const select = document.getElementById('osceLibrarySelect');
+            if (!wrap || !select) return;
+            osceLibraryCache = [];
+            wrap.hidden = true;
+            if (!window.__fb?.ready) return;
+            try {
+                osceLibraryCache = await window.__fb.getOsceLibrary(bucketId);
+            } catch (error) {
+                console.warn('Não foi possível carregar a biblioteca de estações OSCE:', error);
+                return;
+            }
+            if (!osceLibraryCache.length) return;
+            select.innerHTML = osceLibraryCache.map((item, index) => `<option value="${index}">${escapeHtml(item.metadata?.title || `Estação ${index + 1}`)}</option>`).join('');
+            wrap.hidden = false;
+        }
+
+        function useOsceLibraryStation() {
+            const select = document.getElementById('osceLibrarySelect');
+            const status = document.getElementById('osceStationStatus');
+            const raw = osceLibraryCache[Number(select?.value)];
+            if (!raw) return;
+            const station = selectStationFromLibrary(raw);
+            if (status) status.innerHTML = `<strong>Estação escolhida (não revisada)</strong>“${escapeHtml(station.title)}” · gerada por outra pessoa, pronta para iniciar.`;
+        }
+
+        async function generateOsceStationWithAI() {
+            const status = document.getElementById('osceStationStatus');
+            const button = document.getElementById('osceAiGenerateBtn');
+            const areaSlug = document.getElementById('questionConfigArea')?.value || '';
+            const themeCode = document.getElementById('questionConfigTheme')?.value || '';
+            const subthemeSlug = document.getElementById('questionConfigSubtheme')?.value || '';
+            const format = document.getElementById('questionConfigFormat')?.value || '';
+            const area = findOsceCurriculumArea(areaSlug);
+            const subthemeEntry = findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug);
+            if (!area || !themeCode || !subthemeEntry || !format) {
+                revealQuestionNotice('Escolha área, tema, subtema e formato antes de gerar a estação.');
+                return;
+            }
+            if (!window.__fb?.ready || !window.__fb?.getCurrentUser?.()) {
+                revealQuestionNotice('Faça login para gerar uma estação com IA.');
+                return;
+            }
+            const bucketId = osceLibraryBucketId(areaSlug, themeCode, subthemeSlug, format);
+            if (button) { button.disabled = true; button.classList.add('is-loading'); }
+            if (status) status.innerHTML = '<strong>Gerando estação com IA (Groq)…</strong>Isso pode levar alguns segundos.';
+            try {
+                const prompt = buildOsceGenerationPrompt({
+                    areaName: area.name, themeName: `Tema ${themeCode}`, subthemeName: subthemeEntry.name, format
+                });
+                let content;
+                try {
+                    content = await callGroqForOsceStation(prompt);
+                } catch (firstError) {
+                    console.warn('Primeira tentativa de gerar estação falhou, tentando novamente:', firstError);
+                    content = await callGroqForOsceStation(prompt);
+                }
+                const raw = {
+                    schemaVersion: '1.0.0',
+                    externalId: `ai-${areaSlug}-${themeCode}-${subthemeSlug}-${Date.now()}`,
+                    metadata: {
+                        areaSlug, themeCode, subthemeSlug, format,
+                        title: content.title, version: 1,
+                        difficulty: content.difficulty, estimatedMinutes: content.estimatedMinutes
+                    },
+                    scenario: content.scenario,
+                    doorInstructions: {
+                        patientName: content.doorInstructions?.patientName,
+                        age: content.doorInstructions?.age,
+                        chiefComplaint: content.doorInstructions?.chiefComplaint,
+                        triageData: { Resumo: content.doorInstructions?.triageSummary || '' }
+                    },
+                    patientScript: content.patientScript,
+                    physicalExam: content.physicalExam,
+                    complementaryTests: content.complementaryTests,
+                    evolution: content.evolution,
+                    tasks: content.tasks,
+                    finalAnswer: content.finalAnswer
+                };
+                const station = selectStationFromLibrary(raw);
+                if (status) status.innerHTML = `<strong>Estação gerada com IA (Groq)</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+                // Salva na biblioteca compartilhada em segundo plano — se
+                // falhar (ex.: regras do Firestore) ou não passar na
+                // checagem estrutural, a estação já gerada continua
+                // funcionando normalmente para quem a gerou agora, só não
+                // fica salva pra outras pessoas reaproveitarem depois.
+                if (isValidOsceLibraryPayload(raw)) {
+                    window.__fb.saveOsceToLibrary(bucketId, raw).catch(error => console.warn('Não foi possível salvar a estação na biblioteca:', error));
+                } else {
+                    console.warn('Estação gerada não passou na checagem estrutural — não foi salva na biblioteca compartilhada.', raw);
+                }
+            } catch (error) {
+                console.error('Falha ao gerar estação OSCE com IA:', error);
+                await refreshOsceLibraryPicker(bucketId);
+                if (osceLibraryCache.length) {
+                    const fallback = selectStationFromLibrary(osceLibraryCache[Math.floor(Math.random() * osceLibraryCache.length)]);
+                    // Nenhuma estação da biblioteca passou por revisão
+                    // humana — é honesto avisar que veio direto da IA de
+                    // outra pessoa, não um caso curado.
+                    if (status) status.innerHTML = `<strong>Cota da IA esgotada por agora</strong>Usando uma estação já gerada por outra pessoa (não revisada): “${escapeHtml(fallback.title)}”.`;
+                } else {
+                    if (status) status.innerHTML = '<strong>Não foi possível gerar a estação</strong>Tente novamente em instantes.';
+                    revealQuestionNotice('Não foi possível gerar a estação com IA agora.');
+                }
+            } finally {
+                if (button) { button.disabled = false; button.classList.remove('is-loading'); }
+            }
+        }
+
+        function selectQuestionMode(button) {
+            document.querySelectorAll('.question-mode').forEach(item => item.classList.remove('active'));
+            button.classList.add('active');
+            const startButton = document.querySelector('.question-start');
+            const examPanel = document.getElementById('questionExamPanel');
+            const isFullExam = button.dataset.questionMode === 'full-exam';
+            if (examPanel) examPanel.hidden = !isFullExam;
+            const areaTitle = document.getElementById('questionAreaTitle');
+            const areaFilters = document.getElementById('questionAreaFilters');
+            if (areaTitle) areaTitle.hidden = isFullExam;
+            if (areaFilters) areaFilters.hidden = isFullExam;
+            if (isFullExam) {
+                const countSelect = document.getElementById('questionCount');
+                if (countSelect) countSelect.value = 'full';
+                const select = document.getElementById('questionExamSelect');
+                const exams = [...new Map((window.TRYCKTRACK_QUESTION_BANK || [])
+                    .filter(question => question.examId)
+                    .map(question => [question.examId, { id: question.examId, name: question.examName }])).values()];
+                if (select) select.innerHTML = exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('');
+            } else {
+                const countSelect = document.getElementById('questionCount');
+                if (countSelect?.value === 'full') countSelect.value = '12';
+            }
+            if (startButton) {
+                const labels = {
+                    practice: 'Começar sessão',
+                    exam: 'Configurar simulado',
+                    osce: 'Iniciar estação OSCE',
+                    'full-exam': 'Começar prova'
+                };
+                startButton.textContent = labels[button.dataset.questionMode] || 'Começar sessão';
+            }
+        }
+
+        function selectQuestionArea(button) {
+            document.querySelectorAll('.question-area-chip').forEach(item => item.classList.remove('active'));
+            button.classList.add('active');
+            const panel = document.getElementById('questionSubareaPanel');
+            const scroll = document.getElementById('questionSubareaScroll');
+            const isClinical = button.textContent.trim() === 'Clínica Médica';
+            if (panel) panel.hidden = !isClinical;
+            if (!panel || !scroll) return;
+            panel.hidden = !isClinical;
+            if (isClinical) {
+                const subareas = [...new Set((window.TRYCKTRACK_QUESTION_BANK || [])
+                    .filter(question => question.area === 'Clínica Médica' && question.subarea)
+                    .map(question => question.subarea))];
+                scroll.innerHTML = [
+                    '<button class="question-area-chip active" onclick="selectQuestionSubarea(this)">Todas as subáreas</button>',
+                    ...subareas.map(subarea => `<button class="question-area-chip" onclick="selectQuestionSubarea(this)">${subarea}</button>`)
+                ].join('');
+            }
+        }
+
+        function selectQuestionSubarea(button) {
+            document.querySelectorAll('#questionSubareaScroll .question-area-chip').forEach(item => item.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function revealQuestionNotice(message, action) {
+            const notice = document.getElementById('questionComing');
+            if (!notice) return;
+            notice.textContent = message;
+            if (action) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'question-coming-action';
+                btn.textContent = action.label;
+                btn.onclick = action.onClick;
+                notice.appendChild(btn);
+            }
+            notice.classList.remove('visible');
+            void notice.offsetWidth;
+            notice.classList.add('visible');
+        }
+
+        let activeQuestionSession = null;
+        let lastCompletedQuestionSession = null;
+
+        // Todo backend/src/*.js que sustentaria o modo remoto nunca foi
+        // publicado (ver E-01) — toda estação que chega a osceStationsCache
+        // (local, gerada por IA, ou vinda da biblioteca compartilhada) já
+        // passa por normalizeLocalOsceStation, que sempre marca isLocal:
+        // true. Não existe mais um segundo caminho a manter.
+        function startOsceSession() {
+            const stationId = document.getElementById('questionConfigStation')?.value;
+            const localStation = stationId && stationById(stationId);
+            if (!localStation) {
+                revealQuestionNotice('Nenhuma estação OSCE está disponível para os filtros selecionados.');
+                return;
+            }
+            activeOsceSession = {
+                sessionId: `local-${stationId}-${Date.now()}`,
+                station: localStation,
+                mode: activeOsceMode,
+                startedAt: Date.now(),
+                events: [],
+                selfAssessments: {},
+                evaluatorChecklist: {},
+                isLocal: true
+            };
+            renderOsceDoor(localStation);
+        }
+
+        let activeOsceSession = null;
+        let osceTimer = null;
+        // renderOsceDoor substitui TODO o conteúdo de #questionPlayer (a
+        // mesma seção usada pelo player normal de questões) pela própria
+        // marcação do OSCE — inclusive o cabeçalho e o rodapé com os IDs
+        // que renderQuestionPlayer/showQuestionResults esperam encontrar.
+        // Sem restaurar essa estrutura ao sair, a próxima sessão de
+        // Guiado/Simulado chama document.getElementById(...).textContent
+        // num elemento que não existe mais, estoura um TypeError no meio
+        // de renderQuestionPlayer e a tela fica travada mostrando o
+        // gabarito da última estação de OSCE. Capturado uma única vez,
+        // aqui, antes de qualquer função ter chance de sobrescrever.
+        const QUESTION_PLAYER_PRISTINE_HTML = document.getElementById('questionPlayer')?.innerHTML || '';
+
+        function osceReadableValue(value) {
+            if (value === null || value === undefined || value === '') return '';
+            if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return String(value);
+            if (Array.isArray(value)) return value.map(osceReadableValue).filter(Boolean).join(' · ');
+            return Object.entries(value).map(([key, item]) => `${key.replaceAll('_', ' ')}: ${osceReadableValue(item)}`).filter(Boolean).join(' — ');
+        }
+
+        function osceTextList(items) {
+            const values = Array.isArray(items) ? items.filter(Boolean) : [];
+            return values.length ? `<ul>${values.map(item => `<li>${escapeHtml(osceReadableValue(item))}</li>`).join('')}</ul>` : '<p>Nenhum item disponível.</p>';
+        }
+
+        function evaluatorPreparationMarkup(station) {
+            const content = station?.evaluatorContentJson || {};
+            const scenario = content.scenario || {};
+            const script = content.patientScript || {};
+            const tests = content.complementaryTests || [];
+            const evolution = content.evolution || [];
+            const tasks = content.tasks || [];
+            return `<details class="osce-evaluator-case" open><summary>Caso completo do avaliador</summary><div class="osce-case-grid"><div class="osce-info-card"><small>Ambiente</small><strong>${escapeHtml(scenario.environment || 'Estação clínica')}</strong></div><div class="osce-info-card"><small>Paciente</small><strong>${escapeHtml(station.doorInstructions?.patientName || 'Paciente simulado')}</strong></div></div><section class="osce-evaluator-section"><h3>Perfil e fala inicial</h3><p>${escapeHtml(script.openingStatement || '')}</p></section><section class="osce-evaluator-section"><h3>Tarefas da estação</h3>${tasks.map((task, index) => `<div class="osce-resource-card"><small>Tarefa ${index + 1}</small><strong>${escapeHtml(task.title)}</strong><p>${escapeHtml(task.candidateInstructions)}</p></div>`).join('')}</section><section class="osce-evaluator-section"><h3>Gatilhos de evolução</h3>${osceTextList(evolution.map(item => `${item.trigger}: ${item.change}`))}</section><section class="osce-evaluator-section"><h3>Atalhos do avaliador</h3><div class="osce-quick-actions"><button type="button" onclick="showOsceResource('patient')">Respostas do paciente</button><button type="button" onclick="showOsceResource('physical')">Exame físico</button><button type="button" onclick="showOsceResource('tests')">Exames (${tests.length})</button></div><div id="osceResourceOutput"></div></section></details>`;
+        }
+
+        function renderOsceDoor(station) {
+            const player = document.getElementById('questionPlayer');
+            if (!player) return;
+            player.hidden = false;
+            document.body.style.overflow = 'hidden';
+            const isEvaluator = activeOsceSession?.mode === 'EVALUATOR';
+            const door = station.doorInstructions || {};
+            const tasks = Array.isArray(station.tasks) ? station.tasks : [];
+            const doorText = typeof door === 'string' ? door : [door.chiefComplaint, ...(door.candidateTasks || [])].filter(Boolean).join('<br>');
+            const evaluatorDetails = isEvaluator ? evaluatorPreparationMarkup(station) : '';
+            const taskList = !isEvaluator && tasks.length ? `<div class="osce-task-list">${tasks.map((task, index) => `<div class="osce-task${index === 0 ? ' active' : ''}" data-task-index="${index}"><span>${index + 1}</span><strong>${escapeHtml(task.title)}</strong></div>`).join('')}</div>` : '';
+            player.innerHTML = `<div class="osce-door"><div class="question-player-top"><button class="osce-close-button" type="button" aria-label="Fechar estação" title="Fechar estação" onclick="closeOsceSession()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Sair</button></div><div class="osce-door-label">${isEvaluator ? 'Preparação do avaliador' : 'Instruções da porta'}</div><div class="osce-door-card"><span class="question-config-kicker">${isEvaluator ? 'Modo avaliador' : 'Modo avaliando'}</span><h2>${escapeHtml(station.area)} · ${escapeHtml(station.theme)}</h2><p>${escapeHtml(doorText).replaceAll('&lt;br&gt;', '<br>')}</p>${taskList}${evaluatorDetails}<div class="osce-timer-wrap"><div class="osce-timer-head"><span class="osce-timer-label">Tempo da estação</span><div class="osce-timer" id="osceTimer">${formatOsceTime(station.timeLimitSeconds)}</div></div><div class="osce-timer-track" aria-label="Tempo decorrido"><div class="osce-timer-fill" id="osceTimerFill"></div></div></div><button class="question-start" type="button" onclick="beginOsceStation()">${isEvaluator ? 'Iniciar avaliação' : 'Iniciar estação'}</button></div></div>`;
+        }
+
+        // escapeHtml agora vive em app-auth.js (carregado primeiro) — ver
+        // comentário lá.
+
+        function showOsceResource(kind) {
+            const output = document.getElementById('osceResourceOutput');
+            if (!output || !activeOsceSession?.sessionId) return;
+            const content = activeOsceSession.station?.evaluatorContentJson || {};
+            const payload = {
+                patientScript: (content.patientScript?.responses || []).map(item => `${item.trigger}: ${item.response}`),
+                physicalExamFindings: (content.physicalExam || []).map(item => `${item.system}: ${(item.findings || []).join(' · ')}`),
+                tests: (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`)
+            };
+            const value = kind === 'patient' ? payload.patientScript : kind === 'physical' ? payload.physicalExamFindings : payload.tests;
+            const entries = Array.isArray(value) ? value : Object.entries(value || {}).map(([key, item]) => `${key.replaceAll('_', ' ')}: ${osceReadableValue(item)}`);
+            output.innerHTML = `<div class="osce-resource-card"><small>${kind === 'patient' ? 'Respostas liberáveis' : kind === 'physical' ? 'Achados sob solicitação' : 'Exames sob solicitação'}</small>${osceTextList(entries)}</div>`;
+        }
+
+        function formatOsceTime(seconds) { const value = Math.max(0, Number(seconds) || 0); return `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`; }
+
+        const OSCE_AXIS_LABELS = { COMMUNICATION: 'Comunicação', HISTORY: 'Anamnese', PHYSICAL_EXAM: 'Exame físico', DIAGNOSTIC_REASONING: 'Raciocínio diagnóstico', MANAGEMENT: 'Conduta' };
+
+        // Só cuida da pontuação (total + desempenho por eixo). O gabarito e a
+        // explicação do caso têm sua própria seção estruturada, em
+        // osceFinalAnswerMarkup — nunca mais um dump genérico de chave/valor.
+        function osceResultMarkup(summary) {
+            if (!summary) return '<p>Nenhum resultado detalhado disponível.</p>';
+            const { totalPoints = 0, maxPoints = 0, percent = 0, performanceByAxis = {} } = summary;
+            const axisEntries = Object.entries(performanceByAxis).filter(([, stats]) => stats?.maxPoints);
+            return `<div class="osce-score-hero">
+                <span class="osce-score-hero-label">Pontuação final</span>
+                <strong class="osce-score-hero-value">${escapeHtml(String(totalPoints))}<span>/ ${escapeHtml(String(maxPoints))}</span></strong>
+                <span class="osce-score-hero-percent">${escapeHtml(String(percent))}% de aproveitamento</span>
+            </div>
+            ${axisEntries.length ? `<div class="osce-result-grid">${axisEntries.map(([axis, stats]) => `<div class="osce-result-card"><small>${escapeHtml(OSCE_AXIS_LABELS[axis] || axis)}</small><strong>${escapeHtml(String(stats.points))} de ${escapeHtml(String(stats.maxPoints))}</strong><span class="osce-result-card-percent">${escapeHtml(String(stats.percent ?? 0))}%</span></div>`).join('')}</div>` : ''}`;
+        }
+
+        // Cartão único e estruturado com o gabarito/explicação do caso — em
+        // português, com rótulos fixos (nunca a chave em inglês do JSON).
+        function osceFinalAnswerMarkup(finalAnswer) {
+            if (!finalAnswer || typeof finalAnswer !== 'object') return '';
+            const { expectedDiagnosis, expectedManagement, criticalErrors, explanation } = finalAnswer;
+            const sections = [
+                expectedDiagnosis ? `<div class="osce-answer-section"><small>Diagnóstico esperado</small><strong>${escapeHtml(expectedDiagnosis)}</strong></div>` : '',
+                Array.isArray(expectedManagement) && expectedManagement.length ? `<div class="osce-answer-section"><small>Conduta esperada</small>${osceTextList(expectedManagement)}</div>` : '',
+                Array.isArray(criticalErrors) && criticalErrors.length ? `<div class="osce-answer-section osce-answer-section-critical"><small>Erros críticos</small>${osceTextList(criticalErrors)}</div>` : '',
+                explanation ? `<div class="osce-answer-section"><small>Explicação do caso</small><p>${escapeHtml(explanation)}</p></div>` : ''
+            ].filter(Boolean);
+            if (!sections.length) return '';
+            return `<div class="osce-answer-key"><span class="question-config-kicker">Gabarito e elucidação do caso</span>${sections.join('')}</div>`;
+        }
+
+        function beginOsceStation() {
+            const limit = Number(activeOsceSession?.station?.timeLimitSeconds || 480);
+            let remaining = limit;
+            clearInterval(osceTimer);
+            document.querySelector('.osce-door-card')?.classList.add('started');
+            const timer = document.getElementById('osceTimer');
+            const fill = document.getElementById('osceTimerFill');
+            osceTimer = setInterval(() => { remaining -= 1; if (timer) timer.textContent = formatOsceTime(remaining); if (fill) fill.style.width = `${Math.min(100, Math.max(0, ((limit - remaining) / limit) * 100))}%`; if (remaining <= 0) finishOsceStation(); }, 1000);
+            if (activeOsceSession?.mode === 'CANDIDATE') {
+                renderPatientChat(activeOsceSession.station);
+                renderOsceTask(activeOsceSession.station, activeOsceSession.currentTaskIndex || 0);
+            }
+            if (activeOsceSession?.mode === 'EVALUATOR') {
+                document.querySelector('.osce-task-active')?.remove();
+                renderEvaluatorChecklist(activeOsceSession.station);
+            }
+        }
+
+        function renderEvaluatorChecklist(station, taskIndex = 0) {
+            const card = document.querySelector('.osce-door-card');
+            const tasks = station?.evaluatorContentJson?.tasks || station?.content?.evaluation?.tasks || [];
+            if (!card || !tasks.length) return;
+            card.querySelector('.osce-task-active')?.remove();
+            const task = tasks[taskIndex];
+            if (!task) return;
+            activeOsceSession.currentTaskIndex = taskIndex;
+            const isLast = taskIndex >= tasks.length - 1;
+            const section = document.createElement('section'); section.className = 'osce-task-active';
+            // Chave é a posição (tarefa:item), não o "id" que a IA manda —
+            // a chamada ao Groq usa strict: false, então nada garante que
+            // esse id exista ou seja único entre tarefas; um id repetido
+            // fazia as marcações de uma tarefa sobrescreverem as de outra
+            // em saveEvaluatorChecklist, zerando parte da nota. Posição no
+            // array é sempre única, sem depender do que a IA devolveu.
+            section.innerHTML = `<span class="question-config-kicker">Checklist do avaliador · Tarefa ${taskIndex + 1} de ${tasks.length}</span><fieldset><legend>${escapeHtml(task.title || task.name || '')}</legend>${(task.checklist || []).map((item, itemIndex) => { const id = `${taskIndex}:${itemIndex}`; const name = `evaluator-${taskIndex}-${itemIndex}`; return `<div class="osce-evaluator-item"><span class="osce-evaluator-criterion">${escapeHtml(item.description || item.item || item.criterion || item.title || 'Item de avaliação')}</span><div class="osce-status-options"><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</fieldset><button class="question-start" type="button" onclick="saveEvaluatorChecklist(${taskIndex})">${isLast ? 'Salvar e concluir avaliação' : 'Salvar e avançar'}</button>`;
+            card.appendChild(section);
+        }
+
+        function saveEvaluatorChecklist(taskIndex) {
+            if (!activeOsceSession?.sessionId) return;
+            try {
+                const checklist = [...new Set([...document.querySelectorAll('[data-evaluator-item]')].map(input => input.dataset.evaluatorItem))].map(id => { const selected = document.querySelector(`[data-evaluator-item="${CSS.escape(id)}"]:checked`); return { id, status: selected?.value || 'NOT_DONE' }; });
+                const tasks = activeOsceSession.station?.evaluatorContentJson?.tasks || activeOsceSession.station?.content?.evaluation?.tasks || [];
+                const nextTaskIndex = (taskIndex ?? activeOsceSession.currentTaskIndex ?? 0) + 1;
+                if (!activeOsceSession.evaluatorChecklist) activeOsceSession.evaluatorChecklist = {};
+                const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
+                activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
+                if (nextTaskIndex >= tasks.length) finishOsceStation();
+                else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
+            } catch (error) {
+                console.error('Falha ao salvar marcações do avaliador:', error);
+                revealQuestionNotice('Não foi possível salvar as marcações. Tente novamente.');
+            }
+        }
+
+        // Igual numa prova real: a porta só mostra a queixa e a tarefa. Sinais
+        // vitais, exame físico e exames complementares só aparecem quando o
+        // candidato "solicita" durante a tarefa — nunca o checklist/gabarito.
+        function candidateResourceMarkup(station) {
+            const content = station?.evaluatorContentJson || {};
+            const testCount = (content.complementaryTests || []).length;
+            return `<div class="osce-candidate-resources"><div class="osce-quick-actions"><button type="button" onclick="showCandidateResource('vitals')">Sinais vitais</button><button type="button" onclick="showCandidateResource('physical')">Exame físico</button><button type="button" onclick="showCandidateResource('tests')">Exames (${testCount})</button></div><div id="osceCandidateResourceOutput"></div></div>`;
+        }
+
+        function showCandidateResource(kind) {
+            const output = document.getElementById('osceCandidateResourceOutput');
+            const station = activeOsceSession?.station;
+            if (!output || !station) return;
+            const content = station.evaluatorContentJson || {};
+            let label, entries;
+            if (kind === 'vitals') {
+                label = 'Sinais vitais / triagem';
+                entries = Object.entries(station.doorInstructions?.triageData || {}).map(([key, value]) => `${key}: ${value}`);
+            } else if (kind === 'physical') {
+                label = 'Achados ao exame físico';
+                entries = (content.physicalExam || []).map(item => `${item.system}: ${(item.findings || []).join(' · ')}`);
+            } else {
+                label = 'Resultados de exames';
+                entries = (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`);
+            }
+            output.innerHTML = `<div class="osce-resource-card"><small>${escapeHtml(label)}</small>${osceTextList(entries.length ? entries : ['Nenhuma informação disponível para esta estação.'])}</div>`;
+        }
+
+        // normalizeOsceChatText/osceChatWords/matchPatientResponse não são
+        // mais definidas aqui — vêm de shared/scoring.js via
+        // window.matchPatientResponse (mesma ponte do
+        // window.calculatePathPriority, ver comentário lá), agora com
+        // cobertura de node --test em shared/scoring.test.js.
+
+        function renderPatientChat(station) {
+            const card = document.querySelector('.osce-door-card');
+            if (!card || card.querySelector('.osce-patient-chat')) return;
+            const script = station?.evaluatorContentJson?.patientScript || {};
+            const opening = script.openingStatement || '';
+            const section = document.createElement('section');
+            section.className = 'osce-patient-chat';
+            section.innerHTML = `<span class="question-config-kicker">Converse com a paciente</span>
+                <div class="osce-chat-log" id="osceChatLog">${opening ? `<div class="osce-chat-msg osce-chat-msg-patient"><strong>Paciente</strong><p>${escapeHtml(opening)}</p></div>` : ''}</div>
+                <form class="osce-chat-form" onsubmit="return sendOscePatientMessage(event)">
+                    <input type="text" id="osceChatInput" placeholder="Pergunte algo à paciente…" autocomplete="off">
+                    <button type="submit">Perguntar</button>
+                </form>`;
+            card.appendChild(section);
+        }
+
+        function sendOscePatientMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('osceChatInput');
+            const question = input?.value.trim();
+            if (!question) return false;
+            const log = document.getElementById('osceChatLog');
+            log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-candidate"><strong>Você</strong><p>${escapeHtml(question)}</p></div>`);
+            const responses = activeOsceSession?.station?.evaluatorContentJson?.patientScript?.responses || [];
+            const match = window.matchPatientResponse(responses, question);
+            const answer = match?.response || 'Desculpa, não entendi bem. Pode perguntar de outro jeito?';
+            log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-patient"><strong>Paciente</strong><p>${escapeHtml(answer)}</p></div>`);
+            log.scrollTop = log.scrollHeight;
+            input.value = '';
+            return false;
+        }
+
+        function renderOsceTask(station, taskIndex) {
+            const task = station?.tasks?.[taskIndex];
+            if (!task) return;
+            const card = document.querySelector('.osce-door-card');
+            if (!card) return;
+            const existing = card.querySelector('.osce-task-active');
+            if (existing) existing.remove();
+            const section = document.createElement('section');
+            section.className = 'osce-task-active';
+            section.innerHTML = `<span class="question-config-kicker">Tarefa ${taskIndex + 1} de ${station.tasks.length}</span><h3>${escapeHtml(task.title)}</h3><p>${escapeHtml(task.instructions || 'Conclua esta tarefa sem consultar o checklist.')}</p>${candidateResourceMarkup(station)}<button class="question-start" type="button" onclick="completeOsceTask(this)">Encerrar tarefa</button></section>`;
+            card.appendChild(section);
+        }
+
+        function completeOsceTask(button) {
+            if (!activeOsceSession?.sessionId) return;
+            if (activeOsceSession.completingTask) return;
+            activeOsceSession.completingTask = true;
+            if (button) { button.disabled = true; button.textContent = 'Processando…'; }
+            try {
+                const index = activeOsceSession.currentTaskIndex || 0;
+                const task = activeOsceSession.station?.tasks?.[index];
+                if (!task) {
+                    revealQuestionNotice('Não foi possível carregar esta tarefa. Feche e reabra a estação.');
+                    return;
+                }
+                const card = document.querySelector('.osce-door-card');
+                card?.querySelector('.osce-task-active')?.remove();
+                const feedback = document.createElement('div');
+                feedback.className = 'osce-task-feedback';
+                // Mesma razão do checklist do avaliador: chave pela posição
+                // (tarefa:item), não pelo "id" que a IA manda.
+                feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${(task.checklist || []).map((item, itemIndex) => { const id = `${index}:${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.description || item.item || item.criterion || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
+                card?.appendChild(feedback);
+            } catch (error) {
+                console.error('Falha ao concluir tarefa OSCE:', error);
+                revealQuestionNotice('Não foi possível concluir a tarefa. Tente novamente.');
+            } finally {
+                // Garante que o botão nunca fica "travado": qualquer caminho
+                // (sucesso, erro, tarefa ausente) sempre libera um novo clique.
+                activeOsceSession.completingTask = false;
+                if (button) { button.disabled = false; button.textContent = 'Encerrar tarefa'; }
+            }
+        }
+
+        function submitOsceSelfAssessment(taskIndex) {
+            const ids = [...new Set([...document.querySelectorAll('[data-osce-check-id]')].map(field => field.dataset.osceCheckId))];
+            const checklist = ids.map(id => ({ id, status: document.querySelector(`[data-osce-check-id="${CSS.escape(id)}"]:checked`)?.value }));
+            if (checklist.some(item => !item.status)) return revealQuestionNotice('Avalie todos os itens antes de avançar.');
+            activeOsceSession.selfAssessments[taskIndex] = checklist;
+            document.querySelector('.osce-task-feedback')?.remove();
+            const nextTaskIndex = taskIndex + 1;
+            activeOsceSession.currentTaskIndex = nextTaskIndex;
+            if (nextTaskIndex >= activeOsceSession.station.tasks.length) finishOsceStation();
+            else renderOsceTask(activeOsceSession.station, nextTaskIndex);
+        }
+
+        function closeOsceSession() {
+            clearInterval(osceTimer);
+            activeOsceSession = null;
+            const player = document.getElementById('questionPlayer');
+            if (player) {
+                player.setAttribute('hidden', '');
+                // Devolve #questionPlayer à estrutura original que
+                // renderOsceDoor substituiu — ver comentário em
+                // QUESTION_PLAYER_PRISTINE_HTML.
+                player.innerHTML = QUESTION_PLAYER_PRISTINE_HTML;
+            }
+            document.body.style.overflow = '';
+        }
+
+        function localOsceSummary(session) {
+            const axis = {};
+            let points = 0;
+            let maxPoints = 0;
+            (session.station?.tasks || []).forEach((task, taskIndex) => {
+                const answers = new Map((session.selfAssessments?.[taskIndex] || session.evaluatorChecklist?.all || []).map(item => [item.id, item.status]));
+                (task.checklist || []).forEach((item, itemIndex) => {
+                    const itemPoints = Number(item.points || 1);
+                    // Mesma chave posicional usada ao renderizar o checklist
+                    // (renderEvaluatorChecklist/completeOsceTask) — nunca
+                    // item.id, que pode faltar ou repetir entre tarefas.
+                    const status = answers.get(`${taskIndex}:${itemIndex}`) || 'NOT_DONE';
+                    const awarded = status === 'DONE' ? itemPoints : status === 'PARTIAL' ? itemPoints / 2 : 0;
+                    const axisKey = item.axis || 'MANAGEMENT';
+                    if (!axis[axisKey]) axis[axisKey] = { points: 0, maxPoints: 0 };
+                    axis[axisKey].points += awarded; axis[axisKey].maxPoints += itemPoints;
+                    points += awarded; maxPoints += itemPoints;
+                });
+            });
+            Object.values(axis).forEach(item => item.percent = item.maxPoints ? Math.round(item.points / item.maxPoints * 100) : 0);
+            return {
+                totalPoints: Number(points.toFixed(1)),
+                maxPoints,
+                percent: maxPoints ? Math.round(points / maxPoints * 100) : 0,
+                performanceByAxis: axis,
+                finalAnswer: session.station?.evaluatorContentJson?.finalAnswer || null
+            };
+        }
+
+        function finishOsceStation() {
+            clearInterval(osceTimer);
+            if (!activeOsceSession?.sessionId) return;
+            const summary = localOsceSummary(activeOsceSession);
+            const card = document.querySelector('.osce-door-card');
+            if (activeOsceSession.mode === 'CANDIDATE') {
+                if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
+            } else if (card) {
+                card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
+            }
+        }
+
+        async function startQuestionSession() {
+            const mode = activeQuestionConfigMode || document.querySelector('.question-mode.active')?.dataset.questionMode;
+            if (mode === 'osce') {
+                startOsceSession();
+                return;
+            }
+            const area = document.getElementById('questionConfigArea')?.value || document.querySelector('.question-area-chip.active')?.textContent.trim() || 'Todas';
+            const countValue = document.getElementById('questionConfigCount')?.value || document.getElementById('questionCount')?.value || '12';
+            const requestedCount = countValue === 'full' ? Infinity : Number(countValue);
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const isFullExam = mode === 'full-exam';
+            const clinicalSubarea = area === 'Clínica Médica'
+                ? document.querySelector('#questionSubareaScroll .question-area-chip.active')?.textContent.trim()
+                : null;
+            const selectedExam = document.getElementById('questionConfigExam')?.value || document.getElementById('questionExamSelect')?.value;
+            const configTheme = document.getElementById('questionConfigTheme')?.value || 'Todas';
+            const configSubtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
+            const configInstitution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
+            const configYear = document.getElementById('questionConfigYear')?.value || 'Todos';
+            const configBoard = document.getElementById('questionConfigBoard')?.value || 'Todas';
+            let filtered = isFullExam
+                ? bank.filter(question => question.examId === selectedExam)
+                : area === 'Todas'
+                    ? bank
+                : bank.filter(question => area === 'Ginecologia e Obstetrícia'
+                    ? ['Ginecologia', 'Obstetrícia'].includes(question.area)
+                    : area === 'Clínica Médica'
+                        ? question.area === area && (!clinicalSubarea || clinicalSubarea === 'Todas as subáreas' || question.subarea === clinicalSubarea)
+                        : question.area === area);
+            if (!isFullExam) {
+                filtered = filtered.filter(question => {
+                    const questionYears = getQuestionYears(question);
+                    const questionInstitution = String(question.source || '');
+                    const questionBoard = String(question.source || '');
+                    return (configTheme === 'Todas' || question.area === configTheme)
+                        && (configSubtheme === 'Todas' || question.subarea === configSubtheme)
+                        && (configInstitution === 'Todas' || questionInstitution.includes(configInstitution))
+                        && (configYear === 'Todos' || questionYears.includes(configYear))
+                        && (configBoard === 'Todas' || questionBoard.includes(configBoard));
+                });
+            }
+            if (!filtered.length) {
+                revealQuestionNotice(`Ainda não há questões importadas de ${area}.`);
+                return;
+            }
+            const shuffled = [...filtered];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode || 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        function renderQuestionPlayer() {
+            if (!activeQuestionSession) return;
+            applyQuestionFontSize(Number(localStorage.getItem(QUESTION_FONT_KEY)) || 16);
+            const session = activeQuestionSession;
+            const question = session.questions[session.index];
+            const total = session.questions.length;
+            document.getElementById('questionPlayerMode').textContent = session.mode === 'exam' ? 'Simulado' : 'Guiado';
+            document.getElementById('questionPlayerArea').textContent = question.area;
+            document.getElementById('questionPlayerCount').textContent = `${session.index + 1}/${total}`;
+            document.getElementById('questionPlayerProgress').style.width = `${((session.index + 1) / total) * 100}%`;
+            document.getElementById('questionSource').textContent = question.source;
+            document.getElementById('questionNumber').textContent = `Questão ${question.number}`;
+            document.getElementById('questionStem').textContent = question.stem;
+            document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
+            document.getElementById('questionFeedback').hidden = true;
+            const next = document.getElementById('questionNext');
+            next.disabled = true;
+            next.textContent = session.index === total - 1 ? 'Finalizar sessão' : 'Próxima questão';
+            const optionsContainer = document.getElementById('questionOptions');
+            if (question.questionType === 'discursive') {
+                // Markup fixo, sem dado da questão dentro — innerHTML aqui não corre risco.
+                optionsContainer.innerHTML = '<div class="question-discursive"><span>Questão discursiva</span><p>Estruture sua resposta no papel ou mentalmente. Depois, abra a resposta esperada para conferir os pontos essenciais.</p><button class="question-option question-discursive-action" onclick="answerQuestion(\'discursive\')"><span class="question-option-letter">✓</span><span>Ver resposta esperada</span></button></div>';
+            } else {
+                // Construído via DOM + textContent (não innerHTML com string
+                // interpolada) — o texto da alternativa vem do banco de
+                // questões, que já teve alguns casos com "<", ">" e "&"
+                // crus ou pré-escapados. Isso garante que qualquer um desses
+                // caracteres sempre aparece como texto, nunca é interpretado
+                // como HTML, sem depender de o dado estar "limpo".
+                optionsContainer.innerHTML = '';
+                Object.entries(question.options).forEach(([letter, text]) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'question-option';
+                    button.onclick = () => answerQuestion(letter);
+                    const letterEl = document.createElement('span');
+                    letterEl.className = 'question-option-letter';
+                    letterEl.textContent = letter;
+                    const textEl = document.createElement('span');
+                    textEl.textContent = text;
+                    button.append(letterEl, textEl);
+                    optionsContainer.appendChild(button);
+                });
+            }
+            document.getElementById('questionPlayerBody').scrollTop = 0;
+        }
+
+        // isQuestionAnswerCorrect não é mais definida aqui — vem de
+        // shared/scoring.js via window.isQuestionAnswerCorrect (mesma
+        // ponte do window.calculatePathPriority), agora coberta por
+        // node --test em shared/scoring.test.js.
+
+        function answerQuestion(letter) {
+            if (!activeQuestionSession) return;
+            const session = activeQuestionSession;
+            if (session.answers[session.index]) return;
+            const question = session.questions[session.index];
+            session.answers[session.index] = letter;
+            const buttons = [...document.querySelectorAll('.question-option')];
+            if (question.questionType === 'discursive') {
+                buttons.forEach(button => {
+                    button.classList.add('correct');
+                    button.disabled = true;
+                });
+                document.getElementById('questionFeedbackTitle').textContent = 'Resposta esperada';
+                document.getElementById('questionFeedbackText').textContent = question.explanation || 'O espelho de resposta desta questão ainda não foi cadastrado.';
+                document.getElementById('questionFeedback').hidden = false;
+                document.getElementById('questionNext').disabled = false;
+                return;
+            }
+            if (session.mode === 'practice') {
+                buttons.forEach(button => {
+                    const value = button.querySelector('.question-option-letter').textContent;
+                    if ((!question.annulled && value === question.answer) || (question.annulled && value === letter)) button.classList.add('correct');
+                    else if (value === letter) button.classList.add('wrong');
+                    button.disabled = true;
+                });
+                const correct = window.isQuestionAnswerCorrect(question, letter);
+                document.getElementById('questionFeedbackTitle').textContent = question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`);
+                document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
+                document.getElementById('questionFeedback').hidden = false;
+                recordQuestionResult(question, correct);
+            } else {
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    if (button.querySelector('.question-option-letter').textContent === letter) button.style.borderColor = 'var(--lavender-active)';
+                });
+            }
+            document.getElementById('questionNext').disabled = false;
+        }
+
+        function advanceQuestion() {
+            if (!activeQuestionSession || !activeQuestionSession.answers[activeQuestionSession.index]) return;
+            const session = activeQuestionSession;
+            if (session.index < session.questions.length - 1) {
+                session.index += 1;
+                renderQuestionPlayer();
+                return;
+            }
+            if (session.mode === 'exam') {
+                session.questions.forEach((question, index) => recordQuestionResult(question, window.isQuestionAnswerCorrect(question, session.answers[index])));
+            }
+            const correct = session.questions.reduce((sum, question, index) => sum + (window.isQuestionAnswerCorrect(question, session.answers[index]) ? 1 : 0), 0);
+            if (session.trailDiagnostic) completeTrailDiagnostic(session.trailDiagnostic, session);
+            if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
+            if (session.trailPhase) completeTrailPhase(session.trailPhase);
+            recordStudyMinutes(session);
+            lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
+            activeQuestionSession = null;
+            appendQuestionHistory(buildQuestionHistoryEntry(session, correct));
+            showQuestionResults(lastCompletedQuestionSession);
+            updateQuestionHubStats();
+            renderDashboard();
+        }
+
+        let activeResultsSession = null;
+
+        // Substitui o antigo aviso "Sessão concluída" por uma página de
+        // desempenho dentro do próprio player: uma bolha por questão, verde
+        // se acertou e vermelha se errou, cada uma abrindo a questão em modo
+        // de revisão (somente leitura).
+        function showQuestionResults(session) {
+            if (session) activeResultsSession = session;
+            if (!activeResultsSession) return;
+            const player = document.getElementById('questionPlayer');
+            player.hidden = false;
+            document.body.style.overflow = 'hidden';
+
+            document.getElementById('questionPlayQuestion').hidden = true;
+            document.getElementById('questionResultsView').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = true;
+            document.getElementById('questionPlayerFooter').hidden = true;
+            document.getElementById('questionFontsizeBtn').hidden = true;
+            document.getElementById('questionResultsBackBtn').hidden = true;
+            document.getElementById('questionPlayerCount').textContent = '';
+
+            const { questions, answers, mode } = activeResultsSession;
+            const correctCount = questions.reduce((sum, q, i) => sum + (window.isQuestionAnswerCorrect(q, answers[i]) ? 1 : 0), 0);
+            // Discursivas não têm gabarito de letra — ficam de fora do
+            // denominador do placar (senão a fração mentiria), mas ainda
+            // aparecem na grade de bolhas, num terceiro estado neutro.
+            const scoredTotal = questions.filter(q => q.questionType !== 'discursive').length;
+            document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
+            document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
+            document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${scoredTotal}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
+            document.getElementById('questionResultsGrid').innerHTML = questions.map((q, i) => {
+                const correct = window.isQuestionAnswerCorrect(q, answers[i]);
+                const state = correct === null ? 'neutral' : (correct ? 'correct' : 'wrong');
+                const label = correct === null ? 'sem pontuação' : (correct ? 'acertou' : 'errou');
+                return `<button type="button" class="result-bubble ${state}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${label}"><span>${i + 1}</span></button>`;
+            }).join('');
+            document.getElementById('questionPlayerBody').scrollTop = 0;
+        }
+
+        // Mostra uma questão específica do resultado em modo de revisão
+        // (opções já marcadas certo/errado, explicação visível, sem poder
+        // responder de novo). O botão no canto superior direito volta para
+        // a grade de bolhas.
+        function reviewQuestionResult(index) {
+            if (!activeResultsSession) return;
+            const { questions, answers, mode } = activeResultsSession;
+            const question = questions[index];
+            const answer = answers[index];
+
+            document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = true;
+            document.getElementById('questionPlayerFooter').hidden = true;
+            document.getElementById('questionFontsizeBtn').hidden = true;
+            document.getElementById('questionResultsBackBtn').hidden = false;
+
+            document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
+            document.getElementById('questionPlayerArea').textContent = question.area || '';
+            document.getElementById('questionPlayerCount').textContent = `${index + 1}/${questions.length}`;
+            document.getElementById('questionSource').textContent = question.source || '';
+            document.getElementById('questionNumber').textContent = `Questão ${question.number || index + 1}`;
+            document.getElementById('questionStem').textContent = question.stem;
+            document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
+
+            const reviewOptionsContainer = document.getElementById('questionOptions');
+            reviewOptionsContainer.innerHTML = '';
+            if (question.questionType !== 'discursive') {
+                // Mesma razão da renderização normal: construído via DOM +
+                // textContent, não innerHTML com string interpolada.
+                Object.entries(question.options || {}).forEach(([letter, text]) => {
+                    let cls = '';
+                    if (!question.annulled && letter === question.answer) cls = 'correct';
+                    else if (question.annulled && letter === answer) cls = 'correct';
+                    else if (letter === answer) cls = 'wrong';
+                    const optionEl = document.createElement('div');
+                    optionEl.className = cls ? `question-option ${cls}` : 'question-option';
+                    optionEl.style.cursor = 'default';
+                    const letterEl = document.createElement('span');
+                    letterEl.className = 'question-option-letter';
+                    letterEl.textContent = letter;
+                    const textEl = document.createElement('span');
+                    textEl.textContent = text;
+                    optionEl.append(letterEl, textEl);
+                    reviewOptionsContainer.appendChild(optionEl);
+                });
+            }
+
+            const correct = window.isQuestionAnswerCorrect(question, answer);
+            document.getElementById('questionFeedbackTitle').textContent = question.questionType === 'discursive'
+                ? 'Resposta esperada'
+                : (question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`));
+            document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
+            document.getElementById('questionFeedback').hidden = false;
+            document.getElementById('questionPlayerBody').scrollTop = 0;
+        }
+
+        // O botão "voltar" do topo é sensível ao contexto: durante a revisão
+        // de uma questão específica, ele deve voltar para a grade de
+        // desempenho (não fechar o player inteiro) — só fecha de fato quando
+        // já está na grade (ou respondendo normalmente).
+        function handleQuestionPlayerBack() {
+            const reviewing = !document.getElementById('questionResultsBackBtn').hidden;
+            if (reviewing) {
+                showQuestionResults();
+            } else {
+                closeQuestionPlayer();
+            }
+        }
+
+        function closeQuestionPlayer() {
+            closeFontSizeSheet();
+            document.getElementById('questionPlayer').hidden = true;
+            document.body.style.overflow = '';
+            activeQuestionSession = null;
+            activeResultsSession = null;
+            // Restaura o player para o estado normal de "responder questão",
+            // caso tenha ficado na tela de desempenho/revisão.
+            document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = false;
+            document.getElementById('questionPlayerFooter').hidden = false;
+            document.getElementById('questionFontsizeBtn').hidden = false;
+            document.getElementById('questionResultsBackBtn').hidden = true;
+        }
+
+        // Mapa de área (como vem nas questões) -> slug usado no Dashboard
+        // (DASHBOARD_AREAS, acima). "Revalida INEP" e afins não têm
+        // correspondência — ficam de fora do detalhamento por área, mas
+        // continuam contando no total geral de acertos.
+        const QUESTION_AREA_DASHBOARD_SLUG = {
+            'Clínica Médica': 'clinica-medica',
+            'Ginecologia': 'go-completo',
+            'Obstetrícia': 'go-completo',
+            'Pediatria': 'pediatria-completo',
+            'Cirurgia Geral': 'cirurgia-geral',
+            'Medicina Preventiva': 'medicina-preventiva',
+            'Psiquiatria': 'psiquiatria',
+        };
+
+        function recordQuestionResult(question, correct) {
+            // Discursiva não tem gabarito de letra — não é certo nem
+            // errado, então não entra na contagem de acertos/erros.
+            if (question?.questionType === 'discursive') return;
+            const stats = getQuestionStats();
+            stats.answered = Number(stats.answered || 0) + 1;
+            stats.correct = Number(stats.correct || 0) + (correct ? 1 : 0);
+            stats.byArea = stats.byArea || {};
+            const key = QUESTION_AREA_DASHBOARD_SLUG[question?.area];
+            if (key) {
+                stats.byArea[key] = stats.byArea[key] || { answered: 0, correct: 0 };
+                stats.byArea[key].answered += 1;
+                stats.byArea[key].correct += correct ? 1 : 0;
+            }
+            const today = new Date().toISOString().slice(0, 10);
+            stats.daily = Array.isArray(stats.daily) ? stats.daily : [];
+            let day = stats.daily.find(item => item.date === today);
+            if (!day) { day = { date: today, count: 0 }; stats.daily.push(day); }
+            day.count += 1;
+            // Ofensiva: só reavalia uma vez por dia (na primeira questão
+            // respondida do dia), não a cada questão — soma 1 se o último
+            // dia com atividade foi ontem, reinicia em 1 se houve um
+            // intervalo, e não mexe se hoje já tinha sido contado.
+            if (stats.lastActivityDate !== today) {
+                const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+                const yesterdayIso = yesterday.toISOString().slice(0, 10);
+                stats.streak = stats.lastActivityDate === yesterdayIso ? Number(stats.streak || 0) + 1 : 1;
+                stats.lastActivityDate = today;
+            }
+            localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
+            updateQuestionHubStats();
+        }
+
+        // Tempo de estudo: soma a duração de cada sessão de questões ao
+        // total acumulado. Chamado uma vez por sessão concluída (não por
+        // questão), a partir de session.startedAt.
+        function recordStudyMinutes(session) {
+            const startedAt = session?.startedAt ? new Date(session.startedAt).getTime() : NaN;
+            if (!Number.isFinite(startedAt)) return;
+            const minutes = Math.round((Date.now() - startedAt) / 60000);
+            if (minutes <= 0) return;
+            const stats = getQuestionStats();
+            stats.studyMinutes = Number(stats.studyMinutes || 0) + minutes;
+            localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
+        }
+
+        function updateQuestionHubStats() {
+            const stats = getQuestionStats();
+            const answered = Number(stats.answered || 0);
+            const correct = Number(stats.correct || 0);
+            const answeredEl = document.getElementById('questionAnsweredStat');
+            const accuracyEl = document.getElementById('questionAccuracyStat');
+            if (answeredEl) answeredEl.textContent = answered;
+            if (accuracyEl) accuracyEl.textContent = answered ? `${Math.round((correct / answered) * 100)}%` : '—';
+        }
+
+        // As caixas entram uma única vez, de baixo para cima. Não há movimento
+        // durante a rolagem, evitando saltos e a sensação de instabilidade.
+        const CARD_REVEAL_SELECTOR = [
+            '.rr-card', '.exam-countdown-card', '.question-hero', '.question-mode',
+            '.question-count-control', '.question-session', '.question-coming',
+            '.dashboard-hero', '.dashboard-kpi', '.dashboard-card', '.dashboard-area',
+            '.dashboard-empty', '.trail-switch-button', '.trail-status', '.trail-phase'
+        ].join(', ');
+        let cardRevealObserver = null;
+
+        function observeCardReveals() {
+            const content = document.querySelector('.content');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (reduceMotion) {
+                document.querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
+                    card.classList.remove('parallax-card');
+                    card.style.removeProperty('--parallax-y');
+                    card.classList.add('card-reveal', 'is-visible');
+                });
+                return;
+            }
+
+            if (!cardRevealObserver) {
+                cardRevealObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('is-visible');
+                        cardRevealObserver.unobserve(entry.target);
+                    });
+                }, {
+                    root: content,
+                    threshold: 0.08,
+                    rootMargin: '0px 0px -5% 0px'
+                });
+            }
+
+            document.querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
+                card.classList.remove('parallax-card');
+                card.style.removeProperty('--parallax-y');
+                if (card.classList.contains('card-reveal')) return;
+                card.classList.add('card-reveal');
+                cardRevealObserver.observe(card);
+            });
+        }
+
+        // Vários cards/itens de navegação são <div onclick="..."> em vez de
+        // <button> — herdados de quando a marcação foi escrita rápido e
+        // nunca revisitados. Convertê-los todos para <button> mudaria
+        // estilo padrão do navegador (borda, fundo, fonte) em muitos
+        // componentes já estilizados; em vez disso, esta função dá a eles
+        // o mesmo tratamento (role="button", tabindex, Enter/Espaço) que
+        // .sidebar-profile-header já usava manualmente — assim funcionam
+        // com teclado e leitor de tela sem versionar o CSS de novo.
+        // Backdrops (fecham ao clicar fora) ficam de fora de propósito:
+        // não são um controle para tabular até, são só a área de fechar.
+        function enhanceClickableDivsForKeyboard(root) {
+            (root || document).querySelectorAll('div[onclick]').forEach(el => {
+                if (el.hasAttribute('role') || /backdrop/i.test(el.className)) return;
+                el.setAttribute('role', 'button');
+                if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+                el.addEventListener('keydown', event => {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    el.click();
+                });
+            });
+        }
+
+        function setupCardReveal() {
+            const content = document.querySelector('.content');
+            // observeCardReveals mexe em classes dentro da própria árvore
+            // observada, então cada execução realimentava o observer —
+            // uma varredura completa de document.querySelectorAll a cada
+            // mutação (mensagem no chat, render do dashboard, troca de
+            // tarefa do OSCE...). Coalescido num único requestAnimationFrame
+            // por rajada de mutações, no máximo uma varredura por quadro.
+            let revealScheduled = false;
+            const scheduleReveal = () => {
+                if (revealScheduled) return;
+                revealScheduled = true;
+                requestAnimationFrame(() => {
+                    revealScheduled = false;
+                    observeCardReveals();
+                    // Mesma rajada coalescida: qualquer <div onclick> novo
+                    // renderizado dentro de .content (cards de atualização,
+                    // lista de capítulos, "última leitura"...) já sai com
+                    // suporte a teclado, sem precisar chamar isso em cada
+                    // função de render separadamente.
+                    enhanceClickableDivsForKeyboard(content || document.body);
+                });
+            };
+            new MutationObserver(scheduleReveal)
+                .observe(content || document.body, { childList: true, subtree: true });
+            observeCardReveals();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            animarProgresso(document.getElementById('inicioTab'));
+            updateQuestionHubStats();
+            syncRapidReviewMenu();
+            renderTrails();
+            setupCardReveal();
+            // Cobre o que está fora de .content desde o primeiro parse
+            // (nav inferior, avatar, rodapé do leitor) — o resto (dentro
+            // de .content) já é pego pelo observer acima.
+            enhanceClickableDivsForKeyboard(document);
+        });

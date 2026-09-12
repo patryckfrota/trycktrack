@@ -4,16 +4,24 @@ PWA de preparação para provas de residência médica (Revalida/INEP, ENAMED) �
 Rapid Review por capítulos, banco de questões com explicação comentada,
 Trilhas de estudo adaptativas e um simulador de estações de OSCE com IA.
 
-Front-end estático (HTML + CSS + JS embutidos em `index.html`, sem build,
-sem framework) publicado no GitHub Pages. Login e sincronização de
-progresso via Firebase (Auth + Firestore).
+Front-end estático (HTML + CSS + JS em arquivos próprios, sem build, sem
+framework) publicado no GitHub Pages. Login e sincronização de progresso
+via Firebase (Auth + Firestore).
 
 ## Estrutura
 
-- `index.html` — o app (HTML + JS embutido); o CSS mora em `app.css`.
+- `index.html` — o esqueleto HTML da página; carrega o CSS e os scripts
+  abaixo. Nenhum JS embutido além de um pequeno trecho que aplica o tema
+  antes do primeiro paint (evita piscar o tema errado).
 - `app.css` — todo o estilo do app (paleta, tipografia, vidro líquido —
-  ver `DESIGN_SYSTEM.md`). Extraído de dentro do `index.html`, sem outra
-  diferença.
+  ver `DESIGN_SYSTEM.md`).
+- `app-auth.js`, `app-reader.js`, `app-app.js` — o JS principal do app,
+  em três arquivos carregados nessa ordem (script clássico, sem módulos
+  — os `onclick="..."` inline espalhados pelo HTML dependem de funções
+  globais, então a ordem de carregamento importa mesmo estando em
+  arquivos separados). `app-auth.js` cobre login/perfil/histórico,
+  `app-reader.js` o Rapid Review, `app-app.js` o resto (Trilhas,
+  Questões, OSCE, Dashboard, PWA).
 - `shared/trail-priority.js` — cálculo de prioridade das Trilhas
   (incidência × urgência por desempenho). Usado tanto pelo cliente
   (`index.html`, via `window.calculatePathPriority`) quanto pelo backend
