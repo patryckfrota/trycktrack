@@ -6295,7 +6295,8 @@
             signInWithPopup, signOut
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
         import {
-            getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp, arrayUnion
+            getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp,
+            getDocs, query, orderBy, limit
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -6348,14 +6349,25 @@
                 // só no Console do Firebase, em Firestore Database > feedback.
                 submitFeedback: (payload) => addDoc(collection(db, 'feedback'), { ...payload, createdAt: serverTimestamp() }),
                 // Biblioteca compartilhada de estações OSCE geradas por IA,
-                // uma coleção agrupada por área/tema/subtema/formato — assim
-                // qualquer pessoa pode reaproveitar um caso já gerado por
-                // outra, sem gastar cota nova do Groq.
+                // uma subcoleção por balde de área/tema/subtema/formato —
+                // assim qualquer pessoa pode reaproveitar um caso já gerado
+                // por outra, sem gastar cota nova do Groq. Cada estação é o
+                // seu próprio documento (não um item dentro de um array num
+                // documento só), então um balde popular nunca esbarra no
+                // teto de 1MB por documento do Firestore — o antigo formato
+                // (stations: arrayUnion(...)) tinha esse risco.
                 getOsceLibrary: async (bucketId) => {
-                    const snap = await getDoc(doc(db, 'osceLibrary', bucketId));
-                    return snap.exists() ? (snap.data().stations || []) : [];
+                    const stationsQuery = query(collection(db, 'osceLibrary', bucketId, 'stations'), orderBy('createdAt', 'desc'), limit(50));
+                    const snap = await getDocs(stationsQuery);
+                    return snap.docs.map(item => item.data());
                 },
-                saveOsceToLibrary: (bucketId, station) => setDoc(doc(db, 'osceLibrary', bucketId), { stations: arrayUnion(station) }, { merge: true })
+                saveOsceToLibrary: (bucketId, station) => {
+                    const stationId = station?.externalId || `ai-${Date.now()}`;
+                    // reviewed: false deixa explícito que ninguém validou este
+                    // caso clínico antes de servi-lo para outra pessoa — a UI
+                    // mostra esse aviso quando usa uma estação da biblioteca.
+                    return setDoc(doc(db, 'osceLibrary', bucketId, 'stations', stationId), { ...station, reviewed: false, createdAt: serverTimestamp() }, { merge: true });
+                }
             };
             ready = true;
         } catch (e) {
@@ -6566,6 +6578,26 @@
             catch (_) { /* armazenamento indisponível/cheio — segue sem persistir */ }
         }
 
+        // Reconstrói uma questão do histórico a partir do seu ID, buscando
+        // no banco já carregado no cliente (window.TRYCKTRACK_QUESTION_BANK)
+        // em vez de guardar o conteúdo inteiro (enunciado, alternativas,
+        // explicação) dentro de cada sessão salva. Guardar o conteúdo é o
+        // que fazia o documento do usuário no Firestore se aproximar do
+        // teto de 1MB com poucas dezenas de sessões — o ID sozinho custa
+        // menos de 1% disso.
+        // Aceita os dois formatos: string (ID, formato atual) ou objeto
+        // (retrato completo, formato antigo — sessões salvas antes desta
+        // mudança), para não quebrar o histórico de quem já tinha sessões
+        // gravadas.
+        function resolveHistoryQuestion(item) {
+            if (item && typeof item === 'object') return item;
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            return bank.find(q => q.id === item) || {
+                id: item, number: null, area: '', source: '', stem: 'Esta questão não foi encontrada no banco atual.',
+                options: {}, answer: null, explanation: '', questionType: null, annulled: false, needsVisualReview: false,
+            };
+        }
+
         function buildQuestionHistoryEntry(session, correctCount) {
             const areas = [...new Set(session.questions.map(q => q.area).filter(Boolean))];
             // Discursivas não pontuam — não entram no denominador do
@@ -6580,15 +6612,10 @@
                 correct: correctCount,
                 total: scoredTotal,
                 area: areas.length === 1 ? areas[0] : (areas.length ? 'Áreas mistas' : ''),
-                // retrato leve: só os campos usados na grade de bolhas e na
-                // revisão, não o objeto inteiro da questão. O Firestore
-                // rejeita "undefined" (falha síncrona!), então tudo aqui
-                // recebe um valor padrão explícito.
-                questions: session.questions.map(q => ({
-                    number: q.number ?? null, area: q.area ?? '', source: q.source ?? '', stem: q.stem ?? '',
-                    options: q.options ?? {}, answer: q.answer ?? null, explanation: q.explanation ?? '',
-                    questionType: q.questionType ?? null, annulled: !!q.annulled, needsVisualReview: !!q.needsVisualReview,
-                })),
+                // Só o ID — o conteúdo é resolvido de volta pelo banco na
+                // hora de exibir (resolveHistoryQuestion). Ver comentário
+                // acima.
+                questions: session.questions.map(q => q.id ?? null),
                 answers: session.answers.map(a => a ?? null),
             };
         }
@@ -6628,7 +6655,7 @@
             if (!entry) return;
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
-            showQuestionResults(entry);
+            showQuestionResults({ ...entry, questions: (entry.questions || []).map(resolveHistoryQuestion) });
         }
 
         function formatQuestionHistoryDate(iso) {
@@ -9566,6 +9593,24 @@ Regras obrigatórias:
 
         let osceLibraryCache = [];
 
+        // Checagem estrutural mínima antes de gravar na biblioteca
+        // compartilhada: garante que a resposta da IA tem os campos que o
+        // resto do app espera (a chamada ao Groq usa strict: false, então
+        // nada obriga isso) e que o documento não é absurdamente grande.
+        // Não é validação clínica — só impede lixo estrutural de entrar
+        // num acervo que outras pessoas vão usar para estudar.
+        const OSCE_LIBRARY_REQUIRED_FIELDS = ['schemaVersion', 'externalId', 'metadata', 'doorInstructions', 'patientScript', 'tasks', 'finalAnswer'];
+        const OSCE_LIBRARY_MAX_BYTES = 250000;
+
+        function isValidOsceLibraryPayload(raw) {
+            if (!raw || typeof raw !== 'object') return false;
+            if (!OSCE_LIBRARY_REQUIRED_FIELDS.every(field => raw[field] != null)) return false;
+            if (!Array.isArray(raw.tasks) || !raw.tasks.length) return false;
+            if (!raw.tasks.every(task => Array.isArray(task?.checklist) && task.checklist.length)) return false;
+            try { return new Blob([JSON.stringify(raw)]).size <= OSCE_LIBRARY_MAX_BYTES; }
+            catch (_) { return false; }
+        }
+
         function selectStationFromLibrary(station) {
             const normalized = normalizeLocalOsceStation(station, osceStationsCache.length);
             osceStationsCache.unshift(normalized);
@@ -9598,7 +9643,7 @@ Regras obrigatórias:
             const raw = osceLibraryCache[Number(select?.value)];
             if (!raw) return;
             const station = selectStationFromLibrary(raw);
-            if (status) status.innerHTML = `<strong>Estação escolhida</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
+            if (status) status.innerHTML = `<strong>Estação escolhida (não revisada)</strong>“${escapeHtml(station.title)}” · gerada por outra pessoa, pronta para iniciar.`;
         }
 
         async function generateOsceStationWithAI() {
@@ -9657,16 +9702,24 @@ Regras obrigatórias:
                 const station = selectStationFromLibrary(raw);
                 if (status) status.innerHTML = `<strong>Estação gerada com IA (Groq)</strong>“${escapeHtml(station.title)}” · pronta para iniciar.`;
                 // Salva na biblioteca compartilhada em segundo plano — se
-                // falhar (ex.: regras do Firestore), a estação já gerada
-                // continua funcionando normalmente, só não fica salva pra
-                // reaproveitar depois.
-                window.__fb.saveOsceToLibrary(bucketId, raw).catch(error => console.warn('Não foi possível salvar a estação na biblioteca:', error));
+                // falhar (ex.: regras do Firestore) ou não passar na
+                // checagem estrutural, a estação já gerada continua
+                // funcionando normalmente para quem a gerou agora, só não
+                // fica salva pra outras pessoas reaproveitarem depois.
+                if (isValidOsceLibraryPayload(raw)) {
+                    window.__fb.saveOsceToLibrary(bucketId, raw).catch(error => console.warn('Não foi possível salvar a estação na biblioteca:', error));
+                } else {
+                    console.warn('Estação gerada não passou na checagem estrutural — não foi salva na biblioteca compartilhada.', raw);
+                }
             } catch (error) {
                 console.error('Falha ao gerar estação OSCE com IA:', error);
                 await refreshOsceLibraryPicker(bucketId);
                 if (osceLibraryCache.length) {
                     const fallback = selectStationFromLibrary(osceLibraryCache[Math.floor(Math.random() * osceLibraryCache.length)]);
-                    if (status) status.innerHTML = `<strong>Cota da IA esgotada por agora</strong>Usando uma estação já gerada: “${escapeHtml(fallback.title)}”.`;
+                    // Nenhuma estação da biblioteca passou por revisão
+                    // humana — é honesto avisar que veio direto da IA de
+                    // outra pessoa, não um caso curado.
+                    if (status) status.innerHTML = `<strong>Cota da IA esgotada por agora</strong>Usando uma estação já gerada por outra pessoa (não revisada): “${escapeHtml(fallback.title)}”.`;
                 } else {
                     if (status) status.innerHTML = '<strong>Não foi possível gerar a estação</strong>Tente novamente em instantes.';
                     revealQuestionNotice('Não foi possível gerar a estação com IA agora.');
