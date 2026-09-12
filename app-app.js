@@ -426,6 +426,7 @@
             if (pagina === 'trilhas') renderTrails();
             if (pagina === 'review') syncRapidReviewMenu();
             if (pagina === 'metricas') renderDashboard();
+            if (pagina === 'questoes') updateReviewQueueHint();
             // Prefetch silencioso: Questões e Trilhas são as duas telas de
             // onde uma sessão pode começar, então já adianta o download de
             // question-explanations.js aqui — na hora de responder a
@@ -1963,7 +1964,73 @@ Regras obrigatórias:
                 stats.lastActivityDate = today;
             }
             localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
+            updateReviewQueue(question?.id, correct);
             updateQuestionHubStats();
+        }
+
+        // Fila de revisão espaçada (R-01): uma escada Leitner simples —
+        // errou, volta pra revisão amanhã; acertou, o intervalo cresce
+        // (1 → 3 → 7 → 21 dias). Guardado só no dispositivo (localStorage),
+        // sem sincronização com a nuvem — é um cache de estudo, não um
+        // dado que precise seguir a pessoa entre aparelhos.
+        const REVIEW_QUEUE_KEY = 'trycktrack-review-queue-v1';
+        const REVIEW_INTERVALS_DAYS = [1, 3, 7, 21];
+
+        function getReviewQueue() {
+            try { return JSON.parse(localStorage.getItem(REVIEW_QUEUE_KEY) || '{}'); }
+            catch (_) { return {}; }
+        }
+
+        function saveReviewQueue(queue) {
+            try { localStorage.setItem(REVIEW_QUEUE_KEY, JSON.stringify(queue)); }
+            catch (_) { /* armazenamento indisponível/cheio — segue sem persistir */ }
+        }
+
+        function updateReviewQueue(questionId, correct) {
+            if (!questionId) return;
+            const queue = getReviewQueue();
+            const entry = queue[questionId] || { step: -1 };
+            entry.step = correct ? Math.min(entry.step + 1, REVIEW_INTERVALS_DAYS.length - 1) : 0;
+            const days = REVIEW_INTERVALS_DAYS[entry.step];
+            const due = new Date();
+            due.setDate(due.getDate() + days);
+            entry.dueDate = due.toISOString().slice(0, 10);
+            entry.lastResult = correct ? 'correct' : 'wrong';
+            queue[questionId] = entry;
+            saveReviewQueue(queue);
+            updateReviewQueueHint();
+        }
+
+        function getDueReviewQuestions() {
+            const queue = getReviewQueue();
+            const today = new Date().toISOString().slice(0, 10);
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            return Object.entries(queue)
+                .filter(([, entry]) => entry.dueDate <= today)
+                .map(([id]) => bank.find(question => question.id === id))
+                .filter(Boolean);
+        }
+
+        function updateReviewQueueHint() {
+            const hint = document.getElementById('reviewQueueHint');
+            if (!hint) return;
+            const dueCount = getDueReviewQuestions().length;
+            hint.textContent = dueCount
+                ? `${dueCount} questão${dueCount > 1 ? 'ões' : ''} pronta${dueCount > 1 ? 's' : ''} pra rever agora.`
+                : 'Questões que você errou, no momento certo de rever.';
+        }
+
+        async function startReviewSession() {
+            const questions = getDueReviewQuestions();
+            if (!questions.length) {
+                revealQuestionNotice('Nenhuma questão pronta pra revisão agora — volte mais tarde.');
+                return;
+            }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], startedAt: new Date().toISOString(), isReview: true };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
         }
 
         // Tempo de estudo: soma a duração de cada sessão de questões ao

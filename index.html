@@ -292,6 +292,12 @@
                             <strong>Imersão</strong>
                             <span>Faça uma edição completa no formato de simulado.</span>
                         </button>
+                        <button class="question-mode" data-question-mode="review" onclick="startReviewSession()">
+                            <span class="question-mode-check"></span>
+                            <span class="question-mode-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></span>
+                            <strong>Revisão</strong>
+                            <span id="reviewQueueHint">Questões que você errou, no momento certo de rever.</span>
+                        </button>
                     </div>
 
                     <section class="question-config-view" id="questionConfigView" hidden>
