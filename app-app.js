@@ -1680,10 +1680,27 @@ Regras obrigatórias:
             renderQuestionPlayer();
         }
 
+        // R-05 (versão inicial — só o cronômetro por questão; a análise
+        // detalhada com sugestões vem depois): soma o tempo de tela em
+        // cada questão, mesmo se ela for revisitada mais de uma vez
+        // (Simulado/Imersão permitem voltar). Chamada aqui, no topo de
+        // cada render, e de novo em finishExamSession pra fechar a conta
+        // da última questão vista antes de a sessão terminar.
+        function flushQuestionTime(session) {
+            if (!session || session.questionRenderedAt == null || session.lastRenderedIndex == null) return;
+            const elapsedMs = Date.now() - session.questionRenderedAt;
+            session.questionTimesMs = session.questionTimesMs || {};
+            session.questionTimesMs[session.lastRenderedIndex] = (session.questionTimesMs[session.lastRenderedIndex] || 0) + elapsedMs;
+            session.questionRenderedAt = null;
+        }
+
         function renderQuestionPlayer() {
             if (!activeQuestionSession) return;
             applyQuestionFontSize(Number(localStorage.getItem(QUESTION_FONT_KEY)) || 16);
             const session = activeQuestionSession;
+            flushQuestionTime(session);
+            session.questionRenderedAt = Date.now();
+            session.lastRenderedIndex = session.index;
             const question = session.questions[session.index];
             const total = session.questions.length;
             // Simulado/Imersão (mode 'exam') seguem o formato real de
@@ -1873,6 +1890,7 @@ Regras obrigatórias:
         // navegador). Questão em branco conta como errada, igual numa
         // prova real.
         function finishExamSession(session) {
+            flushQuestionTime(session);
             if (session.mode === 'exam') {
                 session.questions.forEach((question, index) => recordQuestionResult(question, window.isQuestionAnswerCorrect(question, session.answers[index])));
             }
@@ -1881,7 +1899,7 @@ Regras obrigatórias:
             if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
             recordStudyMinutes(session);
-            lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
+            lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice(), questionTimesMs: session.questionTimesMs || {} };
             activeQuestionSession = null;
             appendQuestionHistory(buildQuestionHistoryEntry(session, correct));
             showQuestionResults(lastCompletedQuestionSession);
@@ -1944,9 +1962,20 @@ Regras obrigatórias:
         // (opções já marcadas certo/errado, explicação visível, sem poder
         // responder de novo). O botão no canto superior direito volta para
         // a grade de bolhas.
+        // R-05 (versão inicial): "1min 12s", "38s" — sem casas decimais,
+        // sem soar mais preciso do que um cronômetro de tela realmente é
+        // (a pessoa pode ter saído da aba no meio, por exemplo).
+        function formatQuestionTime(ms) {
+            const totalSeconds = Math.round((Number(ms) || 0) / 1000);
+            if (totalSeconds < 60) return `${totalSeconds}s`;
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return seconds ? `${minutes}min ${seconds}s` : `${minutes}min`;
+        }
+
         function reviewQuestionResult(index) {
             if (!activeResultsSession) return;
-            const { questions, answers, mode } = activeResultsSession;
+            const { questions, answers, mode, questionTimesMs } = activeResultsSession;
             const question = questions[index];
             const answer = answers[index];
 
@@ -1961,7 +1990,8 @@ Regras obrigatórias:
             document.getElementById('questionPlayerArea').textContent = question.area || '';
             document.getElementById('questionPlayerCount').textContent = `${index + 1}/${questions.length}`;
             document.getElementById('questionSource').textContent = question.source || '';
-            document.getElementById('questionNumber').textContent = `Questão ${question.number || index + 1}`;
+            const timeSpentMs = questionTimesMs?.[index];
+            document.getElementById('questionNumber').textContent = `Questão ${question.number || index + 1}${timeSpentMs ? ` · ${formatQuestionTime(timeSpentMs)}` : ''}`;
             document.getElementById('questionStem').textContent = question.stem;
             document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
 

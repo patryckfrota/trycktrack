@@ -246,6 +246,10 @@
                 // acima.
                 questions: session.questions.map(q => q.id ?? null),
                 answers: session.answers.map(a => a ?? null),
+                // R-05 (versão inicial): tempo de tela por questão, em ms —
+                // um objeto esparso ({ "0": 42000, "2": 118000, ... }), só
+                // com as questões que de fato foram exibidas.
+                questionTimesMs: session.questionTimesMs || {},
             };
         }
 
