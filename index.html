@@ -9461,10 +9461,8 @@
         // pode viver aqui, porque qualquer visitante consegue lê-la e
         // consumir a cota diária compartilhada de todo mundo. O Worker
         // guarda a chave como secret e só a usa depois de conferir que
-        // quem chamou está logado (token do Firebase). Troque a URL
-        // abaixo pela URL real depois do deploy — ver
-        // cloudflare-worker/README.md.
-        const OSCE_PROXY_URL = 'https://trycktrack-osce-proxy.SEU-SUBDOMINIO.workers.dev';
+        // quem chamou está logado (token do Firebase).
+        const OSCE_PROXY_URL = 'https://trycktrack-osce-proxy.patryckfrota-trycktrack.workers.dev';
 
         async function callGroqForOsceStation(prompt) {
             const idToken = await window.__fb?.getIdToken?.();

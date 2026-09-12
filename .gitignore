@@ -24,3 +24,7 @@ firebase-debug.*.log
 # Artefatos de build/captura de PDF (gerados a cada execução local).
 tmp/
 output/
+
+# Cache/estado local do wrangler (deploy do proxy da Groq em
+# cloudflare-worker/) — nunca precisa ser versionado.
+cloudflare-worker/.wrangler/
