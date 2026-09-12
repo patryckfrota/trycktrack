@@ -9384,10 +9384,6 @@
             document.querySelectorAll('.question-mode').forEach(item => item.classList.remove('active'));
         }
 
-        const OSCE_API_BASE = window.location.protocol === 'file:'
-            ? 'http://localhost:3001'
-            : (window.location.port === '8945' ? `${window.location.protocol}//${window.location.hostname}:3001` : '');
-        const osceFetch = (path, options) => fetch(`${OSCE_API_BASE}${path}`, options);
         let activeOsceMode = 'CANDIDATE';
         // Catálogo curricular completo do OSCE (mesmas área/tema/subtema/
         // formato do backend, em backend/src/osceMatrix.js) — usado para a
@@ -9753,38 +9749,6 @@ Regras obrigatórias:
             }
         }
 
-        async function readOsceImportFile(input) {
-            const file = input.files?.[0]; if (!file) return;
-            document.getElementById('osceImportJson').value = await file.text();
-            previewOsceImport();
-        }
-
-        function getOsceImportPayload() {
-            const raw = document.getElementById('osceImportJson')?.value || '';
-            return JSON.parse(raw);
-        }
-
-        async function previewOsceImport() {
-            const status = document.getElementById('osceImportStatus');
-            try {
-                const response = await osceFetch('/api/osce/import/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(getOsceImportPayload()) });
-                const result = await response.json();
-                if (!response.ok) throw new Error(typeof result.details === 'string' ? result.details : 'JSON incompatível com o schema oficial.');
-                status.innerHTML = `<strong>${result.total} estação(ões) válida(s)</strong>${result.newCount} nova(s) · ${result.duplicateCount} duplicada(s).`;
-            } catch (error) { status.innerHTML = `<strong>Importação inválida</strong>${escapeHtml(error.message)}`; }
-        }
-
-        async function confirmOsceImport() {
-            const status = document.getElementById('osceImportStatus');
-            try {
-                const response = await osceFetch('/api/osce/import', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(getOsceImportPayload()) });
-                const result = await response.json();
-                if (!response.ok) throw new Error(typeof result.details === 'string' ? result.details : 'Falha na importação.');
-                status.innerHTML = `<strong>Importação concluída</strong>${result.importedCount} adicionada(s) · ${result.duplicateCount} ignorada(s).`;
-                loadOsceStations();
-            } catch (error) { status.innerHTML = `<strong>Não foi possível importar</strong>${escapeHtml(error.message)}`; }
-        }
-
         function selectQuestionMode(button) {
             document.querySelectorAll('.question-mode').forEach(item => item.classList.remove('active'));
             button.classList.add('active');
@@ -9864,39 +9828,29 @@ Regras obrigatórias:
         let activeQuestionSession = null;
         let lastCompletedQuestionSession = null;
 
-        async function startOsceSession() {
+        // Todo backend/src/*.js que sustentaria o modo remoto nunca foi
+        // publicado (ver E-01) — toda estação que chega a osceStationsCache
+        // (local, gerada por IA, ou vinda da biblioteca compartilhada) já
+        // passa por normalizeLocalOsceStation, que sempre marca isLocal:
+        // true. Não existe mais um segundo caminho a manter.
+        function startOsceSession() {
             const stationId = document.getElementById('questionConfigStation')?.value;
-            if (!stationId) {
+            const localStation = stationId && stationById(stationId);
+            if (!localStation) {
                 revealQuestionNotice('Nenhuma estação OSCE está disponível para os filtros selecionados.');
                 return;
             }
-            const localStation = stationById(stationId);
-            if (localStation?.isLocal) {
-                activeOsceSession = {
-                    sessionId: `local-${stationId}-${Date.now()}`,
-                    station: localStation,
-                    mode: activeOsceMode,
-                    startedAt: Date.now(),
-                    events: [],
-                    selfAssessments: {},
-                    evaluatorChecklist: {},
-                    isLocal: true
-                };
-                renderOsceDoor(localStation);
-                return;
-            }
-            try {
-                const response = await osceFetch('/api/osce/sessions', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ stationId, userId: 'anonymous', mode: activeOsceMode })
-                });
-                if (!response.ok) throw new Error('Não foi possível iniciar a estação.');
-                const payload = await response.json();
-                activeOsceSession = { ...payload, startedAt: Date.now(), events: [] };
-                renderOsceDoor(payload.station);
-            } catch (error) {
-                revealQuestionNotice('Não foi possível iniciar a estação selecionada.');
-            }
+            activeOsceSession = {
+                sessionId: `local-${stationId}-${Date.now()}`,
+                station: localStation,
+                mode: activeOsceMode,
+                startedAt: Date.now(),
+                events: [],
+                selfAssessments: {},
+                evaluatorChecklist: {},
+                isLocal: true
+            };
+            renderOsceDoor(localStation);
         }
 
         let activeOsceSession = null;
@@ -9951,20 +9905,15 @@ Regras obrigatórias:
 
         function escapeHtml(value) { return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char])); }
 
-        async function showOsceResource(kind) {
+        function showOsceResource(kind) {
             const output = document.getElementById('osceResourceOutput');
             if (!output || !activeOsceSession?.sessionId) return;
-            let payload;
-            if (activeOsceSession.isLocal) {
-                const content = activeOsceSession.station?.evaluatorContentJson || {};
-                payload = {
-                    patientScript: (content.patientScript?.responses || []).map(item => `${item.trigger}: ${item.response}`),
-                    physicalExamFindings: (content.physicalExam || []).map(item => `${item.system}: ${(item.findings || []).join(' · ')}`),
-                    tests: (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`)
-                };
-            } else {
-                payload = await (await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/resources`)).json();
-            }
+            const content = activeOsceSession.station?.evaluatorContentJson || {};
+            const payload = {
+                patientScript: (content.patientScript?.responses || []).map(item => `${item.trigger}: ${item.response}`),
+                physicalExamFindings: (content.physicalExam || []).map(item => `${item.system}: ${(item.findings || []).join(' · ')}`),
+                tests: (content.complementaryTests || []).map(item => `${item.name}: ${item.result}`)
+            };
             const value = kind === 'patient' ? payload.patientScript : kind === 'physical' ? payload.physicalExamFindings : payload.tests;
             const entries = Array.isArray(value) ? value : Object.entries(value || {}).map(([key, item]) => `${key.replaceAll('_', ' ')}: ${osceReadableValue(item)}`);
             output.innerHTML = `<div class="osce-resource-card"><small>${kind === 'patient' ? 'Respostas liberáveis' : kind === 'physical' ? 'Achados sob solicitação' : 'Exames sob solicitação'}</small>${osceTextList(entries)}</div>`;
@@ -10032,25 +9981,25 @@ Regras obrigatórias:
             activeOsceSession.currentTaskIndex = taskIndex;
             const isLast = taskIndex >= tasks.length - 1;
             const section = document.createElement('section'); section.className = 'osce-task-active';
-            section.innerHTML = `<span class="question-config-kicker">Checklist do avaliador · Tarefa ${taskIndex + 1} de ${tasks.length}</span><fieldset><legend>${escapeHtml(task.title || task.name || '')}</legend>${(task.checklist || []).map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${taskIndex}-${itemIndex}`; const name = `evaluator-${taskIndex}-${itemIndex}`; return `<div class="osce-evaluator-item"><span class="osce-evaluator-criterion">${escapeHtml(item.description || item.item || item.criterion || item.title || 'Item de avaliação')}</span><div class="osce-status-options"><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-evaluator-item="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</fieldset><button class="question-start" type="button" onclick="saveEvaluatorChecklist(${taskIndex})">${isLast ? 'Salvar e concluir avaliação' : 'Salvar e avançar'}</button>`;
+            // Chave é a posição (tarefa:item), não o "id" que a IA manda —
+            // a chamada ao Groq usa strict: false, então nada garante que
+            // esse id exista ou seja único entre tarefas; um id repetido
+            // fazia as marcações de uma tarefa sobrescreverem as de outra
+            // em saveEvaluatorChecklist, zerando parte da nota. Posição no
+            // array é sempre única, sem depender do que a IA devolveu.
+            section.innerHTML = `<span class="question-config-kicker">Checklist do avaliador · Tarefa ${taskIndex + 1} de ${tasks.length}</span><fieldset><legend>${escapeHtml(task.title || task.name || '')}</legend>${(task.checklist || []).map((item, itemIndex) => { const id = `${taskIndex}:${itemIndex}`; const name = `evaluator-${taskIndex}-${itemIndex}`; return `<div class="osce-evaluator-item"><span class="osce-evaluator-criterion">${escapeHtml(item.description || item.item || item.criterion || item.title || 'Item de avaliação')}</span><div class="osce-status-options"><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-evaluator-item="${id}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</fieldset><button class="question-start" type="button" onclick="saveEvaluatorChecklist(${taskIndex})">${isLast ? 'Salvar e concluir avaliação' : 'Salvar e avançar'}</button>`;
             card.appendChild(section);
         }
 
-        async function saveEvaluatorChecklist(taskIndex) {
+        function saveEvaluatorChecklist(taskIndex) {
             if (!activeOsceSession?.sessionId) return;
             try {
                 const checklist = [...new Set([...document.querySelectorAll('[data-evaluator-item]')].map(input => input.dataset.evaluatorItem))].map(id => { const selected = document.querySelector(`[data-evaluator-item="${CSS.escape(id)}"]:checked`); return { id, status: selected?.value || 'NOT_DONE' }; });
                 const tasks = activeOsceSession.station?.evaluatorContentJson?.tasks || activeOsceSession.station?.content?.evaluation?.tasks || [];
                 const nextTaskIndex = (taskIndex ?? activeOsceSession.currentTaskIndex ?? 0) + 1;
-                if (activeOsceSession.isLocal) {
-                    if (!activeOsceSession.evaluatorChecklist) activeOsceSession.evaluatorChecklist = {};
-                    const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
-                    activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
-                    if (nextTaskIndex >= tasks.length) finishOsceStation();
-                    else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
-                    return;
-                }
-                await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/evaluator/checklist`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskIndex: taskIndex ?? activeOsceSession.currentTaskIndex ?? 0, checklist }) });
+                if (!activeOsceSession.evaluatorChecklist) activeOsceSession.evaluatorChecklist = {};
+                const merged = (activeOsceSession.evaluatorChecklist.all || []).filter(item => !checklist.some(current => current.id === item.id));
+                activeOsceSession.evaluatorChecklist.all = [...merged, ...checklist];
                 if (nextTaskIndex >= tasks.length) finishOsceStation();
                 else renderEvaluatorChecklist(activeOsceSession.station, nextTaskIndex);
             } catch (error) {
@@ -10164,36 +10113,26 @@ Regras obrigatórias:
             card.appendChild(section);
         }
 
-        async function completeOsceTask(button) {
+        function completeOsceTask(button) {
             if (!activeOsceSession?.sessionId) return;
             if (activeOsceSession.completingTask) return;
             activeOsceSession.completingTask = true;
             if (button) { button.disabled = true; button.textContent = 'Processando…'; }
             try {
                 const index = activeOsceSession.currentTaskIndex || 0;
-                if (activeOsceSession.isLocal) {
-                    const task = activeOsceSession.station?.tasks?.[index];
-                    if (!task) {
-                        revealQuestionNotice('Não foi possível carregar esta tarefa. Feche e reabra a estação.');
-                        return;
-                    }
-                    const card = document.querySelector('.osce-door-card');
-                    card?.querySelector('.osce-task-active')?.remove();
-                    const feedback = document.createElement('div');
-                    feedback.className = 'osce-task-feedback';
-                    feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${(task.checklist || []).map((item, itemIndex) => { const id = item.id || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.description || item.item || item.criterion || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
-                    card?.appendChild(feedback);
+                const task = activeOsceSession.station?.tasks?.[index];
+                if (!task) {
+                    revealQuestionNotice('Não foi possível carregar esta tarefa. Feche e reabra a estação.');
                     return;
                 }
-                const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/tasks/${index}/complete`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
-                const payload = await response.json();
-                if (!response.ok) { revealQuestionNotice(payload.error || 'Não foi possível concluir a tarefa.'); return; }
-                if (payload.task?.checklist) {
-                    const card = document.querySelector('.osce-door-card');
-                    card?.querySelector('.osce-task-active')?.remove();
-                    const feedback = document.createElement('div'); feedback.className = 'osce-task-feedback'; feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${payload.task.checklist.map((item, itemIndex) => { const id = item.id || item.item || item.description || item.criterion || `item-${index}-${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.item || item.description || item.criterion || item.title || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${escapeHtml(id)}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
-                    card?.appendChild(feedback);
-                }
+                const card = document.querySelector('.osce-door-card');
+                card?.querySelector('.osce-task-active')?.remove();
+                const feedback = document.createElement('div');
+                feedback.className = 'osce-task-feedback';
+                // Mesma razão do checklist do avaliador: chave pela posição
+                // (tarefa:item), não pelo "id" que a IA manda.
+                feedback.innerHTML = `<strong>Autoavaliação da tarefa</strong><div class="osce-self-checklist">${(task.checklist || []).map((item, itemIndex) => { const id = `${index}:${itemIndex}`; const name = `self-${index}-${itemIndex}`; return `<div class="osce-self-check-item"><span class="osce-self-check-criterion">${escapeHtml(item.description || item.item || item.criterion || 'Critério da tarefa')}</span><div class="osce-self-check-options"><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="DONE">Realizado</label><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="PARTIAL">Parcial</label><label><input type="radio" name="${name}" data-osce-check-id="${id}" value="NOT_DONE">Não realizado</label></div></div>`; }).join('')}</div><button class="question-start" type="button" onclick="submitOsceSelfAssessment(${index})">Confirmar e avançar</button>`;
+                card?.appendChild(feedback);
             } catch (error) {
                 console.error('Falha ao concluir tarefa OSCE:', error);
                 revealQuestionNotice('Não foi possível concluir a tarefa. Tente novamente.');
@@ -10205,25 +10144,16 @@ Regras obrigatórias:
             }
         }
 
-        async function submitOsceSelfAssessment(taskIndex) {
+        function submitOsceSelfAssessment(taskIndex) {
             const ids = [...new Set([...document.querySelectorAll('[data-osce-check-id]')].map(field => field.dataset.osceCheckId))];
             const checklist = ids.map(id => ({ id, status: document.querySelector(`[data-osce-check-id="${CSS.escape(id)}"]:checked`)?.value }));
             if (checklist.some(item => !item.status)) return revealQuestionNotice('Avalie todos os itens antes de avançar.');
-            if (activeOsceSession.isLocal) {
-                activeOsceSession.selfAssessments[taskIndex] = checklist;
-                document.querySelector('.osce-task-feedback')?.remove();
-                const nextTaskIndex = taskIndex + 1;
-                activeOsceSession.currentTaskIndex = nextTaskIndex;
-                if (nextTaskIndex >= activeOsceSession.station.tasks.length) finishOsceStation();
-                else renderOsceTask(activeOsceSession.station, nextTaskIndex);
-                return;
-            }
-            const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/tasks/${taskIndex}/self-assessment`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ checklist }) });
-            const payload = await response.json();
-            if (!response.ok) return revealQuestionNotice(payload.error || 'Não foi possível salvar a autoavaliação.');
+            activeOsceSession.selfAssessments[taskIndex] = checklist;
             document.querySelector('.osce-task-feedback')?.remove();
-            activeOsceSession.currentTaskIndex = payload.nextTaskIndex;
-            if (payload.final) finishOsceStation(); else renderOsceTask(activeOsceSession.station, payload.nextTaskIndex);
+            const nextTaskIndex = taskIndex + 1;
+            activeOsceSession.currentTaskIndex = nextTaskIndex;
+            if (nextTaskIndex >= activeOsceSession.station.tasks.length) finishOsceStation();
+            else renderOsceTask(activeOsceSession.station, nextTaskIndex);
         }
 
         function closeOsceSession() {
@@ -10245,14 +10175,17 @@ Regras obrigatórias:
             let points = 0;
             let maxPoints = 0;
             (session.station?.tasks || []).forEach((task, taskIndex) => {
-                const answers = new Map((session.selfAssessments?.[taskIndex] || session.evaluatorChecklist?.all || session.evaluatorChecklist?.[taskIndex] || []).map(item => [item.id, item.status]));
-                (task.checklist || []).forEach(item => {
+                const answers = new Map((session.selfAssessments?.[taskIndex] || session.evaluatorChecklist?.all || []).map(item => [item.id, item.status]));
+                (task.checklist || []).forEach((item, itemIndex) => {
                     const itemPoints = Number(item.points || 1);
-                    const status = answers.get(item.id) || 'NOT_DONE';
+                    // Mesma chave posicional usada ao renderizar o checklist
+                    // (renderEvaluatorChecklist/completeOsceTask) — nunca
+                    // item.id, que pode faltar ou repetir entre tarefas.
+                    const status = answers.get(`${taskIndex}:${itemIndex}`) || 'NOT_DONE';
                     const awarded = status === 'DONE' ? itemPoints : status === 'PARTIAL' ? itemPoints / 2 : 0;
-                    const key = item.axis || 'MANAGEMENT';
-                    if (!axis[key]) axis[key] = { points: 0, maxPoints: 0 };
-                    axis[key].points += awarded; axis[key].maxPoints += itemPoints;
+                    const axisKey = item.axis || 'MANAGEMENT';
+                    if (!axis[axisKey]) axis[axisKey] = { points: 0, maxPoints: 0 };
+                    axis[axisKey].points += awarded; axis[axisKey].maxPoints += itemPoints;
                     points += awarded; maxPoints += itemPoints;
                 });
             });
@@ -10266,42 +10199,15 @@ Regras obrigatórias:
             };
         }
 
-        async function finishOsceStation() {
+        function finishOsceStation() {
             clearInterval(osceTimer);
             if (!activeOsceSession?.sessionId) return;
-            if (activeOsceSession.isLocal) {
-                const summary = localOsceSummary(activeOsceSession);
-                const card = document.querySelector('.osce-door-card');
-                if (activeOsceSession.mode === 'CANDIDATE') {
-                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
-                } else if (card) {
-                    card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
-                }
-                return;
-            }
-            try {
-                const response = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/finish`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ checklist: [], debriefing: '' }) });
-                if (!response.ok) throw new Error(`finish respondeu ${response.status}`);
-                await response.json();
-                if (activeOsceSession.mode === 'CANDIDATE') {
-                    const reveal = await osceFetch(`/api/osce/sessions/${activeOsceSession.sessionId}/reveal-result`, { method: 'POST' });
-                    if (!reveal.ok) throw new Error(`reveal-result respondeu ${reveal.status}`);
-                    const result = await reveal.json();
-                    const card = document.querySelector('.osce-door-card');
-                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(result.summary)}${osceFinalAnswerMarkup(result.summary?.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
-                } else revealQuestionNotice('Estação encerrada. Resultado pronto para o avaliador entregar ao candidato.');
-            } catch (error) {
-                // O backend remoto de sessões OSCE não está publicado em produção
-                // — sem essa rede, cair aqui não pode deixar a tela "travada".
-                // Mostra o resultado calculado localmente como alternativa.
-                console.warn('Backend de sessões OSCE indisponível, calculando resultado localmente:', error);
-                const summary = localOsceSummary(activeOsceSession);
-                const card = document.querySelector('.osce-door-card');
-                if (activeOsceSession.mode === 'CANDIDATE') {
-                    if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
-                } else if (card) {
-                    card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
-                }
+            const summary = localOsceSummary(activeOsceSession);
+            const card = document.querySelector('.osce-door-card');
+            if (activeOsceSession.mode === 'CANDIDATE') {
+                if (card) card.innerHTML = `<span class="question-config-kicker">Resultado consolidado</span><h2>Estação finalizada</h2>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">Esta sessão está bloqueada para alterações.</p>`;
+            } else if (card) {
+                card.insertAdjacentHTML('beforeend', `<section class="osce-task-feedback"><strong>Resultado da avaliação</strong>${osceResultMarkup(summary)}${osceFinalAnswerMarkup(summary.finalAnswer)}<p class="osce-answer-lock-note">O resultado está pronto para ser apresentado ao candidato.</p></section>`);
             }
         }
 
