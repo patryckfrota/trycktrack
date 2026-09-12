@@ -11,6 +11,7 @@ const APP_SHELL = [
   './icon-180-transparent.png',
   './logo-clean-v2.png',
   './shared/trail-priority.js',
+  './shared/scoring.js',
   './questions-cirurgia.js',
   './questions-psiquiatria.js',
   './questions-preventiva.js',

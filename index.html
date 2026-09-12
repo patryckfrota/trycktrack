@@ -646,6 +646,12 @@
         // que a inicialização do Firebase falhe.
         import { calculatePathPriority } from "./shared/trail-priority.js";
         window.calculatePathPriority = calculatePathPriority;
+        // Mesma ideia para as duas funções de pontuação/casamento de texto
+        // já cobertas por node --test em shared/scoring.test.js — ver
+        // comentário no próprio arquivo.
+        import { isQuestionAnswerCorrect, matchPatientResponse } from "./shared/scoring.js";
+        window.isQuestionAnswerCorrect = isQuestionAnswerCorrect;
+        window.matchPatientResponse = matchPatientResponse;
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -3237,7 +3243,7 @@
         }
 
         function completeTrailDiagnostic(trailId, session) {
-            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             track.diagnosis = { completedAt: Date.now(), results };
@@ -3247,7 +3253,7 @@
         }
 
         function completeTrailRecalibration(trailId, session) {
-            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             const completedIds = Object.entries(track.phaseProgress || {}).filter(([, progress]) => progress >= 100).map(([id]) => id);
@@ -4360,37 +4366,11 @@ Regras obrigatórias:
             output.innerHTML = `<div class="osce-resource-card"><small>${escapeHtml(label)}</small>${osceTextList(entries.length ? entries : ['Nenhuma informação disponível para esta estação.'])}</div>`;
         }
 
-        const OSCE_CHAT_STOPWORDS = new Set(['a','o','as','os','de','da','do','das','dos','em','com','para','por','sobre','que','e','ou','se','um','uma','no','na','nos','nas','ao','aos','à','às','é','foi','ser','tem','há','esta','está','isso','isto','qual','quais','como','voce','você']);
-
-        function normalizeOsceChatText(text) {
-            return String(text || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s]/g, ' ');
-        }
-
-        function osceChatWords(text) {
-            return normalizeOsceChatText(text).split(/\s+/).filter(word => word.length >= 2 && !OSCE_CHAT_STOPWORDS.has(word));
-        }
-
-        // Casa a pergunta digitada com o "trigger" mais parecido do roteiro da
-        // paciente (sem IA — comparação de palavras-chave). Os triggers são
-        // frases longas ("Pergunta sobre início, duração..."), então exigir
-        // um % alto de palavras em comum penaliza demais perguntas curtas e
-        // objetivas — o critério aqui é: pelo menos duas palavras em comum,
-        // ou uma palavra só se ela for suficientemente específica (>= 4
-        // letras, não um termo genérico).
-        function matchPatientResponse(responses, question) {
-            const qWords = osceChatWords(question);
-            if (!qWords.length) return null;
-            let best = null, bestMatched = [];
-            for (const item of responses || []) {
-                const tWords = osceChatWords(item.trigger);
-                if (!tWords.length) continue;
-                const matched = qWords.filter(word => tWords.some(t => t.includes(word) || word.includes(t)));
-                if (matched.length > bestMatched.length) { bestMatched = matched; best = item; }
-            }
-            const hasStrongWord = bestMatched.some(word => word.length >= 4);
-            if (bestMatched.length >= 2 || (bestMatched.length >= 1 && hasStrongWord)) return best;
-            return null;
-        }
+        // normalizeOsceChatText/osceChatWords/matchPatientResponse não são
+        // mais definidas aqui — vêm de shared/scoring.js via
+        // window.matchPatientResponse (mesma ponte do
+        // window.calculatePathPriority, ver comentário lá), agora com
+        // cobertura de node --test em shared/scoring.test.js.
 
         function renderPatientChat(station) {
             const card = document.querySelector('.osce-door-card');
@@ -4416,7 +4396,7 @@ Regras obrigatórias:
             const log = document.getElementById('osceChatLog');
             log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-candidate"><strong>Você</strong><p>${escapeHtml(question)}</p></div>`);
             const responses = activeOsceSession?.station?.evaluatorContentJson?.patientScript?.responses || [];
-            const match = matchPatientResponse(responses, question);
+            const match = window.matchPatientResponse(responses, question);
             const answer = match?.response || 'Desculpa, não entendi bem. Pode perguntar de outro jeito?';
             log.insertAdjacentHTML('beforeend', `<div class="osce-chat-msg osce-chat-msg-patient"><strong>Paciente</strong><p>${escapeHtml(answer)}</p></div>`);
             log.scrollTop = log.scrollHeight;
@@ -4639,13 +4619,10 @@ Regras obrigatórias:
             document.getElementById('questionPlayerBody').scrollTop = 0;
         }
 
-        // Questão discursiva não tem gabarito de letra — não é certo nem
-        // errado, é "sem pontuação" (null). Quem chama precisa tratar os
-        // três estados: true, false e null.
-        function isQuestionAnswerCorrect(question, answer) {
-            if (question?.questionType === 'discursive') return null;
-            return Boolean(question?.annulled) || answer === question?.answer;
-        }
+        // isQuestionAnswerCorrect não é mais definida aqui — vem de
+        // shared/scoring.js via window.isQuestionAnswerCorrect (mesma
+        // ponte do window.calculatePathPriority), agora coberta por
+        // node --test em shared/scoring.test.js.
 
         function answerQuestion(letter) {
             if (!activeQuestionSession) return;
@@ -4672,7 +4649,7 @@ Regras obrigatórias:
                     else if (value === letter) button.classList.add('wrong');
                     button.disabled = true;
                 });
-                const correct = isQuestionAnswerCorrect(question, letter);
+                const correct = window.isQuestionAnswerCorrect(question, letter);
                 document.getElementById('questionFeedbackTitle').textContent = question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`);
                 document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
                 document.getElementById('questionFeedback').hidden = false;
@@ -4695,9 +4672,9 @@ Regras obrigatórias:
                 return;
             }
             if (session.mode === 'exam') {
-                session.questions.forEach((question, index) => recordQuestionResult(question, isQuestionAnswerCorrect(question, session.answers[index])));
+                session.questions.forEach((question, index) => recordQuestionResult(question, window.isQuestionAnswerCorrect(question, session.answers[index])));
             }
-            const correct = session.questions.reduce((sum, question, index) => sum + (isQuestionAnswerCorrect(question, session.answers[index]) ? 1 : 0), 0);
+            const correct = session.questions.reduce((sum, question, index) => sum + (window.isQuestionAnswerCorrect(question, session.answers[index]) ? 1 : 0), 0);
             if (session.trailDiagnostic) completeTrailDiagnostic(session.trailDiagnostic, session);
             if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
@@ -4732,7 +4709,7 @@ Regras obrigatórias:
             document.getElementById('questionPlayerCount').textContent = '';
 
             const { questions, answers, mode } = activeResultsSession;
-            const correctCount = questions.reduce((sum, q, i) => sum + (isQuestionAnswerCorrect(q, answers[i]) ? 1 : 0), 0);
+            const correctCount = questions.reduce((sum, q, i) => sum + (window.isQuestionAnswerCorrect(q, answers[i]) ? 1 : 0), 0);
             // Discursivas não têm gabarito de letra — ficam de fora do
             // denominador do placar (senão a fração mentiria), mas ainda
             // aparecem na grade de bolhas, num terceiro estado neutro.
@@ -4741,7 +4718,7 @@ Regras obrigatórias:
             document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
             document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${scoredTotal}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
             document.getElementById('questionResultsGrid').innerHTML = questions.map((q, i) => {
-                const correct = isQuestionAnswerCorrect(q, answers[i]);
+                const correct = window.isQuestionAnswerCorrect(q, answers[i]);
                 const state = correct === null ? 'neutral' : (correct ? 'correct' : 'wrong');
                 const label = correct === null ? 'sem pontuação' : (correct ? 'acertou' : 'errou');
                 return `<button type="button" class="result-bubble ${state}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${label}"><span>${i + 1}</span></button>`;
@@ -4797,7 +4774,7 @@ Regras obrigatórias:
                 });
             }
 
-            const correct = isQuestionAnswerCorrect(question, answer);
+            const correct = window.isQuestionAnswerCorrect(question, answer);
             document.getElementById('questionFeedbackTitle').textContent = question.questionType === 'discursive'
                 ? 'Resposta esperada'
                 : (question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`));

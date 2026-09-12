@@ -19,6 +19,11 @@ progresso via Firebase (Auth + Firestore).
   (`index.html`, via `window.calculatePathPriority`) quanto pelo backend
   (`backend/src/pathPriority.js` reexporta este arquivo) — um lugar só,
   em vez de duas cópias que já haviam divergido.
+- `shared/scoring.js` — correção de questão e casamento de pergunta do
+  chat do OSCE (`window.isQuestionAnswerCorrect` /
+  `window.matchPatientResponse`). Cobertas por `node --test` em
+  `shared/*.test.js` — rode `node --test` na raiz do projeto (também
+  roda os testes de `backend/`).
 - `questions-*.js` — banco de questões, um arquivo por área/prova; cada um
   concatena em `window.TRYCKTRACK_QUESTION_BANK` (a ordem de carregamento
   no `<head>` do `index.html` importa). **Gerados a partir dos PDFs
