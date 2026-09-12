@@ -6310,6 +6310,14 @@
             getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp,
             getDocs, query, orderBy, limit
         } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+        // Mesma lógica de priorização de Trilhas usada pelo backend
+        // (backend/src/pathPriority.js reexporta este mesmo arquivo) — só
+        // um lugar pra manter, em vez de duas cópias que já tinham
+        // divergido (ver shared/trail-priority.js). Não depende do
+        // Firebase, então fica exposta incondicionalmente abaixo, mesmo
+        // que a inicialização do Firebase falhe.
+        import { calculatePathPriority } from "./shared/trail-priority.js";
+        window.calculatePathPriority = calculatePathPriority;
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",
@@ -8761,29 +8769,17 @@
             return state.tracks[trailId];
         }
 
-        /* Score de prioridade = incidência prevista (A) × urgência por erro (B).
-           Acerto >80% posterga o tema; desempenho baixo o traz para o início. */
-        function calculatePathPriority(results, topics) {
-            const byArea = {};
-            (results || []).forEach(result => {
-                const area = result.area;
-                byArea[area] = byArea[area] || { total: 0, correct: 0 };
-                byArea[area].total += 1;
-                byArea[area].correct += result.correct ? 1 : 0;
-            });
-            return topics.map(topic => {
-                const group = byArea[topic.area];
-                const accuracy = group && group.total ? group.correct / group.total : null;
-                const urgency = accuracy === null ? 1.10 : accuracy > .80 ? .62 : accuracy >= .60 ? 1.12 : accuracy >= .40 ? 1.48 : 1.84;
-                return { ...topic, accuracy, priorityScore: Math.round(topic.incidence * urgency * 100) / 100 };
-            }).sort((a, b) => b.priorityScore - a.priorityScore);
-        }
-
+        // calculatePathPriority não é mais definida aqui — vem de
+        // shared/trail-priority.js via window.calculatePathPriority,
+        // exposta pelo <script type="module"> do Firebase (que sempre
+        // termina de rodar antes do DOMContentLoaded, então já está
+        // disponível em qualquer handler/callback deste script clássico).
+        // Mesmo arquivo que o backend usa — ver comentário lá.
         function getTrailPlan(trailId, track) {
             const catalog = TRAIL_CATALOG[trailId];
             if (!track.diagnosis) return catalog.phases;
             const byId = Object.fromEntries(catalog.phases.map(item => [item.id, item]));
-            const orderedIds = track.orderedPhaseIds || calculatePathPriority(track.diagnosis.results, catalog.phases).map(item => item.id);
+            const orderedIds = track.orderedPhaseIds || window.calculatePathPriority({ topics: catalog.phases, results: track.diagnosis.results }).map(item => item.id);
             return orderedIds.map(id => byId[id]).filter(Boolean);
         }
 
@@ -8917,7 +8913,7 @@
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             track.diagnosis = { completedAt: Date.now(), results };
-            track.orderedPhaseIds = calculatePathPriority(results, TRAIL_CATALOG[trailId].phases).map(item => item.id);
+            track.orderedPhaseIds = window.calculatePathPriority({ topics: TRAIL_CATALOG[trailId].phases, results }).map(item => item.id);
             saveTrailState(state);
             renderTrails();
         }
@@ -8927,7 +8923,7 @@
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             const completedIds = Object.entries(track.phaseProgress || {}).filter(([, progress]) => progress >= 100).map(([id]) => id);
-            const ranking = calculatePathPriority(results, TRAIL_CATALOG[trailId].phases).map(item => item.id);
+            const ranking = window.calculatePathPriority({ topics: TRAIL_CATALOG[trailId].phases, results }).map(item => item.id);
             const previous = track.orderedPhaseIds || [];
             track.orderedPhaseIds = [...previous.filter(id => completedIds.includes(id)), ...ranking.filter(id => !completedIds.includes(id))];
             track.recalibrations = [...(track.recalibrations || []), { completedAt: Date.now(), results }];
