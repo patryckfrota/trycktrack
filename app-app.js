@@ -1686,7 +1686,12 @@ Regras obrigatórias:
             const session = activeQuestionSession;
             const question = session.questions[session.index];
             const total = session.questions.length;
-            document.getElementById('questionPlayerMode').textContent = session.mode === 'exam' ? 'Simulado' : 'Guiado';
+            // Simulado/Imersão (mode 'exam') seguem o formato real de
+            // prova: dá pra pular, voltar e trocar de resposta antes de
+            // entregar — Guiado continua sequencial, com correção
+            // imediata a cada resposta.
+            const isExam = session.mode === 'exam';
+            document.getElementById('questionPlayerMode').textContent = isExam ? 'Simulado' : 'Guiado';
             document.getElementById('questionPlayerArea').textContent = question.area;
             document.getElementById('questionPlayerCount').textContent = `${session.index + 1}/${total}`;
             document.getElementById('questionPlayerProgress').style.width = `${((session.index + 1) / total) * 100}%`;
@@ -1695,9 +1700,27 @@ Regras obrigatórias:
             document.getElementById('questionStem').textContent = question.stem;
             document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
             document.getElementById('questionFeedback').hidden = true;
+            // Toda sessão nova entra por aqui — garante que a tela de
+            // questão fica por cima de qualquer resultado/navegador que
+            // tenha ficado visível de uma sessão anterior, mesmo que algo
+            // chame renderQuestionPlayer() sem passar por closeQuestionPlayer().
+            document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionNavView').hidden = true;
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionPlayerFooter').hidden = false;
+            document.getElementById('questionPlayerProgressWrap').hidden = false;
+            document.getElementById('questionFontsizeBtn').hidden = false;
+            document.getElementById('questionResultsBackBtn').hidden = true;
+            const markBtn = document.getElementById('questionMarkBtn');
+            markBtn.hidden = !isExam;
+            markBtn.classList.toggle('active', !!session.markedForReview?.[session.index]);
+            document.getElementById('questionNavBtn').hidden = !isExam;
+            document.getElementById('questionPrev').hidden = !isExam || session.index === 0;
             const next = document.getElementById('questionNext');
-            next.disabled = true;
-            next.textContent = session.index === total - 1 ? 'Finalizar sessão' : 'Próxima questão';
+            // Guiado só libera "Próxima" depois de responder; Simulado
+            // permite pular uma questão em branco e voltar a ela depois.
+            next.disabled = !isExam;
+            next.textContent = session.index === total - 1 ? (isExam ? 'Finalizar simulado' : 'Finalizar sessão') : (isExam ? 'Pular / Próxima' : 'Próxima questão');
             const optionsContainer = document.getElementById('questionOptions');
             if (question.questionType === 'discursive') {
                 // Markup fixo, sem dado da questão dentro — innerHTML aqui não corre risco.
@@ -1714,6 +1737,12 @@ Regras obrigatórias:
                     const button = document.createElement('button');
                     button.type = 'button';
                     button.className = 'question-option';
+                    // No Simulado, ao voltar pra uma questão já respondida,
+                    // reabre com a alternativa escolhida destacada — sem
+                    // isso, cada visita "esqueceria" a resposta na tela
+                    // (o dado continua salvo em session.answers, só o
+                    // destaque visual precisa ser reconstruído).
+                    if (isExam && session.answers[session.index] === letter) button.style.borderColor = 'var(--lavender-active)';
                     button.onclick = () => answerQuestion(letter);
                     const letterEl = document.createElement('span');
                     letterEl.className = 'question-option-letter';
@@ -1735,7 +1764,10 @@ Regras obrigatórias:
         function answerQuestion(letter) {
             if (!activeQuestionSession) return;
             const session = activeQuestionSession;
-            if (session.answers[session.index]) return;
+            // Guiado trava depois da primeira resposta (correção
+            // imediata); Simulado/Imersão permitem trocar quantas vezes
+            // quiser antes de avançar ou finalizar.
+            if (session.mode === 'practice' && session.answers[session.index]) return;
             const question = session.questions[session.index];
             session.answers[session.index] = letter;
             const buttons = [...document.querySelectorAll('.question-option')];
@@ -1763,22 +1795,84 @@ Regras obrigatórias:
                 document.getElementById('questionFeedback').hidden = false;
                 recordQuestionResult(question, correct);
             } else {
+                // Simulado/Imersão: sem feedback de certo/errado agora — só
+                // destaca a escolha atual. Os botões continuam habilitados
+                // de propósito, pra dar pra trocar de resposta.
                 buttons.forEach(button => {
-                    button.disabled = true;
-                    if (button.querySelector('.question-option-letter').textContent === letter) button.style.borderColor = 'var(--lavender-active)';
+                    button.style.borderColor = button.querySelector('.question-option-letter').textContent === letter ? 'var(--lavender-active)' : '';
                 });
             }
             document.getElementById('questionNext').disabled = false;
         }
 
-        function advanceQuestion() {
-            if (!activeQuestionSession || !activeQuestionSession.answers[activeQuestionSession.index]) return;
+        function retreatQuestion() {
+            if (!activeQuestionSession || activeQuestionSession.index <= 0) return;
+            activeQuestionSession.index -= 1;
+            renderQuestionPlayer();
+        }
+
+        function toggleMarkForReview() {
             const session = activeQuestionSession;
+            if (!session) return;
+            if (!Array.isArray(session.markedForReview)) session.markedForReview = new Array(session.questions.length).fill(false);
+            session.markedForReview[session.index] = !session.markedForReview[session.index];
+            document.getElementById('questionMarkBtn')?.classList.toggle('active', session.markedForReview[session.index]);
+        }
+
+        // Navegador do Simulado/Imersão: uma grade com todas as questões
+        // do bloco (a mesma ideia visual da tela de desempenho, mas
+        // durante a prova — sem certo/errado, só respondida/em branco/
+        // marcada), pra dar pra pular direto pra qualquer uma.
+        function openQuestionNavigator() {
+            const session = activeQuestionSession;
+            if (!session) return;
+            document.getElementById('questionPlayQuestion').hidden = true;
+            document.getElementById('questionNavView').hidden = false;
+            document.getElementById('questionPlayerFooter').hidden = true;
+            document.getElementById('questionNavGrid').innerHTML = session.questions.map((_, index) => {
+                const answered = !!session.answers[index];
+                const marked = !!session.markedForReview?.[index];
+                const current = index === session.index;
+                const classes = ['result-bubble', answered ? 'nav-answered' : 'nav-empty', marked ? 'nav-marked' : '', current ? 'nav-current' : ''].filter(Boolean).join(' ');
+                const statusLabel = `${answered ? 'respondida' : 'em branco'}${marked ? ', marcada para revisão' : ''}`;
+                return `<button type="button" class="${classes}" onclick="jumpToQuestion(${index})" aria-label="Ir para a questão ${index + 1}, ${statusLabel}"><span>${index + 1}</span></button>`;
+            }).join('');
+        }
+
+        function closeQuestionNavigator() {
+            document.getElementById('questionPlayQuestion').hidden = false;
+            document.getElementById('questionNavView').hidden = true;
+            document.getElementById('questionPlayerFooter').hidden = false;
+        }
+
+        function jumpToQuestion(index) {
+            const session = activeQuestionSession;
+            if (!session || index < 0 || index >= session.questions.length) return;
+            session.index = index;
+            closeQuestionNavigator();
+            renderQuestionPlayer();
+        }
+
+        function advanceQuestion() {
+            if (!activeQuestionSession) return;
+            const session = activeQuestionSession;
+            // Guiado exige responder para seguir; Simulado/Imersão deixam
+            // pular uma questão em branco (fica marcável e reaberta pelo
+            // navegador depois).
+            if (session.mode === 'practice' && !session.answers[session.index]) return;
             if (session.index < session.questions.length - 1) {
                 session.index += 1;
                 renderQuestionPlayer();
                 return;
             }
+            finishExamSession(session);
+        }
+
+        // Fecha e pontua a sessão — chamada pelo fim natural (advanceQuestion
+        // na última questão) e por finishExamNow (entrega antecipada do
+        // navegador). Questão em branco conta como errada, igual numa
+        // prova real.
+        function finishExamSession(session) {
             if (session.mode === 'exam') {
                 session.questions.forEach((question, index) => recordQuestionResult(question, window.isQuestionAnswerCorrect(question, session.answers[index])));
             }
@@ -1793,6 +1887,18 @@ Regras obrigatórias:
             showQuestionResults(lastCompletedQuestionSession);
             updateQuestionHubStats();
             renderDashboard();
+        }
+
+        function finishExamNow() {
+            const session = activeQuestionSession;
+            if (!session || session.mode !== 'exam') return;
+            const answeredCount = session.answers.filter(Boolean).length;
+            const total = session.questions.length;
+            const confirmMessage = answeredCount < total
+                ? `Ainda faltam ${total - answeredCount} questão(ões) sem resposta — elas contam como erradas. Finalizar mesmo assim?`
+                : 'Finalizar o simulado agora?';
+            if (!confirm(confirmMessage)) return;
+            finishExamSession(session);
         }
 
         let activeResultsSession = null;
@@ -1896,8 +2002,11 @@ Regras obrigatórias:
         // desempenho (não fechar o player inteiro) — só fecha de fato quando
         // já está na grade (ou respondendo normalmente).
         function handleQuestionPlayerBack() {
+            const navOpen = !document.getElementById('questionNavView').hidden;
             const reviewing = !document.getElementById('questionResultsBackBtn').hidden;
-            if (reviewing) {
+            if (navOpen) {
+                closeQuestionNavigator();
+            } else if (reviewing) {
                 showQuestionResults();
             } else {
                 closeQuestionPlayer();
@@ -1911,8 +2020,9 @@ Regras obrigatórias:
             activeQuestionSession = null;
             activeResultsSession = null;
             // Restaura o player para o estado normal de "responder questão",
-            // caso tenha ficado na tela de desempenho/revisão.
+            // caso tenha ficado na tela de desempenho/revisão/navegador.
             document.getElementById('questionResultsView').hidden = true;
+            document.getElementById('questionNavView').hidden = true;
             document.getElementById('questionPlayQuestion').hidden = false;
             document.getElementById('questionPlayerProgressWrap').hidden = false;
             document.getElementById('questionPlayerFooter').hidden = false;

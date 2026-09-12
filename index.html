@@ -430,6 +430,8 @@
         <header class="question-player-header">
             <button class="question-player-back" onclick="handleQuestionPlayerBack()" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button>
             <div class="question-player-heading"><strong id="questionPlayerMode">Guiado</strong><span id="questionPlayerArea">Cirurgia Geral</span></div>
+            <button class="question-mark-btn" id="questionMarkBtn" onclick="toggleMarkForReview()" aria-label="Marcar para revisão" title="Marcar para revisão" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15l-7.5-4.3L3 21V6a3 3 0 0 1 3-3Z"/></svg></button>
+            <button class="question-nav-btn" id="questionNavBtn" onclick="openQuestionNavigator()" aria-label="Ver todas as questões do simulado" title="Ver todas as questões" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
             <button class="question-fontsize-btn" id="questionFontsizeBtn" onclick="openQuestionFontSizeSheet()" aria-label="Alterar tamanho do texto">Aa</button>
             <button class="question-results-back" id="questionResultsBackBtn" onclick="showQuestionResults()" aria-label="Voltar para o desempenho" title="Voltar para o desempenho" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
             <div class="question-player-count" id="questionPlayerCount">1/12</div>
@@ -448,8 +450,16 @@
                 <p class="question-results-hint">Toque em uma bolha para revisar a questão.</p>
                 <div class="question-results-grid" id="questionResultsGrid"></div>
             </div>
+            <div class="question-results-view" id="questionNavView" hidden>
+                <p class="question-results-hint">Toque em uma questão para ir direto a ela. Marcadas ficam sinalizadas até você decidir a resposta.</p>
+                <div class="question-results-grid" id="questionNavGrid"></div>
+                <button class="question-nav-finish" id="questionNavFinishBtn" type="button" onclick="finishExamNow()">Finalizar simulado agora</button>
+            </div>
         </main>
-        <footer class="question-player-footer" id="questionPlayerFooter"><button class="question-next" id="questionNext" onclick="advanceQuestion()" disabled>Próxima questão</button></footer>
+        <footer class="question-player-footer" id="questionPlayerFooter">
+            <button class="question-prev" id="questionPrev" onclick="retreatQuestion()" hidden>Anterior</button>
+            <button class="question-next" id="questionNext" onclick="advanceQuestion()" disabled>Próxima questão</button>
+        </footer>
     </section>
 
     <!-- RAPID REVIEW — leitor padronizado por grande área -->
