@@ -10,7 +10,15 @@ progresso via Firebase (Auth + Firestore).
 
 ## Estrutura
 
-- `index.html` — o app inteiro (HTML, CSS e JS).
+- `index.html` — o app (HTML + JS embutido); o CSS mora em `app.css`.
+- `app.css` — todo o estilo do app (paleta, tipografia, vidro líquido —
+  ver `DESIGN_SYSTEM.md`). Extraído de dentro do `index.html`, sem outra
+  diferença.
+- `shared/trail-priority.js` — cálculo de prioridade das Trilhas
+  (incidência × urgência por desempenho). Usado tanto pelo cliente
+  (`index.html`, via `window.calculatePathPriority`) quanto pelo backend
+  (`backend/src/pathPriority.js` reexporta este arquivo) — um lugar só,
+  em vez de duas cópias que já haviam divergido.
 - `questions-*.js` — banco de questões, um arquivo por área/prova; cada um
   concatena em `window.TRYCKTRACK_QUESTION_BANK` (a ordem de carregamento
   no `<head>` do `index.html` importa). **Gerados a partir dos PDFs

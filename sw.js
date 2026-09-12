@@ -1,14 +1,16 @@
-const CACHE_NAME = 'trycktrack-v6';
+const CACHE_NAME = 'trycktrack-v7';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
 const APP_SHELL = [
   './',
   './index.html',
+  './app.css',
   './manifest.json',
   './icon-180.png',
   './icon-180-transparent.png',
   './logo-clean-v2.png',
+  './shared/trail-priority.js',
   './questions-cirurgia.js',
   './questions-psiquiatria.js',
   './questions-preventiva.js',
