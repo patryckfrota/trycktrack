@@ -1481,6 +1481,17 @@
             --bubble-shadow-inner: rgba(255,90,82,.1);
             --bubble-shadow-outer: rgba(255,90,82,.22);
         }
+        /* Questão discursiva: não tem gabarito de letra, então não é
+           certo nem errado — um terceiro estado neutro (lavanda da
+           marca) em vez de forçar verde/vermelho num caso que não é
+           nenhum dos dois. */
+        .result-bubble.neutral {
+            --bubble-tint-strong: rgba(196,181,253,.4);
+            --bubble-tint-soft: rgba(196,181,253,.14);
+            --bubble-border: rgba(196,181,253,.55);
+            --bubble-shadow-inner: rgba(196,181,253,.1);
+            --bubble-shadow-outer: rgba(196,181,253,.22);
+        }
         .question-player-progress { flex: 0 0 auto; height: 3px; background: var(--bg-tertiary); }
         .question-player-progress div { height: 100%; width: 0; background: var(--lavender-active); transition: width .35s ease; }
         .question-player-body { flex: 1 1 0; min-height: 0; overflow-y: auto; padding: 20px 16px 130px; -webkit-overflow-scrolling: touch; }
@@ -6557,13 +6568,17 @@
 
         function buildQuestionHistoryEntry(session, correctCount) {
             const areas = [...new Set(session.questions.map(q => q.area).filter(Boolean))];
+            // Discursivas não pontuam — não entram no denominador do
+            // desempenho da sessão, senão "8/10" mentiria sobre uma
+            // sessão em que só 8 questões tinham gabarito de letra.
+            const scoredTotal = session.questions.filter(q => q.questionType !== 'discursive').length;
             return {
                 id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
                 mode: session.mode,
                 startedAt: session.startedAt || new Date().toISOString(),
                 finishedAt: new Date().toISOString(),
                 correct: correctCount,
-                total: session.questions.length,
+                total: scoredTotal,
                 area: areas.length === 1 ? areas[0] : (areas.length ? 'Áreas mistas' : ''),
                 // retrato leve: só os campos usados na grade de bolhas e na
                 // revisão, não o objeto inteiro da questão. O Firestore
@@ -10270,7 +10285,11 @@ Regras obrigatórias:
             document.getElementById('questionPlayerBody').scrollTop = 0;
         }
 
+        // Questão discursiva não tem gabarito de letra — não é certo nem
+        // errado, é "sem pontuação" (null). Quem chama precisa tratar os
+        // três estados: true, false e null.
         function isQuestionAnswerCorrect(question, answer) {
+            if (question?.questionType === 'discursive') return null;
             return Boolean(question?.annulled) || answer === question?.answer;
         }
 
@@ -10359,12 +10378,18 @@ Regras obrigatórias:
 
             const { questions, answers, mode } = activeResultsSession;
             const correctCount = questions.reduce((sum, q, i) => sum + (isQuestionAnswerCorrect(q, answers[i]) ? 1 : 0), 0);
+            // Discursivas não têm gabarito de letra — ficam de fora do
+            // denominador do placar (senão a fração mentiria), mas ainda
+            // aparecem na grade de bolhas, num terceiro estado neutro.
+            const scoredTotal = questions.filter(q => q.questionType !== 'discursive').length;
             document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
             document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
-            document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${questions.length}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
+            document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${scoredTotal}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
             document.getElementById('questionResultsGrid').innerHTML = questions.map((q, i) => {
                 const correct = isQuestionAnswerCorrect(q, answers[i]);
-                return `<button type="button" class="result-bubble ${correct ? 'correct' : 'wrong'}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${correct ? 'acertou' : 'errou'}"><span>${i + 1}</span></button>`;
+                const state = correct === null ? 'neutral' : (correct ? 'correct' : 'wrong');
+                const label = correct === null ? 'sem pontuação' : (correct ? 'acertou' : 'errou');
+                return `<button type="button" class="result-bubble ${state}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${label}"><span>${i + 1}</span></button>`;
             }).join('');
             document.getElementById('questionPlayerBody').scrollTop = 0;
         }
@@ -10442,15 +10467,34 @@ Regras obrigatórias:
             document.getElementById('questionResultsBackBtn').hidden = true;
         }
 
+        // Mapa de área (como vem nas questões) -> slug usado no Dashboard
+        // (DASHBOARD_AREAS, acima). "Revalida INEP" e afins não têm
+        // correspondência — ficam de fora do detalhamento por área, mas
+        // continuam contando no total geral de acertos.
+        const QUESTION_AREA_DASHBOARD_SLUG = {
+            'Clínica Médica': 'clinica-medica',
+            'Ginecologia': 'go-completo',
+            'Obstetrícia': 'go-completo',
+            'Pediatria': 'pediatria-completo',
+            'Cirurgia Geral': 'cirurgia-geral',
+            'Medicina Preventiva': 'medicina-preventiva',
+            'Psiquiatria': 'psiquiatria',
+        };
+
         function recordQuestionResult(question, correct) {
+            // Discursiva não tem gabarito de letra — não é certo nem
+            // errado, então não entra na contagem de acertos/erros.
+            if (question?.questionType === 'discursive') return;
             const stats = getQuestionStats();
             stats.answered = Number(stats.answered || 0) + 1;
             stats.correct = Number(stats.correct || 0) + (correct ? 1 : 0);
             stats.byArea = stats.byArea || {};
-            const key = 'cirurgia-geral';
-            stats.byArea[key] = stats.byArea[key] || { answered: 0, correct: 0 };
-            stats.byArea[key].answered += 1;
-            stats.byArea[key].correct += correct ? 1 : 0;
+            const key = QUESTION_AREA_DASHBOARD_SLUG[question?.area];
+            if (key) {
+                stats.byArea[key] = stats.byArea[key] || { answered: 0, correct: 0 };
+                stats.byArea[key].answered += 1;
+                stats.byArea[key].correct += correct ? 1 : 0;
+            }
             const today = new Date().toISOString().slice(0, 10);
             stats.daily = Array.isArray(stats.daily) ? stats.daily : [];
             let day = stats.daily.find(item => item.date === today);
