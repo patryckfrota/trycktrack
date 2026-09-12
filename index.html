@@ -11,19 +11,25 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" sizes="180x180" href="logo-clean-v2.png">
     <link rel="icon" type="image/png" href="logo-clean-v2.png">
-    <script src="questions-cirurgia.js"></script>
-    <script src="questions-psiquiatria.js"></script>
-    <script src="questions-preventiva.js"></script>
-    <script src="questions-obstetricia.js"></script>
-    <script src="questions-ginecologia.js"></script>
-    <script src="questions-pediatria.js"></script>
-    <script src="questions-clinica-medica.js"></script>
-    <script src="questions-revalida.js"></script>
-    <script src="question-explanations.js"></script>
-    <script src="osce-stations.js"></script>
-    <script src="vendor/pdf-lib.min.js"></script>
-    <script src="vendor/fontkit.umd.min.js"></script>
-    <script src="pdf-export.js"></script>
+    <!-- defer: nenhum destes precisa executar durante o parse do HTML —
+         adiar deixa o parser seguir para o <body> e pintar a tela mais
+         cedo. A ordem de execução entre scripts defer é preservada, então
+         o encadeamento (cada questions-*.js faz .concat no banco do
+         anterior) continua funcionando igual. -->
+    <script src="questions-cirurgia.js" defer></script>
+    <script src="questions-psiquiatria.js" defer></script>
+    <script src="questions-preventiva.js" defer></script>
+    <script src="questions-obstetricia.js" defer></script>
+    <script src="questions-ginecologia.js" defer></script>
+    <script src="questions-pediatria.js" defer></script>
+    <script src="questions-clinica-medica.js" defer></script>
+    <script src="questions-revalida.js" defer></script>
+    <script src="osce-stations.js" defer></script>
+    <!-- question-explanations.js (829KB) e o trio de PDF — pdf-lib,
+         fontkit e pdf-export (1,25MB juntos) — não entram mais aqui:
+         só servem quando a pessoa responde uma questão ou baixa um PDF,
+         então carregam sob demanda (ver ensureQuestionExplanationsLoaded
+         e ensurePdfLibsLoaded mais abaixo). -->
     <script>
         /* Aplica o tema o mais cedo possível (antes do CSS pintar a
            tela) para não piscar o tema errado por uma fração de
@@ -8059,7 +8065,14 @@
             viewport.addEventListener('touchstart', pause, { passive: true });
             ['pointerup', 'pointercancel', 'touchend', 'mouseleave'].forEach(evt => viewport.addEventListener(evt, scheduleResume));
             function step() {
-                if (!paused && viewport.isConnected) {
+                // Sai do loop de vez quando o elemento não existe mais —
+                // sem isso, o requestAnimationFrame ficava agendando o
+                // próximo quadro pra sempre, mesmo com a pessoa em outra
+                // aba do app. document.hidden também pausa o avanço
+                // (a aba do navegador em segundo plano), sem parar o loop
+                // — só congela o scroll até voltar a ficar visível.
+                if (!viewport.isConnected) return;
+                if (!paused && !document.hidden) {
                     const half = track.scrollWidth / 2;
                     if (half > 0) {
                         viewport.scrollLeft += 0.5;
@@ -8243,6 +8256,8 @@
                 return;
             }
             try {
+                setPdfDownloadProgress(progress, 15, true);
+                await ensurePdfLibsLoaded();
                 setPdfDownloadProgress(progress, 40, true);
                 const bytes = await TryckPdf.buildRapidReviewPdf({ topic });
                 setPdfDownloadProgress(progress, 96, true);
@@ -8846,27 +8861,29 @@
             return randomSample(matching, count);
         }
 
-        function startTrailDiagnostic(trailId) {
+        async function startTrailDiagnostic(trailId) {
             const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o diagnóstico.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailDiagnostic: trailId, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
         }
 
-        function startTrailRecalibration(trailId) {
+        async function startTrailRecalibration(trailId) {
             const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o simulado.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'exam', questions: randomSample(questions, 20), index: 0, answers: [], trailRecalibration: trailId, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
         }
 
-        function startTrailPhase(trailId, phaseId) {
+        async function startTrailPhase(trailId, phaseId) {
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             const phase = getTrailPlan(trailId, track).find(item => item.id === phaseId);
@@ -8882,6 +8899,7 @@
             }
             const questions = trailQuestionsForArea(phase.area, 10);
             if (!questions.length) { revealQuestionNotice(`Ainda não há questões importadas de ${phase.area}.`); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailPhase: { trailId, phaseId }, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
@@ -8966,6 +8984,11 @@
             if (pagina === 'trilhas') renderTrails();
             if (pagina === 'review') syncRapidReviewMenu();
             if (pagina === 'metricas') renderDashboard();
+            // Prefetch silencioso: Questões e Trilhas são as duas telas de
+            // onde uma sessão pode começar, então já adianta o download de
+            // question-explanations.js aqui — na hora de responder a
+            // primeira questão, o arquivo já chegou.
+            if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
         }
 
         const DASHBOARD_AREAS = [
@@ -9012,11 +9035,41 @@
             document.getElementById('dashboardHeadline').textContent = answered ? (accuracy >= 80 ? 'Ótimo desempenho' : accuracy >= 60 ? 'Evolução consistente' : 'Vamos fortalecer a base') : 'Pronto para começar';
             document.getElementById('dashboardInsight').textContent = answered ? `${correct} acertos em ${answered} questões respondidas.` : 'Responda questões para construir uma análise personalizada.';
 
-            const daily = Array.isArray(stats.daily) ? stats.daily.slice(-dashboardPeriodDays) : [];
-            const maxValue = Math.max(1, ...daily.map(item => Number(item.count || 0)));
+            // Casa cada dia por data (não por posição no array) — stats.daily
+            // só ganha uma entrada nos dias em que houve estudo, então
+            // indexar por posição deslocava o gráfico inteiro assim que
+            // havia um intervalo sem responder nada.
+            const dailyByDate = new Map((Array.isArray(stats.daily) ? stats.daily : []).map(item => [item.date, Number(item.count || 0)]));
+            const today = new Date();
+            const countForDaysAgo = (daysAgo) => {
+                const date = new Date(today);
+                date.setDate(date.getDate() - daysAgo);
+                return dailyByDate.get(date.toISOString().slice(0, 10)) || 0;
+            };
+            let chartValues, dayLabels;
+            if (dashboardPeriodDays === 7) {
+                dayLabels = Array.from({ length: 7 }, (_, i) => {
+                    const date = new Date(today); date.setDate(date.getDate() - (6 - i));
+                    return date.toLocaleDateString('pt-BR', { weekday: 'narrow' });
+                });
+                chartValues = Array.from({ length: 7 }, (_, i) => countForDaysAgo(6 - i));
+            } else {
+                // 30 dias em 10 baldes de 3 dias — mantém a mesma densidade
+                // visual de antes (10 barras), agora somando dias reais em
+                // vez de indexar posições que não correspondiam a nada.
+                const BUCKETS = 10, BUCKET_SIZE = 3;
+                dayLabels = []; chartValues = [];
+                for (let bucket = BUCKETS - 1; bucket >= 0; bucket--) {
+                    let sum = 0;
+                    const bucketEndDaysAgo = bucket * BUCKET_SIZE;
+                    for (let offset = 0; offset < BUCKET_SIZE; offset++) sum += countForDaysAgo(bucketEndDaysAgo + offset);
+                    const endDate = new Date(today); endDate.setDate(endDate.getDate() - bucketEndDaysAgo);
+                    dayLabels.push(String(endDate.getDate()));
+                    chartValues.push(sum);
+                }
+            }
+            const maxValue = Math.max(1, ...chartValues);
             const chart = document.getElementById('dashboardChart');
-            const dayLabels = dashboardPeriodDays === 7 ? ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'] : Array.from({length: 10}, (_, i) => String(i + 1));
-            const chartValues = dayLabels.map((_, index) => Number(daily[index]?.count || 0));
             chart.innerHTML = chartValues.map((value, index) => `<div class="dashboard-day"><div class="dashboard-bar-track"><div class="dashboard-bar" style="height:${Math.max(3, Math.round((value / maxValue) * 100))}%"></div></div><label>${dayLabels[index]}</label></div>`).join('');
             document.getElementById('dashboardChartLabel').textContent = dashboardPeriodDays === 7 ? 'Últimos 7 dias' : 'Últimos 30 dias';
 
@@ -9121,6 +9174,48 @@
             return questions.slice(0, Math.min(count, questions.length));
         }
 
+        // pdf-lib + fontkit + pdf-export.js somam 1,25MB e só servem no
+        // momento em que alguém baixa um PDF — não fazem sentido no
+        // carregamento inicial do app. Carregados sob demanda, uma única
+        // vez (chamadas seguintes reaproveitam a mesma promise/resultado).
+        let pdfLibsLoadingPromise = null;
+        function loadScriptOnce(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error(`Falha ao carregar ${src}`));
+                document.head.appendChild(script);
+            });
+        }
+        function ensurePdfLibsLoaded() {
+            if (window.TryckPdf) return Promise.resolve();
+            if (!pdfLibsLoadingPromise) {
+                pdfLibsLoadingPromise = loadScriptOnce('vendor/pdf-lib.min.js')
+                    .then(() => loadScriptOnce('vendor/fontkit.umd.min.js'))
+                    .then(() => loadScriptOnce('pdf-export.js'))
+                    .catch(error => { pdfLibsLoadingPromise = null; throw error; });
+            }
+            return pdfLibsLoadingPromise;
+        }
+
+        // question-explanations.js (829KB) só importa pra quem chega a
+        // responder uma questão — mutando question.explanation direto nos
+        // itens de window.TRYCKTRACK_QUESTION_BANK já carregado. Chamado
+        // de dois jeitos: como prefetch silencioso ao abrir Questões/
+        // Trilhas (mudarPagina) e, de forma garantida, antes de qualquer
+        // sessão de questões realmente começar — se o prefetch já tiver
+        // terminado (caso comum), essa segunda chamada não espera nada.
+        let questionExplanationsLoadingPromise = null;
+        function ensureQuestionExplanationsLoaded() {
+            if (window.TRYCKTRACK_QUESTION_EXPLANATIONS) return Promise.resolve();
+            if (!questionExplanationsLoadingPromise) {
+                questionExplanationsLoadingPromise = loadScriptOnce('question-explanations.js')
+                    .catch(error => { questionExplanationsLoadingPromise = null; throw error; });
+            }
+            return questionExplanationsLoadingPromise;
+        }
+
         function escapeQuestionPdfText(value) {
             return String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
         }
@@ -9162,6 +9257,8 @@
             }
             const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : (mode === 'exam' ? 'Simulado' : 'Guiado');
             try {
+                setPdfDownloadProgress(progress, 15, true);
+                await ensurePdfLibsLoaded();
                 setPdfDownloadProgress(progress, 40, true);
                 // Com gabarito: mesmo layout com caixa lavanda do resultado de
                 // sessão (questão + explicação intercaladas no Guiado/Imersão;
@@ -9187,6 +9284,7 @@
             if (!session || !session.questions?.length) return;
             revealQuestionNotice('Gerando PDF...');
             try {
+                await ensurePdfLibsLoaded();
                 const title = session.mode === 'exam' ? 'Simulado' : 'Guiado';
                 const bytes = await TryckPdf.buildQuestionsResultPdf({
                     questions: session.questions, answers: session.answers, mode: session.mode, title,
@@ -10178,7 +10276,7 @@ Regras obrigatórias:
             }
         }
 
-        function startQuestionSession() {
+        async function startQuestionSession() {
             const mode = activeQuestionConfigMode || document.querySelector('.question-mode.active')?.dataset.questionMode;
             if (mode === 'osce') {
                 startOsceSession();
@@ -10228,6 +10326,7 @@ Regras obrigatórias:
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: isFullExam ? 'exam' : (mode || 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
@@ -10320,6 +10419,7 @@ Regras obrigatórias:
             if (session.trailDiagnostic) completeTrailDiagnostic(session.trailDiagnostic, session);
             if (session.trailRecalibration) completeTrailRecalibration(session.trailRecalibration, session);
             if (session.trailPhase) completeTrailPhase(session.trailPhase);
+            recordStudyMinutes(session);
             lastCompletedQuestionSession = { mode: session.mode, questions: session.questions, answers: session.answers.slice() };
             activeQuestionSession = null;
             appendQuestionHistory(buildQuestionHistoryEntry(session, correct));
@@ -10473,8 +10573,31 @@ Regras obrigatórias:
             let day = stats.daily.find(item => item.date === today);
             if (!day) { day = { date: today, count: 0 }; stats.daily.push(day); }
             day.count += 1;
+            // Ofensiva: só reavalia uma vez por dia (na primeira questão
+            // respondida do dia), não a cada questão — soma 1 se o último
+            // dia com atividade foi ontem, reinicia em 1 se houve um
+            // intervalo, e não mexe se hoje já tinha sido contado.
+            if (stats.lastActivityDate !== today) {
+                const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+                const yesterdayIso = yesterday.toISOString().slice(0, 10);
+                stats.streak = stats.lastActivityDate === yesterdayIso ? Number(stats.streak || 0) + 1 : 1;
+                stats.lastActivityDate = today;
+            }
             localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
             updateQuestionHubStats();
+        }
+
+        // Tempo de estudo: soma a duração de cada sessão de questões ao
+        // total acumulado. Chamado uma vez por sessão concluída (não por
+        // questão), a partir de session.startedAt.
+        function recordStudyMinutes(session) {
+            const startedAt = session?.startedAt ? new Date(session.startedAt).getTime() : NaN;
+            if (!Number.isFinite(startedAt)) return;
+            const minutes = Math.round((Date.now() - startedAt) / 60000);
+            if (minutes <= 0) return;
+            const stats = getQuestionStats();
+            stats.studyMinutes = Number(stats.studyMinutes || 0) + minutes;
+            localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
         }
 
         function updateQuestionHubStats() {
@@ -10535,7 +10658,19 @@ Regras obrigatórias:
 
         function setupCardReveal() {
             const content = document.querySelector('.content');
-            new MutationObserver(observeCardReveals)
+            // observeCardReveals mexe em classes dentro da própria árvore
+            // observada, então cada execução realimentava o observer —
+            // uma varredura completa de document.querySelectorAll a cada
+            // mutação (mensagem no chat, render do dashboard, troca de
+            // tarefa do OSCE...). Coalescido num único requestAnimationFrame
+            // por rajada de mutações, no máximo uma varredura por quadro.
+            let revealScheduled = false;
+            const scheduleReveal = () => {
+                if (revealScheduled) return;
+                revealScheduled = true;
+                requestAnimationFrame(() => { revealScheduled = false; observeCardReveals(); });
+            };
+            new MutationObserver(scheduleReveal)
                 .observe(content || document.body, { childList: true, subtree: true });
             observeCardReveals();
         }
