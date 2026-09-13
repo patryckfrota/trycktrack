@@ -416,30 +416,45 @@
             const index = paginas.indexOf(pagina);
 
             const novaTab = document.getElementById(tabMap[pagina]);
+            // Só o que muda o que a pessoa está olhando NA HORA do toque
+            // (o item do menu inferior fica ativo — é o "badge" que
+            // desliza/acende — e a aba troca) acontece aqui, síncrono,
+            // isolado de qualquer trabalho de conteúdo. O navegador só
+            // pinta a tela depois que TODO o JavaScript síncrono termina;
+            // se renderTrails/renderDashboard rodassem no mesmo instante
+            // (mesmo sendo rápidos no desenvolvimento, um Mac não é um
+            // iPhone), o primeiro frame da transição do menu ficava
+            // esperando esse trabalho terminar, e a badge "não corria
+            // logo" — exatamente o relatado.
             novaTab.classList.add('active');
             if (index >= 0) navItems[index].classList.add('active');
-
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
-            animarProgresso(novaTab);
             updateHeaderTitle(pagina);
-            if (pagina === 'inicio') renderLastReadCard();
-            if (pagina === 'trilhas') renderTrails();
-            if (pagina === 'review') syncRapidReviewMenu();
-            if (pagina === 'metricas') renderDashboard();
-            if (pagina === 'questoes') updateReviewQueueHint();
-            // Prefetch silencioso: Questões e Trilhas são as duas telas de
-            // onde uma sessão pode começar, então já adianta o download de
-            // question-explanations.js aqui — na hora de responder a
-            // primeira questão, o arquivo já chegou.
-            if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
-            // Marca os cards da aba (estáticos e os que renderTrails/
-            // renderDashboard acabaram de criar) pra tocar a animação de
-            // entrada — só um classList.add por elemento, sem leitura de
-            // layout nem observer, então dá pra fazer isso na hora, sem
-            // rAF, sem risco de brigar com a rolagem/transição da troca
-            // de aba. Ver comentário em tagCardReveal.
-            tagCardReveal(novaTab);
-            enhanceClickableDivsForKeyboard(novaTab);
+
+            // Todo o trabalho de conteúdo (renderização de página,
+            // prefetch, marcação de cards) fica pra depois que o
+            // navegador já teve a chance de pintar a troca de aba/badge
+            // acima — não compete pelo mesmo frame.
+            requestAnimationFrame(() => {
+                animarProgresso(novaTab);
+                if (pagina === 'inicio') renderLastReadCard();
+                if (pagina === 'trilhas') renderTrails();
+                if (pagina === 'review') syncRapidReviewMenu();
+                if (pagina === 'metricas') renderDashboard();
+                if (pagina === 'questoes') updateReviewQueueHint();
+                // Prefetch silencioso: Questões e Trilhas são as duas
+                // telas de onde uma sessão pode começar, então já adianta
+                // o download de question-explanations.js aqui — na hora
+                // de responder a primeira questão, o arquivo já chegou.
+                if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
+                // Marca os cards da aba (estáticos e os que renderTrails/
+                // renderDashboard acabaram de criar) — hoje só um
+                // classList.add por elemento (ver tagCardReveal), sem
+                // efeito visual próprio desde que a animação de entrada
+                // foi removida.
+                tagCardReveal(novaTab);
+                enhanceClickableDivsForKeyboard(novaTab);
+            });
         }
 
         const DASHBOARD_AREAS = [
