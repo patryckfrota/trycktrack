@@ -1,4 +1,13 @@
-const CACHE_NAME = 'trycktrack-v8';
+// IMPORTANTE: mude este número a cada deploy que altera qualquer arquivo
+// do APP_SHELL abaixo (qualquer app-*.js, app.css, index.html...). O
+// registro do Service Worker só detecta "há versão nova" quando os
+// BYTES do próprio sw.js mudam — se só os arquivos que ele cacheia
+// mudarem e este número ficar parado, o app instalado (ícone na tela de
+// início) nunca mostra o banner "Atualizar agora" e continua servindo
+// os arquivos antigos do cache indefinidamente (a atualização em
+// segundo plano do fetch handler existe, mas no iOS um PWA em background
+// é suspenso antes dela terminar — já aconteceu, não é hipotético).
+const CACHE_NAME = 'trycktrack-v9';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
