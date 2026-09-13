@@ -342,7 +342,7 @@
                 body: `<div class="onboarding-menu-list">
                     <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1V10.5Z"/></svg></span><div><strong>Início</strong><span>Contagem para a prova, atalho para continuar de onde parou.</span></div></div>
                     <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="4.2" cy="6" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="6" x2="20" y2="6"/><circle cx="4.2" cy="12" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="12" x2="20" y2="12"/><circle cx="4.2" cy="18" r="1.15" fill="currentColor" stroke="none"/><line x1="8.5" y1="18" x2="20" y2="18"/></svg></span><div><strong>Trilhas</strong><span>Fases de estudo organizadas por objetivo, passo a passo.</span></div></div>
-                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 12.3 10.8 15 16 8.5"/></svg></span><div><strong>Questões</strong><span>Pratique no Guiado, Simulado, OSCE ou Imersão completa.</span></div></div>
+                    <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 12.3 10.8 15 16 8.5"/></svg></span><div><strong>QuestHub</strong><span>Pratique no Guiado, Simulado, OSCE ou Imersão completa.</span></div></div>
                     <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="5"/><line x1="18" y1="20" x2="18" y2="10"/></svg></span><div><strong>Dashboard</strong><span>Seu desempenho geral e o histórico de todas as sessões.</span></div></div>
                     <div class="onboarding-menu-item"><span class="onboarding-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v5a6 6 0 0 0 12 0V3"/><path d="M3.7 3h2.6M15.7 3h2.6"/></svg></span><div><strong>Rapid Review</strong><span>Resumos rápidos por grande área, para revisar antes da prova.</span></div></div>
                 </div>`
@@ -350,7 +350,7 @@
             {
                 icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-13h-7z"/></svg>',
                 title: 'Como o app funciona',
-                body: '<p>Leia os temas no <strong>Rapid Review</strong>, treine o que aprendeu nas <strong>Questões</strong> e acompanhe tudo no <strong>Dashboard</strong> — inclusive revisitando sessões antigas para rever o que errou. As <strong>Trilhas</strong> ajudam a organizar essa rotina por etapas.</p>'
+                body: '<p>Leia os temas no <strong>Rapid Review</strong>, treine o que aprendeu no <strong>QuestHub</strong> e acompanhe tudo no <strong>Dashboard</strong> — inclusive revisitando sessões antigas para rever o que errou. As <strong>Trilhas</strong> ajudam a organizar essa rotina por etapas.</p>'
             },
             {
                 icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
@@ -724,7 +724,7 @@
         const PAGE_TITLES = {
             trilhas: 'Trilhas',
             review: 'Rapid Review',
-            questoes: 'Questões',
+            questoes: 'QuestHub',
             metricas: 'Dashboard'
         };
 
