@@ -11,6 +11,13 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" sizes="180x180" href="logo-clean-v2.png">
     <link rel="icon" type="image/png" href="logo-clean-v2.png">
+    <!-- As logos das instituições só aparecem no <img> depois que a aba
+         Trilhas é montada (renderTrails). Pré-carregar aqui faz o
+         navegador buscá-las durante a tela de login/splash, então quando
+         a pessoa abre Trilhas elas já estão prontas — sem esse preload,
+         o download só começava na hora, e a logo "surgia atrasada". -->
+    <link rel="preload" as="image" href="assets/logo-enamed-sigla.png">
+    <link rel="preload" as="image" href="assets/logo-uepa-sigla.png">
     <!-- defer: nenhum destes precisa executar durante o parse do HTML —
          adiar deixa o parser seguir para o <body> e pintar a tela mais
          cedo. A ordem de execução entre scripts defer é preservada, então

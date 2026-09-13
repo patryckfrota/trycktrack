@@ -2269,69 +2269,6 @@ Regras obrigatórias:
             (container || document).querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
                 card.classList.add('card-reveal');
             });
-            observeParallaxCards(container);
-        }
-
-        // Paralaxe leve nos cards de todos os menus: cada card ganha um
-        // pequeno deslocamento vertical (--parallax-y) conforme a posição
-        // de rolagem, dando sensação de profundidade. Reaproveita o mesmo
-        // caminho do tagCardReveal (chamado só nos cards recém-criados,
-        // nunca varrendo o app inteiro) e só acompanha cards que estão
-        // REALMENTE em tela — Intersection Observer decide quem entra e
-        // sai do cálculo, o scroll só lê/escreve nesses poucos elementos
-        // via requestAnimationFrame. É a mesma lição do bug de travamento
-        // corrigido antes (nunca reprocessar o DOM inteiro a cada evento).
-        const parallaxReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const parallaxVisibleCards = new Set();
-        let parallaxObserver = null;
-        let parallaxTicking = false;
-
-        function updateParallax() {
-            parallaxTicking = false;
-            const content = document.querySelector('.content');
-            if (!content) return;
-            const contentRect = content.getBoundingClientRect();
-            const midpoint = contentRect.top + contentRect.height / 2;
-            parallaxVisibleCards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const offset = (rect.top + rect.height / 2) - midpoint;
-                const shift = Math.max(-10, Math.min(10, offset * -0.035));
-                card.style.setProperty('--parallax-y', `${shift.toFixed(2)}px`);
-            });
-        }
-
-        function scheduleParallaxUpdate() {
-            if (parallaxTicking) return;
-            parallaxTicking = true;
-            requestAnimationFrame(updateParallax);
-        }
-
-        function observeParallaxCards(root) {
-            if (parallaxReducedMotion) return;
-            const content = document.querySelector('.content');
-            if (!content) return;
-            if (!parallaxObserver) {
-                parallaxObserver = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            parallaxVisibleCards.add(entry.target);
-                            entry.target.classList.add('parallax-active');
-                        } else {
-                            parallaxVisibleCards.delete(entry.target);
-                            entry.target.classList.remove('parallax-active');
-                            entry.target.style.removeProperty('--parallax-y');
-                        }
-                    });
-                    scheduleParallaxUpdate();
-                }, { root: content, rootMargin: '60px 0px', threshold: 0 });
-                content.addEventListener('scroll', scheduleParallaxUpdate, { passive: true });
-            }
-            (root || document).querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
-                if (card.dataset.parallaxBound) return;
-                card.dataset.parallaxBound = '1';
-                card.classList.add('parallax-card');
-                parallaxObserver.observe(card);
-            });
         }
 
         // Vários cards/itens de navegação são <div onclick="..."> em vez de

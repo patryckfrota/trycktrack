@@ -371,12 +371,16 @@
 
         .tab-content.active {
             display: block;
-            animation: tabIn 0.38s var(--ease-out);
+            animation: tabIn 0.26s var(--ease-out) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tab-content.active { animation: none; }
         }
 
         @keyframes tabIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* FILTER TABS */
@@ -4604,41 +4608,19 @@
         .trail-phase.locked .trail-phase-action { background: rgba(196,181,253,.11); color: var(--lavender-active); }
         [data-theme="light"] .trail-phase.locked::after { background: rgba(243,242,246,.18); }
 
-        /* .card-reveal já teve duas versões animadas (IntersectionObserver
-           e depois uma @keyframes pura) — as duas causaram travamento
-           real em dispositivo (iPhone), sem reproduzir no ambiente de
-           teste. Vários dos cards que levam esta classe usam
-           backdrop-filter (vidro líquido, ex.: os cards de modo do
-           QuestHub) — animar opacity/transform em várias caixas com blur
-           ao mesmo tempo é um caso clássico de custo alto de composição
-           no Safari/WebKit, que só aparece em hardware de verdade. Depois
-           de 4 rodadas sem resolver de vez, a decisão foi tirar a
-           animação — os cards aparecem direto, sem entrada. .card-reveal
-           continua existindo só como marcador (JS ainda adiciona a
-           classe), sem nenhum efeito visual, caso algum dia valha a pena
-           reintroduzir uma entrada mais barata (ex.: só opacity, sem
-           transform, e sem os cards com blur).*/
+        /* .card-reveal já teve TRÊS versões animadas por card
+           (IntersectionObserver, @keyframes com translateY, depois só
+           opacity) — as três pesaram em dispositivo real. A última
+           (opacity isolado) ainda rodava AO MESMO TEMPO que a animação de
+           entrada da aba inteira (.tab-content.active, ver acima) — ou
+           seja, N cards com backdrop-filter animando opacity próprio,
+           simultâneo a outra animação por cima. O efeito de "surgir de
+           baixo pra cima" agora é feito UMA VEZ, na aba inteira (que não
+           tem blur), não card a card — mesmo resultado visual, custo de
+           1 elemento em vez de N. .card-reveal continua só como marcador
+           (JS ainda adiciona a classe), sem efeito próprio. */
         .card-reveal {
             opacity: 1;
-        }
-
-        /* Paralaxe leve: só os cards realmente visíveis (Intersection
-           Observer) recebem a custom property --parallax-y, atualizada no
-           scroll via rAF (ver setupParallax em app-app.js). Nada aqui
-           varre o app inteiro nem anima cards fora de tela — a mesma
-           lição do bug de travamento documentado acima. will-change só é
-           aplicado enquanto o card está em tela (.parallax-active), pra
-           não manter dezenas de camadas promovidas o tempo todo. */
-        .parallax-card {
-            transform: translateY(var(--parallax-y, 0px));
-        }
-
-        .parallax-card.parallax-active {
-            will-change: transform;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .parallax-card { transform: none !important; }
         }
 
         /* Layout responsivo: preserva o mobile e distribui o conteúdo em telas amplas. */
