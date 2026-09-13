@@ -1965,7 +1965,6 @@
             align-items: center;
             justify-content: center;
             background: transparent;
-            transition: background 0.4s var(--ease-spring);
             position: absolute;
             left: 50%;
             top: 50%;
@@ -1973,9 +1972,28 @@
             z-index: 0;
         }
 
-        .nav-item.active .nav-icon-badge {
+        /* Cápsula única que desliza de um item para o outro (em vez de
+           cada item ter seu próprio fundo aparecendo/sumindo). A posição
+           é calculada em JS (moveNavIndicator) porque depende do layout
+           flex real dos itens — só a transform anima, nunca layout. */
+        .nav-indicator {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 78px;
+            height: 50px;
+            margin-left: -39px;
+            border-radius: 25px;
             background: rgba(var(--nav-glass-rgb), 0.16);
+            transform: translate(0px, -50%);
+            transition: transform 0.4s var(--ease-spring);
             z-index: 2;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-indicator { transition: none; }
         }
 
         .nav-icon {
@@ -4602,6 +4620,25 @@
            transform, e sem os cards com blur).*/
         .card-reveal {
             opacity: 1;
+        }
+
+        /* Paralaxe leve: só os cards realmente visíveis (Intersection
+           Observer) recebem a custom property --parallax-y, atualizada no
+           scroll via rAF (ver setupParallax em app-app.js). Nada aqui
+           varre o app inteiro nem anima cards fora de tela — a mesma
+           lição do bug de travamento documentado acima. will-change só é
+           aplicado enquanto o card está em tela (.parallax-active), pra
+           não manter dezenas de camadas promovidas o tempo todo. */
+        .parallax-card {
+            transform: translateY(var(--parallax-y, 0px));
+        }
+
+        .parallax-card.parallax-active {
+            will-change: transform;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .parallax-card { transform: none !important; }
         }
 
         /* Layout responsivo: preserva o mobile e distribui o conteúdo em telas amplas. */

@@ -311,6 +311,7 @@
             document.getElementById('appContainer').hidden = false;
             const nav = document.querySelector('.bottom-nav');
             if (nav) nav.hidden = false;
+            if (window.moveNavIndicator) window.moveNavIndicator(0, true);
             renderCurrentUser();
             updateHeaderTitle('inicio');
             renderFeedbackBanner();

@@ -392,6 +392,32 @@
             });
         }
 
+        // Desliza a cápsula única (.nav-indicator) até o centro do item
+        // ativo. A posição depende do layout flex real da barra, então
+        // precisa de uma leitura de geometria — mas é UMA leitura (o item
+        // + a barra), não uma varredura, e só acontece na troca de aba,
+        // nunca em loop/scroll.
+        function moveNavIndicator(index, instant) {
+            const indicator = document.getElementById('navIndicator');
+            const nav = document.querySelector('.bottom-nav');
+            const navItems = document.querySelectorAll('.nav-item');
+            const item = navItems[index];
+            if (!indicator || !nav || !item) return;
+            const itemRect = item.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+            if (!itemRect.width || !navRect.width) return;
+            const x = itemRect.left - navRect.left + itemRect.width / 2;
+            if (instant) indicator.style.transitionDuration = '0s';
+            indicator.style.transform = `translate(${x}px, -50%)`;
+            if (instant) requestAnimationFrame(() => { indicator.style.transitionDuration = ''; });
+        }
+
+        window.addEventListener('resize', () => {
+            const navItems = Array.from(document.querySelectorAll('.nav-item'));
+            const index = navItems.indexOf(document.querySelector('.nav-item.active'));
+            if (index >= 0) moveNavIndicator(index, true);
+        });
+
         function mudarPagina(pagina) {
             if (PAGINAS_BLOQUEADAS.includes(pagina)) {
                 const index = paginas.indexOf(pagina);
@@ -427,7 +453,7 @@
             // esperando esse trabalho terminar, e a badge "não corria
             // logo" — exatamente o relatado.
             novaTab.classList.add('active');
-            if (index >= 0) navItems[index].classList.add('active');
+            if (index >= 0) { navItems[index].classList.add('active'); moveNavIndicator(index); }
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
             updateHeaderTitle(pagina);
 
@@ -2243,6 +2269,69 @@ Regras obrigatórias:
             (container || document).querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
                 card.classList.add('card-reveal');
             });
+            observeParallaxCards(container);
+        }
+
+        // Paralaxe leve nos cards de todos os menus: cada card ganha um
+        // pequeno deslocamento vertical (--parallax-y) conforme a posição
+        // de rolagem, dando sensação de profundidade. Reaproveita o mesmo
+        // caminho do tagCardReveal (chamado só nos cards recém-criados,
+        // nunca varrendo o app inteiro) e só acompanha cards que estão
+        // REALMENTE em tela — Intersection Observer decide quem entra e
+        // sai do cálculo, o scroll só lê/escreve nesses poucos elementos
+        // via requestAnimationFrame. É a mesma lição do bug de travamento
+        // corrigido antes (nunca reprocessar o DOM inteiro a cada evento).
+        const parallaxReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const parallaxVisibleCards = new Set();
+        let parallaxObserver = null;
+        let parallaxTicking = false;
+
+        function updateParallax() {
+            parallaxTicking = false;
+            const content = document.querySelector('.content');
+            if (!content) return;
+            const contentRect = content.getBoundingClientRect();
+            const midpoint = contentRect.top + contentRect.height / 2;
+            parallaxVisibleCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const offset = (rect.top + rect.height / 2) - midpoint;
+                const shift = Math.max(-10, Math.min(10, offset * -0.035));
+                card.style.setProperty('--parallax-y', `${shift.toFixed(2)}px`);
+            });
+        }
+
+        function scheduleParallaxUpdate() {
+            if (parallaxTicking) return;
+            parallaxTicking = true;
+            requestAnimationFrame(updateParallax);
+        }
+
+        function observeParallaxCards(root) {
+            if (parallaxReducedMotion) return;
+            const content = document.querySelector('.content');
+            if (!content) return;
+            if (!parallaxObserver) {
+                parallaxObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            parallaxVisibleCards.add(entry.target);
+                            entry.target.classList.add('parallax-active');
+                        } else {
+                            parallaxVisibleCards.delete(entry.target);
+                            entry.target.classList.remove('parallax-active');
+                            entry.target.style.removeProperty('--parallax-y');
+                        }
+                    });
+                    scheduleParallaxUpdate();
+                }, { root: content, rootMargin: '60px 0px', threshold: 0 });
+                content.addEventListener('scroll', scheduleParallaxUpdate, { passive: true });
+            }
+            (root || document).querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
+                if (card.dataset.parallaxBound) return;
+                card.dataset.parallaxBound = '1';
+                card.classList.add('parallax-card');
+                parallaxObserver.observe(card);
+            });
         }
 
         // Vários cards/itens de navegação são <div onclick="..."> em vez de
@@ -2277,14 +2366,32 @@ Regras obrigatórias:
             // repetir a varredura a cada mutação individual de uma rajada
             // grande (ex.: montar a grade toda do Simulado), não mais uma
             // exigência pra evitar travamento.
+            // Reagir a mutação varrendo TODO o .content (todas as abas,
+            // não só a visível) a cada innerHTML trocado em qualquer lugar
+            // é caro em hardware real — foi a causa de um travamento sério
+            // ao trocar de aba. Em vez de re-escanear tudo, escaneamos só
+            // os nós que de fato foram adicionados nesta leva de mutações.
             let scheduled = false;
-            const schedule = () => {
+            let pendingNodes = new Set();
+            const schedule = mutations => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === 1) pendingNodes.add(node);
+                    });
+                });
                 if (scheduled) return;
                 scheduled = true;
                 requestAnimationFrame(() => {
                     scheduled = false;
-                    tagCardReveal(content || document.body);
-                    enhanceClickableDivsForKeyboard(content || document.body);
+                    const nodes = pendingNodes;
+                    pendingNodes = new Set();
+                    nodes.forEach(node => {
+                        if (!node.isConnected) return;
+                        if (node.matches(CARD_REVEAL_SELECTOR)) node.classList.add('card-reveal');
+                        tagCardReveal(node);
+                        if (node.matches('div[onclick]')) enhanceClickableDivsForKeyboard(node.parentNode);
+                        else enhanceClickableDivsForKeyboard(node);
+                    });
                 });
             };
             new MutationObserver(schedule)
