@@ -418,6 +418,11 @@
             const novaTab = document.getElementById(tabMap[pagina]);
             novaTab.classList.add('active');
             if (index >= 0) navItems[index].classList.add('active');
+            // Garante os cards já revelados (não em opacity:0) antes mesmo
+            // do IntersectionObserver reagir — ver comentário em
+            // revealVisibleCardsNow.
+            observeCardReveals();
+            revealVisibleCardsNow(novaTab);
 
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
             animarProgresso(novaTab);
@@ -2207,6 +2212,25 @@ Regras obrigatórias:
             '.dashboard-empty', '.trail-switch-button', '.trail-status', '.trail-phase'
         ].join(', ');
         let cardRevealObserver = null;
+
+        // Trocar de aba muda o "viewport" de baixo pra cima na hora — mas o
+        // IntersectionObserver que revela os cards reage de forma
+        // assíncrona (o motor do navegador recomputa interseção depois de
+        // um display:none virar display:grid, não instantaneamente). Sob
+        // carga (celular processando o carregamento inicial, por exemplo),
+        // esse atraso vira perceptível: a aba abre e os cards ficam em
+        // opacity:0 por um tempo, parecendo que a tela travou "carregando".
+        // Revela na hora, sem esperar o observer, tudo que já está dentro
+        // do viewport assim que a aba fica ativa — o observer continua
+        // cuidando do que está abaixo da dobra, revelado ao rolar.
+        function revealVisibleCardsNow(container) {
+            if (!container) return;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            container.querySelectorAll('.card-reveal:not(.is-visible)').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.bottom > 0 && rect.top < viewportHeight) card.classList.add('is-visible');
+            });
+        }
 
         function observeCardReveals() {
             const content = document.querySelector('.content');
