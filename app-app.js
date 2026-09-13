@@ -432,18 +432,14 @@
             // question-explanations.js aqui — na hora de responder a
             // primeira questão, o arquivo já chegou.
             if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
-            // Revela os cards da aba já depois de renderTrails/renderDashboard
-            // (que acabaram de criar elementos novos via innerHTML — revelar
-            // antes deles não pega os cards que ainda nem existiam) e num
-            // requestAnimationFrame separado, pra essa leitura de layout
-            // (getBoundingClientRect, dentro de revealVisibleCardsNow) não
-            // brigar com a troca de aba e a rolagem suave que já estão
-            // acontecendo no mesmo instante — era isso que travava a
-            // transição ("engasgada") ao abrir Trilhas/Questões.
-            requestAnimationFrame(() => {
-                observeCardReveals();
-                revealVisibleCardsNow(novaTab);
-            });
+            // Marca os cards da aba (estáticos e os que renderTrails/
+            // renderDashboard acabaram de criar) pra tocar a animação de
+            // entrada — só um classList.add por elemento, sem leitura de
+            // layout nem observer, então dá pra fazer isso na hora, sem
+            // rAF, sem risco de brigar com a rolagem/transição da troca
+            // de aba. Ver comentário em tagCardReveal.
+            tagCardReveal(novaTab);
+            enhanceClickableDivsForKeyboard(novaTab);
         }
 
         const DASHBOARD_AREAS = [
@@ -2210,68 +2206,27 @@ Regras obrigatórias:
             if (accuracyEl) accuracyEl.textContent = answered ? `${Math.round((correct / answered) * 100)}%` : '—';
         }
 
-        // As caixas entram uma única vez, de baixo para cima. Não há movimento
-        // durante a rolagem, evitando saltos e a sensação de instabilidade.
+        // A entrada dos cards agora é uma @keyframes pura em app.css — o
+        // navegador dispara a animação sozinho sempre que um elemento com
+        // a classe .card-reveal passa a ser renderizado (display:none ->
+        // visível ao trocar de aba, ou inserido no DOM por um render
+        // dinâmico). Essa função só GARANTE que a classe esteja presente
+        // — não há observer, não há leitura de layout, não há timing pra
+        // acertar. Isso substitui uma versão anterior baseada em
+        // IntersectionObserver + getBoundingClientRect que reagia tarde
+        // demais sob carga (cards presos em opacity:0 por tempo
+        // perceptível) e cuja leitura de layout forçada competia com a
+        // própria animação de troca de aba (o "engasgo" relatado).
         const CARD_REVEAL_SELECTOR = [
             '.rr-card', '.exam-countdown-card', '.question-hero', '.question-mode',
             '.question-count-control', '.question-session', '.question-coming',
             '.dashboard-hero', '.dashboard-kpi', '.dashboard-card', '.dashboard-area',
             '.dashboard-empty', '.trail-switch-button', '.trail-status', '.trail-phase'
         ].join(', ');
-        let cardRevealObserver = null;
 
-        // Trocar de aba muda o "viewport" de baixo pra cima na hora — mas o
-        // IntersectionObserver que revela os cards reage de forma
-        // assíncrona (o motor do navegador recomputa interseção depois de
-        // um display:none virar display:grid, não instantaneamente). Sob
-        // carga (celular processando o carregamento inicial, por exemplo),
-        // esse atraso vira perceptível: a aba abre e os cards ficam em
-        // opacity:0 por um tempo, parecendo que a tela travou "carregando".
-        // Revela na hora, sem esperar o observer, tudo que já está dentro
-        // do viewport assim que a aba fica ativa — o observer continua
-        // cuidando do que está abaixo da dobra, revelado ao rolar.
-        function revealVisibleCardsNow(container) {
-            if (!container) return;
-            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-            container.querySelectorAll('.card-reveal:not(.is-visible)').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if (rect.bottom > 0 && rect.top < viewportHeight) card.classList.add('is-visible');
-            });
-        }
-
-        function observeCardReveals() {
-            const content = document.querySelector('.content');
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (reduceMotion) {
-                document.querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
-                    card.classList.remove('parallax-card');
-                    card.style.removeProperty('--parallax-y');
-                    card.classList.add('card-reveal', 'is-visible');
-                });
-                return;
-            }
-
-            if (!cardRevealObserver) {
-                cardRevealObserver = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (!entry.isIntersecting) return;
-                        entry.target.classList.add('is-visible');
-                        cardRevealObserver.unobserve(entry.target);
-                    });
-                }, {
-                    root: content,
-                    threshold: 0.08,
-                    rootMargin: '0px 0px -5% 0px'
-                });
-            }
-
-            document.querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
-                card.classList.remove('parallax-card');
-                card.style.removeProperty('--parallax-y');
-                if (card.classList.contains('card-reveal')) return;
+        function tagCardReveal(container) {
+            (container || document).querySelectorAll(CARD_REVEAL_SELECTOR).forEach(card => {
                 card.classList.add('card-reveal');
-                cardRevealObserver.observe(card);
             });
         }
 
@@ -2300,30 +2255,26 @@ Regras obrigatórias:
 
         function setupCardReveal() {
             const content = document.querySelector('.content');
-            // observeCardReveals mexe em classes dentro da própria árvore
-            // observada, então cada execução realimentava o observer —
-            // uma varredura completa de document.querySelectorAll a cada
-            // mutação (mensagem no chat, render do dashboard, troca de
-            // tarefa do OSCE...). Coalescido num único requestAnimationFrame
-            // por rajada de mutações, no máximo uma varredura por quadro.
-            let revealScheduled = false;
-            const scheduleReveal = () => {
-                if (revealScheduled) return;
-                revealScheduled = true;
+            // tagCardReveal e enhanceClickableDivsForKeyboard agora só
+            // adicionam classe/atributos (nada de observer, nada de
+            // leitura de layout) — bem mais barato que a versão anterior,
+            // então coalescer por requestAnimationFrame aqui é só pra não
+            // repetir a varredura a cada mutação individual de uma rajada
+            // grande (ex.: montar a grade toda do Simulado), não mais uma
+            // exigência pra evitar travamento.
+            let scheduled = false;
+            const schedule = () => {
+                if (scheduled) return;
+                scheduled = true;
                 requestAnimationFrame(() => {
-                    revealScheduled = false;
-                    observeCardReveals();
-                    // Mesma rajada coalescida: qualquer <div onclick> novo
-                    // renderizado dentro de .content (cards de atualização,
-                    // lista de capítulos, "última leitura"...) já sai com
-                    // suporte a teclado, sem precisar chamar isso em cada
-                    // função de render separadamente.
+                    scheduled = false;
+                    tagCardReveal(content || document.body);
                     enhanceClickableDivsForKeyboard(content || document.body);
                 });
             };
-            new MutationObserver(scheduleReveal)
+            new MutationObserver(schedule)
                 .observe(content || document.body, { childList: true, subtree: true });
-            observeCardReveals();
+            tagCardReveal(content || document.body);
         }
 
         window.addEventListener('DOMContentLoaded', () => {

@@ -4586,23 +4586,37 @@
         .trail-phase.locked .trail-phase-action { background: rgba(196,181,253,.11); color: var(--lavender-active); }
         [data-theme="light"] .trail-phase.locked::after { background: rgba(243,242,246,.18); }
 
-        /* Entrada única das caixas: elas sobem quando entram no viewport,
-           sem se reposicionar durante a rolagem. */
+        /* Entrada das caixas: sobem e ganham opacidade assim que passam a
+           ser exibidas. Isto é uma @keyframes pura — o navegador dispara
+           sozinho sempre que o elemento sai de display:none (troca de
+           aba pelo menu inferior) ou é inserido no DOM (conteúdo
+           renderizado depois, como as fases da Trilha), sem nenhum JS no
+           caminho. Chegou a existir uma versão baseada em
+           IntersectionObserver/MutationObserver (revelar só ao rolar, uma
+           vez só na vida do elemento) — trocada por isto porque troca de
+           aba muda display:none pra display:grid de uma vez, não é uma
+           rolagem gradual, e o observer reagia tarde demais sob carga
+           (app recém-aberto), deixando cards presos em opacity:0 por
+           tempo perceptível — ou, pior, nunca revelados se a leitura de
+           layout que os revelava manualmente competisse com a própria
+           animação de troca de aba (o "engasgo" relatado). Efeito
+           colateral aceitável desta troca: reabrir a mesma aba, ou um
+           re-render (ex.: Trilhas depois de concluir uma fase), toca a
+           entrada de novo — comportamento normal de app com abas, não o
+           "só uma vez para sempre" de um feed de rolagem infinita. */
         .card-reveal {
-            opacity: 0;
-            transform: translate3d(0, 16px, 0);
-            transition: opacity .42s ease-out, transform .48s cubic-bezier(.22,.75,.25,1);
+            animation: cardReveal .42s var(--ease-out) both;
             will-change: opacity, transform;
         }
-        .card-reveal.is-visible {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-        }
-        .card-reveal.is-visible:active {
+        .card-reveal:active {
             transform: scale(.985) !important;
         }
+        @keyframes cardReveal {
+            from { opacity: 0; transform: translate3d(0, 16px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
         @media (prefers-reduced-motion: reduce) {
-            .card-reveal { opacity: 1; transform: none !important; transition: none; will-change: auto; }
+            .card-reveal { animation: none; opacity: 1; transform: none; will-change: auto; }
         }
 
         /* Layout responsivo: preserva o mobile e distribui o conteúdo em telas amplas. */
