@@ -936,11 +936,16 @@
                 // Sai do loop de vez quando o elemento não existe mais —
                 // sem isso, o requestAnimationFrame ficava agendando o
                 // próximo quadro pra sempre, mesmo com a pessoa em outra
-                // aba do app. document.hidden também pausa o avanço
-                // (a aba do navegador em segundo plano), sem parar o loop
-                // — só congela o scroll até voltar a ficar visível.
+                // aba do app.
                 if (!viewport.isConnected) return;
-                if (!paused && !document.hidden) {
+                // offsetParent é null quando o elemento (ou um ancestral,
+                // como a aba "Início" enquanto outra aba está ativa) está
+                // com display:none — pausa o avanço sem depender de
+                // document.hidden, que no PWA instalado em modo standalone
+                // do iOS fica preso em "true" mesmo com o app em primeiro
+                // plano, travando o carrossel pra sempre (relatado: "não
+                // tá rodando mais sozinho").
+                if (!paused && viewport.offsetParent !== null) {
                     const half = track.scrollWidth / 2;
                     if (half > 0) {
                         viewport.scrollLeft += 0.5;
