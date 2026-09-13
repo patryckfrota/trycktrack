@@ -418,11 +418,6 @@
             const novaTab = document.getElementById(tabMap[pagina]);
             novaTab.classList.add('active');
             if (index >= 0) navItems[index].classList.add('active');
-            // Garante os cards já revelados (não em opacity:0) antes mesmo
-            // do IntersectionObserver reagir — ver comentário em
-            // revealVisibleCardsNow.
-            observeCardReveals();
-            revealVisibleCardsNow(novaTab);
 
             document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
             animarProgresso(novaTab);
@@ -437,6 +432,18 @@
             // question-explanations.js aqui — na hora de responder a
             // primeira questão, o arquivo já chegou.
             if (pagina === 'questoes' || pagina === 'trilhas') ensureQuestionExplanationsLoaded().catch(() => {});
+            // Revela os cards da aba já depois de renderTrails/renderDashboard
+            // (que acabaram de criar elementos novos via innerHTML — revelar
+            // antes deles não pega os cards que ainda nem existiam) e num
+            // requestAnimationFrame separado, pra essa leitura de layout
+            // (getBoundingClientRect, dentro de revealVisibleCardsNow) não
+            // brigar com a troca de aba e a rolagem suave que já estão
+            // acontecendo no mesmo instante — era isso que travava a
+            // transição ("engasgada") ao abrir Trilhas/Questões.
+            requestAnimationFrame(() => {
+                observeCardReveals();
+                revealVisibleCardsNow(novaTab);
+            });
         }
 
         const DASHBOARD_AREAS = [
