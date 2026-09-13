@@ -2155,8 +2155,10 @@ Regras obrigatórias:
             const hint = document.getElementById('reviewQueueHint');
             if (!hint) return;
             const dueCount = getDueReviewQuestions().length;
+            // "questão" -> "questões" no plural troca a terminação inteira
+            // (ão -> ões), não dá pra só grudar um sufixo em "questão".
             hint.textContent = dueCount
-                ? `${dueCount} questão${dueCount > 1 ? 'ões' : ''} pronta${dueCount > 1 ? 's' : ''} pra rever agora.`
+                ? `${dueCount} ${dueCount > 1 ? 'questões prontas' : 'questão pronta'} pra rever agora.`
                 : 'Questões que você errou, no momento certo de rever.';
         }
 
