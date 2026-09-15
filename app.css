@@ -1506,7 +1506,7 @@
         .question-stem { color: var(--color-body-lg); font-size: var(--question-font-size); line-height: 1.6; text-align: justify; text-justify: inter-word; white-space: pre-line; }
         .question-option-text { text-align: justify; text-justify: inter-word; }
         .question-stem-media { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-        .question-stem-media img { display: block; width: 100%; max-width: 480px; margin: 0 auto; border-radius: 14px; border: 1px solid var(--glass-card-border); background: var(--bg-secondary); }
+        .question-stem-media img { display: block; width: 100%; max-width: 480px; margin: 0 auto; border-radius: 14px; border: 1px solid var(--glass-card-border); background: var(--bg-secondary); cursor: zoom-in; }
         .question-visual-warning { margin-top: 14px; padding: 11px 12px; border-radius: 13px; border: 1px solid rgba(196,181,253,.25); background: rgba(196,181,253,.07); color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
         .question-options { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
         .question-option { width: 100%; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: start; padding: 14px; border: 1px solid var(--border-color); border-radius: 17px; background: var(--bg-secondary); color: var(--color-body); text-align: left; font: 400 calc(var(--question-font-size) - 2px)/1.5 var(--font-family-base); cursor: pointer; transition: transform .18s ease, border-color .22s ease, background .22s ease; }
@@ -3495,6 +3495,83 @@
             box-shadow: 0 24px 70px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.12);
             color: var(--text-main);
         }
+
+        /* ---------- visualizador de imagem em tela cheia (zoom só aqui) ---------- */
+        .media-lightbox {
+            position: fixed; inset: 0; z-index: 20000; background: rgba(0,0,0,.92);
+            display: flex; align-items: center; justify-content: center;
+            touch-action: none; overscroll-behavior: contain;
+        }
+        .media-lightbox[hidden] { display: none; }
+        .media-lightbox-close {
+            position: absolute; top: max(14px, env(safe-area-inset-top)); right: 14px; z-index: 1;
+            width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%;
+            background: rgba(255,255,255,.12); color: #fff; cursor: pointer;
+        }
+        .media-lightbox-viewport {
+            width: 100%; height: 100%; overflow: hidden; touch-action: none;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .media-lightbox-viewport img {
+            max-width: 100%; max-height: 100%; touch-action: none; user-select: none;
+            -webkit-user-drag: none; will-change: transform; transform-origin: center center;
+        }
+
+        /* ---------- filtro avançado (tipo/situação da questão) ---------- */
+        .question-config-advanced-btn {
+            width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 13px; margin-top: 6px; border: 1px solid var(--border-color); border-radius: 14px;
+            background: var(--bg-secondary); color: var(--text-main); font: 750 13px/1 var(--font-family-base);
+            cursor: pointer; transition: border-color .2s ease, background .2s ease;
+        }
+        .question-config-advanced-btn:active { transform: scale(.98); }
+        .question-config-advanced-badge {
+            min-width: 18px; height: 18px; padding: 0 5px; display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 100px; background: var(--lavender-active); color: #19171f; font: 800 10px/1 var(--font-family-base);
+        }
+        .advanced-filter-overlay {
+            position: fixed; inset: 0; z-index: 15000; max-width: 390px; margin: 0 auto;
+            display: flex; flex-direction: column; background: var(--bg-main); color: var(--text-main);
+        }
+        .advanced-filter-overlay[hidden] { display: none; }
+        .advanced-filter-header {
+            flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between;
+            padding: max(16px, env(safe-area-inset-top)) 16px 16px; border-bottom: 1px solid var(--border-color);
+        }
+        .advanced-filter-header strong { font-size: 19px; font-weight: 800; }
+        .advanced-filter-icon-btn {
+            width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border: 0; border-radius: 50%;
+            background: transparent; color: var(--text-main); cursor: pointer;
+        }
+        .advanced-filter-icon-btn:active { background: var(--bg-secondary); }
+        .advanced-filter-body { flex: 1 1 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 24px; }
+        .advanced-filter-section-title {
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+            padding: 22px 16px 14px; font-size: 15px; font-weight: 750; color: var(--text-main);
+        }
+        .advanced-filter-required {
+            padding: 5px 11px; border-radius: 100px; background: rgba(153,246,228,.16); color: #85e8cf;
+            font-size: 11px; font-weight: 750;
+        }
+        .advanced-filter-row {
+            display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            padding: 16px; border-top: 1px solid var(--border-color); cursor: pointer;
+        }
+        .advanced-filter-row span:first-child { font-size: 15px; color: var(--text-main); }
+        .advanced-filter-switch { position: relative; flex: 0 0 auto; width: 48px; height: 28px; }
+        .advanced-filter-switch input {
+            position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; z-index: 1;
+        }
+        .advanced-filter-switch-track {
+            position: absolute; inset: 0; border-radius: 100px; background: var(--bg-tertiary);
+            transition: background .18s ease;
+        }
+        .advanced-filter-switch-track::after {
+            content: ''; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border-radius: 50%;
+            background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .18s ease;
+        }
+        .advanced-filter-switch input:checked + .advanced-filter-switch-track { background: #34c759; }
+        .advanced-filter-switch input:checked + .advanced-filter-switch-track::after { transform: translateX(20px); }
 
         /* ---------- tutorial de primeiro acesso ---------- */
         .onboarding-overlay {

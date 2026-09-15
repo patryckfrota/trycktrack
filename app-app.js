@@ -717,14 +717,14 @@
                 return bank.filter(question => question.examId === examId);
             }
             if (mode === 'internato') {
-                return getInternatoFilteredQuestions(readInternatoConfigFilters());
+                return applyAdvancedFilter(getInternatoFilteredQuestions(readInternatoConfigFilters()));
             }
             const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
             const subtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
             const institution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
             const year = document.getElementById('questionConfigYear')?.value || 'Todos';
             const board = document.getElementById('questionConfigBoard')?.value || 'Todas';
-            return bank.filter(question => {
+            const filtered = bank.filter(question => {
                 const questionYears = getQuestionYears(question);
                 const source = String(question.source || '');
                 return (theme === 'Todas' || question.area === theme)
@@ -733,6 +733,121 @@
                     && (year === 'Todos' || questionYears.includes(year))
                     && (board === 'Todas' || source.includes(board));
             });
+            return applyAdvancedFilter(filtered);
+        }
+
+        // ---------- Filtro Avançado (tipo de questão + situação) ----------
+        // Guardado no mesmo localStorage do resto (sem escopo por uid,
+        // seguindo o padrão já usado por trycktrack-question-stats e
+        // trycktrack-review-queue-v1 — é preferência de estudo do
+        // dispositivo, não dado que precise seguir a pessoa). A "situação"
+        // (já resolvi/não resolvi/acertei/errei) usa a MESMA fila de
+        // revisão (getReviewQueue, REVIEW_QUEUE_KEY) que já alimenta a
+        // revisão espaçada — cada pergunta respondida (não-discursiva) já
+        // grava lá o último resultado, então não precisei criar um
+        // histórico novo, só ler o que já existe.
+        const ADVANCED_FILTER_KEY = 'trycktrack-advanced-filter-v1';
+        const ADVANCED_FILTER_DEFAULT = {
+            tipoCertoErrado: true,
+            tipoMultiplaEscolha: true,
+            tipoDiscursiva: false,
+            situacaoResolvi: true,
+            situacaoNaoResolvi: true,
+            situacaoAcertei: false,
+            situacaoErrei: false
+        };
+        const ADVANCED_FILTER_GROUPS = {
+            tipo: ['tipoCertoErrado', 'tipoMultiplaEscolha', 'tipoDiscursiva'],
+            situacao: ['situacaoResolvi', 'situacaoNaoResolvi', 'situacaoAcertei', 'situacaoErrei']
+        };
+
+        function getAdvancedFilterState() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(ADVANCED_FILTER_KEY) || 'null');
+                if (saved && typeof saved === 'object') return { ...ADVANCED_FILTER_DEFAULT, ...saved };
+            } catch (_) { /* estado corrompido — cai no padrão */ }
+            return { ...ADVANCED_FILTER_DEFAULT };
+        }
+
+        function saveAdvancedFilterState(state) {
+            try { localStorage.setItem(ADVANCED_FILTER_KEY, JSON.stringify(state)); }
+            catch (_) { /* armazenamento indisponível — segue sem persistir */ }
+        }
+
+        // Certo/Errado x múltipla escolha não têm campo próprio no banco —
+        // distingo pela quantidade de alternativas (2 = Certo/Errado, 3+ =
+        // múltipla escolha). Discursiva já vem marcada em questionType.
+        function getQuestionTypeCategory(question) {
+            if (question?.questionType === 'discursive') return 'tipoDiscursiva';
+            const optionCount = question?.options ? Object.keys(question.options).length : 0;
+            return optionCount === 2 ? 'tipoCertoErrado' : 'tipoMultiplaEscolha';
+        }
+
+        function applyAdvancedFilter(questions) {
+            const state = getAdvancedFilterState();
+            const queue = getReviewQueue();
+            return questions.filter(question => {
+                if (!state[getQuestionTypeCategory(question)]) return false;
+                const entry = queue[question.id];
+                const resolved = !!entry;
+                return (state.situacaoResolvi && resolved)
+                    || (state.situacaoNaoResolvi && !resolved)
+                    || (state.situacaoAcertei && entry?.lastResult === 'correct')
+                    || (state.situacaoErrei && entry?.lastResult === 'wrong');
+            });
+        }
+
+        function openAdvancedFilter() {
+            const overlay = document.getElementById('advancedFilterOverlay');
+            if (!overlay) return;
+            const state = getAdvancedFilterState();
+            overlay.querySelectorAll('input[data-filter-key]').forEach(input => {
+                input.checked = !!state[input.dataset.filterKey];
+            });
+            overlay.hidden = false;
+        }
+
+        function closeAdvancedFilter() {
+            document.getElementById('advancedFilterOverlay')?.setAttribute('hidden', '');
+        }
+
+        function onAdvancedFilterToggle(input) {
+            const key = input.dataset.filterKey;
+            const group = ADVANCED_FILTER_GROUPS.tipo.includes(key) ? ADVANCED_FILTER_GROUPS.tipo : ADVANCED_FILTER_GROUPS.situacao;
+            const overlay = document.getElementById('advancedFilterOverlay');
+            const state = getAdvancedFilterState();
+            // Não deixa desligar o último interruptor ligado do grupo —
+            // "Obrigatório" quer dizer que sempre precisa sobrar pelo
+            // menos um critério ativo, senão o filtro não devolve nada.
+            const otherKeysOn = group.filter(k => k !== key).some(k => state[k]);
+            if (!input.checked && !otherKeysOn) {
+                input.checked = true;
+                return;
+            }
+            state[key] = input.checked;
+            saveAdvancedFilterState(state);
+            updateAdvancedFilterBadge();
+            updateQuestionConfigAvailableCount();
+        }
+
+        function resetAdvancedFilter() {
+            saveAdvancedFilterState({ ...ADVANCED_FILTER_DEFAULT });
+            const overlay = document.getElementById('advancedFilterOverlay');
+            overlay?.querySelectorAll('input[data-filter-key]').forEach(input => {
+                input.checked = !!ADVANCED_FILTER_DEFAULT[input.dataset.filterKey];
+            });
+            updateAdvancedFilterBadge();
+            updateQuestionConfigAvailableCount();
+        }
+
+        function updateAdvancedFilterBadge() {
+            const badge = document.getElementById('advancedFilterBadge');
+            if (!badge) return;
+            const state = getAdvancedFilterState();
+            const isDefault = Object.keys(ADVANCED_FILTER_DEFAULT).every(key => state[key] === ADVANCED_FILTER_DEFAULT[key]);
+            const offCount = Object.values(state).filter(value => !value).length;
+            badge.hidden = isDefault;
+            badge.textContent = String(offCount);
         }
 
         // Mostra, no rodapé da caixa de filtros, quantas questões o
@@ -966,9 +1081,11 @@
                         <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
                         <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
                     </div>
+                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtro Avançado</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
                 updateInternatoTemas();
+                updateAdvancedFilterBadge();
             } else {
                 start.hidden = false;
                 const themes = questionThemeOptions();
@@ -987,9 +1104,11 @@
                         <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
                         <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
                     </div>
+                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtro Avançado</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
                 updateQuestionConfigAvailableCount();
+                updateAdvancedFilterBadge();
             }
             view.hidden = false;
             view.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1908,11 +2027,125 @@ Regras obrigatórias:
             const warning = document.getElementById('questionVisualWarning');
             const images = Array.isArray(question?.images) ? question.images.filter(Boolean) : [];
             if (container) {
-                container.innerHTML = images.map(src => `<img src="${escapeHtml(src)}" alt="Imagem da questão" loading="lazy">`).join('');
+                container.innerHTML = images.map(src => `<img src="${escapeHtml(src)}" alt="Imagem da questão" loading="lazy" onclick="openMediaLightbox('${escapeHtml(src).replace(/'/g, "\\'")}')">`).join('');
                 container.hidden = !images.length;
             }
             if (warning) warning.hidden = !question?.needsVisualReview || images.length > 0;
         }
+
+        // Zoom de imagem só dentro deste visualizador em tela cheia — o
+        // resto do app tem o zoom do navegador desativado (viewport
+        // user-scalable=no) para nunca rolar a tela pro lado sem querer.
+        // Pinch/duplo-toque são implementados na mão (não pelo zoom nativo
+        // do navegador) porque o iOS Safari ignora touch-action:pinch-zoom
+        // por elemento quando user-scalable=no está setado no viewport.
+        const mediaLightboxState = { scale: 1, x: 0, y: 0, pointers: new Map(), startDist: 0, startScale: 1, startMid: null, lastTapAt: 0 };
+
+        function openMediaLightbox(src) {
+            const overlay = document.getElementById('mediaLightbox');
+            const img = document.getElementById('mediaLightboxImg');
+            if (!overlay || !img) return;
+            img.src = src;
+            resetMediaLightboxTransform();
+            overlay.hidden = false;
+        }
+
+        function closeMediaLightbox() {
+            const overlay = document.getElementById('mediaLightbox');
+            if (overlay) overlay.hidden = true;
+        }
+
+        function resetMediaLightboxTransform() {
+            mediaLightboxState.scale = 1;
+            mediaLightboxState.x = 0;
+            mediaLightboxState.y = 0;
+            applyMediaLightboxTransform();
+        }
+
+        function applyMediaLightboxTransform() {
+            const img = document.getElementById('mediaLightboxImg');
+            if (!img) return;
+            const { scale, x, y } = mediaLightboxState;
+            img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+        }
+
+        function clampMediaLightboxPan() {
+            const viewport = document.getElementById('mediaLightboxViewport');
+            const img = document.getElementById('mediaLightboxImg');
+            if (!viewport || !img) return;
+            const s = mediaLightboxState.scale;
+            // Com a imagem centralizada e transform-origin:center, ela cresce
+            // simetricamente a partir do centro — o quanto dá pra arrastar é
+            // só a metade do quanto ela passou do tamanho do viewport.
+            const maxX = Math.max(0, (img.clientWidth * s - viewport.clientWidth) / 2);
+            const maxY = Math.max(0, (img.clientHeight * s - viewport.clientHeight) / 2);
+            mediaLightboxState.x = Math.max(-maxX, Math.min(maxX, mediaLightboxState.x));
+            mediaLightboxState.y = Math.max(-maxY, Math.min(maxY, mediaLightboxState.y));
+        }
+
+        (function setupMediaLightboxGestures() {
+            const viewport = document.getElementById('mediaLightboxViewport');
+            if (!viewport) return;
+            const st = mediaLightboxState;
+
+            function midpoint(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
+            function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+
+            viewport.addEventListener('touchstart', e => {
+                for (const t of e.changedTouches) st.pointers.set(t.identifier, { x: t.clientX, y: t.clientY });
+                if (st.pointers.size === 2) {
+                    const [a, b] = [...st.pointers.values()];
+                    st.startDist = dist(a, b);
+                    st.startScale = st.scale;
+                    st.startMid = midpoint(a, b);
+                } else if (st.pointers.size === 1) {
+                    const now = Date.now();
+                    if (now - st.lastTapAt < 300) {
+                        st.scale = st.scale > 1 ? 1 : 2.5;
+                        if (st.scale === 1) { st.x = 0; st.y = 0; }
+                        applyMediaLightboxTransform();
+                    }
+                    st.lastTapAt = now;
+                    st.dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, ox: st.x, oy: st.y };
+                }
+            }, { passive: true });
+
+            viewport.addEventListener('touchmove', e => {
+                for (const t of e.changedTouches) {
+                    if (st.pointers.has(t.identifier)) st.pointers.set(t.identifier, { x: t.clientX, y: t.clientY });
+                }
+                if (st.pointers.size === 2) {
+                    e.preventDefault();
+                    const [a, b] = [...st.pointers.values()];
+                    const newDist = dist(a, b);
+                    st.scale = Math.max(1, Math.min(5, st.startScale * (newDist / (st.startDist || newDist))));
+                    clampMediaLightboxPan();
+                    applyMediaLightboxTransform();
+                } else if (st.pointers.size === 1 && st.scale > 1 && st.dragStart) {
+                    e.preventDefault();
+                    const t = e.touches[0];
+                    st.x = st.dragStart.ox + (t.clientX - st.dragStart.x);
+                    st.y = st.dragStart.oy + (t.clientY - st.dragStart.y);
+                    clampMediaLightboxPan();
+                    applyMediaLightboxTransform();
+                }
+            }, { passive: false });
+
+            function endTouch(e) {
+                for (const t of e.changedTouches) st.pointers.delete(t.identifier);
+                if (st.pointers.size < 2) { st.startDist = 0; }
+                if (st.pointers.size === 0) st.dragStart = null;
+            }
+            viewport.addEventListener('touchend', endTouch, { passive: true });
+            viewport.addEventListener('touchcancel', endTouch, { passive: true });
+
+            // Duplo clique no desktop, equivalente ao duplo-toque no mobile.
+            viewport.addEventListener('dblclick', () => {
+                st.scale = st.scale > 1 ? 1 : 2.5;
+                if (st.scale === 1) { st.x = 0; st.y = 0; }
+                applyMediaLightboxTransform();
+            });
+        })();
 
         function flushQuestionTime(session) {
             if (!session || session.questionRenderedAt == null || session.lastRenderedIndex == null) return;
