@@ -297,6 +297,54 @@
             return copy.slice(0, count);
         }
 
+        // Com busca ativa (R-4), `questions` já chega ordenada por
+        // relevância (filterQuestionBank/filterInternatoBank, via
+        // rankQuestionsBySearch) — embaralhar e cortar aqui jogaria fora
+        // essa ordem, entregando questões aleatórias entre as que bateram
+        // com a busca em vez das que bateram MELHOR. Sem busca, mantém o
+        // sorteio de sempre (randomSample).
+        function selectStudyQuestions(questions, count, searchActive) {
+            return searchActive ? questions.slice(0, Math.min(count, questions.length)) : randomSample(questions, count);
+        }
+
+        // R-3: agrupa por área na mesma convenção de trailQuestionsForArea
+        // — Ginecologia e Obstetrícia contam como uma área só (é como o
+        // TRAIL_CATALOG/edital enxerga essa incidência), embora no banco
+        // de questões elas sejam duas áreas separadas.
+        function groupQuestionsByTrailArea(questions) {
+            const groups = {};
+            questions.forEach(question => {
+                const key = (question.area === 'Ginecologia' || question.area === 'Obstetrícia') ? 'Ginecologia e Obstetrícia' : question.area;
+                (groups[key] = groups[key] || []).push(question);
+            });
+            return groups;
+        }
+
+        // Simulado "Todas as áreas" (sem tema nem busca escolhidos) sorteia
+        // ponderado pela incidência do edital × desempenho da pessoa em
+        // vez de chance igual pra qualquer área (R-3) — usa a mesma
+        // trilha ativa (ENAMED/UEPA) e os mesmos dados de incidência já
+        // usados pra ordenar as Trilhas (TRAIL_CATALOG), e o mesmo
+        // trycktrack-question-stats.byArea que já alimenta o Dashboard,
+        // sem precisar de histórico novo. Com tema específico ou busca
+        // ativa, a ponderação por área não faz sentido (o recorte já foi
+        // escolhido a dedo) — cai no sorteio uniforme de sempre.
+        function selectExamQuestions(filtered, count) {
+            const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
+            const searchActive = !!document.getElementById('questionConfigSearch')?.value.trim();
+            if (theme !== 'Todas' || searchActive || !filtered.length) {
+                return selectStudyQuestions(filtered, count, searchActive);
+            }
+            const trailState = getTrailState();
+            const track = TRAIL_CATALOG[trailState.active] || TRAIL_CATALOG.enamed;
+            const statsByArea = getQuestionStats().byArea || {};
+            const sampled = window.weightedSampleByIncidence(groupQuestionsByTrailArea(filtered), track.phases, statsByArea, count);
+            // Nenhuma área do recorte bateu com o TRAIL_CATALOG (ex.: só
+            // Psiquiatria, que não tem fase própria na trilha) — cai no
+            // sorteio uniforme em vez de devolver uma sessão vazia.
+            return sampled.length ? sampled : selectStudyQuestions(filtered, count, false);
+        }
+
         function trailQuestionsForArea(area, count) {
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
             const matching = area === 'Ginecologia e Obstetrícia' ? bank.filter(q => ['Ginecologia', 'Obstetrícia'].includes(q.area)) : bank.filter(q => q.area === area);
@@ -614,8 +662,20 @@
             return Array.isArray(bank) ? bank : [];
         }
 
-        function questionAreaOptions() {
-            return ['Todas', 'Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva', 'Psiquiatria'];
+        // Índice invertido (R-4, shared/question-search.js) do banco ATIVO —
+        // cacheado por banco (chave = 'principal'/'internato') e só
+        // reconstruído quando o tamanho daquele banco muda, mesmo padrão de
+        // getQuestionIndex (C-2). Sem isso, digitar na busca reprocessaria
+        // o enunciado das ~1600/~1950 questões a cada tecla.
+        const searchIndexCache = new Map(); // 'principal'|'internato' -> { index, size }
+        function getSearchIndex() {
+            const key = activeQuestionConfigMode === 'internato' ? 'internato' : 'principal';
+            const bank = getActiveQuestionBank();
+            const cached = searchIndexCache.get(key);
+            if (cached && cached.size === bank.length) return cached.index;
+            const index = window.buildSearchIndex(bank);
+            searchIndexCache.set(key, { index, size: bank.length });
+            return index;
         }
 
         function questionExamOptions() {
@@ -629,7 +689,25 @@
         }
 
         function questionYearOptions() {
-            return [...new Set(getActiveQuestionBank().flatMap(question => getQuestionYears(question)))].sort().reverse();
+            return [...new Set(getActiveQuestionBank().flatMap(question => window.getQuestionYears(question)))].sort().reverse();
+        }
+
+        // Instituição e Banca eram dois <select> com as mesmas duas opções
+        // fixas no HTML ("Todas"/"INEP") — hoje o banco só tem mesmo um
+        // valor real (source == "INEP" ou "Revalida INEP <ano>", sempre
+        // contendo "INEP"), então os dois campos SEMPRE mostravam a
+        // mesma lista. Em vez de inventar uma segunda dimensão que os
+        // dados não têm, a correção é tirar o hardcode: as opções vêm do
+        // banco (mesmo padrão de questionThemeOptions/questionYearOptions)
+        // — se uma prova de outra instituição/banca entrar um dia, o
+        // filtro já aparece sozinho, sem precisar tocar em código.
+        function questionSourceOptions() {
+            // Extrai a sigla (token em maiúsculas, ex.: "INEP") de dentro
+            // do source — "Revalida INEP 2025.2" e "INEP" viram a mesma
+            // opção "INEP", sem misturar o ano (que já tem filtro próprio)
+            // na lista. Continua batendo com o predicado do filtro
+            // (source.includes(valorEscolhido)).
+            return [...new Set(getActiveQuestionBank().flatMap(question => String(question.source || '').match(/\b[A-ZÀ-Ý]{2,}\b/g) || []))].sort();
         }
 
         // O modo Internato tem taxonomia própria (rodízio > tópico A/B >
@@ -669,13 +747,19 @@
             updateQuestionConfigAvailableCount();
         }
 
-        function getInternatoFilteredQuestions({ rodizio = 'Todos', topico = 'Todos', tema = 'Todos', semestre = 'Todos' } = {}) {
+        // Lógica de filtragem em si (tema/subtema/instituição/ano/banca,
+        // rodízio/tópico/tema/semestre do Internato, e o Filtro Avançado)
+        // vive toda em shared/question-filters.js — window.filterQuestionBank
+        // / window.filterInternatoBank, cobertos por node --test. Este
+        // arquivo só lê DOM/localStorage e repassa: getFilteredQuestions-
+        // ForConfig e startQuestionSession/startInternatoSession chamam a
+        // MESMA função com os MESMOS dados, então nunca mais podem divergir
+        // como aconteceu antes (o Filtro Avançado valia pro contador "N
+        // questões disponíveis" mas não pra sessão de fato).
+        function getInternatoFilteredQuestions(filters, { includeAdvancedFilter = true } = {}) {
             const bank = Array.isArray(window.TRYCKTRACK_INTERNATO_BANK) ? window.TRYCKTRACK_INTERNATO_BANK : [];
-            return bank.filter(question =>
-                (rodizio === 'Todos' || question.rodizio === rodizio)
-                && (topico === 'Todos' || question.topico === topico)
-                && (tema === 'Todos' || question.tema === tema)
-                && (semestre === 'Todos' || question.semestre === semestre));
+            const advancedFilterState = includeAdvancedFilter ? getAdvancedFilterState() : ADVANCED_FILTER_ALL_ON;
+            return window.filterInternatoBank(bank, filters, advancedFilterState, getReviewQueue(), getSearchIndex());
         }
 
         function readInternatoConfigFilters() {
@@ -683,14 +767,9 @@
                 rodizio: document.getElementById('questionConfigRodizio')?.value || 'Todos',
                 topico: document.getElementById('questionConfigTopico')?.value || 'Todos',
                 tema: document.getElementById('questionConfigTema')?.value || 'Todos',
-                semestre: document.getElementById('questionConfigSemestre')?.value || 'Todos'
+                semestre: document.getElementById('questionConfigSemestre')?.value || 'Todos',
+                search: document.getElementById('questionConfigSearch')?.value || ''
             };
-        }
-
-        function getQuestionYears(question) {
-            if (Array.isArray(question?.examYears) && question.examYears.length) return question.examYears;
-            const match = String(question?.examName || question?.source || '').match(/20\d{2}/g);
-            return match ? [...new Set(match)] : [];
         }
 
         function updateQuestionConfigSubtopics() {
@@ -701,7 +780,7 @@
                 .filter(question => !theme || theme === 'Todas' || question.area === theme)
                 .map(question => question.subarea)
                 .filter(Boolean))].sort();
-            select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${item}">${item}</option>`).join('');
+            select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
             updateQuestionConfigAvailableCount();
         }
 
@@ -709,31 +788,30 @@
         // deixariam disponível — usado tanto pelo contador ao vivo
         // ("N questões disponíveis") quanto por getConfiguredQuestionSet
         // (que aplica o embaralhar + slice por cima disso) e por
-        // startQuestionSession, pra nunca terem números diferentes.
-        function getFilteredQuestionsForConfig(mode) {
+        // startQuestionSession/startInternatoSession, que chamam esta
+        // mesma função em vez de recalcular o filtro por conta própria —
+        // é o que garante que a sessão sempre entrega exatamente o que o
+        // contador anunciou, Filtro Avançado incluso.
+        // includeAdvancedFilter:false serve só pra mensagem de "nenhuma
+        // questão" distinguir "esse tema não tem questão nenhuma" de "os
+        // Filtros Avançados zeraram o recorte" (ver startQuestionSession).
+        function getFilteredQuestionsForConfig(mode, { includeAdvancedFilter = true } = {}) {
             const bank = getActiveQuestionBank();
-            if (mode === 'full-exam') {
-                const examId = document.getElementById('questionConfigExam')?.value;
-                return bank.filter(question => question.examId === examId);
-            }
+            const advancedFilterState = includeAdvancedFilter ? getAdvancedFilterState() : ADVANCED_FILTER_ALL_ON;
             if (mode === 'internato') {
-                return applyAdvancedFilter(getInternatoFilteredQuestions(readInternatoConfigFilters()));
+                return getInternatoFilteredQuestions(readInternatoConfigFilters(), { includeAdvancedFilter });
             }
-            const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
-            const subtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
-            const institution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
-            const year = document.getElementById('questionConfigYear')?.value || 'Todos';
-            const board = document.getElementById('questionConfigBoard')?.value || 'Todas';
-            const filtered = bank.filter(question => {
-                const questionYears = getQuestionYears(question);
-                const source = String(question.source || '');
-                return (theme === 'Todas' || question.area === theme)
-                    && (subtheme === 'Todas' || question.subarea === subtheme)
-                    && (institution === 'Todas' || source.includes(institution))
-                    && (year === 'Todos' || questionYears.includes(year))
-                    && (board === 'Todas' || source.includes(board));
-            });
-            return applyAdvancedFilter(filtered);
+            const filters = mode === 'full-exam'
+                ? { examId: document.getElementById('questionConfigExam')?.value }
+                : {
+                    theme: document.getElementById('questionConfigTheme')?.value || 'Todas',
+                    subtheme: document.getElementById('questionConfigSubtheme')?.value || 'Todas',
+                    institution: document.getElementById('questionConfigInstitution')?.value || 'Todas',
+                    year: document.getElementById('questionConfigYear')?.value || 'Todos',
+                    board: document.getElementById('questionConfigBoard')?.value || 'Todas',
+                    search: document.getElementById('questionConfigSearch')?.value || ''
+                };
+            return window.filterQuestionBank(bank, { mode, filters, advancedFilterState, reviewQueue: getReviewQueue(), searchIndex: getSearchIndex() });
         }
 
         // ---------- Filtro Avançado (tipo de questão + situação) ----------
@@ -760,6 +838,15 @@
             tipo: ['tipoCertoErrado', 'tipoMultiplaEscolha', 'tipoDiscursiva'],
             situacao: ['situacaoResolvi', 'situacaoNaoResolvi', 'situacaoAcertei', 'situacaoErrei']
         };
+        // Filtro Avançado "todo ligado" — usado só pra medir quantas
+        // questões o conteúdo (tema/período) deixaria disponível SEM o
+        // Filtro Avançado entrar na conta, pra mensagem de "nenhuma
+        // questão" saber apontar a causa certa. Passa pela mesma função
+        // pura (window.applyAdvancedFilter), não é um caminho à parte.
+        const ADVANCED_FILTER_ALL_ON = {
+            tipoCertoErrado: true, tipoMultiplaEscolha: true, tipoDiscursiva: true,
+            situacaoResolvi: true, situacaoNaoResolvi: true, situacaoAcertei: true, situacaoErrei: true
+        };
 
         function getAdvancedFilterState() {
             try {
@@ -774,27 +861,16 @@
             catch (_) { /* armazenamento indisponível — segue sem persistir */ }
         }
 
-        // Certo/Errado x múltipla escolha não têm campo próprio no banco —
-        // distingo pela quantidade de alternativas (2 = Certo/Errado, 3+ =
-        // múltipla escolha). Discursiva já vem marcada em questionType.
+        // getQuestionTypeCategory/applyAdvancedFilter em si (a lógica pura)
+        // vêm de shared/question-filters.js via window.* — ver comentário
+        // acima de getInternatoFilteredQuestions. Mantidas com o mesmo
+        // nome aqui só pra não precisar tocar cada chamada existente.
         function getQuestionTypeCategory(question) {
-            if (question?.questionType === 'discursive') return 'tipoDiscursiva';
-            const optionCount = question?.options ? Object.keys(question.options).length : 0;
-            return optionCount === 2 ? 'tipoCertoErrado' : 'tipoMultiplaEscolha';
+            return window.getQuestionTypeCategory(question);
         }
 
         function applyAdvancedFilter(questions) {
-            const state = getAdvancedFilterState();
-            const queue = getReviewQueue();
-            return questions.filter(question => {
-                if (!state[getQuestionTypeCategory(question)]) return false;
-                const entry = queue[question.id];
-                const resolved = !!entry;
-                return (state.situacaoResolvi && resolved)
-                    || (state.situacaoNaoResolvi && !resolved)
-                    || (state.situacaoAcertei && entry?.lastResult === 'correct')
-                    || (state.situacaoErrei && entry?.lastResult === 'wrong');
-            });
+            return window.applyAdvancedFilter(questions, getAdvancedFilterState(), getReviewQueue());
         }
 
         function openAdvancedFilter() {
@@ -863,14 +939,12 @@
 
         function getConfiguredQuestionSet() {
             const mode = activeQuestionConfigMode;
-            let questions = [...getFilteredQuestionsForConfig(mode)];
+            const questions = getFilteredQuestionsForConfig(mode);
             if (mode === 'full-exam') return questions;
             const count = Number(document.getElementById('questionConfigCount')?.value || 12);
-            for (let i = questions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [questions[i], questions[j]] = [questions[j], questions[i]];
-            }
-            return questions.slice(0, Math.min(count, questions.length));
+            if (mode === 'exam') return selectExamQuestions(questions, count);
+            const searchActive = !!document.getElementById('questionConfigSearch')?.value.trim();
+            return selectStudyQuestions(questions, count, searchActive);
         }
 
         // pdf-lib + fontkit + pdf-export.js somam 1,25MB e só servem no
@@ -915,6 +989,24 @@
             return questionExplanationsLoadingPromise;
         }
 
+        // Mesmo padrão acima, pro banco do Internato — question-
+        // explanations-internato.js (extraído de questions-internato.js,
+        // que sozinho pesava 5,84MB no boot: 3,01MB eram só o campo
+        // explanation, útil somente depois que a pessoa responde).
+        // Função separada (não reaproveita ensureQuestionExplanationsLoaded)
+        // porque muta um banco diferente e tem sua própria flag de "já
+        // carregou" — os dois arquivos podem chegar em paralelo quando a
+        // Revisão espaçada devolve questões dos dois bancos juntas.
+        let internatoExplanationsLoadingPromise = null;
+        function ensureInternatoExplanationsLoaded() {
+            if (window.TRYCKTRACK_INTERNATO_QUESTION_EXPLANATIONS) return Promise.resolve();
+            if (!internatoExplanationsLoadingPromise) {
+                internatoExplanationsLoadingPromise = loadScriptOnce('question-explanations-internato.js')
+                    .catch(error => { internatoExplanationsLoadingPromise = null; throw error; });
+            }
+            return internatoExplanationsLoadingPromise;
+        }
+
         function escapeQuestionPdfText(value) {
             return String(value || '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
         }
@@ -955,6 +1047,11 @@
                 return;
             }
             const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : mode === 'internato' ? 'Internato' : (mode === 'exam' ? 'Simulado' : 'Guiado');
+            // "Com gabarito" imprime a explicação de cada questão — pro
+            // Internato ela só chega depois de question-explanations-
+            // internato.js (ver M-1: extraído de questions-internato.js
+            // pra não pesar 3MB no boot de quem nunca abre esse modo).
+            if (mode === 'internato' && withAnswers) await ensureInternatoExplanationsLoaded().catch(() => {});
             try {
                 setPdfDownloadProgress(progress, 15, true);
                 await ensurePdfLibsLoaded();
@@ -1031,10 +1128,9 @@
             const internatoEmpty = mode === 'internato' && !getActiveQuestionBank().length;
             if (pdfAction) pdfAction.hidden = internatoEmpty || !['practice', 'exam', 'full-exam', 'internato'].includes(mode);
 
-            const areas = questionAreaOptions().map(area => `<option value="${area}">${area}</option>`).join('');
             if (mode === 'full-exam') {
                 const exams = questionExamOptions();
-                body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigExam">Edição da prova</label><select id="questionConfigExam">${exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('')}</select></div></div>`;
+                body.innerHTML = `<div class="question-config-fields"><div class="question-config-field"><label for="questionConfigExam">Edição da prova</label><select id="questionConfigExam">${exams.map(exam => `<option value="${escapeHtml(exam.id)}">${escapeHtml(exam.name)}</option>`).join('')}</select></div></div>`;
             } else if (mode === 'osce') {
                 body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields">
                     <div class="question-config-divider">Assunto</div>
@@ -1070,6 +1166,7 @@
                 const semestres = internatoFieldOptions('semestre');
                 body.innerHTML = `<div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
+                    <div class="question-config-field"><label for="questionConfigSearch">Buscar</label><input type="search" id="questionConfigSearch" placeholder="Ex.: síndrome de Guillain-Barré" oninput="updateQuestionConfigAvailableCount()"></div>
                     <div class="question-config-field"><label for="questionConfigRodizio">Rotação</label><select id="questionConfigRodizio" onchange="updateInternatoTemas()"><option value="Todos">Todos</option>${rodizios.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigTopico">Tópico</label><select id="questionConfigTopico" onchange="updateInternatoTemas()"><option value="Todos">Todos</option>${topicos.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigTema">Tema</label><select id="questionConfigTema" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option></select></div>
@@ -1081,7 +1178,7 @@
                         <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
                         <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
                     </div>
-                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtro Avançado</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
+                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtros Avançados</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
                 updateInternatoTemas();
@@ -1090,21 +1187,23 @@
                 start.hidden = false;
                 const themes = questionThemeOptions();
                 const years = questionYearOptions();
+                const sources = questionSourceOptions();
                 body.innerHTML = `<div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
+                    <div class="question-config-field"><label for="questionConfigSearch">Buscar</label><input type="search" id="questionConfigSearch" placeholder="Ex.: síndrome de Guillain-Barré" oninput="updateQuestionConfigAvailableCount()"></div>
                     <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todos</option></select></div>
                     <div class="question-config-divider">Filtros</div>
-                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option>${sources.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option>${sources.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('')}</select></div>
                     <div class="question-config-divider">Quantidade</div>
                     <div class="question-config-field question-config-field-slider">
                         <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>
                         <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
                         <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
                     </div>
-                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtro Avançado</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
+                    <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtros Avançados</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
                 updateQuestionConfigAvailableCount();
@@ -1201,7 +1300,7 @@
             const select = document.getElementById(id);
             if (!select) return;
             const current = select.value;
-            select.innerHTML = `<option value="">${placeholder}</option>` + values.map(value => `<option value="${String(value).replace(/"/g, '&quot;')}">${value}</option>`).join('');
+            select.innerHTML = `<option value="">${escapeHtml(placeholder)}</option>` + values.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('');
             if (values.includes(current)) select.value = current;
         }
 
@@ -1507,7 +1606,7 @@ Regras obrigatórias:
                 const exams = [...new Map((window.TRYCKTRACK_QUESTION_BANK || [])
                     .filter(question => question.examId)
                     .map(question => [question.examId, { id: question.examId, name: question.examName }])).values()];
-                if (select) select.innerHTML = exams.map(exam => `<option value="${exam.id}">${exam.name}</option>`).join('');
+                if (select) select.innerHTML = exams.map(exam => `<option value="${escapeHtml(exam.id)}">${escapeHtml(exam.name)}</option>`).join('');
             } else {
                 const countSelect = document.getElementById('questionCount');
                 if (countSelect?.value === 'full') countSelect.value = '12';
@@ -1936,75 +2035,71 @@ Regras obrigatórias:
                 await startInternatoSession();
                 return;
             }
-            const area = document.getElementById('questionConfigArea')?.value || document.querySelector('.question-area-chip.active')?.textContent.trim() || 'Todas';
-            const countValue = document.getElementById('questionConfigCount')?.value || document.getElementById('questionCount')?.value || '12';
-            const requestedCount = countValue === 'full' ? Infinity : Number(countValue);
-            const bank = getActiveQuestionBank();
             const isFullExam = mode === 'full-exam';
-            const clinicalSubarea = area === 'Clínica Médica'
-                ? document.querySelector('#questionSubareaScroll .question-area-chip.active')?.textContent.trim()
-                : null;
-            const selectedExam = document.getElementById('questionConfigExam')?.value || document.getElementById('questionExamSelect')?.value;
-            const configTheme = document.getElementById('questionConfigTheme')?.value || 'Todas';
-            const configSubtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
-            const configInstitution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
-            const configYear = document.getElementById('questionConfigYear')?.value || 'Todos';
-            const configBoard = document.getElementById('questionConfigBoard')?.value || 'Todas';
-            let filtered = isFullExam
-                ? bank.filter(question => question.examId === selectedExam)
-                : area === 'Todas'
-                    ? bank
-                : bank.filter(question => area === 'Ginecologia e Obstetrícia'
-                    ? ['Ginecologia', 'Obstetrícia'].includes(question.area)
-                    : area === 'Clínica Médica'
-                        ? question.area === area && (!clinicalSubarea || clinicalSubarea === 'Todas as subáreas' || question.subarea === clinicalSubarea)
-                        : question.area === area);
-            if (!isFullExam) {
-                filtered = filtered.filter(question => {
-                    const questionYears = getQuestionYears(question);
-                    const questionInstitution = String(question.source || '');
-                    const questionBoard = String(question.source || '');
-                    return (configTheme === 'Todas' || question.area === configTheme)
-                        && (configSubtheme === 'Todas' || question.subarea === configSubtheme)
-                        && (configInstitution === 'Todas' || questionInstitution.includes(configInstitution))
-                        && (configYear === 'Todos' || questionYears.includes(configYear))
-                        && (configBoard === 'Todas' || questionBoard.includes(configBoard));
-                });
+            const selectedExam = document.getElementById('questionConfigExam')?.value;
+            const countValue = document.getElementById('questionConfigCount')?.value || '12';
+            const requestedCount = Number(countValue);
+            // Mesmo recorte que getFilteredQuestionsForConfig(mode) — a
+            // função por trás do contador "N questões disponíveis" e do
+            // PDF — em vez de recalcular tema/subtema/instituição/ano/
+            // banca/Filtro Avançado aqui de novo: essa duplicação foi
+            // exatamente o que deixou o Filtro Avançado valendo só pro
+            // contador e não pra sessão de fato.
+            let filtered = getFilteredQuestionsForConfig(mode);
+            if (!isFullExam && filtered.length === 0) {
+                // Distingue "esse tema não tem questão nenhuma" de "os
+                // Filtros Avançados zeraram o recorte" — senão o aviso
+                // manda procurar importação faltando quando o problema é
+                // um interruptor que o próprio usuário desligou.
+                const withoutAdvancedFilter = getFilteredQuestionsForConfig(mode, { includeAdvancedFilter: false });
+                if (withoutAdvancedFilter.length > 0) {
+                    revealQuestionNotice('Nenhuma questão sobrou com os Filtros Avançados ativos.', { label: 'Abrir Filtros Avançados', onClick: openAdvancedFilter });
+                    return;
+                }
             }
             if (!filtered.length) {
-                revealQuestionNotice(`Ainda não há questões importadas de ${area}.`);
+                revealQuestionNotice(isFullExam ? 'Não foi possível carregar essa edição da prova.' : 'Ainda não há questões importadas com esse filtro.');
                 return;
             }
-            const shuffled = [...filtered];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
             await ensureQuestionExplanationsLoaded().catch(() => {});
-            // Todo modo que não é 'exam'/'full-exam' se comporta como o
-            // Guiado (correção após cada resposta).
-            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode === 'exam' ? 'exam' : 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
+            // Imersão sempre entrega a prova completa embaralhada (nunca
+            // fatiada pela quantidade nem ordenada por busca/incidência —
+            // Imersão é uma prova real específica, sem esses dois campos).
+            // Simulado com "Todas as áreas" e sem busca pondera por
+            // incidência do edital (R-3); com busca ativa (R-4), entram as
+            // questões MAIS relevantes; sem nenhum dos dois, sorteio de
+            // sempre.
+            const sessionQuestions = isFullExam
+                ? randomSample(filtered, filtered.length)
+                : mode === 'exam'
+                    ? selectExamQuestions(filtered, requestedCount)
+                    : selectStudyQuestions(filtered, requestedCount, !!document.getElementById('questionConfigSearch')?.value.trim());
+            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode === 'exam' ? 'exam' : 'practice'), questions: sessionQuestions, index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
         }
 
-        // O modo Internato não compartilha a lógica de área/tema acima —
+        // O modo Internato não compartilha a lógica de tema/subtema acima —
         // filtra só por rodízio/tópico/tema/semestre (ver
         // getInternatoFilteredQuestions) e sempre se comporta como o
         // Guiado (correção após cada resposta).
         async function startInternatoSession() {
-            const filters = readInternatoConfigFilters();
             const countValue = document.getElementById('questionConfigCount')?.value || '12';
             const requestedCount = Number(countValue);
-            const filtered = getInternatoFilteredQuestions(filters);
+            const filtered = getFilteredQuestionsForConfig('internato');
             if (!filtered.length) {
-                revealQuestionNotice('Nenhuma questão encontrada para esse filtro.');
+                const withoutAdvancedFilter = getFilteredQuestionsForConfig('internato', { includeAdvancedFilter: false });
+                revealQuestionNotice(withoutAdvancedFilter.length > 0
+                    ? 'Nenhuma questão sobrou com os Filtros Avançados ativos.'
+                    : 'Nenhuma questão encontrada para esse filtro.',
+                    withoutAdvancedFilter.length > 0 ? { label: 'Abrir Filtros Avançados', onClick: openAdvancedFilter } : undefined);
                 return;
             }
-            const shuffled = randomSample(filtered, filtered.length);
-            await ensureQuestionExplanationsLoaded().catch(() => {});
-            activeQuestionSession = { mode: 'practice', questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString() };
+            const searchActive = !!document.getElementById('questionConfigSearch')?.value.trim();
+            const sessionQuestions = selectStudyQuestions(filtered, requestedCount, searchActive);
+            await ensureInternatoExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions: sessionQuestions, index: 0, answers: [], startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -2178,6 +2273,7 @@ Regras obrigatórias:
             document.getElementById('questionStem').textContent = question.stem;
             renderQuestionStemMedia(question);
             document.getElementById('questionFeedback').hidden = true;
+            document.getElementById('questionReviewRating').hidden = true;
             // Toda sessão nova entra por aqui — garante que a tela de
             // questão fica por cima de qualquer resultado/navegador que
             // tenha ficado visível de uma sessão anterior, mesmo que algo
@@ -2273,6 +2369,19 @@ Regras obrigatórias:
                 document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
                 document.getElementById('questionFeedback').hidden = false;
                 recordQuestionResult(question, correct);
+                // R-1: errar já é o próprio sinal (Errei, sem precisar
+                // perguntar nada) — só quando acerta é que faz sentido
+                // diferenciar "acertei com certeza" de "acertei mas quase
+                // não lembrava", que carregam informação bem diferente
+                // pra estabilidade da memória. session.pendingReview fica
+                // pendente até rateReviewDifficulty ou até a pessoa avançar
+                // sem escolher (flushPendingReviewRating aplica "Bom").
+                if (correct) {
+                    session.pendingReview = { questionId: question.id };
+                    document.getElementById('questionReviewRating').hidden = false;
+                } else {
+                    updateReviewQueue(question.id, window.RATING.AGAIN);
+                }
             } else {
                 // Simulado/Imersão: sem feedback de certo/errado agora — só
                 // destaca a escolha atual. Os botões continuam habilitados
@@ -2339,12 +2448,32 @@ Regras obrigatórias:
             // pular uma questão em branco (fica marcável e reaberta pelo
             // navegador depois).
             if (session.mode === 'practice' && !session.answers[session.index]) return;
+            flushPendingReviewRating(session);
             if (session.index < session.questions.length - 1) {
                 session.index += 1;
                 renderQuestionPlayer();
                 return;
             }
             finishExamSession(session);
+        }
+
+        // Escolha de Difícil/Bom/Fácil (R-1) depois de acertar no Guiado —
+        // ver session.pendingReview em answerQuestion.
+        function rateReviewDifficulty(rating) {
+            const session = activeQuestionSession;
+            if (!session?.pendingReview) return;
+            updateReviewQueue(session.pendingReview.questionId, rating);
+            session.pendingReview = null;
+            document.getElementById('questionReviewRating').hidden = true;
+        }
+
+        // Se a pessoa avança (ou sai) sem escolher Difícil/Bom/Fácil,
+        // aplica "Bom" — não trava o fluxo de estudo por causa de um
+        // detalhe que a pessoa optou por não informar.
+        function flushPendingReviewRating(session) {
+            if (!session?.pendingReview) return;
+            updateReviewQueue(session.pendingReview.questionId, window.RATING.GOOD);
+            session.pendingReview = null;
         }
 
         // Fecha e pontua a sessão — chamada pelo fim natural (advanceQuestion
@@ -2354,7 +2483,16 @@ Regras obrigatórias:
         function finishExamSession(session) {
             flushQuestionTime(session);
             if (session.mode === 'exam') {
-                session.questions.forEach((question, index) => recordQuestionResult(question, window.isQuestionAnswerCorrect(question, session.answers[index])));
+                session.questions.forEach((question, index) => {
+                    const correctAnswer = window.isQuestionAnswerCorrect(question, session.answers[index]);
+                    recordQuestionResult(question, correctAnswer);
+                    // Simulado/Imersão não têm a UI de Difícil/Bom/Fácil por
+                    // questão (o resultado só aparece no fim, todo de uma
+                    // vez) — rating automático: Bom se acertou, Errei se
+                    // errou. Discursiva (correctAnswer===null) não entra na
+                    // fila de revisão, mesma regra de recordQuestionResult.
+                    if (correctAnswer !== null) updateReviewQueue(question.id, correctAnswer ? window.RATING.GOOD : window.RATING.AGAIN);
+                });
             }
             const correct = session.questions.reduce((sum, question, index) => sum + (window.isQuestionAnswerCorrect(question, session.answers[index]) ? 1 : 0), 0);
             if (session.trailDiagnostic) completeTrailDiagnostic(session.trailDiagnostic, session);
@@ -2367,6 +2505,7 @@ Regras obrigatórias:
             showQuestionResults(lastCompletedQuestionSession);
             updateQuestionHubStats();
             renderDashboard();
+            flushReviewSync(); // best-effort — nunca trava o fim da sessão
         }
 
         function finishExamNow() {
@@ -2508,6 +2647,8 @@ Regras obrigatórias:
 
         function closeQuestionPlayer() {
             closeFontSizeSheet();
+            flushPendingReviewRating(activeQuestionSession);
+            flushReviewSync(); // best-effort — nunca trava o fechamento
             document.getElementById('questionPlayer').hidden = true;
             document.body.style.overflow = '';
             activeQuestionSession = null;
@@ -2567,21 +2708,40 @@ Regras obrigatórias:
                 stats.lastActivityDate = today;
             }
             localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
-            updateReviewQueue(question?.id, correct);
+            // Não chama mais updateReviewQueue aqui — quem chama esta
+            // função decide o rating (1–4, ver window.RATING): o Guiado
+            // pede Difícil/Bom/Fácil quando acerta (rateReviewDifficulty)
+            // e manda Errei direto quando erra; Simulado/Imersão (sem
+            // essa UI por questão) mandam Bom/Errei automaticamente em
+            // finishExamSession.
             updateQuestionHubStats();
         }
 
-        // Fila de revisão espaçada (R-01): uma escada Leitner simples —
-        // errou, volta pra revisão amanhã; acertou, o intervalo cresce
-        // (1 → 3 → 7 → 21 dias). Guardado só no dispositivo (localStorage),
-        // sem sincronização com a nuvem — é um cache de estudo, não um
-        // dado que precise seguir a pessoa entre aparelhos.
+        // Fila de revisão espaçada (R-1): modelo de memória por questão
+        // (estabilidade/dificuldade, ver shared/spaced-repetition.js —
+        // FSRS-inspirado, não a escada Leitner fixa de 1/3/7/21 dias que
+        // existia antes). Guardado só no dispositivo (localStorage), sem
+        // sincronização com a nuvem — é um cache de estudo, não um dado
+        // que precise seguir a pessoa entre aparelhos.
         const REVIEW_QUEUE_KEY = 'trycktrack-review-queue-v1';
-        const REVIEW_INTERVALS_DAYS = [1, 3, 7, 21];
 
         function getReviewQueue() {
-            try { return JSON.parse(localStorage.getItem(REVIEW_QUEUE_KEY) || '{}'); }
+            let queue;
+            try { queue = JSON.parse(localStorage.getItem(REVIEW_QUEUE_KEY) || '{}'); }
             catch (_) { return {}; }
+            // Migra entradas do formato antigo (escada Leitner) na
+            // primeira leitura — preserva o dueDate já agendado, então
+            // ninguém é reagendado de surpresa só pela troca de algoritmo.
+            // Grava de volta uma única vez pra não remigrar a cada leitura.
+            let mudou = false;
+            Object.keys(queue).forEach(id => {
+                if (typeof queue[id]?.step === 'number') {
+                    queue[id] = window.migrateLegacyReviewEntry(queue[id]);
+                    mudou = true;
+                }
+            });
+            if (mudou) saveReviewQueue(queue);
+            return queue;
         }
 
         function saveReviewQueue(queue) {
@@ -2589,28 +2749,141 @@ Regras obrigatórias:
             catch (_) { /* armazenamento indisponível/cheio — segue sem persistir */ }
         }
 
-        function updateReviewQueue(questionId, correct) {
+        function daysBetweenIsoDates(fromIso, toIso) {
+            const from = new Date(fromIso).setHours(0, 0, 0, 0);
+            const to = new Date(toIso).setHours(0, 0, 0, 0);
+            return (to - from) / 86400000;
+        }
+
+        // rating: 1(Errei)/2(Difícil)/3(Bom)/4(Fácil) — ver window.RATING.
+        // Simulado/Imersão (sem UI pra escolher a nuance) mandam sempre
+        // GOOD ou AGAIN, derivado automaticamente de certo/errado; só o
+        // Guiado usa os 4 valores de verdade (ver rateReviewDifficulty).
+        function updateReviewQueue(questionId, rating) {
             if (!questionId) return;
             const queue = getReviewQueue();
-            const entry = queue[questionId] || { step: -1 };
-            entry.step = correct ? Math.min(entry.step + 1, REVIEW_INTERVALS_DAYS.length - 1) : 0;
-            const days = REVIEW_INTERVALS_DAYS[entry.step];
+            const previous = queue[questionId];
+            const today = new Date().toISOString().slice(0, 10);
+            // Dias desde a ÚLTIMA revisão de verdade (não desde a data em
+            // que ela estava agendada) — é o que a curva de esquecimento
+            // (retrievability) precisa pra estimar corretamente o quanto
+            // foi "surpreendente" lembrar agora. migrateLegacyReviewEntry
+            // não tem esse dado (formato antigo não guardava) — usa o
+            // próprio dueDate como aproximação só nessa primeira transição.
+            const elapsedDays = previous
+                ? Math.max(0, daysBetweenIsoDates(previous.lastReviewedAt || previous.dueDate || today, today))
+                : 0;
+            const state = previous
+                ? window.nextReviewState({ stability: previous.stability, difficulty: previous.difficulty }, rating, elapsedDays)
+                : window.initReviewState(rating);
+            const intervalDays = window.intervalDaysForStability(state.stability);
             const due = new Date();
-            due.setDate(due.getDate() + days);
-            entry.dueDate = due.toISOString().slice(0, 10);
-            entry.lastResult = correct ? 'correct' : 'wrong';
-            queue[questionId] = entry;
+            due.setDate(due.getDate() + intervalDays);
+            queue[questionId] = {
+                stability: state.stability,
+                difficulty: state.difficulty,
+                dueDate: due.toISOString().slice(0, 10),
+                lastReviewedAt: today,
+                lastResult: rating === window.RATING.AGAIN ? 'wrong' : 'correct',
+                lastRating: rating
+            };
             saveReviewQueue(queue);
             updateReviewQueueHint();
+            queueReviewSyncPush();
+        }
+
+        // ---------- Sincronização de histórico por conta (R-5) ----------
+        // backend/src/server.js expõe /api/sync/push e /api/sync/review-
+        // queue (autenticado — Firebase, mesma verificação do Worker de
+        // IA). SYNC_API_BASE fica vazio até o backend ser publicado
+        // (README.md de backend/); com ele vazio, tudo aqui é um no-op
+        // silencioso — o app continua 100% funcional só com localStorage,
+        // exatamente como era antes do R-5. Best-effort de propósito:
+        // nunca trava o estudo por causa de rede — falha é engolida, não
+        // reportada à pessoa estudando.
+        const SYNC_API_BASE = '';
+
+        // Não dispara uma requisição por questão respondida — acumula e
+        // manda de uma vez quando a sessão termina (ver flushReviewSync,
+        // chamada em finishExamSession/closeQuestionPlayer). Um Set de
+        // IDs "sujos" desde o último envio, não a fila inteira.
+        let dirtyReviewQuestionIds = new Set();
+        function queueReviewSyncPush() {
+            dirtyReviewQuestionIds = new Set([...dirtyReviewQuestionIds, ...Object.keys(getReviewQueue())]);
+        }
+
+        async function flushReviewSync() {
+            if (!SYNC_API_BASE || !dirtyReviewQuestionIds.size) return;
+            const idToken = await window.__fb?.getIdToken?.().catch(() => null);
+            if (!idToken) return; // sem login -> sem sync, sem barulho
+            const queue = getReviewQueue();
+            const reviewEntries = {};
+            dirtyReviewQuestionIds.forEach(id => { if (queue[id]) reviewEntries[id] = queue[id]; });
+            dirtyReviewQuestionIds = new Set();
+            if (!Object.keys(reviewEntries).length) return;
+            try {
+                const response = await fetch(`${SYNC_API_BASE}/api/sync/push`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
+                    body: JSON.stringify({ reviewEntries, responses: [] })
+                });
+                if (!response.ok) return;
+                const { reviewQueue: serverQueue } = await response.json();
+                // O servidor devolve a fila já mesclada (ele também aplica
+                // "mantém a mais recente" — mergeReviewEntry, mesma função)
+                // — funde de volta no local pra pegar qualquer entrada que
+                // outro dispositivo tenha mandado antes deste.
+                saveReviewQueue(window.mergeReviewQueues(getReviewQueue(), serverQueue));
+            } catch (_) { /* offline ou backend fora do ar — tenta nas próximas respostas */ }
+        }
+
+        // Chamada no login (ver app-auth.js) — traz o estado do servidor e
+        // funde com o local, pra um dispositivo novo (ou um que ficou
+        // offline um tempo) não começar do zero nem perder o que só ele
+        // tinha.
+        async function pullReviewSyncFromCloud() {
+            if (!SYNC_API_BASE) return;
+            const idToken = await window.__fb?.getIdToken?.().catch(() => null);
+            if (!idToken) return;
+            try {
+                const response = await fetch(`${SYNC_API_BASE}/api/sync/review-queue`, {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                if (!response.ok) return;
+                const { reviewQueue: serverQueue } = await response.json();
+                saveReviewQueue(window.mergeReviewQueues(getReviewQueue(), serverQueue));
+                updateReviewQueueHint();
+            } catch (_) { /* offline ou backend fora do ar — segue só com o local */ }
+        }
+
+        // Índice id -> questão dos DOIS bancos. O Internato também grava na
+        // fila de revisão (recordQuestionResult não distingue banco), então
+        // procurar só em TRYCKTRACK_QUESTION_BANK descartava em silêncio
+        // toda revisão vinda de lá. Os bancos chegam por <script defer>, por
+        // isso o índice é montado no primeiro uso e refeito quando o total
+        // de questões muda, em vez de uma vez no carregamento.
+        let questionIndexCache = null;
+        let questionIndexSize = -1;
+
+        function getQuestionIndex() {
+            const main = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const internato = Array.isArray(window.TRYCKTRACK_INTERNATO_BANK) ? window.TRYCKTRACK_INTERNATO_BANK : [];
+            const size = main.length + internato.length;
+            if (questionIndexCache && questionIndexSize === size) return questionIndexCache;
+            questionIndexCache = new Map();
+            questionIndexSize = size;
+            for (const question of main) questionIndexCache.set(question.id, question);
+            for (const question of internato) questionIndexCache.set(question.id, question);
+            return questionIndexCache;
         }
 
         function getDueReviewQuestions() {
             const queue = getReviewQueue();
             const today = new Date().toISOString().slice(0, 10);
-            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const index = getQuestionIndex();
             return Object.entries(queue)
                 .filter(([, entry]) => entry.dueDate <= today)
-                .map(([id]) => bank.find(question => question.id === id))
+                .map(([id]) => index.get(id))
                 .filter(Boolean);
         }
 
@@ -2631,7 +2904,13 @@ Regras obrigatórias:
                 revealQuestionNotice('Nenhuma questão pronta pra revisão agora — volte mais tarde.');
                 return;
             }
-            await ensureQuestionExplanationsLoaded().catch(() => {});
+            // A fila de revisão mistura os dois bancos (ver C-2/getQuestionIndex)
+            // — uma sessão de revisão pode devolver questões do Internato e do
+            // banco principal juntas, então carrega as explicações dos dois.
+            await Promise.all([
+                ensureQuestionExplanationsLoaded().catch(() => {}),
+                ensureInternatoExplanationsLoaded().catch(() => {})
+            ]);
             activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], startedAt: new Date().toISOString(), isReview: true };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';

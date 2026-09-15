@@ -555,6 +555,12 @@
                         syncProgressFromCloud(currentFirebaseUser.uid);
                         syncProfilePhotoFromCloud(currentFirebaseUser.uid);
                         syncQuestionHistoryFromCloud(currentFirebaseUser.uid);
+                        // R-5 — revisão espaçada do QuestHub (trycktrack-
+                        // review-queue-v1), definida em app-app.js (window
+                        // já tem a função no momento em que este callback
+                        // roda, mesmo app-auth.js carregando antes — ver
+                        // comentário de pullReviewSyncFromCloud).
+                        if (typeof pullReviewSyncFromCloud === 'function') pullReviewSyncFromCloud();
                         authDecision = 'app';
                     } else {
                         authDecision = 'login';

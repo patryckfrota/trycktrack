@@ -5,16 +5,64 @@ import { assertCandidateSafe, buildCandidateSessionView, buildCandidateStation, 
 import { OSCE_FORMATS, OSCE_MATRIX } from './osceMatrix.js';
 import { importStations, previewStationImport } from './services/osce-import.service.js';
 import { createOsceRepository, MemoryOsceRepository } from './osceRepository.js';
+import { requireFirebaseAuth } from './firebaseAuth.js';
+import { createSyncRepository } from './syncRepository.js';
 
 const app = express();
+
+// Mesma allowlist do cloudflare-worker/worker.js (ALLOWED_ORIGINS) — GitHub
+// Pages é a produção do PWA, localhost cobre o teste local. Refletir
+// `req.headers.origin || '*'` de volta (como era antes) deixa QUALQUER
+// site fazer requisição autenticada pra essa API a partir do navegador
+// de quem estiver com o app aberto; nunca foi explorado porque esta API
+// nunca chegou a ser publicada (ver README), mas o fix é o mesmo antes
+// do primeiro deploy.
+const ALLOWED_ORIGINS = new Set([
+  'https://patryckfrota.github.io',
+]);
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  return /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+}
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  const origin = req.headers.origin;
+  if (isAllowedOrigin(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Vary', 'Origin');
+  }
   res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
-app.use(express.json());
+
+// Limite explícito de corpo — o padrão do Express já é 100kb (não era
+// "sem limite nenhum"), mas deixar implícito não documenta a escolha nem
+// cobre o caso real maior desta API (POST /api/osce/import em lote).
+app.use(express.json({ limit: '512kb' }));
+
+// Limitador de taxa simples, em memória, sem dependência nova (mesmo
+// espírito do cache de JWKS em memória do Worker) — trava scripts
+// disparando centenas de requisições por segundo contra qualquer rota,
+// sem precisar adicionar express-rate-limit só pra isso. Janela
+// deslizante por IP; generoso o bastante pra uso legítimo (inclusive os
+// testes deste arquivo, que reusam o mesmo `app` e batem várias vezes
+// em sequência a partir de 127.0.0.1) e restritivo pra abuso.
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 120;
+const requestLog = new Map(); // ip -> timestamps (ms) dentro da janela atual
+app.use((req, res, next) => {
+  const ip = req.ip || req.socket?.remoteAddress || 'unknown';
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  if (timestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    return res.status(429).json({ error: 'Muitas requisições. Tente novamente em instantes.' });
+  }
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+  next();
+});
 
 // A matriz real deve ser carregada pelo banco de dados. O fallback vazio evita
 // criar casos clínicos fictícios quando ainda não houver estações importadas.
@@ -24,6 +72,7 @@ const matrixAreas = OSCE_MATRIX.map((area, index) => ({ id: `area_${index + 1}`,
 const matrixThemes = matrixAreas.flatMap(area => area.themes.map(theme => ({ id: `${area.id}_${theme.code.toLowerCase()}`, areaId: area.id, ...theme })));
 const matrixSubthemes = matrixThemes.flatMap(theme => theme.subthemes.map(subtheme => ({ id: `${theme.id}_${subtheme.order}`, themeId: theme.id, areaId: theme.areaId, themeCode: theme.code, themeName: theme.name, areaSlug: matrixAreas.find(area => area.id === theme.areaId)?.slug, areaName: matrixAreas.find(area => area.id === theme.areaId)?.name, ...subtheme })));
 let osceRepository = createOsceRepository({ subthemes: matrixSubthemes });
+let syncRepository = createSyncRepository();
 
 const recalculationSchema = z.object({
   topics: z.array(z.object({
@@ -87,12 +136,21 @@ app.get('/api/osce/stations/:stationId/versions', async (req, res) => {
   res.json({ versions: await osceRepository.listVersions(station) });
 });
 
-app.get('/api/osce/users/:userId/history', async (req, res) => {
-  const attempts = await osceRepository.listSessionHistory(req.params.userId);
+// Era GET /api/osce/users/:userId/history: qualquer um podia ler o
+// histórico de QUALQUER usuário só trocando o :userId na URL, sem provar
+// ser o dono. O uid agora vem do token verificado (req.uid), nunca da
+// URL — histórico de outra pessoa não tem como ser pedido nem por
+// engano. Sem consumidor no frontend ainda (backend não publicado), daí
+// dar pra trocar o caminho em vez de manter os dois.
+app.get('/api/osce/me/history', requireFirebaseAuth(), async (req, res) => {
+  const attempts = await osceRepository.listSessionHistory(req.uid);
   res.json({ attempts });
 });
 
-app.post('/api/osce/import/preview', async (req, res) => {
+// Import escreve na biblioteca compartilhada de estações — exige
+// alguém autenticado (não precisa de papel de admin, que o schema ainda
+// não modela; barra automação anônima despejando conteúdo na biblioteca).
+app.post('/api/osce/import/preview', requireFirebaseAuth(), async (req, res) => {
   try {
     const preview = previewStationImport(req.body, new Set(await osceRepository.listFingerprints()));
     const { stations, ...safePreview } = preview;
@@ -102,7 +160,7 @@ app.post('/api/osce/import/preview', async (req, res) => {
   }
 });
 
-app.post('/api/osce/import', async (req, res) => {
+app.post('/api/osce/import', requireFirebaseAuth(), async (req, res) => {
   try {
     const result = await importStations(req.body, osceRepository);
     res.status(201).json(result);
@@ -116,7 +174,12 @@ app.post('/api/osce/sessions', async (req, res) => {
   if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
   const station = await osceRepository.getStation(parsed.data.stationId);
   if (!station) return res.status(404).json({ error: 'Estação OSCE não encontrada.' });
-  const id = `osce_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  // crypto.randomUUID() em vez de Math.random(): o id da sessão também
+  // funciona como capability token nas rotas de sessão abaixo (só quem
+  // tem o id consegue continuá-la) — Math.random() não é
+  // criptograficamente seguro e um sufixo de 6 caracteres é curto
+  // demais pra não ser adivinhável.
+  const id = `osce_${crypto.randomUUID()}`;
   const session = { id, stationId: station.id, userId: parsed.data.userId, mode: parsed.data.mode, startedAt: new Date().toISOString(), events: [], currentTaskIndex: 0, pendingTaskIndex: null, taskAssessments: [], finalRevealed: false, resultDeliveredAt: null };
   osceSessions.set(id, session);
   await osceRepository.createSessionRecord({ id, clientUserKey: parsed.data.userId, stationId: station.id, mode: parsed.data.mode, startedAt: session.startedAt, currentTaskIndex: 0, taskAssessments: [], finalRevealed: false });
@@ -236,7 +299,12 @@ app.post('/api/osce/sessions/:sessionId/deliver-result', async (req, res) => {
 app.post('/api/osce/sessions/:sessionId/swap-roles', async (req, res) => {
   const previous = osceSessions.get(req.params.sessionId);
   if (!previous?.finishedAt) return res.status(409).json({ error: 'Finalize a estação antes de trocar os papéis.' });
-  const id = `osce_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  // crypto.randomUUID() em vez de Math.random(): o id da sessão também
+  // funciona como capability token nas rotas de sessão abaixo (só quem
+  // tem o id consegue continuá-la) — Math.random() não é
+  // criptograficamente seguro e um sufixo de 6 caracteres é curto
+  // demais pra não ser adivinhável.
+  const id = `osce_${crypto.randomUUID()}`;
   const mode = previous.mode === 'EVALUATOR' ? 'CANDIDATE' : 'EVALUATOR';
   const session = { id, stationId: previous.stationId, userId: previous.userId, mode, startedAt: new Date().toISOString(), events: [], currentTaskIndex: 0, pendingTaskIndex: null, taskAssessments: [], finalRevealed: false, resultDeliveredAt: null };
   osceSessions.set(id, session);
@@ -245,8 +313,44 @@ app.post('/api/osce/sessions/:sessionId/swap-roles', async (req, res) => {
   res.status(201).json({ sessionId: id, mode, station: mode === 'CANDIDATE' ? buildCandidateSessionView(station, session) : buildEvaluatorPreparation(station) });
 });
 
-export { app, matrixAreas, matrixThemes, matrixSubthemes };
+// ---------- Sincronização de histórico (R-5) ----------
+// Espelha trycktrack-review-queue-v1 (revisão espaçada, ver shared/
+// spaced-repetition.js) e o log de respostas (QuestionResponse) entre
+// dispositivos — autenticado, nunca por um userId vindo do corpo/URL,
+// mesma regra de /api/osce/me/history (ver M-3 da auditoria).
+const reviewEntrySchema = z.object({
+  stability: z.number().nonnegative(),
+  difficulty: z.number().min(1).max(10),
+  dueDate: z.string(),
+  lastReviewedAt: z.string(),
+  lastRating: z.number().int().min(1).max(4)
+});
+const pushSyncSchema = z.object({
+  reviewEntries: z.record(z.string(), reviewEntrySchema).default({}),
+  responses: z.array(z.object({
+    questionId: z.string(),
+    chosen: z.string().nullable().optional(),
+    correct: z.boolean().nullable().optional(),
+    elapsedMs: z.number().nonnegative().optional(),
+    answeredAt: z.string().optional()
+  })).default([])
+});
+
+app.get('/api/sync/review-queue', requireFirebaseAuth(), async (req, res) => {
+  res.json({ reviewQueue: await syncRepository.getReviewQueue(req.uid) });
+});
+
+app.post('/api/sync/push', requireFirebaseAuth(), async (req, res) => {
+  const parsed = pushSyncSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
+  const reviewQueue = await syncRepository.pushReviewEntries(req.uid, parsed.data.reviewEntries);
+  if (syncRepository.pushResponses) await syncRepository.pushResponses(req.uid, parsed.data.responses);
+  res.json({ reviewQueue });
+});
+
+export { app, matrixAreas, matrixThemes, matrixSubthemes, syncRepository };
 export function setOsceStationsForTests(stations) { osceRepository = new MemoryOsceRepository({ subthemes: matrixSubthemes, stations }); osceSessions.clear(); }
+export function setSyncRepositoryForTests(repository) { syncRepository = repository; }
 
 const isDirectRun = process.argv[1] && new URL(`file://${process.argv[1]}`).href === import.meta.url;
 if (isDirectRun) app.listen(process.env.PORT || 3001, () => console.log('Trycktrack Trails API ativa.'));

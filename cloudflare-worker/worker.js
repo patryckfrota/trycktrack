@@ -20,6 +20,8 @@
 const FIREBASE_PROJECT_ID = 'trycktrack-eebae';
 const GROQ_MODEL = 'openai/gpt-oss-120b';
 const GOOGLE_JWKS_URL = 'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com';
+const GENERATION_RATE_LIMIT_MAX = 20;
+const GENERATION_RATE_LIMIT_WINDOW_SECONDS = 3600;
 
 // Origens que podem chamar este Worker. O GitHub Pages é a produção;
 // localhost cobre o teste local do app (python3 -m http.server).
@@ -195,6 +197,23 @@ async function verifyFirebaseIdToken(idToken) {
     return payload; // payload.sub é o uid do usuário autenticado
 }
 
+// Janela fixa (não deslizante) por hora corrente: chave
+// "osce-gen:<uid>:<hora Unix>". KV não tem incremento atômico, mas o
+// pior caso de corrida (duas gerações quase simultâneas lendo a mesma
+// contagem antes de gravar) deixa passar 1 geração a mais na janela —
+// aceitável pra frear abuso, não é um limite de faturamento exato.
+// env.OSCE_RATE_LIMIT_KV ausente (binding ainda não provisionado, ver
+// README.md desta pasta) => não bloqueia ninguém, só não limita ainda.
+async function checkGenerationRateLimit(env, uid) {
+    if (!env.OSCE_RATE_LIMIT_KV) return { limited: false, max: GENERATION_RATE_LIMIT_MAX };
+    const bucket = Math.floor(Date.now() / (GENERATION_RATE_LIMIT_WINDOW_SECONDS * 1000));
+    const key = `osce-gen:${uid}:${bucket}`;
+    const current = Number(await env.OSCE_RATE_LIMIT_KV.get(key)) || 0;
+    if (current >= GENERATION_RATE_LIMIT_MAX) return { limited: true, max: GENERATION_RATE_LIMIT_MAX };
+    await env.OSCE_RATE_LIMIT_KV.put(key, String(current + 1), { expirationTtl: GENERATION_RATE_LIMIT_WINDOW_SECONDS });
+    return { limited: false, max: GENERATION_RATE_LIMIT_MAX };
+}
+
 export default {
     async fetch(request, env) {
         const origin = request.headers.get('Origin');
@@ -213,10 +232,24 @@ export default {
             return jsonResponse({ error: 'Faça login para gerar uma estação com IA.' }, 401, headers);
         }
 
+        let uid;
         try {
-            await verifyFirebaseIdToken(idToken);
+            uid = (await verifyFirebaseIdToken(idToken)).sub;
         } catch (error) {
             return jsonResponse({ error: `Sessão inválida: ${error.message}` }, 401, headers);
+        }
+
+        // Cada geração é uma chamada PAGA à Groq — sem isto, um uid
+        // autenticado (já passou pela verificação acima) podia disparar
+        // gerações em laço e consumir a cota compartilhada sozinho. Limite
+        // por pessoa, não por IP (mais justo e não afetado por rede
+        // compartilhada/CGNAT). RATE_LIMIT_OSCE_GENERATION é um binding de
+        // KV — se ainda não foi provisionado (ver README.md desta pasta),
+        // a checagem é pulada (isRateLimited sempre false) em vez de
+        // quebrar a geração pra quem já está usando o Worker hoje.
+        const rateLimit = await checkGenerationRateLimit(env, uid);
+        if (rateLimit.limited) {
+            return jsonResponse({ error: `Limite de gerações por hora atingido (${rateLimit.max}). Tente novamente mais tarde.` }, 429, headers);
         }
 
         let body;

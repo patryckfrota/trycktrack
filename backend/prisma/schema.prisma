@@ -27,16 +27,142 @@ enum PhaseStatus {
 }
 
 model User {
-  id           String              @id @default(cuid())
-  firebaseUid  String              @unique
-  email        String              @unique
-  displayName  String?
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
-  trails       StudyTrail[]
-  attempts     AssessmentAttempt[]
-  performance  PerformanceRecord[]
-  osceSessions OsceSession[]
+  id            String              @id @default(cuid())
+  firebaseUid   String              @unique
+  email         String              @unique
+  displayName   String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  trails        StudyTrail[]
+  attempts      AssessmentAttempt[]
+  performance   PerformanceRecord[]
+  osceSessions  OsceSession[]
+  questionAnswers QuestionResponse[]
+  questionReviews UserQuestionReview[]
+}
+
+// ---------- QuestHub (banco de questões) ----------
+// Fonte de verdade nova para o acervo do QuestHub — até aqui, as
+// questões só existiam como arrays literais nos arquivos estáticos
+// questions-*.js (achado C-3 da auditoria). Esses arquivos continuam
+// sendo o que o PWA carrega hoje (mudar isso é uma revisão de
+// arquitetura maior, com implicação em cache offline via Service
+// Worker — não é este commit); scripts/import-questions.js popula
+// estas tabelas A PARTIR desses arquivos, então por enquanto os
+// arquivos são a fonte e o banco é uma cópia consultável. O objetivo
+// deste passo é só destravar o que a ausência de modelagem impedia:
+// histórico por questão (QuestionResponse) e uma fonte que sobrevive
+// a limpar o localStorage — sem isso, nada mais do achado C-3
+// (sincronização entre aparelhos, análise por item) tem onde morar.
+enum QuestionBank {
+  PRINCIPAL
+  INTERNATO
+}
+
+model Question {
+  id                String               @id
+  bank              QuestionBank
+  area              String
+  subarea           String?
+  stem              String
+  answer            String?
+  annulled          Boolean              @default(false)
+  needsVisualReview Boolean              @default(false)
+  questionType      String               @default("multiple_choice")
+  examId            String?
+  examName          String?
+  source            String?
+  sourceCode        String?
+  number            Int?
+  images            String[]             @default([])
+  // Só preenchidos no banco INTERNATO (rodizio/tópico/tema/semestre
+  // substituem area/subarea como esquema de filtro — ver
+  // questions-internato.js).
+  rodizio           String?
+  topico            String?
+  tema              String?
+  semestre          String?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  options           QuestionOption[]
+  explanation       QuestionExplanation?
+  responses         QuestionResponse[]
+  reviews           UserQuestionReview[]
+
+  @@index([bank, area, subarea])
+  @@index([bank, examId])
+  @@index([rodizio, topico, tema, semestre])
+}
+
+model QuestionOption {
+  id         String   @id @default(cuid())
+  questionId String
+  letter     String
+  text       String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, letter])
+}
+
+// Separado de Question de propósito: é o campo mais pesado do acervo
+// (question-explanations.js/question-explanations-internato.js somam
+// quase 4MB, extraídos do boot do PWA por lazy-load — ver M-1) e só é
+// lido depois que alguém responde.
+model QuestionExplanation {
+  questionId String   @id
+  body       String
+  updatedAt  DateTime @updatedAt
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+// O que hoje só existe em trycktrack-review-queue-v1/trycktrack-
+// question-stats no localStorage do dispositivo — some ao trocar de
+// aparelho ou limpar dados do site, e nunca guarda QUAL questão foi
+// respondida (só contadores agregados). Ainda não é escrito por
+// nenhuma rota (isso é a funcionalidade de sync, fora do escopo
+// deste passo — ver roadmap R-5); a tabela existe pra ter onde
+// esse histórico morar quando essa funcionalidade for construída.
+model QuestionResponse {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  chosen     String?
+  correct    Boolean?
+  elapsedMs  Int?
+  answeredAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([userId, answeredAt])
+  @@index([questionId, correct])
+  @@index([userId, questionId])
+}
+
+// Estado de revisão espaçada por usuário×questão (R-1 + R-5) — espelha
+// o que hoje só existe em trycktrack-review-queue-v1 no localStorage de
+// CADA dispositivo, sem nada em comum entre eles. Chave composta
+// (userId, questionId) em vez de um blob JSON por usuário de propósito:
+// dá pra fazer merge "mantém o mais recente" POR QUESTÃO (ver
+// shared/sync-merge.js/mergeReviewEntry, usada nos dois lados — cliente
+// e backend/src/syncRepository.js) sem o risco de um dispositivo com
+// menos progresso sobrescrever o de outro só porque sincronizou por
+// último. Nunca guarda agregados (respondidas/acertos) — esses vêm de
+// COUNT/GROUP BY em QuestionResponse quando forem exibidos, pra não ter
+// um contador que possa divergir do log de respostas que já existe.
+model UserQuestionReview {
+  userId         String
+  questionId     String
+  stability      Float
+  difficulty     Float
+  dueDate        DateTime
+  lastReviewedAt DateTime
+  lastRating     Int
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, questionId])
+  @@index([userId, dueDate])
 }
 
 model Theme {

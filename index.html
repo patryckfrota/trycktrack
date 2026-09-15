@@ -35,11 +35,13 @@
          banco principal acima — alimenta só o modo "Internato" do QuestHub. -->
     <script src="questions-internato.js" defer></script>
     <script src="osce-stations.js" defer></script>
-    <!-- question-explanations.js (829KB) e o trio de PDF — pdf-lib,
-         fontkit e pdf-export (1,25MB juntos) — não entram mais aqui:
-         só servem quando a pessoa responde uma questão ou baixa um PDF,
-         então carregam sob demanda (ver ensureQuestionExplanationsLoaded
-         e ensurePdfLibsLoaded mais abaixo). -->
+    <!-- question-explanations.js (829KB), question-explanations-
+         internato.js (3,17MB) e o trio de PDF — pdf-lib, fontkit e
+         pdf-export (1,25MB juntos) — não entram mais aqui: só servem
+         quando a pessoa responde uma questão ou baixa um PDF, então
+         carregam sob demanda (ver ensureQuestionExplanationsLoaded,
+         ensureInternatoExplanationsLoaded e ensurePdfLibsLoaded mais
+         abaixo). -->
     <script>
         /* Aplica o tema o mais cedo possível (antes do CSS pintar a
            tela) para não piscar o tema errado por uma fração de
@@ -462,6 +464,14 @@
                 <div class="question-visual-warning" id="questionVisualWarning" hidden>Esta questão depende de um elemento visual do PDF original e está sinalizada para revisão.</div>
                 <div class="question-options" id="questionOptions"></div>
                 <div class="question-feedback" id="questionFeedback" hidden><strong id="questionFeedbackTitle"></strong><p id="questionFeedbackText"></p></div>
+                <div class="question-review-rating" id="questionReviewRating" hidden role="group" aria-label="Quão fácil foi lembrar?">
+                    <span class="question-review-rating-label">Quão fácil foi lembrar?</span>
+                    <div class="question-review-rating-buttons">
+                        <button type="button" class="question-review-rating-btn" onclick="rateReviewDifficulty(2)">Difícil</button>
+                        <button type="button" class="question-review-rating-btn question-review-rating-btn-good" onclick="rateReviewDifficulty(3)">Bom</button>
+                        <button type="button" class="question-review-rating-btn" onclick="rateReviewDifficulty(4)">Fácil</button>
+                    </div>
+                </div>
             </div>
             <div class="question-results-view" id="questionResultsView" hidden>
                 <div class="question-results-score" id="questionResultsScore"></div>
@@ -609,7 +619,7 @@
             <button type="button" class="advanced-filter-icon-btn" onclick="closeAdvancedFilter()" aria-label="Fechar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
-            <strong>Filtro Avançados</strong>
+            <strong>Filtros Avançados</strong>
             <button type="button" class="advanced-filter-icon-btn" onclick="resetAdvancedFilter()" aria-label="Limpar filtros">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
             </button>
@@ -740,6 +750,41 @@
         import { isQuestionAnswerCorrect, matchPatientResponse } from "./shared/scoring.js";
         window.isQuestionAnswerCorrect = isQuestionAnswerCorrect;
         window.matchPatientResponse = matchPatientResponse;
+        // Filtragem do QuestHub (tema/subtema/instituição/ano/banca +
+        // Filtro Avançado) — única fonte de verdade compartilhada pelo
+        // contador "N questões disponíveis" e pela sessão de fato, coberta
+        // por node --test em shared/question-filters.test.js.
+        import { getQuestionTypeCategory, getQuestionYears, applyAdvancedFilter, filterQuestionBank, filterInternatoBank } from "./shared/question-filters.js";
+        window.getQuestionTypeCategory = getQuestionTypeCategory;
+        window.getQuestionYears = getQuestionYears;
+        window.applyAdvancedFilter = applyAdvancedFilter;
+        window.filterQuestionBank = filterQuestionBank;
+        window.filterInternatoBank = filterInternatoBank;
+        // Índice invertido + TF-IDF da busca (R-4) — window.buildSearchIndex
+        // é cacheado por banco em getSearchIndex (app-app.js), reconstruído
+        // só quando o total de questões muda.
+        import { buildSearchIndex } from "./shared/question-search.js";
+        window.buildSearchIndex = buildSearchIndex;
+        // Simulado ponderado por incidência (R-3) — mesmo critério de
+        // urgência por desempenho que calculatePathPriority usa nas
+        // Trilhas (trail-priority.js), reaproveitado em vez de repetido.
+        import { weightedSampleByIncidence } from "./shared/weighted-sampling.js";
+        window.weightedSampleByIncidence = weightedSampleByIncidence;
+        // Revisão espaçada FSRS-inspirada (R-1) — ver shared/spaced-
+        // repetition.js pra que ponto isto diverge do FSRS oficial.
+        import { RATING, initReviewState, nextReviewState, intervalDaysForStability, migrateLegacyReviewEntry } from "./shared/spaced-repetition.js";
+        window.RATING = RATING;
+        window.initReviewState = initReviewState;
+        window.nextReviewState = nextReviewState;
+        window.intervalDaysForStability = intervalDaysForStability;
+        window.migrateLegacyReviewEntry = migrateLegacyReviewEntry;
+        // Merge da revisão espaçada entre dispositivos (R-5) — mesma
+        // função usada pelo backend (backend/src/syncRepository.js),
+        // pra cliente e servidor nunca decidirem "quem venceu" de jeitos
+        // diferentes.
+        import { mergeReviewQueues, reviewEntriesNewerThan } from "./shared/sync-merge.js";
+        window.mergeReviewQueues = mergeReviewQueues;
+        window.reviewEntriesNewerThan = reviewEntriesNewerThan;
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",

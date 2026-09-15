@@ -11,6 +11,20 @@
  * desempenho no diagnóstico/recalibragem (peso B). Acerto > 80% posterga
  * o tema; desempenho baixo o traz para o início.
  */
+// Extraída pra fora de calculatePathPriority pra shared/weighted-
+// sampling.js (R-3, Simulado ponderado por incidência do QuestHub)
+// poder reaproveitar exatamente o mesmo critério de urgência — em vez
+// de reimplementar as mesmas faixas com o risco de uma das duas cópias
+// divergir da outra, do jeito que já aconteceu antes nesta base de
+// código (ver comentário no topo do arquivo).
+export function urgencyMultiplierForAccuracy(accuracy) {
+    return accuracy === null || accuracy === undefined ? 1.10
+        : accuracy > 0.80 ? 0.62
+        : accuracy >= 0.60 ? 1.12
+        : accuracy >= 0.40 ? 1.48
+        : 1.84;
+}
+
 export function calculatePathPriority({ topics, results = [], completedThemeIds = [] }) {
     const aggregate = results.reduce((acc, result) => {
         const key = result.themeId || result.area;
@@ -26,11 +40,7 @@ export function calculatePathPriority({ topics, results = [], completedThemeIds 
         .map((topic) => {
             const performance = aggregate[topic.id] || aggregate[topic.area];
             const accuracy = performance ? performance.correct / performance.total : null;
-            const urgency = accuracy === null ? 1.10
-                : accuracy > 0.80 ? 0.62
-                : accuracy >= 0.60 ? 1.12
-                : accuracy >= 0.40 ? 1.48
-                : 1.84;
+            const urgency = urgencyMultiplierForAccuracy(accuracy);
             const incidence = topic.incidence ?? topic.incidenceEnamed ?? 0;
             return {
                 ...topic,

@@ -6,3 +6,11 @@ compatibility_date = "2024-11-01"
 # configurada como secret depois do primeiro deploy, com:
 #   wrangler secret put GROQ_API_KEY
 # Ver README.md nesta pasta para o passo a passo completo.
+
+# Rate limit de geração por usuário (checkGenerationRateLimit em
+# worker.js) — sem esse binding o Worker funciona normalmente, só não
+# limita ainda. Pra ativar: `wrangler kv namespace create OSCE_RATE_LIMIT_KV`
+# e colar o "id" que o comando devolver abaixo. Ver README.md.
+# [[kv_namespaces]]
+# binding = "OSCE_RATE_LIMIT_KV"
+# id = "COLE_AQUI_O_ID_DEVOLVIDO_PELO_COMANDO_ACIMA"

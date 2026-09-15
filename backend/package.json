@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node src/server.js",
     "test": "node --test",
-    "prisma:seed": "node prisma/seed.js"
+    "prisma:seed": "node prisma/seed.js",
+    "import:questions": "node scripts/import-questions.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

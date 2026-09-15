@@ -56,6 +56,20 @@ normalmente pelo app (logado). Se aparecer "Sessão inválida" ou "Faça login
 para gerar uma estação com IA", confira se está logado no app — o Worker
 exige um usuário autenticado do Firebase.
 
+## Limite de gerações por usuário (opcional, recomendado)
+
+Sem isto, um usuário autenticado pode disparar gerações em laço — cada uma é
+uma chamada paga à Groq. O código já sabe limitar (20 gerações/hora por
+pessoa), só falta o namespace de KV que guarda a contagem:
+
+```bash
+npx wrangler kv namespace create OSCE_RATE_LIMIT_KV
+```
+
+O comando devolve um `id`. Descomente o bloco `[[kv_namespaces]]` no final de
+`wrangler.toml`, cole esse `id` e rode `npx wrangler deploy` de novo. Até
+fazer isso, o Worker continua funcionando normalmente — só sem o limite.
+
 ## Manutenção
 
 - **Trocar a chave da Groq:** `npx wrangler secret put GROQ_API_KEY` de novo,
