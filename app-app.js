@@ -523,7 +523,7 @@
             ring.style.setProperty('--score', accuracy);
             document.getElementById('dashboardQuestions').textContent = answered.toLocaleString('pt-BR');
             document.getElementById('dashboardTime').textContent = minutes >= 60 ? `${Math.floor(minutes / 60)}h${minutes % 60 ? ` ${minutes % 60}m` : ''}` : `${minutes}m`;
-            document.getElementById('dashboardStreak').textContent = streak;
+            document.getElementById('dashboardStreak').textContent = `${streak}d`;
             document.getElementById('dashboardHeadline').textContent = answered ? (accuracy >= 80 ? 'Ótimo desempenho' : accuracy >= 60 ? 'Evolução consistente' : 'Vamos fortalecer a base') : 'Pronto para começar';
             document.getElementById('dashboardInsight').textContent = answered ? `${correct} acertos em ${answered} questões respondidas.` : 'Responda questões para construir uma análise personalizada.';
 
@@ -602,6 +602,18 @@
 
         let activeQuestionConfigMode = null;
 
+        // O modo "Internato" usa um banco totalmente isolado
+        // (window.TRYCKTRACK_INTERNATO_BANK, ver questions-internato.js) —
+        // nunca misturado com Guiado/Simulado/OSCE/Imersão. Tudo que hoje
+        // lê window.TRYCKTRACK_QUESTION_BANK direto pra montar a tela de
+        // configuração ou a sessão passa por aqui, então o mesmo fluxo
+        // (filtros de tema/ano/instituição, slider de quantidade) funciona
+        // pros dois bancos sem duplicar a UI.
+        function getActiveQuestionBank() {
+            const bank = activeQuestionConfigMode === 'internato' ? window.TRYCKTRACK_INTERNATO_BANK : window.TRYCKTRACK_QUESTION_BANK;
+            return Array.isArray(bank) ? bank : [];
+        }
+
         function questionAreaOptions() {
             return ['Todas', 'Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva', 'Psiquiatria'];
         }
@@ -613,11 +625,66 @@
         }
 
         function questionThemeOptions() {
-            return [...new Set((window.TRYCKTRACK_QUESTION_BANK || []).map(question => question.area).filter(Boolean))].sort();
+            return [...new Set(getActiveQuestionBank().map(question => question.area).filter(Boolean))].sort();
         }
 
         function questionYearOptions() {
-            return [...new Set((window.TRYCKTRACK_QUESTION_BANK || []).flatMap(question => getQuestionYears(question)))].sort().reverse();
+            return [...new Set(getActiveQuestionBank().flatMap(question => getQuestionYears(question)))].sort().reverse();
+        }
+
+        // O modo Internato tem taxonomia própria (rodízio > tópico A/B >
+        // tema, mais o semestre da prova) em vez de área/subárea — todas
+        // as opções vêm só do que já existe em TRYCKTRACK_INTERNATO_BANK,
+        // então um "semestre" novo (ex.: 2026.2) aparece sozinho assim que
+        // questões com esse valor forem adicionadas ao arquivo.
+        function internatoFieldOptions(field) {
+            const bank = Array.isArray(window.TRYCKTRACK_INTERNATO_BANK) ? window.TRYCKTRACK_INTERNATO_BANK : [];
+            return [...new Set(bank.map(question => question[field]).filter(Boolean))].sort();
+        }
+
+        // Todos os códigos de tema (A/B) usados na matriz do OSCE —
+        // vira as opções do filtro "Tópico" do Internato.
+        function osceThemeCodes() {
+            return [...new Set(OSCE_CURRICULUM_MATRIX.flatMap(area => area.themes.map(theme => theme.code)))].sort();
+        }
+
+        // Tema (Internato) = subtemas da matriz do OSCE, filtrados pela
+        // Rotação (área) e pelo Tópico (código A/B) escolhidos — os dois
+        // disparam esta função (ver onchange nos dois selects acima).
+        function updateInternatoTemas() {
+            const rotacao = document.getElementById('questionConfigRodizio')?.value || 'Todos';
+            const topico = document.getElementById('questionConfigTopico')?.value || 'Todos';
+            const select = document.getElementById('questionConfigTema');
+            if (!select) return;
+            const areas = rotacao === 'Todos' ? OSCE_CURRICULUM_MATRIX : OSCE_CURRICULUM_MATRIX.filter(area => area.name === rotacao);
+            const temas = new Set();
+            areas.forEach(area => {
+                const themes = topico === 'Todos' ? area.themes : (area.themes || []).filter(theme => theme.code === topico);
+                themes.forEach(theme => (theme.subthemes || []).forEach(sub => temas.add(sub.name)));
+            });
+            const sorted = [...temas].sort();
+            const current = select.value;
+            select.innerHTML = '<option value="Todos">Todos</option>' + sorted.map(item => `<option value="${item}">${item}</option>`).join('');
+            if (sorted.includes(current)) select.value = current;
+            updateQuestionConfigAvailableCount();
+        }
+
+        function getInternatoFilteredQuestions({ rodizio = 'Todos', topico = 'Todos', tema = 'Todos', semestre = 'Todos' } = {}) {
+            const bank = Array.isArray(window.TRYCKTRACK_INTERNATO_BANK) ? window.TRYCKTRACK_INTERNATO_BANK : [];
+            return bank.filter(question =>
+                (rodizio === 'Todos' || question.rodizio === rodizio)
+                && (topico === 'Todos' || question.topico === topico)
+                && (tema === 'Todos' || question.tema === tema)
+                && (semestre === 'Todos' || question.semestre === semestre));
+        }
+
+        function readInternatoConfigFilters() {
+            return {
+                rodizio: document.getElementById('questionConfigRodizio')?.value || 'Todos',
+                topico: document.getElementById('questionConfigTopico')?.value || 'Todos',
+                tema: document.getElementById('questionConfigTema')?.value || 'Todos',
+                semestre: document.getElementById('questionConfigSemestre')?.value || 'Todos'
+            };
         }
 
         function getQuestionYears(question) {
@@ -630,26 +697,34 @@
             const theme = document.getElementById('questionConfigTheme')?.value;
             const select = document.getElementById('questionConfigSubtheme');
             if (!select) return;
-            const subthemes = [...new Set((window.TRYCKTRACK_QUESTION_BANK || [])
+            const subthemes = [...new Set(getActiveQuestionBank()
                 .filter(question => !theme || theme === 'Todas' || question.area === theme)
                 .map(question => question.subarea)
                 .filter(Boolean))].sort();
             select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${item}">${item}</option>`).join('');
+            updateQuestionConfigAvailableCount();
         }
 
-        function getConfiguredQuestionSet() {
-            const mode = activeQuestionConfigMode;
-            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+        // Só o que os filtros de conteúdo (sem o slider de quantidade)
+        // deixariam disponível — usado tanto pelo contador ao vivo
+        // ("N questões disponíveis") quanto por getConfiguredQuestionSet
+        // (que aplica o embaralhar + slice por cima disso) e por
+        // startQuestionSession, pra nunca terem números diferentes.
+        function getFilteredQuestionsForConfig(mode) {
+            const bank = getActiveQuestionBank();
             if (mode === 'full-exam') {
                 const examId = document.getElementById('questionConfigExam')?.value;
                 return bank.filter(question => question.examId === examId);
+            }
+            if (mode === 'internato') {
+                return getInternatoFilteredQuestions(readInternatoConfigFilters());
             }
             const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
             const subtheme = document.getElementById('questionConfigSubtheme')?.value || 'Todas';
             const institution = document.getElementById('questionConfigInstitution')?.value || 'Todas';
             const year = document.getElementById('questionConfigYear')?.value || 'Todos';
             const board = document.getElementById('questionConfigBoard')?.value || 'Todas';
-            let questions = bank.filter(question => {
+            return bank.filter(question => {
                 const questionYears = getQuestionYears(question);
                 const source = String(question.source || '');
                 return (theme === 'Todas' || question.area === theme)
@@ -658,6 +733,23 @@
                     && (year === 'Todos' || questionYears.includes(year))
                     && (board === 'Todas' || source.includes(board));
             });
+        }
+
+        // Mostra, no rodapé da caixa de filtros, quantas questões o
+        // recorte atual (Guiado/Simulado/Internato) realmente tem —
+        // recalculado a cada mudança de filtro, antes de aplicar o
+        // slider de quantidade.
+        function updateQuestionConfigAvailableCount() {
+            const el = document.getElementById('questionConfigAvailable');
+            if (!el) return;
+            const total = getFilteredQuestionsForConfig(activeQuestionConfigMode).length;
+            el.textContent = total === 1 ? '1 questão disponível com esse filtro' : `${total} questões disponíveis com esse filtro`;
+        }
+
+        function getConfiguredQuestionSet() {
+            const mode = activeQuestionConfigMode;
+            let questions = [...getFilteredQuestionsForConfig(mode)];
+            if (mode === 'full-exam') return questions;
             const count = Number(document.getElementById('questionConfigCount')?.value || 12);
             for (let i = questions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -738,7 +830,7 @@
 
         async function downloadConfiguredQuestionPdf(withAnswers) {
             const mode = activeQuestionConfigMode;
-            if (!['practice', 'exam', 'full-exam'].includes(mode)) return;
+            if (!['practice', 'exam', 'full-exam', 'internato'].includes(mode)) return;
             const progress = document.getElementById('questionPdfProgress');
             beginPdfDownloadProgress(progress);
             const questions = getConfiguredQuestionSet();
@@ -747,7 +839,7 @@
                 revealQuestionNotice('Não há questões para os filtros selecionados.');
                 return;
             }
-            const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : (mode === 'exam' ? 'Simulado' : 'Guiado');
+            const title = mode === 'full-exam' ? (questions[0].examName || 'Imersão') : mode === 'internato' ? 'Internato' : (mode === 'exam' ? 'Simulado' : 'Guiado');
             try {
                 setPdfDownloadProgress(progress, 15, true);
                 await ensurePdfLibsLoaded();
@@ -813,14 +905,16 @@
                 practice: { title: 'Guiado', description: 'Escolha a área e o número de questões. Você verá a correção após cada resposta.', button: 'Começar prática' },
                 exam: { title: 'Simulado', description: 'Monte uma sessão com tempo e resultado liberado somente ao finalizar.', button: 'Começar simulado' },
                 osce: { title: 'OSCE', description: 'Selecione o foco da estação e treine a sequência clínica com checklist.', button: 'Iniciar estação' },
-                'full-exam': { title: 'Imersão', description: 'Escolha uma edição do Revalida e responda a prova completa em uma única sessão.', button: 'Começar prova' }
+                'full-exam': { title: 'Imersão', description: 'Escolha uma edição do Revalida e responda a prova completa em uma única sessão.', button: 'Começar prova' },
+                internato: { title: 'Internato', description: 'Só as questões das provas aplicadas no seu internato. Você verá a correção após cada resposta.', button: 'Começar prática' }
             }[mode];
             kicker.textContent = mode === 'full-exam' ? 'Simulado oficial' : 'Configuração da modalidade';
             title.textContent = config.title;
             description.textContent = config.description;
             start.textContent = config.button;
             const pdfAction = document.getElementById('questionPdfAction');
-            if (pdfAction) pdfAction.hidden = !['practice', 'exam', 'full-exam'].includes(mode);
+            const internatoEmpty = mode === 'internato' && !getActiveQuestionBank().length;
+            if (pdfAction) pdfAction.hidden = internatoEmpty || !['practice', 'exam', 'full-exam', 'internato'].includes(mode);
 
             const areas = questionAreaOptions().map(area => `<option value="${area}">${area}</option>`).join('');
             if (mode === 'full-exam') {
@@ -829,36 +923,73 @@
             } else if (mode === 'osce') {
                 body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo OSCE"><button type="button" class="active" data-osce-mode="CANDIDATE" onclick="selectOsceMode(this)">Avaliando</button><button type="button" data-osce-mode="EVALUATOR" onclick="selectOsceMode(this)">Avaliador</button></div><div class="question-config-fields">
                     <div class="question-config-divider">Assunto</div>
-                    <div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Área</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a área</option></select></div>
-                    <div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div>
-                    <div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o subtema</option></select></div>
+                    <div class="question-config-field osce-step" id="osceAreaStep"><label for="questionConfigArea">Rotação</label><select id="questionConfigArea" onchange="loadOsceStations()"><option value="">Selecione a rotação</option></select></div>
+                    <div class="question-config-field osce-step" id="osceThemeStep" hidden><label for="questionConfigTheme">Tópico</label><select id="questionConfigTheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tópico</option></select></div>
+                    <div class="question-config-field osce-step" id="osceSubthemeStep" hidden><label for="questionConfigSubtheme">Tema</label><select id="questionConfigSubtheme" onchange="loadOsceStations()" disabled><option value="">Selecione o tema</option></select></div>
                     <div class="question-config-divider">Formato</div>
                     <div class="question-config-field osce-step" id="osceFormatStep" hidden><label for="questionConfigFormat">Formato da estação</label><select id="questionConfigFormat" onchange="loadOsceStations()" disabled><option value="">Selecione o formato</option></select></div>
                     <select id="questionConfigStation" hidden><option value="">Nenhuma estação carregada</option></select>
                     <div class="question-config-divider">Estação</div>
-                    <div class="osce-station-status" id="osceStationStatus" role="status" aria-live="polite"><strong>Matriz OSCE</strong>Escolha uma área para começar.</div>
+                    <div class="osce-station-status" id="osceStationStatus" role="status" aria-live="polite"><strong>Matriz OSCE</strong>Escolha uma rotação para começar.</div>
                     <div class="question-config-field osce-step osce-ai-step" id="osceAiStep" hidden><button type="button" class="osce-ai-generate-btn" id="osceAiGenerateBtn" onclick="generateOsceStationWithAI()"><span class="osce-ai-generate-icon">✨</span><span>Gerar estação com IA</span></button><span class="osce-ai-hint">Cria um caso clínico inédito para essa combinação, gerado com IA (Groq).</span><div class="osce-library-picker" id="osceLibraryPicker" hidden><label for="osceLibrarySelect">Ou escolha uma estação já gerada por outra pessoa</label><select id="osceLibrarySelect"></select><button type="button" class="osce-library-use-btn" onclick="useOsceLibraryStation()">Usar esta estação</button></div></div>
                 </div>`;
                 activeOsceMode = 'CANDIDATE';
                 loadOsceStations();
-            } else {
-                const themes = questionThemeOptions();
-                const years = questionYearOptions();
+            } else if (mode === 'internato' && !getActiveQuestionBank().length) {
+                // Banco isolado ainda vazio (nenhuma prova de internato
+                // importada) — mostra o mesmo aviso usado em outras áreas
+                // sem questões, em vez de uma tela de filtros sem nada
+                // pra filtrar.
+                body.innerHTML = `<div class="question-coming visible">Ainda não há questões cadastradas aqui — assim que as provas do seu internato forem adicionadas, elas aparecem neste modo.</div>`;
+                start.hidden = true;
+            } else if (mode === 'internato') {
+                start.hidden = false;
+                // Rotação/Tópico/Tema vêm da MESMA matriz curricular do
+                // OSCE (OSCE_CURRICULUM_MATRIX) — área vira Rotação, o
+                // código A/B do tema vira Tópico, e os subtemas viram
+                // Tema. Já mostra a árvore inteira mesmo antes de
+                // qualquer prova importada; só o Semestre continua
+                // vindo do banco de fato (não existe na matriz do OSCE).
+                const rodizios = OSCE_CURRICULUM_MATRIX.map(area => area.name);
+                const topicos = osceThemeCodes();
+                const semestres = internatoFieldOptions('semestre');
                 body.innerHTML = `<div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
-                    <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme"><option value="Todas">Todos</option></select></div>
-                    <div class="question-config-divider">Filtros</div>
-                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
-                    <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigRodizio">Rotação</label><select id="questionConfigRodizio" onchange="updateInternatoTemas()"><option value="Todos">Todos</option>${rodizios.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigTopico">Tópico</label><select id="questionConfigTopico" onchange="updateInternatoTemas()"><option value="Todos">Todos</option>${topicos.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigTema">Tema</label><select id="questionConfigTema" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option></select></div>
+                    <div class="question-config-divider">Período</div>
+                    <div class="question-config-field"><label for="questionConfigSemestre">Semestre</label><select id="questionConfigSemestre" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option>${semestres.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-divider">Quantidade</div>
                     <div class="question-config-field question-config-field-slider">
                         <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>
                         <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
                         <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
                     </div>
+                    <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
+                updateInternatoTemas();
+            } else {
+                start.hidden = false;
+                const themes = questionThemeOptions();
+                const years = questionYearOptions();
+                body.innerHTML = `<div class="question-config-fields">
+                    <div class="question-config-divider">Conteúdo</div>
+                    <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-divider">Filtros</div>
+                    <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option><option value="INEP">INEP</option></select></div>
+                    <div class="question-config-divider">Quantidade</div>
+                    <div class="question-config-field question-config-field-slider">
+                        <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>
+                        <input type="range" class="question-config-slider" id="questionConfigCount" min="1" max="100" value="12" step="1" style="--range-pct:11.11%" oninput="updateQuestionCountSlider(this)">
+                        <span class="question-config-slider-hint">As questões serão escolhidas aleatoriamente.</span>
+                    </div>
+                    <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
+                </div>`;
+                updateQuestionConfigAvailableCount();
             }
             view.hidden = false;
             view.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -896,7 +1027,7 @@
             const metadata = source?.metadata || {};
             const area = findOsceCurriculumArea(metadata.areaSlug);
             const subthemeEntry = findOsceCurriculumSubtheme(metadata.areaSlug, metadata.themeCode, metadata.subthemeSlug);
-            const theme = `Tema ${metadata.themeCode || ''}`.trim();
+            const theme = `Tópico ${metadata.themeCode || ''}`.trim();
             const subtheme = subthemeEntry?.name || metadata.subthemeSlug || 'Subtema';
             const tasks = (source?.tasks || []).map(task => ({
                 id: task.id,
@@ -988,7 +1119,7 @@
                 if (!osceStationsCache.length) osceStationsCache = getLocalOsceStations();
 
                 if (areaSelect.dataset.filled !== '1') {
-                    areaSelect.innerHTML = '<option value="">Selecione a área</option>' + OSCE_CURRICULUM_MATRIX.map(area => `<option value="${area.slug}">${escapeHtml(area.name)}</option>`).join('');
+                    areaSelect.innerHTML = '<option value="">Selecione a rotação</option>' + OSCE_CURRICULUM_MATRIX.map(area => `<option value="${area.slug}">${escapeHtml(area.name)}</option>`).join('');
                     areaSelect.dataset.filled = '1';
                 }
 
@@ -999,24 +1130,28 @@
 
                 if (!areaSlug) {
                     setOsceStep('osceThemeStep', false); setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false);
-                    resetOsceSelect('questionConfigTheme', 'Selecione o tema'); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato');
-                    status.innerHTML = '<strong>Escolha uma área</strong>Depois escolha o tema, o subtema e o formato da estação.';
+                    resetOsceSelect('questionConfigTheme', 'Selecione o tópico'); resetOsceSelect('questionConfigSubtheme', 'Selecione o tema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato');
+                    status.innerHTML = '<strong>Escolha uma rotação</strong>Depois escolha o tópico, o tema e o formato da estação.';
                     return;
                 }
 
                 const area = findOsceCurriculumArea(areaSlug);
                 themeSelect.disabled = false;
-                themeSelect.innerHTML = '<option value="">Selecione o tema</option>' + (area?.themes || []).map(theme => `<option value="${theme.code}">Tema ${theme.code}</option>`).join('');
+                // O value do <option> continua o código A/B (usado pra
+                // casar com a biblioteca de estações) — só o texto exibido
+                // vira "Tópico X" em vez de "Tema X", pra bater com o nome
+                // do filtro no Internato.
+                themeSelect.innerHTML = '<option value="">Selecione o tópico</option>' + (area?.themes || []).map(theme => `<option value="${theme.code}">Tópico ${theme.code}</option>`).join('');
                 if (themeCode) themeSelect.value = themeCode;
                 setOsceStep('osceThemeStep', true);
-                if (!themeCode) { setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigSubtheme', 'Selecione o subtema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tema</strong>'; return; }
+                if (!themeCode) { setOsceStep('osceSubthemeStep', false); setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigSubtheme', 'Selecione o tema'); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tópico</strong>'; return; }
 
                 const theme = area?.themes.find(item => item.code === themeCode);
                 subthemeSelect.disabled = false;
-                subthemeSelect.innerHTML = '<option value="">Selecione o subtema</option>' + (theme?.subthemes || []).map(sub => `<option value="${sub.slug}" title="${escapeHtml(sub.name)}">${escapeHtml(truncateText(sub.name, 78))}</option>`).join('');
+                subthemeSelect.innerHTML = '<option value="">Selecione o tema</option>' + (theme?.subthemes || []).map(sub => `<option value="${sub.slug}" title="${escapeHtml(sub.name)}">${escapeHtml(truncateText(sub.name, 78))}</option>`).join('');
                 if (subthemeSlug) subthemeSelect.value = subthemeSlug;
                 setOsceStep('osceSubthemeStep', true);
-                if (!subthemeSlug) { setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o subtema</strong>'; return; }
+                if (!subthemeSlug) { setOsceStep('osceFormatStep', false); setOsceStep('osceAiStep', false); resetOsceSelect('questionConfigFormat', 'Selecione o formato'); status.innerHTML = '<strong>Agora escolha o tema</strong>'; return; }
 
                 formatSelect.disabled = false;
                 formatSelect.innerHTML = '<option value="">Selecione o formato</option>' + OSCE_CURRICULUM_FORMATS.map(value => `<option value="${value}">${escapeHtml(value.replaceAll('_', ' '))}</option>`).join('');
@@ -1026,7 +1161,7 @@
 
                 setOsceStep('osceAiStep', true);
                 const subthemeEntry = findOsceCurriculumSubtheme(areaSlug, themeCode, subthemeSlug);
-                const themeLabel = `Tema ${themeCode}`;
+                const themeLabel = `Tópico ${themeCode}`;
                 const matches = osceStationsCache.filter(station => station.area === area?.name && station.theme === themeLabel && station.subtheme === subthemeEntry?.name && station.format === formatValue);
                 const stationSelect = document.getElementById('questionConfigStation');
                 if (matches.length) {
@@ -1174,7 +1309,7 @@ Regras obrigatórias:
             if (status) status.innerHTML = '<strong>Gerando estação com IA (Groq)…</strong>Isso pode levar alguns segundos.';
             try {
                 const prompt = buildOsceGenerationPrompt({
-                    areaName: area.name, themeName: `Tema ${themeCode}`, subthemeName: subthemeEntry.name, format
+                    areaName: area.name, themeName: `Tópico ${themeCode}`, subthemeName: subthemeEntry.name, format
                 });
                 let content;
                 try {
@@ -1678,10 +1813,14 @@ Regras obrigatórias:
                 startOsceSession();
                 return;
             }
+            if (mode === 'internato') {
+                await startInternatoSession();
+                return;
+            }
             const area = document.getElementById('questionConfigArea')?.value || document.querySelector('.question-area-chip.active')?.textContent.trim() || 'Todas';
             const countValue = document.getElementById('questionConfigCount')?.value || document.getElementById('questionCount')?.value || '12';
             const requestedCount = countValue === 'full' ? Infinity : Number(countValue);
-            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const bank = getActiveQuestionBank();
             const isFullExam = mode === 'full-exam';
             const clinicalSubarea = area === 'Clínica Médica'
                 ? document.querySelector('#questionSubareaScroll .question-area-chip.active')?.textContent.trim()
@@ -1723,7 +1862,30 @@ Regras obrigatórias:
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
             await ensureQuestionExplanationsLoaded().catch(() => {});
-            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode || 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
+            // Todo modo que não é 'exam'/'full-exam' se comporta como o
+            // Guiado (correção após cada resposta).
+            activeQuestionSession = { mode: isFullExam ? 'exam' : (mode === 'exam' ? 'exam' : 'practice'), questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString(), examId: isFullExam ? selectedExam : null };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        // O modo Internato não compartilha a lógica de área/tema acima —
+        // filtra só por rodízio/tópico/tema/semestre (ver
+        // getInternatoFilteredQuestions) e sempre se comporta como o
+        // Guiado (correção após cada resposta).
+        async function startInternatoSession() {
+            const filters = readInternatoConfigFilters();
+            const countValue = document.getElementById('questionConfigCount')?.value || '12';
+            const requestedCount = Number(countValue);
+            const filtered = getInternatoFilteredQuestions(filters);
+            if (!filtered.length) {
+                revealQuestionNotice('Nenhuma questão encontrada para esse filtro.');
+                return;
+            }
+            const shuffled = randomSample(filtered, filtered.length);
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions: shuffled.slice(0, Math.min(requestedCount, shuffled.length)), index: 0, answers: [], startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -1735,6 +1897,23 @@ Regras obrigatórias:
         // (Simulado/Imersão permitem voltar). Chamada aqui, no topo de
         // cada render, e de novo em finishExamSession pra fechar a conta
         // da última questão vista antes de a sessão terminar.
+        // Imagens/tabelas/elementos visuais do enunciado original (hoje só
+        // usado pelo banco do Internato — question.images é um array de
+        // caminhos, ex.: ["assets/internato/img/i12-1.png"]). O aviso de
+        // "precisa de revisão visual" (needsVisualReview, do banco
+        // principal) só aparece quando NÃO há imagem de verdade anexada —
+        // com question.images preenchido, a imagem já resolve o caso.
+        function renderQuestionStemMedia(question) {
+            const container = document.getElementById('questionStemMedia');
+            const warning = document.getElementById('questionVisualWarning');
+            const images = Array.isArray(question?.images) ? question.images.filter(Boolean) : [];
+            if (container) {
+                container.innerHTML = images.map(src => `<img src="${escapeHtml(src)}" alt="Imagem da questão" loading="lazy">`).join('');
+                container.hidden = !images.length;
+            }
+            if (warning) warning.hidden = !question?.needsVisualReview || images.length > 0;
+        }
+
         function flushQuestionTime(session) {
             if (!session || session.questionRenderedAt == null || session.lastRenderedIndex == null) return;
             const elapsedMs = Date.now() - session.questionRenderedAt;
@@ -1764,7 +1943,7 @@ Regras obrigatórias:
             document.getElementById('questionSource').textContent = question.source;
             document.getElementById('questionNumber').textContent = `Questão ${question.number}`;
             document.getElementById('questionStem').textContent = question.stem;
-            document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
+            renderQuestionStemMedia(question);
             document.getElementById('questionFeedback').hidden = true;
             // Toda sessão nova entra por aqui — garante que a tela de
             // questão fica por cima de qualquer resultado/navegador que
@@ -1814,6 +1993,7 @@ Regras obrigatórias:
                     letterEl.className = 'question-option-letter';
                     letterEl.textContent = letter;
                     const textEl = document.createElement('span');
+                    textEl.className = 'question-option-text';
                     textEl.textContent = text;
                     button.append(letterEl, textEl);
                     optionsContainer.appendChild(button);
@@ -2042,7 +2222,7 @@ Regras obrigatórias:
             const timeSpentMs = questionTimesMs?.[index];
             document.getElementById('questionNumber').textContent = `Questão ${question.number || index + 1}${timeSpentMs ? ` · ${formatQuestionTime(timeSpentMs)}` : ''}`;
             document.getElementById('questionStem').textContent = question.stem;
-            document.getElementById('questionVisualWarning').hidden = !question.needsVisualReview;
+            renderQuestionStemMedia(question);
 
             const reviewOptionsContainer = document.getElementById('questionOptions');
             reviewOptionsContainer.innerHTML = '';
@@ -2061,6 +2241,7 @@ Regras obrigatórias:
                     letterEl.className = 'question-option-letter';
                     letterEl.textContent = letter;
                     const textEl = document.createElement('span');
+                    textEl.className = 'question-option-text';
                     textEl.textContent = text;
                     optionEl.append(letterEl, textEl);
                     reviewOptionsContainer.appendChild(optionEl);
