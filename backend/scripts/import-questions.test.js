@@ -33,7 +33,7 @@ test('toOptionRecords: questão sem options (ex.: discursiva) devolve lista vazi
 
 test('buildImportPlan: usa os bancos estáticos reais e não gera IDs duplicados entre principal e internato', () => {
     const { questions, optionsByQuestionId, explanations } = buildImportPlan();
-    assert.ok(questions.length > 3000, 'esperava milhares de questões dos arquivos estáticos reais');
+    assert.ok(questions.length > 2000, 'esperava milhares de questões dos arquivos estáticos reais');
     const ids = new Set(questions.map(q => q.id));
     assert.equal(ids.size, questions.length);
     assert.ok(explanations.length > 0);

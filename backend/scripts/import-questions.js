@@ -151,6 +151,7 @@ async function run() {
 
     console.log('\nImportando...');
     const CHUNK = 25;
+    const validIds = new Set(questions.map(q => q.id));
     for (let i = 0; i < questions.length; i += CHUNK) {
         const chunk = questions.slice(i, i + CHUNK);
         await prisma.$transaction(chunk.map(q => prisma.question.upsert({
@@ -184,6 +185,32 @@ async function run() {
         process.stdout.write(`\r  explicações: ${Math.min(i + CHUNK, explanations.length)}/${explanations.length}`);
     }
     console.log('\nImportação concluída.');
+
+    // Questões que existiam numa importação anterior mas saíram dos
+    // arquivos estáticos (ex.: fundidas/removidas na deduplicação
+    // Revalida×especialidades) ficam órfãs no banco — o upsert acima só
+    // cria/atualiza, nunca remove. QuestionOption/QuestionExplanation
+    // têm onDelete: Cascade, então somem junto. QuestionResponse e
+    // UserQuestionReview também são Cascade a partir de Question — ok
+    // aqui porque essas linhas órfãs só podem existir para os IDs do
+    // lado Revalida que foram fundidos para dentro do ID do lado
+    // especialidade (o merge preserva o ID mais estabelecido), então
+    // nenhum progresso de usuário referenciando o ID sobrevivente é
+    // perdido.
+    const idsNoBanco = (await prisma.question.findMany({ select: { id: true } })).map(r => r.id);
+    const orfaos = idsNoBanco.filter(id => !validIds.has(id));
+    if (orfaos.length) {
+        console.log(`\nRemovendo ${orfaos.length} questões órfãs (não existem mais nos arquivos estáticos)...`);
+        for (let i = 0; i < orfaos.length; i += CHUNK) {
+            const chunk = orfaos.slice(i, i + CHUNK);
+            await prisma.question.deleteMany({ where: { id: { in: chunk } } });
+            process.stdout.write(`\r  removidas: ${Math.min(i + CHUNK, orfaos.length)}/${orfaos.length}`);
+        }
+        console.log();
+    } else {
+        console.log('\nNenhuma questão órfã encontrada.');
+    }
+
     await prisma.$disconnect();
 }
 
