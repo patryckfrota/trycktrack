@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { getPrismaClient } from './prismaClient.js';
 
 function hydrateStation(record) {
   if (!record) return null;
@@ -29,7 +29,7 @@ export class MemoryOsceRepository {
 }
 
 export class PrismaOsceRepository {
-  constructor(client = new PrismaClient()) { this.client = client; }
+  constructor(client = getPrismaClient()) { this.client = client; }
   async listFingerprints() { return (await this.client.osceStation.findMany({ select: { fingerprint: true } })).map(item => item.fingerprint); }
   async findSubtheme(areaSlug, themeCode, subthemeSlug) { return this.client.osceSubtheme.findFirst({ where: { slug: subthemeSlug, theme: { code: themeCode, area: { slug: areaSlug } } } }); }
   async createStation(data) { return this.client.osceStation.create({ data }); }

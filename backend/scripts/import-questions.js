@@ -130,8 +130,8 @@ async function run() {
         return;
     }
 
-    const { PrismaClient } = await import('@prisma/client');
-    const prisma = new PrismaClient();
+    const { getPrismaClient } = await import('../src/prismaClient.js');
+    const prisma = getPrismaClient();
 
     if (verify) {
         console.log('\n--verify: comparando com o que já está no banco (sem escrever)...');

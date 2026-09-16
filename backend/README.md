@@ -7,6 +7,29 @@ prévia local em `localStorage`; esta API permite sincronizar o plano por conta.
 2. Rode `npm install` e `npx prisma migrate dev --name init`.
 3. Rode `npm run dev`.
 
+## Conexão com o banco: driver HTTP do Neon
+
+A porta 5432 (Postgres) fica bloqueada em bastante rede doméstica/corporativa
+(foi o caso aqui — `nc` na porta 5432 dava timeout enquanto a 443 conectava na
+hora). Por isso `src/prismaClient.js` usa `@prisma/adapter-neon` em vez da
+conexão TCP direta: o `PrismaClient` fala com o Neon por HTTPS/WebSocket
+(porta 443), então funciona em qualquer rede que já deixa passar tráfego
+HTTPS normal. `src/osceRepository.js`, `src/syncRepository.js`,
+`scripts/import-questions.js` e `prisma/seed.js` já usam
+`getPrismaClient()` — não crie `new PrismaClient()` direto em código novo.
+
+**Isso não cobre `npx prisma migrate deploy`/`migrate dev`** — esses comandos
+rodam no motor do Prisma (não passam pelo driver JS) e sempre tentam conexão
+direta na 5432. Se sua rede bloquear essa porta, aplique o SQL das migrações
+manualmente pelo SQL Editor do [console.neon.tech](https://console.neon.tech)
+(cada arquivo em `prisma/migrations/*/migration.sql`, na ordem das pastas) e
+depois marque como aplicadas sem rodar de novo:
+```bash
+npx prisma migrate resolve --applied <nome_da_pasta_da_migracao>
+```
+Sem isso, a primeira vez que `migrate deploy` rodar numa rede sem bloqueio vai
+tentar recriar as tabelas e falhar com "já existe".
+
 `POST /api/trails/:trailId/recalculate` recebe os temas, as respostas de um
 diagnóstico ou simulado e os temas já concluídos. A resposta devolve apenas os
 temas pendentes, ordenados por incidência do edital e urgência por desempenho.

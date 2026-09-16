@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { getPrismaClient } from './prismaClient.js';
 import { mergeReviewEntry } from '../../shared/sync-merge.js';
 
 // Formato de entrada em memória/na API: { stability, difficulty,
@@ -48,7 +48,7 @@ export class MemorySyncRepository {
 }
 
 export class PrismaSyncRepository {
-    constructor(client = new PrismaClient()) { this.client = client; }
+    constructor(client = getPrismaClient()) { this.client = client; }
 
     async getReviewQueue(userId) {
         const rows = await this.client.userQuestionReview.findMany({ where: { userId } });

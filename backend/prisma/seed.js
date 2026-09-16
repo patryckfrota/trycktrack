@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import { getPrismaClient } from '../src/prismaClient.js';
 import { OSCE_MATRIX } from '../src/osceMatrix.js';
 
-const prisma = new PrismaClient();
+const prisma = getPrismaClient();
 
 export async function seedOsceMatrix(client = prisma) {
   for (const area of OSCE_MATRIX) {

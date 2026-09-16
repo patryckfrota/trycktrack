@@ -9,8 +9,7 @@ compatibility_date = "2024-11-01"
 
 # Rate limit de geração por usuário (checkGenerationRateLimit em
 # worker.js) — sem esse binding o Worker funciona normalmente, só não
-# limita ainda. Pra ativar: `wrangler kv namespace create OSCE_RATE_LIMIT_KV`
-# e colar o "id" que o comando devolver abaixo. Ver README.md.
-# [[kv_namespaces]]
-# binding = "OSCE_RATE_LIMIT_KV"
-# id = "COLE_AQUI_O_ID_DEVOLVIDO_PELO_COMANDO_ACIMA"
+# limita ainda.
+[[kv_namespaces]]
+binding = "OSCE_RATE_LIMIT_KV"
+id = "0b886b6a7cf74ae4bef669e3b1da55d2"
