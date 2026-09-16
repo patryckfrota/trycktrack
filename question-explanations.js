@@ -4381,6 +4381,13 @@ D — Incorreta. Infecção pode ser gatilho e deve ser investigada, mas antibi�
 
 Ressalva de segurança — o tratamento completo inclui tionamida, depois iodo, corticosteroide, suporte e correção do fator precipitante; esmolol de ação curta pode ser preferido quando há risco cardiovascular.`,
 
+        'cm-endocrinologia-002': `Resposta correta — C. Paciente com diabetes mellitus tipo 2, hipertensão recente e tabagismo importante tem alto risco cardiovascular. A conduta que melhor otimiza esse risco associa um inibidor de SGLT2 (benefício cardiovascular e renal comprovado, independente do controle glicêmico), intensifica o bloqueio do sistema renina-angiotensina para melhor controle pressórico e institui estatina em dose de moderada-alta intensidade (atorvastatina 40 mg) adequada ao risco cardiovascular do paciente.
+
+Distratores:
+A — Incorreta. Gliclazida não tem benefício cardiovascular comprovado e atorvastatina 10 mg é intensidade insuficiente para o risco cardiovascular desse paciente.
+B — Incorreta. Insulinização não é a primeira escolha nesse cenário e ciprofibrato, sem perfil lipídico que o justifique, não substitui a estatina indicada.
+D — Incorreta. Glibenclamida tem maior risco de hipoglicemia sem benefício cardiovascular, e sinvastatina 20 mg mantém intensidade baixa para o risco do paciente.`,
+
         'cm-endocrinologia-004': `Resposta correta — B. Depressão refratária acompanhada de ganho de peso, pele seca, constipação, irregularidade menstrual e frequência baixa-normal sugere hipotireoidismo. TSH e T4 livre confirmam e classificam disfunção primária ou central.
 
 Distratores:
@@ -5627,6 +5634,20 @@ A — Incorreta. Cirurgia urgente fica reservada para obstrução infectada, rim
 B — Incorreta. Leucocitúria discreta pode acompanhar o cálculo; ausência de nitrito, febre e repercussão sistêmica não sustenta antibioticoterapia automática.
 D — Incorreta. Urocultura pode ser solicitada se houver dúvida, mas o diagnóstico principal não é infecção urinária e analgesia isolada não define o acompanhamento do cálculo.`
 
+        ,'cm-nefrologia-002': `Resposta correta — A. Disúria, hematúria macroscópica, polaciúria, febre, calafrios e dor lombar com sinal de Giordano positivo caracterizam pielonefrite. Hipotensão (89 x 52 mmHg), taquicardia e taquipneia associadas configuram sinais de alarme para sepse — a prioridade é iniciar antibioticoterapia intravenosa e ressuscitação volêmica imediatamente na UBS, sem aguardar transferência, e encaminhar a paciente para o hospital de referência dado o risco de deterioração e a distância até um serviço com maior suporte.
+
+Distratores:
+B — Incorreta. Nitrofurantoína não atinge concentração tecidual renal adequada para tratar pielonefrite (só serve para cistite) e a via oral é inadequada numa paciente instável hemodinamicamente.
+C — Incorreta. Manter a paciente na UBS por 5 dias de antibiótico intravenoso ignora a instabilidade hemodinâmica e a ausência de estrutura para monitorização de sepse numa unidade básica.
+D — Incorreta. Sulfametoxazol-trimetoprima oral tem taxas de resistência crescentes para pielonefrite e a via oral não é adequada diante de hipotensão e sinais de gravidade.`
+
+        ,'cm-nefrologia-009': `Resposta correta — D. Paciente com diabetes mellitus tipo 2 e doença cardiovascular estabelecida (infarto agudo do miocárdio prévio) se beneficia da associação de um inibidor de SGLT2, que reduz eventos cardiovasculares e progressão de doença renal independentemente do controle glicêmico — indicação que se sobrepõe à simples manutenção do esquema atual, mesmo com exames estáveis.
+
+Distratores:
+A — Incorreta. Investigar proteinúria é razoável no seguimento do diabético, mas não é a conduta prioritária diante da oportunidade de reduzir risco cardiovascular com um agente de benefício comprovado.
+B — Incorreta. Manter o esquema sem otimização perde a chance de proteção cardiovascular e renal que o paciente, de alto risco, já teria indicação de receber.
+C — Incorreta. Não há indicação de insulinização — os exames de controle estão estáveis e a troca não oferece o benefício cardiovascular que motiva a associação de um inibidor de SGLT2.`
+
         ,'cm-nefrologia-010': `Resposta correta — B. Hematúria glomerular com dismorfismo eritrocitário, hipertensão, edema e proteinúria subnefrótica caracteriza síndrome nefrítica. Nefropatia por IgA é diagnóstico compatível e pode exigir biópsia para definição histológica, prognóstico e conduta conforme apresentação.
 
 Distratores:
@@ -5861,6 +5882,13 @@ Distratores:
 B — TSH e T4 livre normais afastam hipotireoidismo subclínico.
 C — Fibromialgia é uma síndrome clínica reconhecida, não deve ser reduzida a transtorno psicossomático.
 D — Depressão pode coexistir e amplificar sintomas, mas não explica isoladamente a hiperalgesia difusa típica.`
+
+        ,'cm-reumatologia-003': `Resposta correta — B. Monoartrite aguda de joelho com derrame volumoso, eritema e dor à mobilização, em paciente idosa e diabética (fator de risco para infecção), exige excluir artrite séptica e diagnosticar artropatia por cristais antes de qualquer tratamento empírico. A análise do líquido sinovial (pesquisa de cristais, Gram, cultura e contagem celular) é o exame que define a conduta.
+
+Distratores:
+A — Incorreta. Iniciar antibiótico empírico sem antes colher e analisar o líquido sinovial deixa de excluir artropatia por cristais e perde a chance de identificar o agente antes de tratar.
+C — Incorreta. Ressonância magnética não é o exame inicial mais útil para diferenciar infecção de doença por cristais numa monoartrite aguda, além de ser mais lenta e cara que a artrocentese.
+D — Incorreta. Tratar com anti-inflamatório sem excluir artrite séptica pode mascarar uma infecção articular e retardar o diagnóstico de uma condição potencialmente destrutiva para a articulação.`
 
         ,'cm-reumatologia-004': `Resposta correta — B. Poliartrite simétrica de pequenas articulações, rigidez matinal prolongada, sinovite e reagentes inflamatórios elevados indicam artrite reumatoide, mesmo com fator reumatoide negativo. Metotrexato é o fármaco modificador de primeira linha na ausência de contraindicação.
 

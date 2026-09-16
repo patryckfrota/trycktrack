@@ -2368,7 +2368,7 @@ Regras obrigatórias:
                 document.getElementById('questionFeedbackTitle').textContent = question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`);
                 document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
                 document.getElementById('questionFeedback').hidden = false;
-                recordQuestionResult(question, correct);
+                recordQuestionResult(question, correct, letter);
                 // R-1: errar já é o próprio sinal (Errei, sem precisar
                 // perguntar nada) — só quando acerta é que faz sentido
                 // diferenciar "acertei com certeza" de "acertei mas quase
@@ -2485,7 +2485,7 @@ Regras obrigatórias:
             if (session.mode === 'exam') {
                 session.questions.forEach((question, index) => {
                     const correctAnswer = window.isQuestionAnswerCorrect(question, session.answers[index]);
-                    recordQuestionResult(question, correctAnswer);
+                    recordQuestionResult(question, correctAnswer, session.answers[index], session.questionTimesMs?.[index]);
                     // Simulado/Imersão não têm a UI de Difícil/Bom/Fácil por
                     // questão (o resultado só aparece no fim, todo de uma
                     // vez) — rating automático: Bom se acertou, Errei se
@@ -2678,10 +2678,11 @@ Regras obrigatórias:
             'Psiquiatria': 'psiquiatria',
         };
 
-        function recordQuestionResult(question, correct) {
+        function recordQuestionResult(question, correct, chosen, elapsedMs) {
             // Discursiva não tem gabarito de letra — não é certo nem
             // errado, então não entra na contagem de acertos/erros.
             if (question?.questionType === 'discursive') return;
+            queueResponseSyncPush(question, correct, chosen, elapsedMs);
             const stats = getQuestionStats();
             stats.answered = Number(stats.answered || 0) + 1;
             stats.correct = Number(stats.correct || 0) + (correct ? 1 : 0);
@@ -2811,20 +2812,41 @@ Regras obrigatórias:
             dirtyReviewQuestionIds = new Set([...dirtyReviewQuestionIds, ...Object.keys(getReviewQueue())]);
         }
 
+        // Log de respostas individuais (QuestionResponse no backend) —
+        // ao contrário da fila de revisão, é só-acrescenta (cada resposta
+        // é um evento independente, não um estado que precisa de merge
+        // por "mais recente"), então acumula numa lista simples até o
+        // próximo flush. É o que permite (no futuro) responder "quais
+        // questões exatas essa pessoa errou", coisa que o agregado local
+        // (trycktrack-question-stats) nunca guardou.
+        let pendingResponses = [];
+        function queueResponseSyncPush(question, correct, chosen, elapsedMs) {
+            if (!question?.id) return;
+            pendingResponses.push({
+                questionId: question.id,
+                chosen: chosen ?? null,
+                correct: typeof correct === 'boolean' ? correct : null,
+                elapsedMs: Number.isFinite(elapsedMs) ? Math.round(elapsedMs) : undefined,
+                answeredAt: new Date().toISOString()
+            });
+        }
+
         async function flushReviewSync() {
-            if (!SYNC_API_BASE || !dirtyReviewQuestionIds.size) return;
+            if (!SYNC_API_BASE || (!dirtyReviewQuestionIds.size && !pendingResponses.length)) return;
             const idToken = await window.__fb?.getIdToken?.().catch(() => null);
             if (!idToken) return; // sem login -> sem sync, sem barulho
             const queue = getReviewQueue();
             const reviewEntries = {};
             dirtyReviewQuestionIds.forEach(id => { if (queue[id]) reviewEntries[id] = queue[id]; });
             dirtyReviewQuestionIds = new Set();
-            if (!Object.keys(reviewEntries).length) return;
+            const responses = pendingResponses;
+            pendingResponses = [];
+            if (!Object.keys(reviewEntries).length && !responses.length) return;
             try {
                 const response = await fetch(`${SYNC_API_BASE}/api/sync/push`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
-                    body: JSON.stringify({ reviewEntries, responses: [] })
+                    body: JSON.stringify({ reviewEntries, responses })
                 });
                 if (!response.ok) return;
                 const { reviewQueue: serverQueue } = await response.json();
@@ -2833,7 +2855,11 @@ Regras obrigatórias:
                 // — funde de volta no local pra pegar qualquer entrada que
                 // outro dispositivo tenha mandado antes deste.
                 saveReviewQueue(window.mergeReviewQueues(getReviewQueue(), serverQueue));
-            } catch (_) { /* offline ou backend fora do ar — tenta nas próximas respostas */ }
+            } catch (_) {
+                // offline ou backend fora do ar — devolve pro próximo
+                // flush em vez de perder o que já foi acumulado.
+                pendingResponses = [...responses, ...pendingResponses];
+            }
         }
 
         // Chamada no login (ver app-auth.js) — traz o estado do servidor e
