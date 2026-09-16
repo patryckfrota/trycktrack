@@ -2795,13 +2795,12 @@ Regras obrigatórias:
         // ---------- Sincronização de histórico por conta (R-5) ----------
         // backend/src/server.js expõe /api/sync/push e /api/sync/review-
         // queue (autenticado — Firebase, mesma verificação do Worker de
-        // IA). SYNC_API_BASE fica vazio até o backend ser publicado
-        // (README.md de backend/); com ele vazio, tudo aqui é um no-op
-        // silencioso — o app continua 100% funcional só com localStorage,
-        // exatamente como era antes do R-5. Best-effort de propósito:
-        // nunca trava o estudo por causa de rede — falha é engolida, não
-        // reportada à pessoa estudando.
-        const SYNC_API_BASE = '';
+        // IA), publicado no Render. Best-effort de propósito: nunca trava
+        // o estudo por causa de rede — falha (offline, backend
+        // hibernado no plano gratuito, etc.) é engolida, não reportada à
+        // pessoa estudando; sem login, os dois fetch abaixo nem chegam a
+        // sair (getIdToken() resolve null antes).
+        const SYNC_API_BASE = 'https://trycktrack.onrender.com';
 
         // Não dispara uma requisição por questão respondida — acumula e
         // manda de uma vez quando a sessão termina (ver flushReviewSync,
