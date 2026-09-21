@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getQuality, type AdminQuality } from "./api";
 import { QuestionEditor } from "./QuestionEditor";
+import { Page, PageHeader, ErrorBanner, Section, EmptyState } from "./ui";
 
 export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizio?: string }) => void }) {
   const [quality, setQuality] = useState<AdminQuality | null>(null);
@@ -12,19 +13,14 @@ export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizi
   }, []);
 
   return (
-    <div style={{ padding: "28px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.3 }}>Qualidade</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 13.5, marginTop: 2 }}>
-          Furos de conteúdo por rodízio e por área — clique numa linha pra ver as questões.
-        </p>
-      </div>
+    <Page>
+      <PageHeader
+        eyebrow="Curadoria"
+        title="Qualidade"
+        description="Furos de conteúdo por rodízio e por área — clique numa linha pra ver as questões."
+      />
 
-      {error && (
-        <div className="glass-card" style={{ padding: 16, borderColor: "var(--danger)", color: "var(--danger)", marginBottom: 16 }}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
 
       {quality && (
         <>
@@ -44,8 +40,13 @@ export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizi
             />
           </Section>
 
-          {quality.osce.questoesForaDaMatriz.length > 0 && (
-            <Section title="Divergências com a matriz curricular do OSCE">
+          <Section title="Matriz curricular do OSCE">
+            {quality.osce.questoesForaDaMatriz.length === 0 ? (
+              <div className="glass-card" style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 }}>
+                <span aria-hidden style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 0 3px rgba(52,199,89,0.16)" }} />
+                <span style={{ fontSize: 13, fontWeight: 600 }}>Todas as questões do Internato batem com a matriz do OSCE.</span>
+              </div>
+            ) : (
               <div className="glass-card" style={{ padding: "14px 16px" }}>
                 <p style={{ fontSize: 12.5, color: "var(--text-secondary)", marginBottom: 10 }}>
                   {quality.osce.questoesForaDaMatriz.length} questão(ões) com rodízio/tópico/tema que não bate
@@ -58,7 +59,7 @@ export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizi
                       onClick={() => setEditingId(id)}
                       style={{
                         fontSize: 11,
-                        fontFamily: "monospace",
+                        fontFamily: "var(--font-family-mono)",
                         padding: "4px 8px",
                         borderRadius: 6,
                         border: "1px solid var(--border-color)",
@@ -72,8 +73,8 @@ export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizi
                   ))}
                 </div>
               </div>
-            </Section>
-          )}
+            )}
+          </Section>
 
           <Section title="Banco principal — por área">
             <QualityTable
@@ -95,7 +96,7 @@ export function Quality({ onDrill }: { onDrill: (filter: { bank?: string; rodizi
       {editingId && (
         <QuestionEditor id={editingId} onClose={() => setEditingId(null)} onSaved={() => getQuality().then(setQuality)} />
       )}
-    </div>
+    </Page>
   );
 }
 
@@ -108,13 +109,7 @@ interface QualityRow {
 }
 
 function QualityTable({ rows }: { rows: QualityRow[] }) {
-  if (rows.length === 0) {
-    return (
-      <div className="glass-card" style={{ padding: 20, textAlign: "center", color: "var(--text-secondary)", fontSize: 13 }}>
-        Nada por aqui.
-      </div>
-    );
-  }
+  if (rows.length === 0) return <EmptyState>Nada por aqui.</EmptyState>;
   return (
     <div className="glass-card" style={{ overflow: "hidden" }}>
       {rows.map((row, i) => (
@@ -128,7 +123,10 @@ function QualityTable({ rows }: { rows: QualityRow[] }) {
             padding: "12px 16px",
             borderBottom: i < rows.length - 1 ? "1px solid var(--border-color)" : "none",
             cursor: "pointer",
+            transition: "background 0.12s var(--ease)",
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-hover)")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
         >
           <span style={{ flex: 1, fontSize: 13, fontWeight: 600 }}>{row.label}</span>
           <span style={{ fontSize: 11.5, color: "var(--text-secondary)", fontVariantNumeric: "tabular-nums" }}>
@@ -151,26 +149,6 @@ function QualityTable({ rows }: { rows: QualityRow[] }) {
           ))}
         </div>
       ))}
-    </div>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h2
-        style={{
-          fontSize: 12.5,
-          fontWeight: 700,
-          color: "var(--text-secondary)",
-          marginBottom: 12,
-          textTransform: "uppercase",
-          letterSpacing: 0.5,
-        }}
-      >
-        {title}
-      </h2>
-      {children}
     </div>
   );
 }

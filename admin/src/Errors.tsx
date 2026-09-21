@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { listErrors, type AdminClientError } from "./api";
+import { Page, PageHeader, ErrorBanner, EmptyState } from "./ui";
 
 export function Errors() {
   const [errors, setErrors] = useState<AdminClientError[]>([]);
@@ -26,25 +27,16 @@ export function Errors() {
   }, []);
 
   return (
-    <div style={{ padding: "28px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.3 }}>Erros em produção</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 13.5, marginTop: 2 }}>
-          Exceções de JS não tratadas capturadas no app do aluno, mais recentes primeiro.
-        </p>
-      </div>
+    <Page>
+      <PageHeader
+        eyebrow="Observabilidade"
+        title="Erros em produção"
+        description="Exceções de JS não tratadas capturadas no app do aluno, mais recentes primeiro."
+      />
 
-      {error && (
-        <div className="glass-card" style={{ padding: 16, borderColor: "var(--danger)", color: "var(--danger)", marginBottom: 16 }}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
 
-      {!loading && errors.length === 0 && !error && (
-        <div className="glass-card" style={{ padding: 24, textAlign: "center", color: "var(--text-secondary)", fontSize: 13 }}>
-          Nenhum erro registrado.
-        </div>
-      )}
+      {!loading && errors.length === 0 && !error && <EmptyState>Nenhum erro registrado.</EmptyState>}
 
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {errors.map((e) => (
@@ -85,6 +77,6 @@ export function Errors() {
           </button>
         </div>
       )}
-    </div>
+    </Page>
   );
 }

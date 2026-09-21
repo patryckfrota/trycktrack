@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { listQuestions, type AdminQuestion } from "./api";
 import { QuestionEditor } from "./QuestionEditor";
+import { Page, PageHeader, ErrorBanner } from "./ui";
 
 const BANK_LABELS: Record<string, string> = {
   PRINCIPAL: "Banco principal",
@@ -40,14 +41,17 @@ export function Questions({ initialFilter }: { initialFilter?: { bank?: string; 
   }
 
   return (
-    <div style={{ padding: "28px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.3 }}>Questões</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 13.5, marginTop: 2 }}>
-          Busca direta no banco de dados — a fonte que o app do aluno lê.
-          {rodizio && <> · filtrado por <strong>{rodizio}</strong></>}
-        </p>
-      </div>
+    <Page>
+      <PageHeader
+        eyebrow="Conteúdo"
+        title="Questões"
+        description={
+          <>
+            Busca direta no banco de dados — a fonte que o app do aluno lê.
+            {rodizio && <> · filtrado por <strong>{rodizio}</strong></>}
+          </>
+        }
+      />
 
       <form onSubmit={handleSearchSubmit} style={{ display: "flex", gap: 10, marginBottom: 18 }}>
         <input
@@ -70,38 +74,30 @@ export function Questions({ initialFilter }: { initialFilter?: { bank?: string; 
         <button className="btn-primary" type="submit" disabled={loading}>Buscar</button>
       </form>
 
-      {error && (
-        <div className="glass-card" style={{ padding: 16, borderColor: "var(--danger)", color: "var(--danger)", marginBottom: 16 }}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
 
       <div className="glass-card" style={{ overflow: "hidden" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+        <table className="data-table">
           <thead>
-            <tr style={{ textAlign: "left", borderBottom: "1px solid var(--border-color)" }}>
-              <Th>Enunciado</Th>
-              <Th>Banco</Th>
-              <Th>Rodízio / Tema</Th>
-              <Th>Explicação</Th>
+            <tr>
+              <th>Enunciado</th>
+              <th>Banco</th>
+              <th>Rodízio / Tema</th>
+              <th>Explicação</th>
             </tr>
           </thead>
           <tbody>
             {questions.map((q) => (
-              <tr
-                key={q.id}
-                onClick={() => setEditingId(q.id)}
-                style={{ borderBottom: "1px solid var(--border-color)", cursor: "pointer" }}
-              >
-                <td style={{ padding: "10px 14px", maxWidth: 460 }}>
+              <tr key={q.id} onClick={() => setEditingId(q.id)} className="is-clickable">
+                <td style={{ maxWidth: 460 }}>
                   <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{q.stem}</div>
                   {q.annulled && <span style={{ fontSize: 10.5, color: "var(--warn)", fontWeight: 700 }}>ANULADA</span>}
                 </td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>{BANK_LABELS[q.bank] || q.bank}</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>
+                <td style={{ color: "var(--text-secondary)" }}>{BANK_LABELS[q.bank] || q.bank}</td>
+                <td style={{ color: "var(--text-secondary)" }}>
                   {q.rodizio || "—"}{q.tema ? ` · ${q.tema}` : ""}
                 </td>
-                <td style={{ padding: "10px 14px" }}>
+                <td>
                   <span
                     style={{
                       fontSize: 11,
@@ -116,9 +112,7 @@ export function Questions({ initialFilter }: { initialFilter?: { bank?: string; 
             ))}
             {!loading && questions.length === 0 && (
               <tr>
-                <td colSpan={4} style={{ padding: 24, textAlign: "center", color: "var(--text-secondary)" }}>
-                  Nenhuma questão encontrada.
-                </td>
+                <td colSpan={4} className="empty-state">Nenhuma questão encontrada.</td>
               </tr>
             )}
           </tbody>
@@ -140,14 +134,6 @@ export function Questions({ initialFilter }: { initialFilter?: { bank?: string; 
           onSaved={() => load(true)}
         />
       )}
-    </div>
-  );
-}
-
-function Th({ children }: { children: React.ReactNode }) {
-  return (
-    <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.4 }}>
-      {children}
-    </th>
+    </Page>
   );
 }

@@ -103,42 +103,53 @@ function LoginForm() {
     <form
       onSubmit={handleSubmit}
       className="glass-card"
-      style={{ display: "flex", flexDirection: "column", gap: 12, width: 300, padding: 28 }}
+      style={{ display: "flex", flexDirection: "column", gap: 14, width: 320, padding: "32px 30px" }}
     >
-      <div style={{ marginBottom: 4, display: "flex", alignItems: "center", gap: 10 }}>
-        <img src={logo} alt="" style={{ width: 36, height: 36, borderRadius: 10 }} />
+      <div style={{ marginBottom: 6, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 12 }}>
+        <img src={logo} alt="" style={{ width: 44, height: 44, borderRadius: 13, boxShadow: "0 8px 22px rgba(139,107,224,0.35)" }} />
         <div>
-          <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: -0.3, lineHeight: 1.1 }}>
+          <div style={{ fontSize: 19, fontWeight: 800, letterSpacing: -0.3, lineHeight: 1.1 }}>
             tryck<span style={{ color: "var(--brand-400)" }}>track</span>
           </div>
-          <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>Painel de gestão</div>
+          <div style={{ fontSize: 11.5, color: "var(--text-secondary)", marginTop: 3, textTransform: "uppercase", letterSpacing: 0.6, fontWeight: 600 }}>
+            Painel de gestão
+          </div>
         </div>
       </div>
-      <input
-        className="input-field"
-        type="email"
-        placeholder="E-mail"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        className="input-field"
-        type="password"
-        placeholder="Senha"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+
+      <label>
+        <span style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 6 }}>E-mail</span>
+        <input
+          className="input-field"
+          type="email"
+          placeholder="voce@trycktrack.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          style={{ width: "100%" }}
+        />
+      </label>
+      <label>
+        <span style={{ display: "block", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", marginBottom: 6 }}>Senha</span>
+        <input
+          className="input-field"
+          type="password"
+          placeholder="••••••••"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          style={{ width: "100%" }}
+        />
+      </label>
       <button className="btn-primary" type="submit" disabled={loading} style={{ marginTop: 4 }}>
         {loading ? "Entrando…" : "Entrar"}
       </button>
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 2 }}>
+      {error && <p style={{ color: "var(--danger)", fontSize: 12.5 }}>{error}</p>}
+      {info && <p style={{ color: "var(--success)", fontSize: 12.5 }}>{info}</p>}
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, paddingTop: 12, borderTop: "1px solid var(--border-color)" }}>
         <button type="button" className="btn-link" onClick={handleSignUp}>Criar conta</button>
         <button type="button" className="btn-link" onClick={handleReset}>Esqueci a senha</button>
       </div>
-      {error && <p style={{ color: "var(--danger)", fontSize: 13 }}>{error}</p>}
-      {info && <p style={{ color: "var(--success)", fontSize: 13 }}>{info}</p>}
     </form>
   );
 }

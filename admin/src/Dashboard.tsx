@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ComponentType, SVGProps } from "react";
 import { getIntegrity, getStats, type AdminIntegrity, type AdminStats } from "./api";
+import { Page, PageHeader, Section, ErrorBanner } from "./ui";
 import { IconBook, IconFolder, IconPencil, IconTag, IconUsers } from "./Icons";
 
 const BANK_LABELS: Record<string, string> = {
@@ -19,19 +20,14 @@ export function Dashboard() {
   }, []);
 
   return (
-    <div style={{ padding: "28px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.3 }}>Visão geral</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 13.5, marginTop: 2 }}>
-          Estado atual do banco de questões, direto do banco de dados.
-        </p>
-      </div>
+    <Page>
+      <PageHeader
+        eyebrow="Painel de gestão"
+        title="Visão geral"
+        description="Estado atual do banco de questões, direto do banco de dados."
+      />
 
-      {error && (
-        <div className="glass-card" style={{ padding: 16, borderColor: "var(--danger)", color: "var(--danger)" }}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
 
       {!error && !stats && (
         <SectionGrid>
@@ -65,7 +61,7 @@ export function Dashboard() {
           </Section>
         </>
       )}
-    </div>
+    </Page>
   );
 }
 
@@ -94,6 +90,7 @@ function IntegrityBanner({ integrity }: { integrity: AdminIntegrity }) {
             borderRadius: "50%",
             background: integrity.sincronizado ? "var(--success)" : "var(--warn)",
             flex: "none",
+            boxShadow: `0 0 0 3px ${integrity.sincronizado ? "rgba(52,199,89,0.16)" : "rgba(240,182,74,0.16)"}`,
           }}
         />
         <span style={{ fontSize: 14.5, fontWeight: 700 }}>
@@ -142,26 +139,6 @@ function IntegrityBanner({ integrity }: { integrity: AdminIntegrity }) {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: 32 }}>
-      <h2
-        style={{
-          fontSize: 12.5,
-          fontWeight: 700,
-          color: "var(--text-secondary)",
-          marginBottom: 12,
-          textTransform: "uppercase",
-          letterSpacing: 0.5,
-        }}
-      >
-        {title}
-      </h2>
-      {children}
-    </div>
-  );
-}
-
 function SectionGrid({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ display: "grid", gap: 14, gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))" }}>
@@ -172,19 +149,14 @@ function SectionGrid({ children }: { children: React.ReactNode }) {
 
 function Card({ Icon, label, value, warn, accent }: { Icon: ComponentType<SVGProps<SVGSVGElement>>; label: string; value: number; warn?: boolean; accent?: boolean }) {
   return (
-    <div className="glass-card" style={{ padding: "18px 20px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-        <Icon style={{ opacity: 0.85 }} />
-        <span style={{ color: "var(--text-secondary)", fontSize: 12.5, fontWeight: 600 }}>{label}</span>
+    <div className="glass-card stat-card">
+      <div className="stat-card-head">
+        <span className={`stat-card-icon ${accent ? "stat-card-icon-accent" : warn ? "stat-card-icon-warn" : ""}`}>
+          <Icon />
+        </span>
+        <span className="stat-card-label">{label}</span>
       </div>
-      <div
-        style={{
-          fontSize: 30,
-          fontWeight: 800,
-          fontVariantNumeric: "tabular-nums",
-          color: warn ? "var(--warn)" : accent ? "var(--brand-300)" : "var(--text-main)",
-        }}
-      >
+      <div className="stat-card-value" style={{ color: warn ? "var(--warn)" : accent ? "var(--brand-300)" : "var(--text-main)" }}>
         {value.toLocaleString("pt-BR")}
       </div>
     </div>
@@ -193,8 +165,8 @@ function Card({ Icon, label, value, warn, accent }: { Icon: ComponentType<SVGPro
 
 function SkeletonCard() {
   return (
-    <div className="glass-card" style={{ padding: "18px 20px", height: 82 }}>
-      <div style={{ width: "60%", height: 12, borderRadius: 6, background: "rgba(255,255,255,0.06)", marginBottom: 14 }} />
+    <div className="glass-card" style={{ padding: "18px 20px", height: 96 }}>
+      <div style={{ width: 30, height: 30, borderRadius: 9, background: "rgba(255,255,255,0.06)", marginBottom: 14 }} />
       <div style={{ width: "40%", height: 24, borderRadius: 6, background: "rgba(255,255,255,0.08)" }} />
     </div>
   );

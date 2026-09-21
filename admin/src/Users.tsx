@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { listUsers, type AdminUser } from "./api";
+import { Page, PageHeader, ErrorBanner, initials } from "./ui";
 
 export function Users() {
   const [search, setSearch] = useState("");
@@ -31,13 +32,8 @@ export function Users() {
   }
 
   return (
-    <div style={{ padding: "28px 32px", maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, letterSpacing: -0.3 }}>Usuários</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 13.5, marginTop: 2 }}>
-          Contas registradas, direto do banco de dados.
-        </p>
-      </div>
+    <Page>
+      <PageHeader eyebrow="Contas" title="Usuários" description="Contas registradas, direto do banco de dados." />
 
       <form onSubmit={handleSearchSubmit} style={{ display: "flex", gap: 10, marginBottom: 18 }}>
         <input
@@ -50,40 +46,42 @@ export function Users() {
         <button className="btn-primary" type="submit" disabled={loading}>Buscar</button>
       </form>
 
-      {error && (
-        <div className="glass-card" style={{ padding: 16, borderColor: "var(--danger)", color: "var(--danger)", marginBottom: 16 }}>
-          {error}
-        </div>
-      )}
+      {error && <ErrorBanner>{error}</ErrorBanner>}
 
       <div className="glass-card" style={{ overflow: "hidden" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+        <table className="data-table">
           <thead>
-            <tr style={{ textAlign: "left", borderBottom: "1px solid var(--border-color)" }}>
-              <Th>E-mail</Th>
-              <Th>Nome</Th>
-              <Th>Desde</Th>
-              <Th>Respostas</Th>
-              <Th>Revisões</Th>
+            <tr>
+              <th>Usuário</th>
+              <th>Desde</th>
+              <th>Respostas</th>
+              <th>Revisões</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} style={{ borderBottom: "1px solid var(--border-color)" }}>
-                <td style={{ padding: "10px 14px" }}>{u.email}</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>{u.displayName || "—"}</td>
-                <td style={{ padding: "10px 14px", color: "var(--text-secondary)" }}>
+              <tr key={u.id}>
+                <td>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span className="sidebar-avatar" style={{ width: 26, height: 26, fontSize: 10.5 }}>
+                      {initials(u.displayName, u.email)}
+                    </span>
+                    <div>
+                      <div style={{ fontWeight: 600 }}>{u.email}</div>
+                      {u.displayName && <div style={{ fontSize: 11.5, color: "var(--text-secondary)" }}>{u.displayName}</div>}
+                    </div>
+                  </div>
+                </td>
+                <td style={{ color: "var(--text-secondary)" }}>
                   {new Date(u.createdAt).toLocaleDateString("pt-BR")}
                 </td>
-                <td style={{ padding: "10px 14px", fontVariantNumeric: "tabular-nums" }}>{u.respostas}</td>
-                <td style={{ padding: "10px 14px", fontVariantNumeric: "tabular-nums" }}>{u.revisoes}</td>
+                <td style={{ fontVariantNumeric: "tabular-nums" }}>{u.respostas}</td>
+                <td style={{ fontVariantNumeric: "tabular-nums" }}>{u.revisoes}</td>
               </tr>
             ))}
             {!loading && users.length === 0 && (
               <tr>
-                <td colSpan={5} style={{ padding: 24, textAlign: "center", color: "var(--text-secondary)" }}>
-                  Nenhum usuário ainda.
-                </td>
+                <td colSpan={4} className="empty-state">Nenhum usuário ainda.</td>
               </tr>
             )}
           </tbody>
@@ -97,14 +95,6 @@ export function Users() {
           </button>
         </div>
       )}
-    </div>
-  );
-}
-
-function Th({ children }: { children: React.ReactNode }) {
-  return (
-    <th style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: 0.4 }}>
-      {children}
-    </th>
+    </Page>
   );
 }
