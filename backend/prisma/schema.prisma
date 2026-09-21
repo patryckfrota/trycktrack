@@ -401,3 +401,22 @@ model OsceChecklistScore {
   session        OsceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   @@index([sessionId, category])
 }
+
+// Erros de JS não tratados capturados no app do aluno (window.onerror +
+// unhandledrejection, ver app-app.js) — hoje não existe NENHUMA
+// visibilidade de produção, um erro na tela do aluno simplesmente some.
+// Sem FK pra User de propósito: muitos erros acontecem antes do login
+// (splash, onboarding), e não pode se perder um erro só porque não
+// tinha sessão — userId aqui é só um id de referência solto, nunca
+// resolvido/validado contra a tabela User.
+model ClientError {
+  id         String   @id @default(cuid())
+  message    String
+  stack      String?
+  url        String?
+  userAgent  String?
+  userId     String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+}

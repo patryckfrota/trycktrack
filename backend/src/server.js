@@ -7,6 +7,8 @@ import { importStations, previewStationImport } from './services/osce-import.ser
 import { createOsceRepository, MemoryOsceRepository } from './osceRepository.js';
 import { requireFirebaseAuth } from './firebaseAuth.js';
 import { createSyncRepository } from './syncRepository.js';
+import { adminRouter } from './adminRoutes.js';
+import { getPrismaClient } from './prismaClient.js';
 
 const app = express();
 
@@ -31,7 +33,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Vary', 'Origin');
   }
-  res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
@@ -63,6 +65,8 @@ app.use((req, res, next) => {
   requestLog.set(ip, timestamps);
   next();
 });
+
+app.use('/api/admin', adminRouter);
 
 // A matriz real deve ser carregada pelo banco de dados. O fallback vazio evita
 // criar casos clínicos fictícios quando ainda não houver estações importadas.
@@ -346,6 +350,32 @@ app.post('/api/sync/push', requireFirebaseAuth(), async (req, res) => {
   const reviewQueue = await syncRepository.pushReviewEntries(req.uid, parsed.data.reviewEntries);
   if (syncRepository.pushResponses) await syncRepository.pushResponses(req.uid, parsed.data.responses);
   res.json({ reviewQueue });
+});
+
+// Sem exigir login de propósito — a maioria dos erros de JS acontece
+// antes do usuário logar (splash, onboarding) ou no meio de uma sessão
+// já quebrada, exatamente quando um Authorization header a mais
+// poderia falhar também. userId é só o que o cliente já tinha à mão
+// (localStorage), nunca validado contra token nenhum — não é dado
+// sensível o suficiente pra justificar a fricção de exigir auth aqui.
+const clientErrorSchema = z.object({
+  message: z.string().min(1).max(2000),
+  stack: z.string().max(8000).optional(),
+  url: z.string().max(500).optional(),
+  userAgent: z.string().max(500).optional(),
+  userId: z.string().max(200).optional()
+});
+
+app.post('/api/errors', async (req, res) => {
+  const parsed = clientErrorSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
+  try {
+    if (process.env.DATABASE_URL) await getPrismaClient().clientError.create({ data: parsed.data });
+    else console.error('[client-error]', parsed.data.message);
+  } catch (error) {
+    console.error('Falha ao registrar erro de cliente:', error.message);
+  }
+  res.status(204).end();
 });
 
 export { app, matrixAreas, matrixThemes, matrixSubthemes, syncRepository };

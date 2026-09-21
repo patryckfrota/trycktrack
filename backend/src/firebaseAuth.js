@@ -13,6 +13,8 @@
  * continua funcionando sem login, como já era.
  */
 
+import { getPrismaClient } from './prismaClient.js';
+
 const FIREBASE_PROJECT_ID = 'trycktrack-eebae';
 const GOOGLE_JWKS_URL = 'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com';
 
@@ -72,10 +74,35 @@ export async function verifyFirebaseIdToken(idToken) {
     return payload; // payload.sub é o uid do usuário autenticado
 }
 
+// req.uid dos consumidores (syncRepository, osceRepository) é usado
+// como chave estrangeira pra User.id (UserQuestionReview.userId,
+// QuestionResponse.userId, OsceSession.userId, AssessmentAttempt.userId
+// — todos @relation pra User). O uid do Firebase (payload.sub) NUNCA
+// bate com um User.id (cuid gerado), e nenhum User era criado antes
+// disso — toda escrita autenticada falhava com violação de FK
+// (P2003), silenciosamente (o push do cliente é fire-and-forget), e
+// toda leitura por usuário devolvia vazio. Achado auditando por que
+// User/QuestionResponse/UserQuestionReview estavam todos zerados em
+// produção. upsert por firebaseUid garante o User existir e devolve o
+// id de verdade pra usar daqui pra frente.
+async function ensureUser(payload) {
+    const prisma = getPrismaClient();
+    return prisma.user.upsert({
+        where: { firebaseUid: payload.sub },
+        update: {},
+        create: {
+            firebaseUid: payload.sub,
+            email: payload.email || `${payload.sub}@sem-email.trycktrack`,
+            displayName: payload.name || null
+        }
+    });
+}
+
 // Middleware Express: exige Authorization: Bearer <id token>, expõe o
-// uid verificado em req.uid. Nunca aceita um uid vindo do corpo ou da
-// URL sem essa verificação — é o que faltava nas rotas que hoje
-// confiam em req.params.userId sem provar quem está perguntando.
+// id do User (Postgres) verificado em req.uid. Nunca aceita um uid
+// vindo do corpo ou da URL sem essa verificação — é o que faltava nas
+// rotas que hoje confiam em req.params.userId sem provar quem está
+// perguntando.
 export function requireFirebaseAuth() {
     return async (req, res, next) => {
         const authHeader = req.headers.authorization || '';
@@ -83,7 +110,8 @@ export function requireFirebaseAuth() {
         if (!idToken) return res.status(401).json({ error: 'Autenticação obrigatória.' });
         try {
             const payload = await verifyFirebaseIdToken(idToken);
-            req.uid = payload.sub;
+            const user = await ensureUser(payload);
+            req.uid = user.id;
             next();
         } catch (error) {
             res.status(401).json({ error: `Sessão inválida: ${error.message}` });

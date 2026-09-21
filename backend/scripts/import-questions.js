@@ -130,8 +130,32 @@ async function run() {
         return;
     }
 
-    const { getPrismaClient } = await import('../src/prismaClient.js');
-    const prisma = getPrismaClient();
+    const { getPrismaClient, resetPrismaClient } = await import('../src/prismaClient.js');
+    let prisma = getPrismaClient();
+
+    // O WebSocket do driver Neon já travou silenciosamente (sem lançar
+    // erro) depois de dezenas de milhares de statements na mesma sessão
+    // — sempre no mesmo ponto absoluto do import, não em conteúdo
+    // específico (confirmado testando os itens do lote um a um fora de
+    // uma transação: todos passam rápido). Cada lote roda com timeout;
+    // se travar, reconecta (nova sessão WebSocket) e tenta de novo.
+    async function runChunk(buildOps, label) {
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            let timer;
+            const timeout = new Promise((_, reject) => {
+                timer = setTimeout(() => reject(new Error(`timeout de 20s no lote (${label})`)), 20000);
+            });
+            try {
+                return await Promise.race([prisma.$transaction(buildOps(prisma)), timeout]);
+            } catch (error) {
+                if (attempt === 3) throw error;
+                process.stdout.write(`\n  (${label} travou — ${error.message} — reconectando e tentando de novo) `);
+                prisma = await resetPrismaClient();
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+    }
 
     if (verify) {
         console.log('\n--verify: comparando com o que já está no banco (sem escrever)...');
@@ -154,11 +178,11 @@ async function run() {
     const validIds = new Set(questions.map(q => q.id));
     for (let i = 0; i < questions.length; i += CHUNK) {
         const chunk = questions.slice(i, i + CHUNK);
-        await prisma.$transaction(chunk.map(q => prisma.question.upsert({
+        await runChunk(p => chunk.map(q => p.question.upsert({
             where: { id: q.id },
             create: q,
             update: q
-        })));
+        })), 'questões');
         process.stdout.write(`\r  questões: ${Math.min(i + CHUNK, questions.length)}/${questions.length}`);
     }
     console.log();
@@ -166,22 +190,22 @@ async function run() {
     const allOptions = questions.flatMap(q => optionsByQuestionId.get(q.id).map(opt => ({ questionId: q.id, ...opt })));
     for (let i = 0; i < allOptions.length; i += CHUNK) {
         const chunk = allOptions.slice(i, i + CHUNK);
-        await prisma.$transaction(chunk.map(opt => prisma.questionOption.upsert({
+        await runChunk(p => chunk.map(opt => p.questionOption.upsert({
             where: { questionId_letter: { questionId: opt.questionId, letter: opt.letter } },
             create: opt,
             update: { text: opt.text }
-        })));
+        })), 'alternativas');
         process.stdout.write(`\r  alternativas: ${Math.min(i + CHUNK, allOptions.length)}/${allOptions.length}`);
     }
     console.log();
 
     for (let i = 0; i < explanations.length; i += CHUNK) {
         const chunk = explanations.slice(i, i + CHUNK);
-        await prisma.$transaction(chunk.map(ex => prisma.questionExplanation.upsert({
+        await runChunk(p => chunk.map(ex => p.questionExplanation.upsert({
             where: { questionId: ex.questionId },
             create: ex,
             update: { body: ex.body }
-        })));
+        })), 'explicações');
         process.stdout.write(`\r  explicações: ${Math.min(i + CHUNK, explanations.length)}/${explanations.length}`);
     }
     console.log('\nImportação concluída.');

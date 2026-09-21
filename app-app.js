@@ -1,4 +1,39 @@
         /* ============================================================
+           VISIBILIDADE DE ERROS EM PRODUÇÃO
+           Antes disso, um erro de JS não tratado na tela do aluno
+           simplesmente sumia — sem log nenhum, em lugar nenhum. Reporta
+           pro backend (POST /api/errors, sem exigir login — muitos erros
+           acontecem antes do usuário logar) de forma best-effort: nunca
+           lança, nunca bloqueia, nunca reporta o próprio erro de
+           reportar. Roda o mais cedo possível no arquivo pra capturar
+           qualquer coisa que quebre depois daqui.
+           ============================================================ */
+        (function initClientErrorReporting() {
+            const ENDPOINT = 'https://trycktrack.onrender.com/api/errors';
+            function report(message, stack) {
+                try {
+                    const body = JSON.stringify({
+                        message: String(message || 'Erro desconhecido').slice(0, 2000),
+                        stack: stack ? String(stack).slice(0, 8000) : undefined,
+                        url: location.href.slice(0, 500),
+                        userAgent: navigator.userAgent.slice(0, 500),
+                        userId: (window.__fb?.getCurrentUser?.()?.uid || undefined)
+                    });
+                    if (navigator.sendBeacon) {
+                        navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'application/json' }));
+                    } else {
+                        fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true }).catch(() => {});
+                    }
+                } catch (_) { /* nunca deixa o report quebrar o app */ }
+            }
+            window.addEventListener('error', event => report(event.message, event.error && event.error.stack));
+            window.addEventListener('unhandledrejection', event => report(
+                event.reason && event.reason.message ? event.reason.message : String(event.reason),
+                event.reason && event.reason.stack
+            ));
+        })();
+
+        /* ============================================================
            PAINÉIS DO MENU LATERAL
            Um único painel reutilizável mantém Perfil, Configurações,
            Ajuda e Sobre com a mesma linguagem visual, sem duplicar
@@ -351,8 +386,18 @@
             return randomSample(matching, count);
         }
 
+        // As "grandes áreas" do diagnóstico/recalibração vêm das fases da
+        // trilha ativa (TRAIL_CATALOG) em vez de uma lista solta — as
+        // duas trilhas (enamed/uepa) têm as mesmas 5 áreas hoje, mas se
+        // uma ganhar/perder uma fase um dia, isso segue sozinho, sem
+        // precisar lembrar de atualizar uma cópia separada aqui.
+        function trailDiagnosticAreas(trailId) {
+            const catalog = TRAIL_CATALOG[trailId] || TRAIL_CATALOG.enamed;
+            return catalog.phases.map(phase => phase.area);
+        }
+
         async function startTrailDiagnostic(trailId) {
-            const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
+            const groups = trailDiagnosticAreas(trailId);
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o diagnóstico.'); return; }
             await ensureQuestionExplanationsLoaded().catch(() => {});
@@ -363,7 +408,7 @@
         }
 
         async function startTrailRecalibration(trailId) {
-            const groups = ['Clínica Médica', 'Cirurgia Geral', 'Pediatria', 'Ginecologia e Obstetrícia', 'Medicina Preventiva'];
+            const groups = trailDiagnosticAreas(trailId);
             const questions = groups.flatMap(area => trailQuestionsForArea(area, 4));
             if (questions.length < 20) { revealQuestionNotice('Ainda faltam questões em uma das grandes áreas para formar o simulado.'); return; }
             await ensureQuestionExplanationsLoaded().catch(() => {});
@@ -465,6 +510,34 @@
             const index = navItems.indexOf(document.querySelector('.nav-item.active'));
             if (index >= 0) moveNavIndicator(index, true);
         });
+
+        // Ondinha (ripple) no ponto exato do toque + a cápsula "afunda"
+        // enquanto o dedo/mouse está pressionado. Delegado num único
+        // listener na barra (não por item) pra não precisar tocar nos
+        // onclick="mudarPagina(...)" já existentes em cada item.
+        (function initNavTouchFeedback() {
+            const nav = document.querySelector('.bottom-nav');
+            const indicator = document.getElementById('navIndicator');
+            if (!nav || !indicator) return;
+
+            nav.addEventListener('pointerdown', (e) => {
+                const item = e.target.closest('.nav-item');
+                if (!item) return;
+                indicator.classList.add('is-pressed');
+
+                const rect = item.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.className = 'nav-ripple';
+                ripple.style.left = `${e.clientX - rect.left}px`;
+                ripple.style.top = `${e.clientY - rect.top}px`;
+                item.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            });
+
+            ['pointerup', 'pointercancel', 'pointerleave'].forEach(evt => {
+                nav.addEventListener(evt, () => indicator.classList.remove('is-pressed'));
+            });
+        })();
 
         function mudarPagina(pagina) {
             if (PAGINAS_BLOQUEADAS.includes(pagina)) {
@@ -692,15 +765,15 @@
             return [...new Set(getActiveQuestionBank().flatMap(question => window.getQuestionYears(question)))].sort().reverse();
         }
 
-        // Instituição e Banca eram dois <select> com as mesmas duas opções
-        // fixas no HTML ("Todas"/"INEP") — hoje o banco só tem mesmo um
-        // valor real (source == "INEP" ou "Revalida INEP <ano>", sempre
-        // contendo "INEP"), então os dois campos SEMPRE mostravam a
-        // mesma lista. Em vez de inventar uma segunda dimensão que os
-        // dados não têm, a correção é tirar o hardcode: as opções vêm do
-        // banco (mesmo padrão de questionThemeOptions/questionYearOptions)
-        // — se uma prova de outra instituição/banca entrar um dia, o
-        // filtro já aparece sozinho, sem precisar tocar em código.
+        // "Instituição" e "Banca" eram dois <select> filtrando o MESMO
+        // campo (source.includes(valor)) com a MESMA lista de opções —
+        // os dados não têm uma banca examinadora separada da
+        // instituição, então os dois campos sempre mostravam e faziam
+        // exatamente a mesma coisa. Unificado num só campo. Opções vêm
+        // do banco (mesmo padrão de questionThemeOptions/
+        // questionYearOptions) — se uma prova de outra instituição
+        // entrar um dia, o filtro já aparece sozinho, sem precisar
+        // tocar em código.
         function questionSourceOptions() {
             // Extrai a sigla (token em maiúsculas, ex.: "INEP") de dentro
             // do source — "Revalida INEP 2025.2" e "INEP" viram a mesma
@@ -808,7 +881,6 @@
                     subtheme: document.getElementById('questionConfigSubtheme')?.value || 'Todas',
                     institution: document.getElementById('questionConfigInstitution')?.value || 'Todas',
                     year: document.getElementById('questionConfigYear')?.value || 'Todos',
-                    board: document.getElementById('questionConfigBoard')?.value || 'Todas',
                     search: document.getElementById('questionConfigSearch')?.value || ''
                 };
             return window.filterQuestionBank(bank, { mode, filters, advancedFilterState, reviewQueue: getReviewQueue(), searchIndex: getSearchIndex() });
@@ -1196,7 +1268,6 @@
                     <div class="question-config-divider">Filtros</div>
                     <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option>${sources.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigBoard">Banca</label><select id="questionConfigBoard" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option>${sources.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('')}</select></div>
                     <div class="question-config-divider">Quantidade</div>
                     <div class="question-config-field question-config-field-slider">
                         <label for="questionConfigCount">Número de questões <span class="question-config-slider-value" id="questionConfigCountValue">12</span></label>

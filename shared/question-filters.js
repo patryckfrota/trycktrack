@@ -106,7 +106,6 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
         subtheme = 'Todas',
         institution = 'Todas',
         year = 'Todos',
-        board = 'Todas',
         search = ''
     } = filters;
     const matchedIds = searchIndex ? matchingQuestionIds(search, searchIndex) : null;
@@ -117,7 +116,6 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
             && (subtheme === 'Todas' || question.subarea === subtheme)
             && (institution === 'Todas' || source.includes(institution))
             && (year === 'Todos' || questionYears.includes(year))
-            && (board === 'Todas' || source.includes(board))
             && (matchedIds ? matchedIds.has(question.id) : questionMatchesSearch(question, search));
     });
     const withAdvancedFilter = applyAdvancedFilter(filtered, advancedFilterState, reviewQueue);

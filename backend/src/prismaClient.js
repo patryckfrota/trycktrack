@@ -34,3 +34,16 @@ export function getPrismaClient() {
     sharedClient = new PrismaClient({ adapter });
     return sharedClient;
 }
+
+// O WebSocket do driver Neon trava silenciosamente (sem erro, sem
+// fechar a conexão) depois de muitos statements numa sessão longa —
+// visto na prática num import de ~20 mil upserts, que sempre parava no
+// mesmo ponto sem exceção nenhuma. Scripts de longa duração (import)
+// chamam isto pra forçar uma conexão nova quando suspeitam de trava.
+export async function resetPrismaClient() {
+    if (sharedClient) {
+        await sharedClient.$disconnect().catch(() => {});
+        sharedClient = null;
+    }
+    return getPrismaClient();
+}

@@ -1999,12 +1999,34 @@
             cursor: pointer;
             color: var(--nav-icon-color);
             filter: var(--nav-icon-filter);
-            transition: color 0.25s var(--ease);
+            transition: color 0.25s var(--ease), transform 0.15s var(--ease);
             height: 100%;
+            overflow: hidden;
         }
 
         .nav-item:active {
-            transform: scale(0.92);
+            transform: scale(0.92) translateY(1px);
+        }
+
+        /* Ondinha ao tocar/clicar um item — nasce no ponto exato do toque
+           (posição vem inline via JS em initNavTouchFeedback, app-app.js). */
+        .nav-ripple {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(var(--nav-glass-rgb), 0.4) 0%, rgba(var(--nav-glass-rgb), 0) 70%);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            animation: nav-ripple 0.5s ease-out forwards;
+        }
+
+        @keyframes nav-ripple {
+            to { transform: translate(-50%, -50%) scale(6); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-ripple { animation: none; display: none; }
         }
 
         .nav-item.active {
@@ -2040,10 +2062,18 @@
             border-radius: 25px;
             background: rgba(var(--nav-glass-rgb), 0.16);
             transform: translate(0px, -50%);
-            transition: transform 0.4s var(--ease-spring);
+            transition: transform 0.4s var(--ease-spring), box-shadow 0.15s var(--ease);
             z-index: 2;
             pointer-events: none;
             will-change: transform;
+        }
+
+        /* Enquanto um item está sendo pressionado, a cápsula "afunda"
+           visualmente (sombra interna, sem mover) — mesma sensação de peso
+           do botão de referência, aplicada aqui na cápsula em vez de cada
+           item (ela é o "corpo" visual da nav). */
+        .nav-indicator.is-pressed {
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
         }
 
         @media (prefers-reduced-motion: reduce) {
