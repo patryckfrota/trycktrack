@@ -1810,325 +1810,6 @@
                     }
                 ]
             },
-            "go-completo": {
-                "area": "Ginecologia e Obstetrícia",
-                "title": "Ginecologia e Obstetrícia",
-                "sections": [
-                    {
-                        "title": "PARTE I — PRÉ-NATAL",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "1.1",
-                                "title": "Organização, calendário e datação da gestação",
-                                "tags": [
-                                    "ja",
-                                    "novo"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>Rede Alyne</strong> (Portaria GM/MS 5.350/2024, substituindo a Rede Cegonha): início até 12 semanas, <strong>mínimo de 7 consultas</strong> (mais que as 6 do antigo PHPN), intercaladas médico/enfermeiro.</li><li>Estratificação de risco em todo ponto de entrada; ambulatório de alto risco com mínimo de 12 consultas; meta de consulta puerperal entre o <strong>3º e o 5º dia</strong>.</li><li>Em toda consulta: peso, PA, altura uterina, BCF (sonar 10–12 semanas, Pinard 20 semanas), movimentação fetal, edema.</li><li><strong>Datação</strong>: se DUM certa e regular, calcular por Naegele (DUM + 7 dias − 3 meses); se há <strong>USG de 1º trimestre (CCN, até 13s6d) com diferença > 5–7 dias da DUM, a USG prevalece</strong> — é o método mais acurado da gestação inteira.</li><li>USG tardia (> 22 semanas) perde acurácia (margem de 2–3 semanas), usar com cautela se for a única disponível.</li></ul>"
-                            },
-                            {
-                                "num": "1.2",
-                                "title": "Exames de rotina, suplementação e vacinação",
-                                "tags": [
-                                    "ja",
-                                    "novo"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>1ª consulta</strong>: hemograma, tipagem ABO/Rh (Rh− → Coombs indireto), glicemia de jejum, sífilis/HIV/hepatite B/C, toxoplasmose IgG/IgM, urina I + urocultura, eletroforese de Hb.</li><li><strong>24–28 semanas</strong>: TOTG 75g. <strong>3º trimestre</strong>: repetir sífilis/HIV/hepatite B. <strong>36–37 semanas</strong>: swab para <strong>estreptococo do grupo B</strong>.</li><li>Suplementação: <strong>ácido fólico 0,4mg/dia</strong> (5mg se alto risco de defeito de tubo neural), <strong>ferro 40mg/dia a partir de 20 semanas</strong>.</li><li><strong>Cálcio NÃO é mais indicado especificamente para prevenir pré-eclâmpsia</strong> (FEBRASGO/RBEHG, 2026) — segue indicado por outros motivos quando pertinente, mas essa não é mais a resposta para \"o que previne pré-eclâmpsia\".</li><li>Vacinação: <strong>dTpa a partir da 20ª semana em toda gestação</strong>; <strong>VSR a partir da 28ª semana</strong> (protege o lactente); influenza e hepatite B conforme indicação; <strong>vírus vivo (tríplice viral, varicela, HPV, febre amarela) contraindicado</strong>.</li><li>Proscritos na gestação: IECA/BRA, varfarina, retinoides, tetraciclinas, <strong>AINE após 20–28 semanas</strong>.</li><li><strong> Erros comuns</strong>: usar cálcio como resposta de prevenção de pré-eclâmpsia (desatualizado); esquecer que a USG de 1º trimestre sobrepõe a DUM quando discrepantes.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE II — INFECÇÕES NA GESTAÇÃO",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "2.1",
-                                "title": "Sorologias positivas na gestante — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">SÍFILIS reagente → PENICILINA BENZATINA sempre (alérgica dessensibiliza, nunca troca)\n Recente (<1 ano): 2,4 milhões UI dose única | Tardia/ignorada: 3 doses semanais\n VDRL mensal; queda <2 diluições em 3 meses = retratar/investigar neurossífilis\n No parto: VDRL do RN ≥2 diluições acima do materno → investigar e tratar o RN\n\nHIV reagente → TARV imediata para todas, independente de CD4\n CV 34-36 semanas define parto: >1.000/desconhecida → cesárea eletiva 38s + AZT EV\n indetectável → via obstétrica\n Aleitamento SEMPRE contraindicado\n\nTOXOPLASMOSE\n IgG−/IgM− → suscetível, repetir a cada trimestre\n IgG+/IgM− → imune\n IgG−/IgM+ → possível recente/falso+, repetir em 2-3 semanas + espiramicina\n IgG+/IgM+ → TESTE DE AVIDEZ: alta avidez + <16 semanas tranquiliza;\n caso contrário manter espiramicina e investigar infecção fetal\n (PCR em líquido amniótico >18 semanas) → se + : sulfadiazina+pirimetamina+ác. folínico</pre><ul class=\"reader-list\"><li><strong>Bacteriúria assintomática</strong>: sempre rastrear e tratar na gestante (reduz pielonefrite/prematuridade).</li><li><strong>EGB</strong>: profilaxia intraparto com penicilina cristalina se cultura +, bacteriúria por EGB atual, filho anterior acometido, ou risco sem cultura (< 37sem, bolsa rota ≥ 18h, febre intraparto).</li><li>Hepatite B: RN de mãe HBsAg+ recebe vacina + imunoglobulina em 12h. Zika/dengue: nunca AAS/AINE.</li><li><strong> Erros comuns</strong>: sondar/tratar sífilis com outra droga em alérgica em vez de dessensibilizar; amamentar com HIV materno; assumir infecção toxoplásmica ativa com IgG+/IgM+ sem teste de avidez.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE III — SÍNDROMES HIPERTENSIVAS DA GESTAÇÃO",
-                        "tags": [
-                            "ja",
-                            "novo"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "3.1",
-                                "title": "Classificação e manejo — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">PA≥140/90 — QUANDO apareceu?\n ANTES de 20 semanas → HAS CRÔNICA (piora/proteinúria na 2ª metade = sobreposta)\n DEPOIS de 20 semanas — TEM proteinúria OU disfunção de órgão-alvo?\n NÃO → HIPERTENSÃO GESTACIONAL\n SIM → PRÉ-ECLÂMPSIA\n Tem sinal de gravidade (PA≥160/110 | plaquetas<100.000 | creatinina>1,1 |\n transaminases≥2x | cefaleia/escotoma persistente | dor em HD | EAP)?\n SIM → PE GRAVE → resolver com 34 semanas + corticoide se <34 + magnésio\n NÃO → resolver com 37 semanas\n Convulsão → ECLÂMPSIA → magnésio + ESTABILIZAR A MÃE PRIMEIRO (não é cesárea automática)\n Hemólise+enzimas altas+plaquetopenia → SÍNDROME HELLP → mesma lógica da PE grave</pre><ul class=\"reader-list\"><li>Sinais e sintomas de gravidade: cefaleia persistente, escotomas/turvação visual, dor em hipocôndrio direito/epigástrio, hiper-reflexia.</li><li><strong>Manejo</strong>: <strong>sulfato de magnésio</strong> (Zuspan 4g EV/20min ou Pritchard 4g EV+10g IM) na PE grave/eclâmpsia/HELLP — vigiar <strong>reflexo patelar (1º sinal de intoxicação se abolido), FR ≥ 16, diurese ≥ 25–30mL/h</strong>; antídoto <strong>gluconato de cálcio 1g EV lento</strong>.</li><li>Crise hipertensiva (≥ 160/110): hidralazina/nifedipino/labetalol, meta 140–150×90–100, <strong>nunca normalizar bruscamente</strong>.</li><li><strong>Prevenção no alto risco</strong>: AAS 100–150mg de 12–16 até 36 semanas — <strong>cálcio NÃO entra mais aqui</strong>.</li><li><strong>Seguimento</strong>: manter magnésio por 24h pós-parto/última convulsão; PA pode piorar nos primeiros dias de puerpério; risco cardiovascular aumentado para o resto da vida (sobretudo se início precoce) — orientar seguimento clínico; gestação futura com AAS profilático e investigação de trombofilia se recorrência grave/precoce.</li><li><strong> Erros comuns</strong>: usar cálcio como prevenção; achar que convulsão indica cesárea imediata (estabilizar a mãe primeiro); normalizar a PA bruscamente.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IV — DIABETES NA GESTAÇÃO",
-                        "tags": [
-                            "adj"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "4.1",
-                                "title": "Diabetes gestacional",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">1ª consulta, glicemia de jejum: ≥126 = diabetes prévio | 92-125 = DMG já aqui | <92 = normal\n24-28 semanas, TOTG 75g (mesmo se normal antes): 1 valor alterado já fecha\n jejum≥92 OU 1h≥180 OU 2h≥153 → DIABETES GESTACIONAL</pre><ul class=\"reader-list\"><li>Frequentemente assintomática (fatores de risco: obesidade, ≥ 35 anos, DMG prévio, macrossomia prévia, SOMP); polidrâmnio/suspeita de macrossomia pode ser a 1ª pista.</li><li><strong>Manejo</strong>: dieta + exercício por 1–2 semanas, automonitorização glicêmica, vigilância fetal (USG seriada, CTG/perfil biofísico a partir de 32–36 semanas).</li><li><strong>Tratamento</strong>: <strong>insulina</strong> se metas não atingidas (jejum < 95, 1h < 140, 2h < 120) — esquema NPH + rápida ajustado ao perfil. Via de parto conforme obstetrícia habitual, discutir cesárea se macrossomia importante (risco de distocia de ombro).</li><li><strong>Seguimento</strong>: necessidade de insulina <strong>cai abruptamente no pós-parto</strong> — reduzir/suspender de imediato; <strong>TOTG de reclassificação em 6–12 semanas</strong>; risco aumentado de DM2 futuro, reforçar estilo de vida mesmo com TOTG normal; próxima gestação rastreia diabetes já na 1ª consulta.</li><li><strong> Erro comum</strong>: manter dose alta de insulina no pós-parto imediato sem reduzir.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE V — SANGRAMENTOS DA GESTAÇÃO",
-                        "tags": [],
-                        "subchapters": [
-                            {
-                                "num": "5.1",
-                                "title": "Sangramento na 1ª metade — fluxograma e condutas",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Atraso menstrual + sangramento + beta-hCG positivo — onde está a gestação?\n Saco gestacional TÓPICO, com BCF, colo fechado → AMEAÇA DE ABORTAMENTO (expectante)\n Tópico, sem BCF, colo fechado, útero pequeno → ABORTAMENTO RETIDO\n Colo ABERTO + sangramento importante → INEVITÁVEL\n Restos + colo aberto → INCOMPLETO → AMIU\n Febre+odor fétido+leucocitose → INFECTADO → ATB + esvaziamento\n Útero MAIOR que a IG + beta muito alto + \"flocos de neve\" + hiperêmese + PE precoce\n → MOLA HIDATIFORME\n SEM saco intrauterino, beta não dobra 53% em 48h → GESTAÇÃO ECTÓPICA</pre><ul class=\"reader-list\"><li><strong>Mola hidatiforme</strong>: esvaziamento por aspiração a vácuo (método de escolha, qualquer tamanho); histerectomia se prole definida/> 40 anos.</li><li><strong>Contracepção eficaz obrigatória</strong> durante o seguimento (evitar DIU até beta negativar); <strong>beta-hCG semanal até 3 negativos, depois mensal por 6 meses</strong>; suspeitar de malignização se platô/elevação em dosagens seriadas ou beta ainda detectável após 6 meses → investigar e quimioterapizar.</li><li><strong>Gestação ectópica</strong>: metotrexato se íntegra, < 3,5–4cm, sem BCF, beta < 5.000, estável — <strong>monitorar beta nos dias 4 e 7, esperando queda ≥ 15%</strong>; cirurgia (salpingectomia/salpingostomia) se rota, instável, ou falha do MTX.</li><li>Gestante Rh− recebe imunoglobulina anti-D independente da via de tratamento; seguimento com beta semanal até negativar após MTX/salpingostomia.</li><li><strong>Aborto legal</strong> (sem BO/autorização judicial no estupro): risco de vida, estupro, anencefalia.</li><li><strong> Erros comuns</strong>: esquecer contracepção/seguimento com beta pós-mola; usar MTX fora dos critérios (massa grande, BCF+, beta muito alto); não dar imunoglobulina anti-D em ectópica de gestante Rh−.</li></ul>"
-                            },
-                            {
-                                "num": "5.2",
-                                "title": "Sangramento na 2ª metade, isoimunização Rh, trombofilia e RCIU",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Sangramento >20 semanas — a dor está presente?\n DOR INTENSA+hipertonia+sangue ESCURO (±oculto) → DPP → resolução RÁPIDA\n SEM dor, sangue VERMELHO VIVO recorrente, útero normotônico → PLACENTA PRÉVIA\n → NÃO fazer toque vaginal; USG confirma; cesárea se total/sangramento importante\n Dor súbita+PARADA das contrações+subida da apresentação+cicatriz prévia → ROTURA UTERINA\n No momento da rotura de membranas+sofrimento fetal desproporcional → VASA PRÉVIA</pre><ul class=\"reader-list\"><li>Acretismo (prévia + cesárea prévia): USG Doppler/RM → cesárea-histerectomia programada com hemoterapia disponível.</li><li><strong>Isoimunização Rh</strong>: gestante Rh− com Coombs indireto <strong>negativo</strong> → imunoglobulina anti-D em qualquer sangramento, procedimento invasivo, trauma abdominal, rotineiramente às 28 semanas, e sempre no pós-parto se RN Rh+; <strong>Coombs já positivo → imunoglobulina não tem mais papel</strong>, acompanhar com Doppler de ACM para anemia fetal.</li><li><strong>Trombofilia/SAF</strong>: investigar em pré-eclâmpsia grave precoce recorrente ou perdas gestacionais de repetição; gestação seguinte com AAS + HBPM profilática.</li><li><strong>RCIU</strong> (peso < percentil 10): causa mais comum é <strong>insuficiência placentária</strong> → Doppler de artéria umbilical; resolução quando o risco de permanecer intraútero supera o da prematuridade (diástole zero/reversa persistente), com corticoide se pré-termo.</li><li><strong> Erros comuns</strong>: toque vaginal em placenta prévia; não dar imunoglobulina anti-D em sangramento leve com Coombs negativo.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE VI — VITALIDADE FETAL E ULTRASSONOGRAFIA",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "6.1",
-                                "title": "Cardiotocografia e Doppler — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Linha de base 110-160? Variabilidade 6-25? Acelerações presentes?\n SIM a tudo → CATEGORIA I (normal)\n Desaceleração ESPELHA a contração → DIP I/precoce → compressão CEFÁLICA, benigno\n Desaceleração começa DEPOIS do pico → DIP II/tardia → INSUFICIÊNCIA PLACENTÁRIA\n → reanimação intrauterina: DLE, O2, hidratar, SUSPENDER OCITOCINA\n Forma/momento variáveis → DIP III/variável → compressão de CORDÃO</pre><ul class=\"reader-list\"><li>Categoria III (variabilidade ausente + desacelerações recorrentes ou bradicardia ou sinusoidal) → reanimação imediata e resolução.</li><li>Doppler: artéria umbilical com <strong>diástole zero/reversa</strong> = gravidade; artéria cerebral média com resistência reduzida = centralização; ducto venoso com <strong>onda A ausente/reversa</strong> = descompensação, indica resolução.</li><li>Perfil biofísico: CTG + respiratórios + corpóreos + tônus + <strong>líquido amniótico</strong> (marcador de hipóxia crônica).</li><li><strong> Erro comum</strong>: manter ocitocina diante de DIP II.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE VII — TRABALHO DE PARTO",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "7.1",
-                                "title": "Distocias, estática fetal, gravidez prolongada e vias de parto",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Fase ATIVA (≥5-6cm) progredindo <1cm/h por 2h+ → PARADA SECUNDÁRIA DA DILATAÇÃO\nDilatação completa sem descida por 1h+ → PARADA SECUNDÁRIA DA DESCIDA\nIndução: Bishop <6 → preparo cervical (misoprostol vaginal/sonda de Foley)\n Bishop ≥6-9 → ocitocina ± amniotomia Misoprostol CONTRAINDICADO se cesárea anterior</pre><ul class=\"reader-list\"><li><strong>Manobras de Leopold</strong>: 1ª (fundo) define situação; 2ª (lados) define posição (lado do dorso); 3ª (suprapúbica) define apresentação e mobilidade; 4ª define grau de insinuação.</li><li>Situação <strong>transversa = cesárea sempre</strong>; apresentação pélvica a termo discute via com a paciente (cesárea geralmente preferida).</li><li><strong>Distocia de ombro</strong>: McRoberts + pressão suprapúbica → manobras internas (Rubin II, Woods, extração do braço posterior) — <strong>nunca Kristeller, nunca tração excessiva</strong>.</li><li><strong>Gravidez prolongada</strong> (≥ 42 semanas): intensificar vigilância a partir de 41 semanas; indução recomendada entre 41–42 semanas; passar da data com vitalidade preservada não é indicação isolada de cesárea.</li><li><strong>Cesárea — indicações absolutas</strong>: prévia total, situação transversa, prolapso de cordão, herpes ativo, cesárea corporal prévia, DCP confirmada, sofrimento fetal sem condição de parto vaginal imediato.</li><li><strong>Iteratividade</strong> (múltiplas cesáreas prévias): risco de rotura/acretismo aumenta a cada cicatriz → cesárea eletiva programada com atenção a acretismo (USG Doppler/RM antenatal) e hemoderivados disponíveis; 1 cesárea prévia com cicatriz transversa baixa pode tentar PVAC em casos selecionados.</li><li>Boas práticas OMS: acompanhante, posição livre, analgesia a pedido, <strong>clampeamento tardio</strong>, pele a pele; <strong>sem episiotomia/Kristeller/amniotomia de rotina</strong>.</li><li><strong> Erros comuns</strong>: misoprostol com cesárea prévia; Kristeller na distocia de ombro; cesárea automática só por \"passar da data\".</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE VIII — PUERPÉRIO E HEMORRAGIA PÓS-PARTO",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "8.1",
-                                "title": "Hemorragia pós-parto — fluxograma e condutas",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Perda >500mL (vaginal)/>1.000mL (cesárea) ou repercussão hemodinâmica\nÚtero CONTRAÍDO ou AMOLECIDO?\n AMOLECIDO → TÔNUS/atonia (70-80% dos casos)\n → massagem bimanual+esvaziar bexiga → ocitocina → misoprostol 800mcg\n → ác. tranexâmico 1g (até 3h do início) → balão intrauterino\n → B-Lynch/ligadura → histerectomia (último recurso) metilergometrina CONTRAINDICADA se hipertensa\n CONTRAÍDO+sangramento ativo → TRAUMA → revisar canal, suturar, excluir rotura/inversão\n Dequitação incompleta → TECIDO → revisão uterina/curetagem\n \"Em babação\" sem coágulos → TROMBINA/CIVD → hemoderivados + tratar causa</pre><ul class=\"reader-list\"><li>Fatores de risco: trabalho de parto prolongado/muito rápido, ocitocina prolongada, macrossomia, gemelaridade, polidrâmnio, corioamnionite, multiparidade, miomas.</li><li><strong>Seguimento</strong>: monitorização intensiva nas primeiras 24h, repor ferro conforme gravidade da anemia, profilaxia de TEV, planejar parto futuro em serviço com banco de sangue se atonia prévia.</li><li><strong> Erro comum</strong>: metilergometrina em hipertensa/pré-eclâmpsia.</li></ul>"
-                            },
-                            {
-                                "num": "8.2",
-                                "title": "Puerpério normal, endometrite e corioamnionite",
-                                "tags": [],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Loquiação: rubra (3–4 dias) → serosa → alba.</li><li>Saúde mental do puerpério (ver Rapid Review de Psiquiatria): blues (autolimitado, 2 semanas) × depressão pós-parto (persistente, tratar, rastreio com Edimburgo) × psicose puerperal (emergência).</li><li><strong>Endometrite</strong>: febre <strong>≥ 38°C por 2 dias, entre o 2º e o 10º dia</strong>, útero subinvoluído e doloroso, lóquios fétidos — fator de risco maior é <strong>cesárea</strong> → <strong>clindamicina + gentamicina</strong> até 24–48h afebril; investigar coleção/tromboflebite pélvica séptica se sem resposta em 48–72h; diferencial: infecção de ferida, mastite, ITU, TVP, atelectasia (mais precoce).</li><li><strong>Corioamnionite</strong>: febre + taquicardia materna/fetal + líquido fétido → antibiótico amplo espectro + <strong>resolução da gestação independente da idade gestacional</strong>; RN avaliado para sepse precoce.</li><li><strong> Erros comuns</strong>: não investigar coleção/tromboflebite se endometrite não responde em 48–72h; manter conduta expectante de prematuridade diante de corioamnionite.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IX — PREMATURIDADE, AMNIORREXE E TRAUMA NA GESTANTE",
-                        "tags": [],
-                        "subchapters": [
-                            {
-                                "num": "9.1",
-                                "title": "Prematuridade e rotura prematura de membranas",
-                                "tags": [
-                                    "adj"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Corticoide antenatal (betametasona/dexametasona) entre 24–34 semanas.</li><li>Tocólise até 48h para permitir corticoide: nifedipino, indometacina (< 32 semanas), atosibano.</li><li>Sulfato de magnésio para neuroproteção fetal < 32 semanas.</li><li>RPMO pré-termo: evitar toque vaginal, antibiótico para latência + corticoide; <strong>corioamnionite indica resolução imediata</strong>.</li></ul>"
-                            },
-                            {
-                                "num": "9.2",
-                                "title": "Trauma na gestante",
-                                "tags": [
-                                    "ja"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>A mãe vem primeiro</strong> — reanimar a mãe é a melhor reanimação do feto.</li><li>A partir de ~20 semanas, <strong>deslocar o útero para a esquerda</strong> (DLE ou coxim sob o quadril direito) evita compressão aortocava.</li><li>A gestante <strong>pode estar em choque com sinais vitais ainda normais</strong> (reserva funcional aumentada) — não se tranquilizar com PA normal.</li><li>IG viável: <strong>cardiotocografia contínua por 4–6h</strong>, mesmo em trauma aparentemente leve (DPP oculto pode se manifestar horas depois).</li><li>Gestante Rh− recebe imunoglobulina anti-D. Cinto de segurança: parte inferior sob o abdome/sobre os quadris, nunca sobre o fundo uterino.</li><li>Cesárea perimortem considerada em minutos se PCR materna sem RCE rápido e feto viável.</li><li><strong> Erro comum</strong>: tranquilizar-se com sinais vitais maternos normais logo após o trauma.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IX — CONTRACEPÇÃO E PLANEJAMENTO FAMILIAR",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "9.1",
-                                "title": "Elegibilidade para o combinado — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Vou prescrever COMBINADO? Pergunte, na ordem:\n1. Enxaqueca COM AURA? → categoria 4, NUNCA prescreva\n2. Tabagista ≥35 anos com ≥15 cigarros/dia? → categoria 4\n3. PA≥160/100 ou doença vascular? → categoria 4\n4. TVP/TEP atual/prévio, trombofilia? → categoria 4\n5. <21 dias pós-parto? Amamentando <6 semanas? → categoria 4\n6. Câncer de mama atual? Cardiopatia isquêmica/AVC? LES+antifosfolípide? → categoria 4\nQualquer SIM → contraindicação ABSOLUTA → oferecer progestagênio isolado/DIU\nTodos NÃO → combinado seguro</pre><ul class=\"reader-list\"><li>Métodos: DIU de cobre (10 anos, também contracepção de emergência mais eficaz), DIU-LNG (até 8 anos, reduz fluxo), implante de etonogestrel (3 anos, mais eficaz), injetável trimestral, combinado oral.</li><li><strong>LARC: nuliparidade e adolescência não contraindicam.</strong></li><li>Emergência: levonorgestrel até 5 dias ou <strong>DIU de cobre até 5 dias (mais eficaz)</strong> — não é abortivo.</li><li>Pós-parto: progestagênio isolado desde já, mesmo amamentando; combinado só após 6 meses se lactante.</li><li><strong>Esterilização</strong> (Lei 9.263/1996 com redação da Lei 14.443/2022): ≥ 21 anos ou ≥ 2 filhos, 60 dias de prazo, <strong>não exige mais consentimento do cônjuge</strong>; vedada no parto/aborto e até 42 dias depois salvo necessidade comprovada.</li><li><strong> Erros comuns</strong>: negar LARC a nulípara/adolescente; exigir consentimento do cônjuge para laqueadura.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE X — RASTREAMENTO E LESÕES DO COLO DO ÚTERO",
-                        "tags": [
-                            "ja",
-                            "novo"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "9.1",
-                                "title": "DNA-HPV e conduta — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">DNA-HPV (25-64 anos)\n NEGATIVO → repetir em 5 ANOS\n POSITIVO — genótipo?\n HPV 16/18 → COLPOSCOPIA direto (~70% das lesões precursoras)\n Outro oncogênico → CITOLOGIA REFLEXA no mesmo material\n ASC-US+ ou insatisfatória → colposcopia\n Normal → repetir DNA-HPV em 1 ano</pre><ul class=\"reader-list\"><li>Implementação a partir de agosto/2025, meta de cobertura nacional até dezembro/2026 — substitui a citologia isolada como método primário.</li><li>Condutas citológicas: NIC I/LSIL repete em 6 meses (3 anos se < 25a); ASC-H/HSIL/AGC → colposcopia; NIC II/III → EZT/conização.</li><li>Gestante: rastreamento igual, colposcopia permitida, tratar só lesão invasiva suspeita. Vacina HPV: dose única 9–14 anos, não substitui rastreamento.</li><li><strong>Câncer de colo invasor</strong>: sangramento pós-coital (<strong>sinusorragia</strong>) é o sintoma mais característico; biópsia dirigida se lesão visível; <strong>estadiamento clínico (FIGO)</strong>, não cirúrgico.</li><li><strong>Tratamento por estádio</strong>: microinvasor → conização/histerectomia simples; IA2-IB → cirurgia radical ou radioterapia; <strong>II-IVA localmente avançado → quimiorradioterapia, não cirurgia primária</strong>; IVB → tratamento sistêmico paliativo.</li><li><strong>Seguimento</strong>: consultas a cada 3–4 meses nos primeiros 2 anos, depois espaçando; vigiar sangramento/dor pélvica nova/edema de membro/sintomas urinários como sinais de recidiva.</li><li><strong> Erros comuns</strong>: operar doença localmente avançada em vez de quimiorradioterapia; não valorizar sinusorragia como sinal de alarme.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE XI — MAMA",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "9.1",
-                                "title": "Nódulo mamário e câncer de mama — fluxograma e condutas",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Idade? <35-40 anos → USG primeiro | ≥35-40 anos → mamografia+USG\nBI-RADS: 0 complementar | 1-2 rotina | 3 controle em 6 meses | 4-5 biópsia | 6 já confirmado</pre><ul class=\"reader-list\"><li><strong>Rastreamento</strong>: <strong>MS/INCA mamografia bienal 50–69 anos</strong>; <strong>FEBRASGO/SBM/CBR anual a partir dos 40</strong>; alto risco (BRCA, familiar < 50a, irradiação prévia) início ~30 anos + RM.</li><li>Perfil: nódulo móvel/fibroelástico em jovem = fibroadenoma; súbito/anecoico 35–50a = cisto; <strong>descarga sanguinolenta uniductal</strong> = papiloma, investigar; nódulo endurecido/fixo/irregular + retração = câncer; mama edemaciada/quente sem melhora com ATB = carcinoma inflamatório (não confundir com mastite).</li><li><strong>Câncer de mama invasor</strong>: biópsia percutânea (core biopsy) com <strong>imuno-histoquímica obrigatória (RE, RP, HER2, Ki-67)</strong>.</li><li><strong>Tratamento cirúrgico</strong>: conservadora + radioterapia (preferencial se margens permitem) ou mastectomia; linfonodo sentinela em axila clínica negativa.</li><li><strong>Sistêmico por subtipo</strong>: <strong>luminal (RE/RP+) → hormonioterapia 5–10 anos</strong> ± QT; <strong>HER2+ → terapia anti-HER2 + QT</strong>; <strong>triplo-negativo → só quimioterapia</strong> (sem alvo hormonal/HER2). Neoadjuvância em tumores grandes/triplo-negativos/HER2+.</li><li><strong>Seguimento</strong>: mamografia anual mesmo pós-tratamento, consultas clínicas periódicas, reforçar adesão à hormonioterapia (abandono precoce é a principal causa evitável de recidiva), avaliação genética se critério de alto risco.</li><li><strong> Erros comuns</strong>: não investigar descarga sanguinolenta uniductal; achar que triplo-negativo tem alvo hormonal; abandonar hormonioterapia precocemente.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE XII — CORRIMENTOS, DIP E ISTs",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "9.1",
-                                "title": "Corrimento vaginal e DIP — fluxograma e condutas",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">pH e aspecto:\n pH normal + branco grumoso + prurido intenso → CANDIDÍASE (não é IST, não trata parceiro)\n pH>4,5 + acinzentado/odor de peixe + Whiff+/clue cells → VAGINOSE (não é IST)\n pH>4,5 + amarelo-esverdeado/bolhoso + colo em framboesa → TRICOMONÍASE\n → É IST: TRATAR A PARCERIA</pre><ul class=\"reader-list\"><li>Cervicite (gonococo/clamídia): mucopurulento + dor à mobilização do colo → ceftriaxona + azitromicina, tratando ambos.</li><li><strong>DIP</strong>: 3 critérios mínimos bastam (dor hipogástrica + dor à mobilização do colo + dor anexial); ambulatorial = ceftriaxona IM + doxiciclina 14d + metronidazol 14d; internar se gestante/abscesso tubo-ovariano/falha oral/toxemia/imunossupressão/dúvida cirúrgica.</li><li><strong>Reavaliar em 48–72h</strong> — sem melhora, investigar abscesso ou reconsiderar diagnóstico; sequelas mesmo tratada corretamente: infertilidade tubária, ectópica, dor pélvica crônica, Fitz-Hugh-Curtis.</li><li><strong> Erros comuns</strong>: tratar parceiro na candidíase/vaginose; não reavaliar em 48–72h.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE XV — SANGRAMENTO UTERINO, MIOMA E ENDOMETRIOSE",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "14.1",
-                                "title": "Mioma, adenomiose e endometriose",
-                                "tags": [],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>PALM-COEIN (estruturais: Pólipo/Adenomiose/Leiomioma/Malignidade; não estruturais: Coagulopatia/Ovulatória/Endometrial/Iatrogênica/Não classificada).</li><li><strong>Mioma</strong>: geralmente assintomático; <strong>submucoso</strong> causa mais sangramento/infertilidade (distorce cavidade); intramural causa dismenorreia; subseroso causa sintomas compressivos; USG confirma e localiza.</li><li><strong>Tratamento do mioma</strong>: DIU-LNG/ácido tranexâmico (clínico) ou miomectomia (preserva fertilidade)/histerectomia (prole completa); embolização como alternativa. Crescimento rápido <strong>na pós-menopausa</strong> → investigar sarcoma.</li><li><strong>Adenomiose</strong>: útero globoso e difusamente doloroso, multípara, dismenorreia + sangramento → DIU-LNG/tranexâmico, histerectomia é o definitivo.</li><li><strong>Endometriose</strong>: tríade dismenorreia progressiva + dispareunia de profundidade + infertilidade, frequentemente desproporcional aos achados de imagem; USG com preparo/RM identificam endometrioma; laparoscopia é padrão-ouro mas reservada a dúvida/falha clínica.</li><li><strong>Tratamento da endometriose</strong>: <strong>hormonal contínuo crônico</strong> (combinado sem pausa, DIU-LNG, ou análogo de GnRH nos refratários) — <strong>suspender leva à recorrência</strong>; cirurgia se endometrioma volumoso/doença profunda refratária/infertilidade associada.</li><li><strong>Seguimento</strong>: reavaliar resposta em 3–6 meses; manter supressão hormonal a longo prazo.</li><li><strong>Sangramento pós-menopausa é câncer de endométrio até prova em contrário</strong> → USG transvaginal, biópsia/histeroscopia se endométrio > 4–5mm.</li><li><strong> Erros comuns</strong>: achar que endometriose exige confirmação cirúrgica antes de tratar; não investigar sarcoma em mioma de crescimento rápido na pós-menopausa.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IXV — AMENORREIA, SOMP E INFERTILIDADE",
-                        "tags": [
-                            "ja",
-                            "novo"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "15.1",
-                                "title": "Amenorreia por compartimento — fluxograma",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">Amenorreia primária: sem caracteres aos 13a, OU caracteres sem menarca aos 15a\nFSH alto → falência OVARIANA → Turner (baixa estatura, pescoço alado) → cariótipo\nFSH baixo/normal-baixo → eixo hipotálamo-hipófise → prolactina alta (prolactinoma)\n ou hipotalâmico funcional (estresse/exercício/anorexia)\nFSH normal + útero/vagina ausentes + caracteres NORMAIS → compartimento uterovaginal\n 46XX → Rokitansky (agenesia mülleriana)\n 46XY sem pelos pubianos/axilares → Morris (insensibilidade androgênica) → gonadectomia pós-puberal</pre>"
-                            },
-                            {
-                                "num": "15.2",
-                                "title": "SOMP (antiga SOP)",
-                                "tags": [
-                                    "novo"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Consenso <em>Lancet</em> maio/2026 (SBEM/Brasil) <strong>renomeou SOP para Síndrome Ovariana Metabólica Poliendócrina</strong> — critério de Rotterdam e tratamento inalterados; SOP ainda circula ~3 anos de transição.</li><li>Sinais: irregularidade menstrual desde a adolescência, hiperandrogenismo (hirsutismo, acne), sinais metabólicos (obesidade abdominal, acantose nigricans), infertilidade.</li><li><strong>Diagnóstico</strong> (2 de 3, excluídas outras causas): oligo/anovulação + hiperandrogenismo clínico/laboratorial + morfologia policística ao USG — <strong>USG não é obrigatória</strong> se irregularidade + hiperandrogenismo claros; excluir hiperprolactinemia, disfunção tireoidiana, hiperplasia adrenal tardia.</li><li><strong>Tratamento por objetivo</strong>: sem desejo reprodutivo → combinado oral ± antiandrogênio, metformina se resistência insulínica; <strong>desejo reprodutivo → suspender combinado, letrozol como 1ª linha de indução de ovulação</strong>; estilo de vida é base em qualquer objetivo.</li><li><strong>Seguimento</strong>: rastreio metabólico periódico (glicemia, lipídios, PA) pelo risco cardiovascular; vigiar hiperplasia endometrial em amenorreia prolongada sem oposição hormonal.</li><li><strong> Erros comuns</strong>: exigir USG para fechar diagnóstico em quadro clínico claro; manter combinado em quem deseja engravidar.</li></ul>"
-                            },
-                            {
-                                "num": "15.3",
-                                "title": "Infertilidade",
-                                "tags": [
-                                    "adj"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Ausência de gestação após 12 meses sem contracepção (6 meses se ≥ 35a).</li><li>Investigação: <strong>espermograma primeiro</strong> (simples, ~35% dos casos), avaliação de ovulação/reserva ovariana, histerossalpingografia para fator tubário.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IXVI — CLIMATÉRIO E MENOPAUSA",
-                        "tags": [
-                            "ja"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "16.1",
-                                "title": "Menopausa e terapia hormonal",
-                                "tags": [],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Menopausa = <strong>12 meses de amenorreia</strong>, diagnóstico clínico (48–51 anos no Brasil), sem necessidade de dosar FSH na faixa etária típica.</li><li>Insuficiência ovariana prematura (< 40 anos): investigar (cariótipo, FMR1, autoimunidade) e repor hormônio até a idade habitual da menopausa.</li><li>TH indicada para sintomas vasomotores moderados/graves, síndrome geniturinária, prevenção de osteoporose em selecionadas; <strong>janela de oportunidade < 60 anos ou < 10 anos de menopausa</strong>.</li><li>Contraindicações: câncer de mama/endométrio, sangramento não esclarecido, TVP/TEP, doença coronariana/AVC prévio, hepatopatia grave, LES + antifosfolípide.</li><li>Esquema: com útero → estrogênio + progestagênio; sem útero → estrogênio isolado. Sintomas geniturinários isolados → estrogênio tópico vaginal (poucas contraindicações).</li><li>Alternativas não hormonais para fogachos: ISRS/IRSN, gabapentina, clonidina.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "PARTE IXVII — MASSAS ANEXIAIS, ABDOME AGUDO GINECOLÓGICO E TEMAS FINAIS",
-                        "tags": [],
-                        "subchapters": [
-                            {
-                                "num": "17.1",
-                                "title": "Massa anexial e abdome agudo ginecológico — fluxogramas",
-                                "tags": [],
-                                "bodyHtml": "<pre class=\"reader-pre-card\">USG de massa anexial:\n <5cm, anecoica, unilocular, menacme → cisto FUNCIONAL → expectante, reavaliar 1-2 ciclos\n >8-10cm OU sólido OU septos espessos OU ascite OU vascularização central → SUSPEITO → investigar\nDor pélvica súbita+massa+náusea → TORÇÃO ANEXIAL → destorção com preservação ovariana\n (Doppler normal NÃO exclui torção)\n\nDor pélvica aguda — beta-hCG SEMPRE primeiro\n Positivo → pensar ectópica primeiro\n Negativo:\n Dor súbita unilateral+massa → cisto roto ou torção anexial\n Dor+febre+dor à mobilização do colo → DIP\n Dor migrando periumbilical→FID+Blumberg+anorexia → APENDICITE\n DIU+dor+suspeita de deslocamento → localizar por USG, remover se fora da cavidade</pre><ul class=\"reader-list\"><li>Tumores ovarianos: teratoma maduro em jovem (heterogêneo, maior risco de torção); endometrioma (\"vidro fosco\"); cistoadenoma seroso/mucinoso; tumor de células da granulosa (produção hormonal); <strong>câncer epitelial na pós-menopausa</strong> (CA-125 útil aqui); <strong>tumor de células germinativas em jovem/adolescente</strong> (AFP, beta-hCG, DHL).</li><li>Regra: jovem → teratoma/marcadores germinativos; pós-menopausa + sólido → epitelial/CA-125.</li><li><strong> Erros comuns</strong>: excluir torção por Doppler normal; não pedir beta-hCG antes de investigar dor pélvica aguda.</li></ul>"
-                            },
-                            {
-                                "num": "17.2",
-                                "title": "Patologias vulvares, violência sexual e uroginecologia",
-                                "tags": [
-                                    "adj"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Líquen escleroso: placas brancas atróficas pós-menopausa → corticoide tópico potente, seguimento pelo risco de malignização.</li><li>Câncer de vulva: lesão ulcerada/vegetante persistente em idosa → <strong>biópsia sempre</strong>, não tratar como candidíase sem examinar.</li><li>Bartolinite: drenagem com marsupialização se recorrente.</li><li>Violência sexual: acolhimento sem exigir BO/autorização judicial, notificação compulsória, contracepção de emergência até 5 dias, profilaxia de ISTs não virais + PEP HIV até 72h, hepatite B se não imune, aborto legal garantido; sexo com menor de 14 anos = estupro de vulnerável.</li><li>Uroginecologia: incontinência de esforço → fisioterapia/sling; bexiga hiperativa → treinamento vesical/anticolinérgico; prolapso → POP-Q, pessário ou cirurgia.</li></ul>"
-                            },
-                            {
-                                "num": "17.3",
-                                "title": "Aleitamento materno — problemas maternos",
-                                "tags": [
-                                    "ja"
-                                ],
-                                "bodyHtml": "<ul class=\"reader-list\"><li>Fissura/trauma mamilar: dor no início da mamada, corrigir a pega.</li><li>Ingurgitamento: ordenha de alívio, mamadas frequentes.</li><li>Candidíase mamilar: dor em agulhadas que persiste após a mamada, aréola brilhante → antifúngico tópico na mãe e na boca do bebê.</li><li><strong>Mastite lactacional</strong>: área endurecida + hiperemia + febre alta → <strong>antibiótico anti-estafilocócico + esvaziamento da mama + manter a amamentação</strong>.</li><li>Abscesso: drenagem + antibiótico, mantendo amamentação (contralateral se necessário).</li><li><strong>Em nenhum desses quadros a amamentação deve ser suspensa</strong> — é o distrator mais oferecido.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Checklist Final",
-                        "tags": [],
-                        "subchapters": [
-                            {
-                                "num": "✓",
-                                "title": "77 frases para a véspera",
-                                "tags": [],
-                                "bodyHtml": "<p class=\"reader-checklist-category\">Pré-natal</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">1</span><span class=\"reader-checklist-text\"><strong>Rede Alyne: mínimo de 7 consultas</strong> (não mais 6 do PHPN antigo), intercaladas médico/enfermeiro.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">2</span><span class=\"reader-checklist-text\">USG de 1º trimestre (CCN) é o método mais acurado para datar a gestação.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">3</span><span class=\"reader-checklist-text\">Naegele: DUM + 7 dias − 3 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">4</span><span class=\"reader-checklist-text\">TOTG 75g entre 24-28 semanas; um valor alterado já fecha DMG.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">5</span><span class=\"reader-checklist-text\"><strong>Cálcio NÃO é mais recomendado especificamente para prevenir pré-eclâmpsia</strong> (FEBRASGO/RBEHG, 2026).</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">6</span><span class=\"reader-checklist-text\">AAS 100-150mg de 12-16 semanas até 36 semanas continua indicado no alto risco.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">7</span><span class=\"reader-checklist-text\">dTpa a partir da 20ª semana; vacina do VSR a partir da 28ª.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">8</span><span class=\"reader-checklist-text\">Vacinas de vírus vivo são contraindicadas na gestação.</span></p><p class=\"reader-checklist-category\">Infecções</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">9</span><span class=\"reader-checklist-text\">Sífilis: benzatina sempre; alérgica dessensibiliza, nunca troca de droga.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">10</span><span class=\"reader-checklist-text\">VDRL do RN ≥2 diluições acima do materno → investigar e tratar o RN.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">11</span><span class=\"reader-checklist-text\">HIV: CV>1.000 ou desconhecida → cesárea eletiva + AZT EV; aleitamento sempre contraindicado.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">12</span><span class=\"reader-checklist-text\">Toxoplasmose: IgG+/IgM+ → teste de avidez; alta avidez + <16 semanas tranquiliza.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">13</span><span class=\"reader-checklist-text\">Bacteriúria assintomática na gestante sempre se trata.</span></p><p class=\"reader-checklist-category\">Hipertensão</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">14</span><span class=\"reader-checklist-text\">Pré-eclâmpsia = PA≥140/90 após 20 semanas + proteinúria OU disfunção de órgão-alvo.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">15</span><span class=\"reader-checklist-text\">Magnésio: vigiar reflexo patelar, FR≥16, diurese; antídoto é gluconato de cálcio.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">16</span><span class=\"reader-checklist-text\">PE sem gravidade → 37 semanas; com gravidade → 34 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">17</span><span class=\"reader-checklist-text\">Estabilizar a mãe primeiro — eclâmpsia não é indicação automática de cesárea.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">18</span><span class=\"reader-checklist-text\">DPP = dor + hipertonia + sangue escuro; prévia = indolor + sangue vivo + sem toque vaginal.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">19</span><span class=\"reader-checklist-text\">Gestante Rh negativo + Coombs indireto negativo + qualquer sangramento → imunoglobulina anti-D.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">20</span><span class=\"reader-checklist-text\">Coombs indireto já positivo → imunoglobulina não tem mais papel; acompanhar com Doppler de ACM.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">21</span><span class=\"reader-checklist-text\">Trombofilia/SAF: investigar em pré-eclâmpsia grave recorrente ou perdas gestacionais de repetição.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">22</span><span class=\"reader-checklist-text\">RCIU: causa mais comum é insuficiência placentária → Doppler de artéria umbilical.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">23</span><span class=\"reader-checklist-text\">Trauma na gestante: a mãe vem primeiro; deslocar o útero para a esquerda a partir de ~20 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">24</span><span class=\"reader-checklist-text\">Gestante pode estar em choque com sinais vitais normais — reserva funcional aumentada.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">25</span><span class=\"reader-checklist-text\">Trauma abdominal, mesmo leve: cardiotocografia contínua por 4-6h e vigiar DPP oculto.</span></p><p class=\"reader-checklist-category\">Parto</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">26</span><span class=\"reader-checklist-text\">Situação transversa = cesárea sempre; apresentação pélvica discute via com a paciente.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">27</span><span class=\"reader-checklist-text\">Pós-termo é ≥42 semanas; indução recomendada entre 41 e 42 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">28</span><span class=\"reader-checklist-text\">Cesárea por iteratividade: risco de rotura e acretismo aumenta a cada cicatriz.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">29</span><span class=\"reader-checklist-text\">DIP II (tardia) = insuficiência placentária, a preocupante; DIP III = cordão.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">30</span><span class=\"reader-checklist-text\">Bishop <6 → preparo cervical; misoprostol contraindicado com cesárea anterior.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">31</span><span class=\"reader-checklist-text\">Distocia de ombro: McRoberts + pressão suprapúbica; jamais Kristeller.</span></p><p class=\"reader-checklist-category\">Puerpério</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">32</span><span class=\"reader-checklist-text\">HPP: atonia responde por 70-80% — massagem → ocitocina → misoprostol → tranexâmico em até 3h.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">33</span><span class=\"reader-checklist-text\">Metilergometrina contraindicada na hipertensa.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">34</span><span class=\"reader-checklist-text\">Febre puerperal típica (2º-10º dia) = endometrite → clindamicina + gentamicina.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">35</span><span class=\"reader-checklist-text\">Mastite e abscesso mamário: nunca suspender a amamentação.</span></p><p class=\"reader-checklist-category\">Contracepção</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">36</span><span class=\"reader-checklist-text\">Enxaqueca com aura contraindica em absoluto o combinado.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">37</span><span class=\"reader-checklist-text\">Tabagista ≥35 anos com ≥15 cigarros/dia = categoria 4.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">38</span><span class=\"reader-checklist-text\">Nuliparidade e adolescência não contraindicam DIU nem implante.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">39</span><span class=\"reader-checklist-text\">DIU de cobre é a contracepção de emergência mais eficaz.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">40</span><span class=\"reader-checklist-text\">Laqueadura: ≥21 anos ou 2 filhos, 60 dias de prazo, sem exigir consentimento do cônjuge.</span></p><p class=\"reader-checklist-category\">Colo e mama</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">41</span><span class=\"reader-checklist-text\">Rastreamento do colo agora é DNA-HPV, 25-64 anos, a cada 5 anos se negativo.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">42</span><span class=\"reader-checklist-text\">HPV 16/18 positivo vai direto para colposcopia; outros oncogênicos fazem citologia reflexa.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">43</span><span class=\"reader-checklist-text\">Mamografia: MS/INCA bienal 50-69; sociedades recomendam anual a partir dos 40.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">44</span><span class=\"reader-checklist-text\">BI-RADS 3 = controle em 6 meses; 4 e 5 = biópsia.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">45</span><span class=\"reader-checklist-text\">Nódulo em jovem → USG; ≥35-40 anos → USG + mamografia.</span></p><p class=\"reader-checklist-category\">Ginecologia geral</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">46</span><span class=\"reader-checklist-text\">Candidíase e vaginose não são ISTs; tricomoníase é e trata a parceria.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">47</span><span class=\"reader-checklist-text\">DIP: os 3 critérios mínimos bastam para iniciar tratamento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">48</span><span class=\"reader-checklist-text\">Sangramento pós-menopausa = câncer de endométrio até prova em contrário.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">49</span><span class=\"reader-checklist-text\">SOP agora é SOMP (consenso Lancet, maio de 2026) — mesmo critério de Rotterdam, mesmo tratamento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">50</span><span class=\"reader-checklist-text\">Diagnóstico de SOMP não exige USG obrigatória se hiperandrogenismo + irregularidade menstrual claros.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">51</span><span class=\"reader-checklist-text\">Massa anexial <5cm anecoica em menacme → expectante; suspeita exige sólido/septo/ascite.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">52</span><span class=\"reader-checklist-text\">Torção anexial: Doppler normal não exclui — a clínica manda.</span></p><p class=\"reader-checklist-category\">Temas destrinchados</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">53</span><span class=\"reader-checklist-text\">Magnésio mantido por 24h após o parto/última convulsão na pré-eclâmpsia grave/eclâmpsia.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">54</span><span class=\"reader-checklist-text\">Pré-eclâmpsia grave: risco cardiovascular aumenta para o resto da vida — orientar seguimento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">55</span><span class=\"reader-checklist-text\">DMG: necessidade de insulina cai abruptamente no pós-parto — reduzir a dose de imediato.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">56</span><span class=\"reader-checklist-text\">Mola: contracepção obrigatória + beta-hCG semanal até 3 negativos, depois mensal por 6 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">57</span><span class=\"reader-checklist-text\">Suspeitar de malignização da mola se houver platô ou elevação do beta-hCG, ou detecção após 6 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">58</span><span class=\"reader-checklist-text\">Ectópica com metotrexato: beta-hCG nos dias 4 e 7, esperando queda ≥15%.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">59</span><span class=\"reader-checklist-text\">Curva normal de beta-hCG em gestação tópica viável: aumento ≥53% em 48h.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">60</span><span class=\"reader-checklist-text\">Endometrite: tratar com clindamicina + gentamicina até 24-48h afebril; investigar coleção se não responder.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">61</span><span class=\"reader-checklist-text\">Corioamnionite é indicação de resolução da gestação, independente da idade gestacional.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">62</span><span class=\"reader-checklist-text\">Mioma submucoso é o que mais causa sangramento e infertilidade; miomectomia preserva o útero.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">63</span><span class=\"reader-checklist-text\">Mioma com crescimento rápido na pós-menopausa → investigar sarcoma.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">64</span><span class=\"reader-checklist-text\">Endometriose: tratamento hormonal contínuo é crônico — suspender leva à recorrência.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">65</span><span class=\"reader-checklist-text\">DIP: reavaliar em 48-72h; sem melhora, investigar abscesso ou reconsiderar diagnóstico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">66</span><span class=\"reader-checklist-text\">SOMP: letrozol é a indução de ovulação de 1ª linha para quem deseja engravidar.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">67</span><span class=\"reader-checklist-text\">SOMP: vigiar hiperplasia endometrial em quem tem longos períodos de amenorreia sem oposição hormonal.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">68</span><span class=\"reader-checklist-text\">Câncer de colo: sinusorragia é o sintoma mais característico da doença já invasora.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">69</span><span class=\"reader-checklist-text\">Câncer de colo localmente avançado (II-IVA): quimiorradioterapia, não cirurgia primária.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">70</span><span class=\"reader-checklist-text\">Câncer de mama: subtipo triplo-negativo só tem quimioterapia como base sistêmica — sem alvo hormonal/HER2.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">71</span><span class=\"reader-checklist-text\">Câncer de mama luminal: hormonioterapia por 5 a 10 anos — abandono precoce é a principal causa evitável de recidiva.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">72</span><span class=\"reader-checklist-text\">Dor pélvica aguda: beta-hCG sempre primeiro, para excluir ectópica antes de qualquer outra hipótese.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">73</span><span class=\"reader-checklist-text\">Massa ovariana em jovem → teratoma/marcadores germinativos; em pós-menopausa → câncer epitelial/CA-125.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">74</span><span class=\"reader-checklist-text\">Amenorreia primária: investigar FSH para localizar o compartimento comprometido.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">75</span><span class=\"reader-checklist-text\">Síndrome de Rokitansky: 46XX, caracteres normais, sem útero/vagina superior.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">76</span><span class=\"reader-checklist-text\">Síndrome de Morris: 46XY, fenótipo feminino, ausência de pelos pubianos/axilares.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">77</span><span class=\"reader-checklist-text\">Aleitamento: nem mastite nem abscesso mamário são motivo para suspender a amamentação.</span></p>"
-                            }
-                        ]
-                    }
-                ]
-            },
             "infectologia": {
                 "area": "Clínica Médica",
                 "title": "Infectologia",
@@ -2607,7 +2288,7 @@
             },
             "gastroenterologia": {
                 "area": "Clínica Médica",
-                "title": "Gastroenterologia e Hepatologia",
+                "title": "Gastroenterologia",
                 "sections": [
                     {
                         "title": "DRGE, dispepsia e úlcera péptica",
@@ -2642,31 +2323,13 @@
                         ]
                     },
                     {
-                        "title": "Fígado — nomenclatura atualizada e hepatopatias",
-                        "tags": [
-                            "ja",
-                            "novo"
-                        ],
-                        "subchapters": [
-                            {
-                                "num": "3.1",
-                                "title": "Fígado — nomenclatura atualizada e hepatopatias",
-                                "tags": [
-                                    "ja",
-                                    "novo"
-                                ],
-                                "bodyHtml": "<p><strong>Mudança de nomenclatura internacional (2023), já adotada por sociedades brasileiras:</strong> a antiga <strong>\"doença hepática gordurosa não alcoólica\" (DHGNA/NAFLD)</strong> foi substituída por <strong>doença hepática esteatótica associada a disfunção metabólica (MASLD)</strong>; a antiga esteato-hepatite não alcoólica (EHNA/NASH) virou <strong>MASH</strong>. A Sociedade Brasileira de Diabetes já adota o termo em português \"doença hepática esteatótica metabólica (DHEM)\".</p><ul class=\"reader-list\"><li>Diagnóstico de MASLD: esteatose hepática (por imagem, biópsia ou biomarcador) <strong>associada a pelo menos 1 dos 5 critérios cardiometabólicos</strong> (obesidade/sobrepeso, glicemia alterada/diabetes, hipertensão, dislipidemia com HDL baixo ou triglicerídeos altos).</li><li><strong>MetALD</strong>: nova categoria intermediária para pacientes com MASLD que também consomem álcool em quantidade moderada (140–350 g/semana em mulheres, 210–420 g/semana em homens) — sem preencher critério para doença hepática alcoólica pura.</li><li>Mais de 95% dos pacientes antes rotulados como NAFLD preenchem os novos critérios de MASLD — a mudança é essencialmente de nomenclatura e de critérios diagnósticos positivos, não uma nova doença.</li><li>A <strong>fibrose hepática segue sendo o principal fator prognóstico</strong>, independentemente do nome adotado.</li></ul><div class=\"reader-subheading\"><h3>Outras hepatopatias a lembrar (temas adjacentes):</h3></div><ul class=\"reader-list\"><li><strong>Hepatite autoimune</strong>: mulher jovem, transaminases elevadas, hipergamaglobulinemia, autoanticorpos (FAN, anti-músculo liso) → corticoide ± azatioprina.</li><li><strong>Hemocromatose hereditária</strong>: sobrecarga de ferro, cirrose, diabetes bronzeado, cardiomiopatia, artropatia — ferritina e saturação de transferrina elevadas; tratamento com flebotomias terapêuticas.</li><li><strong>Doença de Wilson</strong>: jovem com hepatopatia + sintomas neuropsiquiátricos + <strong>anel de Kayser-Fleischer</strong> — ceruloplasmina baixa; quelante de cobre.</li><li><strong>Deficiência de alfa-1 antitripsina</strong>: hepatopatia e enfisema pulmonar precoce, especialmente em não tabagistas jovens.</li></ul><div class=\"reader-subheading\"><h3>Cirrose e suas complicações:</h3></div><ul class=\"reader-list\"><li><strong>Ascite</strong>: paracentese diagnóstica com <strong>GASA (gradiente albumina soro-ascite) ≥ 1,1 g/dL</strong> indica hipertensão portal. Tratamento: restrição de sódio + <strong>espironolactona associada a furosemida</strong>.</li><li><strong>Peritonite bacteriana espontânea</strong>: <strong>≥ 250 polimorfonucleares/mm³</strong> no líquido ascítico → <strong>cefotaxima ou ceftriaxona + albumina</strong> (a albumina reduz o risco de síndrome hepatorrenal); profilaxia secundária com norfloxacino.</li><li><strong>Encefalopatia hepática</strong>: alteração do nível de consciência e comportamento em cirrótico → <strong>lactulose</strong> e rifaximina; sempre procurar o fator precipitante (infecção, sangramento digestivo, constipação, distúrbio eletrolítico, uso de sedativo).</li><li><strong>Síndrome hepatorrenal</strong>: insuficiência renal funcional em cirrótico com ascite refratária, sem outra causa identificável → terlipressina/albumina; diagnóstico de exclusão.</li><li><strong>Varizes esofágicas</strong>: rastreamento por endoscopia no cirrótico; profilaxia primária do primeiro sangramento com <strong>betabloqueador não seletivo ou ligadura elástica</strong>.</li><li><strong>Rastreio de carcinoma hepatocelular</strong>: ultrassonografia semestral (± alfafetoproteína) em todo cirrótico.</li><li>Classificações prognósticas: <strong>Child-Pugh</strong> e <strong>MELD</strong>, usadas para estimar gravidade e priorizar transplante.</li></ul>"
-                            }
-                        ]
-                    },
-                    {
                         "title": "Pâncreas",
                         "tags": [
                             "adj"
                         ],
                         "subchapters": [
                             {
-                                "num": "4.1",
+                                "num": "3.1",
                                 "title": "Pâncreas",
                                 "tags": [
                                     "adj"
@@ -2683,7 +2346,7 @@
                                 "num": "✓",
                                 "title": "Frases para a véspera",
                                 "tags": [],
-                                "bodyHtml": "<p class=\"reader-checklist-category\">Gastro e hepato</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">59</span><span class=\"reader-checklist-text\">DRGE: endoscopia só com <strong>sinais de alarme</strong>.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">60</span><span class=\"reader-checklist-text\">Erradicar <em>H. pylori</em> em úlcera péptica e linfoma MALT; controle após 4 semanas com <strong>teste respiratório ou antígeno fecal — sorologia não serve</strong>.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">61</span><span class=\"reader-checklist-text\"><strong>Toda úlcera gástrica se biopsia</strong> e tem controle endoscópico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">62</span><span class=\"reader-checklist-text\"><strong>NAFLD/DHGNA agora é MASLD</strong>; NASH agora é MASH; diagnóstico exige esteatose + 1 critério cardiometabólico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">63</span><span class=\"reader-checklist-text\"><strong>GASA ≥ 1,1</strong> = hipertensão portal; <strong>PBE ≥ 250 PMN</strong> → cefotaxima + albumina.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">64</span><span class=\"reader-checklist-text\">Encefalopatia hepática: <strong>lactulose</strong> + buscar o fator precipitante.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">65</span><span class=\"reader-checklist-text\">Doença celíaca: biópsia <strong>com o paciente ainda ingerindo glúten</strong>.</span></p>"
+                                "bodyHtml": "<p class=\"reader-checklist-category\">Gastroenterologia</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">59</span><span class=\"reader-checklist-text\">DRGE: endoscopia só com <strong>sinais de alarme</strong>.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">60</span><span class=\"reader-checklist-text\">Erradicar <em>H. pylori</em> em úlcera péptica e linfoma MALT; controle após 4 semanas com <strong>teste respiratório ou antígeno fecal — sorologia não serve</strong>.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">61</span><span class=\"reader-checklist-text\"><strong>Toda úlcera gástrica se biopsia</strong> e tem controle endoscópico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">65</span><span class=\"reader-checklist-text\">Doença celíaca: biópsia <strong>com o paciente ainda ingerindo glúten</strong>.</span></p>"
                             }
                         ]
                     }
@@ -3311,9 +2974,9 @@
                     }
                 ]
             },
-            "oftalmo-otorrino": {
+            "oftalmologia": {
                 "area": "Clínica Médica",
-                "title": "Oftalmologia e Otorrinolaringologia",
+                "title": "Oftalmologia",
                 "sections": [
                     {
                         "title": "Olho vermelho e emergências oftalmológicas",
@@ -3328,13 +2991,31 @@
                         ]
                     },
                     {
+                        "title": "Checklist Final",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "✓",
+                                "title": "Frases para a véspera",
+                                "tags": [],
+                                "bodyHtml": "<p class=\"reader-checklist-category\">Oftalmo/ORL</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">100</span><span class=\"reader-checklist-text\">Glaucoma agudo de ângulo fechado: <strong>midríase fixa + dor + halos</strong> = emergência.</span></p>"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "otorrinolaringologia": {
+                "area": "Clínica Médica",
+                "title": "Otorrinolaringologia",
+                "sections": [
+                    {
                         "title": "Vertigem e perda auditiva",
                         "tags": [
                             "ja"
                         ],
                         "subchapters": [
                             {
-                                "num": "2.1",
+                                "num": "1.1",
                                 "title": "Vertigem e perda auditiva",
                                 "tags": [
                                     "ja"
@@ -3350,12 +3031,36 @@
                         ],
                         "subchapters": [
                             {
-                                "num": "3.1",
+                                "num": "2.1",
                                 "title": "Epistaxe",
                                 "tags": [
                                     "adj"
                                 ],
                                 "bodyHtml": "<ul class=\"reader-list\"><li>A maioria é anterior (plexo de Kiesselbach) → <strong>compressão digital do terço anterior do nariz por 10–15 minutos</strong> contínuos, com a cabeça inclinada para frente; cauterização química ou elétrica se recorrente; tamponamento anterior se refratário; epistaxe posterior (mais rara, mais grave, mais comum no idoso hipertenso) pode exigir tamponamento posterior ou abordagem especializada.</li></ul>"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "hepatologia": {
+                "area": "Clínica Médica",
+                "title": "Hepatologia",
+                "sections": [
+                    {
+                        "title": "Fígado — nomenclatura atualizada e hepatopatias",
+                        "tags": [
+                            "ja",
+                            "novo"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "1.1",
+                                "title": "Fígado — nomenclatura atualizada e hepatopatias",
+                                "tags": [
+                                    "ja",
+                                    "novo"
+                                ],
+                                "bodyHtml": "<p><strong>Mudança de nomenclatura internacional (2023), já adotada por sociedades brasileiras:</strong> a antiga <strong>\"doença hepática gordurosa não alcoólica\" (DHGNA/NAFLD)</strong> foi substituída por <strong>doença hepática esteatótica associada a disfunção metabólica (MASLD)</strong>; a antiga esteato-hepatite não alcoólica (EHNA/NASH) virou <strong>MASH</strong>. A Sociedade Brasileira de Diabetes já adota o termo em português \"doença hepática esteatótica metabólica (DHEM)\".</p><ul class=\"reader-list\"><li>Diagnóstico de MASLD: esteatose hepática (por imagem, biópsia ou biomarcador) <strong>associada a pelo menos 1 dos 5 critérios cardiometabólicos</strong> (obesidade/sobrepeso, glicemia alterada/diabetes, hipertensão, dislipidemia com HDL baixo ou triglicerídeos altos).</li><li><strong>MetALD</strong>: nova categoria intermediária para pacientes com MASLD que também consomem álcool em quantidade moderada (140–350 g/semana em mulheres, 210–420 g/semana em homens) — sem preencher critério para doença hepática alcoólica pura.</li><li>Mais de 95% dos pacientes antes rotulados como NAFLD preenchem os novos critérios de MASLD — a mudança é essencialmente de nomenclatura e de critérios diagnósticos positivos, não uma nova doença.</li><li>A <strong>fibrose hepática segue sendo o principal fator prognóstico</strong>, independentemente do nome adotado.</li></ul><div class=\"reader-subheading\"><h3>Outras hepatopatias a lembrar (temas adjacentes):</h3></div><ul class=\"reader-list\"><li><strong>Hepatite autoimune</strong>: mulher jovem, transaminases elevadas, hipergamaglobulinemia, autoanticorpos (FAN, anti-músculo liso) → corticoide ± azatioprina.</li><li><strong>Hemocromatose hereditária</strong>: sobrecarga de ferro, cirrose, diabetes bronzeado, cardiomiopatia, artropatia — ferritina e saturação de transferrina elevadas; tratamento com flebotomias terapêuticas.</li><li><strong>Doença de Wilson</strong>: jovem com hepatopatia + sintomas neuropsiquiátricos + <strong>anel de Kayser-Fleischer</strong> — ceruloplasmina baixa; quelante de cobre.</li><li><strong>Deficiência de alfa-1 antitripsina</strong>: hepatopatia e enfisema pulmonar precoce, especialmente em não tabagistas jovens.</li></ul><div class=\"reader-subheading\"><h3>Cirrose e suas complicações:</h3></div><ul class=\"reader-list\"><li><strong>Ascite</strong>: paracentese diagnóstica com <strong>GASA (gradiente albumina soro-ascite) ≥ 1,1 g/dL</strong> indica hipertensão portal. Tratamento: restrição de sódio + <strong>espironolactona associada a furosemida</strong>.</li><li><strong>Peritonite bacteriana espontânea</strong>: <strong>≥ 250 polimorfonucleares/mm³</strong> no líquido ascítico → <strong>cefotaxima ou ceftriaxona + albumina</strong> (a albumina reduz o risco de síndrome hepatorrenal); profilaxia secundária com norfloxacino.</li><li><strong>Encefalopatia hepática</strong>: alteração do nível de consciência e comportamento em cirrótico → <strong>lactulose</strong> e rifaximina; sempre procurar o fator precipitante (infecção, sangramento digestivo, constipação, distúrbio eletrolítico, uso de sedativo).</li><li><strong>Síndrome hepatorrenal</strong>: insuficiência renal funcional em cirrótico com ascite refratária, sem outra causa identificável → terlipressina/albumina; diagnóstico de exclusão.</li><li><strong>Varizes esofágicas</strong>: rastreamento por endoscopia no cirrótico; profilaxia primária do primeiro sangramento com <strong>betabloqueador não seletivo ou ligadura elástica</strong>.</li><li><strong>Rastreio de carcinoma hepatocelular</strong>: ultrassonografia semestral (± alfafetoproteína) em todo cirrótico.</li><li>Classificações prognósticas: <strong>Child-Pugh</strong> e <strong>MELD</strong>, usadas para estimar gravidade e priorizar transplante.</li></ul>"
                             }
                         ]
                     },
@@ -3367,7 +3072,344 @@
                                 "num": "✓",
                                 "title": "Frases para a véspera",
                                 "tags": [],
-                                "bodyHtml": "<p class=\"reader-checklist-category\">Oftalmo/ORL</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">100</span><span class=\"reader-checklist-text\">Glaucoma agudo de ângulo fechado: <strong>midríase fixa + dor + halos</strong> = emergência.</span></p>"
+                                "bodyHtml": "<p class=\"reader-checklist-category\">Hepatologia</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">62</span><span class=\"reader-checklist-text\"><strong>NAFLD/DHGNA agora é MASLD</strong>; NASH agora é MASH; diagnóstico exige esteatose + 1 critério cardiometabólico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">63</span><span class=\"reader-checklist-text\"><strong>GASA ≥ 1,1</strong> = hipertensão portal; <strong>PBE ≥ 250 PMN</strong> → cefotaxima + albumina.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">64</span><span class=\"reader-checklist-text\">Encefalopatia hepática: <strong>lactulose</strong> + buscar o fator precipitante.</span></p>"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "obstetricia": {
+                "area": "Ginecologia e Obstetrícia",
+                "title": "Obstetrícia",
+                "sections": [
+                    {
+                        "title": "Pré-natal",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "1.1",
+                                "title": "Organização, calendário e datação da gestação",
+                                "tags": [
+                                    "ja",
+                                    "novo"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>Rede Alyne</strong> (Portaria GM/MS 5.350/2024, substituindo a Rede Cegonha): início até 12 semanas, <strong>mínimo de 7 consultas</strong> (mais que as 6 do antigo PHPN), intercaladas médico/enfermeiro.</li><li>Estratificação de risco em todo ponto de entrada; ambulatório de alto risco com mínimo de 12 consultas; meta de consulta puerperal entre o <strong>3º e o 5º dia</strong>.</li><li>Em toda consulta: peso, PA, altura uterina, BCF (sonar 10–12 semanas, Pinard 20 semanas), movimentação fetal, edema.</li><li><strong>Datação</strong>: se DUM certa e regular, calcular por Naegele (DUM + 7 dias − 3 meses); se há <strong>USG de 1º trimestre (CCN, até 13s6d) com diferença > 5–7 dias da DUM, a USG prevalece</strong> — é o método mais acurado da gestação inteira.</li><li>USG tardia (> 22 semanas) perde acurácia (margem de 2–3 semanas), usar com cautela se for a única disponível.</li></ul>"
+                            },
+                            {
+                                "num": "1.2",
+                                "title": "Exames de rotina, suplementação e vacinação",
+                                "tags": [
+                                    "ja",
+                                    "novo"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>1ª consulta</strong>: hemograma, tipagem ABO/Rh (Rh− → Coombs indireto), glicemia de jejum, sífilis/HIV/hepatite B/C, toxoplasmose IgG/IgM, urina I + urocultura, eletroforese de Hb.</li><li><strong>24–28 semanas</strong>: TOTG 75g. <strong>3º trimestre</strong>: repetir sífilis/HIV/hepatite B. <strong>36–37 semanas</strong>: swab para <strong>estreptococo do grupo B</strong>.</li><li>Suplementação: <strong>ácido fólico 0,4mg/dia</strong> (5mg se alto risco de defeito de tubo neural), <strong>ferro 40mg/dia a partir de 20 semanas</strong>.</li><li><strong>Cálcio NÃO é mais indicado especificamente para prevenir pré-eclâmpsia</strong> (FEBRASGO/RBEHG, 2026) — segue indicado por outros motivos quando pertinente, mas essa não é mais a resposta para \"o que previne pré-eclâmpsia\".</li><li>Vacinação: <strong>dTpa a partir da 20ª semana em toda gestação</strong>; <strong>VSR a partir da 28ª semana</strong> (protege o lactente); influenza e hepatite B conforme indicação; <strong>vírus vivo (tríplice viral, varicela, HPV, febre amarela) contraindicado</strong>.</li><li>Proscritos na gestação: IECA/BRA, varfarina, retinoides, tetraciclinas, <strong>AINE após 20–28 semanas</strong>.</li><li><strong> Erros comuns</strong>: usar cálcio como resposta de prevenção de pré-eclâmpsia (desatualizado); esquecer que a USG de 1º trimestre sobrepõe a DUM quando discrepantes.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Infecções na gestação",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "2.1",
+                                "title": "Sorologias positivas na gestante — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">SÍFILIS reagente → PENICILINA BENZATINA sempre (alérgica dessensibiliza, nunca troca)\n Recente (<1 ano): 2,4 milhões UI dose única | Tardia/ignorada: 3 doses semanais\n VDRL mensal; queda <2 diluições em 3 meses = retratar/investigar neurossífilis\n No parto: VDRL do RN ≥2 diluições acima do materno → investigar e tratar o RN\n\nHIV reagente → TARV imediata para todas, independente de CD4\n CV 34-36 semanas define parto: >1.000/desconhecida → cesárea eletiva 38s + AZT EV\n indetectável → via obstétrica\n Aleitamento SEMPRE contraindicado\n\nTOXOPLASMOSE\n IgG−/IgM− → suscetível, repetir a cada trimestre\n IgG+/IgM− → imune\n IgG−/IgM+ → possível recente/falso+, repetir em 2-3 semanas + espiramicina\n IgG+/IgM+ → TESTE DE AVIDEZ: alta avidez + <16 semanas tranquiliza;\n caso contrário manter espiramicina e investigar infecção fetal\n (PCR em líquido amniótico >18 semanas) → se + : sulfadiazina+pirimetamina+ác. folínico</pre><ul class=\"reader-list\"><li><strong>Bacteriúria assintomática</strong>: sempre rastrear e tratar na gestante (reduz pielonefrite/prematuridade).</li><li><strong>EGB</strong>: profilaxia intraparto com penicilina cristalina se cultura +, bacteriúria por EGB atual, filho anterior acometido, ou risco sem cultura (< 37sem, bolsa rota ≥ 18h, febre intraparto).</li><li>Hepatite B: RN de mãe HBsAg+ recebe vacina + imunoglobulina em 12h. Zika/dengue: nunca AAS/AINE.</li><li><strong> Erros comuns</strong>: sondar/tratar sífilis com outra droga em alérgica em vez de dessensibilizar; amamentar com HIV materno; assumir infecção toxoplásmica ativa com IgG+/IgM+ sem teste de avidez.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Síndromes hipertensivas da gestação",
+                        "tags": [
+                            "ja",
+                            "novo"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "3.1",
+                                "title": "Classificação e manejo — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">PA≥140/90 — QUANDO apareceu?\n ANTES de 20 semanas → HAS CRÔNICA (piora/proteinúria na 2ª metade = sobreposta)\n DEPOIS de 20 semanas — TEM proteinúria OU disfunção de órgão-alvo?\n NÃO → HIPERTENSÃO GESTACIONAL\n SIM → PRÉ-ECLÂMPSIA\n Tem sinal de gravidade (PA≥160/110 | plaquetas<100.000 | creatinina>1,1 |\n transaminases≥2x | cefaleia/escotoma persistente | dor em HD | EAP)?\n SIM → PE GRAVE → resolver com 34 semanas + corticoide se <34 + magnésio\n NÃO → resolver com 37 semanas\n Convulsão → ECLÂMPSIA → magnésio + ESTABILIZAR A MÃE PRIMEIRO (não é cesárea automática)\n Hemólise+enzimas altas+plaquetopenia → SÍNDROME HELLP → mesma lógica da PE grave</pre><ul class=\"reader-list\"><li>Sinais e sintomas de gravidade: cefaleia persistente, escotomas/turvação visual, dor em hipocôndrio direito/epigástrio, hiper-reflexia.</li><li><strong>Manejo</strong>: <strong>sulfato de magnésio</strong> (Zuspan 4g EV/20min ou Pritchard 4g EV+10g IM) na PE grave/eclâmpsia/HELLP — vigiar <strong>reflexo patelar (1º sinal de intoxicação se abolido), FR ≥ 16, diurese ≥ 25–30mL/h</strong>; antídoto <strong>gluconato de cálcio 1g EV lento</strong>.</li><li>Crise hipertensiva (≥ 160/110): hidralazina/nifedipino/labetalol, meta 140–150×90–100, <strong>nunca normalizar bruscamente</strong>.</li><li><strong>Prevenção no alto risco</strong>: AAS 100–150mg de 12–16 até 36 semanas — <strong>cálcio NÃO entra mais aqui</strong>.</li><li><strong>Seguimento</strong>: manter magnésio por 24h pós-parto/última convulsão; PA pode piorar nos primeiros dias de puerpério; risco cardiovascular aumentado para o resto da vida (sobretudo se início precoce) — orientar seguimento clínico; gestação futura com AAS profilático e investigação de trombofilia se recorrência grave/precoce.</li><li><strong> Erros comuns</strong>: usar cálcio como prevenção; achar que convulsão indica cesárea imediata (estabilizar a mãe primeiro); normalizar a PA bruscamente.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Diabetes na gestação",
+                        "tags": [
+                            "adj"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "4.1",
+                                "title": "Diabetes gestacional",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">1ª consulta, glicemia de jejum: ≥126 = diabetes prévio | 92-125 = DMG já aqui | <92 = normal\n24-28 semanas, TOTG 75g (mesmo se normal antes): 1 valor alterado já fecha\n jejum≥92 OU 1h≥180 OU 2h≥153 → DIABETES GESTACIONAL</pre><ul class=\"reader-list\"><li>Frequentemente assintomática (fatores de risco: obesidade, ≥ 35 anos, DMG prévio, macrossomia prévia, SOMP); polidrâmnio/suspeita de macrossomia pode ser a 1ª pista.</li><li><strong>Manejo</strong>: dieta + exercício por 1–2 semanas, automonitorização glicêmica, vigilância fetal (USG seriada, CTG/perfil biofísico a partir de 32–36 semanas).</li><li><strong>Tratamento</strong>: <strong>insulina</strong> se metas não atingidas (jejum < 95, 1h < 140, 2h < 120) — esquema NPH + rápida ajustado ao perfil. Via de parto conforme obstetrícia habitual, discutir cesárea se macrossomia importante (risco de distocia de ombro).</li><li><strong>Seguimento</strong>: necessidade de insulina <strong>cai abruptamente no pós-parto</strong> — reduzir/suspender de imediato; <strong>TOTG de reclassificação em 6–12 semanas</strong>; risco aumentado de DM2 futuro, reforçar estilo de vida mesmo com TOTG normal; próxima gestação rastreia diabetes já na 1ª consulta.</li><li><strong> Erro comum</strong>: manter dose alta de insulina no pós-parto imediato sem reduzir.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Sangramentos da gestação",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "5.1",
+                                "title": "Sangramento na 1ª metade — fluxograma e condutas",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Atraso menstrual + sangramento + beta-hCG positivo — onde está a gestação?\n Saco gestacional TÓPICO, com BCF, colo fechado → AMEAÇA DE ABORTAMENTO (expectante)\n Tópico, sem BCF, colo fechado, útero pequeno → ABORTAMENTO RETIDO\n Colo ABERTO + sangramento importante → INEVITÁVEL\n Restos + colo aberto → INCOMPLETO → AMIU\n Febre+odor fétido+leucocitose → INFECTADO → ATB + esvaziamento\n Útero MAIOR que a IG + beta muito alto + \"flocos de neve\" + hiperêmese + PE precoce\n → MOLA HIDATIFORME\n SEM saco intrauterino, beta não dobra 53% em 48h → GESTAÇÃO ECTÓPICA</pre><ul class=\"reader-list\"><li><strong>Mola hidatiforme</strong>: esvaziamento por aspiração a vácuo (método de escolha, qualquer tamanho); histerectomia se prole definida/> 40 anos.</li><li><strong>Contracepção eficaz obrigatória</strong> durante o seguimento (evitar DIU até beta negativar); <strong>beta-hCG semanal até 3 negativos, depois mensal por 6 meses</strong>; suspeitar de malignização se platô/elevação em dosagens seriadas ou beta ainda detectável após 6 meses → investigar e quimioterapizar.</li><li><strong>Gestação ectópica</strong>: metotrexato se íntegra, < 3,5–4cm, sem BCF, beta < 5.000, estável — <strong>monitorar beta nos dias 4 e 7, esperando queda ≥ 15%</strong>; cirurgia (salpingectomia/salpingostomia) se rota, instável, ou falha do MTX.</li><li>Gestante Rh− recebe imunoglobulina anti-D independente da via de tratamento; seguimento com beta semanal até negativar após MTX/salpingostomia.</li><li><strong>Aborto legal</strong> (sem BO/autorização judicial no estupro): risco de vida, estupro, anencefalia.</li><li><strong> Erros comuns</strong>: esquecer contracepção/seguimento com beta pós-mola; usar MTX fora dos critérios (massa grande, BCF+, beta muito alto); não dar imunoglobulina anti-D em ectópica de gestante Rh−.</li></ul>"
+                            },
+                            {
+                                "num": "5.2",
+                                "title": "Sangramento na 2ª metade, isoimunização Rh, trombofilia e RCIU",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Sangramento >20 semanas — a dor está presente?\n DOR INTENSA+hipertonia+sangue ESCURO (±oculto) → DPP → resolução RÁPIDA\n SEM dor, sangue VERMELHO VIVO recorrente, útero normotônico → PLACENTA PRÉVIA\n → NÃO fazer toque vaginal; USG confirma; cesárea se total/sangramento importante\n Dor súbita+PARADA das contrações+subida da apresentação+cicatriz prévia → ROTURA UTERINA\n No momento da rotura de membranas+sofrimento fetal desproporcional → VASA PRÉVIA</pre><ul class=\"reader-list\"><li>Acretismo (prévia + cesárea prévia): USG Doppler/RM → cesárea-histerectomia programada com hemoterapia disponível.</li><li><strong>Isoimunização Rh</strong>: gestante Rh− com Coombs indireto <strong>negativo</strong> → imunoglobulina anti-D em qualquer sangramento, procedimento invasivo, trauma abdominal, rotineiramente às 28 semanas, e sempre no pós-parto se RN Rh+; <strong>Coombs já positivo → imunoglobulina não tem mais papel</strong>, acompanhar com Doppler de ACM para anemia fetal.</li><li><strong>Trombofilia/SAF</strong>: investigar em pré-eclâmpsia grave precoce recorrente ou perdas gestacionais de repetição; gestação seguinte com AAS + HBPM profilática.</li><li><strong>RCIU</strong> (peso < percentil 10): causa mais comum é <strong>insuficiência placentária</strong> → Doppler de artéria umbilical; resolução quando o risco de permanecer intraútero supera o da prematuridade (diástole zero/reversa persistente), com corticoide se pré-termo.</li><li><strong> Erros comuns</strong>: toque vaginal em placenta prévia; não dar imunoglobulina anti-D em sangramento leve com Coombs negativo.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Vitalidade fetal e ultrassonografia",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "6.1",
+                                "title": "Cardiotocografia e Doppler — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Linha de base 110-160? Variabilidade 6-25? Acelerações presentes?\n SIM a tudo → CATEGORIA I (normal)\n Desaceleração ESPELHA a contração → DIP I/precoce → compressão CEFÁLICA, benigno\n Desaceleração começa DEPOIS do pico → DIP II/tardia → INSUFICIÊNCIA PLACENTÁRIA\n → reanimação intrauterina: DLE, O2, hidratar, SUSPENDER OCITOCINA\n Forma/momento variáveis → DIP III/variável → compressão de CORDÃO</pre><ul class=\"reader-list\"><li>Categoria III (variabilidade ausente + desacelerações recorrentes ou bradicardia ou sinusoidal) → reanimação imediata e resolução.</li><li>Doppler: artéria umbilical com <strong>diástole zero/reversa</strong> = gravidade; artéria cerebral média com resistência reduzida = centralização; ducto venoso com <strong>onda A ausente/reversa</strong> = descompensação, indica resolução.</li><li>Perfil biofísico: CTG + respiratórios + corpóreos + tônus + <strong>líquido amniótico</strong> (marcador de hipóxia crônica).</li><li><strong> Erro comum</strong>: manter ocitocina diante de DIP II.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Trabalho de parto",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "7.1",
+                                "title": "Distocias, estática fetal, gravidez prolongada e vias de parto",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Fase ATIVA (≥5-6cm) progredindo <1cm/h por 2h+ → PARADA SECUNDÁRIA DA DILATAÇÃO\nDilatação completa sem descida por 1h+ → PARADA SECUNDÁRIA DA DESCIDA\nIndução: Bishop <6 → preparo cervical (misoprostol vaginal/sonda de Foley)\n Bishop ≥6-9 → ocitocina ± amniotomia Misoprostol CONTRAINDICADO se cesárea anterior</pre><ul class=\"reader-list\"><li><strong>Manobras de Leopold</strong>: 1ª (fundo) define situação; 2ª (lados) define posição (lado do dorso); 3ª (suprapúbica) define apresentação e mobilidade; 4ª define grau de insinuação.</li><li>Situação <strong>transversa = cesárea sempre</strong>; apresentação pélvica a termo discute via com a paciente (cesárea geralmente preferida).</li><li><strong>Distocia de ombro</strong>: McRoberts + pressão suprapúbica → manobras internas (Rubin II, Woods, extração do braço posterior) — <strong>nunca Kristeller, nunca tração excessiva</strong>.</li><li><strong>Gravidez prolongada</strong> (≥ 42 semanas): intensificar vigilância a partir de 41 semanas; indução recomendada entre 41–42 semanas; passar da data com vitalidade preservada não é indicação isolada de cesárea.</li><li><strong>Cesárea — indicações absolutas</strong>: prévia total, situação transversa, prolapso de cordão, herpes ativo, cesárea corporal prévia, DCP confirmada, sofrimento fetal sem condição de parto vaginal imediato.</li><li><strong>Iteratividade</strong> (múltiplas cesáreas prévias): risco de rotura/acretismo aumenta a cada cicatriz → cesárea eletiva programada com atenção a acretismo (USG Doppler/RM antenatal) e hemoderivados disponíveis; 1 cesárea prévia com cicatriz transversa baixa pode tentar PVAC em casos selecionados.</li><li>Boas práticas OMS: acompanhante, posição livre, analgesia a pedido, <strong>clampeamento tardio</strong>, pele a pele; <strong>sem episiotomia/Kristeller/amniotomia de rotina</strong>.</li><li><strong> Erros comuns</strong>: misoprostol com cesárea prévia; Kristeller na distocia de ombro; cesárea automática só por \"passar da data\".</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Puerpério e hemorragia pós-parto",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "8.1",
+                                "title": "Hemorragia pós-parto — fluxograma e condutas",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Perda >500mL (vaginal)/>1.000mL (cesárea) ou repercussão hemodinâmica\nÚtero CONTRAÍDO ou AMOLECIDO?\n AMOLECIDO → TÔNUS/atonia (70-80% dos casos)\n → massagem bimanual+esvaziar bexiga → ocitocina → misoprostol 800mcg\n → ác. tranexâmico 1g (até 3h do início) → balão intrauterino\n → B-Lynch/ligadura → histerectomia (último recurso) metilergometrina CONTRAINDICADA se hipertensa\n CONTRAÍDO+sangramento ativo → TRAUMA → revisar canal, suturar, excluir rotura/inversão\n Dequitação incompleta → TECIDO → revisão uterina/curetagem\n \"Em babação\" sem coágulos → TROMBINA/CIVD → hemoderivados + tratar causa</pre><ul class=\"reader-list\"><li>Fatores de risco: trabalho de parto prolongado/muito rápido, ocitocina prolongada, macrossomia, gemelaridade, polidrâmnio, corioamnionite, multiparidade, miomas.</li><li><strong>Seguimento</strong>: monitorização intensiva nas primeiras 24h, repor ferro conforme gravidade da anemia, profilaxia de TEV, planejar parto futuro em serviço com banco de sangue se atonia prévia.</li><li><strong> Erro comum</strong>: metilergometrina em hipertensa/pré-eclâmpsia.</li></ul>"
+                            },
+                            {
+                                "num": "8.2",
+                                "title": "Puerpério normal, endometrite e corioamnionite",
+                                "tags": [],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Loquiação: rubra (3–4 dias) → serosa → alba.</li><li>Saúde mental do puerpério (ver Rapid Review de Psiquiatria): blues (autolimitado, 2 semanas) × depressão pós-parto (persistente, tratar, rastreio com Edimburgo) × psicose puerperal (emergência).</li><li><strong>Endometrite</strong>: febre <strong>≥ 38°C por 2 dias, entre o 2º e o 10º dia</strong>, útero subinvoluído e doloroso, lóquios fétidos — fator de risco maior é <strong>cesárea</strong> → <strong>clindamicina + gentamicina</strong> até 24–48h afebril; investigar coleção/tromboflebite pélvica séptica se sem resposta em 48–72h; diferencial: infecção de ferida, mastite, ITU, TVP, atelectasia (mais precoce).</li><li><strong>Corioamnionite</strong>: febre + taquicardia materna/fetal + líquido fétido → antibiótico amplo espectro + <strong>resolução da gestação independente da idade gestacional</strong>; RN avaliado para sepse precoce.</li><li><strong> Erros comuns</strong>: não investigar coleção/tromboflebite se endometrite não responde em 48–72h; manter conduta expectante de prematuridade diante de corioamnionite.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Prematuridade, amniorrexe e trauma na gestante",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "9.1",
+                                "title": "Prematuridade e rotura prematura de membranas",
+                                "tags": [
+                                    "adj"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Corticoide antenatal (betametasona/dexametasona) entre 24–34 semanas.</li><li>Tocólise até 48h para permitir corticoide: nifedipino, indometacina (< 32 semanas), atosibano.</li><li>Sulfato de magnésio para neuroproteção fetal < 32 semanas.</li><li>RPMO pré-termo: evitar toque vaginal, antibiótico para latência + corticoide; <strong>corioamnionite indica resolução imediata</strong>.</li></ul>"
+                            },
+                            {
+                                "num": "9.2",
+                                "title": "Trauma na gestante",
+                                "tags": [
+                                    "ja"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li><strong>A mãe vem primeiro</strong> — reanimar a mãe é a melhor reanimação do feto.</li><li>A partir de ~20 semanas, <strong>deslocar o útero para a esquerda</strong> (DLE ou coxim sob o quadril direito) evita compressão aortocava.</li><li>A gestante <strong>pode estar em choque com sinais vitais ainda normais</strong> (reserva funcional aumentada) — não se tranquilizar com PA normal.</li><li>IG viável: <strong>cardiotocografia contínua por 4–6h</strong>, mesmo em trauma aparentemente leve (DPP oculto pode se manifestar horas depois).</li><li>Gestante Rh− recebe imunoglobulina anti-D. Cinto de segurança: parte inferior sob o abdome/sobre os quadris, nunca sobre o fundo uterino.</li><li>Cesárea perimortem considerada em minutos se PCR materna sem RCE rápido e feto viável.</li><li><strong> Erro comum</strong>: tranquilizar-se com sinais vitais maternos normais logo após o trauma.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Checklist Final",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "✓",
+                                "title": "77 frases para a véspera",
+                                "tags": [],
+                                "bodyHtml": "<p class=\"reader-checklist-category\">Pré-natal</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">1</span><span class=\"reader-checklist-text\"><strong>Rede Alyne: mínimo de 7 consultas</strong> (não mais 6 do PHPN antigo), intercaladas médico/enfermeiro.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">2</span><span class=\"reader-checklist-text\">USG de 1º trimestre (CCN) é o método mais acurado para datar a gestação.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">3</span><span class=\"reader-checklist-text\">Naegele: DUM + 7 dias − 3 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">4</span><span class=\"reader-checklist-text\">TOTG 75g entre 24-28 semanas; um valor alterado já fecha DMG.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">5</span><span class=\"reader-checklist-text\"><strong>Cálcio NÃO é mais recomendado especificamente para prevenir pré-eclâmpsia</strong> (FEBRASGO/RBEHG, 2026).</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">6</span><span class=\"reader-checklist-text\">AAS 100-150mg de 12-16 semanas até 36 semanas continua indicado no alto risco.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">7</span><span class=\"reader-checklist-text\">dTpa a partir da 20ª semana; vacina do VSR a partir da 28ª.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">8</span><span class=\"reader-checklist-text\">Vacinas de vírus vivo são contraindicadas na gestação.</span></p><p class=\"reader-checklist-category\">Infecções</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">9</span><span class=\"reader-checklist-text\">Sífilis: benzatina sempre; alérgica dessensibiliza, nunca troca de droga.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">10</span><span class=\"reader-checklist-text\">VDRL do RN ≥2 diluições acima do materno → investigar e tratar o RN.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">11</span><span class=\"reader-checklist-text\">HIV: CV>1.000 ou desconhecida → cesárea eletiva + AZT EV; aleitamento sempre contraindicado.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">12</span><span class=\"reader-checklist-text\">Toxoplasmose: IgG+/IgM+ → teste de avidez; alta avidez + <16 semanas tranquiliza.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">13</span><span class=\"reader-checklist-text\">Bacteriúria assintomática na gestante sempre se trata.</span></p><p class=\"reader-checklist-category\">Hipertensão</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">14</span><span class=\"reader-checklist-text\">Pré-eclâmpsia = PA≥140/90 após 20 semanas + proteinúria OU disfunção de órgão-alvo.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">15</span><span class=\"reader-checklist-text\">Magnésio: vigiar reflexo patelar, FR≥16, diurese; antídoto é gluconato de cálcio.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">16</span><span class=\"reader-checklist-text\">PE sem gravidade → 37 semanas; com gravidade → 34 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">17</span><span class=\"reader-checklist-text\">Estabilizar a mãe primeiro — eclâmpsia não é indicação automática de cesárea.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">18</span><span class=\"reader-checklist-text\">DPP = dor + hipertonia + sangue escuro; prévia = indolor + sangue vivo + sem toque vaginal.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">19</span><span class=\"reader-checklist-text\">Gestante Rh negativo + Coombs indireto negativo + qualquer sangramento → imunoglobulina anti-D.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">20</span><span class=\"reader-checklist-text\">Coombs indireto já positivo → imunoglobulina não tem mais papel; acompanhar com Doppler de ACM.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">21</span><span class=\"reader-checklist-text\">Trombofilia/SAF: investigar em pré-eclâmpsia grave recorrente ou perdas gestacionais de repetição.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">22</span><span class=\"reader-checklist-text\">RCIU: causa mais comum é insuficiência placentária → Doppler de artéria umbilical.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">23</span><span class=\"reader-checklist-text\">Trauma na gestante: a mãe vem primeiro; deslocar o útero para a esquerda a partir de ~20 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">24</span><span class=\"reader-checklist-text\">Gestante pode estar em choque com sinais vitais normais — reserva funcional aumentada.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">25</span><span class=\"reader-checklist-text\">Trauma abdominal, mesmo leve: cardiotocografia contínua por 4-6h e vigiar DPP oculto.</span></p><p class=\"reader-checklist-category\">Parto</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">26</span><span class=\"reader-checklist-text\">Situação transversa = cesárea sempre; apresentação pélvica discute via com a paciente.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">27</span><span class=\"reader-checklist-text\">Pós-termo é ≥42 semanas; indução recomendada entre 41 e 42 semanas.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">28</span><span class=\"reader-checklist-text\">Cesárea por iteratividade: risco de rotura e acretismo aumenta a cada cicatriz.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">29</span><span class=\"reader-checklist-text\">DIP II (tardia) = insuficiência placentária, a preocupante; DIP III = cordão.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">30</span><span class=\"reader-checklist-text\">Bishop <6 → preparo cervical; misoprostol contraindicado com cesárea anterior.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">31</span><span class=\"reader-checklist-text\">Distocia de ombro: McRoberts + pressão suprapúbica; jamais Kristeller.</span></p><p class=\"reader-checklist-category\">Puerpério</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">32</span><span class=\"reader-checklist-text\">HPP: atonia responde por 70-80% — massagem → ocitocina → misoprostol → tranexâmico em até 3h.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">33</span><span class=\"reader-checklist-text\">Metilergometrina contraindicada na hipertensa.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">34</span><span class=\"reader-checklist-text\">Febre puerperal típica (2º-10º dia) = endometrite → clindamicina + gentamicina.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">35</span><span class=\"reader-checklist-text\">Mastite e abscesso mamário: nunca suspender a amamentação.</span></p><p class=\"reader-checklist-category\">Temas destrinchados</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">53</span><span class=\"reader-checklist-text\">Magnésio mantido por 24h após o parto/última convulsão na pré-eclâmpsia grave/eclâmpsia.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">54</span><span class=\"reader-checklist-text\">Pré-eclâmpsia grave: risco cardiovascular aumenta para o resto da vida — orientar seguimento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">55</span><span class=\"reader-checklist-text\">DMG: necessidade de insulina cai abruptamente no pós-parto — reduzir a dose de imediato.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">56</span><span class=\"reader-checklist-text\">Mola: contracepção obrigatória + beta-hCG semanal até 3 negativos, depois mensal por 6 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">57</span><span class=\"reader-checklist-text\">Suspeitar de malignização da mola se houver platô ou elevação do beta-hCG, ou detecção após 6 meses.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">58</span><span class=\"reader-checklist-text\">Ectópica com metotrexato: beta-hCG nos dias 4 e 7, esperando queda ≥15%.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">59</span><span class=\"reader-checklist-text\">Curva normal de beta-hCG em gestação tópica viável: aumento ≥53% em 48h.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">60</span><span class=\"reader-checklist-text\">Endometrite: tratar com clindamicina + gentamicina até 24-48h afebril; investigar coleção se não responder.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">61</span><span class=\"reader-checklist-text\">Corioamnionite é indicação de resolução da gestação, independente da idade gestacional.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">62</span><span class=\"reader-checklist-text\">Mioma submucoso é o que mais causa sangramento e infertilidade; miomectomia preserva o útero.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">63</span><span class=\"reader-checklist-text\">Mioma com crescimento rápido na pós-menopausa → investigar sarcoma.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">64</span><span class=\"reader-checklist-text\">Endometriose: tratamento hormonal contínuo é crônico — suspender leva à recorrência.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">65</span><span class=\"reader-checklist-text\">DIP: reavaliar em 48-72h; sem melhora, investigar abscesso ou reconsiderar diagnóstico.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">66</span><span class=\"reader-checklist-text\">SOMP: letrozol é a indução de ovulação de 1ª linha para quem deseja engravidar.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">67</span><span class=\"reader-checklist-text\">SOMP: vigiar hiperplasia endometrial em quem tem longos períodos de amenorreia sem oposição hormonal.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">68</span><span class=\"reader-checklist-text\">Câncer de colo: sinusorragia é o sintoma mais característico da doença já invasora.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">69</span><span class=\"reader-checklist-text\">Câncer de colo localmente avançado (II-IVA): quimiorradioterapia, não cirurgia primária.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">70</span><span class=\"reader-checklist-text\">Câncer de mama: subtipo triplo-negativo só tem quimioterapia como base sistêmica — sem alvo hormonal/HER2.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">71</span><span class=\"reader-checklist-text\">Câncer de mama luminal: hormonioterapia por 5 a 10 anos — abandono precoce é a principal causa evitável de recidiva.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">72</span><span class=\"reader-checklist-text\">Dor pélvica aguda: beta-hCG sempre primeiro, para excluir ectópica antes de qualquer outra hipótese.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">73</span><span class=\"reader-checklist-text\">Massa ovariana em jovem → teratoma/marcadores germinativos; em pós-menopausa → câncer epitelial/CA-125.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">74</span><span class=\"reader-checklist-text\">Amenorreia primária: investigar FSH para localizar o compartimento comprometido.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">75</span><span class=\"reader-checklist-text\">Síndrome de Rokitansky: 46XX, caracteres normais, sem útero/vagina superior.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">76</span><span class=\"reader-checklist-text\">Síndrome de Morris: 46XY, fenótipo feminino, ausência de pelos pubianos/axilares.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">77</span><span class=\"reader-checklist-text\">Aleitamento: nem mastite nem abscesso mamário são motivo para suspender a amamentação.</span></p>"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "ginecologia": {
+                "area": "Ginecologia e Obstetrícia",
+                "title": "Ginecologia",
+                "sections": [
+                    {
+                        "title": "Contracepção e planejamento familiar",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "1.1",
+                                "title": "Elegibilidade para o combinado — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Vou prescrever COMBINADO? Pergunte, na ordem:\n1. Enxaqueca COM AURA? → categoria 4, NUNCA prescreva\n2. Tabagista ≥35 anos com ≥15 cigarros/dia? → categoria 4\n3. PA≥160/100 ou doença vascular? → categoria 4\n4. TVP/TEP atual/prévio, trombofilia? → categoria 4\n5. <21 dias pós-parto? Amamentando <6 semanas? → categoria 4\n6. Câncer de mama atual? Cardiopatia isquêmica/AVC? LES+antifosfolípide? → categoria 4\nQualquer SIM → contraindicação ABSOLUTA → oferecer progestagênio isolado/DIU\nTodos NÃO → combinado seguro</pre><ul class=\"reader-list\"><li>Métodos: DIU de cobre (10 anos, também contracepção de emergência mais eficaz), DIU-LNG (até 8 anos, reduz fluxo), implante de etonogestrel (3 anos, mais eficaz), injetável trimestral, combinado oral.</li><li><strong>LARC: nuliparidade e adolescência não contraindicam.</strong></li><li>Emergência: levonorgestrel até 5 dias ou <strong>DIU de cobre até 5 dias (mais eficaz)</strong> — não é abortivo.</li><li>Pós-parto: progestagênio isolado desde já, mesmo amamentando; combinado só após 6 meses se lactante.</li><li><strong>Esterilização</strong> (Lei 9.263/1996 com redação da Lei 14.443/2022): ≥ 21 anos ou ≥ 2 filhos, 60 dias de prazo, <strong>não exige mais consentimento do cônjuge</strong>; vedada no parto/aborto e até 42 dias depois salvo necessidade comprovada.</li><li><strong> Erros comuns</strong>: negar LARC a nulípara/adolescente; exigir consentimento do cônjuge para laqueadura.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Rastreamento e lesões do colo do útero",
+                        "tags": [
+                            "ja",
+                            "novo"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "2.1",
+                                "title": "DNA-HPV e conduta — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">DNA-HPV (25-64 anos)\n NEGATIVO → repetir em 5 ANOS\n POSITIVO — genótipo?\n HPV 16/18 → COLPOSCOPIA direto (~70% das lesões precursoras)\n Outro oncogênico → CITOLOGIA REFLEXA no mesmo material\n ASC-US+ ou insatisfatória → colposcopia\n Normal → repetir DNA-HPV em 1 ano</pre><ul class=\"reader-list\"><li>Implementação a partir de agosto/2025, meta de cobertura nacional até dezembro/2026 — substitui a citologia isolada como método primário.</li><li>Condutas citológicas: NIC I/LSIL repete em 6 meses (3 anos se < 25a); ASC-H/HSIL/AGC → colposcopia; NIC II/III → EZT/conização.</li><li>Gestante: rastreamento igual, colposcopia permitida, tratar só lesão invasiva suspeita. Vacina HPV: dose única 9–14 anos, não substitui rastreamento.</li><li><strong>Câncer de colo invasor</strong>: sangramento pós-coital (<strong>sinusorragia</strong>) é o sintoma mais característico; biópsia dirigida se lesão visível; <strong>estadiamento clínico (FIGO)</strong>, não cirúrgico.</li><li><strong>Tratamento por estádio</strong>: microinvasor → conização/histerectomia simples; IA2-IB → cirurgia radical ou radioterapia; <strong>II-IVA localmente avançado → quimiorradioterapia, não cirurgia primária</strong>; IVB → tratamento sistêmico paliativo.</li><li><strong>Seguimento</strong>: consultas a cada 3–4 meses nos primeiros 2 anos, depois espaçando; vigiar sangramento/dor pélvica nova/edema de membro/sintomas urinários como sinais de recidiva.</li><li><strong> Erros comuns</strong>: operar doença localmente avançada em vez de quimiorradioterapia; não valorizar sinusorragia como sinal de alarme.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Mama",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "3.1",
+                                "title": "Nódulo mamário e câncer de mama — fluxograma e condutas",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Idade? <35-40 anos → USG primeiro | ≥35-40 anos → mamografia+USG\nBI-RADS: 0 complementar | 1-2 rotina | 3 controle em 6 meses | 4-5 biópsia | 6 já confirmado</pre><ul class=\"reader-list\"><li><strong>Rastreamento</strong>: <strong>MS/INCA mamografia bienal 50–69 anos</strong>; <strong>FEBRASGO/SBM/CBR anual a partir dos 40</strong>; alto risco (BRCA, familiar < 50a, irradiação prévia) início ~30 anos + RM.</li><li>Perfil: nódulo móvel/fibroelástico em jovem = fibroadenoma; súbito/anecoico 35–50a = cisto; <strong>descarga sanguinolenta uniductal</strong> = papiloma, investigar; nódulo endurecido/fixo/irregular + retração = câncer; mama edemaciada/quente sem melhora com ATB = carcinoma inflamatório (não confundir com mastite).</li><li><strong>Câncer de mama invasor</strong>: biópsia percutânea (core biopsy) com <strong>imuno-histoquímica obrigatória (RE, RP, HER2, Ki-67)</strong>.</li><li><strong>Tratamento cirúrgico</strong>: conservadora + radioterapia (preferencial se margens permitem) ou mastectomia; linfonodo sentinela em axila clínica negativa.</li><li><strong>Sistêmico por subtipo</strong>: <strong>luminal (RE/RP+) → hormonioterapia 5–10 anos</strong> ± QT; <strong>HER2+ → terapia anti-HER2 + QT</strong>; <strong>triplo-negativo → só quimioterapia</strong> (sem alvo hormonal/HER2). Neoadjuvância em tumores grandes/triplo-negativos/HER2+.</li><li><strong>Seguimento</strong>: mamografia anual mesmo pós-tratamento, consultas clínicas periódicas, reforçar adesão à hormonioterapia (abandono precoce é a principal causa evitável de recidiva), avaliação genética se critério de alto risco.</li><li><strong> Erros comuns</strong>: não investigar descarga sanguinolenta uniductal; achar que triplo-negativo tem alvo hormonal; abandonar hormonioterapia precocemente.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Corrimentos, DIP e ISTs",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "4.1",
+                                "title": "Corrimento vaginal e DIP — fluxograma e condutas",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">pH e aspecto:\n pH normal + branco grumoso + prurido intenso → CANDIDÍASE (não é IST, não trata parceiro)\n pH>4,5 + acinzentado/odor de peixe + Whiff+/clue cells → VAGINOSE (não é IST)\n pH>4,5 + amarelo-esverdeado/bolhoso + colo em framboesa → TRICOMONÍASE\n → É IST: TRATAR A PARCERIA</pre><ul class=\"reader-list\"><li>Cervicite (gonococo/clamídia): mucopurulento + dor à mobilização do colo → ceftriaxona + azitromicina, tratando ambos.</li><li><strong>DIP</strong>: 3 critérios mínimos bastam (dor hipogástrica + dor à mobilização do colo + dor anexial); ambulatorial = ceftriaxona IM + doxiciclina 14d + metronidazol 14d; internar se gestante/abscesso tubo-ovariano/falha oral/toxemia/imunossupressão/dúvida cirúrgica.</li><li><strong>Reavaliar em 48–72h</strong> — sem melhora, investigar abscesso ou reconsiderar diagnóstico; sequelas mesmo tratada corretamente: infertilidade tubária, ectópica, dor pélvica crônica, Fitz-Hugh-Curtis.</li><li><strong> Erros comuns</strong>: tratar parceiro na candidíase/vaginose; não reavaliar em 48–72h.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Sangramento uterino, mioma e endometriose",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "5.1",
+                                "title": "Mioma, adenomiose e endometriose",
+                                "tags": [],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>PALM-COEIN (estruturais: Pólipo/Adenomiose/Leiomioma/Malignidade; não estruturais: Coagulopatia/Ovulatória/Endometrial/Iatrogênica/Não classificada).</li><li><strong>Mioma</strong>: geralmente assintomático; <strong>submucoso</strong> causa mais sangramento/infertilidade (distorce cavidade); intramural causa dismenorreia; subseroso causa sintomas compressivos; USG confirma e localiza.</li><li><strong>Tratamento do mioma</strong>: DIU-LNG/ácido tranexâmico (clínico) ou miomectomia (preserva fertilidade)/histerectomia (prole completa); embolização como alternativa. Crescimento rápido <strong>na pós-menopausa</strong> → investigar sarcoma.</li><li><strong>Adenomiose</strong>: útero globoso e difusamente doloroso, multípara, dismenorreia + sangramento → DIU-LNG/tranexâmico, histerectomia é o definitivo.</li><li><strong>Endometriose</strong>: tríade dismenorreia progressiva + dispareunia de profundidade + infertilidade, frequentemente desproporcional aos achados de imagem; USG com preparo/RM identificam endometrioma; laparoscopia é padrão-ouro mas reservada a dúvida/falha clínica.</li><li><strong>Tratamento da endometriose</strong>: <strong>hormonal contínuo crônico</strong> (combinado sem pausa, DIU-LNG, ou análogo de GnRH nos refratários) — <strong>suspender leva à recorrência</strong>; cirurgia se endometrioma volumoso/doença profunda refratária/infertilidade associada.</li><li><strong>Seguimento</strong>: reavaliar resposta em 3–6 meses; manter supressão hormonal a longo prazo.</li><li><strong>Sangramento pós-menopausa é câncer de endométrio até prova em contrário</strong> → USG transvaginal, biópsia/histeroscopia se endométrio > 4–5mm.</li><li><strong> Erros comuns</strong>: achar que endometriose exige confirmação cirúrgica antes de tratar; não investigar sarcoma em mioma de crescimento rápido na pós-menopausa.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Amenorreia, SOMP e infertilidade",
+                        "tags": [
+                            "ja",
+                            "novo"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "6.1",
+                                "title": "Amenorreia por compartimento — fluxograma",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">Amenorreia primária: sem caracteres aos 13a, OU caracteres sem menarca aos 15a\nFSH alto → falência OVARIANA → Turner (baixa estatura, pescoço alado) → cariótipo\nFSH baixo/normal-baixo → eixo hipotálamo-hipófise → prolactina alta (prolactinoma)\n ou hipotalâmico funcional (estresse/exercício/anorexia)\nFSH normal + útero/vagina ausentes + caracteres NORMAIS → compartimento uterovaginal\n 46XX → Rokitansky (agenesia mülleriana)\n 46XY sem pelos pubianos/axilares → Morris (insensibilidade androgênica) → gonadectomia pós-puberal</pre>"
+                            },
+                            {
+                                "num": "6.2",
+                                "title": "SOMP (antiga SOP)",
+                                "tags": [
+                                    "novo"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Consenso <em>Lancet</em> maio/2026 (SBEM/Brasil) <strong>renomeou SOP para Síndrome Ovariana Metabólica Poliendócrina</strong> — critério de Rotterdam e tratamento inalterados; SOP ainda circula ~3 anos de transição.</li><li>Sinais: irregularidade menstrual desde a adolescência, hiperandrogenismo (hirsutismo, acne), sinais metabólicos (obesidade abdominal, acantose nigricans), infertilidade.</li><li><strong>Diagnóstico</strong> (2 de 3, excluídas outras causas): oligo/anovulação + hiperandrogenismo clínico/laboratorial + morfologia policística ao USG — <strong>USG não é obrigatória</strong> se irregularidade + hiperandrogenismo claros; excluir hiperprolactinemia, disfunção tireoidiana, hiperplasia adrenal tardia.</li><li><strong>Tratamento por objetivo</strong>: sem desejo reprodutivo → combinado oral ± antiandrogênio, metformina se resistência insulínica; <strong>desejo reprodutivo → suspender combinado, letrozol como 1ª linha de indução de ovulação</strong>; estilo de vida é base em qualquer objetivo.</li><li><strong>Seguimento</strong>: rastreio metabólico periódico (glicemia, lipídios, PA) pelo risco cardiovascular; vigiar hiperplasia endometrial em amenorreia prolongada sem oposição hormonal.</li><li><strong> Erros comuns</strong>: exigir USG para fechar diagnóstico em quadro clínico claro; manter combinado em quem deseja engravidar.</li></ul>"
+                            },
+                            {
+                                "num": "6.3",
+                                "title": "Infertilidade",
+                                "tags": [
+                                    "adj"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Ausência de gestação após 12 meses sem contracepção (6 meses se ≥ 35a).</li><li>Investigação: <strong>espermograma primeiro</strong> (simples, ~35% dos casos), avaliação de ovulação/reserva ovariana, histerossalpingografia para fator tubário.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Climatério e menopausa",
+                        "tags": [
+                            "ja"
+                        ],
+                        "subchapters": [
+                            {
+                                "num": "7.1",
+                                "title": "Menopausa e terapia hormonal",
+                                "tags": [],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Menopausa = <strong>12 meses de amenorreia</strong>, diagnóstico clínico (48–51 anos no Brasil), sem necessidade de dosar FSH na faixa etária típica.</li><li>Insuficiência ovariana prematura (< 40 anos): investigar (cariótipo, FMR1, autoimunidade) e repor hormônio até a idade habitual da menopausa.</li><li>TH indicada para sintomas vasomotores moderados/graves, síndrome geniturinária, prevenção de osteoporose em selecionadas; <strong>janela de oportunidade < 60 anos ou < 10 anos de menopausa</strong>.</li><li>Contraindicações: câncer de mama/endométrio, sangramento não esclarecido, TVP/TEP, doença coronariana/AVC prévio, hepatopatia grave, LES + antifosfolípide.</li><li>Esquema: com útero → estrogênio + progestagênio; sem útero → estrogênio isolado. Sintomas geniturinários isolados → estrogênio tópico vaginal (poucas contraindicações).</li><li>Alternativas não hormonais para fogachos: ISRS/IRSN, gabapentina, clonidina.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Massas anexiais, abdome agudo ginecológico e temas finais",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "8.1",
+                                "title": "Massa anexial e abdome agudo ginecológico — fluxogramas",
+                                "tags": [],
+                                "bodyHtml": "<pre class=\"reader-pre-card\">USG de massa anexial:\n <5cm, anecoica, unilocular, menacme → cisto FUNCIONAL → expectante, reavaliar 1-2 ciclos\n >8-10cm OU sólido OU septos espessos OU ascite OU vascularização central → SUSPEITO → investigar\nDor pélvica súbita+massa+náusea → TORÇÃO ANEXIAL → destorção com preservação ovariana\n (Doppler normal NÃO exclui torção)\n\nDor pélvica aguda — beta-hCG SEMPRE primeiro\n Positivo → pensar ectópica primeiro\n Negativo:\n Dor súbita unilateral+massa → cisto roto ou torção anexial\n Dor+febre+dor à mobilização do colo → DIP\n Dor migrando periumbilical→FID+Blumberg+anorexia → APENDICITE\n DIU+dor+suspeita de deslocamento → localizar por USG, remover se fora da cavidade</pre><ul class=\"reader-list\"><li>Tumores ovarianos: teratoma maduro em jovem (heterogêneo, maior risco de torção); endometrioma (\"vidro fosco\"); cistoadenoma seroso/mucinoso; tumor de células da granulosa (produção hormonal); <strong>câncer epitelial na pós-menopausa</strong> (CA-125 útil aqui); <strong>tumor de células germinativas em jovem/adolescente</strong> (AFP, beta-hCG, DHL).</li><li>Regra: jovem → teratoma/marcadores germinativos; pós-menopausa + sólido → epitelial/CA-125.</li><li><strong> Erros comuns</strong>: excluir torção por Doppler normal; não pedir beta-hCG antes de investigar dor pélvica aguda.</li></ul>"
+                            },
+                            {
+                                "num": "8.2",
+                                "title": "Patologias vulvares, violência sexual e uroginecologia",
+                                "tags": [
+                                    "adj"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Líquen escleroso: placas brancas atróficas pós-menopausa → corticoide tópico potente, seguimento pelo risco de malignização.</li><li>Câncer de vulva: lesão ulcerada/vegetante persistente em idosa → <strong>biópsia sempre</strong>, não tratar como candidíase sem examinar.</li><li>Bartolinite: drenagem com marsupialização se recorrente.</li><li>Violência sexual: acolhimento sem exigir BO/autorização judicial, notificação compulsória, contracepção de emergência até 5 dias, profilaxia de ISTs não virais + PEP HIV até 72h, hepatite B se não imune, aborto legal garantido; sexo com menor de 14 anos = estupro de vulnerável.</li><li>Uroginecologia: incontinência de esforço → fisioterapia/sling; bexiga hiperativa → treinamento vesical/anticolinérgico; prolapso → POP-Q, pessário ou cirurgia.</li></ul>"
+                            },
+                            {
+                                "num": "8.3",
+                                "title": "Aleitamento materno — problemas maternos",
+                                "tags": [
+                                    "ja"
+                                ],
+                                "bodyHtml": "<ul class=\"reader-list\"><li>Fissura/trauma mamilar: dor no início da mamada, corrigir a pega.</li><li>Ingurgitamento: ordenha de alívio, mamadas frequentes.</li><li>Candidíase mamilar: dor em agulhadas que persiste após a mamada, aréola brilhante → antifúngico tópico na mãe e na boca do bebê.</li><li><strong>Mastite lactacional</strong>: área endurecida + hiperemia + febre alta → <strong>antibiótico anti-estafilocócico + esvaziamento da mama + manter a amamentação</strong>.</li><li>Abscesso: drenagem + antibiótico, mantendo amamentação (contralateral se necessário).</li><li><strong>Em nenhum desses quadros a amamentação deve ser suspensa</strong> — é o distrator mais oferecido.</li></ul>"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Checklist Final",
+                        "tags": [],
+                        "subchapters": [
+                            {
+                                "num": "✓",
+                                "title": "77 frases para a véspera",
+                                "tags": [],
+                                "bodyHtml": "<p class=\"reader-checklist-category\">Contracepção</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">36</span><span class=\"reader-checklist-text\">Enxaqueca com aura contraindica em absoluto o combinado.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">37</span><span class=\"reader-checklist-text\">Tabagista ≥35 anos com ≥15 cigarros/dia = categoria 4.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">38</span><span class=\"reader-checklist-text\">Nuliparidade e adolescência não contraindicam DIU nem implante.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">39</span><span class=\"reader-checklist-text\">DIU de cobre é a contracepção de emergência mais eficaz.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">40</span><span class=\"reader-checklist-text\">Laqueadura: ≥21 anos ou 2 filhos, 60 dias de prazo, sem exigir consentimento do cônjuge.</span></p><p class=\"reader-checklist-category\">Colo e mama</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">41</span><span class=\"reader-checklist-text\">Rastreamento do colo agora é DNA-HPV, 25-64 anos, a cada 5 anos se negativo.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">42</span><span class=\"reader-checklist-text\">HPV 16/18 positivo vai direto para colposcopia; outros oncogênicos fazem citologia reflexa.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">43</span><span class=\"reader-checklist-text\">Mamografia: MS/INCA bienal 50-69; sociedades recomendam anual a partir dos 40.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">44</span><span class=\"reader-checklist-text\">BI-RADS 3 = controle em 6 meses; 4 e 5 = biópsia.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">45</span><span class=\"reader-checklist-text\">Nódulo em jovem → USG; ≥35-40 anos → USG + mamografia.</span></p><p class=\"reader-checklist-category\">Ginecologia geral</p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">46</span><span class=\"reader-checklist-text\">Candidíase e vaginose não são ISTs; tricomoníase é e trata a parceria.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">47</span><span class=\"reader-checklist-text\">DIP: os 3 critérios mínimos bastam para iniciar tratamento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">48</span><span class=\"reader-checklist-text\">Sangramento pós-menopausa = câncer de endométrio até prova em contrário.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">49</span><span class=\"reader-checklist-text\">SOP agora é SOMP (consenso Lancet, maio de 2026) — mesmo critério de Rotterdam, mesmo tratamento.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">50</span><span class=\"reader-checklist-text\">Diagnóstico de SOMP não exige USG obrigatória se hiperandrogenismo + irregularidade menstrual claros.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">51</span><span class=\"reader-checklist-text\">Massa anexial <5cm anecoica em menacme → expectante; suspeita exige sólido/septo/ascite.</span></p><p class=\"reader-checklist-item\"><span class=\"reader-checklist-num\">52</span><span class=\"reader-checklist-text\">Torção anexial: Doppler normal não exclui — a clínica manda.</span></p>"
                             }
                         ]
                     }
@@ -3834,8 +3876,11 @@
             'nefrologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.6 3.6C6.4 3.6 4.3 6.9 4.3 11c0 5.5 3.1 9.5 6.8 9.5 1.9 0 2.9-1.3 2.9-3.2 0-1.5-.9-2.2-.9-3.6 0-1.7 1.6-2 1.6-3.9 0-3.4-1.9-6.2-5.1-6.2Z"/></svg>',
             'hematologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 4.4-6 7.9-6 11.2a6 6 0 0 0 12 0c0-3.3-3-6.8-6-11.2Z"/><path d="M8.7 14.4c.2 1.4 1.3 2.5 2.7 2.7"/></svg>',
             'dermatologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.3" y="8.2" width="17.4" height="7.6" rx="3.8"/><path d="M9.6 8.2v7.6M14.4 8.2v7.6"/><circle cx="6.3" cy="12" r="0.5" fill="currentColor" stroke="none"/><circle cx="17.7" cy="12" r="0.5" fill="currentColor" stroke="none"/></svg>',
-            'oftalmo-otorrino': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.6 12 5.6 21.5 12 21.5 12 18 18.4 12 18.4 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
-            'go-completo': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.6" r="5.1"/><path d="M12 13.7v6"/><path d="M9.1 17.2h5.8"/></svg>',
+            'oftalmologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.6 12 5.6 21.5 12 21.5 12 18 18.4 12 18.4 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
+            'otorrinolaringologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.2c-3 0-5.3 2.4-5.3 5.5v6.1a3.7 3.7 0 0 0 7.4 0"/><circle cx="17.4" cy="16.6" r="1.8"/></svg>',
+            'hepatologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 10.5c0-3.4 2.6-6 6.3-6 2 0 3.4 1 4.1 2.3.8-.5 1.7-.7 2.6-.5 2.3.5 3.6 2.7 3 5-.2.9-.7 1.6-1.3 2.1.6.7 1 1.6 1 2.7 0 2.3-1.9 4.1-4.4 4.1-1 0-1.9-.3-2.6-.8-.9.9-2.2 1.4-3.7 1.4-3.5 0-5.9-2.4-5.9-5.9 0-1.7.5-3 1.4-4-.3-.1-.4-.2-.5-.4Z"/></svg>',
+            'obstetricia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.6" r="5.1"/><path d="M12 13.7v6"/><path d="M9.1 17.2h5.8"/></svg>',
+            'ginecologia': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 9.2c0-2.6 1.6-4.6 3.6-4.6s3.6 2 3.6 4.6c0 3.4-1.7 6-3.6 8.4-1.9-2.4-3.6-5-3.6-8.4Z"/><path d="M12 17.6V21M9.5 19.3h5"/></svg>',
             'psiquiatria': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6v18.8"/><path d="M9.7 3.1a2.5 2.5 0 0 0-4.7 1.2v.1a2.9 2.9 0 0 0-2.5 3.3 2.9 2.9 0 0 0-1 5.1 2.7 2.7 0 0 0 1.1 4.1 2.6 2.6 0 0 0 2.5 3.3 2.5 2.5 0 0 0 4.6-1.4z"/><path d="M14.3 3.1a2.5 2.5 0 0 1 4.7 1.2v.1a2.9 2.9 0 0 1 2.5 3.3 2.9 2.9 0 0 1 1 5.1 2.7 2.7 0 0 1-1.1 4.1 2.6 2.6 0 0 1-2.5 3.3 2.5 2.5 0 0 1-4.6-1.4z"/><path d="M4.3 8a2 2 0 0 0 2.4 1.6"/><path d="M3.4 13.1a2.3 2.3 0 0 0 2.4 1"/><path d="M5.5 17.5a2.1 2.1 0 0 1 2.3-.8"/><path d="M19.7 8a2 2 0 0 1-2.4 1.6"/><path d="M20.6 13.1a2.3 2.3 0 0 1-2.4 1"/><path d="M18.5 17.5a2.1 2.1 0 0 0-2.3-.8"/></svg>',
             'pediatria-completo': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.6c0-1.4.8-2.6 1.9-2.6s1.9 1.2 1.9 2.6"/><path d="M10.3 4.6 8.8 7.3M13.9 4.6l1.5 2.7"/><rect x="7" y="7.3" width="10" height="14.2" rx="2.6"/><path d="M9.3 11.3h2.2M9.3 14.4h2.2M9.3 17.5h2.2"/></svg>',
             'medicina-preventiva': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.1 5.7 5.4v5.2c0 4.9 2.8 8 6.3 9.6 3.5-1.6 6.3-4.7 6.3-9.6V5.4z"/><path d="m8.9 11.9 2.1 2.1 4.3-4.3"/></svg>',
@@ -3846,15 +3891,18 @@
             'infectologia': 'HIV/aids, ISTs, Tuberculose, Hanseníase',
             'cardiologia': 'Síndromes coronarianas, Arritmias, Insuficiência cardíaca',
             'endocrinologia': 'Diabetes mellitus, Tireoide, Adrenal, Hipófise',
-            'gastroenterologia': 'DRGE, Doenças inflamatórias intestinais, Fígado',
+            'gastroenterologia': 'DRGE, Doenças inflamatórias intestinais, Pâncreas',
+            'hepatologia': 'Nomenclatura atualizada, Hepatopatias, Cirrose',
             'pneumologia': 'Asma, DPOC, Pneumonia, Tromboembolismo',
             'neurologia': 'Cefaleias, AVC, Epilepsia, Demências',
             'reumatologia': 'Artrite reumatoide, Lúpus, Espondiloartropatias',
             'nefrologia': 'Doença renal crônica, Injúria renal aguda, Distúrbios eletrolíticos',
             'hematologia': 'Anemias, Neoplasias hematológicas, Coagulação',
             'dermatologia': 'Infecções de pele, Dermatoses inflamatórias, Câncer de pele',
-            'oftalmo-otorrino': 'Olho vermelho, Vertigem, Perda auditiva, Epistaxe',
-            'go-completo': 'Pré-natal, Síndromes hipertensivas, Parto e puerpério',
+            'oftalmologia': 'Olho vermelho, Glaucoma agudo, Emergências oftalmológicas',
+            'otorrinolaringologia': 'Vertigem, Perda auditiva, Epistaxe',
+            'obstetricia': 'Pré-natal, Síndromes hipertensivas, Parto e puerpério',
+            'ginecologia': 'Contracepção, Colo do útero, Mama, Climatério',
             'psiquiatria': 'Transtornos de ansiedade, Psicoses, Depressão',
             'pediatria-completo': 'Neonatologia, Crescimento e desenvolvimento, Imunizações',
             'medicina-preventiva': 'Vigilância em saúde, Promoção da saúde, Estratégias de SUS',
