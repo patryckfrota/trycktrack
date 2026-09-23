@@ -362,11 +362,15 @@
         let activeTrackCapsule = localStorage.getItem(TRACK_CAPSULE_KEY) === 'curso' ? 'curso' : 'residencia';
 
         function filterQuestionModesByCapsule() {
+            // .question-mode fixa display própria (grid/flex) em vários
+            // breakpoints — o atributo hidden sozinho não vence essa regra
+            // de autor, por isso o toggle é via style.display (sempre tem
+            // prioridade) em vez de .hidden.
             document.querySelectorAll('.question-mode[data-question-mode]').forEach(btn => {
                 const mode = btn.dataset.questionMode;
-                if (mode === 'review') { btn.hidden = false; return; }
+                if (mode === 'review') { btn.style.display = ''; return; }
                 const visibleModes = CAPSULE_MODES[activeTrackCapsule] || [];
-                btn.hidden = !visibleModes.includes(mode);
+                btn.style.display = visibleModes.includes(mode) ? '' : 'none';
             });
         }
 
