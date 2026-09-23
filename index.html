@@ -167,15 +167,205 @@
 
             <!-- RAPID REVIEW -->
             <div class="tab-content" id="reviewTab">
-            <div class="rr-card" onclick="openReader('clinica-medica')" data-topic="clinica-medica">
+            <div class="rr-card" onclick="openReader('infectologia')" data-topic="infectologia">
                 <div class="rr-continue-badge">Continuar</div>
-                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v5a6 6 0 0 0 12 0V3"/><path d="M3.7 3h2.6M15.7 3h2.6"/><path d="M11 14v1.2a5.3 5.3 0 0 0 5.3 5.3h.8"/><circle cx="19.2" cy="20.5" r="2.1"/><circle cx="19.2" cy="20.5" r=".55" fill="currentColor" stroke="none"/></svg></div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
                 <div class="rr-card-content">
                     <div class="rr-card-header">
-                        <div class="rr-card-title">Clínica Médica</div>
-                        <div class="rr-card-badge">9 temas</div>
+                        <div class="rr-card-title">Infectologia</div>
+                        <div class="rr-card-badge">11 temas</div>
                     </div>
-                    <div class="rr-card-description">Infectologia, Cardiologia, Pneumologia</div>
+                    <div class="rr-card-description">HIV/aids, ISTs, Tuberculose, Hanseníase</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('cardiologia')" data-topic="cardiologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.3c-3.7-2.5-7.8-5.7-7.8-9.9C4.2 7.2 6.3 5.3 8.8 5.3c1.5 0 2.7.8 3.2 1.9.5-1.1 1.7-1.9 3.2-1.9 2.5 0 4.6 1.9 4.6 5.1 0 4.2-4.1 7.4-7.8 9.9Z"/><path d="M5.8 12.5h2.6l1.3-2.6 1.7 5 1.3-3.4h3.4"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Cardiologia</div>
+                        <div class="rr-card-badge">11 temas</div>
+                    </div>
+                    <div class="rr-card-description">Síndromes coronarianas, Arritmias, Insuficiência cardíaca</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('endocrinologia')" data-topic="endocrinologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8.7c-2.2 0-3.8 1.6-3.8 3.8S6.8 16.3 9 16.3c1.5 0 2.6-.8 3-2.1"/><path d="M15 8.7c2.2 0 3.8 1.6 3.8 3.8s-1.6 3.8-3.8 3.8c-1.5 0-2.6-.8-3-2.1"/><path d="M9 8.7c1.5 0 2.6.8 3 2.1M15 8.7c-1.5 0-2.6.8-3 2.1"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Endocrinologia</div>
+                        <div class="rr-card-badge">7 temas</div>
+                    </div>
+                    <div class="rr-card-description">Diabetes mellitus, Tireoide, Adrenal, Hipófise</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('gastroenterologia')" data-topic="gastroenterologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.2 4.3c-1.7 0-2.9 1.3-2.9 3.2 0 1.5.8 2.2.8 3.6 0 1.9-1.7 2.5-1.7 4.7 0 2.8 2.3 5 5.7 5 4 0 6.6-2.5 6.6-7 0-3.4-1.6-5.5-3.8-6.2-.6-1.9-2.2-3.3-4.7-3.3Z"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Gastroenterologia e Hepatologia</div>
+                        <div class="rr-card-badge">5 temas</div>
+                    </div>
+                    <div class="rr-card-description">DRGE, Doenças inflamatórias intestinais, Fígado</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('pneumologia')" data-topic="pneumologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6.8"/><path d="M12 10.8c-1.3-1.5-3.2-1.9-4.4-.7C6.3 11.4 5.3 14 5.3 16.4c0 1.9 1.2 2.9 2.5 2.9 1.5 0 2.6-1.2 3-2.6"/><path d="M12 10.8c1.3-1.5 3.2-1.9 4.4-.7 1.3 1.3 2.3 3.9 2.3 6.3 0 1.9-1.2 2.9-2.5 2.9-1.5 0-2.6-1.2-3-2.6"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Pneumologia</div>
+                        <div class="rr-card-badge">8 temas</div>
+                    </div>
+                    <div class="rr-card-description">Asma, DPOC, Pneumonia, Tromboembolismo</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('neurologia')" data-topic="neurologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.3 4.6a2.7 2.7 0 0 0-2.6 3.3A3 3 0 0 0 5.1 13a3 3 0 0 0 1.8 5.4 2.6 2.6 0 0 0 5-.9V6.9a2.6 2.6 0 0 0-2.6-2.3Z"/><path d="M14.7 4.6a2.7 2.7 0 0 1 2.6 3.3A3 3 0 0 1 18.9 13a3 3 0 0 1-1.8 5.4 2.6 2.6 0 0 1-5-.9"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Neurologia</div>
+                        <div class="rr-card-badge">8 temas</div>
+                    </div>
+                    <div class="rr-card-description">Cefaleias, AVC, Epilepsia, Demências</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('reumatologia')" data-topic="reumatologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 8.4a2.1 2.1 0 1 1 2.9-2.9l10.7 10.7a2.1 2.1 0 1 1-2.9 2.9z"/><circle cx="4.6" cy="7.3" r="1.5"/><circle cx="7.3" cy="4.6" r="1.5"/><circle cx="19.4" cy="16.7" r="1.5"/><circle cx="16.7" cy="19.4" r="1.5"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Reumatologia</div>
+                        <div class="rr-card-badge">7 temas</div>
+                    </div>
+                    <div class="rr-card-description">Artrite reumatoide, Lúpus, Espondiloartropatias</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('nefrologia')" data-topic="nefrologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.3 3.7C6.3 3.7 4.2 6.9 4.2 10.9c0 5.6 3.1 10 6.9 10 2 0 3-1.4 3-3.4 0-1.6-1-2.4-1-3.8 0-1.9 1.7-2.2 1.7-4.1 0-3.4-1.9-5.9-5.5-5.9Z"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Nefrologia</div>
+                        <div class="rr-card-badge">7 temas</div>
+                    </div>
+                    <div class="rr-card-description">Doença renal crônica, Injúria renal aguda, Distúrbios eletrolíticos</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('hematologia')" data-topic="hematologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 4.5-6 8-6 11.4a6 6 0 0 0 12 0c0-3.4-3-6.9-6-11.4Z"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Hematologia</div>
+                        <div class="rr-card-badge">4 temas</div>
+                    </div>
+                    <div class="rr-card-description">Anemias, Neoplasias hematológicas, Coagulação</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('dermatologia')" data-topic="dermatologia">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="8" rx="3.5"/><circle cx="9" cy="12" r="0.6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="0.6" fill="currentColor" stroke="none"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Dermatologia</div>
+                        <div class="rr-card-badge">5 temas</div>
+                    </div>
+                    <div class="rr-card-description">Infecções de pele, Dermatoses inflamatórias, Câncer de pele</div>
+                    <div class="rr-card-status">
+                        <span class="rr-progress-label">0% lido</span>
+                    </div>
+                    <div class="rr-progress-bar">
+                        <div class="rr-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="rr-card-arrow">›</div>
+            </div>
+            
+            <div class="rr-card" onclick="openReader('oftalmo-otorrino')" data-topic="oftalmo-otorrino">
+                <div class="rr-continue-badge">Continuar</div>
+                <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div class="rr-card-content">
+                    <div class="rr-card-header">
+                        <div class="rr-card-title">Oftalmologia e Otorrinolaringologia</div>
+                        <div class="rr-card-badge">4 temas</div>
+                    </div>
+                    <div class="rr-card-description">Olho vermelho, Vertigem, Perda auditiva, Epistaxe</div>
                     <div class="rr-card-status">
                         <span class="rr-progress-label">0% lido</span>
                     </div>
