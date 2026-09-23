@@ -47,7 +47,7 @@
                 <div class="bullet-card">
                     <h2 class="bullet-card-title">${b.titulo}</h2>
                     <span class="bullet-card-area-tag">${b.area}</span>${b.atualizacao2026 ? '<span class="bullet-card-update-badge">ATUALIZAÇÃO 2026</span>' : ''}
-                    ${b.imagem ? `<img class="bullet-card-image is-diagram" src="${b.imagem}" alt="${b.titulo}">` : ''}
+                    ${b.imagem ? `<img class="bullet-card-image is-diagram" src="${b.imagem}" alt="${b.titulo}" loading="lazy" decoding="async">` : ''}
                     ${b.html}
                 </div>
             `).join('') || '<p style="color:var(--text-secondary);text-align:center;padding:30px 0;">Nenhum bullet encontrado.</p>';
