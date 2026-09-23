@@ -845,18 +845,6 @@
             };
         }
 
-        function updateQuestionConfigSubtopics() {
-            const theme = document.getElementById('questionConfigTheme')?.value;
-            const select = document.getElementById('questionConfigSubtheme');
-            if (!select) return;
-            const subthemes = [...new Set(getActiveQuestionBank()
-                .filter(question => !theme || theme === 'Todas' || question.area === theme)
-                .map(question => question.subarea)
-                .filter(Boolean))].sort();
-            select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
-            updateQuestionConfigTemas();
-        }
-
         // Tema/Subtema = a divisão real do Rapid Review (seção "PARTE..."
         // e subcapítulo) usada pra classificar cada questão — ver
         // questions-cirurgia.js. Em cascata com Área (igual Rotação →
@@ -911,7 +899,6 @@
                 ? { examId: document.getElementById('questionConfigExam')?.value }
                 : {
                     theme: document.getElementById('questionConfigTheme')?.value || 'Todas',
-                    subtheme: document.getElementById('questionConfigSubtheme')?.value || 'Todas',
                     tema: document.getElementById('questionConfigTema')?.value || 'Todos',
                     subtema: document.getElementById('questionConfigSubtema')?.value || 'Todos',
                     institution: document.getElementById('questionConfigInstitution')?.value || 'Todas',
@@ -1300,8 +1287,7 @@
                 body.innerHTML = `<div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
                     <div class="question-config-field"><label for="questionConfigSearch">Buscar</label><input type="search" id="questionConfigSearch" placeholder="Ex.: síndrome de Guillain-Barré" oninput="updateQuestionConfigAvailableCount()"></div>
-                    <div class="question-config-field"><label for="questionConfigTheme">Área</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigSubtheme">Subárea</label><select id="questionConfigSubtheme" onchange="updateQuestionConfigTemas()"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigTheme">Área</label><select id="questionConfigTheme" onchange="updateQuestionConfigTemas()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigTema">Tema</label><select id="questionConfigTema" onchange="updateQuestionConfigSubtemas()"><option value="Todos">Todos</option></select></div>
                     <div class="question-config-field"><label for="questionConfigSubtema">Subtema</label><select id="questionConfigSubtema" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option></select></div>
                     <div class="question-config-divider">Filtros</div>
@@ -1316,7 +1302,7 @@
                     <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtros Avançados</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
-                updateQuestionConfigSubtopics();
+                updateQuestionConfigTemas();
                 updateAdvancedFilterBadge();
             }
             view.hidden = false;
