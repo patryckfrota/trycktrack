@@ -409,6 +409,45 @@ model OsceChecklistScore {
 // (splash, onboarding), e não pode se perder um erro só porque não
 // tinha sessão — userId aqui é só um id de referência solto, nunca
 // resolvido/validado contra a tabela User.
+// Calendário/fila de aprovação de posts do Instagram — existe
+// independente de token nenhum da API estar configurado: dá pra
+// planejar, escrever legenda e anexar arte, aprovar, e só na hora de
+// publicar de fato é que a rota precisa do token (POST /publish falha
+// com uma mensagem clara se INSTAGRAM_ACCESS_TOKEN não estiver
+// setado, em vez de essas telas dependerem disso pra existir).
+model SocialPost {
+  id               String           @id @default(cuid())
+  caption          String
+  mediaUrls        String[]         @default([])
+  status           SocialPostStatus @default(RASCUNHO)
+  scheduledAt      DateTime?
+  publishedAt      DateTime?
+  instagramPostId  String?
+  error            String?
+  createdBy        String?
+  // Preenchidos só depois de publicado, sincronizados sob demanda via
+  // API (não em tempo real — a Graph API não empurra métrica, tem que
+  // perguntar). lastMetricsSyncAt existe pra UI poder mostrar "hoje às
+  // 14h" em vez de fingir que o número é ao vivo.
+  likes            Int?
+  comments         Int?
+  reach            Int?
+  lastMetricsSyncAt DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([scheduledAt])
+  @@index([status])
+}
+
+enum SocialPostStatus {
+  RASCUNHO
+  AGUARDANDO_APROVACAO
+  AGENDADO
+  PUBLICADO
+  ERRO
+}
+
 model ClientError {
   id         String   @id @default(cuid())
   // "client" (exceção no navegador do aluno) ou "backend" (rota do
