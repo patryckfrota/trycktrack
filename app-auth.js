@@ -241,6 +241,9 @@
                 correct: correctCount,
                 total: scoredTotal,
                 area: areas.length === 1 ? areas[0] : (areas.length ? 'Áreas mistas' : ''),
+                // Internato não tem question.area (usa rodizio) — mesmo
+                // discriminador de recordQuestionResult em app-app.js.
+                track: session.questions.some(q => q.rodizio) ? 'curso' : 'residencia',
                 // Só o ID — o conteúdo é resolvido de volta pelo banco na
                 // hora de exibir (resolveHistoryQuestion). Ver comentário
                 // acima.

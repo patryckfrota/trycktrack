@@ -136,6 +136,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             applyGlobalFontScale(Number(localStorage.getItem('trycktrack-global-font-scale')) || 1);
+            syncTrackCapsuleUI();
         });
 
         /* ============================================================
@@ -261,6 +262,16 @@
         function renderTrails() {
             const hub = document.getElementById('trailHub');
             if (!hub) return;
+            // Trilhas hoje só existem pro lado Residência (ENAMED/UEPA) —
+            // não há trilha de rodízio pro Internato ainda (fica pra sessão
+            // dedicada de redesign de Trilhas). Estado vazio simples em vez
+            // de esconder a aba inteira.
+            if (activeTrackCapsule === 'curso') {
+                hub.className = 'dashboard-empty';
+                hub.innerHTML = '<div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><span>Trilha de Internato ainda não existe — pratique pelo QuestHub, na cápsula Curso, por enquanto.</span>';
+                return;
+            }
+            hub.className = 'trail-hub';
             const state = getTrailState();
             const trailId = state.active || 'enamed';
             const track = getTrailTrack(state, trailId);
@@ -342,6 +353,38 @@
             return searchActive ? questions.slice(0, Math.min(count, questions.length)) : randomSample(questions, count);
         }
 
+        // Cápsula Curso (Internato/OSCE, foco faculdade) / Residência
+        // (Guiado/Simulado/Imersão + Trilhas + Rapid Review, foco provas de
+        // residência) no topo do QuestHub. Só decide visibilidade — não
+        // mexe em getActiveQuestionBank nem na lógica de cada modo.
+        const TRACK_CAPSULE_KEY = 'trycktrack-track-capsule';
+        const CAPSULE_MODES = { curso: ['internato', 'osce'], residencia: ['practice', 'exam', 'full-exam'] };
+        let activeTrackCapsule = localStorage.getItem(TRACK_CAPSULE_KEY) === 'curso' ? 'curso' : 'residencia';
+
+        function filterQuestionModesByCapsule() {
+            document.querySelectorAll('.question-mode[data-question-mode]').forEach(btn => {
+                const mode = btn.dataset.questionMode;
+                if (mode === 'review') { btn.hidden = false; return; }
+                const visibleModes = CAPSULE_MODES[activeTrackCapsule] || [];
+                btn.hidden = !visibleModes.includes(mode);
+            });
+        }
+
+        function syncTrackCapsuleUI() {
+            document.querySelectorAll('[data-track-capsule]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.trackCapsule === activeTrackCapsule);
+            });
+            filterQuestionModesByCapsule();
+        }
+
+        function setTrackCapsule(button) {
+            activeTrackCapsule = button.dataset.trackCapsule === 'curso' ? 'curso' : 'residencia';
+            localStorage.setItem(TRACK_CAPSULE_KEY, activeTrackCapsule);
+            syncTrackCapsuleUI();
+            if (document.getElementById('trailHub')?.innerHTML) renderTrails();
+            if (document.getElementById('dashboardScore')) renderDashboard();
+        }
+
         // Cada Rapid Review de Clínica Médica (Cardiologia, Endocrinologia
         // etc.) é sua própria área no banco de questões, mas a Trilha/
         // edital enxerga isso como uma fase só ("Clínica Médica") — igual
@@ -381,7 +424,7 @@
             }
             const trailState = getTrailState();
             const track = TRAIL_CATALOG[trailState.active] || TRAIL_CATALOG.enamed;
-            const statsByArea = getQuestionStats().byArea || {};
+            const statsByArea = getQuestionStats().byArea?.residencia || {};
             const sampled = window.weightedSampleByIncidence(groupQuestionsByTrailArea(filtered), track.phases, statsByArea, count);
             // Nenhuma área do recorte bateu com o TRAIL_CATALOG (ex.: só
             // Psiquiatria, que não tem fase própria na trilha) — cai no
@@ -599,7 +642,7 @@
                 if (pagina === 'trilhas') renderTrails();
                 if (pagina === 'review') syncRapidReviewMenu();
                 if (pagina === 'metricas') renderDashboard();
-                if (pagina === 'questoes') updateReviewQueueHint();
+                if (pagina === 'questoes') { updateReviewQueueHint(); syncTrackCapsuleUI(); }
                 // Prefetch silencioso: Questões e Trilhas são as duas
                 // telas de onde uma sessão pode começar, então já adianta
                 // o download de question-explanations.js aqui — na hora
@@ -622,6 +665,16 @@
             ['cirurgia-geral', 'Cirurgia Geral'],
             ['medicina-preventiva', 'Medicina Preventiva'],
             ['psiquiatria', 'Psiquiatria']
+        ];
+        // Rodízios do Internato (mesmos nomes/slugs de OSCE_CURRICULUM_MATRIX)
+        // — lado Curso do detalhamento por área do Dashboard.
+        const DASHBOARD_AREAS_CURSO = [
+            ['atencao-primaria-a-saude', 'Atenção Primária à Saúde'],
+            ['cirurgia', 'Cirurgia'],
+            ['clinica-medica', 'Clínica Médica'],
+            ['ginecologia-e-obstetricia', 'Ginecologia e Obstetrícia'],
+            ['pediatria', 'Pediatria'],
+            ['urgencia-e-emergencia-saude-mental', 'Urgência e Emergência / Saúde Mental']
         ];
         let dashboardPeriodDays = 7;
 
@@ -697,8 +750,9 @@
             chart.innerHTML = chartValues.map((value, index) => `<div class="dashboard-day"><div class="dashboard-bar-track"><div class="dashboard-bar" style="height:${Math.max(3, Math.round((value / maxValue) * 100))}%"></div></div><label>${dayLabels[index]}</label></div>`).join('');
             document.getElementById('dashboardChartLabel').textContent = dashboardPeriodDays === 7 ? 'Últimos 7 dias' : 'Últimos 30 dias';
 
-            const byArea = stats.byArea || {};
-            document.getElementById('dashboardAreas').innerHTML = DASHBOARD_AREAS.map(([key, name]) => {
+            const byArea = stats.byArea?.[activeTrackCapsule] || {};
+            const dashboardAreaList = activeTrackCapsule === 'curso' ? DASHBOARD_AREAS_CURSO : DASHBOARD_AREAS;
+            document.getElementById('dashboardAreas').innerHTML = dashboardAreaList.map(([key, name]) => {
                 const area = byArea[key] || {};
                 const areaAnswered = Number(area.answered || 0);
                 const areaCorrect = Number(area.correct || 0);
@@ -706,7 +760,7 @@
                 return `<div class="dashboard-area"><div class="dashboard-area-top"><span class="dashboard-area-name">${name}</span><span class="dashboard-area-value">${areaAnswered ? `${value}% · ${areaAnswered} questões` : 'Sem respostas'}</span></div><div class="dashboard-area-track"><div class="dashboard-area-fill" style="width:${value}%"></div></div></div>`;
             }).join('');
 
-            const history = getQuestionHistory();
+            const history = getQuestionHistory().filter(entry => entry.track === activeTrackCapsule);
             const recent = document.getElementById('dashboardRecent');
             if (!history.length) {
                 recent.className = 'dashboard-empty';
@@ -2952,6 +3006,11 @@ Regras obrigatórias:
             ...Object.fromEntries(CLINICA_MEDICA_AREAS.map(area => [area, 'clinica-medica'])),
         };
 
+        // Nome do rodízio (question.rodizio, Internato) -> slug do lado
+        // Curso do Dashboard — mesmos nomes/slugs de OSCE_CURRICULUM_MATRIX,
+        // não duplicados à mão.
+        const RODIZIO_DASHBOARD_SLUG = Object.fromEntries(OSCE_CURRICULUM_MATRIX.map(area => [area.name, area.slug]));
+
         function recordQuestionResult(question, correct, chosen, elapsedMs) {
             // Discursiva não tem gabarito de letra — não é certo nem
             // errado, então não entra na contagem de acertos/erros.
@@ -2961,11 +3020,16 @@ Regras obrigatórias:
             stats.answered = Number(stats.answered || 0) + 1;
             stats.correct = Number(stats.correct || 0) + (correct ? 1 : 0);
             stats.byArea = stats.byArea || {};
-            const key = QUESTION_AREA_DASHBOARD_SLUG[question?.area];
+            // Internato (question.rodizio) e banco principal (question.area)
+            // nunca colidem no mesmo campo — o discriminador natural de
+            // qual trilha (Curso/Residência) essa resposta pertence.
+            const track = question?.rodizio ? 'curso' : 'residencia';
+            const key = track === 'curso' ? RODIZIO_DASHBOARD_SLUG[question?.rodizio] : QUESTION_AREA_DASHBOARD_SLUG[question?.area];
             if (key) {
-                stats.byArea[key] = stats.byArea[key] || { answered: 0, correct: 0 };
-                stats.byArea[key].answered += 1;
-                stats.byArea[key].correct += correct ? 1 : 0;
+                stats.byArea[track] = stats.byArea[track] || {};
+                stats.byArea[track][key] = stats.byArea[track][key] || { answered: 0, correct: 0 };
+                stats.byArea[track][key].answered += 1;
+                stats.byArea[track][key].correct += correct ? 1 : 0;
             }
             const today = new Date().toISOString().slice(0, 10);
             stats.daily = Array.isArray(stats.daily) ? stats.daily : [];

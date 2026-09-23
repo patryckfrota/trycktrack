@@ -541,6 +541,11 @@
                         </div>
                     </section>
 
+                    <div class="osce-mode-choice track-capsule" role="group" aria-label="Trilha de estudo">
+                        <button type="button" class="active" data-track-capsule="residencia" onclick="setTrackCapsule(this)">Residência</button>
+                        <button type="button" data-track-capsule="curso" onclick="setTrackCapsule(this)">Curso</button>
+                    </div>
+
                     <div class="question-section-title">Como você quer treinar?</div>
                     <div class="question-modes" role="group" aria-label="Modo de resolução">
                         <button class="question-mode" data-question-mode="practice" onclick="openQuestionConfig('practice')">
