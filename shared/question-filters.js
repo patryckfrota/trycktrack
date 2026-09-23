@@ -58,6 +58,7 @@ export function questionMatchesSearch(question, search) {
         question?.area,
         question?.subarea,
         question?.tema,
+        question?.subtema,
         ...Object.values(question?.options || {})
     ].filter(Boolean).join(' '));
     return terms.every(term => haystack.includes(term));
@@ -104,6 +105,8 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
     const {
         theme = 'Todas',
         subtheme = 'Todas',
+        tema = 'Todos',
+        subtema = 'Todos',
         institution = 'Todas',
         year = 'Todos',
         search = ''
@@ -114,6 +117,8 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
         const source = String(question.source || '');
         return (theme === 'Todas' || question.area === theme)
             && (subtheme === 'Todas' || question.subarea === subtheme)
+            && (tema === 'Todos' || question.tema === tema)
+            && (subtema === 'Todos' || question.subtema === subtema)
             && (institution === 'Todas' || source.includes(institution))
             && (year === 'Todos' || questionYears.includes(year))
             && (matchedIds ? matchedIds.has(question.id) : questionMatchesSearch(question, search));

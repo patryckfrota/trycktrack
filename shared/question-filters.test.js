@@ -99,6 +99,24 @@ test('filterInternatoBank: filtra por rodízio/tópico/tema/semestre e ainda apl
     assert.deepEqual(result.map(q => q.id), ['i1']);
 });
 
+test('filterQuestionBank: tema/subtema (taxonomia do Rapid Review) filtram junto com área, sem substituí-la', () => {
+    const bank = [
+        makeQuestion({ id: 'c1', area: 'Cirurgia Geral', tema: 'PARTE I — TRAUMA', subtema: 'Trauma torácico' }),
+        makeQuestion({ id: 'c2', area: 'Cirurgia Geral', tema: 'PARTE I — TRAUMA', subtema: 'Trauma abdominal' }),
+        makeQuestion({ id: 'c3', area: 'Cirurgia Geral', tema: 'PARTE II — ABDOME AGUDO', subtema: 'Apendicite aguda' }),
+        makeQuestion({ id: 'c4', area: 'Clínica Médica' }), // ainda não classificada — sem tema/subtema
+    ];
+    const porTema = filterQuestionBank(bank, { mode: 'practice', filters: { tema: 'PARTE I — TRAUMA' } });
+    assert.deepEqual(porTema.map(q => q.id).sort(), ['c1', 'c2']);
+
+    const porSubtema = filterQuestionBank(bank, { mode: 'practice', filters: { tema: 'PARTE I — TRAUMA', subtema: 'Trauma torácico' } });
+    assert.deepEqual(porSubtema.map(q => q.id), ['c1']);
+
+    // sem filtro de tema, questão não classificada continua aparecendo — tema/subtema é um refinamento, não obrigatório
+    const semFiltroTema = filterQuestionBank(bank, { mode: 'practice', filters: { theme: 'Clínica Médica' } });
+    assert.deepEqual(semFiltroTema.map(q => q.id), ['c4']);
+});
+
 test('normalizeSearchText: minúsculas e sem acento (B-2)', () => {
     assert.equal(normalizeSearchText('Síndrome de Guillain-Barré'), 'sindrome de guillain-barre');
     assert.equal(normalizeSearchText(''), '');

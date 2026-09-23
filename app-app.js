@@ -854,6 +854,39 @@
                 .map(question => question.subarea)
                 .filter(Boolean))].sort();
             select.innerHTML = '<option value="Todas">Todos</option>' + subthemes.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
+            updateQuestionConfigTemas();
+        }
+
+        // Tema/Subtema = a divisão real do Rapid Review (seção "PARTE..."
+        // e subcapítulo) usada pra classificar cada questão — ver
+        // questions-cirurgia.js. Em cascata com Área (igual Rotação →
+        // Tópico → Tema do Internato): só lista o que existe de verdade
+        // pra área escolhida, então uma área ainda não classificada
+        // simplesmente não mostra opção nenhuma além de "Todos", sem
+        // quebrar nada nem exigir mudança de código quando a
+        // classificação de mais áreas for entrando.
+        function updateQuestionConfigTemas() {
+            const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
+            const select = document.getElementById('questionConfigTema');
+            if (!select) return;
+            const temas = [...new Set(getActiveQuestionBank()
+                .filter(question => (theme === 'Todas' || question.area === theme) && question.tema)
+                .map(question => question.tema))].sort();
+            const current = select.value;
+            select.innerHTML = '<option value="Todos">Todos</option>' + temas.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
+            if (temas.includes(current)) select.value = current;
+            updateQuestionConfigSubtemas();
+        }
+
+        function updateQuestionConfigSubtemas() {
+            const theme = document.getElementById('questionConfigTheme')?.value || 'Todas';
+            const tema = document.getElementById('questionConfigTema')?.value || 'Todos';
+            const select = document.getElementById('questionConfigSubtema');
+            if (!select) return;
+            const subtemas = [...new Set(getActiveQuestionBank()
+                .filter(question => (theme === 'Todas' || question.area === theme) && (tema === 'Todos' || question.tema === tema) && question.subtema)
+                .map(question => question.subtema))].sort();
+            select.innerHTML = '<option value="Todos">Todos</option>' + subtemas.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
             updateQuestionConfigAvailableCount();
         }
 
@@ -879,6 +912,8 @@
                 : {
                     theme: document.getElementById('questionConfigTheme')?.value || 'Todas',
                     subtheme: document.getElementById('questionConfigSubtheme')?.value || 'Todas',
+                    tema: document.getElementById('questionConfigTema')?.value || 'Todos',
+                    subtema: document.getElementById('questionConfigSubtema')?.value || 'Todos',
                     institution: document.getElementById('questionConfigInstitution')?.value || 'Todas',
                     year: document.getElementById('questionConfigYear')?.value || 'Todos',
                     search: document.getElementById('questionConfigSearch')?.value || ''
@@ -1265,8 +1300,10 @@
                 body.innerHTML = `<div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
                     <div class="question-config-field"><label for="questionConfigSearch">Buscar</label><input type="search" id="questionConfigSearch" placeholder="Ex.: síndrome de Guillain-Barré" oninput="updateQuestionConfigAvailableCount()"></div>
-                    <div class="question-config-field"><label for="questionConfigTheme">Tema</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
-                    <div class="question-config-field"><label for="questionConfigSubtheme">Subtema</label><select id="questionConfigSubtheme" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigTheme">Área</label><select id="questionConfigTheme" onchange="updateQuestionConfigSubtopics()"><option value="Todas">Todos</option>${themes.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
+                    <div class="question-config-field"><label for="questionConfigSubtheme">Subárea</label><select id="questionConfigSubtheme" onchange="updateQuestionConfigTemas()"><option value="Todas">Todos</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigTema">Tema</label><select id="questionConfigTema" onchange="updateQuestionConfigSubtemas()"><option value="Todos">Todos</option></select></div>
+                    <div class="question-config-field"><label for="questionConfigSubtema">Subtema</label><select id="questionConfigSubtema" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option></select></div>
                     <div class="question-config-divider">Filtros</div>
                     <div class="question-config-field"><label for="questionConfigInstitution">Instituição</label><select id="questionConfigInstitution" onchange="updateQuestionConfigAvailableCount()"><option value="Todas">Todas</option>${sources.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('')}</select></div>
                     <div class="question-config-field"><label for="questionConfigYear">Ano</label><select id="questionConfigYear" onchange="updateQuestionConfigAvailableCount()"><option value="Todos">Todos</option>${years.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
@@ -1279,7 +1316,7 @@
                     <button type="button" class="question-config-advanced-btn" onclick="openAdvancedFilter()"><span>Filtros Avançados</span><span class="question-config-advanced-badge" id="advancedFilterBadge" hidden>0</span></button>
                     <div class="question-config-available" id="questionConfigAvailable" role="status" aria-live="polite"></div>
                 </div>`;
-                updateQuestionConfigAvailableCount();
+                updateQuestionConfigSubtopics();
                 updateAdvancedFilterBadge();
             }
             view.hidden = false;
