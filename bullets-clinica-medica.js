@@ -5,7 +5,7 @@
     const bullets = [
         {
             id: 'cm-2026-tep-aha-acc',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Nova Diretriz AHA/ACC para TEP - Categorias A a E',
             atualizacao2026: true,
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Categoria</th><th>Perfil Clínico</th><th>Hemodinâmica</th><th>Biomarcadores/VD</th><th>Conduta</th></tr></thead><tbody>
@@ -22,7 +22,7 @@
         },
         {
             id: 'cm-2026-erradicacao-h-pylori',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Erradicação H. Pylori',
             atualizacao2026: true,
             html: `<p><strong>1ª linha de tratamento:</strong></p>
@@ -41,7 +41,7 @@
         },
         {
             id: 'cm-2026-e-dgbi-roma-v',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Desordens Esofágicas da Interação Cérebro-Intestino (E-DGBI) - ROMA V',
             atualizacao2026: true,
             html: `<ul class="reader-sublist">
@@ -57,7 +57,7 @@
         },
         {
             id: 'cm-2026-sii-roma-v',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Síndrome do Intestino Irritável (adulto) - ROMA V',
             atualizacao2026: true,
             html: `<ul class="reader-sublist">
@@ -68,7 +68,7 @@
         },
         {
             id: 'cm-2026-dispepsia-funcional-roma-v',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Dispepsia Funcional - ROMA V',
             atualizacao2026: true,
             imagem: 'assets/bullets/img/upd2026-dispepsia-fluxograma.png',
@@ -80,7 +80,7 @@
         },
         {
             id: 'cm-diagnostico-diabetes',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Diagnóstico de Diabetes',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Critério</th><th>Valor de referência</th></tr></thead><tbody>
 <tr><td>Glicemia de jejum</td><td>≥ 126 mg/dL</td></tr>
@@ -92,7 +92,7 @@
         },
         {
             id: 'cm-gradacao-hipoglicemia',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Gradação - Hipoglicemia',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Grau</th><th>Glicemia (mg/dL)</th><th>Características clínicas</th></tr></thead><tbody>
 <tr><td>Hipoglicemia leve / Nível 1</td><td>54–69 mg/dL</td><td>Sintomas adrenérgicos: tremor, sudorese, palpitações, fome; paciente consegue se autotratar</td></tr>
@@ -102,7 +102,7 @@
         },
         {
             id: 'cm-triade-whipple',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Tríade de Whipple - Insulinoma',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Componente</th><th>Descrição</th></tr></thead><tbody>
 <tr><td>1. Sintomas de hipoglicemia</td><td>Manifestações neuroglicopênicas (confusão, irritabilidade, visão turva, convulsões, coma) e/ou adrenérgicas (tremores, palpitações, sudorese, fome).</td></tr>
@@ -112,7 +112,7 @@
         },
         {
             id: 'cm-classificacao-neuropatia-periferica',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Classificação Neuropatia Periférica',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Risco</th><th>Características</th><th>Rastreamento de fatores de risco</th><th>Recomendação</th></tr></thead><tbody>
 <tr><td>0 – Muito baixo</td><td>Sem PSP e sem DAP</td><td>Uma vez por ano</td><td>Exame anual dos pés; autocuidado dos pés; exercícios de mobilidade</td></tr>
@@ -132,7 +132,7 @@
         },
         {
             id: 'cm-hipertensao-arterial-classificacao',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Hipertensão Arterial - Classificação',
             html: `<div class="reader-table-wrap"><table class="reader-table pa-table"><thead><tr><th>Classificação da PA</th><th>PAS (mmHg)</th><th></th><th>PAD (mmHg)</th></tr></thead><tbody>
 <tr class="sev-ok"><td>PA normal</td><td>&lt; 120</td><td>e</td><td>&lt; 80</td></tr>
@@ -152,7 +152,7 @@
         },
         {
             id: 'cm-crises-hipertensivas',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Crises hipertensivas',
             html: `<p><em>PA ≥ 180×110 mmHg</em></p>
 <ul class="reader-list">
@@ -173,7 +173,7 @@
         },
         {
             id: 'cm-retinopatia-hipertensiva',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Classificação Retinopatia Hipertensiva',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Grau</th><th>Achados</th></tr></thead><tbody>
 <tr><td>I</td><td><u>Estreitamento</u> arteriolar difuso ou <strong>tortuosidade leve</strong></td></tr>
@@ -184,7 +184,7 @@
         },
         {
             id: 'cm-dislipidemia',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Dislipidemia - Metas Terapêuticas',
             html: `<ul class="reader-list">
 <li><strong>Abordagem inicial:</strong> lipidograma + ApoB + lipoproteína (a)</li>
@@ -226,7 +226,7 @@
         },
         {
             id: 'cm-neoplasias-aids',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Neoplasias definidoras de AIDS',
             html: `<p>As neoplasias definidoras de AIDS (imunodeficiência adquirida) são:</p>
 <ul class="reader-list">
@@ -237,7 +237,7 @@
         },
         {
             id: 'cm-sindromes-febris',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Síndromes Febris',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Doença</th><th>Agente</th><th>Transmissão</th><th>Sintomas principais</th><th>Manifestações graves</th><th>Tratamento / Profilaxia</th></tr></thead><tbody>
 <tr><td>Dengue</td><td>Vírus da dengue (Flavivírus, sorotipos 1-4)</td><td>Picada do mosquito Aedes aegypti</td><td>Febre alta, cefaleia, dor retro-orbital, mialgia, artralgia, exantema</td><td>Hemorragias, choque por dengue grave</td><td>Suporte clínico (hidratação, analgésicos sem AAS)</td></tr>
@@ -250,7 +250,7 @@
         },
         {
             id: 'cm-intoxicacoes-medicamentosas',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Intoxicações Medicamentosas',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Fármaco / Substância</th><th>Principais Sinais/Sintomas</th><th>Achados laboratoriais / ECG</th><th>Tratamento Inicial / Antídoto</th></tr></thead><tbody>
 <tr><td>Paracetamol</td><td>Inicialmente assintomático ou náuseas, vômitos, mal-estar</td><td>ALT/AST elevadas após 24–48h, bilirrubinas aumentadas</td><td><strong>N-acetilcisteína (NAC)</strong>, suporte hepático, monitorar função hepática</td></tr>
@@ -264,7 +264,7 @@
         },
         {
             id: 'cm-acidentes-ofidicos',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Acidentes Ofídicos',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Tipo de Cobra</th><th>Nome do Acidente</th><th>Principais Sintomas</th></tr></thead><tbody>
 <tr><td>Jararaca</td><td>Acidente botrópico</td><td>Dor intensa local, edema, equimoses, bolhas, sangramentos, necrose tecidual; sinais sistêmicos: hemorragias, hipotensão, coagulopatia</td></tr>
@@ -275,7 +275,7 @@
         },
         {
             id: 'cm-criterios-framingham-ic',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Critérios de Framingham para Insuficiência Cardíaca',
             html: `<p><strong>Critérios maiores</strong></p>
 <ul class="reader-list">
@@ -298,7 +298,7 @@
         },
         {
             id: 'cm-classificacao-drc',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Classificação - DRC',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Estágio</th><th>TFG (mL/min/1,73 m²)</th></tr></thead><tbody>
 <tr><td>G1</td><td>≥90</td></tr><tr><td>G2</td><td>60–89</td></tr><tr><td>G3a</td><td>45–59</td></tr>
@@ -312,7 +312,7 @@
         },
         {
             id: 'cm-classificacao-ira',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Classificação - IRA',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Estágio</th><th>Creatinina sérica (Cr)</th><th>Débito urinário (mL/kg/h)</th></tr></thead><tbody>
 <tr><td>Estágio 1</td><td>↑ Cr ≥ 0,3 mg/dL em 48h <strong>ou</strong> 1,5–1,9 × Cr basal</td><td>&lt;0,5 por 6–12h</td></tr>
@@ -322,7 +322,7 @@
         },
         {
             id: 'cm-nta-x-ira-pre-renal',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'NTA x IRA Pré-Renal',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Característica</th><th>IRA Pré-Renal</th><th>NTA (Necrose Tubular Aguda)</th></tr></thead><tbody>
 <tr><td>Causa principal</td><td>Hipoperfusão renal (desidratação, choque, insuficiência cardíaca, uso de diuréticos)</td><td>Lesão direta ao túbulo renal (isquemia prolongada, nefrotóxicos: aminoglicosídeos, contraste, cisplatina)</td></tr>
@@ -336,7 +336,7 @@
         },
         {
             id: 'cm-iam-paredes-derivacoes',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'IAM – Paredes e Derivações ECG',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Parede</th><th>Derivações correspondentes</th></tr></thead><tbody>
 <tr><td>Parede anterior</td><td>V1, V2 e V3 – anterosseptal; V1–V4 – anterior; V3 e V4 ou V3, V4 e V5 – anterior localizada; V4 a V6, DI e aVL – anterolateral; V1 a V6, DI e aVL – anterior extenso.</td></tr>
@@ -348,7 +348,7 @@
         },
         {
             id: 'cm-iam-tempo-tratamento',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'IAM - Tempo de tratamento',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Tempo</th><th>Situação</th><th>Meta recomendada</th><th>Descrição / Observação</th></tr></thead><tbody>
 <tr><td>Tempo porta-agulha</td><td><strong>Terapia trombolítica</strong> (quando não há possibilidade de angioplastia primária imediata)</td><td>≤ 30 minutos após a chegada ao hospital</td><td>Tempo entre a <strong>entrada do paciente no serviço de emergência</strong> e a <strong>administração do trombolítico</strong>.</td></tr>
@@ -358,7 +358,7 @@
         },
         {
             id: 'cm-sindrome-takotsubo',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Síndrome Takotsubo - Coração partido',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Aspecto</th><th>Descrição</th></tr></thead><tbody>
 <tr><td>Quadro clínico</td><td>Dor torácica e dispneia semelhantes ao IAM.</td></tr>
@@ -371,7 +371,7 @@
         },
         {
             id: 'cm-angina-prinzmetal',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Angina de Prinzmetal',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Aspecto</th><th>Descrição</th></tr></thead><tbody>
 <tr><td>Definição</td><td>Dor torácica isquêmica causada por <strong>vasoespasmo coronariano transitório</strong>, sem obstrução aterosclerótica significativa.</td></tr>
@@ -388,7 +388,7 @@
         },
         {
             id: 'cm-sindrome-coracao-pos-feriado',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Síndrome do Coração Pós-Feriado',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Aspecto</th><th>Descrição</th></tr></thead><tbody>
 <tr><td>Definição</td><td>Arritmia cardíaca (geralmente <strong>fibrilação atrial</strong>) que ocorre <strong>após ingestão aguda e excessiva de álcool</strong>, em pessoas sem doença cardíaca estrutural prévia.</td></tr>
@@ -407,7 +407,7 @@
         },
         {
             id: 'cm-classificacao-disseccao-aorta',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Classificação - Dissecção de Aorta',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Sistema</th><th>Tipo / Classe</th><th>Localização</th></tr></thead><tbody>
 <tr><td rowspan="2"><u>Stanford</u></td><td>Tipo A</td><td>Envolve a <strong>aorta ascendente</strong>, independentemente de extensão para a descendente</td></tr>
@@ -419,7 +419,7 @@
         },
         {
             id: 'cm-hsa-fisher-hunt-hess',
-            area: 'Clínica Médica',
+            area: 'Neurologia',
             titulo: 'Hemorragia Subaracnoide - Classificação de Fisher e Hunt-Hess',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Classificação</th><th>Critérios</th><th>Grau</th></tr></thead><tbody>
 <tr><td><u>Fisher</u></td><td>Baseada em <em>TC de sangue subaracnóideo</em></td><td>1 – Sem sangue aparente; 2 – Sangue difuso &lt;1 mm ou sem coágulo; 3 – Sangue com coágulo ou &gt;1 mm; 4 – Sangue intraventricular ou hematoma intracerebral associado</td></tr>
@@ -428,7 +428,7 @@
         },
         {
             id: 'cm-erradicacao-h-pylori',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Erradicação H. Pylori',
             html: `<p><strong>1ª linha de tratamento:</strong></p>
 <ol class="reader-list">
@@ -447,7 +447,7 @@
         },
         {
             id: 'cm-criterios-roma-iv-sii',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Critérios de Roma IV - Síndrome do Intestino Irritável',
             html: `<p><strong>Diagnóstico requer:</strong></p>
 <ul class="reader-list">
@@ -462,7 +462,7 @@
         },
         {
             id: 'cm-curb65-pneumonia',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'CURB-65 e CRB-65 - Pneumonia',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Critério</th><th>CURB-65</th><th>CRB-65</th><th>Pontuação</th></tr></thead><tbody>
 <tr><td>C – Confusão mental (nova)</td><td>✅</td><td>✅</td><td>1 ponto</td></tr>
@@ -478,7 +478,7 @@
         },
         {
             id: 'cm-criterios-light-derrame-pleural',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Critérios de Light - Derrame Pleural',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Critério</th><th>Exsudato</th><th>Transudato</th></tr></thead><tbody>
 <tr><td>1. Relação proteína pleural / proteína sérica</td><td>&gt; 0,5</td><td>≤ 0,5</td></tr>
@@ -493,7 +493,7 @@
         },
         {
             id: 'cm-endocardite-criterios-duke',
-            area: 'Clínica Médica',
+            area: 'Cardiologia',
             titulo: 'Endocardite - Critérios de Duke',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Categoria</th><th>Critérios</th><th>Descrição</th></tr></thead><tbody>
 <tr><td rowspan="4">Maiores</td><td>1. Hemoculturas positivas típicas</td><td>Duas amostras positivas para microrganismos típicos de endocardite <strong>ou</strong> uma amostra c. burnetii <strong>ou</strong> 3 amostras para os demais agentes</td></tr>
@@ -513,7 +513,7 @@
         },
         {
             id: 'cm-classificacao-bethesda',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Classificação de Bethesda - Nódulos Tireoidianos',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Categoria (Bethesda)</th><th>Descrição citológica</th><th>Conduta recomendada</th></tr></thead><tbody>
 <tr><td>I. Não diagnóstica / Insatisfatória</td><td>Material escasso, mal preservado ou sem células foliculares suficientes.</td><td>Repetir a PAAF guiada por USG.</td></tr>
@@ -526,7 +526,7 @@
         },
         {
             id: 'cm-escore-wells-tep',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Escore de Wells - Tromboembolismo Pulmonar (TEP)',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Variáveis</th><th>Pontos</th></tr></thead><tbody>
 <tr><td>TVP ou EP prévios</td><td>+1,5</td></tr>
@@ -545,7 +545,7 @@
         },
         {
             id: 'cm-estadiamento-dpoc',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Estadiamento - DPOC (GOLD)',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Estágio GOLD</th><th>VEF₁ (% do previsto)</th><th>Classificação da gravidade</th></tr></thead><tbody>
 <tr><td>GOLD 1</td><td>≥ 80%</td><td>Leve</td></tr>
@@ -556,7 +556,7 @@
         },
         {
             id: 'cm-classificacao-dpoc-grupos',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Classificação - DPOC (Grupos A/B/E)',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Grupo</th><th>Sintomas (mMRC ≥ 2 ou CAT ≥ 10)</th><th>Exacerbações / Internações no último ano</th><th>Conduta inicial sugerida</th></tr></thead><tbody>
 <tr><td>A</td><td>mMRC 0-1 ; CAT &lt; 10</td><td>0 ou 1 exacerbação (sem internação)</td><td>LABA ou LAMA</td></tr>
@@ -566,7 +566,7 @@
         },
         {
             id: 'cm-asma-gina-adultos',
-            area: 'Clínica Médica',
+            area: 'Pneumologia',
             titulo: 'Asma - Manejo GINA (Adultos e Adolescentes 12+)',
             html: `<p>Ciclo de manejo: Avaliar → Ajustar → Revisar (sintomas, exacerbações, efeitos colaterais, função pulmonar, satisfação do paciente).</p>
 <p><strong>Track 1 (preferencial)</strong> — controlador e aliviador com <strong>ICS-formoterol</strong> (reduz risco de exacerbação em relação ao uso de SABA como aliviador):</p>
@@ -589,7 +589,7 @@
         },
         {
             id: 'cm-delirium-cam',
-            area: 'Clínica Médica',
+            area: 'Neurologia',
             titulo: 'Delirium - Critérios diagnósticos CAM',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Critério</th><th>Descrição</th><th>Presente para diagnóstico?</th></tr></thead><tbody>
 <tr><td>1. Início agudo e flutuação do curso mental</td><td>Mudança súbita no estado mental com tendência a piorar ou melhorar ao longo do dia</td><td>Obrigatório</td></tr>
@@ -602,7 +602,7 @@
         },
         {
             id: 'cm-doencas-inflamatorias-intestinais',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Doenças Inflamatórias Intestinais',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Tópico</th><th>Doença de Crohn</th><th>Retocolite Ulcerativa</th></tr></thead><tbody>
 <tr><td>Epidemiologia</td><td>Tabagismo ↑ risco</td><td>Tabagismo não é FR</td></tr>
@@ -617,7 +617,7 @@
         },
         {
             id: 'cm-dengue-planos',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Dengue - Planos A / B / C',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Grupo</th><th>Critérios / Indicação</th><th>Acompanhamento</th><th>Exames Complementares</th><th>Conduta / Tratamento</th><th>Reavaliação / Retorno</th></tr></thead><tbody>
 <tr><td>Grupo A</td><td>Sem sangramento espontâneo ou induzido (prova do laço negativa), sem sinais de alarme, sem condição especial, sem risco social ou comorbidades</td><td>Ambulatorial</td><td>-</td><td>Hidratação oral: Adultos: 60 ml/kg/dia (1/3 via solução salina, 2/3 via líquidos orais). Crianças: reidratação oral precoce + líquidos conforme idade; repouso, antitérmicos e antieméticos se necessário</td><td>Retorno: diário ou imediato se surgirem sinais de alarme; acompanhamento até 48h após queda da febre</td></tr>
@@ -628,7 +628,7 @@
         },
         {
             id: 'cm-nivel-medular-sensibilidade',
-            area: 'Clínica Médica',
+            area: 'Neurologia',
             titulo: 'Nível Medular e Sensibilidade Comprometida',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Nível medular</th><th>Região / Dermátomo afetado</th><th>Sensibilidade comprometida</th></tr></thead><tbody>
 <tr><td>T2</td><td>Segunda costela / parte superior do tórax</td><td>Sensibilidade torácica superior, região do peitoral próximo à axila</td></tr>
@@ -642,7 +642,7 @@
         },
         {
             id: 'cm-sindrome-cockett',
-            area: 'Clínica Médica',
+            area: 'Hematologia',
             titulo: 'Síndrome de Cockett - May Thurner',
             html: `<ul class="reader-list">
 <li>Compressão da veia ilíaca comum esquerda pela artéria ilíaca comum direita</li>
@@ -651,7 +651,7 @@
         },
         {
             id: 'cm-sindrome-wilkie',
-            area: 'Clínica Médica',
+            area: 'Gastroenterologia',
             titulo: 'Síndrome de Wilkie',
             html: `<ul class="reader-list">
 <li>Compressão da terceira porção do duodeno entre a aorta abdominal e a artéria mesentérica superior, causando obstrução intestinal alta.</li>
@@ -672,7 +672,7 @@
         },
         {
             id: 'cm-sindrome-quebra-nozes',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Síndrome do Quebra-Nozes',
             html: `<ul class="reader-list">
 <li>Compressão da veia renal esquerda entre a artéria mesentérica superior e a aorta (ou entre a aorta e coluna), causando hipertensão venosa renal e sintomas relacionados.</li>
@@ -690,7 +690,7 @@
         },
         {
             id: 'cm-hipocalcemia-sinais',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Hipocalcemia - Sinais',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Categoria</th><th>Exemplos</th></tr></thead><tbody>
 <tr><td>Neuromusculares</td><td>Parestesias (formigamento em mãos, pés e face); espasmos musculares e cãibras; tetania (contrações musculares involuntárias); convulsões</td></tr>
@@ -700,7 +700,7 @@
         },
         {
             id: 'cm-sepse-sofa-qsofa',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Sepse - SOFA e Q-SOFA',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Escala</th><th>Parâmetros</th></tr></thead><tbody>
 <tr><td>SOFA (Sequential Organ Failure Assessment)</td><td>1. Respiração (PaO₂/FiO₂) 2. Coagulação (plaquetas) 3. Fígado (bilirrubina) 4. Sistema cardiovascular (uso de vasopressores / PA) 5. Sistema nervoso (Glasgow) 6. Rim (creatinina / diurese)</td></tr>
@@ -718,7 +718,7 @@
         },
         {
             id: 'cm-iodo-tireoide',
-            area: 'Clínica Médica',
+            area: 'Endocrinologia',
             titulo: 'Iodo x Tireoide',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Efeito / Fenômeno</th><th>Mecanismo</th><th>Consequência</th></tr></thead><tbody>
 <tr><td>Efeito Wolff-Chaikoff</td><td>Exposição súbita a grandes quantidades de iodo → inibe temporariamente a organificação do iodo na tireoide</td><td>Hipotireoidismo transitório</td></tr>
@@ -727,7 +727,7 @@
         },
         {
             id: 'cm-bacteriuria-assintomatica',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Bacteriúria Assintomática - Indicações de tratamento',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>População / Situação</th><th>Indicação de Tratamento</th><th>Observações</th></tr></thead><tbody>
 <tr><td>Gestantes</td><td>✅ Tratar sempre</td><td>Evita pielonefrite, parto prematuro e baixo peso ao nascer. Antibióticos seguros na gestação são usados, como amoxicilina, cefalosporinas, nitrofurantoína (exceto no final da gestação).</td></tr>
@@ -736,7 +736,7 @@
         },
         {
             id: 'cm-trombolise-avei-contraindicacoes',
-            area: 'Clínica Médica',
+            area: 'Neurologia',
             titulo: 'Trombólise (AVEi) - Contraindicações',
             html: `<p><strong>Contraindicações absolutas:</strong></p>
 <ul class="reader-list">
@@ -753,7 +753,7 @@
         },
         {
             id: 'cm-anticoagulantes',
-            area: 'Clínica Médica',
+            area: 'Hematologia',
             titulo: 'Anticoagulantes - Reversão',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Classe / Fármaco</th><th>Exemplos</th><th>Antídoto / Reversão</th></tr></thead><tbody>
 <tr><td>Antagonistas da vitamina K</td><td>Varfarina</td><td>Vitamina K, complexo protrombínico</td></tr>
@@ -764,7 +764,7 @@
         },
         {
             id: 'cm-wernicke-korsakoff',
-            area: 'Clínica Médica',
+            area: 'Neurologia',
             titulo: 'Síndrome de Wernicke e Korsakoff - Álcool',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Aspecto</th><th>Encefalopatia de Wernicke</th><th>Síndrome de Korsakoff</th></tr></thead><tbody>
 <tr><td>Definição</td><td>Neuropatia aguda causada por deficiência de tiamina (vitamina B1)</td><td>Complicação crônica da deficiência de tiamina, geralmente após Wernicke</td></tr>
@@ -776,7 +776,7 @@
         },
         {
             id: 'cm-ssj-net',
-            area: 'Clínica Médica',
+            area: 'Dermatologia',
             titulo: 'Síndrome de Stevens Johnson (SSJ) e Necrólise Epidérmica Tóxica (NET)',
             html: `<p>Lesões cutâneomucosas com bolhas e descolamento da pele.</p>
 <ul class="reader-list">
@@ -786,7 +786,7 @@
         },
         {
             id: 'cm-psoriase',
-            area: 'Clínica Médica',
+            area: 'Dermatologia',
             titulo: 'Psoríase',
             html: `<ul class="reader-list">
 <li><em>Fenômeno de Koebner</em> → lesão em áreas de trauma</li>
@@ -795,7 +795,7 @@
         },
         {
             id: 'cm-buloses',
-            area: 'Clínica Médica',
+            area: 'Dermatologia',
             titulo: 'Buloses',
             html: `<ul class="reader-list">
 <li><strong>Pênfigo foliáceo</strong> → desmogleína 1, poupa mucosa.</li>
@@ -804,7 +804,7 @@
         },
         {
             id: 'cm-osteossarcoma-ewing',
-            area: 'Clínica Médica',
+            area: 'Reumatologia',
             titulo: 'Osteossarcoma x Sarcoma de Ewing',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Característica</th><th>Osteossarcoma</th><th>Sarcoma de Ewing</th></tr></thead><tbody>
 <tr><td>Idade mais comum</td><td>Adolescência (10–20 anos)</td><td>Crianças e adolescentes (10–20 anos)</td></tr>
@@ -818,7 +818,7 @@
         },
         {
             id: 'cm-coriorretinite-cmv',
-            area: 'Clínica Médica',
+            area: 'Oftalmologia',
             titulo: 'Coriorretinite por Citomegalovírus',
             imagem: 'assets/bullets/img/cm-cmv-retinite.png',
             html: `<ul class="reader-list">
@@ -827,7 +827,7 @@
         },
         {
             id: 'cm-disturbios-potassio',
-            area: 'Clínica Médica',
+            area: 'Nefrologia',
             titulo: 'Distúrbios do Potássio (K+)',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Característica</th><th>Hipocalemia</th><th>Hipercalemia</th></tr></thead><tbody>
 <tr><td>Definição</td><td>Potássio sérico &lt; 3,5 mEq/L</td><td>Potássio sérico &gt; 5,0 mEq/L</td></tr>
@@ -839,7 +839,7 @@
         },
         {
             id: 'cm-calazio-hordeolo',
-            area: 'Clínica Médica',
+            area: 'Oftalmologia',
             titulo: 'Calázio x Hordéolo',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Característica</th><th>Calázio</th><th>Hordéolo (terçol)</th></tr></thead><tbody>
 <tr><td>Definição</td><td>Inflamação <strong>crônica granulomatosa</strong> das glândulas de <strong>Meibômio</strong> (sebáceas da tarsal)</td><td>Infecção <strong>aguda supurativa</strong> das glândulas palpebrais (Zeiss, Moll ou Meibômio)</td></tr>
@@ -854,7 +854,7 @@
         },
         {
             id: 'cm-anemias',
-            area: 'Clínica Médica',
+            area: 'Hematologia',
             titulo: 'Anemias',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Tipo de Anemia</th><th>Mecanismo / Causa</th><th>VCM</th><th>RDW</th><th>Ferro sérico</th><th>Ferritina</th><th>TIBC/CTLF</th><th>Reticulócitos</th></tr></thead><tbody>
 <tr><td>Anemia Ferropriva</td><td>Diminuição do ferro corporal total (dieta pobre, perdas crônicas, sangramento menstrual ou GI)</td><td>↓</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td></tr>
@@ -876,7 +876,7 @@
         },
         {
             id: 'cm-erisipela-celulite-fasceite',
-            area: 'Clínica Médica',
+            area: 'Dermatologia',
             titulo: 'Erisipela x Celulite x Fasceíte Necrosante',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Característica</th><th>Erisipela</th><th>Celulite</th><th>Fasceíte Necrosante</th></tr></thead><tbody>
 <tr><td>Camada acometida</td><td>Derme superficial e linfáticos</td><td>Derme profunda e tecido subcutâneo</td><td>Fáscia superficial e tecido subcutâneo profundo</td></tr>
@@ -892,7 +892,7 @@
         },
         {
             id: 'cm-gota-pseudogota',
-            area: 'Clínica Médica',
+            area: 'Reumatologia',
             titulo: 'Gota x Pseudogota',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Gota</th><th>Pseudogota</th></tr></thead><tbody>
 <tr><td>Cristais de urato monossódico</td><td>Cristais de pirofosfato de cálcio</td></tr>
@@ -902,7 +902,7 @@
         },
         {
             id: 'cm-antibioticos-efeitos-colaterais',
-            area: 'Clínica Médica',
+            area: 'Infectologia',
             titulo: 'Antibióticos x Efeitos Colaterais',
             html: `<div class="reader-table-wrap"><table class="reader-table"><thead><tr><th>Antibiótico</th><th>Efeito colateral</th></tr></thead><tbody>
 <tr><td>Vancomicina</td><td>Síndrome do Homem Vermelho</td></tr>

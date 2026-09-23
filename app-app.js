@@ -342,14 +342,23 @@
             return searchActive ? questions.slice(0, Math.min(count, questions.length)) : randomSample(questions, count);
         }
 
-        // R-3: agrupa por área na mesma convenção de trailQuestionsForArea
-        // — Ginecologia e Obstetrícia contam como uma área só (é como o
-        // TRAIL_CATALOG/edital enxerga essa incidência), embora no banco
-        // de questões elas sejam duas áreas separadas.
+        // Cada Rapid Review de Clínica Médica (Cardiologia, Endocrinologia
+        // etc.) é sua própria área no banco de questões, mas a Trilha/
+        // edital enxerga isso como uma fase só ("Clínica Médica") — igual
+        // já acontecia com Ginecologia+Obstetrícia.
+        const CLINICA_MEDICA_AREAS = ['Cardiologia', 'Dermatologia', 'Endocrinologia', 'Gastroenterologia', 'Hematologia', 'Hepatologia', 'Infectologia', 'Nefrologia', 'Neurologia', 'Pneumologia', 'Reumatologia'];
+
+        function toTrailArea(area) {
+            if (area === 'Ginecologia' || area === 'Obstetrícia') return 'Ginecologia e Obstetrícia';
+            if (CLINICA_MEDICA_AREAS.includes(area)) return 'Clínica Médica';
+            return area;
+        }
+
+        // R-3: agrupa por área na mesma convenção de trailQuestionsForArea.
         function groupQuestionsByTrailArea(questions) {
             const groups = {};
             questions.forEach(question => {
-                const key = (question.area === 'Ginecologia' || question.area === 'Obstetrícia') ? 'Ginecologia e Obstetrícia' : question.area;
+                const key = toTrailArea(question.area);
                 (groups[key] = groups[key] || []).push(question);
             });
             return groups;
@@ -382,7 +391,9 @@
 
         function trailQuestionsForArea(area, count) {
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
-            const matching = area === 'Ginecologia e Obstetrícia' ? bank.filter(q => ['Ginecologia', 'Obstetrícia'].includes(q.area)) : bank.filter(q => q.area === area);
+            const matching = area === 'Ginecologia e Obstetrícia' ? bank.filter(q => ['Ginecologia', 'Obstetrícia'].includes(q.area))
+                : area === 'Clínica Médica' ? bank.filter(q => CLINICA_MEDICA_AREAS.includes(q.area))
+                : bank.filter(q => q.area === area);
             return randomSample(matching, count);
         }
 
@@ -442,7 +453,7 @@
         }
 
         function completeTrailDiagnostic(trailId, session) {
-            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const results = session.questions.map((question, index) => ({ area: toTrailArea(question.area), correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             track.diagnosis = { completedAt: Date.now(), results };
@@ -452,7 +463,7 @@
         }
 
         function completeTrailRecalibration(trailId, session) {
-            const results = session.questions.map((question, index) => ({ area: question.area === 'Ginecologia' || question.area === 'Obstetrícia' ? 'Ginecologia e Obstetrícia' : question.area, correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
+            const results = session.questions.map((question, index) => ({ area: toTrailArea(question.area), correct: window.isQuestionAnswerCorrect(question, session.answers[index]) }));
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             const completedIds = Object.entries(track.phaseProgress || {}).filter(([, progress]) => progress >= 100).map(([id]) => id);
@@ -1708,10 +1719,6 @@ Regras obrigatórias:
             const examPanel = document.getElementById('questionExamPanel');
             const isFullExam = button.dataset.questionMode === 'full-exam';
             if (examPanel) examPanel.hidden = !isFullExam;
-            const areaTitle = document.getElementById('questionAreaTitle');
-            const areaFilters = document.getElementById('questionAreaFilters');
-            if (areaTitle) areaTitle.hidden = isFullExam;
-            if (areaFilters) areaFilters.hidden = isFullExam;
             if (isFullExam) {
                 const countSelect = document.getElementById('questionCount');
                 if (countSelect) countSelect.value = 'full';
@@ -1733,31 +1740,6 @@ Regras obrigatórias:
                 };
                 startButton.textContent = labels[button.dataset.questionMode] || 'Começar sessão';
             }
-        }
-
-        function selectQuestionArea(button) {
-            document.querySelectorAll('.question-area-chip').forEach(item => item.classList.remove('active'));
-            button.classList.add('active');
-            const panel = document.getElementById('questionSubareaPanel');
-            const scroll = document.getElementById('questionSubareaScroll');
-            const isClinical = button.textContent.trim() === 'Clínica Médica';
-            if (panel) panel.hidden = !isClinical;
-            if (!panel || !scroll) return;
-            panel.hidden = !isClinical;
-            if (isClinical) {
-                const subareas = [...new Set((window.TRYCKTRACK_QUESTION_BANK || [])
-                    .filter(question => question.area === 'Clínica Médica' && question.subarea)
-                    .map(question => question.subarea))];
-                scroll.innerHTML = [
-                    '<button class="question-area-chip active" onclick="selectQuestionSubarea(this)">Todas as subáreas</button>',
-                    ...subareas.map(subarea => `<button class="question-area-chip" onclick="selectQuestionSubarea(this)">${subarea}</button>`)
-                ].join('');
-            }
-        }
-
-        function selectQuestionSubarea(button) {
-            document.querySelectorAll('#questionSubareaScroll .question-area-chip').forEach(item => item.classList.remove('active'));
-            button.classList.add('active');
         }
 
         function revealQuestionNotice(message, action) {
@@ -2961,13 +2943,13 @@ Regras obrigatórias:
         // correspondência — ficam de fora do detalhamento por área, mas
         // continuam contando no total geral de acertos.
         const QUESTION_AREA_DASHBOARD_SLUG = {
-            'Clínica Médica': 'clinica-medica',
             'Ginecologia': 'go-completo',
             'Obstetrícia': 'go-completo',
             'Pediatria': 'pediatria-completo',
             'Cirurgia Geral': 'cirurgia-geral',
             'Medicina Preventiva': 'medicina-preventiva',
             'Psiquiatria': 'psiquiatria',
+            ...Object.fromEntries(CLINICA_MEDICA_AREAS.map(area => [area, 'clinica-medica'])),
         };
 
         function recordQuestionResult(question, correct, chosen, elapsedMs) {
