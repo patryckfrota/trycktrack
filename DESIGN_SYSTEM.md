@@ -1,39 +1,63 @@
-# Sistema visual institucional — Trycktrack
+# Sistema visual — MedTrack (Trycktrack)
 
-Este documento é a referência de cor e material do aplicativo. Novos componentes devem reutilizar os tokens definidos no `:root` de `index.html`, sem criar novos tons de roxo ou receitas independentes de vidro.
+Este documento é a referência de cor, tipografia e material do aplicativo. Novos componentes devem reutilizar os tokens definidos no `:root` e em `[data-theme="light"]` de `app.css`, sem criar novos tons de roxo, cores literais ou receitas independentes de vidro. Proposta aprovada em 22/09/2026: "tinta violeta sobre papel".
 
-## Marca
+## Papéis de cor
 
-| Token | Cor | Uso |
-| --- | --- | --- |
-| `--brand-50` | `#F7F4FF` | Fundo lavanda muito claro |
-| `--brand-100` | `#EEE8FF` | Superfície clara secundária |
-| `--brand-200` | `#DED2FF` | Bordas e realces suaves |
-| `--brand-300` | `#C4B5FD` | Lavanda principal no modo escuro |
-| `--brand-400` | `#A78BFA` | Destaques intermediários |
-| `--brand-500` | `#8B6BE0` | Roxo de marca |
-| `--brand-600` | `#7250C7` | Ações e seleção |
-| `--brand-700` | `#593AA4` | Profundidade de gradiente |
-| `--brand-800` | `#432A7D` | Roxo institucional escuro |
-| `--brand-900` | `#30205A` | Superfície roxa profunda |
-| `--brand-950` | `#20143D` | Sombra cromática |
+Cada cor tem um papel, e só um. Os valores abaixo são claro / escuro.
+
+| Papel | Token | Claro | Escuro | Uso |
+| --- | --- | --- | --- | --- |
+| Tinta | `--lavender-active` | `#5B3CC4` | `#B9A6FF` | Ação: botões, seleção, progresso, links |
+| Sobre a tinta | `--on-action` | `#FFFFFF` | `#141319` | Texto sobre botão primário (7,27:1 / 8,76:1) |
+| Violeta profundo | `--brand-deep` | `#3E2A8C` | `#D4C8FF` | Logo e marca |
+| Realce | `--lavender-dark` | `#EDE8FC` | `#2A2442` | Tag "JÁ CAIU", tema atual, card em destaque |
+| Papel / Noite | `--bg-main` | `#F7F7FA` | `#141319` | Fundo de tela |
+| Superfície | `--bg-secondary` | `#FFFFFF` | `#1C1B23` | Cards |
+| Superfície 2 | `--bg-tertiary` | `#EEEDF3` | `#25242E` | Chips, campos, letra da alternativa |
+| Borda | `--border-color` | `#E3E1EA` | `#2E2D38` | Bordas de card e divisórias |
+| Grafite | `--text-main` | `#1B1A22` | `#EDECF3` | Texto principal |
+| Grafite 2 | `--text-secondary` | `#55536A` | `#BDBACB` | Texto secundário |
+| Grafite 3 | `--color-caption` | `#6E6C80` | `#928FA3` | Metadados e legendas |
+
+A escala `--brand-50…950` continua disponível como referência, mas componentes usam os papéis acima.
+
+## Estados de estudo
+
+| Estado | Texto / borda | Fundo | Escuro |
+| --- | --- | --- | --- |
+| Acerto | `--success` `#1F7A4D` | `--success-soft` `#E4F3EA` | `#5FD39A` / `#16291F` |
+| Erro | `--danger` `#C23B30` | `--danger-soft` `#FBE9E7` | `#FF8F85` / `#361B19` |
+| Revisar | `--warning` `#93600A` | — | `#F2BD5B` |
+
+Acerto e erro têm a mesma intensidade (≈5,3:1): nenhum dos dois grita mais que o outro. Cor de estado aparece só onde há estado, nunca como decoração.
 
 ## Regras de aplicação
 
-- Roxo identifica marca, seleção, progresso e ações principais.
-- Branco puro é reservado a logos sobre roxo e elementos de contraste curto.
-- Textos longos usam a escala Slate já definida no aplicativo.
-- Verde e vermelho aparecem apenas como estados semânticos de sucesso e erro.
-- Uma opção selecionada deve ser diferenciada por intensidade, transparência, borda e profundidade — nunca por uma cor sem relação com a marca.
+- Roxo (Tinta) só onde se toca: ação, seleção, progresso. Se é roxo, é interativo.
+- Lavanda (Realce) só como destaque pontual, nunca como fundo de tela ou gradiente decorativo.
+- Sem gradientes em texto ou em cards. A logo é cor única (`--brand-deep`).
+- Branco e preto puros não são usados em texto: o grafite tem o mesmo viés violeta da marca.
+- Todo texto passa no WCAG AA (4,5:1); texto principal, ação e modo escuro passam no AAA (7:1).
 
-## Vidro líquido
+## Tipografia
 
-- Cards comuns usam `--glass-card-bg`, `--glass-card-border` e `--glass-card-shadow`.
-- Cards selecionados ou em destaque usam as variantes `-strong`.
-- O desfoque deve usar `--glass-blur` e a saturação `--glass-saturation`.
-- O modo claro usa vidro branco/lavanda translúcido; o modo escuro usa vidro grafite com reflexo lavanda.
-- A cápsula inferior possui composição própria e não deve herdar automaticamente o material dos cards.
-- Evitar bolhas decorativas sobre ícones. A profundidade deve estar na caixa maior.
+| Família | Token | Onde |
+| --- | --- | --- |
+| Literata | `--font-family-reading` | Enunciado, alternativas, comentário, texto do Rapid Review, título de tema, logo |
+| Inter | `--font-family-base` | Botões, rótulos, chips, navegação, números e métricas |
+
+- Texto de leitura em Literata usa `× 1.0625` sobre o tamanho escolhido no "Aa" (16 → 17px) e `line-height: 1.65`: a Literata tem olho menor que a Inter e pede mais entrelinha.
+- Texto de leitura é alinhado à esquerda — nunca justificado.
+- Tabelas, escores e números dentro do Rapid Review continuam em Inter.
+
+## Superfícies
+
+- Cards são sólidos: `--glass-card-bg` (= superfície), `--glass-card-border` e `--glass-card-shadow` (sombra mínima no claro, nenhuma no escuro).
+- Cards em destaque usam as variantes `-strong` (fundo Realce).
+- Vidro (`--glass-blur`) só na barra superior, no rodapé flutuante da questão e nos painéis que sobem da base.
+- Sem círculos, reflexos ou bolhas decorativas sobre cards e ícones.
+- A cápsula inferior possui composição própria (pendente de revisão).
 
 ## Instituições nas Trilhas
 

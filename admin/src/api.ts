@@ -32,6 +32,7 @@ export interface AdminQuality {
 
 export interface AdminClientError {
   id: string;
+  source: "client" | "backend";
   message: string;
   stack: string | null;
   url: string | null;

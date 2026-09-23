@@ -36,7 +36,7 @@ export function QuestionEditor({ id, onClose, onSaved }: { id: string; onClose: 
       };
       if (question.bank === "INTERNATO") fields.tema = tema;
       const res = await updateQuestion(id, fields);
-      setSaved(res.fileWriteback ? "Salvo — gravado no arquivo-fonte e no banco." : "Salvo só no banco (banco principal ainda não tem gravação em arquivo — some no próximo import).");
+      setSaved(res.fileWriteback ? "Salvo — gravado no arquivo-fonte e no banco." : "Salvo só no Postgres (esse banco ainda não tem gravação em arquivo-fonte).");
       onSaved();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erro ao salvar.");

@@ -46,7 +46,24 @@ export function Errors() {
               style={{ display: "flex", alignItems: "flex-start", gap: 12, cursor: "pointer" }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 13.5, fontWeight: 700, color: "var(--danger)" }}>{e.message}</div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span
+                    style={{
+                      fontSize: 9.5,
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: 0.4,
+                      padding: "2px 6px",
+                      borderRadius: 4,
+                      flex: "none",
+                      color: e.source === "backend" ? "var(--brand-300)" : "var(--warn)",
+                      background: e.source === "backend" ? "rgba(196,181,253,0.14)" : "rgba(240,182,74,0.14)",
+                    }}
+                  >
+                    {e.source === "backend" ? "backend" : "cliente"}
+                  </span>
+                  <div style={{ fontSize: 13.5, fontWeight: 700, color: "var(--danger)" }}>{e.message}</div>
+                </div>
                 <div style={{ fontSize: 11.5, color: "var(--text-secondary)", marginTop: 3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                   {e.url || "—"}
                 </div>

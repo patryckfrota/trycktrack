@@ -294,7 +294,7 @@
                     <span class="beta-pill">Beta</span>
                 </div>
                 <div class="trail-switch">
-                    ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}"></button>`).join('')}
+                    ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}" aria-pressed="${id === trailId}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}">${id === trailId ? '<span class="trail-switch-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>' : ''}</button>`).join('')}
                 </div>
                 <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${diagnosticDone ? `${completed} de ${plan.length} fases concluídas. Próximas fases priorizadas pelo seu diagnóstico.` : 'Comece pelo diagnóstico para personalizar automaticamente a ordem das fases.'}</span></div>
                 <div class="trail-path">
@@ -1190,7 +1190,9 @@
                 exam: { title: 'Simulado', description: 'Monte uma sessão com tempo e resultado liberado somente ao finalizar.', button: 'Começar simulado' },
                 osce: { title: 'OSCE', description: 'Selecione o foco da estação e treine a sequência clínica com checklist.', button: 'Iniciar estação' },
                 'full-exam': { title: 'Imersão', description: 'Escolha uma edição do Revalida e responda a prova completa em uma única sessão.', button: 'Começar prova' },
-                internato: { title: 'Internato', description: 'Só as questões das provas aplicadas no seu internato. Você verá a correção após cada resposta.', button: 'Começar prática' }
+                internato: activeInternatoMode === 'exam'
+                    ? { title: 'Internato', description: 'Só as questões das provas aplicadas no seu internato, em formato de prova: resultado liberado somente ao finalizar.', button: 'Começar simulado' }
+                    : { title: 'Internato', description: 'Só as questões das provas aplicadas no seu internato. Você verá a correção após cada resposta.', button: 'Começar prática' }
             }[mode];
             kicker.textContent = mode === 'full-exam' ? 'Simulado oficial' : 'Configuração da modalidade';
             title.textContent = config.title;
@@ -1236,7 +1238,7 @@
                 const rodizios = OSCE_CURRICULUM_MATRIX.map(area => area.name);
                 const topicos = osceThemeCodes();
                 const semestres = internatoFieldOptions('semestre');
-                body.innerHTML = `<div class="question-config-fields">
+                body.innerHTML = `<div class="osce-mode-choice" role="group" aria-label="Modo do Internato"><button type="button" class="${activeInternatoMode === 'exam' ? '' : 'active'}" data-internato-mode="practice" aria-pressed="${activeInternatoMode !== 'exam'}" onclick="selectInternatoMode(this)">Guiado</button><button type="button" class="${activeInternatoMode === 'exam' ? 'active' : ''}" data-internato-mode="exam" aria-pressed="${activeInternatoMode === 'exam'}" onclick="selectInternatoMode(this)">Simulado</button></div><div class="question-config-fields">
                     <div class="question-config-divider">Conteúdo</div>
                     <div class="question-config-field"><label for="questionConfigSearch">Buscar</label><input type="search" id="questionConfigSearch" placeholder="Ex.: síndrome de Guillain-Barré" oninput="updateQuestionConfigAvailableCount()"></div>
                     <div class="question-config-field"><label for="questionConfigRodizio">Rotação</label><select id="questionConfigRodizio" onchange="updateInternatoTemas()"><option value="Todos">Todos</option>${rodizios.map(item => `<option value="${item}">${item}</option>`).join('')}</select></div>
@@ -1356,6 +1358,23 @@
 
         function stationById(id) {
             return osceStationsCache.find(station => station.id === id);
+        }
+
+        // Internato em dois modos: Guiado (correção a cada resposta) ou
+        // Simulado (pode pular, resultado só no fim, aviso de em branco).
+        let activeInternatoMode = 'practice';
+        function selectInternatoMode(button) {
+            activeInternatoMode = button.dataset.internatoMode === 'exam' ? 'exam' : 'practice';
+            document.querySelectorAll('[data-internato-mode]').forEach(item => {
+                const on = item === button;
+                item.classList.toggle('active', on);
+                item.setAttribute('aria-pressed', String(on));
+            });
+            const exam = activeInternatoMode === 'exam';
+            document.getElementById('questionConfigDescription').textContent = exam
+                ? 'Só as questões das provas aplicadas no seu internato, em formato de prova: resultado liberado somente ao finalizar.'
+                : 'Só as questões das provas aplicadas no seu internato. Você verá a correção após cada resposta.';
+            document.getElementById('questionConfigStart').textContent = exam ? 'Começar simulado' : 'Começar prática';
         }
 
         function selectOsceMode(button) {
@@ -2153,8 +2172,8 @@ Regras obrigatórias:
 
         // O modo Internato não compartilha a lógica de tema/subtema acima —
         // filtra só por rodízio/tópico/tema/semestre (ver
-        // getInternatoFilteredQuestions) e sempre se comporta como o
-        // Guiado (correção após cada resposta).
+        // getInternatoFilteredQuestions). Roda como Guiado ou Simulado,
+        // conforme a escolha na configuração (activeInternatoMode).
         async function startInternatoSession() {
             const countValue = document.getElementById('questionConfigCount')?.value || '12';
             const requestedCount = Number(countValue);
@@ -2170,7 +2189,7 @@ Regras obrigatórias:
             const searchActive = !!document.getElementById('questionConfigSearch')?.value.trim();
             const sessionQuestions = selectStudyQuestions(filtered, requestedCount, searchActive);
             await ensureInternatoExplanationsLoaded().catch(() => {});
-            activeQuestionSession = { mode: 'practice', questions: sessionQuestions, index: 0, answers: [], startedAt: new Date().toISOString() };
+            activeQuestionSession = { mode: activeInternatoMode === 'exam' ? 'exam' : 'practice', questions: sessionQuestions, index: 0, answers: [], startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
@@ -2360,12 +2379,18 @@ Regras obrigatórias:
             markBtn.hidden = !isExam;
             markBtn.classList.toggle('active', !!session.markedForReview?.[session.index]);
             document.getElementById('questionNavBtn').hidden = !isExam;
-            document.getElementById('questionPrev').hidden = !isExam || session.index === 0;
+            const blankQueue = isExam ? session.blankQueue : null;
+            document.getElementById('questionPrev').hidden = !isExam || (blankQueue ? session.blankPos === 0 : session.index === 0);
             const next = document.getElementById('questionNext');
             // Guiado só libera "Próxima" depois de responder; Simulado
             // permite pular uma questão em branco e voltar a ela depois.
             next.disabled = !isExam;
-            next.textContent = session.index === total - 1 ? (isExam ? 'Finalizar simulado' : 'Finalizar sessão') : (isExam ? 'Pular / Próxima' : 'Próxima questão');
+            if (blankQueue) {
+                next.textContent = session.blankPos === blankQueue.length - 1 ? 'Finalizar simulado' : 'Próxima em branco';
+                document.getElementById('questionPlayerCount').textContent = `Em branco ${session.blankPos + 1}/${blankQueue.length}`;
+            } else {
+                next.textContent = session.index === total - 1 ? (isExam ? 'Finalizar simulado' : 'Finalizar sessão') : (isExam ? 'Pular / Próxima' : 'Próxima questão');
+            }
             const optionsContainer = document.getElementById('questionOptions');
             if (question.questionType === 'discursive') {
                 // Markup fixo, sem dado da questão dentro — innerHTML aqui não corre risco.
@@ -2465,6 +2490,14 @@ Regras obrigatórias:
         }
 
         function retreatQuestion() {
+            const session = activeQuestionSession;
+            if (session?.blankQueue) {
+                if (session.blankPos <= 0) return;
+                session.blankPos -= 1;
+                session.index = session.blankQueue[session.blankPos];
+                renderQuestionPlayer();
+                return;
+            }
             if (!activeQuestionSession || activeQuestionSession.index <= 0) return;
             activeQuestionSession.index -= 1;
             renderQuestionPlayer();
@@ -2508,6 +2541,7 @@ Regras obrigatórias:
             const session = activeQuestionSession;
             if (!session || index < 0 || index >= session.questions.length) return;
             session.index = index;
+            session.blankQueue = null; // navegador livre sai do modo "só as em branco"
             closeQuestionNavigator();
             renderQuestionPlayer();
         }
@@ -2520,12 +2554,24 @@ Regras obrigatórias:
             // navegador depois).
             if (session.mode === 'practice' && !session.answers[session.index]) return;
             flushPendingReviewRating(session);
+            // Modo "só as em branco": segue a fila e, na última, pede para
+            // confirmar a entrega.
+            if (session.blankQueue) {
+                if (session.blankPos < session.blankQueue.length - 1) {
+                    session.blankPos += 1;
+                    session.index = session.blankQueue[session.blankPos];
+                    renderQuestionPlayer();
+                } else {
+                    confirmFinishExam(session);
+                }
+                return;
+            }
             if (session.index < session.questions.length - 1) {
                 session.index += 1;
                 renderQuestionPlayer();
                 return;
             }
-            finishExamSession(session);
+            requestFinishExam(session);
         }
 
         // Escolha de Difícil/Bom/Fácil (R-1) depois de acertar no Guiado —
@@ -2582,12 +2628,70 @@ Regras obrigatórias:
         function finishExamNow() {
             const session = activeQuestionSession;
             if (!session || session.mode !== 'exam') return;
-            const answeredCount = session.answers.filter(Boolean).length;
-            const total = session.questions.length;
-            const confirmMessage = answeredCount < total
-                ? `Ainda faltam ${total - answeredCount} questão(ões) sem resposta — elas contam como erradas. Finalizar mesmo assim?`
-                : 'Finalizar o simulado agora?';
-            if (!confirm(confirmMessage)) return;
+            requestFinishExam(session);
+        }
+
+        // Antes de entregar um Simulado/Imersão com questões em branco,
+        // avisa dentro do app (não com confirm) e oferece um botão para
+        // cada questão em branco — em branco conta como erro.
+        function requestFinishExam(session) {
+            const blanks = session.questions.map((_, i) => session.answers[i] ? -1 : i).filter(i => i >= 0);
+            if (session.mode !== 'exam' || !blanks.length) { finishExamSession(session); return; }
+            session.pendingBlanks = blanks;
+            const n = blanks.length;
+            showExamDialog(`<h2 id="blankDialogTitle">${n === 1 ? 'Você deixou 1 questão em branco' : `Você deixou ${n} questões em branco`}</h2>`
+                + `<p>Em branco conta como erro, como na prova. Toque numa questão para responder.</p>`
+                + `<div class="blank-dialog-list">${blanks.map(i => `<button type="button" onclick="rescueBlankQuestion(${i})">${String(i + 1).padStart(2, '0')}</button>`).join('')}</div>`
+                + `<div class="blank-dialog-actions">`
+                + `<button type="button" class="results-primary" onclick="rescueBlankQuestion(${blanks[0]})">${n === 1 ? 'Responder a questão em branco' : 'Ir para a primeira em branco'}</button>`
+                + `<button type="button" class="results-secondary" onclick="finishExamFromDialog()">Entregar mesmo assim</button>`
+                + `</div>`);
+        }
+        // Fim da fila de questões em branco: confirma antes de entregar.
+        function confirmFinishExam(session) {
+            const left = session.questions.filter((_, i) => !session.answers[i]).length;
+            showExamDialog(`<h2 id="blankDialogTitle">Finalizar o simulado?</h2>`
+                + `<p>${left ? (left === 1 ? 'Ainda há 1 questão em branco, que conta como erro.' : `Ainda há ${left} questões em branco, que contam como erro.`) : 'Todas as questões foram respondidas.'}</p>`
+                + `<div class="blank-dialog-actions">`
+                + `<button type="button" class="results-primary" onclick="finishExamFromDialog()">Finalizar simulado</button>`
+                + `<button type="button" class="results-secondary" onclick="closeBlankDialog()">Voltar</button>`
+                + `</div>`);
+        }
+        function showExamDialog(content) {
+            let dialog = document.getElementById('blankQuestionsDialog');
+            if (!dialog) {
+                dialog = document.createElement('div');
+                dialog.id = 'blankQuestionsDialog';
+                dialog.className = 'blank-dialog';
+                dialog.setAttribute('role', 'dialog');
+                dialog.setAttribute('aria-modal', 'true');
+                dialog.setAttribute('aria-labelledby', 'blankDialogTitle');
+                document.getElementById('questionPlayer').appendChild(dialog);
+            }
+            dialog.innerHTML = `<div class="blank-dialog-card">${content}</div>`;
+            dialog.hidden = false;
+            dialog.querySelector('.results-primary').focus();
+        }
+        function closeBlankDialog() {
+            const dialog = document.getElementById('blankQuestionsDialog');
+            if (dialog) dialog.hidden = true;
+        }
+        // Entra no modo "só as em branco" a partir da questão tocada.
+        function rescueBlankQuestion(index) {
+            closeBlankDialog();
+            const session = activeQuestionSession;
+            if (!session) return;
+            closeQuestionNavigator();
+            session.blankQueue = session.pendingBlanks || [index];
+            session.blankPos = Math.max(0, session.blankQueue.indexOf(index));
+            session.index = index;
+            renderQuestionPlayer();
+        }
+        function finishExamFromDialog() {
+            closeBlankDialog();
+            const session = activeQuestionSession;
+            if (!session) return;
+            session.blankQueue = null;
             finishExamSession(session);
         }
 
@@ -2620,15 +2724,107 @@ Regras obrigatórias:
             const scoredTotal = questions.filter(q => q.questionType !== 'discursive').length;
             document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
             document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
-            document.getElementById('questionResultsScore').innerHTML = `<strong>${correctCount}/${scoredTotal}</strong><span>acertos nesta sessão</span><button type="button" class="question-results-pdf-btn" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar resultado em PDF</button>`;
-            document.getElementById('questionResultsGrid').innerHTML = questions.map((q, i) => {
-                const correct = window.isQuestionAnswerCorrect(q, answers[i]);
+            // Cartão-resposta: uma linha por questão, alternativas como
+            // bolinhas de marcar (a marcada preenchida, o gabarito circulado
+            // quando errou) e o resultado em texto no fim da linha.
+            const wrongIndexes = questions.map((q, i) => window.isQuestionAnswerCorrect(q, answers[i]) === false ? i : -1).filter(i => i >= 0);
+            const reviewLabel = wrongIndexes.length === 1 ? 'Revisar o erro' : `Revisar os ${wrongIndexes.length} erros`;
+            document.getElementById('questionResultsScore').innerHTML = `<h2 class="results-title">${correctCount} de ${scoredTotal} acertos</h2>`
+                + `<div class="results-actions">`
+                + (wrongIndexes.length ? `<button type="button" class="results-primary" onclick="reviewErrors()">${reviewLabel}</button>` : '')
+                + `<button type="button" class="results-secondary" onclick="downloadQuestionSessionResultPdf(activeResultsSession)">Baixar PDF</button></div>`;
+            const sheet = document.getElementById('questionResultsGrid');
+            // A classe vem do JS (não do HTML) para que um HTML novo com JS
+            // antigo em cache continue mostrando a grade antiga inteira.
+            sheet.className = 'answer-sheet';
+            answerSheetRows = questions.map((q, i) => {
+                const answer = answers[i];
+                const correct = window.isQuestionAnswerCorrect(q, answer);
                 const state = correct === null ? 'neutral' : (correct ? 'correct' : 'wrong');
-                const label = correct === null ? 'sem pontuação' : (correct ? 'acertou' : 'errou');
-                return `<button type="button" class="result-bubble ${state}" onclick="reviewQuestionResult(${i})" aria-label="Revisar questão ${i + 1}, ${label}"><span>${i + 1}</span></button>`;
-            }).join('');
+                const marks = Object.keys(q.options || {}).map(letter => {
+                    const cls = ['sheet-mark', answer === letter ? 'marked' : '', correct === false && letter === q.answer ? 'key' : ''].filter(Boolean).join(' ');
+                    return `<span class="${cls}">${letter}</span>`;
+                }).join('');
+                let result = '';
+                let label = 'sem pontuação';
+                if (correct === true) { result = '<b>✓</b>'; label = 'acertou'; }
+                else if (correct === false) {
+                    const detail = answer ? `${answer}, era ${q.answer}` : `em branco, era ${q.answer}`;
+                    result = `<b>✕</b><span>${detail}</span>`;
+                    label = answer ? `errou: marcou ${answer}, gabarito ${q.answer}` : `em branco, gabarito ${q.answer}`;
+                } else result = '<span>discursiva</span>';
+                return `<button type="button" class="sheet-row ${state}" onclick="reviewFromSheet(${i})" aria-label="Questão ${i + 1}, ${label}"><span class="sheet-num">${String(i + 1).padStart(2, '0')}</span><span class="sheet-marks" aria-hidden="true">${marks}</span><span class="sheet-result" aria-hidden="true">${result}</span></button>`;
+            });
             document.getElementById('questionPlayerBody').scrollTop = 0;
+            sheet.innerHTML = '';
+            layoutAnswerSheet();
+            hideReviewNav();
         }
+
+        // Navegação na revisão: "Revisar os N erros" percorre só os erros;
+        // tocar numa linha do cartão percorre todas as questões a partir dela.
+        let reviewList = [];
+        let reviewPos = 0;
+        let reviewKind = '';
+        function reviewErrors() {
+            if (!activeResultsSession) return;
+            const { questions, answers } = activeResultsSession;
+            const wrong = questions.map((q, i) => window.isQuestionAnswerCorrect(q, answers[i]) === false ? i : -1).filter(i => i >= 0);
+            if (wrong.length) startResultsReview(wrong, 0, 'Erro');
+        }
+        function reviewFromSheet(index) {
+            if (!activeResultsSession) return;
+            startResultsReview(activeResultsSession.questions.map((_, i) => i), index, 'Questão');
+        }
+        function startResultsReview(list, pos, kind) {
+            reviewList = list;
+            reviewPos = pos;
+            reviewKind = kind;
+            showReviewAt();
+        }
+        function stepResultsReview(delta) {
+            const next = reviewPos + delta;
+            if (next < 0) return;
+            if (next >= reviewList.length) { showQuestionResults(); return; }
+            reviewPos = next;
+            showReviewAt();
+        }
+        function showReviewAt() {
+            reviewQuestionResult(reviewList[reviewPos]);
+            let nav = document.getElementById('reviewNavFooter');
+            if (!nav) {
+                nav = document.createElement('footer');
+                nav.id = 'reviewNavFooter';
+                nav.className = 'question-player-footer review-nav';
+                document.getElementById('questionPlayerFooter').after(nav);
+            }
+            const last = reviewPos === reviewList.length - 1;
+            nav.hidden = false;
+            nav.innerHTML = `<button type="button" class="results-secondary" onclick="stepResultsReview(-1)" ${reviewPos === 0 ? 'disabled' : ''}>Anterior</button>`
+                + `<span class="review-nav-count">${reviewKind} ${reviewPos + 1} de ${reviewList.length}</span>`
+                + `<button type="button" class="results-primary" onclick="stepResultsReview(1)">${last ? 'Voltar ao cartão' : (reviewKind === 'Erro' ? 'Próximo erro' : 'Próxima')}</button>`;
+        }
+        function hideReviewNav() {
+            const nav = document.getElementById('reviewNavFooter');
+            if (nav) nav.hidden = true;
+        }
+
+        // Cartão-resposta: colunas pelo espaço disponível (iPhone 1, iPad 2-3,
+        // Mac 3-4), lidas de cima para baixo como na folha de papel. Rola só
+        // na vertical — o número de linhas acompanha a quantidade de questões,
+        // então a grade nunca cria colunas extras para os lados.
+        let answerSheetRows = [];
+        function layoutAnswerSheet() {
+            const sheet = document.getElementById('questionResultsGrid');
+            const view = document.getElementById('questionResultsView');
+            if (!sheet || !view || view.hidden || !answerSheetRows.length) return;
+            const COL_MIN = 300, GAP = 32;
+            const cols = Math.max(1, Math.min(4, Math.floor((sheet.parentElement.clientWidth + GAP) / (COL_MIN + GAP))));
+            sheet.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+            sheet.style.setProperty('--sheet-rows', Math.ceil(answerSheetRows.length / cols));
+            if (sheet.childElementCount !== answerSheetRows.length) sheet.innerHTML = answerSheetRows.join('');
+        }
+        window.addEventListener('resize', layoutAnswerSheet);
 
         // Mostra uma questão específica do resultado em modo de revisão
         // (opções já marcadas certo/errado, explicação visível, sem poder
@@ -2717,6 +2913,8 @@ Regras obrigatórias:
         }
 
         function closeQuestionPlayer() {
+            hideReviewNav();
+            closeBlankDialog();
             closeFontSizeSheet();
             flushPendingReviewRating(activeQuestionSession);
             flushReviewSync(); // best-effort — nunca trava o fechamento

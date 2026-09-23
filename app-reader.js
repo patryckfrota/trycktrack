@@ -962,14 +962,23 @@
         function renderEnamedCountdown() {
             const container = document.getElementById('enamedCountdown');
             if (!container) return;
-            const remaining = Math.max(0, ENAMED_TARGET_DATE - Date.now());
+            // Passada a data da prova, o card não tem mais o que anunciar —
+            // "ENAMED começou" ficaria pendurado pra sempre (a prova só
+            // dura um dia, não faz sentido continuar sinalizando isso
+            // depois). Some com o card e para o timer em vez de mostrar
+            // uma mensagem defasada indefinidamente.
+            if (Date.now() >= ENAMED_TARGET_DATE) {
+                container.innerHTML = '';
+                clearInterval(enamedCountdownTimer);
+                return;
+            }
+            const remaining = ENAMED_TARGET_DATE - Date.now();
             const units = [
                 ['dias', Math.floor(remaining / 86400000)],
                 ['horas', Math.floor((remaining % 86400000) / 3600000)],
                 ['min', Math.floor((remaining % 3600000) / 60000)],
                 ['seg', Math.floor((remaining % 60000) / 1000)]
             ];
-            const isLive = remaining === 0;
             let card = container.querySelector('.exam-countdown-card');
 
             // A estrutura da caixa é criada uma vez. A cada segundo trocamos
@@ -984,8 +993,8 @@
                 card = container.querySelector('.exam-countdown-card');
             }
 
-            card.querySelector('.exam-countdown-eyebrow').textContent = isLive ? 'Hoje' : 'Contagem regressiva';
-            card.querySelector('.exam-countdown-title').textContent = isLive ? 'ENAMED começou' : 'ENAMED 2026';
+            card.querySelector('.exam-countdown-eyebrow').textContent = 'Contagem regressiva';
+            card.querySelector('.exam-countdown-title').textContent = 'ENAMED 2026';
             units.forEach(([label, value]) => {
                 const number = card.querySelector(`[data-countdown-unit="${label}"]`);
                 if (number) number.textContent = String(value).padStart(2, '0');

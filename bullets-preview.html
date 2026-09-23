@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bullets — protótipo v2</title>
+<link rel="stylesheet" href="app.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: auto; overflow: visible !important; }
+  body {
+    margin: 0; padding: 0 0 60px;
+    background:
+      radial-gradient(70% 50% at 85% 0%, rgba(255,159,67,.16), transparent 60%),
+      radial-gradient(60% 45% at 10% 15%, rgba(124,92,191,.24), transparent 60%),
+      radial-gradient(55% 40% at 90% 55%, rgba(62,198,192,.13), transparent 60%),
+      radial-gradient(60% 50% at 15% 85%, rgba(232,93,158,.13), transparent 60%),
+      #150F24;
+    background-attachment: fixed;
+  }
+  .bullets-shell { max-width: 620px; margin: 0 auto; padding: 0 18px; }
+
+  /* ---- hero ---- */
+  .bullets-hero {
+    position: relative;
+    margin: 0 -18px 22px;
+    padding: 34px 22px 26px;
+    background:
+      radial-gradient(120% 140% at 15% 0%, rgba(196,181,253,.32), transparent 55%),
+      radial-gradient(90% 120% at 100% 0%, rgba(255,159,67,.24), transparent 50%),
+      linear-gradient(160deg, #2c1f52, #1c1533 70%);
+    overflow: hidden;
+  }
+  .bullets-hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity:.05;
+    pointer-events:none;
+  }
+  .bullets-eyebrow {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--brand-300, #C4B5FD);
+    font: 800 10.5px var(--font-family-base);
+    text-transform: uppercase; letter-spacing: .12em;
+    margin-bottom: 10px;
+  }
+  .bullets-eyebrow::before{ content:'⚡'; font-size: 11px; }
+  .bullets-title {
+    position: relative;
+    color: #fff;
+    font: 800 34px/1.05 var(--font-family-base);
+    letter-spacing: -0.9px;
+    margin: 0 0 8px;
+  }
+  .bullets-title span{ color: var(--brand-300, #C4B5FD); }
+  .bullets-sub {
+    position: relative;
+    color: rgba(255,255,255,.62);
+    font: 500 13.5px/1.5 var(--font-family-base);
+    max-width: 420px;
+    margin: 0 0 20px;
+  }
+  .bullets-search {
+    position: relative;
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    padding: 12px 16px;
+    backdrop-filter: blur(6px);
+  }
+  .bullets-search svg{ flex-shrink:0; opacity:.55; }
+  .bullets-search input {
+    flex: 1; background: none; border: none; outline: none;
+    color: #fff; font: 600 14px var(--font-family-base);
+  }
+  .bullets-search input::placeholder{ color: rgba(255,255,255,.4); font-weight:500; }
+
+  /* ---- area filter chips ---- */
+  .bullets-chips { display:flex; gap:8px; overflow-x:auto; margin: 16px 0 20px; padding-bottom:2px; }
+  .bullets-chip {
+    flex-shrink:0;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font: 700 12px var(--font-family-base);
+    border: 1px solid var(--glass-card-border);
+    color: var(--text-secondary);
+    background: var(--glass-card-bg);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .bullets-chip.is-active{ color:#fff; border-color: transparent; background: linear-gradient(120deg, var(--brand-400), var(--brand-600)); }
+
+  /* ---- card ---- */
+  .bullet-card {
+    position: relative;
+    border: 1px solid var(--glass-card-border);
+    background: linear-gradient(160deg, rgba(196,181,253,.14), rgba(255,255,255,.03));
+    box-shadow: var(--glass-card-shadow);
+    border-radius: 18px;
+    padding: 18px 18px 16px 20px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .bullet-card::before{
+    content:'';
+    position:absolute; left:0; top:0; bottom:0; width:4px;
+    background: var(--brand-400, #A78BFA);
+  }
+
+  .bullet-card-area-tag{
+    display: inline-block;
+    font: 700 10px var(--font-family-base);
+    color: var(--text-secondary);
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--glass-card-border);
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .bullet-card-title {
+    color: var(--text-main);
+    font: 800 18px/1.2 var(--font-family-base);
+    letter-spacing: -0.3px;
+    margin: 0 0 8px;
+  }
+
+  /* ---- score stat bars (substituem tabela plana de interpretação) ---- */
+  .score-bars { display:flex; flex-direction:column; gap:8px; margin: 4px 0 16px; }
+  .score-bar {
+    display:flex; align-items:center; gap:12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .score-bar-range {
+    font: 800 15px var(--font-family-base);
+    min-width: 46px;
+    flex-shrink:0;
+  }
+  .score-bar-text { font: 600 12.5px/1.4 var(--font-family-base); color: var(--text-main); }
+  .score-bar-text strong{ display:block; font-size:13px; margin-bottom:1px; }
+  .score-bar.sev-grave{ background: rgba(255,59,48,.12); }
+  .score-bar.sev-grave .score-bar-range{ color: var(--danger); }
+  .score-bar.sev-moderado{ background: rgba(255,159,67,.13); }
+  .score-bar.sev-moderado .score-bar-range{ color: #FF9F43; }
+  .score-bar.sev-bom{ background: rgba(52,199,89,.12); }
+  .score-bar.sev-bom .score-bar-range{ color: var(--success); }
+
+  /* ---- tabelas clínicas (dado literal, não editorializar) ---- */
+  .reader-table-wrap{ margin: 4px 0 14px !important; }
+  .reader-table thead th{ font-size: 10.5px !important; }
+
+  /* tabela com severidade por linha (ex: peso/IMC/estatura, PA) */
+  .peso-imc-table tr.sev-grave td:first-child{ color: var(--danger); font-weight:800; }
+  .peso-imc-table tr.sev-moderado td:first-child{ color: #FF9F43; font-weight:800; }
+  .peso-imc-table tr.sev-alerta td:first-child{ color: #F0D64A; font-weight:800; }
+  .peso-imc-table tr.sev-ok td:first-child{ color: var(--success); font-weight:800; }
+
+  .reader-table tr.sev-grave td{ background: rgba(255,59,48,.14); }
+  .reader-table tr.sev-grave td:first-child{ color: var(--danger); font-weight:800; }
+  .reader-table tr.sev-moderado td{ background: rgba(255,159,67,.13); }
+  .reader-table tr.sev-moderado td:first-child{ color: #FF9F43; font-weight:800; }
+  .reader-table tr.sev-alerta td{ background: rgba(240,214,74,.13); }
+  .reader-table tr.sev-alerta td:first-child{ color: #F0D64A; font-weight:800; }
+  .reader-table tr.sev-ok td{ background: rgba(52,199,89,.1); }
+  .reader-table tr.sev-ok td:first-child{ color: var(--success); font-weight:800; }
+
+  /* grade de pílulas de medicação (manter/suspender/depende) */
+  .med-section-title{ font: 800 11px var(--font-family-base); text-transform:uppercase; letter-spacing:.06em; margin: 14px 0 8px; display:flex; align-items:center; gap:7px; }
+  .med-section-title .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .med-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap:8px; margin-bottom:6px; }
+  .med-pill{ border-radius:12px; padding:9px 11px; border:1px solid transparent; }
+  .med-pill-name{ font: 700 12.5px var(--font-family-base); color: var(--text-main); display:block; margin-bottom:2px; }
+  .med-pill-note{ font: 600 11px var(--font-family-base); opacity:.85; }
+  .med-pill.ok{ background: rgba(52,199,89,.12); border-color: rgba(52,199,89,.25); }
+  .med-pill.ok .med-pill-note{ color: var(--success); }
+  .med-pill.grave{ background: rgba(255,59,48,.12); border-color: rgba(255,59,48,.22); }
+  .med-pill.grave .med-pill-note{ color: var(--danger); }
+  .med-pill.alerta{ background: rgba(240,214,74,.12); border-color: rgba(240,214,74,.24); }
+  .med-pill.alerta .med-pill-note{ color: #d4b90a; }
+
+  .bullet-card-image{ width:100%; border-radius: 12px; margin: 4px 0 14px; display:block; }
+  .bullet-card-image.is-diagram{ background:#fff; padding: 10px; }
+
+  /* ---- callout de fórmula ---- */
+  .formula-callout{
+    display:flex; align-items:center; gap:12px;
+    background: linear-gradient(120deg, rgba(196,181,253,.16), rgba(124,92,191,.08));
+    border: 1px solid rgba(196,181,253,.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 4px;
+  }
+  .formula-callout-icon{
+    width:34px; height:34px; flex-shrink:0;
+    border-radius: 10px;
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(196,181,253,.18);
+    font-size:16px;
+  }
+  .formula-callout-text{ font: 700 15px/1.3 var(--font-family-base); color: var(--text-main); }
+  .formula-callout-text small{ display:block; font: 600 10.5px var(--font-family-base); color: var(--text-secondary); text-transform:uppercase; letter-spacing:.04em; margin-bottom:2px; }
+
+  ol.reader-list, ul.reader-list { margin-top: 2px !important; }
+</style>
+</head>
+<body>
+<div class="bullets-shell">
+
+  <div class="bullets-hero">
+    <div class="bullets-eyebrow">Nova funcionalidade</div>
+    <h1 class="bullets-title">Bul<span>lets</span></h1>
+    <p class="bullets-sub">Escores, tabelas e critérios pra revisão de véspera — direto ao ponto, sem texto corrido.</p>
+    <div class="bullets-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" placeholder="Buscar (ex: APGAR, Tokyo, Fisher)…">
+    </div>
+  </div>
+
+  <div class="bullets-chips" id="areaChips"></div>
+
+  <div id="bulletsList"></div>
+
+</div>
+
+<script src="bullets-pediatria.js"></script>
+<script src="bullets-clinica-medica.js"></script>
+<script src="bullets-go.js"></script>
+<script src="bullets-cirurgia.js"></script>
+<script>
+(function () {
+  const all = [
+    ...(window.TRYCKTRACK_BULLETS_PEDIATRIA || []),
+    ...(window.TRYCKTRACK_BULLETS_CM || []),
+    ...(window.TRYCKTRACK_BULLETS_GO || []),
+    ...(window.TRYCKTRACK_BULLETS_CIRURGIA || []),
+  ];
+  const areas = ['Todas', ...new Set(all.map(b => b.area))];
+  const list = document.getElementById('bulletsList');
+  const chipsEl = document.getElementById('areaChips');
+  const search = document.querySelector('.bullets-search input');
+  let activeArea = 'Todas';
+
+  chipsEl.innerHTML = areas.map(a => `<div class="bullets-chip${a === activeArea ? ' is-active' : ''}" data-area="${a}">${a}</div>`).join('');
+
+  function render() {
+    const term = (search.value || '').trim().toLowerCase();
+    const filtered = all.filter(b =>
+      (activeArea === 'Todas' || b.area === activeArea) &&
+      (!term || b.titulo.toLowerCase().includes(term))
+    );
+    list.innerHTML = filtered.map(b => `
+      <div class="bullet-card">
+        <h2 class="bullet-card-title">${b.titulo}</h2>
+        <span class="bullet-card-area-tag">${b.area}</span>
+        ${b.imagem ? `<img class="bullet-card-image is-diagram" src="${b.imagem}" alt="${b.titulo}">` : ''}
+        ${b.html}
+      </div>
+    `).join('') || '<p style="color:var(--text-secondary);text-align:center;padding:30px 0;">Nenhum bullet encontrado.</p>';
+  }
+
+  chipsEl.addEventListener('click', (e) => {
+    const chip = e.target.closest('.bullets-chip');
+    if (!chip) return;
+    chipsEl.querySelectorAll('.bullets-chip').forEach(c => c.classList.remove('is-active'));
+    chip.classList.add('is-active');
+    activeArea = chip.dataset.area;
+    render();
+  });
+  search.addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>

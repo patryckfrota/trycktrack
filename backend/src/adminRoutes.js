@@ -9,13 +9,15 @@ import { requireAdminAuth } from './adminAuth.js';
 import { getPrismaClient } from './prismaClient.js';
 import { buildImportPlan } from '../scripts/import-questions.js';
 import { updateInternatoExplanation, updateInternatoQuestionFields } from './staticInternatoWriter.js';
+import { updatePrincipalAnnulled, updatePrincipalExplanation } from './staticPrincipalWriter.js';
 import { getQuestionYears } from '../../shared/question-filters.js';
 import { getOsceCurriculumMatrix } from './osceMatrixReader.js';
+import { autoWrapAsyncRoutes } from './asyncHandler.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 
-export const adminRouter = Router();
+export const adminRouter = autoWrapAsyncRoutes(Router());
 adminRouter.use(requireAdminAuth());
 
 adminRouter.get('/stats', async (req, res) => {
@@ -255,11 +257,9 @@ adminRouter.get('/questions/:id', async (req, res) => {
 
 // Edição de curadoria: tema, anulada e corpo da explicação. O app do
 // aluno lê os arquivos estáticos (não o Postgres), então gravar só no
-// banco seria apagado no próximo import — no banco INTERNATO a edição
-// vai pros dois lugares (staticInternatoWriter). O banco PRINCIPAL
-// ainda não tem writer equivalente (explicação é mutada via
-// question-explanations.js por um sistema de aliases mais complexo),
-// então por ora fica só no Postgres e a resposta avisa disso.
+// banco seria apagado no próximo import — a edição vai pros dois
+// lugares nos dois bancos (staticInternatoWriter / staticPrincipalWriter).
+// "tema" só existe no schema do INTERNATO, por isso ignorado no PRINCIPAL.
 adminRouter.patch('/questions/:id', async (req, res) => {
     const prisma = getPrismaClient();
     const { tema, annulled, explanationBody } = req.body || {};
@@ -270,14 +270,22 @@ adminRouter.patch('/questions/:id', async (req, res) => {
     const question = await prisma.question.findUnique({ where: { id: req.params.id }, select: { bank: true } });
     if (!question) return res.status(404).json({ error: 'Questão não encontrada.' });
 
-    const fileWriteback = question.bank === 'INTERNATO';
+    const fileWriteback = question.bank === 'INTERNATO' || question.bank === 'PRINCIPAL';
     if (fileWriteback) {
         try {
-            const fields = {};
-            if (tema !== undefined) fields.tema = tema;
-            if (annulled !== undefined) fields.annulled = !!annulled;
-            if (Object.keys(fields).length) updateInternatoQuestionFields(req.params.id, fields);
-            if (explanationBody !== undefined) updateInternatoExplanation(req.params.id, explanationBody);
+            if (question.bank === 'INTERNATO') {
+                const fields = {};
+                if (tema !== undefined) fields.tema = tema;
+                if (annulled !== undefined) fields.annulled = !!annulled;
+                if (Object.keys(fields).length) updateInternatoQuestionFields(req.params.id, fields);
+                if (explanationBody !== undefined) updateInternatoExplanation(req.params.id, explanationBody);
+            } else {
+                // Banco PRINCIPAL não tem campo "tema" (só o Internato
+                // usa essa taxonomia) — ignora silenciosamente se vier,
+                // em vez de dar erro por um campo que não se aplica.
+                if (annulled !== undefined) updatePrincipalAnnulled(req.params.id, !!annulled);
+                if (explanationBody !== undefined) updatePrincipalExplanation(req.params.id, explanationBody);
+            }
         } catch (error) {
             return res.status(500).json({ error: `Falha ao gravar no arquivo-fonte: ${error.message}` });
         }

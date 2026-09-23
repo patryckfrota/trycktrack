@@ -9,8 +9,10 @@ import { requireFirebaseAuth } from './firebaseAuth.js';
 import { createSyncRepository } from './syncRepository.js';
 import { adminRouter } from './adminRoutes.js';
 import { getPrismaClient } from './prismaClient.js';
+import { autoWrapAsyncRoutes } from './asyncHandler.js';
 
 const app = express();
+autoWrapAsyncRoutes(app);
 
 // Mesma allowlist do cloudflare-worker/worker.js (ALLOWED_ORIGINS) — GitHub
 // Pages é a produção do PWA, localhost cobre o teste local. Refletir
@@ -370,12 +372,39 @@ app.post('/api/errors', async (req, res) => {
   const parsed = clientErrorSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
   try {
-    if (process.env.DATABASE_URL) await getPrismaClient().clientError.create({ data: parsed.data });
+    // source nunca vem do corpo — quem chama essa rota pública jamais
+    // deve conseguir se passar por um erro "backend" nos relatórios.
+    if (process.env.DATABASE_URL) await getPrismaClient().clientError.create({ data: { ...parsed.data, source: 'client' } });
     else console.error('[client-error]', parsed.data.message);
   } catch (error) {
     console.error('Falha ao registrar erro de cliente:', error.message);
   }
   res.status(204).end();
+});
+
+// Middleware de erro (4 argumentos — é assim que o Express reconhece
+// que é esse tipo de handler) captura qualquer exceção que sobrou de
+// uma rota (agora todas embrulhadas por autoWrapAsyncRoutes) e registra
+// na mesma tabela dos erros de cliente, com source:'backend'. Sem isso,
+// uma rota quebrada em produção só aparecia (talvez) no log do Render
+// — que ninguém fica olhando ao vivo — e o cliente via um 500 genérico
+// sem nenhum rastro do que houve.
+app.use((err, req, res, next) => {
+  console.error(`[${req.method} ${req.originalUrl}]`, err);
+  try {
+    if (process.env.DATABASE_URL) {
+      getPrismaClient().clientError.create({
+        data: {
+          source: 'backend',
+          message: String(err?.message || err).slice(0, 2000),
+          stack: err?.stack ? String(err.stack).slice(0, 8000) : undefined,
+          url: req.originalUrl?.slice(0, 500)
+        }
+      }).catch(() => {});
+    }
+  } catch (_) { /* nunca deixa o log de erro derrubar a resposta de erro */ }
+  if (res.headersSent) return next(err);
+  res.status(500).json({ error: 'Erro interno.' });
 });
 
 export { app, matrixAreas, matrixThemes, matrixSubthemes, syncRepository };

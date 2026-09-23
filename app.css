@@ -19,30 +19,36 @@
             --brand-900: #30205A;
             --brand-950: #20143D;
 
-            --neutral-950: #111218;
-            --neutral-900: #15161A;
-            --neutral-850: #1B1C22;
-            --neutral-800: #21232A;
-            --neutral-700: #2C2F38;
+            /* Neutros MedTrack: grafite com o mesmo viés violeta da marca. */
+            --neutral-950: #0F0E14;
+            --neutral-900: #141319;
+            --neutral-850: #19181F;
+            --neutral-800: #1C1B23;
+            --neutral-700: #25242E;
 
             --bg-main: var(--neutral-900);
             --bg-secondary: var(--neutral-800);
             --bg-tertiary: var(--neutral-700);
-            --border-color: rgba(222, 210, 255, 0.12);
+            --border-color: #2E2D38;
 
-            --lavender-active: var(--brand-300);
+            /* Tinta (ação), Realce e Violeta profundo — ver DESIGN_SYSTEM.md. */
+            --lavender-active: #B9A6FF;
             --lavender-medium: #5B4A75;
-            --lavender-dark: #30263D;
+            --lavender-dark: #2A2442;
+            --brand-deep: #D4C8FF;
+            --on-action: #141319;
             --lavender-glow: rgba(196, 181, 253, 0.18);
 
             /* MATERIAL VIDRO — uma receita única para todas as caixas. */
-            --glass-card-bg: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.022));
-            --glass-card-bg-strong: linear-gradient(145deg, rgba(91,74,117,.68), rgba(48,38,61,.54));
-            --glass-card-border: rgba(222,210,255,.15);
-            --glass-card-border-strong: rgba(196,181,253,.48);
-            --glass-card-highlight: rgba(255,255,255,.13);
-            --glass-card-shadow: 0 14px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.09);
-            --glass-card-shadow-strong: 0 18px 40px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.16);
+            /* Cards são superfícies sólidas; o vidro (--glass-blur) fica só
+               na barra superior e nos painéis que sobem da base. */
+            --glass-card-bg: var(--bg-secondary);
+            --glass-card-bg-strong: var(--lavender-dark);
+            --glass-card-border: var(--border-color);
+            --glass-card-border-strong: #4A3F7A;
+            --glass-card-highlight: transparent;
+            --glass-card-shadow: none;
+            --glass-card-shadow-strong: none;
             --glass-blur: 22px;
             --glass-saturation: 150%;
 
@@ -51,14 +57,17 @@
             --institution-border: rgba(196,181,253,.42);
             --institution-border-active: rgba(220,208,255,.76);
 
-            --text-main: #FFFFFF;
-            --text-secondary: #A0A4AB;
+            --text-main: #EDECF3;
+            --text-secondary: #BDBACB;
 
-            --success: #34c759;
-            --danger: #ff3b30;
+            --success: #5FD39A;
+            --success-soft: #16291F;
+            --danger: #FF8F85;
+            --danger-soft: #361B19;
+            --warning: #F2BD5B;
 
-            --header-bg: rgba(21, 22, 26, 0.85);
-            --sidebar-bg: #1C1A24;
+            --header-bg: rgba(20, 19, 25, 0.85);
+            --sidebar-bg: #1C1B23;
             --sidebar-item-active-bg: rgba(255, 255, 255, 0.1);
             --sidebar-border: rgba(255, 255, 255, 0.1);
 
@@ -94,16 +103,19 @@
             --slate-950: #020617;
 
             --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            /* Literata: texto de leitura (enunciado, alternativas, comentário,
+               Rapid Review), títulos de tema e logo. Inter fica na interface. */
+            --font-family-reading: 'Literata', Georgia, 'Times New Roman', serif;
 
             /* Cores semânticas da escala tipográfica — indireção para
                inverter a hierarquia de cinza-azulado no tema claro
                (texto escuro sobre fundo claro) sem duplicar as 6
                classes .text-*. */
-            --color-display: var(--slate-50);
-            --color-title: var(--slate-100);
-            --color-body-lg: var(--slate-200);
-            --color-body: var(--slate-300);
-            --color-caption: var(--slate-400);
+            --color-display: #EDECF3;
+            --color-title: #EDECF3;
+            --color-body-lg: #E2E0EA;
+            --color-body: #BDBACB;
+            --color-caption: #928FA3;
         }
 
         /* ============================================================
@@ -118,23 +130,25 @@
              a mudanças de tema do SO em tempo real sem recarregar.
            ============================================================ */
         [data-theme="light"] {
-            --bg-main: #F5F3F8;
+            --bg-main: #F7F7FA;
             --bg-secondary: #FFFFFF;
-            --bg-tertiary: #ECE9F2;
-            --border-color: rgba(67,42,125,.13);
+            --bg-tertiary: #EEEDF3;
+            --border-color: #E3E1EA;
 
-            --lavender-active: #7C5CBF;
+            --lavender-active: #5B3CC4;
             --lavender-medium: #9482BD;
-            --lavender-dark: #EDE9FB;
-            --lavender-glow: rgba(124, 92, 191, 0.15);
+            --lavender-dark: #EDE8FC;
+            --lavender-glow: rgba(91, 60, 196, 0.15);
+            --brand-deep: #3E2A8C;
+            --on-action: #FFFFFF;
 
-            --glass-card-bg: linear-gradient(145deg, rgba(255,255,255,.8), rgba(238,232,255,.52));
-            --glass-card-bg-strong: linear-gradient(145deg, rgba(244,239,255,.94), rgba(255,255,255,.68));
-            --glass-card-border: rgba(67,42,125,.14);
-            --glass-card-border-strong: rgba(114,80,199,.45);
-            --glass-card-highlight: rgba(255,255,255,.9);
-            --glass-card-shadow: 0 14px 32px rgba(67,42,125,.09), inset 0 1px 0 rgba(255,255,255,.88);
-            --glass-card-shadow-strong: 0 18px 38px rgba(67,42,125,.15), inset 0 1px 0 rgba(255,255,255,.94);
+            --glass-card-bg: var(--bg-secondary);
+            --glass-card-bg-strong: var(--lavender-dark);
+            --glass-card-border: var(--border-color);
+            --glass-card-border-strong: #CFC4F5;
+            --glass-card-highlight: transparent;
+            --glass-card-shadow: 0 1px 2px rgba(27, 26, 34, .05);
+            --glass-card-shadow-strong: 0 1px 2px rgba(27, 26, 34, .06);
             --glass-blur: 24px;
             --glass-saturation: 165%;
 
@@ -143,10 +157,16 @@
             --institution-border: rgba(112,76,174,.38);
             --institution-border-active: rgba(102,63,172,.82);
 
-            --text-main: #0F172A;
-            --text-secondary: #475569;
+            --text-main: #1B1A22;
+            --text-secondary: #55536A;
 
-            --header-bg: rgba(243, 242, 246, 0.85);
+            --success: #1F7A4D;
+            --success-soft: #E4F3EA;
+            --danger: #C23B30;
+            --danger-soft: #FBE9E7;
+            --warning: #93600A;
+
+            --header-bg: rgba(247, 247, 250, 0.85);
             --sidebar-bg: #F1EDFA;
             --sidebar-item-active-bg: rgba(15, 23, 42, 0.06);
             --sidebar-border: rgba(15, 23, 42, 0.08);
@@ -155,11 +175,11 @@
             --nav-icon-color: #1E1B26;
             --nav-icon-filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
 
-            --color-display: var(--slate-900);
-            --color-title: var(--slate-800);
-            --color-body-lg: var(--slate-700);
-            --color-body: var(--slate-600);
-            --color-caption: var(--slate-500);
+            --color-display: #1B1A22;
+            --color-title: #1B1A22;
+            --color-body-lg: #1B1A22;
+            --color-body: #55536A;
+            --color-caption: #6E6C80;
         }
 
         html, body {
@@ -223,7 +243,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #7C5CBF, #30263D);
+            background: #5B3CC4;
             color: #ffffff;
             font-family: var(--font-family-base);
             font-size: 15px;
@@ -280,10 +300,10 @@
         }
 
         .logo-wordmark {
-            font-family: var(--font-family-base);
+            font-family: var(--font-family-reading);
             font-size: 23px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
             line-height: 1.18;
             display: inline-block;
             padding: 0.06em 0.02em 0.16em;
@@ -291,11 +311,7 @@
             text-rendering: geometricPrecision;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background: linear-gradient(90deg, #6B4FBB, #4F7FE0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+            color: var(--brand-deep);
         }
 
         /* O mesmo gradiente roxo/azul funciona em ambos os temas —
@@ -861,7 +877,7 @@
         #questionAreaTitle, #questionAreaFilters, #questionSubareaPanel, #questionExamPanel, .question-count-control { display: none !important; }
 
         .a4-question { margin: 0 0 7mm; break-inside: auto; page-break-inside: auto; }
-        .a4-question-number { margin: 0 0 2mm; color: #6f52c7; font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+        .a4-question-number { margin: 0 0 2mm; color: #5B3CC4; font-size: 10px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
         .a4-question-stem { margin: 0 0 3mm; color: #202027; font-size: 10.5px; line-height: 1.45; }
         .a4-question-options { margin: 0; padding-left: 5mm; color: #383642; font-size: 9.5px; line-height: 1.4; }
         .a4-question-options li { margin-bottom: 1.5mm; padding-left: 1mm; }
@@ -969,8 +985,8 @@
         .dashboard-history-item-main strong { font-size: 12.5px; color: var(--text-main); font-weight: 700; }
         .dashboard-history-item-main span { font-size: 10.5px; color: var(--text-secondary); }
         .dashboard-history-item-score { flex: 0 0 auto; padding: 6px 11px; border-radius: 100px; font-size: 12px; font-weight: 800; }
-        .dashboard-history-item-score.good { background: rgba(52,199,89,.15); color: #34c759; }
-        .dashboard-history-item-score.bad { background: rgba(255,90,82,.15); color: #ff5a52; }
+        .dashboard-history-item-score.good { background: var(--success-soft); color: var(--success); }
+        .dashboard-history-item-score.bad { background: var(--danger-soft); color: var(--danger); }
         .dashboard-empty-icon { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; background: var(--lavender-dark); color: var(--lavender-active); }
         .dashboard-empty-icon svg { width: 18px; height: 18px; }
 
@@ -1517,10 +1533,9 @@
         .question-player-progress div { height: 100%; width: 0; background: var(--lavender-active); transition: width .35s ease; }
         .question-player-body { flex: 1 1 0; min-height: 0; overflow-y: auto; padding: 20px 16px 130px; -webkit-overflow-scrolling: touch; }
         .question-meta { display: flex; align-items: center; gap: 7px; margin-bottom: 16px; }
-        .question-meta span { padding: 6px 9px; border-radius: 100px; background: var(--lavender-dark); color: var(--lavender-active); font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
-        .question-stem { color: var(--color-body-lg); font-size: var(--question-font-size); line-height: 1.6; text-align: justify; text-justify: inter-word; white-space: pre-line; }
-        .question-option-text { text-align: justify; text-justify: inter-word; }
-        /* Referências longas sem espaço (URLs de fonte, ex.: prev-inep-015)
+        .question-meta span { padding: 4px 8px; border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12px; line-height: 16px; font-weight: 500; }
+        .question-stem { color: var(--color-body-lg); font-family: var(--font-family-reading); font-size: calc(var(--question-font-size) * 1.0625); line-height: 1.65; white-space: pre-line; }
+                /* Referências longas sem espaço (URLs de fonte, ex.: prev-inep-015)
            não têm onde quebrar e empurravam a largura da caixa além da tela,
            fazendo a página rolar na horizontal — justamente o que o
            user-scalable=no do index.html deveria ter eliminado.
@@ -1532,17 +1547,17 @@
         .question-stem-media img { display: block; width: 100%; max-width: 480px; margin: 0 auto; border-radius: 14px; border: 1px solid var(--glass-card-border); background: var(--bg-secondary); cursor: zoom-in; }
         .question-visual-warning { margin-top: 14px; padding: 11px 12px; border-radius: 13px; border: 1px solid rgba(196,181,253,.25); background: rgba(196,181,253,.07); color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
         .question-options { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
-        .question-option { width: 100%; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: start; padding: 14px; border: 1px solid var(--border-color); border-radius: 17px; background: var(--bg-secondary); color: var(--color-body); text-align: left; font: 400 calc(var(--question-font-size) - 2px)/1.5 var(--font-family-base); cursor: pointer; transition: transform .18s ease, border-color .22s ease, background .22s ease; }
+        .question-option { width: 100%; display: grid; grid-template-columns: 32px 1fr; gap: 11px; align-items: start; padding: 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--color-body-lg); text-align: left; font: 400 calc(var(--question-font-size) * 1.0625)/1.65 var(--font-family-reading); cursor: pointer; transition: transform .18s ease, border-color .22s ease, background .22s ease; }
         .question-option:active { transform: scale(.985); }
-        .question-option-letter { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: var(--bg-tertiary); color: var(--text-main); font-size: 11px; font-weight: 750; }
-        .question-option.correct { border-color: rgba(52,199,89,.7); background: rgba(52,199,89,.09); }
-        .question-option.correct .question-option-letter { background: #34c759; color: #07140b; }
-        .question-option.wrong { border-color: rgba(255,59,48,.65); background: rgba(255,59,48,.08); }
-        .question-option.wrong .question-option-letter { background: #ff5a52; color: #1a0605; }
+        .question-option-letter { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-secondary); font: 600 14px/1 var(--font-family-base); }
+        .question-option.correct { border-color: var(--success); background: var(--success-soft); }
+        .question-option.correct .question-option-letter { background: var(--success); color: var(--bg-secondary); }
+        .question-option.wrong { border-color: var(--danger); background: var(--danger-soft); }
+        .question-option.wrong .question-option-letter { background: var(--danger); color: var(--bg-secondary); }
         .question-feedback { margin-top: 16px; padding: 15px; border-radius: 17px; background: var(--bg-secondary); border: 1px solid var(--border-color); }
         .question-feedback[hidden] { display: none; }
         .question-feedback strong { display: block; color: var(--text-main); font-size: 13px; margin-bottom: 6px; }
-        .question-feedback p { margin: 0; color: var(--text-secondary); font-size: calc(var(--question-font-size) - 3px); line-height: 1.55; white-space: pre-line; text-align: justify; text-justify: inter-word; }
+        .question-feedback p { margin: 0; color: var(--color-body); font-family: var(--font-family-reading); font-size: calc(var(--question-font-size) * 1.0625 - 1px); line-height: 1.65; white-space: pre-line; }
         /* Avaliação de dificuldade pra revisão espaçada (R-1) — só
            aparece depois de ACERTAR no Guiado (errar já é o próprio
            sinal, ver rateReviewDifficulty em app-app.js). */
@@ -1553,9 +1568,9 @@
         .question-review-rating-btn { flex: 1 1 0; min-height: 42px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-tertiary); color: var(--text-main); font: 700 12.5px/1 var(--font-family-base); cursor: pointer; transition: border-color .15s ease, background-color .15s ease; }
         .question-review-rating-btn:hover { border-color: rgba(196,181,253,.4); }
         .question-review-rating-btn-good { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
-        .question-player-footer { position: absolute; left: 16px; right: 16px; bottom: max(8px, env(safe-area-inset-bottom)); padding: 10px; display: flex; gap: 8px; border: 1px solid rgba(196,181,253,.18); border-radius: 19px; background: rgba(31,33,39,.86); backdrop-filter: blur(18px); box-shadow: 0 12px 32px rgba(0,0,0,.28); }
-        .question-next { flex: 1 1 auto; width: 100%; min-height: 48px; border: 0; border-radius: 14px; background: var(--lavender-active); color: #19171f; font: 750 13px/1 var(--font-family-base); cursor: pointer; }
-        .question-next:disabled { opacity: .35; }
+        .question-player-footer { position: absolute; left: 16px; right: 16px; bottom: max(8px, env(safe-area-inset-bottom)); padding: 10px; display: flex; gap: 8px; border: 1px solid var(--border-color); border-radius: 19px; background: var(--header-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 8px 24px rgba(20,19,25,.12); }
+        .question-next { flex: 1 1 auto; width: 100%; min-height: 48px; border: 0; border-radius: 14px; background: var(--lavender-active); color: var(--on-action); font: 600 16px/1 var(--font-family-base); cursor: pointer; }
+        .question-next:disabled { background: var(--bg-tertiary); color: var(--color-caption); opacity: 1; }
         /* Anterior — só existe no Simulado/Imersão, onde é possível voltar
            e trocar de resposta (no Guiado a sessão é sempre sequencial). */
         .question-prev { flex: 0 0 auto; min-width: 92px; min-height: 48px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-secondary); color: var(--text-main); font: 750 13px/1 var(--font-family-base); cursor: pointer; }
@@ -1626,11 +1641,11 @@
             overflow: hidden;
             margin-bottom: 18px;
             padding: 22px 20px 20px;
-            border: 1px solid rgba(196,181,253,.48);
+            border: 1px solid var(--glass-card-border);
             border-radius: 22px;
             color: var(--text-main);
-            background: linear-gradient(140deg, rgba(91,74,117,.52), rgba(31,33,39,.92) 68%);
-            box-shadow: 0 16px 34px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.13);
+            background: var(--glass-card-bg);
+            box-shadow: var(--glass-card-shadow);
         }
         .exam-countdown-card::before {
             content: "";
@@ -1648,7 +1663,7 @@
         .exam-countdown-title { position: relative; margin: 0; font-size: 21px; line-height: 1.2; letter-spacing: -.03em; }
         .exam-countdown-date { position: relative; margin: 7px 0 18px; color: var(--text-secondary); font-size: 13px; }
         .exam-countdown-grid { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .exam-countdown-unit { padding: 10px 4px 9px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(7,8,11,.16); text-align: center; }
+        .exam-countdown-unit { padding: 10px 4px 9px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-main); text-align: center; }
         .exam-countdown-number { display: block; font-size: 23px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1; }
         .exam-countdown-label { display: block; margin-top: 5px; color: var(--text-secondary); font-size: 9px; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
 
@@ -1710,8 +1725,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        [data-theme="light"] .exam-countdown-card { background: linear-gradient(140deg, rgba(211,199,246,.68), rgba(255,255,255,.88) 72%); border-color: rgba(113,83,175,.3); box-shadow: 0 14px 28px rgba(63,47,95,.09), inset 0 1px rgba(255,255,255,.8); }
-        [data-theme="light"] .exam-countdown-unit { background: rgba(255,255,255,.44); border-color: rgba(111,83,170,.16); }
 
         .rr-card.highlighted {
             background: linear-gradient(135deg, rgba(196, 181, 253, 0.15), rgba(196, 181, 253, 0.06));
@@ -2525,9 +2538,9 @@
         }
 
         .reader-chapter-title {
-            font-family: var(--font-family-base);
+            font-family: var(--font-family-reading);
             font-size: 22px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-main);
             line-height: 1.25;
         }
@@ -2538,9 +2551,10 @@
 
         .reader-body p,
         .reader-body li {
-            font-size: 1em;
+            font-family: var(--font-family-reading);
+            font-size: 1.0625em;
             font-weight: 400;
-            line-height: 1.6;
+            line-height: 1.65;
             color: var(--color-body-lg);
         }
 
@@ -2550,7 +2564,7 @@
 
         .reader-body strong {
             color: var(--text-main);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .reader-body em {
@@ -2832,6 +2846,149 @@
             left: 0;
             color: var(--lavender-medium);
         }
+
+        /* ---- Bullets: atalho na tela Início ---- */
+        .bullets-shortcut-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            margin: 0 0 14px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-card-border);
+            background: var(--glass-card-bg);
+            box-shadow: var(--glass-card-shadow);
+            cursor: pointer;
+        }
+        .bullets-shortcut-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(196, 181, 253, 0.14);
+            color: var(--lavender-active);
+        }
+        .bullets-shortcut-text { flex: 1; min-width: 0; }
+        .bullets-shortcut-title { font: 700 14.5px var(--font-family-base); color: var(--text-main); }
+        .bullets-shortcut-desc { font: 500 12px var(--font-family-base); color: var(--text-secondary); margin-top: 1px; }
+        .bullets-shortcut-arrow { font-size: 20px; color: var(--text-secondary); flex-shrink: 0; }
+
+        /* ---- Bullets: tela (overlay reaproveita .reader-view/.reader-header) ---- */
+        .bullets-toolbar {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--glass-card-border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bullets-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 13px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-card-border);
+            background: var(--glass-card-bg);
+        }
+        .bullets-search svg { flex-shrink: 0; opacity: .6; color: var(--text-secondary); }
+        .bullets-search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: none;
+            color: var(--text-main);
+            font: 600 13.5px var(--font-family-base);
+        }
+        .bullets-search input::placeholder { color: var(--text-secondary); font-weight: 500; }
+        .bullets-chips { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 2px; }
+        .bullets-chip {
+            flex-shrink: 0;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font: 700 11.5px var(--font-family-base);
+            border: 1px solid var(--glass-card-border);
+            color: var(--text-secondary);
+            background: var(--glass-card-bg);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .bullets-chip.is-active { color: #fff; border-color: transparent; background: linear-gradient(120deg, var(--brand-400), var(--brand-600)); }
+
+        #bulletsContent { padding: 16px; }
+        .bullet-card {
+            position: relative;
+            border: 1px solid var(--glass-card-border);
+            background: linear-gradient(160deg, rgba(196, 181, 253, .1), rgba(255, 255, 255, .02));
+            box-shadow: var(--glass-card-shadow);
+            border-radius: 16px;
+            padding: 16px 16px 14px 18px;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .bullet-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--brand-400); }
+        .bullet-card-area-tag {
+            display: inline-block;
+            font: 700 10px var(--font-family-base);
+            color: var(--text-secondary);
+            background: rgba(196, 181, 253, .08);
+            border: 1px solid var(--glass-card-border);
+            padding: 3px 9px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+        .bullet-card-title { color: var(--text-main); font: 800 16.5px/1.25 var(--font-family-base); letter-spacing: -0.2px; margin: 0 0 6px; }
+        .bullet-card-update-badge {
+            display: inline-block;
+            font: 800 10px var(--font-family-base);
+            color: #fff;
+            background: linear-gradient(135deg, var(--danger), #f97316);
+            padding: 3px 9px;
+            border-radius: 999px;
+            margin: 0 0 12px 6px;
+            letter-spacing: .2px;
+        }
+        .bullet-card-image { width: 100%; border-radius: 12px; margin: 4px 0 12px; display: block; }
+        .bullet-card-image.is-diagram { background: #fff; padding: 8px; }
+
+        /* barras de score com severidade (ex: APGAR) */
+        .score-bars { display: flex; flex-direction: column; gap: 8px; margin: 4px 0 14px; }
+        .score-bar { display: flex; align-items: center; gap: 12px; padding: 9px 13px; border-radius: 11px; }
+        .score-bar-range { font: 800 14px var(--font-family-base); min-width: 42px; flex-shrink: 0; }
+        .score-bar-text { font: 600 12px/1.4 var(--font-family-base); color: var(--text-main); }
+        .score-bar-text strong { display: block; font-size: 12.5px; margin-bottom: 1px; }
+        .score-bar.sev-grave { background: rgba(255, 59, 48, .12); }
+        .score-bar.sev-grave .score-bar-range { color: var(--danger); }
+        .score-bar.sev-moderado { background: rgba(255, 159, 67, .13); }
+        .score-bar.sev-moderado .score-bar-range { color: #FF9F43; }
+        .score-bar.sev-bom { background: rgba(52, 199, 89, .12); }
+        .score-bar.sev-bom .score-bar-range { color: var(--success); }
+
+        /* tabela com severidade por linha (ex: peso/IMC, PA) */
+        .reader-table tr.sev-grave td { background: rgba(255, 59, 48, .14); }
+        .reader-table tr.sev-grave td:first-child { color: var(--danger); font-weight: 800; }
+        .reader-table tr.sev-moderado td { background: rgba(255, 159, 67, .13); }
+        .reader-table tr.sev-moderado td:first-child { color: #FF9F43; font-weight: 800; }
+        .reader-table tr.sev-alerta td { background: rgba(240, 214, 74, .13); }
+        .reader-table tr.sev-alerta td:first-child { color: #d4b90a; font-weight: 800; }
+        .reader-table tr.sev-ok td { background: rgba(52, 199, 89, .1); }
+        .reader-table tr.sev-ok td:first-child { color: var(--success); font-weight: 800; }
+
+        /* pílulas de medicação (manter/suspender/depende) */
+        .med-section-title { font: 800 11px var(--font-family-base); text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 8px; display: flex; align-items: center; gap: 7px; }
+        .med-section-title .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+        .med-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-bottom: 6px; }
+        .med-pill { border-radius: 12px; padding: 9px 11px; border: 1px solid transparent; }
+        .med-pill-name { font: 700 12.5px var(--font-family-base); color: var(--text-main); display: block; margin-bottom: 2px; }
+        .med-pill-note { font: 600 11px var(--font-family-base); opacity: .85; }
+        .med-pill.ok { background: rgba(52, 199, 89, .12); border-color: rgba(52, 199, 89, .25); }
+        .med-pill.ok .med-pill-note { color: var(--success); }
+        .med-pill.grave { background: rgba(255, 59, 48, .12); border-color: rgba(255, 59, 48, .22); }
+        .med-pill.grave .med-pill-note { color: var(--danger); }
+        .med-pill.alerta { background: rgba(240, 214, 74, .12); border-color: rgba(240, 214, 74, .24); }
+        .med-pill.alerta .med-pill-note { color: #d4b90a; }
 
         /* Diagramas ASCII (fenced code blocks do markdown) */
         .reader-pre-card {
@@ -3755,7 +3912,7 @@
         [data-theme="light"] .pwa-install-button {
             background: linear-gradient(135deg, rgba(196,181,253,.32), rgba(255,255,255,.68));
             border-color: rgba(104,77,161,.26);
-            color: #30263D;
+            color: #3E2A8C;
         }
 
         /* ============================================================
@@ -3789,19 +3946,20 @@
         }
         .a4-header-logo { width: 34px; height: 34px; object-fit: contain; }
         .a4-header-wordmark {
-            color: #6f52c7;
+            color: #3E2A8C;
+            font-family: var(--font-family-reading);
             font-size: 22px;
-            font-weight: 750;
-            letter-spacing: -.035em;
+            font-weight: 700;
+            letter-spacing: -.01em;
         }
         .a4-content { height: auto; min-height: 249mm; padding-top: 10mm; overflow: visible; }
         .a4-document-title { margin: 0 0 7mm; padding-bottom: 4mm; border-bottom: 1px solid #ece8f5; }
         .a4-document-title h1 { margin: 0 0 2mm; color: #202027; font-size: 18px; line-height: 1.2; }
         .a4-document-title p { margin: 0; color: #6d6878; font-size: 9.5px; line-height: 1.35; }
-        .a4-rapid-part { margin: 0 0 4mm; color: #6f52c7; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+        .a4-rapid-part { margin: 0 0 4mm; color: #5B3CC4; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
         .a4-rapid-theme { margin: 0 0 5mm; break-inside: avoid; }
         .a4-rapid-heading { display: flex; align-items: baseline; gap: 7px; margin: 0 0 2.5mm; }
-        .a4-rapid-num { flex: 0 0 auto; color: #6f52c7; font-size: 10px; font-weight: 800; }
+        .a4-rapid-num { flex: 0 0 auto; color: #5B3CC4; font-size: 10px; font-weight: 800; }
         .a4-rapid-heading h2 { margin: 0; color: #202027; font-size: 12px; line-height: 1.25; font-weight: 750; }
         .a4-rapid-body { color: #30303a; font-size: 8.6px; line-height: 1.38; }
         .a4-rapid-body p { margin: 0 0 2.5mm; }
@@ -3908,7 +4066,7 @@
             justify-content: center;
         }
         .question-print-brand {
-            color: #6747bd;
+            color: #5B3CC4;
             font-family: var(--font-family-base), Inter, Arial, sans-serif;
             font-size: 25pt;
             font-weight: 750;
@@ -3950,7 +4108,7 @@
             z-index: 2;
             width: .45mm;
             content: "";
-            background: #4b2e8f;
+            background: #3E2A8C;
             transform: translateX(-50%);
         }
         .question-print-column {
@@ -3968,7 +4126,7 @@
         }
         .question-print-number {
             margin: 0 0 1.4mm;
-            color: #6747bd;
+            color: #5B3CC4;
             font-size: 8pt;
             font-weight: 750;
             letter-spacing: .04em;
@@ -4130,7 +4288,7 @@
             justify-content: center;
         }
         .rapid-print-brand {
-            color: #6747bd;
+            color: #5B3CC4;
             font-family: var(--font-family-base), Inter, Arial, sans-serif;
             font-size: 25pt;
             font-weight: 750;
@@ -4165,7 +4323,7 @@
         }
         .rapid-print-part {
             margin: 0 0 5mm;
-            color: #4b2e8f;
+            color: #3E2A8C;
             font-size: 12pt;
             font-weight: 800;
             letter-spacing: .035em;
@@ -4517,7 +4675,7 @@
         .auth-logo .logo-wordmark {
             font-size: 44px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--brand-deep);
             white-space: nowrap;
             transition: font-size 1.72s cubic-bezier(.4, 0, .2, 1);
         }
@@ -4848,8 +5006,10 @@
 
             .question-player { max-width: none; }
             .question-player-header { padding-left: max(32px, calc((100vw - 860px) / 2)); padding-right: max(32px, calc((100vw - 860px) / 2)); }
-            .question-player-body { width: min(860px, 100%); box-sizing: border-box; margin: 0 auto; padding: 32px 40px 150px; }
-            .question-player-footer { left: 50%; right: auto; width: min(620px, calc(100% - 64px)); box-sizing: border-box; transform: translateX(-50%); }
+            /* Coluna de leitura de 640px (≈75 caracteres de Literata 17px);
+               o rodapé tem a mesma largura para alinhar com o texto. */
+            .question-player-body { width: min(720px, 100%); box-sizing: border-box; margin: 0 auto; padding: 32px 40px 150px; }
+            .question-player-footer { left: 50%; right: auto; width: min(640px, calc(100% - 64px)); box-sizing: border-box; transform: translateX(-50%); }
             .sidebar { width: min(360px, 40vw); }
         }
 
@@ -5278,8 +5438,8 @@
             background: var(--glass-card-bg);
             border-color: var(--glass-card-border);
             box-shadow: var(--glass-card-shadow);
-            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         :is(
@@ -5292,8 +5452,8 @@
             background: var(--glass-card-bg-strong);
             border-color: var(--glass-card-border-strong);
             box-shadow: var(--glass-card-shadow-strong);
-            backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         [data-theme="light"] :is(
@@ -5700,9 +5860,7 @@
             padding: 50px 20px 20px !important;
             box-sizing: border-box;
             overflow: hidden;
-            background:
-                radial-gradient(circle at 90% 5%, rgba(196,181,253,.16), transparent 30%),
-                linear-gradient(140deg, rgba(91,74,117,.74), rgba(48,38,61,.72) 58%, var(--bg-secondary));
+            background: var(--glass-card-bg-strong);
         }
         #metricasTab .dashboard-hero-grid {
             display: grid;
@@ -5776,11 +5934,6 @@
             margin: 0;
             font-size: clamp(11px, 1.3vw, 14px);
             line-height: 1.4;
-        }
-        [data-theme="light"] #metricasTab .dashboard-hero {
-            background:
-                radial-gradient(circle at 90% 5%, rgba(149,121,214,.22), transparent 32%),
-                linear-gradient(140deg, rgba(237,233,251,.96), rgba(255,255,255,.74));
         }
         [data-theme="light"] #metricasTab .dashboard-score-panel::after {
             background: linear-gradient(to bottom, transparent, rgba(124,92,191,.42), transparent);
@@ -5907,3 +6060,76 @@
                 min-height: 208px;
             }
         }
+
+        /* Sistema MedTrack: cards são superfícies sólidas — sem os círculos
+           e reflexos decorativos em lavanda (ver DESIGN_SYSTEM.md). */
+        .question-hero::before,
+        .question-hero::after,
+        .question-mode::before,
+        .dashboard-hero::after,
+        .exam-countdown-card::before { content: none; }
+
+
+        /* Resultado da sessão como cartão-resposta de prova. */
+        #questionResultsView .question-results-score { text-align: left; margin-bottom: 0; }
+        .results-title { margin: 0; font: 600 28px/36px var(--font-family-reading); color: var(--text-main); }
+        .results-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .results-primary, .results-secondary { min-height: 48px; padding: 0 20px; border-radius: 12px; font: 600 16px/1 var(--font-family-base); cursor: pointer; }
+        .results-primary { border: 0; background: var(--lavender-active); color: var(--on-action); }
+        .results-secondary { border: 1px solid var(--border-color); background: transparent; color: var(--text-main); font-weight: 500; }
+        #questionResultsView .question-results-hint { text-align: left; font-size: 14px; line-height: 20px; color: var(--color-caption); margin: 32px 0 8px; }
+        .answer-sheet { display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--sheet-rows, 6), auto); column-gap: 32px; border-top: 1px solid var(--border-color); }
+        /* Com o resultado aberto, o corpo rola só na vertical e usa a largura
+           toda (até 1280px) para caber mais colunas. */
+        .question-player-body:has(#questionResultsView:not([hidden])) { overflow-x: hidden; padding-bottom: 32px; }
+        @media (min-width: 768px) {
+            .question-player-body:has(#questionResultsView:not([hidden])) { width: min(1280px, 100%); }
+        }
+        #questionResultsView:not([hidden]) { max-width: none; }
+        .sheet-row { display: grid; grid-template-columns: 28px auto 1fr; align-items: center; gap: 16px; min-height: 52px; padding: 8px 4px; border: 0; border-bottom: 1px solid var(--border-color); background: none; color: var(--text-main); text-align: left; font: inherit; cursor: pointer; }
+        .sheet-row:hover { background: var(--bg-secondary); }
+        .sheet-num { font: 600 15px/1 var(--font-family-base); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+        .sheet-marks { display: flex; gap: 6px; }
+        .sheet-mark { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--color-caption); display: grid; place-items: center; font: 600 12px/1 var(--font-family-base); color: var(--color-caption); }
+        .sheet-mark.marked { background: var(--text-main); border-color: var(--text-main); color: var(--bg-main); }
+        .sheet-mark.key { border: 2px solid var(--success); color: var(--success); }
+        .sheet-result { justify-self: end; display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 20px; color: var(--text-secondary); white-space: nowrap; }
+        .sheet-result b { font-weight: 700; }
+        .sheet-row.correct .sheet-result b { color: var(--success); }
+        .sheet-row.wrong .sheet-result b { color: var(--danger); }
+        /* O rodapé tem display:flex, que vencia o atributo hidden na tela de resultado. */
+        .question-player-footer[hidden] { display: none; }
+        /* Rodapé da revisão de resultado: Anterior · contagem · Próximo erro. */
+        .review-nav { align-items: center; }
+        .review-nav[hidden] { display: none; }
+        .review-nav .results-primary, .review-nav .results-secondary { min-width: 0; padding: 0 16px; }
+        .review-nav .results-primary { flex: 1 1 0; }
+        .review-nav .results-secondary:disabled { opacity: .4; cursor: default; }
+        .review-nav-count { flex: 0 0 auto; padding: 0 8px; font-size: 14px; line-height: 20px; color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+        /* Aviso de questões em branco antes de entregar Simulado/Imersão. */
+        .blank-dialog { position: fixed; inset: 0; z-index: 12100; display: flex; align-items: flex-end; justify-content: center; padding: 16px 16px max(16px, env(safe-area-inset-bottom)); background: rgba(20, 19, 25, .5); }
+        .blank-dialog[hidden] { display: none; }
+        @media (min-width: 768px) { .blank-dialog { align-items: center; } }
+        .blank-dialog-card { width: min(520px, 100%); max-height: calc(100dvh - 32px); overflow-y: auto; padding: 24px; border-radius: 24px; background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-main); display: grid; gap: 16px; }
+        .blank-dialog-card h2 { margin: 0; font: 600 22px/28px var(--font-family-reading); color: var(--text-main); }
+        .blank-dialog-card p { margin: 0; font-size: 15px; line-height: 22px; color: var(--text-secondary); }
+        .blank-dialog-list { display: flex; flex-wrap: wrap; gap: 8px; max-height: 200px; overflow-y: auto; }
+        .blank-dialog-list button { min-width: 56px; min-height: 44px; padding: 0 12px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-main); color: var(--text-main); font: 600 15px/1 var(--font-family-base); font-variant-numeric: tabular-nums; cursor: pointer; }
+        .blank-dialog-list button:hover { border-color: var(--lavender-active); }
+        .blank-dialog-actions { display: grid; gap: 8px; }
+        /* Bolhas do navegador: o anel da questão atual era um outline, que no
+           Safari pode sair quadrado por cima da bolha redonda. Agora o anel é
+           box-shadow (acompanha o círculo) e o botão nativo fica desligado. */
+        .result-bubble { -webkit-appearance: none; appearance: none; padding: 0; outline: none; }
+        .result-bubble:focus { outline: none; }
+        .result-bubble.nav-current { outline: none; box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px var(--lavender-active), 0 8px 18px var(--bubble-shadow-outer); }
+        .result-bubble.nav-current.nav-marked { box-shadow: 0 0 0 2px #e0b15e, 0 0 0 4px var(--lavender-active), 0 8px 18px var(--bubble-shadow-outer); }
+        .result-bubble:focus-visible { box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px var(--lavender-active); }
+        /* Item ativo da barra no tema claro: fica só o indicador oval
+           (#navIndicator). O fundo do ícone ativo usava backdrop-filter, que
+           no iOS ignora o border-radius e aparecia quadrado sobre o oval. */
+        [data-theme="light"] .nav-item.active .nav-icon-badge { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+        /* Trilhas: selo de "selecionada" na instituição ativa (ENAMED/UEPA). */
+        .trail-switch-button { position: relative; }
+        .trail-switch-check { position: absolute; top: 8px; right: 8px; z-index: 3; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; color: #5B3CC4; display: grid; place-items: center; box-shadow: 0 1px 3px rgba(20, 19, 25, .25); pointer-events: none; }
+        .trail-switch-check svg { width: 13px; height: 13px; }

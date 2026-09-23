@@ -411,6 +411,11 @@ model OsceChecklistScore {
 // resolvido/validado contra a tabela User.
 model ClientError {
   id         String   @id @default(cuid())
+  // "client" (exceção no navegador do aluno) ou "backend" (rota do
+  // Express que lançou/rejeitou sem tratar) — mesma tabela pros dois
+  // porque a pergunta que ela responde é a mesma ("o que quebrou em
+  // produção"), só a origem muda.
+  source     String   @default("client")
   message    String
   stack      String?
   url        String?

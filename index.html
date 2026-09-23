@@ -35,6 +35,14 @@
          banco principal acima — alimenta só o modo "Internato" do QuestHub. -->
     <script src="questions-internato.js" defer></script>
     <script src="osce-stations.js" defer></script>
+    <!-- Bullets (escores/tabelas/critérios de decoreba) — bancos
+         independentes por área, cada um define seu próprio
+         window.TRYCKTRACK_BULLETS_*, concatenados em app-bullets.js. -->
+    <script src="bullets-pediatria.js" defer></script>
+    <script src="bullets-clinica-medica.js" defer></script>
+    <script src="bullets-go.js" defer></script>
+    <script src="bullets-cirurgia.js" defer></script>
+    <script src="bullets-preventiva.js" defer></script>
     <!-- question-explanations.js (829KB), question-explanations-
          internato.js (3,17MB) e o trio de PDF — pdf-lib, fontkit e
          pdf-export (1,25MB juntos) — não entram mais aqui: só servem
@@ -57,7 +65,7 @@
         })();
     </script>
     <title>Trycktrack</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -141,6 +149,14 @@
                 <div id="feedbackBannerSlot"></div>
                 <div id="enamedCountdown"></div>
                 <div id="medUpdatesCarousel"></div>
+                <div class="bullets-shortcut-card" onclick="openBullets()">
+                    <div class="bullets-shortcut-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="4" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg></div>
+                    <div class="bullets-shortcut-text">
+                        <div class="bullets-shortcut-title">Bullets</div>
+                        <div class="bullets-shortcut-desc">Escores, tabelas e critérios pra revisão de véspera</div>
+                    </div>
+                    <div class="bullets-shortcut-arrow">›</div>
+                </div>
                 <div id="inicioLastRead"></div>
             </div>
 
@@ -475,7 +491,7 @@
             </div>
             <div class="question-results-view" id="questionResultsView" hidden>
                 <div class="question-results-score" id="questionResultsScore"></div>
-                <p class="question-results-hint">Toque em uma bolha para revisar a questão.</p>
+                <p class="question-results-hint">Toque numa questão para rever.</p>
                 <div class="question-results-grid" id="questionResultsGrid"></div>
             </div>
             <div class="question-results-view" id="questionNavView" hidden>
@@ -521,6 +537,23 @@
             <div class="reader-footer-num" id="readerFooterNum">1.1</div>
             <div class="reader-footer-label">Trocar o tema</div>
         </div>
+    </div>
+
+    <div class="reader-view" id="bulletsView">
+        <div class="reader-header">
+            <button class="reader-back" onclick="closeBullets()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+            </button>
+            <div class="reader-header-title">Bullets</div>
+        </div>
+        <div class="bullets-toolbar">
+            <div class="bullets-search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                <input type="text" id="bulletsSearchInput" placeholder="Buscar (ex: APGAR, Tokyo, Fisher)…" oninput="renderBullets()">
+            </div>
+            <div class="bullets-chips" id="bulletsAreaChips"></div>
+        </div>
+        <div class="reader-content" id="bulletsContent"></div>
     </div>
 
     <!-- RAPID REVIEW — painel lateral de temas (direita → esquerda) -->
@@ -871,6 +904,7 @@
     </script>
     <script src="app-auth.js"></script>
     <script src="app-reader.js"></script>
+    <script src="app-bullets.js"></script>
     <script src="app-app.js"></script>
     <script>
         /* ============================================================
