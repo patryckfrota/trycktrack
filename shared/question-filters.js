@@ -57,8 +57,9 @@ export function questionMatchesSearch(question, search) {
         question?.stem,
         question?.area,
         question?.subarea,
-        question?.tema,
-        question?.subtema,
+        question?.assunto,
+        question?.topico,
+        question?.subtopico,
         ...Object.values(question?.options || {})
     ].filter(Boolean).join(' '));
     return terms.every(term => haystack.includes(term));
@@ -80,7 +81,7 @@ export function applyAdvancedFilter(questions, filterState, reviewQueue) {
     });
 }
 
-// Filtro de conteúdo (tema/subtema/instituição/ano/banca/busca) + Filtro
+// Filtro de conteúdo (assunto/tópico/subtópico/instituição/ano/banca/busca) + Filtro
 // Avançado, na mesma ordem pro modo "full-exam" (prova completa,
 // filtrada só por examId — Imersão sempre entrega a prova inteira,
 // sem Filtro Avançado nem busca) e pro modo "internato" (rodízio/
@@ -105,8 +106,9 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
     const {
         theme = 'Todas',
         subtheme = 'Todas',
-        tema = 'Todos',
-        subtema = 'Todos',
+        assunto = 'Todos',
+        topico = 'Todos',
+        subtopico = 'Todos',
         institution = 'Todas',
         year = 'Todos',
         search = ''
@@ -117,8 +119,9 @@ export function filterQuestionBank(bank, { mode, filters = {}, advancedFilterSta
         const source = String(question.source || '');
         return (theme === 'Todas' || question.area === theme)
             && (subtheme === 'Todas' || question.subarea === subtheme)
-            && (tema === 'Todos' || question.tema === tema)
-            && (subtema === 'Todos' || question.subtema === subtema)
+            && (assunto === 'Todos' || question.assunto === assunto)
+            && (topico === 'Todos' || question.topico === topico)
+            && (subtopico === 'Todos' || question.subtopico === subtopico)
             && (institution === 'Todas' || source.includes(institution))
             && (year === 'Todos' || questionYears.includes(year))
             && (matchedIds ? matchedIds.has(question.id) : questionMatchesSearch(question, search));

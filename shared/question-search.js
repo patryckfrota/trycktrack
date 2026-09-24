@@ -31,6 +31,9 @@ function questionSearchText(question) {
         question?.area,
         question?.subarea,
         question?.tema,
+        question?.assunto,
+        question?.topico,
+        question?.subtopico,
         ...Object.values(question?.options || {})
     ].filter(Boolean).join(' ');
 }
