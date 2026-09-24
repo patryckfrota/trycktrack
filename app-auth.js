@@ -318,6 +318,7 @@
             renderCurrentUser();
             updateHeaderTitle('inicio');
             renderFeedbackBanner();
+            renderGuestBanner();
             if (!hasSeenOnboarding()) openOnboarding();
         }
 
@@ -405,6 +406,49 @@
            o projeto.
            ============================================================ */
         const FEEDBACK_BANNER_KEY = 'trycktrack-feedback-banner-dismissed-v1';
+
+        /* ============================================================
+           MODO VISITANTE
+           Entra no app sem autenticar (window.isGuestMode = true), sem
+           mexer no fluxo de dados: localStorage já funciona sem login
+           hoje (trycktrack-question-stats, trycktrack-review-queue-v1
+           etc. não têm escopo por uid), então o progresso local
+           continua registrando normalmente — só nunca sincroniza pra
+           nuvem, porque o sync só roda dentro do bloco
+           `if (currentFirebaseUser)` do listener do Firebase. O banner
+           avisa exatamente isso. window.isGuestMode também é o ponto
+           que ensurePdfLibsLoaded() (app-app.js) checa pra bloquear
+           exportação de PDF nos três lugares que passam por ali
+           (Questões configuradas, resultado de sessão, Rapid Review).
+           ============================================================ */
+        window.isGuestMode = false;
+
+        function enterGuestMode() {
+            window.isGuestMode = true;
+            showApp();
+        }
+
+        function renderGuestBanner() {
+            const slot = document.getElementById('guestBannerSlot');
+            if (!slot) return;
+            if (!window.isGuestMode) { slot.innerHTML = ''; return; }
+            slot.innerHTML = `<div class="feedback-banner">
+                <div class="feedback-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+                <div class="feedback-banner-copy">
+                    <strong>Você está sem login</strong>
+                    <p>Seu progresso fica só neste aparelho — nada é salvo na nuvem, e a exportação de PDF não fica disponível. Crie uma conta pra guardar tudo.</p>
+                    <div class="feedback-banner-actions">
+                        <button type="button" class="feedback-banner-btn" onclick="exitGuestMode()">Criar conta / entrar</button>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function exitGuestMode() {
+            window.isGuestMode = false;
+            showAuthScreen();
+            revealLoginForm();
+        }
 
         function renderFeedbackBanner() {
             const slot = document.getElementById('feedbackBannerSlot');

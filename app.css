@@ -4812,6 +4812,19 @@
             cursor: pointer;
             padding: 0 0 0 4px;
         }
+        /* Ação secundária de menor hierarquia que "Entrar"/Google — não
+           deve competir visualmente com o login de verdade, por isso
+           cor neutra em vez do roxo de .auth-link e um respiro maior. */
+        .auth-guest-link {
+            display: block;
+            width: 100%;
+            margin-top: 14px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
 
         /* SELO "BETA" — cápsula de vidro para funcionalidades ainda incompletas */
         .beta-pill {

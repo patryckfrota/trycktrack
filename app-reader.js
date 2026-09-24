@@ -4034,6 +4034,7 @@
             } catch (err) {
                 console.error('Falha ao gerar PDF do Rapid Review', err);
                 setPdfDownloadProgress(progress, 0, false);
+                if (typeof revealQuestionNotice === 'function') revealQuestionNotice(pdfErrorNotice(err, 'Não foi possível gerar o PDF. Tente novamente.'));
             }
         }
 

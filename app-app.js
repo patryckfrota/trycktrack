@@ -1125,7 +1125,12 @@
                 document.head.appendChild(script);
             });
         }
+        // Ponto único de bloqueio de PDF no modo visitante — os três
+        // fluxos que exportam PDF (Questões configuradas, resultado de
+        // sessão, Rapid Review) passam todos por aqui antes de gerar
+        // qualquer coisa, então travar aqui cobre os três de uma vez.
         function ensurePdfLibsLoaded() {
+            if (window.isGuestMode) return Promise.reject(new Error('GUEST_PDF_BLOCKED'));
             if (window.TryckPdf) return Promise.resolve();
             if (!pdfLibsLoadingPromise) {
                 pdfLibsLoadingPromise = loadScriptOnce('vendor/pdf-lib.min.js')
@@ -1134,6 +1139,11 @@
                     .catch(error => { pdfLibsLoadingPromise = null; throw error; });
             }
             return pdfLibsLoadingPromise;
+        }
+        function pdfErrorNotice(err, fallback) {
+            return err?.message === 'GUEST_PDF_BLOCKED'
+                ? 'Exportar PDF exige login. Crie uma conta pra liberar isso e salvar seu progresso.'
+                : fallback;
         }
 
         // question-explanations.js (829KB) só importa pra quem chega a
@@ -1236,7 +1246,7 @@
             } catch (err) {
                 console.error('Falha ao gerar PDF de questões', err);
                 setPdfDownloadProgress(progress, 0, false);
-                revealQuestionNotice('Não foi possível gerar o PDF. Tente novamente.');
+                revealQuestionNotice(pdfErrorNotice(err, 'Não foi possível gerar o PDF. Tente novamente.'));
             }
         }
 
@@ -1253,7 +1263,7 @@
                 TryckPdf.downloadBytes(bytes, `trycktrack-resultado-${fileTitle}.pdf`);
             } catch (err) {
                 console.error('Falha ao gerar PDF do resultado', err);
-                revealQuestionNotice('Não foi possível gerar o PDF do resultado. Tente novamente.');
+                revealQuestionNotice(pdfErrorNotice(err, 'Não foi possível gerar o PDF do resultado. Tente novamente.'));
             }
         }
 

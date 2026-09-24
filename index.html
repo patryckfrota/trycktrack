@@ -99,6 +99,7 @@
                     <span id="authSwitchText">Não tem conta?</span>
                     <button type="button" class="auth-link" onclick="toggleAuthMode()" id="authSwitchBtn">Criar conta</button>
                 </div>
+                <button type="button" class="auth-link auth-guest-link" onclick="enterGuestMode()">Continuar sem login</button>
             </div>
         </div>
     </div>
@@ -146,6 +147,7 @@
         <div class="content">
             <!-- INÍCIO -->
             <div class="tab-content active" id="inicioTab">
+                <div id="guestBannerSlot"></div>
                 <div id="feedbackBannerSlot"></div>
                 <div id="enamedCountdown"></div>
                 <div id="medUpdatesCarousel"></div>
