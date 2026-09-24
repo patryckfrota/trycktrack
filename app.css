@@ -4812,19 +4812,27 @@
             cursor: pointer;
             padding: 0 0 0 4px;
         }
-        /* Ação secundária de menor hierarquia que "Entrar"/Google — não
-           deve competir visualmente com o login de verdade, por isso
-           cor neutra em vez do roxo de .auth-link e um respiro maior. */
-        .auth-guest-link {
-            display: block;
+        /* Mesmo tamanho/formato de .auth-btn-google (largura total, pílula
+           arredondada) pra ter peso visual de botão de verdade, mas com
+           contorno tracejado em vez de preenchido — sinaliza "é uma
+           entrada alternativa, não a principal" sem virar um link
+           discreto perdido embaixo do formulário. */
+        .auth-btn-guest {
             width: 100%;
-            margin-top: 14px;
-            text-align: center;
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+            padding: 13px;
+            margin-top: 10px;
+            border-radius: 12px;
+            border: 1.5px dashed var(--lavender-active);
+            background: transparent;
+            color: var(--lavender-active);
+            font-size: 14px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.15s var(--ease-spring), background 0.2s var(--ease);
         }
+        .auth-btn-guest:active { transform: scale(0.98); }
+        .auth-btn-guest:hover { background: color-mix(in srgb, var(--lavender-active) 10%, transparent); }
 
         /* SELO "BETA" — cápsula de vidro para funcionalidades ainda incompletas */
         .beta-pill {
