@@ -47,9 +47,35 @@ explicação.
 ## 4. Gravação e checagem
 
 1. Gravar em `questions-*.js` (dados + classificação) e
-   `question-explanations.js` (explicação).
+   `question-explanations.js` (explicação). `questions-*.js` e
+   `question-explanations*.js` são **a fonte** — o PWA lê direto deles;
+   o Postgres só espelha (passo 5).
 2. `node taxonomia/validar.cjs` → precisa terminar com **0 problema(s)**.
 3. `node shared/question-filters.test.js` e
    `cd backend && node scripts/import-questions.js --dry-run`.
 4. Entregar a lista de revisão (ver modelo, Etapa 7) e esperar a
-   revisão do usuário antes de publicar. Subir `CACHE_NAME` em `sw.js`.
+   revisão do usuário antes de publicar.
+5. **Só depois da aprovação**: `cd backend && node scripts/import-questions.js`
+   (sem `--dry-run` — escreve de verdade). Idempotente/upsert, pode
+   rodar de novo sem duplicar. **Este passo não é opcional nem um "se
+   sobrar tempo"** — sem ele o painel de gestão (`admin/`) continua
+   mostrando os dados antigos, porque ele lê do Postgres, não dos
+   arquivos estáticos, e não tem nenhuma forma de perceber sozinho que
+   os arquivos mudaram.
+6. Subir `CACHE_NAME` em `sw.js`.
+
+Resumo do fluxo de dados, pra não esquecer por que o passo 5 existe:
+
+```
+PDF da prova
+   │
+   ▼
+questions-*.js / question-explanations*.js   ← fonte real, o PWA lê direto daqui
+   │
+   │  node scripts/import-questions.js  (passo 5 — manual, precisa ser lembrado)
+   ▼
+Postgres
+   │
+   ▼
+painel de gestão (admin/)                    ← só enxerga o que passou pelo passo 5
+```
