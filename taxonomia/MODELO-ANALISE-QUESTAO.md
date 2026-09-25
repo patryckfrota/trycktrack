@@ -207,6 +207,17 @@ Tamanho: 60–150 palavras.
 - **Última linha, sempre**: `Portanto, o gabarito é a alternativa X.` — e
   X tem de ser igual ao `answer` da questão.
 
+### 4.5.1 OBSERVAÇÃO — GABARITO EM DISCUSSÃO (opcional)
+
+- **Só** quando a Etapa 2 achar conflito real (gabarito oficial não se
+  sustenta ou há outra alternativa defensável). A explicação acima continua
+  defendendo o gabarito oficial.
+- Vai **depois** de `Portanto, o gabarito é…`, separada por uma linha em
+  branco, com o título exato `OBSERVAÇÃO — GABARITO EM DISCUSSÃO` numa linha
+  sozinha — o app renderiza como bloco destacado.
+- 2–3 frases: o motivo (diretriz antiga, passível de recurso, passível de
+  anulação) e qual seria a resposta correta.
+
 ### 4.6 Estilo
 
 - Português do Brasil, técnico e direto. Frases curtas.

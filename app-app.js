@@ -3049,13 +3049,21 @@ Regras obrigatórias:
         // viram cabeçalho destacado.
         // Explicação no formato antigo (sem esses títulos) sai igual antes.
         const EXPLANATION_HEADINGS = ['NÚCLEO DA QUESTÃO', 'ARMADILHA — ONDE SE ERRA', 'ALTERNATIVA POR ALTERNATIVA', 'RESPOSTA ESPERADA', 'FIXAÇÃO 80/20'];
-        function renderExplanation(text) {
-            document.getElementById('questionFeedbackText').innerHTML = String(text).split('\n')
+        // Observação sobre gabarito em discussão: sempre por último, vira um
+        // bloco destacado com tudo o que vem depois do título.
+        const EXPLANATION_NOTE_HEADING = 'OBSERVAÇÃO — GABARITO EM DISCUSSÃO';
+        function renderExplanationLines(text) {
+            return String(text).split('\n')
                 .map(line => EXPLANATION_HEADINGS.includes(line.trim())
                     ? `<span class="explanation-heading">${escapeHtml(line.trim())}</span>`
                     : escapeHtml(line))
                 .join('\n')
                 .replace(/<\/span>\n/g, '</span>');
+        }
+        function renderExplanation(text) {
+            const [main, note] = String(text).split(new RegExp(`\\n[ \\t]*${EXPLANATION_NOTE_HEADING}[ \\t]*\\n`));
+            document.getElementById('questionFeedbackText').innerHTML = renderExplanationLines(main)
+                + (note === undefined ? '' : `<span class="explanation-note"><span class="explanation-note-title">${EXPLANATION_NOTE_HEADING}</span>${escapeHtml(note.trim())}</span>`);
         }
 
         function recordQuestionResult(question, correct, chosen, elapsedMs) {
