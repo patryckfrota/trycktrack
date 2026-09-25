@@ -3045,9 +3045,10 @@ Regras obrigatórias:
         // não duplicados à mão.
         const RODIZIO_DASHBOARD_SLUG = Object.fromEntries(OSCE_CURRICULUM_MATRIX.map(area => [area.name, area.slug]));
 
-        // Roteiro de explicação: as 4 seções viram cabeçalho destacado.
+        // Seções do modelo de explicação (taxonomia/MODELO-ANALISE-QUESTAO.md)
+        // viram cabeçalho destacado.
         // Explicação no formato antigo (sem esses títulos) sai igual antes.
-        const EXPLANATION_HEADINGS = ['NÚCLEO DA QUESTÃO', 'ARMADILHA — ONDE SE ERRA', 'ALTERNATIVA POR ALTERNATIVA', 'FIXAÇÃO 80/20'];
+        const EXPLANATION_HEADINGS = ['NÚCLEO DA QUESTÃO', 'ARMADILHA — ONDE SE ERRA', 'ALTERNATIVA POR ALTERNATIVA', 'RESPOSTA ESPERADA', 'FIXAÇÃO 80/20'];
         function renderExplanation(text) {
             document.getElementById('questionFeedbackText').innerHTML = String(text).split('\n')
                 .map(line => EXPLANATION_HEADINGS.includes(line.trim())
