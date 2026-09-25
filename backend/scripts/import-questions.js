@@ -43,7 +43,8 @@ const PRINCIPAL_FILES = [
     'questions-obstetricia.js',
     'questions-preventiva.js',
     'questions-psiquiatria.js',
-    'questions-revalida.js'
+    'questions-revalida.js',
+    'questions-uepa.js'
 ];
 
 function loadStaticFile(relPath) {

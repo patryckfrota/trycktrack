@@ -9,6 +9,12 @@ Enunciado, alternativas e gabarito de cada questão do PDF. Conferir se a
 contagem bate com a prova e se nenhum trecho ficou cortado. Questões com
 imagem: extrair a imagem e salvar junto das demais.
 
+Armadilha conhecida (UEPA 2026): quando a prova marca alternativas só com
+a letra ("a texto", sem parêntese), uma linha com o artigo "a" ou a
+conjunção "e" sozinha é confundida com a alternativa A ou E. Depois de
+separar, conferir: enunciado terminando em ": a …" e alternativa
+contendo ". e …" no meio indicam alternativa partida.
+
 ## 2. Classificação — obrigatória, antes de gravar
 
 Toda questão entra com os 4 níveis da taxonomia do Estratégia MED
