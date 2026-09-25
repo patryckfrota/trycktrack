@@ -1558,6 +1558,8 @@
         .question-feedback[hidden] { display: none; }
         .question-feedback strong { display: block; color: var(--text-main); font-size: 13px; margin-bottom: 6px; }
         .question-feedback p { margin: 0; color: var(--color-body); font-family: var(--font-family-reading); font-size: calc(var(--question-font-size) * 1.0625 - 1px); line-height: 1.65; white-space: pre-line; }
+        .question-feedback .explanation-heading { display: block; margin: 14px 0 2px; color: var(--lavender-active); font-family: var(--font-family-base); font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+        .question-feedback .explanation-heading:first-child { margin-top: 0; }
         /* Avaliação de dificuldade pra revisão espaçada (R-1) — só
            aparece depois de ACERTAR no Guiado (errar já é o próprio
            sinal, ver rateReviewDifficulty em app-app.js). */

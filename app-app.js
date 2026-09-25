@@ -2541,7 +2541,7 @@ Regras obrigatórias:
                     button.disabled = true;
                 });
                 document.getElementById('questionFeedbackTitle').textContent = 'Resposta esperada';
-                document.getElementById('questionFeedbackText').textContent = question.explanation || 'O espelho de resposta desta questão ainda não foi cadastrado.';
+                renderExplanation(question.explanation || 'O espelho de resposta desta questão ainda não foi cadastrado.');
                 document.getElementById('questionFeedback').hidden = false;
                 document.getElementById('questionNext').disabled = false;
                 return;
@@ -2555,7 +2555,7 @@ Regras obrigatórias:
                 });
                 const correct = window.isQuestionAnswerCorrect(question, letter);
                 document.getElementById('questionFeedbackTitle').textContent = question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`);
-                document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
+                renderExplanation(question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`);
                 document.getElementById('questionFeedback').hidden = false;
                 recordQuestionResult(question, correct, letter);
                 // R-1: errar já é o próprio sinal (Errei, sem precisar
@@ -2984,7 +2984,7 @@ Regras obrigatórias:
             document.getElementById('questionFeedbackTitle').textContent = question.questionType === 'discursive'
                 ? 'Resposta esperada'
                 : (question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`));
-            document.getElementById('questionFeedbackText').textContent = question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`;
+            renderExplanation(question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`);
             document.getElementById('questionFeedback').hidden = false;
             document.getElementById('questionPlayerBody').scrollTop = 0;
         }
@@ -3044,6 +3044,18 @@ Regras obrigatórias:
         // Curso do Dashboard — mesmos nomes/slugs de OSCE_CURRICULUM_MATRIX,
         // não duplicados à mão.
         const RODIZIO_DASHBOARD_SLUG = Object.fromEntries(OSCE_CURRICULUM_MATRIX.map(area => [area.name, area.slug]));
+
+        // Roteiro de explicação: as 4 seções viram cabeçalho destacado.
+        // Explicação no formato antigo (sem esses títulos) sai igual antes.
+        const EXPLANATION_HEADINGS = ['NÚCLEO DA QUESTÃO', 'ARMADILHA — ONDE SE ERRA', 'ALTERNATIVA POR ALTERNATIVA', 'FIXAÇÃO 80/20'];
+        function renderExplanation(text) {
+            document.getElementById('questionFeedbackText').innerHTML = String(text).split('\n')
+                .map(line => EXPLANATION_HEADINGS.includes(line.trim())
+                    ? `<span class="explanation-heading">${escapeHtml(line.trim())}</span>`
+                    : escapeHtml(line))
+                .join('\n')
+                .replace(/<\/span>\n/g, '</span>');
+        }
 
         function recordQuestionResult(question, correct, chosen, elapsedMs) {
             // Discursiva não tem gabarito de letra — não é certo nem
