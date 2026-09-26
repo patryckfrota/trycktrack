@@ -1077,6 +1077,10 @@
         window.paceStatus = paceStatus;
         window.isFinalStretch = isFinalStretch;
         window.isLowWeightForFinalStretch = isLowWeightForFinalStretch;
+        // Simulado no formato real da UEPA (100 questões, 20 por grande
+        // área, classificadas pela posição na prova — ver exam-areas.js).
+        import { buildWeightedExam } from "./shared/trail-exam.js";
+        window.buildWeightedExam = buildWeightedExam;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
         // já cobertas por node --test em shared/scoring.test.js — ver
         // comentário no próprio arquivo.

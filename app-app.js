@@ -229,6 +229,7 @@
                 // banco principal pertencem a esta trilha.
                 subjectBased: true,
                 bankPrefix: 'uepa-',
+                examPerArea: 20, // formato real: 100 questões, 20 por grande área (ver shared/exam-areas.js)
                 phases: [
                     { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Clínica aplicada e emergências', incidence: 91 },
                     { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Atenção à criança e neonatologia', incidence: 90 },
@@ -489,6 +490,7 @@
         }
 
         function renderSubjectTrail(hub, state, trailId, track) {
+            const catalog = TRAIL_CATALOG[trailId];
             const goal = getTrailGoal(track);
             const subjects = buildTrailSubjects(trailId);
             const queue = getReviewQueue();
@@ -558,6 +560,7 @@
                 <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${divida ? `${divida} questão${divida > 1 ? 'ões' : ''} pronta${divida > 1 ? 's' : ''} pra revisar.` : 'Tudo em dia — comece um assunto novo abaixo.'}</span></div>
 
                 ${divida > 0 ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${divida} questão${divida > 1 ? 'ões' : ''}</button>` : ''}
+                ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
 
                 <div class="trail-daily-goal">
                     <div class="trail-daily-goal-label">Meta diária <strong>${Math.min(answeredToday, dailyGoal)}/${dailyGoal}</strong> questões</div>
@@ -622,6 +625,26 @@
             if (!questions.length) { revealQuestionNotice('Nenhuma questão pronta pra revisão agora.'); return; }
             await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailToday: trailId, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        // Simulado no formato real da banca (fase 4) — 100 questões, 20
+        // por grande área, ponderado por assunto dentro de cada bloco
+        // (buildWeightedExam, shared/trail-exam.js). Só existe pra
+        // trilhas com `examPerArea` — sem prova real classificável por
+        // posição (número da questão), não dá pra montar isto.
+        async function startTrailExam(trailId) {
+            const catalog = TRAIL_CATALOG[trailId];
+            if (!catalog.examPerArea) return;
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const questions = bank.filter(q => q.id.startsWith(catalog.bankPrefix));
+            const exam = window.buildWeightedExam(questions, catalog.examPerArea);
+            const expectedTotal = catalog.examPerArea * 5;
+            if (exam.length < expectedTotal) { revealQuestionNotice('Ainda não há questões suficientes pra montar o simulado completo.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'exam', questions: exam, index: 0, answers: [], trailExam: trailId, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();

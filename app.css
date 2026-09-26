@@ -5026,6 +5026,8 @@
         /* Sessão de hoje + meta diária */
         .trail-today-btn { display: block; width: 100%; padding: 13px; border: 0; border-radius: 14px; background: var(--lavender-active); color: #1c1330; font-size: 13.5px; font-weight: 750; cursor: pointer; transition: transform .2s var(--ease-spring); }
         .trail-today-btn:active { transform: scale(.98); }
+        .trail-exam-btn { display: block; width: 100%; padding: 13px; border: 1.5px solid var(--lavender-active); border-radius: 14px; background: transparent; color: var(--lavender-active); font-size: 13.5px; font-weight: 750; cursor: pointer; transition: transform .2s var(--ease-spring); }
+        .trail-exam-btn:active { transform: scale(.98); }
         .trail-daily-goal { padding: 2px 2px 0; }
         .trail-daily-goal-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
         .trail-daily-goal-label strong { color: var(--text-main); }
@@ -5097,6 +5099,11 @@
 
             #reviewTab.active, .review-group-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
             .rr-card { min-height: 145px; padding: 20px; }
+            /* Só 2 hub cards (ENAMED/UEPA) — sempre 2 colunas, nunca vira 3
+               (o que sobraria uma coluna vazia e torta em telas largas). */
+            #reviewTab.active { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .rr-hub-card { min-height: 130px; padding: 26px; }
+            .rr-hub-logo { height: 46px; max-width: 70%; }
 
             .question-hub { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
             .question-hub > .question-hero, .question-hub > .question-section-title, .question-hub > .question-modes, .question-hub > .question-area-scroll, .question-hub > .question-subarea-panel, .question-hub > .question-coming, .question-hub > .question-config-view { grid-column: 1 / -1; }
@@ -5137,8 +5144,10 @@
         }
 
         @media (min-width: 1180px) {
-            #reviewTab.active, .review-group-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .review-group-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .rr-card { min-height: 158px; }
+            .rr-hub-card { min-height: 170px; padding: 32px; }
+            .rr-hub-logo { height: 56px; }
             .dashboard-hero { min-height: 180px; padding: 28px; }
             .dashboard-score-ring { width: 108px; height: 108px; }
         }
@@ -5178,7 +5187,7 @@
             .question-mode, .question-mode.question-mode-osce { min-height: 184px; }
             .question-hub { grid-template-columns: repeat(4, minmax(0, 1fr)); }
             .question-hub > .question-hero, .question-hub > .question-section-title, .question-hub > .question-modes, .question-hub > .question-area-scroll, .question-hub > .question-subarea-panel, .question-hub > .question-coming, .question-hub > .question-config-view { grid-column: 1 / -1; }
-            #reviewTab.active, .review-group-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .review-group-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .dashboard { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .dashboard-toolbar, .dashboard-hero, .dashboard-kpis { grid-column: 1 / -1; }
             .dashboard-card { grid-column: span 2; }
