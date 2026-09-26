@@ -271,6 +271,17 @@
             renderTrails();
         }
 
+        // Data da prova (fase 3) — guardada por trilha, igual à meta de
+        // acerto. Sem data nenhuma, o ritmo simplesmente não aparece (ver
+        // paceStatus 'sem-data') em vez de esconder a trilha inteira.
+        function setTrailExamDate(trailId, dateIso) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.examDate = dateIso || null;
+            saveTrailState(state);
+            renderTrails();
+        }
+
         // calculatePathPriority não é mais definida aqui — vem de
         // shared/trail-priority.js via window.calculatePathPriority,
         // exposta pelo <script type="module"> do Firebase (que sempre
@@ -442,6 +453,41 @@
             return `<svg class="trail-sparkline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polyline points="${points}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         }
 
+        const PACE_LABEL = {
+            'adiantado': { text: 'Adiantado', tone: 'ok' },
+            'no-ritmo': { text: 'No ritmo', tone: 'ok' },
+            'atrasado': { text: 'Atrasado', tone: 'late' },
+            'concluido': { text: 'Todos os assuntos já abertos', tone: 'ok' },
+            'sem-historico': { text: 'Calculando seu ritmo…', tone: 'neutral' },
+        };
+
+        function trailPaceHtml(trailId, examDate, daysLeft, pace, finalStretch) {
+            const dateInput = `<input type="date" class="trail-pace-date" value="${examDate || ''}" onchange="setTrailExamDate('${trailId}', this.value)">`;
+            if (pace.status === 'sem-data') {
+                return `<div class="trail-pace trail-pace-empty">
+                    <span>Quando é a sua prova?</span>
+                    ${dateInput}
+                </div>`;
+            }
+            const info = PACE_LABEL[pace.status] || { text: pace.status, tone: 'neutral' };
+            const daysText = daysLeft > 0 ? `${daysLeft} dia${daysLeft > 1 ? 's' : ''} até a prova` : 'A prova é hoje!';
+            const paceDetail = (pace.status === 'adiantado' || pace.status === 'no-ritmo' || pace.status === 'atrasado')
+                ? `<p>Ritmo real: ${(pace.actual * 100).toFixed(1)}%/dia de cobertura · necessário: ${(pace.required * 100).toFixed(1)}%/dia</p>`
+                : pace.status === 'sem-historico'
+                    ? `<p>Precisa de necessário ~${(pace.required * 100).toFixed(1)}%/dia de cobertura — ainda sem histórico suficiente pra medir o seu ritmo real.</p>`
+                    : '';
+            return `<div class="trail-pace trail-pace-${info.tone}">
+                <div class="trail-pace-header">
+                    <div>
+                        <strong>${daysText}</strong>
+                        <span class="trail-pace-status">${info.text}${finalStretch ? ' · Reta final' : ''}</span>
+                    </div>
+                    ${dateInput}
+                </div>
+                ${paceDetail}
+            </div>`;
+        }
+
         function renderSubjectTrail(hub, state, trailId, track) {
             const goal = getTrailGoal(track);
             const subjects = buildTrailSubjects(trailId);
@@ -451,9 +497,21 @@
             const hoje = subjects
                 .filter(s => s.status.status === 'atrasado' || s.status.status === 'faça agora')
                 .sort((a, b) => (b.status.overdue - a.status.overdue) || (b.weight - a.weight));
-            const novos = window.prioritizeNewSubjects(subjects, goal).slice(0, 8);
             const coverage = window.weightedCoverage(subjects);
             const divida = subjects.reduce((total, s) => total + s.status.overdue + s.status.dueToday, 0);
+
+            const daysLeft = window.daysUntilExam(track.examDate, today);
+            const finalStretch = window.isFinalStretch(daysLeft);
+            const required = window.requiredPacePerDay(window.remainingWeight(subjects), daysLeft);
+            const actual = window.actualPacePerDay(track.history);
+            const pace = window.paceStatus(required, actual);
+            // Reta final (fase 3): pra de puxar assunto novo de peso
+            // baixo — só continua sugerindo os de peso acima da média
+            // (ver isLowWeightForFinalStretch) e prioriza revisão do que
+            // já foi visto sobre abrir conteúdo novo de pouco peso.
+            let novos = window.prioritizeNewSubjects(subjects, goal);
+            if (finalStretch) novos = novos.filter(s => !window.isLowWeightForFinalStretch(s, subjects));
+            novos = novos.slice(0, 8);
 
             const projected = window.projectedScore(subjects);
             const weak = window.weakSpots(subjects, 5);
@@ -495,6 +553,8 @@
                 </div>
                 <div class="trail-area-bars">${areaBars}</div>
 
+                ${trailPaceHtml(trailId, track.examDate, daysLeft, pace, finalStretch)}
+
                 <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${divida ? `${divida} questão${divida > 1 ? 'ões' : ''} pronta${divida > 1 ? 's' : ''} pra revisar.` : 'Tudo em dia — comece um assunto novo abaixo.'}</span></div>
 
                 ${divida > 0 ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${divida} questão${divida > 1 ? 'ões' : ''}</button>` : ''}
@@ -519,7 +579,7 @@
                 <div class="trail-load-chart">${loadBars}</div>
 
                 ${hoje.length ? `<h3 class="trail-section-title">Hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today)).join('')}</div>` : ''}
-                <h3 class="trail-section-title">Próximos assuntos</h3>
+                <h3 class="trail-section-title">Próximos assuntos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
                 <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today)).join('') : '<p class="trail-empty-note">Sem questões classificadas por assunto nesta banca ainda.</p>'}</div>`;
         }
 

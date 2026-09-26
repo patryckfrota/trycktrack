@@ -1068,6 +1068,15 @@
         window.weakSpots = weakSpots;
         window.reviewLoadByDay = reviewLoadByDay;
         window.subjectRetention = subjectRetention;
+        // Ritmo até a prova + modo reta final (fase 3).
+        import { daysUntilExam, remainingWeight, requiredPacePerDay, actualPacePerDay, paceStatus, isFinalStretch, isLowWeightForFinalStretch } from "./shared/trail-pace.js";
+        window.daysUntilExam = daysUntilExam;
+        window.remainingWeight = remainingWeight;
+        window.requiredPacePerDay = requiredPacePerDay;
+        window.actualPacePerDay = actualPacePerDay;
+        window.paceStatus = paceStatus;
+        window.isFinalStretch = isFinalStretch;
+        window.isLowWeightForFinalStretch = isLowWeightForFinalStretch;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
         // já cobertas por node --test em shared/scoring.test.js — ver
         // comentário no próprio arquivo.
