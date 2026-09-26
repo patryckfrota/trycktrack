@@ -734,7 +734,20 @@
         function setTrailDashArea(area) { trailDashArea = area; renderTrailDashboard(); }
 
         // Qualquer mudança de configuração redesenha a aba e, se aberto, o painel.
+        // Redesenhar troca o innerHTML inteiro — se um campo de data da
+        // trilha estiver com o seletor aberto, ele é destruído e o seletor
+        // fecha. No iPhone a roleta de data dispara `change` a cada giro,
+        // então salvar a data já derrubava o próprio seletor. Enquanto o
+        // campo tem foco, o redesenho espera ele perder o foco.
         function refreshTrailViews() {
+            const active = document.activeElement;
+            if (active && active.type === 'date' && active.closest?.('#trailHub, #trailDashboard')) {
+                if (!active.dataset.refreshPending) {
+                    active.dataset.refreshPending = '1';
+                    active.addEventListener('blur', () => refreshTrailViews(), { once: true });
+                }
+                return;
+            }
             renderTrails();
             if (isTrailDashboardOpen()) renderTrailDashboard();
         }
@@ -898,7 +911,7 @@
                     </div>`;
                 }).join('');
                 return `<details class="trail-week"${wi < 2 ? ' open' : ''}>
-                    <summary><span>${trailDateShort(week[0].date)} – ${trailDateShort(week[week.length - 1].date)}</span><span class="trail-week-meta">${trailQuestionsText(total)}${opened ? ` · ${opened} ${opened === 1 ? 'assunto novo' : 'assuntos novos'}` : ''}</span></summary>
+                    <summary><span>${trailDateShort(week[0].date)} – ${trailDateShort(week[week.length - 1].date)}</span><span class="trail-week-meta">${trailQuestionsText(total)}${opened ? ` · ${opened} ${opened === 1 ? 'assunto novo' : 'assuntos novos'}` : ''}${week.some(d => d.finalStretch) ? ' · reta final' : ''}</span></summary>
                     ${rows}
                 </details>`;
             }).join('');
