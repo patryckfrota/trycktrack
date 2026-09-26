@@ -1019,6 +1019,17 @@
         // que a inicialização do Firebase falhe.
         import { calculatePathPriority } from "./shared/trail-priority.js";
         window.calculatePathPriority = calculatePathPriority;
+        // Trilhas por assunto, ponderadas pela incidência real de cada
+        // banca no acervo (R-6) — ver shared/subject-weights.js e
+        // shared/trail-subjects.js pra como isso se junta à fila de
+        // revisão por questão acima em vez de reinventar agendamento.
+        import { computeSubjectWeights } from "./shared/subject-weights.js";
+        import { buildSubjectCatalog, subjectStatus, prioritizeNewSubjects, weightedCoverage } from "./shared/trail-subjects.js";
+        window.computeSubjectWeights = computeSubjectWeights;
+        window.buildSubjectCatalog = buildSubjectCatalog;
+        window.subjectStatus = subjectStatus;
+        window.prioritizeNewSubjects = prioritizeNewSubjects;
+        window.weightedCoverage = weightedCoverage;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
         // já cobertas por node --test em shared/scoring.test.js — ver
         // comentário no próprio arquivo.

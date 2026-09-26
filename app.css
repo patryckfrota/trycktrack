@@ -4955,6 +4955,26 @@
         }
         .trail-status { display: flex; align-items: center; gap: 8px; padding: 11px 13px; border-radius: 14px; background: var(--lavender-dark); color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
         .trail-status svg { flex: 0 0 auto; width: 17px; height: 17px; color: var(--lavender-active); }
+        /* Trilhas por assunto (R-6) — meta de acerto, cobertura ponderada
+           e os títulos de seção ("Hoje" / "Próximos assuntos") que
+           dividem trail-path em blocos quando a trilha é subjectBased. */
+        .trail-goal { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 13px; border-radius: 14px; background: var(--bg-secondary); border: 1px solid var(--border-color); }
+        .trail-goal label { font-size: 11px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+        .trail-goal label strong { color: var(--text-main); font-size: 12px; }
+        .trail-goal input[type="range"] { flex: 1; max-width: 140px; accent-color: var(--lavender-active); }
+        .trail-coverage { padding: 2px 2px 0; }
+        .trail-coverage-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+        .trail-coverage-label strong { color: var(--text-main); }
+        .trail-coverage-bar { height: 5px; border-radius: 6px; overflow: hidden; background: var(--bg-tertiary); }
+        .trail-coverage-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--lavender-active); transition: width .4s var(--ease); }
+        .trail-section-title { margin: 4px 2px 0; font-size: 11px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); }
+        .trail-empty-note { margin: 0 2px; font-size: 12px; color: var(--text-secondary); }
+        /* Cor do marcador/ícone por status do assunto — atrasado chama
+           mais atenção que faça-agora (mesma paleta lavanda), que por
+           sua vez chama mais que um assunto novo/em dia (neutro). */
+        .trail-phase-late .trail-phase-marker { background: var(--danger); }
+        .trail-phase-late .trail-phase-action { background: var(--danger-soft); color: var(--danger); }
+        .trail-phase-late .trail-phase-kicker { color: var(--danger); }
         .trail-path { position: relative; display: flex; flex-direction: column; gap: 13px; padding-left: 20px; }
         .trail-path::before { content: ""; position: absolute; left: 6px; top: 24px; bottom: 24px; width: 1px; background: linear-gradient(var(--lavender-active), var(--border-color) 75%); opacity: .55; }
         .trail-phase { position: relative; min-height: 122px; border: 1px solid var(--border-color); border-radius: 20px; background: var(--bg-secondary); overflow: hidden; cursor: pointer; transition: transform .25s var(--ease-spring), border-color .25s ease; }

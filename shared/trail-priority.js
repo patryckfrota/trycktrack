@@ -17,15 +17,21 @@
 // de reimplementar as mesmas faixas com o risco de uma das duas cópias
 // divergir da outra, do jeito que já aconteceu antes nesta base de
 // código (ver comentário no topo do arquivo).
-export function urgencyMultiplierForAccuracy(accuracy) {
+// `goal`: meta de acerto ajustável pelo aluno (fração 0-1, padrão
+// 0.80 — mesma meta-padrão da FluidMed, ver shared/subject-weights.js
+// e a discussão do redesign de Trilhas). As faixas abaixo da meta
+// escalam junto (goal-0.20, goal-0.40) em vez de ficarem fixas em
+// 60%/40% — quem pede uma meta mais alta é puxado de volta ao tema
+// mais cedo, não só quem cai abaixo de 80% fixo.
+export function urgencyMultiplierForAccuracy(accuracy, goal = 0.80) {
     return accuracy === null || accuracy === undefined ? 1.10
-        : accuracy > 0.80 ? 0.62
-        : accuracy >= 0.60 ? 1.12
-        : accuracy >= 0.40 ? 1.48
+        : accuracy > goal ? 0.62
+        : accuracy >= goal - 0.20 ? 1.12
+        : accuracy >= goal - 0.40 ? 1.48
         : 1.84;
 }
 
-export function calculatePathPriority({ topics, results = [], completedThemeIds = [] }) {
+export function calculatePathPriority({ topics, results = [], completedThemeIds = [], goal = 0.80 }) {
     const aggregate = results.reduce((acc, result) => {
         const key = result.themeId || result.area;
         // correct === null: discursiva ou anulada, sem pontuação.
@@ -41,7 +47,7 @@ export function calculatePathPriority({ topics, results = [], completedThemeIds 
         .map((topic) => {
             const performance = aggregate[topic.id] || aggregate[topic.area];
             const accuracy = performance ? performance.correct / performance.total : null;
-            const urgency = urgencyMultiplierForAccuracy(accuracy);
+            const urgency = urgencyMultiplierForAccuracy(accuracy, goal);
             const incidence = topic.incidence ?? topic.incidenceEnamed ?? 0;
             return {
                 ...topic,

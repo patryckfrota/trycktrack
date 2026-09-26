@@ -220,6 +220,15 @@
                 name: 'Trilha UEPA',
                 logo: 'assets/logo-uepa-sigla.png',
                 description: 'Organiza o estudo com a matriz de prioridade UEPA.',
+                // R-6: só a UEPA tem prova o suficiente no acervo (500
+                // questões, 2022-2026) pra um peso por ASSUNTO confiável —
+                // ver shared/subject-weights.js. `subjectBased` troca o
+                // caminho de fases fixas (usado por ENAMED, sem essa
+                // profundidade de dado ainda) pela visão por assunto em
+                // renderSubjectTrail. `bankPrefix` filtra quais questões do
+                // banco principal pertencem a esta trilha.
+                subjectBased: true,
+                bankPrefix: 'uepa-',
                 phases: [
                     { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Clínica aplicada e emergências', incidence: 91 },
                     { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Atenção à criança e neonatologia', incidence: 90 },
@@ -241,8 +250,25 @@
 
         function getTrailTrack(state, trailId) {
             state.tracks = state.tracks || {};
-            if (!state.tracks[trailId]) state.tracks[trailId] = { diagnosis: null, phaseProgress: {}, recalibrations: [] };
+            if (!state.tracks[trailId]) state.tracks[trailId] = { diagnosis: null, phaseProgress: {}, recalibrations: [], goal: 0.80 };
             return state.tracks[trailId];
+        }
+
+        // Meta de acerto ajustável (R-6) — some pro parâmetro `goal` de
+        // urgencyMultiplierForAccuracy/calculatePathPriority (shared/
+        // trail-priority.js), padrão 80% igual à FluidMed. Guardada por
+        // trilha (ENAMED e UEPA podem ter metas diferentes).
+        function getTrailGoal(track) {
+            const goal = Number(track.goal);
+            return Number.isFinite(goal) && goal > 0 && goal < 1 ? goal : 0.80;
+        }
+
+        function setTrailGoal(trailId, goal) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.goal = Math.min(0.95, Math.max(0.5, Number(goal) || 0.80));
+            saveTrailState(state);
+            renderTrails();
         }
 
         // calculatePathPriority não é mais definida aqui — vem de
@@ -277,6 +303,7 @@
             const track = getTrailTrack(state, trailId);
             saveTrailState(state);
             const catalog = TRAIL_CATALOG[trailId];
+            if (catalog.subjectBased) { renderSubjectTrail(hub, state, trailId, track); return; }
             const plan = getTrailPlan(trailId, track);
             const completed = Object.values(track.phaseProgress || {}).filter(value => value >= 100).length;
             const diagnosticDone = !!track.diagnosis;
@@ -335,6 +362,98 @@
             getTrailTrack(state, trailId);
             saveTrailState(state);
             renderTrails();
+        }
+
+        // ---------- Trilhas por assunto (R-6) ----------
+        // Junta o peso real de cada assunto na banca (shared/subject-
+        // weights.js) com a fila de revisão por questão que já existe
+        // (getReviewQueue/shared/spaced-repetition.js) — não inventa um
+        // segundo agendamento: só agrega o que a fila por questão já
+        // sabe, no nível de assunto (ver shared/trail-subjects.js).
+        function buildTrailSubjects(trailId) {
+            const catalog = TRAIL_CATALOG[trailId];
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const questions = bank.filter(q => q.id.startsWith(catalog.bankPrefix));
+            const weights = window.computeSubjectWeights(questions);
+            const catalogSubjects = window.buildSubjectCatalog(questions, weights);
+            const queue = getReviewQueue();
+            const today = new Date().toISOString().slice(0, 10);
+            return catalogSubjects.map(subject => ({ ...subject, status: window.subjectStatus(subject, queue, today) }));
+        }
+
+        const SUBJECT_STATUS_LABEL = { atrasado: 'Atrasado', 'faça agora': 'Faça agora', novo: 'Novo', 'em dia': 'Em dia' };
+
+        const SUBJECT_STATUS_SLUG = { atrasado: 'late', 'faça agora': 'now', novo: 'new', 'em dia': 'ok' };
+
+        function trailSubjectCardHtml(subject) {
+            const pct = Math.round(subject.weight * 1000) / 10;
+            const label = SUBJECT_STATUS_LABEL[subject.status.status] || subject.status.status;
+            const slug = SUBJECT_STATUS_SLUG[subject.status.status] || 'ok';
+            const progressText = subject.status.studied ? ` · ${subject.status.studied}/${subject.status.total} já estudadas` : '';
+            const key = subject.key.replace(/'/g, "\\'");
+            return `<article class="trail-phase trail-phase-${slug}" onclick="startTrailSubject('${key}')">
+                <span class="trail-phase-marker"></span>
+                <div class="trail-phase-content">
+                    <div class="trail-phase-kicker">${subject.area} · ${pct}% da prova</div>
+                    <h3>${subject.assunto}</h3>
+                    <p>${label}${progressText}</p>
+                </div>
+                <span class="trail-phase-action" aria-label="${label}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+            </article>`;
+        }
+
+        function renderSubjectTrail(hub, state, trailId, track) {
+            const goal = getTrailGoal(track);
+            const subjects = buildTrailSubjects(trailId);
+            const hoje = subjects
+                .filter(s => s.status.status === 'atrasado' || s.status.status === 'faça agora')
+                .sort((a, b) => (b.status.overdue - a.status.overdue) || (b.weight - a.weight));
+            const novos = window.prioritizeNewSubjects(subjects, goal).slice(0, 8);
+            const coverage = window.weightedCoverage(subjects);
+            const divida = subjects.reduce((total, s) => total + s.status.overdue + s.status.dueToday, 0);
+
+            hub.innerHTML = `
+                <div class="trail-hub-header">
+                    <span class="beta-pill">Beta</span>
+                </div>
+                <div class="trail-switch">
+                    ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}" aria-pressed="${id === trailId}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}">${id === trailId ? '<span class="trail-switch-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>' : ''}</button>`).join('')}
+                </div>
+                <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${divida ? `${divida} questão${divida > 1 ? 'ões' : ''} pronta${divida > 1 ? 's' : ''} pra revisar.` : 'Tudo em dia — comece um assunto novo abaixo.'}</span></div>
+                <div class="trail-goal">
+                    <label for="trailGoalRange">Meta de acerto <strong>${Math.round(goal * 100)}%</strong></label>
+                    <input id="trailGoalRange" type="range" min="50" max="95" step="5" value="${Math.round(goal * 100)}" oninput="this.previousElementSibling.querySelector('strong').textContent = this.value + '%'" onchange="setTrailGoal('${trailId}', this.value / 100)">
+                </div>
+                <div class="trail-coverage">
+                    <div class="trail-coverage-label">Cobertura ponderada da prova <strong>${Math.round(coverage * 100)}%</strong></div>
+                    <div class="trail-coverage-bar"><span style="width:${Math.round(coverage * 100)}%"></span></div>
+                </div>
+                ${hoje.length ? `<h3 class="trail-section-title">Hoje</h3><div class="trail-path">${hoje.map(trailSubjectCardHtml).join('')}</div>` : ''}
+                <h3 class="trail-section-title">Próximos assuntos</h3>
+                <div class="trail-path">${novos.length ? novos.map(trailSubjectCardHtml).join('') : '<p class="trail-empty-note">Sem questões classificadas por assunto nesta banca ainda.</p>'}</div>`;
+        }
+
+        // Inicia uma sessão pra um assunto: se tiver questão vencida
+        // (atrasada ou pra hoje), revisa essas; se o assunto ainda não
+        // foi estudado, sorteia até 10 questões novas dele.
+        async function startTrailSubject(subjectKey) {
+            const state = getTrailState();
+            const trailId = state.active;
+            const subjects = buildTrailSubjects(trailId);
+            const subject = subjects.find(s => s.key === subjectKey);
+            if (!subject) return;
+            const index = getQuestionIndex();
+            const queue = getReviewQueue();
+            const today = new Date().toISOString().slice(0, 10);
+            const dueIds = subject.questionIds.filter(id => queue[id] && queue[id].dueDate <= today);
+            const ids = dueIds.length ? dueIds : randomSample(subject.questionIds.filter(id => !queue[id]), Math.min(10, subject.questionIds.length));
+            const questions = ids.map(id => index.get(id)).filter(Boolean);
+            if (!questions.length) { revealQuestionNotice('Sem questões disponíveis pra este assunto agora.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailSubject: { trailId, subjectKey }, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
         }
 
         function randomSample(items, count) {
