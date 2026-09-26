@@ -1123,9 +1123,10 @@
         // função usada pelo backend (backend/src/syncRepository.js),
         // pra cliente e servidor nunca decidirem "quem venceu" de jeitos
         // diferentes.
-        import { mergeReviewQueues, reviewEntriesNewerThan } from "./shared/sync-merge.js";
+        import { mergeReviewQueues, reviewEntriesNewerThan, mergeTrailSettings } from "./shared/sync-merge.js";
         window.mergeReviewQueues = mergeReviewQueues;
         window.reviewEntriesNewerThan = reviewEntriesNewerThan;
+        window.mergeTrailSettings = mergeTrailSettings;
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",

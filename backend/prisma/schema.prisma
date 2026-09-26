@@ -39,6 +39,7 @@ model User {
   osceSessions  OsceSession[]
   questionAnswers QuestionResponse[]
   questionReviews UserQuestionReview[]
+  trailSettings UserTrailSettings[]
 }
 
 // ---------- QuestHub (banco de questões) ----------
@@ -163,6 +164,28 @@ model UserQuestionReview {
 
   @@id([userId, questionId])
   @@index([userId, dueDate])
+}
+
+// Preferências da Trilha por assunto (R-6/R-7) que não dá pra recalcular
+// a partir da fila de revisão por questão — meta de acerto, data da
+// prova e o histórico diário do sparkline (o resto da trilha, nota
+// projetada/cobertura/pontos fracos, é derivado na hora de
+// UserQuestionReview + o banco de questões, não precisa de tabela
+// própria). Merge "o updatedAt mais recente vence" no blob inteiro
+// (shared/sync-merge.js, mergeTrailSettings) — diferente do merge por
+// questão de UserQuestionReview, aqui os três campos mudam juntos com
+// pouca frequência, então o risco de perder algo do lado "perdedor" é
+// baixo e simplifica bastante em troca.
+model UserTrailSettings {
+  userId    String
+  trailId   String
+  goal      Float?
+  examDate  DateTime?
+  history   Json?
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, trailId])
 }
 
 model Theme {

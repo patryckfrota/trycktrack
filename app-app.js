@@ -276,8 +276,10 @@
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             track.goal = Math.min(0.95, Math.max(0.5, Number(goal) || 0.80));
+            track.updatedAt = new Date().toISOString();
             saveTrailState(state);
             renderTrails();
+            pushTrailSettingsToCloud(trailId); // best-effort, não trava a UI
         }
 
         // Data da prova (fase 3) — guardada por trilha, igual à meta de
@@ -287,8 +289,10 @@
             const state = getTrailState();
             const track = getTrailTrack(state, trailId);
             track.examDate = dateIso || null;
+            track.updatedAt = new Date().toISOString();
             saveTrailState(state);
             renderTrails();
+            pushTrailSettingsToCloud(trailId); // best-effort, não trava a UI
         }
 
         // calculatePathPriority não é mais definida aqui — vem de
@@ -406,12 +410,17 @@
         // um snapshot por render) e mantém só as últimas 8 semanas — é
         // tendência recente, não um log pra sempre.
         const TRAIL_HISTORY_DAYS = 56;
+        // Devolve true quando um dia NOVO foi acrescentado (não só o de
+        // hoje sendo atualizado de novo) — é o sinal que o chamador usa
+        // pra decidir se vale sincronizar (não a cada render, só quando o
+        // histórico realmente ganhou um ponto novo).
         function recordTrailHistory(track, today, score, coverage) {
             track.history = Array.isArray(track.history) ? track.history : [];
             const last = track.history[track.history.length - 1];
-            if (last && last.date === today) { last.score = score; last.coverage = coverage; }
-            else track.history.push({ date: today, score, coverage });
+            if (last && last.date === today) { last.score = score; last.coverage = coverage; return false; }
+            track.history.push({ date: today, score, coverage });
             if (track.history.length > TRAIL_HISTORY_DAYS) track.history = track.history.slice(-TRAIL_HISTORY_DAYS);
+            return true;
         }
 
         // Meta diária (fase 1): conta quantas questões DESTA trilha já
@@ -553,7 +562,8 @@
             const answeredToday = trailAnsweredToday(subjects, queue, today);
             const dailyGoal = Number(track.dailyGoal) > 0 ? Number(track.dailyGoal) : 20;
 
-            recordTrailHistory(track, today, projected.score, coverage);
+            const isNewHistoryDay = recordTrailHistory(track, today, projected.score, coverage);
+            if (isNewHistoryDay) { track.updatedAt = new Date().toISOString(); pushTrailSettingsToCloud(trailId); }
             saveTrailState(state);
 
             const areaBars = Object.entries(projected.byArea)
@@ -3643,6 +3653,70 @@ Regras obrigatórias:
                 saveReviewQueue(window.mergeReviewQueues(getReviewQueue(), serverQueue));
                 updateReviewQueueHint();
             } catch (_) { /* offline ou backend fora do ar — segue só com o local */ }
+        }
+
+        // ---------- Sincronização da Trilha (R-7) ----------
+        // Só o que não dá pra recalcular da fila de revisão por questão
+        // (meta de acerto, data da prova, histórico diário do sparkline)
+        // — o resto (nota projetada, cobertura, pontos fracos) é derivado
+        // na hora, tanto local quanto se algum dia o backend quiser
+        // recalcular também. Mesmo par push/pull best-effort de
+        // pullReviewSyncFromCloud/flushReviewSync acima, um endpoint por
+        // trilha em vez de um payload por questão.
+        function trailSettingsPayload(track) {
+            return { goal: track.goal ?? null, examDate: track.examDate ?? null, history: track.history ?? [], updatedAt: track.updatedAt || new Date().toISOString() };
+        }
+
+        async function pushTrailSettingsToCloud(trailId) {
+            if (!SYNC_API_BASE) return;
+            const idToken = await window.__fb?.getIdToken?.().catch(() => null);
+            if (!idToken) return;
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            try {
+                const response = await fetch(`${SYNC_API_BASE}/api/sync/trail-settings/${trailId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
+                    body: JSON.stringify(trailSettingsPayload(track))
+                });
+                if (!response.ok) return;
+                const { settings } = await response.json();
+                // O servidor devolve o blob já mesclado (mesma função,
+                // mergeTrailSettings) — funde de volta pra pegar o que
+                // outro dispositivo tenha mandado antes deste.
+                applyTrailSettings(trailId, settings);
+            } catch (_) { /* offline ou backend fora do ar — a próxima mudança tenta de novo */ }
+        }
+
+        // Chamada no login (mesmo padrão de pullReviewSyncFromCloud) — só
+        // pra trilhas com preferências reais pra sincronizar (por ora,
+        // só a UEPA — ver project_trilhas_redesign na memória, "trabalhar
+        // apenas a UEPA por enquanto").
+        async function pullTrailSettingsFromCloud(trailId) {
+            if (!SYNC_API_BASE) return;
+            const idToken = await window.__fb?.getIdToken?.().catch(() => null);
+            if (!idToken) return;
+            try {
+                const response = await fetch(`${SYNC_API_BASE}/api/sync/trail-settings/${trailId}`, {
+                    headers: { 'Authorization': `Bearer ${idToken}` }
+                });
+                if (!response.ok) return;
+                const { settings } = await response.json();
+                if (settings) applyTrailSettings(trailId, settings);
+            } catch (_) { /* offline ou backend fora do ar — segue só com o local */ }
+        }
+
+        function applyTrailSettings(trailId, remoteSettings) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            const merged = window.mergeTrailSettings(trailSettingsPayload(track), remoteSettings);
+            if (!merged) return;
+            track.goal = merged.goal ?? track.goal;
+            track.examDate = merged.examDate ?? null;
+            track.history = Array.isArray(merged.history) ? merged.history : track.history;
+            track.updatedAt = merged.updatedAt;
+            saveTrailState(state);
+            if (state.active === trailId) renderTrails();
         }
 
         // Índice id -> questão dos DOIS bancos. O Internato também grava na

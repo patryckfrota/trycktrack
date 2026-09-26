@@ -354,6 +354,30 @@ app.post('/api/sync/push', requireFirebaseAuth(), async (req, res) => {
   res.json({ reviewQueue });
 });
 
+// Preferências da Trilha por assunto (R-7: meta de acerto, data da
+// prova, histórico diário do sparkline) — o resto da trilha (nota
+// projetada, cobertura, pontos fracos) é derivado de UserQuestionReview
+// na hora, não precisa sincronizar nada à parte pra isso. `trailId` na
+// URL (não no corpo) porque é só um seletor de qual trilha, não dado do
+// usuário.
+const trailSettingsSchema = z.object({
+  goal: z.number().min(0).max(1).nullable().optional(),
+  examDate: z.string().nullable().optional(),
+  history: z.array(z.object({ date: z.string(), score: z.number(), coverage: z.number() })).nullable().optional(),
+  updatedAt: z.string()
+});
+
+app.get('/api/sync/trail-settings/:trailId', requireFirebaseAuth(), async (req, res) => {
+  res.json({ settings: await syncRepository.getTrailSettings(req.uid, req.params.trailId) });
+});
+
+app.post('/api/sync/trail-settings/:trailId', requireFirebaseAuth(), async (req, res) => {
+  const parsed = trailSettingsSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
+  const settings = await syncRepository.pushTrailSettings(req.uid, req.params.trailId, parsed.data);
+  res.json({ settings });
+});
+
 // Sem exigir login de propósito — a maioria dos erros de JS acontece
 // antes do usuário logar (splash, onboarding) ou no meio de uma sessão
 // já quebrada, exatamente quando um Authorization header a mais

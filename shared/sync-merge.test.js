@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mergeReviewEntry, mergeReviewQueues, reviewEntriesNewerThan } from './sync-merge.js';
+import { mergeReviewEntry, mergeReviewQueues, reviewEntriesNewerThan, mergeTrailSettings } from './sync-merge.js';
 
 function entry(lastReviewedAt, extra = {}) {
     return { stability: 3, difficulty: 5, dueDate: '2026-10-01', lastReviewedAt, lastRating: 3, ...extra };
@@ -40,4 +40,18 @@ test('reviewEntriesNewerThan: só devolve o que é novo/mais recente que o remot
     const remote = { 'q1': entry('2026-09-05'), 'q2': entry('2026-09-01') }; // q1 local é mais nova, q2 igual, q3 só existe local
     const paraEnviar = reviewEntriesNewerThan(local, remote);
     assert.deepEqual(Object.keys(paraEnviar).sort(), ['q1', 'q3']);
+});
+
+test('mergeTrailSettings: sem um dos dois lados, devolve o que existe', () => {
+    const settings = { goal: 0.8, examDate: '2026-12-01', updatedAt: '2026-09-01T00:00:00.000Z' };
+    assert.equal(mergeTrailSettings(null, settings), settings);
+    assert.equal(mergeTrailSettings(settings, null), settings);
+    assert.equal(mergeTrailSettings(null, null), null);
+});
+
+test('mergeTrailSettings: mantém o blob com updatedAt mais recente', () => {
+    const antigo = { goal: 0.7, examDate: null, updatedAt: '2026-09-01T00:00:00.000Z' };
+    const novo = { goal: 0.85, examDate: '2026-12-01', updatedAt: '2026-09-10T00:00:00.000Z' };
+    assert.equal(mergeTrailSettings(antigo, novo), novo);
+    assert.equal(mergeTrailSettings(novo, antigo), novo);
 });

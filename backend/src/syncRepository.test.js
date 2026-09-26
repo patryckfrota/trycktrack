@@ -65,3 +65,29 @@ test('getReviewQueue: usuário sem nenhuma entrada devolve objeto vazio, não er
   const repo = new MemorySyncRepository();
   assert.deepEqual(await repo.getReviewQueue('ninguem'), {});
 });
+
+test('getTrailSettings: usuário/trilha sem nada devolve null, não erro', async () => {
+  const repo = new MemorySyncRepository();
+  assert.equal(await repo.getTrailSettings('user-1', 'uepa'), null);
+});
+
+test('pushTrailSettings: primeira gravação é aceita direto', async () => {
+  const repo = new MemorySyncRepository();
+  const settings = await repo.pushTrailSettings('user-1', 'uepa', { goal: 0.8, examDate: '2026-12-01', history: [], updatedAt: '2026-09-01T00:00:00.000Z' });
+  assert.equal(settings.goal, 0.8);
+});
+
+test('pushTrailSettings: blob mais antigo não sobrescreve o mais novo já salvo', async () => {
+  const repo = new MemorySyncRepository();
+  await repo.pushTrailSettings('user-1', 'uepa', { goal: 0.9, examDate: '2026-12-01', history: [], updatedAt: '2026-09-10T00:00:00.000Z' });
+  const settings = await repo.pushTrailSettings('user-1', 'uepa', { goal: 0.5, examDate: null, history: [], updatedAt: '2026-09-01T00:00:00.000Z' });
+  assert.equal(settings.goal, 0.9);
+});
+
+test('pushTrailSettings: trilhas diferentes do mesmo usuário não se misturam', async () => {
+  const repo = new MemorySyncRepository();
+  await repo.pushTrailSettings('user-1', 'uepa', { goal: 0.8, examDate: null, history: [], updatedAt: '2026-09-01T00:00:00.000Z' });
+  await repo.pushTrailSettings('user-1', 'enamed', { goal: 0.7, examDate: null, history: [], updatedAt: '2026-09-01T00:00:00.000Z' });
+  assert.equal((await repo.getTrailSettings('user-1', 'uepa')).goal, 0.8);
+  assert.equal((await repo.getTrailSettings('user-1', 'enamed')).goal, 0.7);
+});

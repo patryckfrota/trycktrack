@@ -46,3 +46,16 @@ export function reviewEntriesNewerThan(local, remote) {
     });
     return changed;
 }
+
+// Preferências da Trilha (R-7: meta de acerto, data da prova, histórico
+// diário — ver UserTrailSettings no schema do backend) que não dá pra
+// derivar da fila de revisão por questão. Diferente do merge acima
+// (por questão), aqui o blob inteiro troca junto com pouca frequência
+// — então "o updatedAt mais recente vence" no objeto todo é simples e
+// o risco de perder algo do lado "perdedor" é baixo, ao contrário de um
+// merge por questão que perderia progresso de verdade.
+export function mergeTrailSettings(local, remote) {
+    if (!local) return remote || null;
+    if (!remote) return local;
+    return String(remote.updatedAt || '') > String(local.updatedAt || '') ? remote : local;
+}

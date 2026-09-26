@@ -1,5 +1,19 @@
 import { getPrismaClient } from './prismaClient.js';
-import { mergeReviewEntry } from '../../shared/sync-merge.js';
+import { mergeReviewEntry, mergeTrailSettings } from '../../shared/sync-merge.js';
+
+// Mesmo formato do blob no cliente ({ goal, examDate, history,
+// updatedAt }, ver UserTrailSettings no schema) — dueDate/examDate como
+// string 'YYYY-MM-DD', updatedAt como ISO completo (é o que decide o
+// merge, precisa da resolução de milissegundo).
+function hydrateTrailSettings(row) {
+    if (!row) return null;
+    return {
+        goal: row.goal ?? null,
+        examDate: row.examDate instanceof Date ? row.examDate.toISOString().slice(0, 10) : row.examDate,
+        history: row.history ?? null,
+        updatedAt: row.updatedAt instanceof Date ? row.updatedAt.toISOString() : row.updatedAt,
+    };
+}
 
 // Formato de entrada em memória/na API: { stability, difficulty,
 // dueDate, lastReviewedAt, lastRating } — dueDate/lastReviewedAt como
@@ -17,7 +31,7 @@ function hydrate(row) {
 }
 
 export class MemorySyncRepository {
-    constructor() { this.rows = new Map(); this.responses = []; } // rows key: `${userId}:${questionId}`
+    constructor() { this.rows = new Map(); this.responses = []; this.trailSettings = new Map(); } // rows/trailSettings key: `${userId}:${questionId ou trailId}`
 
     async getReviewQueue(userId) {
         const queue = {};
@@ -44,6 +58,17 @@ export class MemorySyncRepository {
 
     async pushResponses(userId, responses) {
         (responses || []).forEach(response => this.responses.push({ userId, ...response }));
+    }
+
+    async getTrailSettings(userId, trailId) {
+        return this.trailSettings.get(`${userId}:${trailId}`) || null;
+    }
+
+    async pushTrailSettings(userId, trailId, incoming) {
+        const key = `${userId}:${trailId}`;
+        const winner = mergeTrailSettings(this.trailSettings.get(key), incoming);
+        if (winner) this.trailSettings.set(key, winner);
+        return this.getTrailSettings(userId, trailId);
     }
 }
 
@@ -99,6 +124,28 @@ export class PrismaSyncRepository {
                 answeredAt: response.answeredAt ? new Date(response.answeredAt) : new Date()
             }))
         });
+    }
+
+    async getTrailSettings(userId, trailId) {
+        const row = await this.client.userTrailSettings.findUnique({ where: { userId_trailId: { userId, trailId } } });
+        return hydrateTrailSettings(row);
+    }
+
+    async pushTrailSettings(userId, trailId, incoming) {
+        const existing = await this.getTrailSettings(userId, trailId);
+        const winner = mergeTrailSettings(existing, incoming);
+        if (!winner) return null;
+        const data = {
+            goal: winner.goal ?? null,
+            examDate: winner.examDate ? new Date(winner.examDate) : null,
+            history: winner.history ?? null,
+        };
+        await this.client.userTrailSettings.upsert({
+            where: { userId_trailId: { userId, trailId } },
+            create: { userId, trailId, ...data },
+            update: data,
+        });
+        return this.getTrailSettings(userId, trailId);
     }
 }
 
