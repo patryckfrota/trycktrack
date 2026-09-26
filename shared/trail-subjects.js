@@ -64,6 +64,27 @@ export function prioritizeNewSubjects(subjectsWithStatus, goal = 0.80) {
         .sort((a, b) => b.priorityScore - a.priorityScore);
 }
 
+// Drill-down por tópico (fase 4, item 1) — dentro de um assunto (ex.
+// "Cardiologia > HAS"), quebra por `topico` (o nível mais fino que o
+// banco já classifica, ver taxonomia/ROTEIRO-IMPORTACAO.md) mostrando
+// onde exatamente dentro do assunto a pessoa mais erra. questionsById:
+// Map id -> questão completa (só usa `.topico` daqui). Questão sem
+// `topico` classificado cai em "Outros" — nunca escondida.
+export function subjectTopicBreakdown(subject, questionsById, reviewQueue, todayIso) {
+    const byTopico = new Map();
+    for (const id of subject.questionIds) {
+        const topico = (questionsById.get(id)?.topico || 'Outros').trim() || 'Outros';
+        if (!byTopico.has(topico)) byTopico.set(topico, { topico, questionIds: [] });
+        byTopico.get(topico).questionIds.push(id);
+    }
+    return [...byTopico.values()]
+        .map((entry) => ({
+            topico: entry.topico,
+            ...subjectStatus({ questionIds: entry.questionIds }, reviewQueue, todayIso),
+        }))
+        .sort((a, b) => b.total - a.total);
+}
+
 // Cobertura ponderada: soma do peso dos assuntos já iniciados (pelo
 // menos 1 questão estudada) sobre o peso total — "quanto da prova,
 // pelo peso real de cada assunto, você já começou a estudar", não uma

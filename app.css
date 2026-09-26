@@ -5001,6 +5001,19 @@
         .trail-coverage-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--lavender-active); transition: width .4s var(--ease); }
         .trail-section-title { margin: 4px 2px 0; font-size: 11px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); }
         .trail-empty-note { margin: 0 2px; font-size: 12px; color: var(--text-secondary); }
+
+        /* Drill-down por tópico (fase 4, item 1) */
+        .trail-phase-expanded .trail-phase-content { padding-bottom: 14px; }
+        .trail-phase-toggle { cursor: pointer; }
+        .trail-topic-list { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 6px; cursor: default; }
+        .trail-topic-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11px; }
+        .trail-topic-name { color: var(--text-main); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .trail-topic-meta { color: var(--text-secondary); flex: none; }
+
+        /* Simulados por área (fase 4, item 4) */
+        .trail-area-exams { display: flex; flex-wrap: wrap; gap: 8px; }
+        .trail-area-exam-btn { flex: 1; min-width: 42%; padding: 9px 10px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-main); font-size: 11.5px; font-weight: 600; cursor: pointer; text-align: left; transition: border-color .2s ease; }
+        .trail-area-exam-btn:active { transform: scale(.98); }
         /* Cor do marcador/ícone por status do assunto — atrasado chama
            mais atenção que faça-agora (mesma paleta lavanda), que por
            sua vez chama mais que um assunto novo/em dia (neutro). */

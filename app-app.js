@@ -230,12 +230,20 @@
                 subjectBased: true,
                 bankPrefix: 'uepa-',
                 examPerArea: 20, // formato real: 100 questões, 20 por grande área (ver shared/exam-areas.js)
+                // `incidence` igual (20) nas 5 — a prova real da UEPA
+                // aplica exatamente 20 questões por grande área em toda
+                // edição (2022-2026, ver exam-areas.js), nunca ponderado.
+                // Os valores 91/90/87/82/74 que existiam aqui antes eram
+                // um chute inicial (pré-R-6), incompatível com o formato
+                // real descoberto depois — mantido só isso corrigido
+                // porque `weightedSampleByIncidence` (Simulado geral do
+                // app) ainda lê esta lista por incidência × urgência.
                 phases: [
-                    { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Clínica aplicada e emergências', incidence: 91 },
-                    { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Atenção à criança e neonatologia', incidence: 90 },
-                    { id: 'preventiva', title: 'Medicina Preventiva', area: 'Medicina Preventiva', topicKey: 'medicina-preventiva', focus: 'APS, SUS e saúde coletiva', incidence: 87 },
-                    { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Assistência pré-natal e parto', incidence: 82 },
-                    { id: 'cirurgia', title: 'Cirurgia Geral', area: 'Cirurgia Geral', topicKey: 'cirurgia-geral', focus: 'Trauma e cuidados perioperatórios', incidence: 74 }
+                    { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Clínica aplicada e emergências', incidence: 20 },
+                    { id: 'pediatria', title: 'Pediatria', area: 'Pediatria', topicKey: 'pediatria-completo', focus: 'Atenção à criança e neonatologia', incidence: 20 },
+                    { id: 'preventiva', title: 'Medicina Preventiva', area: 'Medicina Preventiva', topicKey: 'medicina-preventiva', focus: 'APS, SUS e saúde coletiva', incidence: 20 },
+                    { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Assistência pré-natal e parto', incidence: 20 },
+                    { id: 'cirurgia', title: 'Cirurgia Geral', area: 'Cirurgia Geral', topicKey: 'cirurgia-geral', focus: 'Trauma e cuidados perioperatórios', incidence: 20 }
                 ]
             }
         };
@@ -420,7 +428,27 @@
 
         const SUBJECT_STATUS_SLUG = { atrasado: 'late', 'faça agora': 'now', novo: 'new', 'em dia': 'ok' };
 
-        function trailSubjectCardHtml(subject, queue, today) {
+        // Drill-down por tópico (fase 4, item 1) — estado só de UI, não
+        // persistido (não faz sentido lembrar entre sessões o que estava
+        // expandido). Guarda a chave do assunto expandido no momento.
+        let expandedTrailSubjectKey = null;
+
+        function toggleTrailSubjectTopics(key) {
+            expandedTrailSubjectKey = expandedTrailSubjectKey === key ? null : key;
+            renderTrails();
+        }
+
+        function trailTopicListHtml(subject, questionsById, queue, today) {
+            const topics = window.subjectTopicBreakdown(subject, questionsById, queue, today);
+            return `<div class="trail-topic-list" onclick="event.stopPropagation()">
+                ${topics.map(t => {
+                    const acertoText = t.studied ? `${Math.round(t.accuracy * 100)}% de acerto` : 'ainda não estudado';
+                    return `<div class="trail-topic-row"><span class="trail-topic-name">${t.topico}</span><span class="trail-topic-meta">${t.studied}/${t.total} · ${acertoText}</span></div>`;
+                }).join('')}
+            </div>`;
+        }
+
+        function trailSubjectCardHtml(subject, queue, today, questionsById) {
             const pct = Math.round(subject.weight * 1000) / 10;
             const label = SUBJECT_STATUS_LABEL[subject.status.status] || subject.status.status;
             const slug = SUBJECT_STATUS_SLUG[subject.status.status] || 'ok';
@@ -432,14 +460,16 @@
                 if (retention !== null) bits.push(`~${Math.round(retention * 100)}% retido`);
             }
             const detail = bits.length ? `${label} · ${bits.join(' · ')}` : label;
-            return `<article class="trail-phase trail-phase-${slug}" onclick="startTrailSubject('${key}')">
+            const expanded = expandedTrailSubjectKey === subject.key;
+            return `<article class="trail-phase trail-phase-${slug}${expanded ? ' trail-phase-expanded' : ''}" onclick="startTrailSubject('${key}')">
                 <span class="trail-phase-marker"></span>
                 <div class="trail-phase-content">
                     <div class="trail-phase-kicker">${subject.area} · ${pct}% da prova</div>
                     <h3>${subject.assunto}</h3>
                     <p>${detail}</p>
+                    ${expanded ? trailTopicListHtml(subject, questionsById, queue, today) : ''}
                 </div>
-                <span class="trail-phase-action" aria-label="${label}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+                <span class="trail-phase-action trail-phase-toggle" aria-label="Ver tópicos" onclick="event.stopPropagation(); toggleTrailSubjectTopics('${key}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="${expanded ? 'm18 15-6-6-6 6' : 'm6 9 6 6 6-6'}"/></svg></span>
             </article>`;
         }
 
@@ -495,6 +525,7 @@
             const subjects = buildTrailSubjects(trailId);
             const queue = getReviewQueue();
             const today = new Date().toISOString().slice(0, 10);
+            const questionsById = getQuestionIndex();
 
             const hoje = subjects
                 .filter(s => s.status.status === 'atrasado' || s.status.status === 'faça agora')
@@ -561,6 +592,7 @@
 
                 ${divida > 0 ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${divida} questão${divida > 1 ? 'ões' : ''}</button>` : ''}
                 ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
+                ${catalog.examPerArea ? `<div class="trail-area-exams">${window.UEPA_GRANDE_AREAS.map(area => `<button class="trail-area-exam-btn" onclick="startTrailAreaExam('${trailId}','${area.replace(/'/g, "\\'")}')">${area} · ${catalog.examPerArea}</button>`).join('')}</div>` : ''}
 
                 <div class="trail-daily-goal">
                     <div class="trail-daily-goal-label">Meta diária <strong>${Math.min(answeredToday, dailyGoal)}/${dailyGoal}</strong> questões</div>
@@ -576,14 +608,14 @@
                     <div class="trail-coverage-bar"><span style="width:${Math.round(coverage * 100)}%"></span></div>
                 </div>
 
-                ${weak.length ? `<h3 class="trail-section-title">Pontos fracos</h3><div class="trail-path">${weak.map(s => trailSubjectCardHtml(s, queue, today)).join('')}</div>` : ''}
+                ${weak.length ? `<h3 class="trail-section-title">Pontos fracos</h3><div class="trail-path">${weak.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
 
                 <h3 class="trail-section-title">Carga de revisão — próximos 7 dias</h3>
                 <div class="trail-load-chart">${loadBars}</div>
 
-                ${hoje.length ? `<h3 class="trail-section-title">Hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today)).join('')}</div>` : ''}
+                ${hoje.length ? `<h3 class="trail-section-title">Hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
                 <h3 class="trail-section-title">Próximos assuntos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
-                <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today)).join('') : '<p class="trail-empty-note">Sem questões classificadas por assunto nesta banca ainda.</p>'}</div>`;
+                <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('') : '<p class="trail-empty-note">Sem questões classificadas por assunto nesta banca ainda.</p>'}</div>`;
         }
 
         // Inicia uma sessão pra um assunto: se tiver questão vencida
@@ -645,6 +677,26 @@
             if (exam.length < expectedTotal) { revealQuestionNotice('Ainda não há questões suficientes pra montar o simulado completo.'); return; }
             await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'exam', questions: exam, index: 0, answers: [], trailExam: trailId, startedAt: new Date().toISOString() };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        // Simulado de uma grande área só (fase 4, item 4) — mesmo motor
+        // do simulado completo (buildWeightedExam), só que o pool de
+        // entrada já vem filtrado pra uma grande área, então só aquele
+        // bloco de 20 é montado.
+        async function startTrailAreaExam(trailId, areaName) {
+            const catalog = TRAIL_CATALOG[trailId];
+            if (!catalog.examPerArea) return;
+            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
+            const questions = bank
+                .filter(q => q.id.startsWith(catalog.bankPrefix))
+                .filter(q => window.grandeAreaForUepaQuestion(q) === areaName);
+            const exam = window.buildWeightedExam(questions, catalog.examPerArea);
+            if (exam.length < catalog.examPerArea) { revealQuestionNotice(`Ainda não há questões suficientes de ${areaName} pra montar esse simulado.`); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'exam', questions: exam, index: 0, answers: [], trailExam: trailId, trailExamArea: areaName, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();

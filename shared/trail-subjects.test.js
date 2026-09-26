@@ -1,11 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { computeSubjectWeights } from './subject-weights.js';
-import { buildSubjectCatalog, subjectStatus, prioritizeNewSubjects, weightedCoverage } from './trail-subjects.js';
+import { buildSubjectCatalog, subjectStatus, prioritizeNewSubjects, weightedCoverage, subjectTopicBreakdown } from './trail-subjects.js';
 
 const questions = [
-    { id: 'a1', area: 'Pediatria', assunto: 'Puericultura' },
-    { id: 'a2', area: 'Pediatria', assunto: 'Puericultura' },
+    { id: 'a1', area: 'Pediatria', assunto: 'Puericultura', topico: 'Aleitamento' },
+    { id: 'a2', area: 'Pediatria', assunto: 'Puericultura', topico: 'Imunizações' },
     { id: 'b1', area: 'Cirurgia Geral', assunto: 'Trauma' },
     { id: 'b2', area: 'Cirurgia Geral', assunto: 'Trauma' },
 ];
@@ -93,4 +93,33 @@ test('weightedCoverage pondera pelo peso real, não pela contagem de assuntos', 
     const queue = { y1: { dueDate: '2026-02-01', lastResult: 'correct' } };
     const withStatus = subjects.map((s) => ({ ...s, status: subjectStatus(s, queue, '2026-01-10') }));
     assert.equal(weightedCoverage(withStatus), 0.2);
+});
+
+test('subjectTopicBreakdown quebra o assunto por tópico', () => {
+    const subject = catalog().find((s) => s.key === 'Pediatria > Puericultura');
+    const questionsById = new Map(questions.map((q) => [q.id, q]));
+    const breakdown = subjectTopicBreakdown(subject, questionsById, {}, '2026-01-10');
+    assert.equal(breakdown.length, 2);
+    assert.deepEqual(breakdown.map((t) => t.topico).sort(), ['Aleitamento', 'Imunizações']);
+    assert.ok(breakdown.every((t) => t.total === 1));
+});
+
+test('subjectTopicBreakdown cai em "Outros" quando a questão não tem tópico classificado', () => {
+    const subject = catalog().find((s) => s.key === 'Cirurgia Geral > Trauma');
+    const questionsById = new Map(questions.map((q) => [q.id, q]));
+    const breakdown = subjectTopicBreakdown(subject, questionsById, {}, '2026-01-10');
+    assert.equal(breakdown.length, 1);
+    assert.equal(breakdown[0].topico, 'Outros');
+    assert.equal(breakdown[0].total, 2);
+});
+
+test('subjectTopicBreakdown reflete acerto por tópico, não só do assunto inteiro', () => {
+    const subject = catalog().find((s) => s.key === 'Pediatria > Puericultura');
+    const questionsById = new Map(questions.map((q) => [q.id, q]));
+    const queue = { a1: { dueDate: '2026-02-01', lastResult: 'correct' }, a2: { dueDate: '2026-02-01', lastResult: 'wrong' } };
+    const breakdown = subjectTopicBreakdown(subject, questionsById, queue, '2026-01-10');
+    const aleitamento = breakdown.find((t) => t.topico === 'Aleitamento');
+    const imunizacoes = breakdown.find((t) => t.topico === 'Imunizações');
+    assert.equal(aleitamento.accuracy, 1);
+    assert.equal(imunizacoes.accuracy, 0);
 });

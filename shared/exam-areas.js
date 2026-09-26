@@ -16,6 +16,10 @@ const UEPA_BLOCKS = [
     { max: 100, grandeArea: 'Pediatria' },
 ];
 
+// As 5 grandes áreas, na ordem em que aparecem no caderno — reaproveitada
+// pra montar simulados de uma área só (ver shared/trail-exam.js).
+export const UEPA_GRANDE_AREAS = UEPA_BLOCKS.map((b) => b.grandeArea);
+
 // `number` é 1-100 dentro do caderno daquele ano (ver questions-uepa.js).
 // Fora desse range (dado ausente/malformado), devolve null em vez de
 // chutar uma grande área errada.
