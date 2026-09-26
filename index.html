@@ -171,32 +171,14 @@
             <!-- RAPID REVIEW -->
             <div class="tab-content" id="reviewTab">
             <div class="rr-card rr-hub-card" onclick="openReviewGroup('enamed')" data-topic="rr-hub-enamed">
-                <div class="rr-card-icon rr-card-icon--logo">
-                    <img src="assets/logo-enamed-sigla.png" alt="ENAMED" class="rr-hub-logo">
-                </div>
-                <div class="rr-card-content">
-                    <div class="rr-card-header">
-                        <div class="rr-card-title">ENAMED</div>
-                        <div class="rr-card-badge">19 áreas</div>
-                    </div>
-                    <div class="rr-card-description">Todos os Rapid Review por especialidade — Clínica Médica, Cirurgia, GO, Pediatria e mais</div>
-                </div>
+                <img src="assets/logo-enamed-sigla.png" alt="ENAMED" class="rr-hub-logo">
+                <div class="rr-card-badge">19 áreas</div>
                 <div class="rr-card-arrow">›</div>
             </div>
 
             <div class="rr-card rr-hub-card" onclick="openReviewGroup('uepa')" data-topic="rr-hub-uepa">
-                <div class="rr-card-icon rr-card-icon--logo">
-                    <img src="assets/logo-uepa-sigla.png" alt="UEPA" class="rr-hub-logo">
-                </div>
-                <div class="rr-card-content">
-                    <div class="rr-card-header">
-                        <div class="rr-card-title">UEPA</div>
-                        <div class="rr-card-badge">Em breve</div>
-                    </div>
-                    <div class="rr-card-description">Rapid Review específico das provas da UEPA</div>
-                </div>
-                <div class="rr-card-arrow">›</div>
-            </div>
+                <img src="assets/logo-uepa-sigla.png" alt="UEPA" class="rr-hub-logo">
+                <div class="rr-card-badge">Em breve</div>
                 <div class="rr-card-arrow">›</div>
             </div>
             </div>
@@ -1079,6 +1061,13 @@
         window.subjectStatus = subjectStatus;
         window.prioritizeNewSubjects = prioritizeNewSubjects;
         window.weightedCoverage = weightedCoverage;
+        // Métricas da Trilha por assunto (fase 2) — nota projetada,
+        // pontos fracos, carga de revisão e retenção estimada.
+        import { projectedScore, weakSpots, reviewLoadByDay, subjectRetention } from "./shared/trail-metrics.js";
+        window.projectedScore = projectedScore;
+        window.weakSpots = weakSpots;
+        window.reviewLoadByDay = reviewLoadByDay;
+        window.subjectRetention = subjectRetention;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
         // já cobertas por node --test em shared/scoring.test.js — ver
         // comentário no próprio arquivo.
