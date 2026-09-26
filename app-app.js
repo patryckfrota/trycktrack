@@ -208,6 +208,20 @@
                 name: 'Trilha Enamed',
                 logo: 'assets/logo-enamed-sigla.png',
                 description: 'Prioriza incidência nacional e o seu desempenho.',
+                // R-8: banco principal inteiro (Revalida INEP + INEP,
+                // 955 questões, todas classificadas em assunto/tópico) —
+                // são as mesmas provas que o ENAMED aplica, só fundidas
+                // nos arquivos por especialidade durante a importação
+                // (ver comentário em import-questions.js), sem prefixo de
+                // id comum como a UEPA tem. Sem `examPerArea`: ao
+                // contrário da UEPA (sempre 20 por grande área, mesma
+                // ordem), essas provas foram fundidas/recortadas por
+                // especialidade e não preservam um layout fixo por
+                // posição de questão — não dá pra montar um "simulado
+                // formato real" a partir disso, só a trilha por assunto
+                // (nota projetada, pontos fracos, carga de revisão etc.).
+                subjectBased: true,
+                bankFilter: () => true,
                 phases: [
                     { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Cardiologia, Infectologia e Pneumologia', incidence: 96 },
                     { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Pré-natal, parto e urgências obstétricas', incidence: 88 },
@@ -397,7 +411,13 @@
         function buildTrailSubjects(trailId) {
             const catalog = TRAIL_CATALOG[trailId];
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
-            const questions = bank.filter(q => q.id.startsWith(catalog.bankPrefix));
+            // `bankFilter` (função) tem prioridade sobre `bankPrefix`
+            // (string) — a UEPA filtra por prefixo do id (todo o banco
+            // dela é 'uepa-*'), o ENAMED usa o banco principal inteiro
+            // (revalida+INEP fundidos em vários arquivos por
+            // especialidade, sem prefixo comum — ver comentário no
+            // catálogo).
+            const questions = catalog.bankFilter ? bank.filter(catalog.bankFilter) : bank.filter(q => q.id.startsWith(catalog.bankPrefix));
             const weights = window.computeSubjectWeights(questions);
             const catalogSubjects = window.buildSubjectCatalog(questions, weights);
             const queue = getReviewQueue();

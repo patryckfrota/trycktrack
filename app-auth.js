@@ -609,9 +609,13 @@
                         // comentário de pullReviewSyncFromCloud).
                         if (typeof pullReviewSyncFromCloud === 'function') pullReviewSyncFromCloud();
                         // R-7 — preferências da Trilha (meta de acerto,
-                        // data da prova, histórico) — só UEPA por ora, ver
-                        // project_trilhas_redesign na memória.
-                        if (typeof pullTrailSettingsFromCloud === 'function') pullTrailSettingsFromCloud('uepa');
+                        // data da prova, histórico) — UEPA e ENAMED, as
+                        // duas trilhas por assunto (ver
+                        // project_trilhas_redesign na memória).
+                        if (typeof pullTrailSettingsFromCloud === 'function') {
+                            pullTrailSettingsFromCloud('uepa');
+                            pullTrailSettingsFromCloud('enamed');
+                        }
                         authDecision = 'app';
                     } else {
                         authDecision = 'login';
