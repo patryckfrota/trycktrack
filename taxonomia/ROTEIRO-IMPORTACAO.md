@@ -15,6 +15,20 @@ conjunção "e" sozinha é confundida com a alternativa A ou E. Depois de
 separar, conferir: enunciado terminando em ": a …" e alternativa
 contendo ". e …" no meio indicam alternativa partida.
 
+Outras armadilhas (UEPA 2022–2025):
+- `pdftotext -raw` lê as duas colunas na ordem certa; `-layout` mistura.
+- Textos de apoio ("Leia/Analise/Avalie/Observe … para responder à
+  questão N" ou "às questões N e M") grudam na alternativa E da questão
+  anterior. Mover o texto para o início do enunciado de cada questão
+  alvo.
+- Imagem de questão: `pdfimages -j` + render da página para achar a
+  questão; salvar em `assets/<banca>/img/<id>-1.jpg` e preencher
+  `images: [...]` na questão (o app já exibe).
+- Letra de música ou texto protegido no enunciado: trocar por uma
+  descrição curta entre colchetes.
+- Comparar enunciados com as provas já importadas da mesma banca: há
+  questões reaplicadas entre anos, às vezes com alternativas embaralhadas.
+
 ## 2. Classificação — obrigatória, antes de gravar
 
 Toda questão entra com os 4 níveis da taxonomia do Estratégia MED
