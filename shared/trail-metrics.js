@@ -32,13 +32,19 @@ export function priorAccuracy(subjectsWithStatus) {
 // dividido pelo peso total (soma 1 quando os pesos já vêm normalizados,
 // mas divide de qualquer forma pra ficar correto mesmo com um
 // subconjunto). byArea agrega a mesma conta por grande área.
-export function projectedScore(subjectsWithStatus) {
+// options.unseenAccuracy: chance usada para assunto NUNCA estudado. Sem
+// ela, cai no acerto médio (prior) — mas isso infla a nota de quem
+// estudou pouco (visto com dados reais: 14 de 129 assuntos estudados já
+// davam 69/100). O app passa a chance de acertar no chute (1/nº de
+// alternativas), então a nota só sobe com o que foi de fato praticado.
+export function projectedScore(subjectsWithStatus, options = {}) {
     const prior = priorAccuracy(subjectsWithStatus);
+    const unseen = Number.isFinite(options.unseenAccuracy) ? options.unseenAccuracy : prior;
     const totalWeight = subjectsWithStatus.reduce((sum, s) => sum + s.weight, 0);
     const byArea = {};
     let weighted = 0;
     for (const s of subjectsWithStatus) {
-        const p = s.status.studied > 0 ? s.status.accuracy : prior;
+        const p = s.status.studied > 0 ? s.status.accuracy : unseen;
         weighted += s.weight * p;
         byArea[s.area] ||= { weight: 0, weighted: 0 };
         byArea[s.area].weight += s.weight;

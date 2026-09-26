@@ -5014,6 +5014,123 @@
         .trail-area-exams { display: flex; flex-wrap: wrap; gap: 8px; }
         .trail-area-exam-btn { flex: 1; min-width: 42%; padding: 9px 10px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-main); font-size: 11.5px; font-weight: 600; cursor: pointer; text-align: left; transition: border-color .2s ease; }
         .trail-area-exam-btn:active { transform: scale(.98); }
+
+        /* ---------- Resumo da trilha (aba Trilhas, R-9) ---------- */
+        .trail-summary { appearance: none; display: flex; flex-direction: column; gap: 10px; width: 100%; padding: 16px 18px; border: 1px solid var(--border-color); border-radius: 18px; background: var(--bg-secondary); color: var(--text-main); font: inherit; text-align: left; cursor: pointer; transition: border-color .2s ease, transform .2s var(--ease-spring); }
+        .trail-summary:hover { border-color: rgba(196,181,253,.48); }
+        .trail-summary:active { transform: scale(.99); }
+        .trail-summary:focus-visible, .trail-dash-tab:focus-visible, .trail-subj-row:focus-visible, .trail-link-btn:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
+        .trail-summary-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .trail-summary-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11.5px; color: var(--text-secondary); }
+        .trail-summary-stats strong { color: var(--text-main); font-variant-numeric: tabular-nums; }
+        .trail-summary-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--lavender-active); }
+        .trail-summary-cta svg { width: 14px; height: 14px; }
+        .trail-link-btn { appearance: none; align-self: center; border: 0; background: none; padding: 6px 4px; color: var(--lavender-active); font: 700 12.5px var(--font-family-base); cursor: pointer; }
+
+        /* ---------- Painel da trilha (tela cheia, R-9) ---------- */
+        .trail-dash-tabs { display: flex; gap: 7px; overflow-x: auto; padding: 0 16px 12px; scrollbar-width: none; }
+        .trail-dash-tabs::-webkit-scrollbar { display: none; }
+        .trail-dash-tab { flex-shrink: 0; padding: 7px 13px; border-radius: 999px; font: 700 12px var(--font-family-base); border: 1px solid var(--border-color); color: var(--text-secondary); background: var(--bg-secondary); white-space: nowrap; cursor: pointer; }
+        .trail-dash-tab.is-active { color: #fff; border-color: transparent; background: linear-gradient(120deg, var(--brand-400), var(--brand-600)); }
+        .trail-chip-count { margin-left: 3px; font-weight: 600; opacity: .75; font-variant-numeric: tabular-nums; }
+        .trail-dash-content { display: flex; flex-direction: column; gap: 14px; padding: 8px 16px 110px; font-size: 14px; }
+        .trail-dash-content .trail-section-title { margin-top: 10px; }
+        .trail-dash-hero { display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-secondary); }
+        .trail-score-value-lg { font-size: 48px; }
+        .trail-dash-delta { margin: 0; font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+        .trail-dash-footnote { margin: 0; font-size: 11px; line-height: 1.45; color: var(--text-secondary); }
+
+        /* Gráficos (série única na cor de destaque, eixos discretos) */
+        .trail-chart { width: 100%; height: auto; display: block; overflow: visible; }
+        .trail-chart-grid { stroke: var(--border-color); stroke-width: 1; }
+        .trail-chart-grid.is-strong { stroke: var(--text-secondary); stroke-opacity: .45; stroke-dasharray: 3 3; }
+        .trail-chart-tick { font: 600 9.5px var(--font-family-base); fill: var(--text-secondary); }
+        .trail-chart-area { fill: var(--lavender-active); fill-opacity: .12; }
+        .trail-chart-line { fill: none; stroke: var(--lavender-active); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .trail-chart-dot { fill: var(--lavender-active); stroke: var(--bg-secondary); stroke-width: 2; }
+        .trail-matrix-dot { fill: var(--lavender-active); stroke: var(--bg-main); stroke-width: 2; }
+        .trail-matrix-dot.is-critical { fill: var(--danger); }
+        .trail-matrix-zone { fill: var(--danger-soft); }
+        .trail-matrix-zone-label { font: 700 9.5px var(--font-family-base); fill: var(--danger); }
+
+        /* Indicadores */
+        .trail-kpi-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .trail-kpi { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-secondary); }
+        .trail-kpi-label { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); }
+        .trail-kpi-value { font-size: 22px; font-weight: 800; color: var(--text-main); font-variant-numeric: tabular-nums; }
+        .trail-kpi-sub { font-size: 10.5px; color: var(--text-secondary); }
+
+        /* Ajustes do plano */
+        .trail-settings { display: flex; flex-direction: column; gap: 14px; padding: 14px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-secondary); }
+        .trail-setting { display: flex; flex-direction: column; gap: 8px; }
+        .trail-setting-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); }
+        .trail-setting-label strong { color: var(--text-main); }
+        .trail-setting input[type="range"] { width: 100%; accent-color: var(--lavender-active); }
+        .trail-setting .trail-pace-date { align-self: flex-start; }
+
+        /* Cronograma */
+        .trail-plan-banner { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-secondary); }
+        .trail-plan-banner strong { font-size: 14px; color: var(--text-main); }
+        .trail-plan-banner p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--text-secondary); }
+        .trail-plan-banner .trail-link-btn { align-self: flex-start; padding-left: 0; }
+        .trail-plan-banner .trail-pace-date { align-self: flex-start; }
+        .trail-plan-banner.is-ok { border-color: color-mix(in srgb, var(--success) 45%, transparent); }
+        .trail-plan-banner.is-ok strong { color: var(--success); }
+        .trail-plan-banner.is-late { border-color: color-mix(in srgb, var(--danger) 45%, transparent); }
+        .trail-plan-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 10.5px; color: var(--text-secondary); }
+        .trail-plan-legend span { display: inline-flex; align-items: center; gap: 5px; }
+        .trail-legend-dot { width: 9px; height: 9px; border-radius: 3px; background: var(--bg-tertiary); border: 1px solid var(--border-color); }
+        .trail-legend-dot.is-projected { background: transparent; border: 1px dashed var(--text-secondary); }
+        .trail-legend-dot.is-new { background: var(--lavender-active); border-color: transparent; }
+        .trail-week { border: 1px solid var(--border-color); border-radius: 16px; background: var(--bg-secondary); overflow: hidden; }
+        .trail-week > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; font-size: 13px; font-weight: 700; color: var(--text-main); cursor: pointer; list-style: none; }
+        .trail-week > summary::-webkit-details-marker { display: none; }
+        .trail-week > summary::after { content: ""; width: 7px; height: 7px; flex: none; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: rotate(45deg); transition: transform .2s var(--ease); }
+        .trail-week[open] > summary::after { transform: rotate(-135deg); }
+        .trail-week-meta { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+        .trail-day { display: flex; flex-direction: column; gap: 6px; padding: 10px 14px; border-top: 1px solid var(--border-color); }
+        .trail-day-head { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; }
+        .trail-day-label { font-weight: 700; color: var(--text-main); text-transform: capitalize; }
+        .trail-day-load { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+        .trail-day-bar { height: 4px; border-radius: 4px; overflow: hidden; background: var(--bg-tertiary); }
+        .trail-day-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--lavender-active); }
+        .trail-day.is-over .trail-day-bar > span { background: var(--danger); }
+        .trail-day.is-over .trail-day-load { color: var(--danger); font-weight: 700; }
+        .trail-day.is-exam { background: var(--lavender-dark); }
+        .trail-day.is-exam .trail-day-load { color: var(--lavender-active); font-weight: 800; }
+        .trail-day-items { display: flex; flex-wrap: wrap; gap: 5px; }
+        .trail-day-chip { padding: 3px 8px; border-radius: 8px; font-size: 10.5px; font-weight: 600; color: var(--text-main); background: var(--bg-tertiary); border: 1px solid var(--border-color); }
+        .trail-day-chip.is-projected { background: transparent; border-style: dashed; color: var(--text-secondary); }
+        .trail-day-chip.is-new { background: var(--lavender-dark); border-color: transparent; color: var(--lavender-active); }
+        .trail-day-free { font-size: 10.5px; color: var(--text-secondary); }
+        .trail-day-divider { padding: 8px 14px; border-top: 1px solid var(--border-color); font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--danger); background: var(--danger-soft); }
+
+        /* Lista completa de assuntos */
+        .trail-dash-filters { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; }
+        .trail-dash-filters::-webkit-scrollbar { display: none; }
+        .trail-dash-select { align-self: flex-start; max-width: 100%; padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main); font: 600 12.5px var(--font-family-base); }
+        .trail-subj-list { display: flex; flex-direction: column; gap: 8px; }
+        .trail-subj { border: 1px solid var(--border-color); border-radius: 16px; background: var(--bg-secondary); overflow: hidden; }
+        .trail-subj.is-open { border-color: rgba(196,181,253,.48); }
+        .trail-subj-row { appearance: none; display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 12px 14px 10px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+        .trail-subj-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+        .trail-subj-title { font-size: 13.5px; font-weight: 700; color: var(--text-main); line-height: 1.3; }
+        .trail-subj-meta { font-size: 11px; color: var(--lavender-active); font-weight: 600; }
+        .trail-subj-stats { font-size: 11px; color: var(--text-secondary); }
+        .trail-subj-status { flex: none; padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 700; background: var(--bg-tertiary); color: var(--text-secondary); }
+        .trail-subj-status.is-late { background: var(--danger-soft); color: var(--danger); }
+        .trail-subj-status.is-now { background: var(--lavender-dark); color: var(--lavender-active); }
+        .trail-subj-status.is-ok { background: var(--success-soft); color: var(--success); }
+        .trail-subj-progress { height: 3px; background: var(--bg-tertiary); }
+        .trail-subj-progress > span { display: block; height: 100%; background: var(--lavender-active); }
+        .trail-subj .trail-topic-list { margin: 0; padding: 10px 14px 4px; }
+        .trail-subj .trail-subj-study { box-sizing: border-box; margin: 8px 14px 14px; width: calc(100% - 28px); }
+        .trail-load-chart-wide { gap: 4px; }
+
+        @media (min-width: 720px) {
+            .trail-kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .trail-dash-content, .trail-dash-tabs { width: min(760px, 100%); margin: 0 auto; box-sizing: border-box; }
+        }
         /* Cor do marcador/ícone por status do assunto — atrasado chama
            mais atenção que faça-agora (mesma paleta lavanda), que por
            sua vez chama mais que um assunto novo/em dia (neutro). */
@@ -5032,12 +5149,17 @@
         .trail-area-bars { display: flex; flex-direction: column; gap: 7px; padding: 2px 2px 0; }
         .trail-area-row { display: flex; align-items: center; gap: 10px; }
         .trail-area-name { flex: 0 0 132px; font-size: 11px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .trail-area-name small { display: block; font-size: 9.5px; color: var(--text-secondary); opacity: .75; }
+        .trail-dash-content .trail-area-name { flex-basis: 150px; font-size: 12px; color: var(--text-main); font-weight: 600; }
         .trail-area-bar { flex: 1; height: 6px; border-radius: 6px; overflow: hidden; background: var(--bg-tertiary); }
         .trail-area-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--lavender-active); transition: width .4s var(--ease); }
         .trail-area-pct { flex: 0 0 34px; font-size: 11px; font-weight: 700; text-align: right; color: var(--text-main); }
 
         /* Sessão de hoje + meta diária */
-        .trail-today-btn { display: block; width: 100%; padding: 13px; border: 0; border-radius: 14px; background: var(--lavender-active); color: #1c1330; font-size: 13.5px; font-weight: 750; cursor: pointer; transition: transform .2s var(--ease-spring); }
+        /* Texto na cor do fundo do tema: escuro sobre o lavanda claro do
+           tema escuro, claro sobre o roxo escuro do tema claro (#1c1330
+           fixo ficava ilegível no tema claro). */
+        .trail-today-btn { display: block; width: 100%; padding: 13px; border: 0; border-radius: 14px; background: var(--lavender-active); color: var(--bg-main); font-size: 13.5px; font-weight: 750; cursor: pointer; transition: transform .2s var(--ease-spring); }
         .trail-today-btn:active { transform: scale(.98); }
         .trail-exam-btn { display: block; width: 100%; padding: 13px; border: 1.5px solid var(--lavender-active); border-radius: 14px; background: transparent; color: var(--lavender-active); font-size: 13.5px; font-weight: 750; cursor: pointer; transition: transform .2s var(--ease-spring); }
         .trail-exam-btn:active { transform: scale(.98); }

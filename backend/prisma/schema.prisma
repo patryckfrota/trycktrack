@@ -181,6 +181,7 @@ model UserTrailSettings {
   trailId   String
   goal      Float?
   examDate  DateTime?
+  dailyGoal Int?
   history   Json?
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)

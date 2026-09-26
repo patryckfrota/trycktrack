@@ -10,6 +10,7 @@ function hydrateTrailSettings(row) {
     return {
         goal: row.goal ?? null,
         examDate: row.examDate instanceof Date ? row.examDate.toISOString().slice(0, 10) : row.examDate,
+        dailyGoal: row.dailyGoal ?? null,
         history: row.history ?? null,
         updatedAt: row.updatedAt instanceof Date ? row.updatedAt.toISOString() : row.updatedAt,
     };
@@ -138,6 +139,7 @@ export class PrismaSyncRepository {
         const data = {
             goal: winner.goal ?? null,
             examDate: winner.examDate ? new Date(winner.examDate) : null,
+            dailyGoal: Number.isInteger(winner.dailyGoal) ? winner.dailyGoal : null,
             history: winner.history ?? null,
         };
         await this.client.userTrailSettings.upsert({

@@ -20,6 +20,21 @@ const UEPA_BLOCKS = [
 // pra montar simulados de uma área só (ver shared/trail-exam.js).
 export const UEPA_GRANDE_AREAS = UEPA_BLOCKS.map((b) => b.grandeArea);
 
+// Agrupamento de EXIBIÇÃO (painel da trilha): o campo `area` das questões
+// ora é a grande área ("Cirurgia Geral"), ora a especialidade de Clínica
+// Médica ("Cardiologia") — mesma divisão de taxonomia/*.json. Isto junta
+// tudo nas grandes áreas pra um gráfico legível. NÃO serve pra montar
+// simulado da UEPA (lá vale a posição da questão, ver acima): um mesmo
+// assunto pode cair em blocos diferentes conforme o ano.
+const CLINICA_MEDICA = ['Cardiologia', 'Dermatologia', 'Endocrinologia', 'Gastroenterologia', 'Hepatologia', 'Hematologia', 'Infectologia', 'Nefrologia', 'Neurologia', 'Pneumologia', 'Reumatologia', 'Clínica Médica'];
+export function displayAreaFor(area) {
+    const a = (area || '').trim();
+    if (CLINICA_MEDICA.includes(a)) return 'Clínica Médica';
+    if (a === 'Ginecologia' || a === 'Obstetrícia') return 'Ginecologia e Obstetrícia';
+    if (['Cirurgia Geral', 'Pediatria', 'Medicina Preventiva'].includes(a)) return a;
+    return 'Outras especialidades';
+}
+
 // `number` é 1-100 dentro do caderno daquele ano (ver questions-uepa.js).
 // Fora desse range (dado ausente/malformado), devolve null em vez de
 // chutar uma grande área errada.

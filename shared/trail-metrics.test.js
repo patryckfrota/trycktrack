@@ -47,6 +47,14 @@ test('projectedScore usa acerto real onde estudado e prior onde não', () => {
     assert.equal(result.prior, 1);
 });
 
+test('projectedScore com unseenAccuracy: assunto não estudado entra com a chance informada, não com o acerto médio', () => {
+    const queue = { a1: { dueDate: '2026-02-01', lastResult: 'correct' }, a2: { dueDate: '2026-02-01', lastResult: 'correct' } };
+    const result = projectedScore(withStatus(queue), { unseenAccuracy: 0.2 });
+    // Puericultura (1/3 do peso) a 100%; Trauma e Hérnias (2/3) a 20%
+    assert.ok(Math.abs(result.score - (1 / 3 + (2 / 3) * 0.2)) < 1e-9);
+    assert.equal(result.prior, 1); // o acerto médio continua sendo reportado
+});
+
 test('projectedScore agrega por área corretamente', () => {
     const queue = { a1: { dueDate: '2026-02-01', lastResult: 'correct' }, a2: { dueDate: '2026-02-01', lastResult: 'wrong' } };
     const subjects = withStatus(queue);

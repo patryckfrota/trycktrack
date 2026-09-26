@@ -292,8 +292,20 @@
             track.goal = Math.min(0.95, Math.max(0.5, Number(goal) || 0.80));
             track.updatedAt = new Date().toISOString();
             saveTrailState(state);
-            renderTrails();
+            refreshTrailViews();
             pushTrailSettingsToCloud(trailId); // best-effort, não trava a UI
+        }
+
+        // Meta diária de questões (R-9) — é a capacidade que o cronograma
+        // distribui; sincroniza com as outras preferências da trilha.
+        function setTrailDailyGoal(trailId, value) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.dailyGoal = Math.min(300, Math.max(5, Math.round(Number(value) / 5) * 5 || 20));
+            track.updatedAt = new Date().toISOString();
+            saveTrailState(state);
+            refreshTrailViews();
+            pushTrailSettingsToCloud(trailId);
         }
 
         // Data da prova (fase 3) — guardada por trilha, igual à meta de
@@ -305,7 +317,7 @@
             track.examDate = dateIso || null;
             track.updatedAt = new Date().toISOString();
             saveTrailState(state);
-            renderTrails();
+            refreshTrailViews();
             pushTrailSettingsToCloud(trailId); // best-effort, não trava a UI
         }
 
@@ -341,7 +353,7 @@
             const track = getTrailTrack(state, trailId);
             saveTrailState(state);
             const catalog = TRAIL_CATALOG[trailId];
-            if (catalog.subjectBased) { renderSubjectTrail(hub, state, trailId, track); return; }
+            if (catalog.subjectBased) { renderSubjectTrail(hub, state, trailId); return; }
             const plan = getTrailPlan(trailId, track);
             const completed = Object.values(track.phaseProgress || {}).filter(value => value >= 100).length;
             const diagnosticDone = !!track.diagnosis;
@@ -464,7 +476,7 @@
 
         function toggleTrailSubjectTopics(key) {
             expandedTrailSubjectKey = expandedTrailSubjectKey === key ? null : key;
-            renderTrails();
+            refreshTrailViews();
         }
 
         function trailTopicListHtml(subject, questionsById, queue, today) {
@@ -548,104 +560,455 @@
             </div>`;
         }
 
-        function renderSubjectTrail(hub, state, trailId, track) {
+        // ---------- Contexto da trilha (R-9) ----------
+        // Tudo que a aba Trilhas e o Painel da trilha mostram, calculado
+        // num lugar só — as duas telas nunca discordam de um número.
+        function getTrailDailyGoal(track) {
+            const value = Number(track.dailyGoal);
+            return Number.isInteger(value) && value >= 5 ? value : 20;
+        }
+
+        // Chance de acertar no chute na banca: média de 1/nº de alternativas
+        // das questões dela (UEPA tem 5 → 20%; Revalida tem 4 → 25%). É o
+        // valor que um assunto nunca estudado vale na nota projetada.
+        const trailGuessRateCache = {};
+        function trailGuessRate(trailId, subjects, questionsById) {
+            if (trailGuessRateCache[trailId]) return trailGuessRateCache[trailId];
+            let sum = 0, n = 0;
+            for (const s of subjects) for (const id of s.questionIds) {
+                const count = Object.keys(questionsById.get(id)?.options || {}).length;
+                if (count >= 2) { sum += 1 / count; n += 1; }
+            }
+            return (trailGuessRateCache[trailId] = n ? sum / n : 0.2);
+        }
+
+        function buildTrailContext(trailId) {
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
             const catalog = TRAIL_CATALOG[trailId];
             const goal = getTrailGoal(track);
             const subjects = buildTrailSubjects(trailId);
             const queue = getReviewQueue();
             const today = new Date().toISOString().slice(0, 10);
+            const daysLeft = window.daysUntilExam(track.examDate, today);
+            const required = window.requiredPacePerDay(window.remainingWeight(subjects), daysLeft);
             const questionsById = getQuestionIndex();
+            const guessRate = trailGuessRate(trailId, subjects, questionsById);
+            return {
+                state, track, catalog, trailId, goal, subjects, queue, today, questionsById, guessRate,
+                coverage: window.weightedCoverage(subjects),
+                divida: subjects.reduce((total, s) => total + s.status.overdue + s.status.dueToday, 0),
+                daysLeft,
+                finalStretch: window.isFinalStretch(daysLeft),
+                pace: window.paceStatus(required, window.actualPacePerDay(track.history)),
+                projected: window.projectedScore(subjects, { unseenAccuracy: guessRate }),
+                dailyGoal: getTrailDailyGoal(track),
+                answeredToday: trailAnsweredToday(subjects, queue, today),
+            };
+        }
+
+        function trailPct(value) {
+            return `${Math.round(value * 100)}%`;
+        }
+
+        function trailDateShort(iso) {
+            const [, m, d] = iso.split('-');
+            return `${d}/${m}`;
+        }
+
+        const TRAIL_WEEKDAY = new Intl.DateTimeFormat('pt-BR', { weekday: 'short' });
+        function trailDayLabel(iso, today) {
+            if (iso === today) return 'Hoje';
+            const diff = Math.round((Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86400000);
+            if (diff === 1) return 'Amanhã';
+            return `${TRAIL_WEEKDAY.format(new Date(`${iso}T12:00:00`)).replace('.', '')} ${trailDateShort(iso)}`;
+        }
+
+        function trailQuestionsText(n) {
+            return `${n} ${n === 1 ? 'questão' : 'questões'}`;
+        }
+
+        // Próxima revisão agendada de um assunto (a menor data da fila entre
+        // as questões dele já estudadas) — null se nada estudado.
+        function trailNextReview(subject, queue) {
+            let next = null;
+            for (const id of subject.questionIds) {
+                const due = queue[id]?.dueDate;
+                if (due && (!next || due < next)) next = due;
+            }
+            return next;
+        }
+
+        function trailSwitchHtml(trailId) {
+            return `<div class="trail-switch">
+                ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}" aria-pressed="${id === trailId}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}">${id === trailId ? '<span class="trail-switch-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>' : ''}</button>`).join('')}
+            </div>`;
+        }
+
+        // Aba Trilhas = o que fazer HOJE. As métricas completas moram no
+        // Painel da trilha (openTrailDashboard) — antes tudo ficava empilhado
+        // numa rolagem só e o aluno não sabia por onde começar.
+        function renderSubjectTrail(hub, state, trailId) {
+            const ctx = buildTrailContext(trailId);
+            const { track, catalog, subjects, queue, today, questionsById, goal, divida, finalStretch, projected, coverage, dailyGoal, answeredToday } = ctx;
+
+            const isNewHistoryDay = recordTrailHistory(track, today, projected.score, coverage);
+            if (isNewHistoryDay) { track.updatedAt = new Date().toISOString(); pushTrailSettingsToCloud(trailId); }
+            saveTrailState(ctx.state);
 
             const hoje = subjects
                 .filter(s => s.status.status === 'atrasado' || s.status.status === 'faça agora')
                 .sort((a, b) => (b.status.overdue - a.status.overdue) || (b.weight - a.weight));
-            const coverage = window.weightedCoverage(subjects);
-            const divida = subjects.reduce((total, s) => total + s.status.overdue + s.status.dueToday, 0);
-
-            const daysLeft = window.daysUntilExam(track.examDate, today);
-            const finalStretch = window.isFinalStretch(daysLeft);
-            const required = window.requiredPacePerDay(window.remainingWeight(subjects), daysLeft);
-            const actual = window.actualPacePerDay(track.history);
-            const pace = window.paceStatus(required, actual);
-            // Reta final (fase 3): pra de puxar assunto novo de peso
-            // baixo — só continua sugerindo os de peso acima da média
-            // (ver isLowWeightForFinalStretch) e prioriza revisão do que
-            // já foi visto sobre abrir conteúdo novo de pouco peso.
             let novos = window.prioritizeNewSubjects(subjects, goal);
             if (finalStretch) novos = novos.filter(s => !window.isLowWeightForFinalStretch(s, subjects));
-            novos = novos.slice(0, 8);
-
-            const projected = window.projectedScore(subjects);
-            const weak = window.weakSpots(subjects, 5);
-            const load = window.reviewLoadByDay(subjects, queue, today, 7);
-            const maxLoad = Math.max(1, ...load.map(d => d.count));
-            const answeredToday = trailAnsweredToday(subjects, queue, today);
-            const dailyGoal = Number(track.dailyGoal) > 0 ? Number(track.dailyGoal) : 20;
-
-            const isNewHistoryDay = recordTrailHistory(track, today, projected.score, coverage);
-            if (isNewHistoryDay) { track.updatedAt = new Date().toISOString(); pushTrailSettingsToCloud(trailId); }
-            saveTrailState(state);
-
-            const areaBars = Object.entries(projected.byArea)
-                .sort((a, b) => b[1].weight - a[1].weight)
-                .map(([area, v]) => `<div class="trail-area-row"><span class="trail-area-name">${area}</span><div class="trail-area-bar"><span style="width:${Math.round(v.score * 100)}%"></span></div><span class="trail-area-pct">${Math.round(v.score * 100)}%</span></div>`)
-                .join('');
-
-            const weekdayFmt = new Intl.DateTimeFormat('pt-BR', { weekday: 'short' });
-            const loadBars = load.map(d => {
-                const isToday = d.date === today;
-                const label = isToday ? 'Hoje' : weekdayFmt.format(new Date(d.date + 'T00:00:00')).replace('.', '');
-                const h = Math.round((d.count / maxLoad) * 100);
-                return `<div class="trail-load-col"><div class="trail-load-track"><span style="height:${h}%"></span></div><span class="trail-load-count">${d.count}</span><span class="trail-load-label">${label}</span></div>`;
-            }).join('');
+            novos = novos.slice(0, 5);
+            const todayPct = Math.min(100, Math.round((answeredToday / dailyGoal) * 100));
 
             hub.innerHTML = `
                 <div class="trail-hub-header">
                     <span class="beta-pill">Beta</span>
                 </div>
-                <div class="trail-switch">
-                    ${Object.entries(TRAIL_CATALOG).map(([id, item]) => `<button class="trail-switch-button${id === trailId ? ' active' : ''}" onclick="selectTrail('${id}')" aria-label="${item.name}" aria-pressed="${id === trailId}"><img class="trail-switch-logo" src="${item.logo}" alt="${item.name}">${id === trailId ? '<span class="trail-switch-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>' : ''}</button>`).join('')}
-                </div>
+                ${trailSwitchHtml(trailId)}
 
-                <div class="trail-score-card">
-                    <div class="trail-score-main">
-                        <span class="trail-score-value">${Math.round(projected.score * 100)}</span>
-                        <span class="trail-score-suffix">/100 se a prova fosse hoje</span>
+                <button type="button" class="trail-summary" onclick="openTrailDashboard('geral')" aria-label="Abrir o painel da trilha">
+                    <div class="trail-summary-top">
+                        <div class="trail-score-main">
+                            <span class="trail-score-value">${Math.round(projected.score * 100)}</span>
+                            <span class="trail-score-suffix">/100 se a prova fosse hoje</span>
+                        </div>
+                        ${trailHistorySparklineSvg(track.history)}
                     </div>
-                    ${trailHistorySparklineSvg(track.history)}
-                </div>
-                <div class="trail-area-bars">${areaBars}</div>
+                    <div class="trail-summary-stats">
+                        <span><strong>${trailPct(coverage)}</strong> da prova iniciada</span>
+                        <span><strong>${Math.min(answeredToday, dailyGoal)}/${dailyGoal}</strong> hoje</span>
+                        ${ctx.daysLeft !== null && ctx.daysLeft >= 0 ? `<span><strong>${ctx.daysLeft}</strong> dias até a prova</span>` : ''}
+                    </div>
+                    <div class="trail-coverage-bar" aria-hidden="true"><span style="width:${todayPct}%"></span></div>
+                    <span class="trail-summary-cta">Abrir painel completo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span>
+                </button>
 
-                ${trailPaceHtml(trailId, track.examDate, daysLeft, pace, finalStretch)}
+                ${ctx.pace.status === 'sem-data' ? trailPaceHtml(trailId, track.examDate, ctx.daysLeft, ctx.pace, finalStretch) : ''}
 
-                <div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>${divida ? `${divida} questão${divida > 1 ? 'ões' : ''} pronta${divida > 1 ? 's' : ''} pra revisar.` : 'Tudo em dia — comece um assunto novo abaixo.'}</span></div>
-
-                ${divida > 0 ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${divida} questão${divida > 1 ? 'ões' : ''}</button>` : ''}
+                ${divida > 0
+                    ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${trailQuestionsText(divida)} pra revisar</button>`
+                    : `<div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Nenhuma revisão pendente — comece um assunto novo abaixo.</span></div>`}
+                <button type="button" class="trail-exam-btn" onclick="openTrailDashboard('cronograma')">Ver cronograma até a prova</button>
                 ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
                 ${catalog.examPerArea ? `<div class="trail-area-exams">${window.UEPA_GRANDE_AREAS.map(area => `<button class="trail-area-exam-btn" onclick="startTrailAreaExam('${trailId}','${area.replace(/'/g, "\\'")}')">${area} · ${catalog.examPerArea}</button>`).join('')}</div>` : ''}
 
-                <div class="trail-daily-goal">
-                    <div class="trail-daily-goal-label">Meta diária <strong>${Math.min(answeredToday, dailyGoal)}/${dailyGoal}</strong> questões</div>
-                    <div class="trail-coverage-bar"><span style="width:${Math.min(100, Math.round((answeredToday / dailyGoal) * 100))}%"></span></div>
-                </div>
-
-                <div class="trail-goal">
-                    <label for="trailGoalRange">Meta de acerto <strong>${Math.round(goal * 100)}%</strong></label>
-                    <input id="trailGoalRange" type="range" min="50" max="95" step="5" value="${Math.round(goal * 100)}" oninput="this.previousElementSibling.querySelector('strong').textContent = this.value + '%'" onchange="setTrailGoal('${trailId}', this.value / 100)">
-                </div>
-                <div class="trail-coverage">
-                    <div class="trail-coverage-label">Cobertura ponderada da prova <strong>${Math.round(coverage * 100)}%</strong></div>
-                    <div class="trail-coverage-bar"><span style="width:${Math.round(coverage * 100)}%"></span></div>
-                </div>
-
-                ${weak.length ? `<h3 class="trail-section-title">Pontos fracos</h3><div class="trail-path">${weak.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
-
-                <h3 class="trail-section-title">Carga de revisão — próximos 7 dias</h3>
-                <div class="trail-load-chart">${loadBars}</div>
-
-                ${hoje.length ? `<h3 class="trail-section-title">Hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
+                ${hoje.length ? `<h3 class="trail-section-title">Revisar hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
                 <h3 class="trail-section-title">Próximos assuntos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
-                <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('') : '<p class="trail-empty-note">Sem questões classificadas por assunto nesta banca ainda.</p>'}</div>`;
+                <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('') : '<p class="trail-empty-note">Todos os assuntos já foram iniciados.</p>'}</div>
+                <button type="button" class="trail-link-btn" onclick="openTrailDashboard('assuntos')">Ver todos os ${subjects.length} assuntos</button>`;
+        }
+
+        // ---------- Painel da trilha (R-9) ----------
+        const TRAIL_DASH_TABS = [['geral', 'Visão geral'], ['cronograma', 'Cronograma'], ['assuntos', 'Assuntos'], ['desempenho', 'Desempenho']];
+        let trailDashTab = 'geral';
+        let trailDashFilter = 'todos';
+        let trailDashArea = '';
+
+        function isTrailDashboardOpen() {
+            return !!document.getElementById('trailDashboard')?.classList.contains('active');
+        }
+
+        function openTrailDashboard(tab) {
+            if (tab) trailDashTab = tab;
+            renderTrailDashboard();
+            document.getElementById('trailDashboard').classList.add('active');
+        }
+
+        function closeTrailDashboard() {
+            document.getElementById('trailDashboard').classList.remove('active');
+            renderTrails();
+        }
+
+        function setTrailDashTab(tab) {
+            trailDashTab = tab;
+            renderTrailDashboard();
+            const content = document.getElementById('trailDashContent');
+            if (content) content.scrollTop = 0;
+        }
+
+        function setTrailDashFilter(filter) { trailDashFilter = filter; renderTrailDashboard(); }
+        function setTrailDashArea(area) { trailDashArea = area; renderTrailDashboard(); }
+
+        // Qualquer mudança de configuração redesenha a aba e, se aberto, o painel.
+        function refreshTrailViews() {
+            renderTrails();
+            if (isTrailDashboardOpen()) renderTrailDashboard();
+        }
+
+        // Sai do painel antes de abrir uma sessão — ao voltar, o aluno cai na
+        // aba já atualizada, não num painel com números de antes da sessão.
+        function studyTrailSubjectFromDashboard(key) {
+            closeTrailDashboard();
+            startTrailSubject(key);
+        }
+
+        function renderTrailDashboard() {
+            const state = getTrailState();
+            const trailId = state.active || 'enamed';
+            if (!TRAIL_CATALOG[trailId]?.subjectBased) return;
+            const ctx = buildTrailContext(trailId);
+            document.getElementById('trailDashTitle').textContent = `Painel · ${ctx.catalog.name.replace('Trilha ', '')}`;
+            document.getElementById('trailDashTabs').innerHTML = TRAIL_DASH_TABS.map(([id, label]) =>
+                `<button type="button" role="tab" aria-selected="${id === trailDashTab}" class="trail-dash-tab${id === trailDashTab ? ' is-active' : ''}" onclick="setTrailDashTab('${id}')">${label}</button>`
+            ).join('');
+            const render = { geral: trailDashGeralHtml, cronograma: trailDashCronogramaHtml, assuntos: trailDashAssuntosHtml, desempenho: trailDashDesempenhoHtml }[trailDashTab] || trailDashGeralHtml;
+            document.getElementById('trailDashContent').innerHTML = render(ctx);
+        }
+
+        // Linha de evolução da nota projetada (uma série só: a cor de
+        // destaque; eixos discretos; tooltip nativo por ponto).
+        function trailHistoryChartSvg(history) {
+            if (!history || history.length < 2) {
+                return '<p class="trail-empty-note">A evolução aparece a partir do segundo dia de uso da trilha.</p>';
+            }
+            const W = 320, H = 140, L = 30, R = 10, T = 10, B = 22;
+            const x = i => L + (i / (history.length - 1)) * (W - L - R);
+            const y = v => T + (1 - v) * (H - T - B);
+            const line = history.map((p, i) => `${x(i).toFixed(1)},${y(p.score).toFixed(1)}`).join(' ');
+            const area = `${x(0).toFixed(1)},${y(0)} ${line} ${x(history.length - 1).toFixed(1)},${y(0)}`;
+            const grid = [0, 0.5, 1].map(v => `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" class="trail-chart-grid"/><text x="${L - 6}" y="${y(v) + 3.5}" text-anchor="end" class="trail-chart-tick">${Math.round(v * 100)}</text>`).join('');
+            const dots = history.map((p, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(p.score).toFixed(1)}" r="${i === history.length - 1 ? 4 : 2.5}" class="trail-chart-dot"><title>${trailDateShort(p.date)}: ${Math.round(p.score * 100)}/100</title></circle>`).join('');
+            return `<svg class="trail-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolução da nota projetada">
+                ${grid}
+                <polygon points="${area}" class="trail-chart-area"/>
+                <polyline points="${line}" class="trail-chart-line"/>
+                ${dots}
+                <text x="${L}" y="${H - 6}" class="trail-chart-tick">${trailDateShort(history[0].date)}</text>
+                <text x="${W - R}" y="${H - 6}" text-anchor="end" class="trail-chart-tick">${trailDateShort(history[history.length - 1].date)}</text>
+            </svg>`;
+        }
+
+        function trailDashGeralHtml(ctx) {
+            const { track, subjects, queue, today, projected, coverage, divida, dailyGoal, answeredToday, goal, trailId } = ctx;
+            const studied = subjects.filter(s => s.status.studied > 0);
+            const retentions = studied.map(s => window.subjectRetention(s, queue, today)).filter(v => v !== null);
+            const retention = retentions.length ? retentions.reduce((a, b) => a + b, 0) / retentions.length : null;
+            const history = Array.isArray(track.history) ? track.history : [];
+            const cutoff = new Date(`${today}T00:00:00Z`); cutoff.setUTCDate(cutoff.getUTCDate() - 7);
+            const cutoffIso = cutoff.toISOString().slice(0, 10);
+            const base = [...history].reverse().find(p => p.date <= cutoffIso);
+            const delta = base ? Math.round((projected.score - base.score) * 100) : null;
+            const kpi = (label, value, sub) => `<div class="trail-kpi"><span class="trail-kpi-label">${label}</span><strong class="trail-kpi-value">${value}</strong><span class="trail-kpi-sub">${sub}</span></div>`;
+            // byArea vem pela área crua da questão (ora grande área, ora
+            // especialidade de Clínica Médica) — reagrupa nas grandes áreas,
+            // média ponderada pelo peso, pra um gráfico de 5-6 linhas.
+            const grouped = {};
+            for (const [area, v] of Object.entries(projected.byArea)) {
+                const key = window.displayAreaFor(area);
+                grouped[key] ||= { weight: 0, weighted: 0 };
+                grouped[key].weight += v.weight;
+                grouped[key].weighted += v.weight * v.score;
+            }
+            const totalWeight = Object.values(grouped).reduce((sum, v) => sum + v.weight, 0) || 1;
+            const areaBars = Object.entries(grouped)
+                .sort((a, b) => b[1].weight - a[1].weight)
+                .map(([area, v]) => {
+                    const score = v.weight ? v.weighted / v.weight : 0;
+                    return `<div class="trail-area-row" title="${area}: ${trailPct(score)} de nota projetada, ${trailPct(v.weight / totalWeight)} da prova"><span class="trail-area-name">${area}<small>${trailPct(v.weight / totalWeight)} da prova</small></span><div class="trail-area-bar"><span style="width:${Math.round(score * 100)}%"></span></div><span class="trail-area-pct">${trailPct(score)}</span></div>`;
+                })
+                .join('');
+            return `
+                <section class="trail-dash-hero">
+                    <div class="trail-score-main">
+                        <span class="trail-score-value trail-score-value-lg">${Math.round(projected.score * 100)}</span>
+                        <span class="trail-score-suffix">/100 se a prova fosse hoje</span>
+                    </div>
+                    <p class="trail-dash-delta">${delta === null ? 'A comparação semanal aparece depois de 7 dias de uso.' : `${delta >= 0 ? '+' : ''}${delta} ${Math.abs(delta) === 1 ? 'ponto' : 'pontos'} nos últimos 7 dias`}</p>
+                    ${trailHistoryChartSvg(history)}
+                    <p class="trail-dash-footnote">Nota estimada: peso real de cada assunto na prova × seu acerto nele. Assunto ainda não estudado vale o acerto no chute (${trailPct(ctx.guessRate)}) — a nota sobe conforme você pratica.</p>
+                </section>
+
+                <div class="trail-kpi-grid">
+                    ${kpi('Prova iniciada', trailPct(coverage), 'do peso total da prova')}
+                    ${kpi('Assuntos iniciados', `${studied.length}/${subjects.length}`, 'com ao menos 1 questão')}
+                    ${kpi('Acerto geral', studied.length ? trailPct(projected.prior) : '—', 'nas questões já feitas')}
+                    ${kpi('Retenção média', retention === null ? '—' : `~${trailPct(retention)}`, 'estimada para hoje')}
+                    ${kpi('Revisões pendentes', String(divida), divida ? 'vencidas ou de hoje' : 'nada acumulado')}
+                    ${kpi('Hoje', `${answeredToday}/${dailyGoal}`, 'questões da meta diária')}
+                </div>
+
+                <h3 class="trail-section-title">Nota projetada por área</h3>
+                <div class="trail-area-bars">${areaBars}</div>
+
+                <h3 class="trail-section-title">Ritmo até a prova</h3>
+                ${trailPaceHtml(trailId, track.examDate, ctx.daysLeft, ctx.pace, ctx.finalStretch)}
+
+                <h3 class="trail-section-title">Ajustes do plano</h3>
+                ${trailSettingsHtml(trailId, track, goal, dailyGoal)}`;
+        }
+
+        function trailSettingsHtml(trailId, track, goal, dailyGoal) {
+            return `<div class="trail-settings">
+                <label class="trail-setting">
+                    <span class="trail-setting-label">Data da prova</span>
+                    <input type="date" class="trail-pace-date" value="${track.examDate || ''}" onchange="setTrailExamDate('${trailId}', this.value)">
+                </label>
+                <label class="trail-setting">
+                    <span class="trail-setting-label">Meta diária <strong>${dailyGoal} questões</strong></span>
+                    <input type="range" min="10" max="150" step="5" value="${dailyGoal}" oninput="this.previousElementSibling.querySelector('strong').textContent = this.value + ' questões'" onchange="setTrailDailyGoal('${trailId}', this.value)">
+                </label>
+                <label class="trail-setting">
+                    <span class="trail-setting-label">Meta de acerto <strong>${Math.round(goal * 100)}%</strong></span>
+                    <input type="range" min="50" max="95" step="5" value="${Math.round(goal * 100)}" oninput="this.previousElementSibling.querySelector('strong').textContent = this.value + '%'" onchange="setTrailGoal('${trailId}', this.value / 100)">
+                </label>
+            </div>`;
+        }
+
+        function trailDashCronogramaHtml(ctx) {
+            const { subjects, queue, today, track, dailyGoal, goal, trailId } = ctx;
+            const options = { subjectsWithStatus: subjects, reviewQueue: queue, todayIso: today, examDateIso: track.examDate || null, goal };
+            const { days, summary } = window.buildSchedule({ ...options, dailyCapacity: dailyGoal });
+            const minimum = window.minimumDailyCapacity(options);
+
+            let banner;
+            if (!summary.hasExam) {
+                banner = `<div class="trail-plan-banner"><strong>Defina a data da prova</strong><p>Sem data, o plano mostra só as próximas 4 semanas.</p><input type="date" class="trail-pace-date" onchange="setTrailExamDate('${trailId}', this.value)"></div>`;
+            } else if (summary.allCovered) {
+                const spare = summary.coveredAllBy ? days.filter(d => d.date > summary.coveredAllBy).length : 0;
+                banner = `<div class="trail-plan-banner is-ok"><strong>Dá tempo de ver tudo</strong><p>Com ${dailyGoal} questões por dia você abre os ${summary.subjectsScheduled} assuntos até ${trailDateShort(summary.coveredAllBy)}${spare > 1 ? ` e ainda sobram ${spare} dias só de revisão antes da prova` : ''}.</p></div>`;
+            } else {
+                const left = summary.subjectsLeft + summary.skippedLowWeight;
+                banner = `<div class="trail-plan-banner is-late"><strong>${trailPct(summary.weightCovered)} do peso da prova entra no plano</strong><p>Com ${dailyGoal} questões por dia, ${left} ${left === 1 ? 'assunto fica' : 'assuntos ficam'} de fora — os de menor peso.${minimum ? ` Para ver todos: ${minimum} questões por dia.` : ' Nem com 200 por dia cabe tudo — priorize pelo peso.'}</p>${minimum ? `<button type="button" class="trail-link-btn" onclick="setTrailDailyGoal('${trailId}', ${minimum})">Usar ${minimum} questões por dia</button>` : ''}</div>`;
+            }
+
+            const weeks = [];
+            for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
+            const weeksHtml = weeks.map((week, wi) => {
+                const total = week.reduce((sum, d) => sum + d.load, 0);
+                const opened = week.reduce((sum, d) => sum + d.newSubjects.length, 0);
+                const rows = week.map((day, di) => {
+                    const prev = di > 0 ? week[di - 1] : (wi > 0 ? weeks[wi - 1][weeks[wi - 1].length - 1] : null);
+                    const stretchStart = day.finalStretch && !(prev && prev.finalStretch)
+                        ? '<div class="trail-day-divider">Início da reta final — só assuntos de peso alto</div>' : '';
+                    if (day.examDay) return `${stretchStart}<div class="trail-day is-exam"><div class="trail-day-head"><span class="trail-day-label">${trailDayLabel(day.date, today)}</span><span class="trail-day-load">Dia da prova</span></div></div>`;
+                    const chips = [
+                        day.reviews ? `<span class="trail-day-chip">${day.reviews} ${day.reviews === 1 ? 'revisão' : 'revisões'}</span>` : '',
+                        day.projectedReviews ? `<span class="trail-day-chip is-projected">~${day.projectedReviews} previstas</span>` : '',
+                        ...day.newSubjects.map(s => `<span class="trail-day-chip is-new" title="${s.area} · ${Math.round(s.weight * 1000) / 10}% da prova">${s.assunto} · ${s.questions}</span>`),
+                    ].join('');
+                    const width = Math.min(100, Math.round((day.load / dailyGoal) * 100));
+                    return `${stretchStart}<div class="trail-day${day.overload ? ' is-over' : ''}">
+                        <div class="trail-day-head"><span class="trail-day-label">${trailDayLabel(day.date, today)}</span><span class="trail-day-load">${day.load}/${dailyGoal}</span></div>
+                        <div class="trail-day-bar" aria-hidden="true"><span style="width:${width}%"></span></div>
+                        <div class="trail-day-items">${chips || '<span class="trail-day-free">Livre — bom dia pra simulado</span>'}</div>
+                    </div>`;
+                }).join('');
+                return `<details class="trail-week"${wi < 2 ? ' open' : ''}>
+                    <summary><span>${trailDateShort(week[0].date)} – ${trailDateShort(week[week.length - 1].date)}</span><span class="trail-week-meta">${trailQuestionsText(total)}${opened ? ` · ${opened} ${opened === 1 ? 'assunto novo' : 'assuntos novos'}` : ''}</span></summary>
+                    ${rows}
+                </details>`;
+            }).join('');
+
+            return `${banner}
+                <div class="trail-plan-legend">
+                    <span><i class="trail-legend-dot"></i>Revisões já agendadas</span>
+                    <span><i class="trail-legend-dot is-projected"></i>Revisões previstas</span>
+                    <span><i class="trail-legend-dot is-new"></i>Assunto novo · questões</span>
+                </div>
+                ${summary.overloadDays ? `<p class="trail-dash-footnote">${summary.overloadDays} ${summary.overloadDays === 1 ? 'dia passa' : 'dias passam'} da meta diária por revisões que já estão vencendo.</p>` : ''}
+                ${weeksHtml}
+                <p class="trail-dash-footnote">Revisões previstas são estimativas (revisão em 3, 10 e 30 dias após abrir o assunto) e são substituídas pelas datas reais assim que você responde as questões. O plano se recalcula sozinho a cada acesso.</p>`;
+        }
+
+        function trailSubjectRowHtml(subject, ctx) {
+            const { queue, today, questionsById } = ctx;
+            const key = subject.key.replace(/'/g, "\\'");
+            const slug = SUBJECT_STATUS_SLUG[subject.status.status] || 'ok';
+            const label = SUBJECT_STATUS_LABEL[subject.status.status] || subject.status.status;
+            const expanded = expandedTrailSubjectKey === subject.key;
+            const stats = [];
+            if (subject.status.studied) {
+                stats.push(`${trailPct(subject.status.accuracy)} de acerto`);
+                const retention = window.subjectRetention(subject, queue, today);
+                if (retention !== null) stats.push(`~${trailPct(retention)} retido`);
+                const next = trailNextReview(subject, queue);
+                if (next) stats.push(next <= today ? 'revisar hoje' : `revisão ${trailDateShort(next)}`);
+            }
+            stats.push(`${subject.status.studied}/${subject.status.total} feitas`);
+            return `<div class="trail-subj${expanded ? ' is-open' : ''}">
+                <button type="button" class="trail-subj-row" onclick="toggleTrailSubjectTopics('${key}')" aria-expanded="${expanded}">
+                    <span class="trail-subj-main">
+                        <span class="trail-subj-title">${subject.assunto}</span>
+                        <span class="trail-subj-meta">${subject.area} · ${Math.round(subject.weight * 1000) / 10}% da prova</span>
+                        <span class="trail-subj-stats">${stats.join(' · ')}</span>
+                    </span>
+                    <span class="trail-subj-status is-${slug}">${label}</span>
+                </button>
+                <div class="trail-subj-progress" aria-hidden="true"><span style="width:${Math.round((subject.status.studied / Math.max(1, subject.status.total)) * 100)}%"></span></div>
+                ${expanded ? `${trailTopicListHtml(subject, questionsById, queue, today)}<button type="button" class="trail-today-btn trail-subj-study" onclick="studyTrailSubjectFromDashboard('${key}')">Estudar este assunto</button>` : ''}
+            </div>`;
+        }
+
+        function trailDashAssuntosHtml(ctx) {
+            const { subjects } = ctx;
+            const filters = [['todos', 'Todos'], ['atrasado', 'Atrasados'], ['faça agora', 'Pra hoje'], ['em dia', 'Em dia'], ['novo', 'Novos']];
+            const count = f => f === 'todos' ? subjects.length : subjects.filter(s => s.status.status === f).length;
+            const areas = [...new Set(subjects.map(s => s.area))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+            const list = subjects
+                .filter(s => trailDashFilter === 'todos' || s.status.status === trailDashFilter)
+                .filter(s => !trailDashArea || s.area === trailDashArea)
+                .sort((a, b) => b.weight - a.weight);
+            return `
+                <div class="trail-dash-filters">
+                    ${filters.map(([id, label]) => `<button type="button" class="trail-dash-tab${trailDashFilter === id ? ' is-active' : ''}" onclick="setTrailDashFilter('${id}')">${label} <span class="trail-chip-count">${count(id)}</span></button>`).join('')}
+                </div>
+                <select class="trail-dash-select" onchange="setTrailDashArea(this.value)" aria-label="Filtrar por área">
+                    <option value="">Todas as áreas</option>
+                    ${areas.map(a => `<option value="${a.replace(/"/g, '&quot;')}"${a === trailDashArea ? ' selected' : ''}>${a}</option>`).join('')}
+                </select>
+                <p class="trail-dash-footnote">${list.length} ${list.length === 1 ? 'assunto' : 'assuntos'}, do maior pro menor peso na prova. Toque pra ver os tópicos.</p>
+                <div class="trail-subj-list">${list.length ? list.map(s => trailSubjectRowHtml(s, ctx)).join('') : '<p class="trail-empty-note">Nenhum assunto neste filtro.</p>'}</div>`;
+        }
+
+        // Matriz peso × acerto: onde cada assunto estudado está. O quadrante
+        // de peso alto e acerto abaixo da meta é o que mais custa ponto.
+        function trailMatrixSvg(ctx) {
+            const { subjects, goal } = ctx;
+            const studied = subjects.filter(s => s.status.studied > 0);
+            if (!studied.length) return '<p class="trail-empty-note">A matriz aparece quando você responder questões de algum assunto.</p>';
+            const W = 320, H = 220, L = 34, R = 12, T = 12, B = 30;
+            const maxW = Math.max(...subjects.map(s => s.weight)) * 1.05;
+            const meanW = subjects.reduce((a, s) => a + s.weight, 0) / subjects.length;
+            const x = w => L + (w / maxW) * (W - L - R);
+            const y = a => T + (1 - a) * (H - T - B);
+            const dots = studied.map(s => {
+                const critical = s.weight >= meanW && s.status.accuracy < goal;
+                return `<circle cx="${x(s.weight).toFixed(1)}" cy="${y(s.status.accuracy).toFixed(1)}" r="5" class="trail-matrix-dot${critical ? ' is-critical' : ''}"><title>${s.assunto} — ${Math.round(s.weight * 1000) / 10}% da prova, ${trailPct(s.status.accuracy)} de acerto</title></circle>`;
+            }).join('');
+            return `<svg class="trail-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Matriz de peso na prova por acerto">
+                <rect x="${x(meanW)}" y="${y(goal)}" width="${W - R - x(meanW)}" height="${H - B - y(goal)}" class="trail-matrix-zone"/>
+                <text x="${W - R - 4}" y="${H - B - 6}" text-anchor="end" class="trail-matrix-zone-label">Prioridade máxima</text>
+                <line x1="${L}" x2="${W - R}" y1="${y(goal)}" y2="${y(goal)}" class="trail-chart-grid is-strong"/>
+                <line x1="${x(meanW)}" x2="${x(meanW)}" y1="${T}" y2="${H - B}" class="trail-chart-grid is-strong"/>
+                <text x="${L - 6}" y="${y(1) + 3.5}" text-anchor="end" class="trail-chart-tick">100%</text>
+                <text x="${L - 6}" y="${y(goal) + 3.5}" text-anchor="end" class="trail-chart-tick">meta</text>
+                <text x="${L - 6}" y="${y(0) + 3.5}" text-anchor="end" class="trail-chart-tick">0%</text>
+                <text x="${(L + W - R) / 2}" y="${H - 8}" text-anchor="middle" class="trail-chart-tick">peso na prova →</text>
+                ${dots}
+            </svg>`;
+        }
+
+        function trailDashDesempenhoHtml(ctx) {
+            const { subjects, queue, today, dailyGoal } = ctx;
+            const weak = window.weakSpots(subjects, 8);
+            const load = window.reviewLoadByDay(subjects, queue, today, 14);
+            const maxLoad = Math.max(dailyGoal, ...load.map(d => d.count));
+            const bars = load.map(d => `<div class="trail-load-col" title="${trailDateShort(d.date)}: ${trailQuestionsText(d.count)}"><div class="trail-load-track"><span style="height:${Math.round((d.count / maxLoad) * 100)}%"></span></div><span class="trail-load-count">${d.count}</span><span class="trail-load-label">${d.date === today ? 'Hoje' : trailDateShort(d.date).slice(0, 2)}</span></div>`).join('');
+            return `
+                <h3 class="trail-section-title">Peso na prova × seu acerto</h3>
+                ${trailMatrixSvg(ctx)}
+                <p class="trail-dash-footnote">Cada ponto é um assunto já estudado. A área em destaque junta os que pesam acima da média e estão abaixo da sua meta de acerto — é onde cada hora rende mais pontos.</p>
+
+                <h3 class="trail-section-title">Pontos fracos · o que mais custa na nota</h3>
+                <div class="trail-subj-list">${weak.length ? weak.map(s => trailSubjectRowHtml(s, ctx)).join('') : '<p class="trail-empty-note">Aparecem aqui os assuntos estudados com mais erro, ponderados pelo peso na prova.</p>'}</div>
+
+                <h3 class="trail-section-title">Revisões já agendadas · próximos 14 dias</h3>
+                <div class="trail-load-chart trail-load-chart-wide">${bars}</div>
+                <p class="trail-dash-footnote">Escala até ${maxLoad} questões (sua meta diária é ${dailyGoal}).</p>`;
         }
 
         // Inicia uma sessão pra um assunto: se tiver questão vencida
@@ -3684,7 +4047,13 @@ Regras obrigatórias:
         // pullReviewSyncFromCloud/flushReviewSync acima, um endpoint por
         // trilha em vez de um payload por questão.
         function trailSettingsPayload(track) {
-            return { goal: track.goal ?? null, examDate: track.examDate ?? null, history: track.history ?? [], updatedAt: track.updatedAt || new Date().toISOString() };
+            return {
+                goal: track.goal ?? null,
+                examDate: track.examDate ?? null,
+                dailyGoal: Number.isInteger(track.dailyGoal) ? track.dailyGoal : null,
+                history: track.history ?? [],
+                updatedAt: track.updatedAt || new Date().toISOString()
+            };
         }
 
         async function pushTrailSettingsToCloud(trailId) {
@@ -3733,10 +4102,11 @@ Regras obrigatórias:
             if (!merged) return;
             track.goal = merged.goal ?? track.goal;
             track.examDate = merged.examDate ?? null;
+            if (Number.isInteger(merged.dailyGoal)) track.dailyGoal = merged.dailyGoal;
             track.history = Array.isArray(merged.history) ? merged.history : track.history;
             track.updatedAt = merged.updatedAt;
             saveTrailState(state);
-            if (state.active === trailId) renderTrails();
+            if (state.active === trailId) refreshTrailViews();
         }
 
         // Índice id -> questão dos DOIS bancos. O Internato também grava na

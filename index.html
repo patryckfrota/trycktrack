@@ -812,6 +812,19 @@
         </div>
     </div>
 
+    <!-- PAINEL DA TRILHA — dashboard em tela cheia (R-9), mesmo padrão
+         .reader-view dos Bullets. Conteúdo montado por renderTrailDashboard. -->
+    <div class="reader-view trail-dash" id="trailDashboard" role="dialog" aria-modal="true" aria-labelledby="trailDashTitle">
+        <div class="reader-header">
+            <button class="reader-back" onclick="closeTrailDashboard()" aria-label="Fechar painel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+            </button>
+            <div class="reader-header-title" id="trailDashTitle">Painel da trilha</div>
+        </div>
+        <div class="trail-dash-tabs" id="trailDashTabs" role="tablist"></div>
+        <div class="reader-content trail-dash-content" id="trailDashContent"></div>
+    </div>
+
     <div class="reader-view" id="bulletsView">
         <div class="reader-header">
             <button class="reader-back" onclick="closeBullets()">
@@ -1082,9 +1095,14 @@
         // área, classificadas pela posição na prova — ver exam-areas.js).
         import { buildWeightedExam } from "./shared/trail-exam.js";
         window.buildWeightedExam = buildWeightedExam;
-        import { grandeAreaForUepaQuestion, UEPA_GRANDE_AREAS } from "./shared/exam-areas.js";
+        import { grandeAreaForUepaQuestion, UEPA_GRANDE_AREAS, displayAreaFor } from "./shared/exam-areas.js";
+        window.displayAreaFor = displayAreaFor;
         window.grandeAreaForUepaQuestion = grandeAreaForUepaQuestion;
         window.UEPA_GRANDE_AREAS = UEPA_GRANDE_AREAS;
+        // Cronograma até a prova (painel da trilha, R-9).
+        import { buildSchedule, minimumDailyCapacity } from "./shared/trail-schedule.js";
+        window.buildSchedule = buildSchedule;
+        window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
         // já cobertas por node --test em shared/scoring.test.js — ver
         // comentário no próprio arquivo.

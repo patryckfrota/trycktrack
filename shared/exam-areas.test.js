@@ -1,6 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { grandeAreaForUepaQuestion } from './exam-areas.js';
+import { grandeAreaForUepaQuestion, displayAreaFor } from './exam-areas.js';
+
+test('displayAreaFor junta especialidades nas grandes áreas pra exibição', () => {
+    assert.equal(displayAreaFor('Cardiologia'), 'Clínica Médica');
+    assert.equal(displayAreaFor('Obstetrícia'), 'Ginecologia e Obstetrícia');
+    assert.equal(displayAreaFor('Cirurgia Geral'), 'Cirurgia Geral');
+    assert.equal(displayAreaFor('Psiquiatria'), 'Outras especialidades');
+    assert.equal(displayAreaFor(undefined), 'Outras especialidades');
+});
 
 test('classifica pelos limites de cada bloco de 20 questões', () => {
     assert.equal(grandeAreaForUepaQuestion({ number: 1 }), 'Medicina Preventiva');
