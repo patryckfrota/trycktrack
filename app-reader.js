@@ -3650,17 +3650,36 @@
             return getLastReadTopic();
         }
 
+        // Não busca mais só dentro de #reviewTab — desde que os cards por
+        // tópico moraram pro overlay de grupo (#reviewGroupEnamed/Uepa), o
+        // card em si pode estar em qualquer um desses contêineres; procurar
+        // no documento inteiro e reordenar dentro do próprio pai de cada um
+        // funciona nos dois lugares sem precisar saber qual grupo é.
         function syncRapidReviewMenu(topicKey = getFeaturedReviewTopic()) {
-            const reviewTab = document.getElementById('reviewTab');
-            if (!reviewTab) return;
-
-            const cards = Array.from(reviewTab.querySelectorAll(':scope > .rr-card'));
+            const cards = Array.from(document.querySelectorAll('.rr-card[data-topic]'))
+                .filter(card => RAPID_REVIEW_DATA[card.getAttribute('data-topic')]);
             cards.forEach(card => {
                 card.classList.toggle('highlighted', Boolean(topicKey) && card.getAttribute('data-topic') === topicKey);
             });
 
             const featuredCard = cards.find(card => card.getAttribute('data-topic') === topicKey);
-            if (featuredCard) reviewTab.prepend(featuredCard);
+            if (featuredCard?.parentElement) featuredCard.parentElement.prepend(featuredCard);
+        }
+
+        // Hub ENAMED/UEPA na aba Rapid Review — abre o overlay mostrando só
+        // a lista do grupo escolhido (os cards de tópico continuam sendo os
+        // mesmos .rr-card de sempre, só trocam de contêiner visível).
+        function openReviewGroup(group) {
+            const titles = { enamed: 'ENAMED', uepa: 'UEPA' };
+            document.getElementById('reviewGroupTitle').textContent = titles[group] || 'Rapid Review';
+            document.getElementById('reviewGroupEnamed').style.display = group === 'enamed' ? '' : 'none';
+            document.getElementById('reviewGroupUepa').style.display = group === 'uepa' ? '' : 'none';
+            document.getElementById('reviewGroupView').classList.add('active');
+            if (group === 'enamed') updateAllCardProgress();
+        }
+
+        function closeReviewGroup() {
+            document.getElementById('reviewGroupView').classList.remove('active');
         }
 
         function highlightCurrentCard(topicKey) {
