@@ -28,7 +28,8 @@ export function urgencyMultiplierForAccuracy(accuracy) {
 export function calculatePathPriority({ topics, results = [], completedThemeIds = [] }) {
     const aggregate = results.reduce((acc, result) => {
         const key = result.themeId || result.area;
-        if (!key) return acc;
+        // correct === null: discursiva ou anulada, sem pontuação.
+        if (!key || result.correct === null) return acc;
         acc[key] ||= { correct: 0, total: 0 };
         acc[key].total += 1;
         acc[key].correct += result.correct ? 1 : 0;

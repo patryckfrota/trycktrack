@@ -9,12 +9,13 @@
  * no "não entendi").
  */
 
-// Questão discursiva não tem gabarito de letra — não é certo nem
-// errado, é "sem pontuação" (null). Quem chama precisa tratar os três
-// estados: true, false e null.
+// Questão discursiva não tem gabarito de letra, e anulada não tem
+// gabarito válido — nenhuma das duas é certa nem errada, é "sem
+// pontuação" (null) e fica fora do desempenho. Quem chama precisa
+// tratar os três estados: true, false e null.
 export function isQuestionAnswerCorrect(question, answer) {
-    if (question?.questionType === 'discursive') return null;
-    return Boolean(question?.annulled) || answer === question?.answer;
+    if (question?.questionType === 'discursive' || question?.annulled) return null;
+    return answer === question?.answer;
 }
 
 const OSCE_CHAT_STOPWORDS = new Set(['a', 'o', 'as', 'os', 'de', 'da', 'do', 'das', 'dos', 'em', 'com', 'para', 'por', 'sobre', 'que', 'e', 'ou', 'se', 'um', 'uma', 'no', 'na', 'nos', 'nas', 'ao', 'aos', 'à', 'às', 'é', 'foi', 'ser', 'tem', 'há', 'esta', 'está', 'isso', 'isto', 'qual', 'quais', 'como', 'voce', 'você']);

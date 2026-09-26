@@ -7,9 +7,9 @@ test('isQuestionAnswerCorrect: discursiva não pontua (null), não conta como er
     assert.equal(isQuestionAnswerCorrect(discursiva, 'discursive'), null);
 });
 
-test('isQuestionAnswerCorrect: questão anulada é sempre correta, qualquer resposta', () => {
-    const anulada = { annulled: true, answer: 'B' };
-    assert.equal(isQuestionAnswerCorrect(anulada, 'A'), true);
+test('isQuestionAnswerCorrect: questão anulada não pontua (null), qualquer resposta', () => {
+    const anulada = { annulled: true, answer: null };
+    assert.equal(isQuestionAnswerCorrect(anulada, 'A'), null);
 });
 
 test('isQuestionAnswerCorrect: alternativa certa e errada', () => {

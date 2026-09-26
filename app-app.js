@@ -2309,6 +2309,10 @@ Regras obrigatórias:
                 container.hidden = !images.length;
             }
             if (warning) warning.hidden = !question?.needsVisualReview || images.length > 0;
+            // Mesmo ponto de entrada da questão (jogo e revisão) — aproveita
+            // pra mostrar o aviso de anulada no topo.
+            const annulled = document.getElementById('questionAnnulledBanner');
+            if (annulled) annulled.hidden = !question?.annulled;
         }
 
         // Zoom de imagem só dentro deste visualizador em tela cheia — o
@@ -2549,7 +2553,8 @@ Regras obrigatórias:
             if (session.mode === 'practice') {
                 buttons.forEach(button => {
                     const value = button.querySelector('.question-option-letter').textContent;
-                    if ((!question.annulled && value === question.answer) || (question.annulled && value === letter)) button.classList.add('correct');
+                    if (question.annulled) { if (value === letter) button.style.borderColor = 'var(--lavender-active)'; }
+                    else if (value === question.answer) button.classList.add('correct');
                     else if (value === letter) button.classList.add('wrong');
                     button.disabled = true;
                 });
@@ -2565,7 +2570,9 @@ Regras obrigatórias:
                 // pra estabilidade da memória. session.pendingReview fica
                 // pendente até rateReviewDifficulty ou até a pessoa avançar
                 // sem escolher (flushPendingReviewRating aplica "Bom").
-                if (correct) {
+                if (correct === null) {
+                    // anulada: fora da fila de revisão, como a discursiva.
+                } else if (correct) {
                     session.pendingReview = { questionId: question.id };
                     document.getElementById('questionReviewRating').hidden = false;
                 } else {
@@ -2814,7 +2821,7 @@ Regras obrigatórias:
             // Discursivas não têm gabarito de letra — ficam de fora do
             // denominador do placar (senão a fração mentiria), mas ainda
             // aparecem na grade de bolhas, num terceiro estado neutro.
-            const scoredTotal = questions.filter(q => q.questionType !== 'discursive').length;
+            const scoredTotal = questions.filter((q, i) => window.isQuestionAnswerCorrect(q, answers[i]) !== null).length;
             document.getElementById('questionPlayerMode').textContent = mode === 'exam' ? 'Simulado' : 'Guiado';
             document.getElementById('questionPlayerArea').textContent = 'Desempenho da sessão';
             // Cartão-resposta: uma linha por questão, alternativas como
@@ -2964,8 +2971,7 @@ Regras obrigatórias:
                 Object.entries(question.options || {}).forEach(([letter, text]) => {
                     let cls = '';
                     if (!question.annulled && letter === question.answer) cls = 'correct';
-                    else if (question.annulled && letter === answer) cls = 'correct';
-                    else if (letter === answer) cls = 'wrong';
+                    else if (letter === answer && !question.annulled) cls = 'wrong';
                     const optionEl = document.createElement('div');
                     optionEl.className = cls ? `question-option ${cls}` : 'question-option';
                     optionEl.style.cursor = 'default';
@@ -3067,9 +3073,9 @@ Regras obrigatórias:
         }
 
         function recordQuestionResult(question, correct, chosen, elapsedMs) {
-            // Discursiva não tem gabarito de letra — não é certo nem
-            // errado, então não entra na contagem de acertos/erros.
-            if (question?.questionType === 'discursive') return;
+            // Discursiva e anulada não têm gabarito válido — não são
+            // certas nem erradas, então não entram na contagem.
+            if (correct === null) return;
             queueResponseSyncPush(question, correct, chosen, elapsedMs);
             const stats = getQuestionStats();
             stats.answered = Number(stats.answered || 0) + 1;
