@@ -1,74 +1,97 @@
 {
   "area": "Hematologia",
-  "title": "Hematologia - Master Rapid Review",
+  "title": "Rapid Review ENAMED - Hematologia",
   "isExample": false,
   "sections": [
-    {
-      "title": "Anemias",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Anemias Microcíticas e Hipocrômicas (Foco em Ferropriva)",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Parâmetro</th><th>Anemia Ferropriva</th><th>Anemia de Doença Crônica</th><th>Talassemias</th></tr></thead><tbody><tr><td>Ferritina</td><td>Baixa (&lt; 15-30 ng/mL)</td><td>Normal ou Alta</td><td>Normal ou Alta</td></tr><tr><td>TIBC / Transferrina</td><td>Alto</td><td>Baixo</td><td>Normal</td></tr><tr><td>Ferro Sérico</td><td>Baixo</td><td>Baixo</td><td>Normal ou Alto</td></tr><tr><td>Saturação de Transferrina</td><td>Baixa (&lt; 16%)</td><td>Baixa ou Normal</td><td>Normal ou Alta</td></tr><tr><td>RDW</td><td>Elevado (&gt; 14-15%)</td><td>Normal</td><td>Normal</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Fisiopatologia da Anemia Ferropriva:</strong> Deficiência de ferro compromete síntese do heme. Causas: perda crônica de sangue (sangramento TGI, ginecológico), má absorção (doença celíaca, pós-bariátrica), aumento da demanda (crescimento, gestação).</li><li><strong>Clínica:</strong> Fadiga, palidez, queilite angular, glossite, coiloníquia (unhas em colher), pica (perversão do apetite, ex: pagofagia - gelo), Síndrome de Plummer-Vinson (disfagia + teia esofágica + anemia ferropriva).</li><li><strong>Diagnóstico:</strong> Ferropenia = primeira alteração é a queda da ferritina; depois, aumento do TIBC e queda do ferro sérico. Hemograma inicialmente normo/normo, evoluindo para micro/hipo.</li><li><strong>Tratamento:</strong> Reposição de ferro (VO: sulfato ferroso, IV se intolerância ou má absorção). A contagem de reticulócitos sobe em 7-10 dias (pico reticulocitário indica resposta terapêutica). Tratar a causa base.</li></ul>"
-        },
-        {
-          "num": "1.2",
-          "title": "Anemias Hemolíticas",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Exame Laboratorial</th><th>Hemólise Intravascular</th><th>Hemólise Extravascular</th></tr></thead><tbody><tr><td>Bilirrubina Indireta</td><td>Elevada</td><td>Elevada</td></tr><tr><td>DHL (Lactato Desidrogenase)</td><td>Muito Elevado</td><td>Elevado</td></tr><tr><td>Haptoglobina</td><td>Muito Baixa / Indetectável</td><td>Normal ou Levemente Baixa</td></tr><tr><td>Reticulócitos</td><td>Elevados (Policromatofilia)</td><td>Elevados (Policromatofilia)</td></tr><tr><td>Hemoglobinúria / Hemossiderinúria</td><td>Presentes</td><td>Ausentes</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Hemólise Intravascular:</strong> Destruição do RBC no vaso. Haptoglobina (proteína que se liga à Hb livre) cai drasticamente. Exemplos: PTT, SHU, CIVD, reações transfusionais agudas, HPN, malária.</li><li><strong>Hemólise Extravascular:</strong> Destruição no sistema reticuloendotelial (baço/fígado). Exemplos: Esferocitose hereditária, anemia falciforme, AHAI (quente e fria).</li><li><strong>Anemia Falciforme:</strong> Mutação no gene da cadeia beta da globina (HbS). Crises vaso-oclusivas (dor), síndrome torácica aguda, sequestro esplênico (crianças), suscetibilidade a germes encapsulados (autoesplenectomia).</li><li><strong>AHAI (Anemia Hemolítica Autoimune):</strong> Coombs direto (TAD) positivo. Quente (IgG, extravascular, idiopática/lúpus, trata com corticoide), Fria (IgM, intravascular, micoplasma/EBV, tratar o frio/rituximabe).</li></ul>"
-        },
-        {
-          "num": "1.3",
-          "title": "Anemias Macrocíticas e Normocíticas (Outras)",
-          "tags": ["adj"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Anemia Megaloblástica:</strong> Macrocitose (VCM > 100 fL), neutrófilos hipersegmentados, pancitopenia leve. Causas: deficiência de Vitamina B12 (homocisteína e ácido metilmalônico altos, clínica neurológica) e Ácido Fólico (homocisteína alta, sem alt. neurológica).</li><li><strong>Anemia Perniciosa:</strong> Principal causa de deficiência de B12. Autoimune contra células parietais gástricas ou fator intrínseco.</li><li><strong>Anemia Aplástica:</strong> Normocítica/normocrômica. Pancitopenia + reticulocitopenia + medula óssea hipocelular (substituição gordurosa). Sem esplenomegalia. Tratamento com imunossupressão ou TMO.</li></ul>"
-        }
-      ]
-    },
     {
       "title": "Hemostasia e Trombose",
       "subchapters": [
         {
-          "num": "2.1",
-          "title": "Hemostasia Primária vs Secundária",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Característica</th><th>Alteração na Hemostasia Primária</th><th>Alteração na Hemostasia Secundária</th></tr></thead><tbody><tr><td>Fatores envolvidos</td><td>Plaquetas e Fator de von Willebrand (FvW)</td><td>Fatores de Coagulação (Cascata)</td></tr><tr><td>Clínica típica</td><td>Petéquias, púrpuras, equimoses, sangramento mucocutâneo (gengival, epistaxe, menorragia). Sangramento imediato ao trauma.</td><td>Hematomas profundos, hemartroses, sangramento muscular/articular. Sangramento tardio pós-trauma/cirurgia.</td></tr><tr><td>Exames alterados</td><td>Tempo de Sangramento (TS), Contagem de plaquetas.</td><td>TAP (Via Extrínseca), TTPa (Via Intrínseca).</td></tr><tr><td>Exemplos</td><td>PTI, PTT, Doença de von Willebrand, Trombastenia de Glanzmann, Bernard-Soulier, Uremia, uso de AAS.</td><td>Hemofilias (A e B), deficiência de Vitamina K, CIVD, Hepatopatias, uso de Varfarina/Heparina.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Doença de von Willebrand:</strong> Distúrbio hemorrágico hereditário mais comum. Deficiência/disfunção do FvW (necessário para adesão plaquetária e estabilização do fator VIII). TS prolongado, TTPa pode estar normal ou prolongado.</li><li><strong>PTI (Púrpura Trombocitopênica Imunológica):</strong> Plaquetopenia isolada, anticorpos antiplaquetários. Em crianças geralmente pós-viral e autolimitada. Em adultos, crônica. Tratar se sangramento ou plaquetas &lt; 20-30k (Corticoide, IVIG).</li><li><strong>Hemofilias:</strong> Herança ligada ao X. Hemofilia A (deficiência do fator VIII) e Hemofilia B (deficiência do fator IX). TTPa prolongado, TAP normal. Tratar com reposição do fator específico.</li></ul>"
+          "num": "1.1",
+          "title": "Hemostasia Primária e Distúrbios Plaquetários",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Avaliação Inicial da Hemostasia Primária:</strong> Envolve plaquetas e parede vascular. O sangramento costuma ser mucocutâneo (petéquias, púrpuras, equimoses, sangramento gengival). <strong>Palavra-chave:</strong> Sangramento imediato após trauma ou corte.</li>\n<li><strong>Distúrbios Plaquetários Quantitativos:</strong> Trombocitopenias (PTI - Púrpura Trombocitopênica Imune; PTT - Púrpura Trombocitopênica Trombótica). <strong>Pegadinha:</strong> Na PTT há alteração neurológica e renal associada à anemia hemolítica microangiopática, o tratamento NÃO inclui transfusão de plaquetas, mas sim plasmaférese.</li>\n<li><strong>Distúrbios Plaquetários Qualitativos:</strong> Doença de von Willebrand (distúrbio hereditário mais comum, fator de vW ajuda na adesão plaquetária e protege o Fator VIII; tempo de sangramento alargado, PTTa pode estar alargado), Tromboastenia de Glanzmann (falta de GP IIb/IIIa - <strong>Pegadinha:</strong> Foi cobrada como distúrbio genético que NÃO é fator de risco clássico para Trombose Venosa Profunda, pois causa SANGRAMENTO, não trombose).</li>\n</ul>"
         },
         {
-          "num": "2.2",
+          "num": "1.2",
+          "title": "Hemostasia Secundária e Anticoagulação",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Avaliação da Hemostasia Secundária:</strong> Fatores de coagulação. Sangramento é caracteristicamente profundo (hemartroses, hematomas musculares) e tardio.</li>\n<li><strong>Testes de Coagulação:</strong> TAP (Via Extrínseca - Fator VII - Avalia ação da Varfarina); PTTa (Via Intrínseca - Fatores VIII, IX, XI, XII - Avalia ação da Heparina Não Fracionada).</li>\n<li><strong>Hemofilias:</strong> A (deficiência de Fator VIII) e B (deficiência de Fator IX). PTTa alargado.</li>\n<li><strong>Manejo e Antídotos de Anticoagulantes:</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead><tr><th>Anticoagulante</th><th>Monitoramento</th><th>Antídoto</th></tr></thead>\n      <tbody>\n        <tr><td>Heparina Não Fracionada (HNF)</td><td>PTTa</td><td>Sulfato de Protamina</td></tr>\n        <tr><td>Heparina de Baixo Peso Molecular (Enoxaparina)</td><td>Anti-Xa (raro uso clínico rotineiro)</td><td>Sulfato de Protamina (<strong>Palavra-chave:</strong> Antídoto da enoxaparina em dose tóxica com sangramento é a Protamina, reverte cerca de 60%)</td></tr>\n        <tr><td>Varfarina (Cumarínico)</td><td>TAP / INR</td><td>Vitamina K (se leve), Plasma Fresco Congelado ou Complexo Protrombínico (urgências e sangramento grave)</td></tr>\n        <tr><td>Novos Anticoagulantes Orais (NOACs)</td><td>Não requer</td><td>Idarucizumabe (para Dabigatrana), Andexanet Alfa (Rivaroxabana/Apixabana)</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
           "title": "Trombofilias e Trombose",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Trombofilias Hereditárias:</strong> Fator V de Leiden (mais comum, resistência à proteína C ativada), Mutação do gene da Protrombina (G20210A), Deficiência de Antitrombina, Deficiências de Proteína C e S. Suspeitar em TVP jovens, recorrentes, locais atípicos ou história familiar.</li><li><strong>Trombofilias Adquiridas:</strong> Síndrome do Anticorpo Antifosfolípide (SAF) -> trombose + morbidade gestacional + anticorpos (anticardiolipina, anti-beta-2-glicoproteína I, anticoagulante lúpico). TTPa prolongado IN VITRO, mas causa trombose IN VIVO.</li><li><strong>Fatores de Risco para TVP:</strong> Tríade de Virchow (lesão endotelial, estase venosa, hipercoagulabilidade). Idade, tabagismo, imobilidade, cirurgia recente, neoplasia, uso de ACOs (estrogênio). Trombastenia de Glanzmann NÃO é fator de risco (é doença hemorrágica primária).</li><li><strong>Trombose Pediátrica:</strong> Neonatos têm sistema hemostático em desenvolvimento. Trombose de veia renal é a TVP não relacionada a cateter mais comum no primeiro mês (hematúria, massa lombar, plaquetopenia). Trombose de veia porta associa-se a cateterização umbilical.</li></ul>"
-        },
-        {
-          "num": "2.3",
-          "title": "Anticoagulantes e Reversão",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco</th><th>Mecanismo</th><th>Monitoramento</th><th>Antídoto / Reversão</th></tr></thead><tbody><tr><td>Heparina Não Fracionada (HNF)</td><td>Ativa antitrombina, inibe IIa e Xa</td><td>TTPa</td><td>Protamina</td></tr><tr><td>Heparina de Baixo Peso (HBPM - Ex: Enoxaparina)</td><td>Inibe Xa &gt; IIa</td><td>Geralmente não necessário (anti-Xa)</td><td>Protamina (reversão parcial)</td></tr><tr><td>Varfarina (Cumarínico)</td><td>Inibe fatores vit. K dep. (II, VII, IX, X, Prot. C e S)</td><td>TAP (RNI)</td><td>Vitamina K, Complexo Protrombínico, Plasma Fresco (em urgências)</td></tr><tr><td>DOACs (Dabigatrana, Rivaroxabana)</td><td>Inibição direta de IIa (Dabi) ou Xa (Riva/Apixa)</td><td>Não requer rotineiramente</td><td>Idarucizumabe (Dabi), Andexanet Alfa (Inib. Xa)</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Intoxicação / Sangramento por Enoxaparina:</strong> Se instabilidade hemorrágica/cirurgia, usar Sulfato de Protamina. Embora não reverta 100% como na HNF, é a droga de escolha.</li><li><strong>Trombocitopenia Induzida por Heparina (HIT):</strong> Queda de plaquetas após 5-10 dias de heparina + TROMBOSE (paradoxal). Formação de Ac contra complexo heparina-Fator Plaquetário 4 (PF4). Conduta: suspender heparina e iniciar inibidor direto da trombina (argatrobana) ou fondaparinux. Evitar transfusão de plaquetas (aumenta risco trombótico).</li></ul>"
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Trombofilias Hereditárias:</strong> Estados de hipercoagulabilidade. As principais incluem Mutação do Fator V de Leiden (mais comum), Mutação do gene da Protrombina, Deficiência de Proteína C, Proteína S e Antitrombina.</li>\n<li><strong>Quadro Clínico e Investigação:</strong> Pacientes jovens, com TVP ou TEP imotivados, em locais atípicos ou recorrentes, ou início de uso de anticoncepcional oral desencadeando quadro. <strong>Palavra-chave:</strong> Tromboflebite de veia basílica após início de ACO em mulher jovem → suspeitar de trombofilia e pesquisar Mutação do Fator V de Leiden, Proteína C e S.</li>\n<li><strong>Trombose na População Pediátrica:</strong> Rara, tem pico em menores de 1 ano e adolescentes. <strong>Pegadinha:</strong> Neonatos POSSUEM risco de trombose, seus sistemas hemostáticos em desenvolvimento não os isentam de risco na cateterização. Trombose de veia renal é a mais comum no 1º mês (hematúria, proteinúria, trombocitopenia), e trombose de veia porta associa-se à cateterização umbilical.</li>\n<li><strong>Fatores de Risco para TVP:</strong> Idade, tabagismo, imobilidade, trombofilias, câncer. <strong>Pegadinha:</strong> Tromboastenia de Glanzmann é causa de sangramento primário, não de trombose!</li>\n</ul>"
         }
       ]
     },
     {
-      "title": "Medicina Transfusional e Oncohematologia",
+      "title": "Medicina Transfusional",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Indicações de Hemocomponentes",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Concentrado de Hemácias:</strong> 1 unidade eleva a Hb em 1 g/dL e Ht em 3%. Gatilho habitual é Hb < 7 g/dL (ou < 8-9 em cardiopatas sintomáticos).</li>\n<li><strong>Concentrado de Plaquetas:</strong> Profilático: Transfundir se < 10.000/mm³ (risco espontâneo). Para procedimentos invasivos: > 50.000 para cirurgias gerais, e > 100.000 para neurocirurgias e oftalmológicas. <strong>Pegadinha:</strong> Na Trombocitopenia Induzida por Heparina (HIT), as transfusões de plaquetas aumentam consideravelmente o risco de trombose e são CONTRAINDICADAS!</li>\n<li><strong>Plasma Fresco Congelado (PFC):</strong> Contém todos os fatores de coagulação. Usado para reversão de Varfarina, coagulopatia intravascular disseminada (CIVD), sangramentos maciços.</li>\n<li><strong>Crioprecipitado:</strong> Rico em Fator VIII, Fator de von Willebrand e Fibrinogênio. Usado especialmente em hipofibrinogenemia.</li>\n<li><strong>Protocolo de Transfusão Maciça:</strong> Deve existir em hospitais de trauma (proporção 1:1:1 de CH, PFC e plaquetas).</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Reações Transfusionais",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>TRALI (Transfusion-Related Acute Lung Injury):</strong> Lesão pulmonar aguda imunomediada. É caracterizada por edema pulmonar não cardiogênico. <strong>Pegadinha:</strong> Se o paciente já possui fatores de risco para SDRA previamente, não se exclui TRALI, mas a condição é denominada \"possível TRALI\". Hipotensão, hipoxemia abrupta em < 6 horas pós transfusão. Diferencia-se de SDRA ou edema cardiogênico pelos critérios clínicos de ausência de sobrecarga de volume primária e temporalidade com transfusão.</li>\n<li><strong>TACO (Transfusion-Associated Circulatory Overload):</strong> Sobrecarga circulatória. Apresenta hipertensão, turgência jugular e BNP elevado, ao contrário da TRALI (que cursa com normo/hipotensão e ausência de hipervolemia).</li>\n<li><strong>Reação Hemolítica Aguda:</strong> Incompatibilidade ABO. Erro de identificação. Apresenta febre, calafrios, dor lombar, hemoglobinúria e choque logo no início da transfusão.</li>\n<li><strong>Reação Febril Não Hemolítica:</strong> Mais comum, reação aos leucócitos do doador. Manejo: Antipiréticos. Prevenção com hemocomponentes desleucocitados.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Anemias",
       "subchapters": [
         {
           "num": "3.1",
-          "title": "Hemocomponentes e Transfusão",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Concentrado de Hemácias (CH):</strong> 1 bolsa eleva Hb em 1 g/dL e Ht em 3%. Indicação: anemia sintomática ou Hb &lt; 7 g/dL (ou &lt; 8 g/dL em cardiopatas/ortopédicos agudos).</li><li><strong>Concentrado de Plaquetas (CP):</strong> Indicação profilática (Hb &lt; 10k geral; &lt; 50k p/ procedimentos menores/sangramento ativo; &lt; 100k p/ neuro/oftalmo cirurgias). Contraindicado em PTT e HIT (agrava o quadro trombótico).</li><li><strong>Plasma Fresco Congelado (PFC):</strong> Contém todos os fatores de coagulação. Uso em coagulopatias múltiplas (hepatopatia, CIVD, reversão de varfarina sem complexo protrombínico), transfusão maciça.</li><li><strong>Crioprecipitado:</strong> Rico em Fator VIII, FvW, Fibrinogênio e Fator XIII. Indicado em hipofibrinogenemia (&lt; 100 mg/dL), CIVD e uremia.</li></ul>"
+          "title": "Investigação e Anemias Hemolíticas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Marcadores de Hemólise:</strong> Quando há destruição de hemácias (intravascular ou extravascular), os laboratórios mostram padrão clássico:\n  <ul>\n    <li>↑ Reticulócitos (medula óssea respondendo, policromatofilia).</li>\n    <li>↑ Desidrogenase Lática (LDH) - <strong>Palavra-chave:</strong> enzima intracelular liberada com a lise.</li>\n    <li>↑ Bilirrubina Indireta (degradação do heme).</li>\n    <li>↓ Haptoglobina (liga-se à hemoglobina livre intravascular e é consumida - <strong>Pegadinha:</strong> É o marcador que REDUZ na hemólise!).</li>\n  </ul>\n</li>\n<li><strong>Anemia Hemolítica Autoimune (AHAI):</strong> Anticorpos quentes (IgG) ou frios (IgM). Diagnóstico com Teste de Coombs Direto positivo. Tratamento com corticoide (IgG).</li>\n<li><strong>Esferocitose Hereditária:</strong> Defeito de membrana. CHCM elevado. Hemólise extravascular crônica no baço (esplenomegalia). Tratamento: Esplenectomia.</li>\n</ul>"
         },
         {
           "num": "3.2",
-          "title": "Reações Transfusionais",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Reação</th><th>Características e Fisiopatologia</th><th>Clínica e Manejo</th></tr></thead><tbody><tr><td>TRALI (Lesão Pulmonar Aguda Transfusional)</td><td>Edema pulmonar não cardiogênico. Acs do doador contra leucócitos (HLA/HNA) do receptor. Começa em até 6h.</td><td>Dispneia aguda, hipoxemia, infiltrado bilateral (Rx tórax). Diferente de SDRA prévia. Suporte ventilatório (não usar diurético). Fatores de risco de SDRA prévios denominam quadro como \"possível TRALI\".</td></tr><tr><td>TACO (Sobrecarga Circulatória)</td><td>Sobrecarga de volume. Comum em idosos/crianças ou renais crônicos rápidos demais.</td><td>EAP cardiogênico, dispneia, estertores, BNP alto. Tratar com diuréticos e oxigênio.</td></tr><tr><td>Hemolítica Aguda (Incompatibilidade ABO)</td><td>Erro de identificação (Acs anti-A/B naturais IgM). Hemólise intravascular aguda e maciça.</td><td>Febre, dor lombar, hipotensão, hemoglobinúria (urina escura). Suspender imediato, hiperidratação, diurese.</td></tr><tr><td>Hemolítica Tardia</td><td>Incompatibilidade em outros sistemas (Kidd, Duffy). Resposta anamnéstica IgG (dias a semanas após).</td><td>Hemólise extravascular leve, febre baixa, queda de Hb, icterícia. Maioria não requer tto agressivo.</td></tr><tr><td>Febre Não Hemolítica</td><td>Acs do receptor contra leucócitos do doador ou liberação de citocinas na bolsa.</td><td>Febre e calafrios durante a transfusão. Excluir hemólise. Prevenção: hemácias desleucocitadas.</td></tr></tbody></table></div>"
+          "title": "Anemias Carenciais e Outras",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Anemia Ferropriva:</strong> A mais comum. Microcítica e hipocrômica. RDW elevado (anisocitose). Ferro sérico baixo, Ferritina baixa (melhor parâmetro inicial), TIBC alto, saturação de transferrina baixa. <strong>Conduta:</strong> Reposição de sulfato ferroso (dose: 3 a 5 mg/kg/dia de ferro elementar), investigar causa do sangramento crônico (TGI nas mulheres/idosos, verminose em crianças).</li>\n<li><strong>Anemia de Doença Crônica:</strong> Normo/normo (ou micro/hipo leve). Ferro baixo, mas <strong>Ferritina ALTA ou normal</strong> (ferro preso no macrófago pela hepcidina), TIBC baixo.</li>\n<li><strong>Anemia Megaloblástica:</strong> Macrocítica (VCM > 100). Deficiência de Vitamina B12 (cursa com sintomas neurológicos, metilmalonil-CoA aumentado, atrofia gástrica na Anemia Perniciosa) ou Ácido Fólico (sem sintomas neurológicos). Esfregaço: Neutrófilos hipersegmentados.</li>\n<li><strong>Doença Falciforme:</strong> Mutação do gene da cadeia beta (HbS). Crises vaso-oclusivas (dor óssea, síndrome torácica aguda). Crises de sequestro esplênico (crianças pequenas, choque e baço palpável). Prevenção: Hidroxiureia, vacinação contra encapsulados, ácido fólico.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Oncohematologia",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Emergências e Síndrome de Lise Tumoral",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome de Lise Tumoral (SLT):</strong> Destruição maciça de células neoplásicas (Linfomas agressivos, Leucemias agudas) espontânea ou após quimioterapia. Liberação do conteúdo intracelular na circulação.</li>\n<li><strong>Alterações Laboratoriais:</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead><tr><th>Eletrólito</th><th>Alteração na SLT</th><th>Motivo</th></tr></thead>\n      <tbody>\n        <tr><td>Potássio</td><td>Aumentado</td><td>Íon intracelular liberado (risco de arritmia)</td></tr>\n        <tr><td>Fósforo</td><td>Aumentado</td><td>Íon intracelular liberado massivamente</td></tr>\n        <tr><td>Ácido Úrico</td><td>Aumentado</td><td>Degradação dos ácidos nucleicos liberados (pode causar LRA obstrutiva por cristais)</td></tr>\n        <tr><td>Cálcio</td><td><strong>Reduzido</strong></td><td>O Fósforo livre elevado se liga ao Cálcio sérico precipitando-o (calcificações e hipocalcemia grave). <strong>Palavra-chave:</strong> É o único que CAI.</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Clínica e Manejo da SLT:</strong> Arritmias, LRA, convulsão e confusão mental (hipocalcemia grave). Tratamento: Hidratação venosa vigorosa, Alopurinol ou Rasburicase, correção de distúrbios.</li>\n</ul>"
         },
         {
-          "num": "3.3",
-          "title": "Síndrome de Lise Tumoral e Oncohematologia",
-          "tags": ["ja"],
-          "bodyHtml": "<pre class=\"reader-pre-card\">\nLise de Células Tumorais (pós QT em neoplasias hematológicas de alta proliferação como LNH/Burkitt/LMA)\n|\nv\nLiberação Intracelular Maciça\n|\n+-> Potássio (HIPERCALEMIA) -> Arritmias, alterações ECG.\n+-> Fósforo (HIPERFOSFATEMIA) -> Liga-se ao Cálcio -> HIPOCALCEMIA secundária (cãibras, confusão, convulsões).\n+-> Ácidos Nucleicos -> ÁCIDO ÚRICO (HIPERURICEMIA) -> Lesão Renal Aguda obstrutiva.\n</pre><ul class=\"reader-list\"><li><strong>Marcadores da SLT:</strong> Espera-se <strong>aumento</strong> de Potássio, Fósforo e Ácido Úrico. Espera-se <strong>redução</strong> do Cálcio sérico (Hipocalcemia). A creatinina sobe devido à IRA por nefropatia por urato e precipitação de fosfato de cálcio.</li><li><strong>Clínica:</strong> Fraqueza, arritmias, espasmos musculares (tetania por hipocalcemia), convulsões, LRA oligúrica.</li><li><strong>Prevenção / Tratamento:</strong> Hidratação venosa vigorosa, Alopurinol (inibe xantina oxidase na formação de novo ác. úrico) ou Rasburicase (degrada ác. úrico existente). Manejo dos distúrbios hidroeletrolíticos agudos e diálise se indicação.</li></ul>"
+          "num": "4.2",
+          "title": "Leucemias e Linfomas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Leucemia Mieloide Aguda (LMA):</strong> Adultos, bastonetes de Auer, mieloperoxidase positiva. Risco de CIVD na variante Promielocítica (LMA M3) cujo tratamento é com ATRA.</li>\n<li><strong>Leucemia Linfoide Aguda (LLA):</strong> Crianças. Infiltração do SNC e testículos. Tratamento quimioterápico.</li>\n<li><strong>Leucemia Mieloide Crônica (LMC):</strong> Esplenomegalia maciça. Cromossomo Philadelphia (t(9;22)), gene BCR-ABL. Tratamento revolucionário com Imatinibe.</li>\n<li><strong>Linfoma de Hodgkin:</strong> Jovens, adenopatia indolor (cervical/supraclavicular), sintomas B (febre, sudorese noturna, perda de peso). Prurido e dor após álcool. Células de Reed-Sternberg (olhos de coruja).</li>\n<li><strong>Linfoma Não-Hodgkin:</strong> Mais comum em idosos, adenopatias periféricas espalhadas, envolvimento extranodal frequente. O tipo Burkitt associa-se ao EBV e tem alta taxa de lise tumoral.</li>\n</ul>"
         }
       ]
     }

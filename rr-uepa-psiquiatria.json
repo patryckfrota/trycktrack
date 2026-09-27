@@ -1,84 +1,102 @@
 {
   "area": "Psiquiatria",
-  "title": "Psiquiatria UEPA",
+  "title": "Rapid Review - Psiquiatria",
   "isExample": false,
   "sections": [
     {
-      "title": "Transtornos Psicóticos",
+      "title": "1. Transtornos Psicóticos",
       "subchapters": [
         {
-          "num": "1",
-          "title": "Transtorno Delirante Persistente e Esquizofrenia",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Transtorno</th><th>Características Principais</th></tr></thead><tbody><tr><td><strong>Transtorno Delirante</strong></td><td><ul class=\"reader-list\"><li>Presença de delírios (ex: persecutórios) com duração &gt; 1 mês.</li><li>Sem alucinações proeminentes (ex: sem alucinações auditivas significativas).</li><li>Sem prejuízo grave no funcionamento social e ocupacional (preservado).</li></ul></td></tr><tr><td><strong>Esquizofrenia</strong></td><td><ul class=\"reader-list\"><li><strong>Sintomas Negativos:</strong> Perda de funções psíquicas, empobrecimento global da vida afetiva, cognitiva e social; distanciamento e aplainamento afetivo (embotamento).</li><li><strong>Sintomas Positivos:</strong> Distorção da realidade, delírios, alucinações, ilusões ou pseudoalucinações.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Transtornos de Ansiedade e Humor",
-      "subchapters": [
-        {
-          "num": "2",
-          "title": "Transtorno de Pânico e Transtorno Bipolar",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Transtorno de Pânico:</strong> Ataques súbitos e recorrentes de medo intenso, palpitações, sensação de morte iminente. Frequentemente associado a esquiva de locais públicos (Agorafobia).</li><li><strong>Transtorno Bipolar Tipo I:</strong> Caracterizado por episódios de mania. O paciente pode apresentar fala logorreica, aceleração do pensamento, grandiosidade e necessidade reduzida de sono.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Psicopatologia",
-      "subchapters": [
-        {
-          "num": "3",
-          "title": "Semiologia Psiquiátrica",
+          "num": "1.1",
+          "title": "Esquizofrenia e Transtorno Delirante",
           "tags": [
             "ja",
             "adj"
           ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Conceito</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Delírio</strong></td><td>Crença irredutível e inabalável na veracidade de uma ideia (ex: chip implantado no corpo). Permanece mesmo diante de argumentos lógicos ou dados objetivos.</td></tr><tr><td><strong>Logorreia</strong></td><td>Aceleração e aumento no fluxo da fala, frequentemente ininterrupta, comum em episódios de mania.</td></tr></tbody></table></div>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Esquizofrenia:</strong> Transtorno psicótico crônico caracterizado por sintomas positivos (delírios, alucinações, desorganização do pensamento/comportamento) e <strong>sintomas negativos</strong> (<strong>Pegadinha:</strong> afeto embotado, alogia, abulia, anedonia - representam perdas de funções psíquicas e empobrecimento global da vida afetiva e cognitiva). O diagnóstico exige pelo menos 2 sintomas (sendo 1 deles delírio, alucinação ou discurso desorganizado) por no mínimo 6 meses.\n  <br><strong>Diagnóstico e Conduta:</strong> Avaliação clínica exaustiva para descartar causas orgânicas. Tratamento com antipsicóticos.\n  <pre class=\"reader-pre-card\">\nPaciente com psicose ↓\n1º episódio? ↓ Descartar causas orgânicas (Tóxico/Metabólicas) ↓\nConfirma Esquizofrenia ↓ Iniciar Antipsicótico Atípico\n  </pre>\n  </li>\n  <li><strong>Transtorno Delirante Persistente:</strong> Presença de <strong>delírio</strong> (ex: persecutório) por > 1 mês, <strong>Palavra-chave:</strong> \"sem alucinações auditivas ou visuais proeminentes\" e, crucialmente, <strong>\"sem prejuízo grave no funcionamento\"</strong> global do indivíduo (ele trabalha e vive quase normalmente, exceto pelo tema do delírio). <strong>Pegadinha:</strong> Não fechar esquizofrenia se não houver declínio funcional acentuado ou outros sintomas psicóticos.</li>\n  <li><strong>Antipsicóticos:</strong> Divididos em típicos e atípicos. \n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Classe</th><th>Exemplos</th><th>Características / Efeitos Adversos</th></tr></thead>\n        <tbody>\n          <tr><td>Típicos (1ª Geração)</td><td>Haloperidol, Clorpromazina</td><td>Alta afinidade D2. Maior risco de sintomas extrapiramidais (acatisia, distonia) e discinesia tardia.</td></tr>\n          <tr><td>Atípicos (2ª Geração)</td><td><strong>Risperidona, Olanzapina, Aripiprazol</strong>, Quetiapina, Clozapina</td><td>Afinidade D2 e 5-HT2A. Menor risco extrapiramidal. Maior risco de <strong>Síndrome Metabólica</strong> (ganho de peso, dislipidemia). <strong>Pegadinha:</strong> Clozapina exige hemograma por risco de agranulocitose.</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>\n          "
         }
       ]
     },
     {
-      "title": "Dependência Química",
+      "title": "2. Psicopatologia e Semiologia Psiquiátrica",
       "subchapters": [
         {
-          "num": "4",
-          "title": "Síndromes de Abstinência",
+          "num": "2.1",
+          "title": "Alterações do Estado Mental",
           "tags": [
             "ja"
           ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Substância</th><th>Clínica na Abstinência</th></tr></thead><tbody><tr><td><strong>Álcool</strong></td><td><ul class=\"reader-list\"><li>Tremor, agitação psicomotora extrema, alterações autonômicas (taquicardia, sudorese).</li><li>Pode evoluir para <em>Delirium Tremens</em> (com rebaixamento do nível de consciência e alucinações).</li></ul></td></tr><tr><td><strong>Opioides</strong></td><td><ul class=\"reader-list\"><li>Pacientes habitualmente permanecem <strong>alertas e orientados</strong>.</li><li>Sintomas: midríase, piloereção, rinorreia, dores musculares, diarreia e náuseas.</li></ul></td></tr></tbody></table></div>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Delírio:</strong> Alteração do juízo de realidade. A crença é inabalável, absolutamente convicta e impermeável à argumentação lógica (ex: \"implantaram um chip em mim\"). <strong>Palavra-chave:</strong> \"a crença permanece mesmo diante de argumentos lógicos\".</li>\n  <li><strong>Alterações de Linguagem e Pensamento:</strong> \n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Alteração</th><th>Definição</th></tr></thead>\n        <tbody>\n          <tr><td>Ecolalia</td><td>Repetição em eco das palavras do interlocutor.</td></tr>\n          <tr><td>Neologismo</td><td>Criação de palavras novas ou atribuição de novo sentido a palavras existentes.</td></tr>\n          <tr><td>Logorreia</td><td>Aceleração do fluxo da fala, comum na mania.</td></tr>\n          <tr><td>Bradifasia</td><td>Lentidão da fala, comum na depressão grave.</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>\n          "
         }
       ]
     },
     {
-      "title": "Psicofarmacologia",
+      "title": "3. Transtornos do Humor",
       "subchapters": [
         {
-          "num": "5",
-          "title": "Antipsicóticos",
+          "num": "3.1",
+          "title": "Depressão e Transtorno Bipolar",
           "tags": [
-            "ja"
+            "ja",
+            "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Típicos (1ª geração):</strong> Haloperidol, Clorpromazina, Levomepromazina. Bloqueadores D2 mais potentes, maior risco de efeitos extrapiramidais (SEP).</li><li><strong>Atípicos (2ª geração):</strong> Risperidona, Olanzapina, Aripiprazol, Quetiapina. Menor risco de SEP, mas maior risco de efeitos metabólicos (ganho de peso, dislipidemia).</li></ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno Depressivo Maior:</strong> Humor deprimido ou anedonia por pelo menos 2 semanas, associado a alterações de sono, apetite, energia, culpa, ideação suicida. O tratamento é feito com ISRS (Fluoxetina, Sertralina, Escitalopram).</li>\n  <li><strong>Transtorno do Humor Bipolar (THB):</strong> Alternância de episódios de mania/hipomania e depressão. <strong>Palavra-chave para mania:</strong> \"logorreia\", grandiosidade, redução da necessidade de sono, agitação psicomotora.\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Tipo</th><th>Características</th></tr></thead>\n        <tbody>\n          <tr><td>THB Tipo I</td><td>Pelo menos 1 episódio de <strong>Mania</strong> (duração > 7 dias ou internação). Prejuízo grave.</td></tr>\n          <tr><td>THB Tipo II</td><td>Episódios de <strong>Hipomania</strong> (duração > 4 dias, sem prejuízo grave/internação) + Depressão.</td></tr>\n        </tbody>\n      </table>\n    </div>\n    <br><strong>Conduta:</strong> Estabilizadores de humor (Lítio, Ácido Valproico, Lamotrigina). <strong>Pegadinha:</strong> O uso isolado de antidepressivos no THB pode induzir \"virada maníaca\".\n  </li>\n</ul>\n          "
         }
       ]
     },
     {
-      "title": "Psiquiatria Social e Saúde Pública",
+      "title": "4. Transtornos Ansiosos",
       "subchapters": [
         {
-          "num": "6",
-          "title": "Reforma Psiquiátrica e Apoio Matricial",
+          "num": "4.1",
+          "title": "Transtorno de Pânico e TAG",
           "tags": [
-            "ja"
+            "ja",
+            "adj"
           ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tema</th><th>Conceitos Importantes</th></tr></thead><tbody><tr><td><strong>Reforma Psiquiátrica</strong></td><td><ul class=\"reader-list\"><li>Desinstitucionalização como eixo central.</li><li><strong>Desafios:</strong> Insuficiência de recursos financeiros para serviços comunitários, fragilidade da articulação CAPS x APS (apoio matricial), persistência de estigmas socioculturais.</li></ul></td></tr><tr><td><strong>Apoio Matricial (Matriciamento)</strong></td><td><ul class=\"reader-list\"><li>Equipe de especialistas (ex: CAPS) fornece retaguarda especializada à equipe de Atenção Primária (APS).</li><li>Envolve <strong>orientação clínica, capacitação e suporte técnico contínuo</strong> (ex: teleconsultas, treinamentos).</li><li>Permite que o tratamento seja mantido no território do paciente, evitando novas internações e ampliando a resolutividade da APS.</li></ul></td></tr></tbody></table></div>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno de Pânico:</strong> Episódios de ansiedade paroxística extrema. <strong>Palavra-chave:</strong> \"ataques súbitos de medo intenso\", palpitações, taquicardia, e a clássica \"sensação de morte iminente\". É comum o desenvolvimento de ansiedade antecipatória e agorafobia (esquiva de locais públicos).\n    <br><strong>Tratamento:</strong> ISRS (manutenção) + Benzodiazepínicos (resgate na fase inicial).\n  </li>\n  <li><strong>Transtorno de Ansiedade Generalizada (TAG):</strong> Preocupação excessiva e constante por > 6 meses, somatizações (tensão muscular, insônia). Tratamento com ISRS.</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "5. Dependência Química e Intoxicações Exógenas",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Álcool, Opioides, Tabaco e Metanol",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Álcool:</strong> A Síndrome de Abstinência Alcoólica (SAA) ocorre horas/dias após a suspensão. Manifesta-se com <strong>tremor</strong>, agitação psicomotora, sudorese, taquicardia. <strong>Pegadinha:</strong> Paciente etilista crônico trazido agitado, negando uso recente, deve ser avaliado para SAA. Pode evoluir para Delirium Tremens. Tratamento com Diazepam (ou Lorazepam se hepatopatia).</li>\n  <li><strong>Opioides:</strong> Intoxicação (Síndrome Narcótica) cursa com rebaixamento do nível de consciência, <strong>miose puntiforme</strong> e depressão respiratória. Antídoto: Naloxona. \n    <br>Já a <strong>Abstinência de Opioides</strong> causa quadro adrenérgico rebote, mas <strong>Palavra-chave:</strong> o paciente geralmente fica \"alerta e orientado\", com midríase, piloereção, rinorreia e diarreia. Não é comum rebaixamento na abstinência.\n  </li>\n  <li><strong>Tabagismo:</strong> Tratamento baseia-se em TCC associada a farmacoterapia: TRN (Adesivo/Goma de nicotina), Bupropiona (antidepressivo que reduz fissura; contraindicado em epilepsia) e Vareniclina.</li>\n  <li><strong>Intoxicação por Metanol:</strong> Álcool clandestino. Cursa com acidose metabólica grave (ânion gap alto) e alterações visuais (cegueira, \"visão em tempestade de neve\"). Tratamento com Etanol ou Fomepizol (bloqueiam a álcool desidrogenase).</li>\n  <pre class=\"reader-pre-card\">\nPaciente com depressão respiratória + Miose ↓\nSuspeita de Intoxicação por Opioide ↓\nConduta: Naloxona IV\n  </pre>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "6. Psiquiatria Infantil",
+      "subchapters": [
+        {
+          "num": "6.1",
+          "title": "TEA e TDAH",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno do Espectro Autista (TEA):</strong> Déficits persistentes na comunicação e interação social associados a padrões restritos e repetitivos de comportamento (estereotipias, apego a rotinas). Manifesta-se precocemente (ex: \"criança de 2 anos que ainda não fala e evita contato visual\"). Conduta: Intervenção multidisciplinar precoce (fono, TO, psicologia).</li>\n  <li><strong>Transtorno do Déficit de Atenção e Hiperatividade (TDAH):</strong> Padrão persistente de desatenção e/ou hiperatividade-impulsividade que interfere no funcionamento. Os sintomas devem ocorrer em pelo menos dois ambientes (ex: casa e escola) e surgir antes dos 12 anos. O tratamento padrão ouro envolve psicoestimulantes (Metilfenidato, Lisdexanfetamina).</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "7. Psiquiatria Social e Reforma Psiquiátrica",
+      "subchapters": [
+        {
+          "num": "7.1",
+          "title": "RAPS e Apoio Matricial",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Reforma Psiquiátrica Brasileira:</strong> Tem como eixo central a <strong>desinstitucionalização</strong> (fechamento progressivo de manicômios e criação de serviços territoriais - CAPS). Os maiores desafios são: <strong>Palavra-chave:</strong> \"insuficiência de recursos financeiros destinados aos serviços comunitários, fragilidade da articulação entre CAPS e atenção básica, e persistência de estigmas\".</li>\n  <li><strong>Rede de Atenção Psicossocial (RAPS):</strong> Integra os serviços. O <strong>Apoio Matricial</strong> é a retaguarda especializada (ex: Psiquiatra do CAPS) dada à Atenção Básica (UBS). <strong>Pegadinha:</strong> O apoio matricial NÃO transfere a responsabilidade para o especialista, mas capacita e orienta a equipe de saúde da família para que o paciente permaneça sendo cuidado no seu território (ex: telemedicina, discussão de casos).</li>\n</ul>\n          "
         }
       ]
     }

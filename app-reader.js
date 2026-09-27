@@ -23,308 +23,709 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_otorrinolaringologia": {
+  "area": "Otorrinolaringologia",
+  "title": "Otorrinolaringologia - Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Otologia e Otoneurologia",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Rolha de Cerume e Corpos Estranhos",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rolha de Cerume:</strong> É a causa mais comum de perda auditiva condutiva reversível. <strong>Palavra-chave:</strong> Paciente idoso, uso de hastes flexíveis (cotonetes), queixa de hipoacusia e plenitude aural (ou zumbido) súbita ou progressiva. <strong>Conduta:</strong> O tratamento de primeira linha em atenção primária para rolha impactada (sem visualização de MT) não é a lavagem imediata, mas <strong>indicar solução otológica cerolítica (ex: peróxido de ureia, glicerina) por 5 a 7 dias</strong> e reavaliar. <strong>Pegadinha:</strong> Lavagem sem preparo prévio em rolha dura ou em pacientes com perfuração timpânica prévia (contraindicação absoluta para lavagem hídrica).\n              <pre class=\"reader-pre-card\">\nPaciente com Hipoacusia + Rolha de cera visível (sem MT visualizável)\n↓\nHistórico de perfuração timpânica ou cirurgia otológica?\n- SIM: Remoção mecânica (curetagem/aspiração) por Otorrino (NUNCA LAVAR).\n- NÃO: Prescrever cerolítico tópico por 5-7 dias.\n↓\nRetorno: Lavagem auricular com água morna (temperatura corporal para evitar vertigem térmica).</pre></li>\n              <li><strong>Corpo Estranho em Orelha:</strong> Muito comum em crianças (grãos, miçangas, insetos). <strong>Palavra-chave para Insetos (animados):</strong> Zumbido intenso, dor e agitação. <strong>Conduta imediata:</strong> Instilar óleo mineral, álcool ou lidocaína tópica para matar/imobilizar o inseto ANTES da remoção. <strong>Pegadinha:</strong> Tentar remover inseto vivo ou usar pinça em objetos esféricos (empurra mais para o fundo; preferir gancho ou lavagem). Sementes não devem ser lavadas, pois incham com água.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.2",
+          "title": "Otites Médias (Aguda, Efusão, Crônica) e Complicações",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Média Aguda (OMA):</strong> Infecção bacteriana do ouvido médio, pico de incidência entre 6-24 meses. <strong>Fisiopatologia:</strong> Disfunção da tuba auditiva (frequentemente após IVAS viral). <strong>Agentes etiológicos (Palavra-chave da banca):</strong> <em>Streptococcus pneumoniae</em>, <em>Haemophilus influenzae</em> não tipável e <em>Moraxella catarrhalis</em>. <strong>Quadro clínico:</strong> Otalgia (irritabilidade na criança), febre, hipoacusia. Otoscopia: Membrana timpânica (MT) hiperemiada, abaulada, com perda do triângulo luminoso e opaca/purulenta.\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Idade</th><th>Gravidade</th><th>Conduta Inicial</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>&lt; 6 meses</td><td>Qualquer</td><td>Sempre Antibiótico (Amoxicilina)</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Bilateral ou Sintomas Graves (Febre &gt;39C, otalgia intensa)</td><td>Sempre Antibiótico</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Unilateral leve/moderada</td><td>Observação (WASP) por 48-72h ou ATB</td></tr>\n                    <tr><td>&gt; 2 anos</td><td>Leve a moderada</td><td>Observação (WASP) por 48-72h</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              <strong>Tratamento de Escolha:</strong> Amoxicilina (45-90 mg/kg/dia) por 10 dias. <strong>Pegadinha:</strong> Falha terapêutica após 48-72h -> trocar para Amoxicilina com Clavulanato (cobre produtoras de beta-lactamase como H. influenzae e M. catarrhalis). Se alergia a penicilina (não anafilática): Cefuroxima; (anafilática): Azitromicina ou Claritromicina.</li>\n              <li><strong>Otite Média com Efusão (Serosa):</strong> Líquido no ouvido médio sem sinais de inflamação aguda (sem febre, sem hiperemia intensa). <strong>Clássico:</strong> Criança com atraso escolar/de fala, desatenta, MT retraída e opalescente, nível líquido ou bolhas na otoscopia. <strong>Tratamento:</strong> Expectante por até 3 meses. Se não resolver, tubos de ventilação (carretel). <strong>Atenção:</strong> Em adultos com OME unilateral persistente, SEMPRE afastar carcinoma de nasofaringe (obstrução tubária tumoral).</li>\n              <li><strong>Otite Média Crônica (OMC):</strong> Perfuração timpânica com duração > 3 meses.\n                <ul>\n                  <li><strong>OMC Simples:</strong> Perfuração central, otorreia intermitente (mucopurulenta) indolor que piora com entrada de água. Tratamento: Gotas tópicas (ciprofloxacino) nas agudizações; cirurgia (timpanoplastia) definitiva.</li>\n                  <li><strong>OMC Colesteatomatosa:</strong> Pele (epitélio escamoso) dentro do ouvido médio destruindo osso (ossículos). <strong>Palavra-chave:</strong> Otorreia fétida crônica e contínua, perfuração MARGINAL ou atical, massa branca perolada, lise óssea. Pode complicar com fístula labiríntica, paralisia facial ou meningite/abscesso cerebral. Tratamento: Cirúrgico OBRIGATÓRIO (Mastoidectomia).</li>\n                </ul>\n              </li>\n              <li><strong>Complicações das Otites Médias:</strong>\n                <ul>\n                  <li><strong>Mastoidite Aguda:</strong> Principal complicação da OMA. <strong>Clínica:</strong> OMA que evolui com eritema, edema e dor retroauricular, e apagamento do sulco retroauricular (deslocamento do pavilhão em abano). <strong>Conduta:</strong> Internação, TC de mastoides, ATB venoso (Ceftriaxona) e miringotomia +/- mastoidectomia.</li>\n                  <li><strong>Paralisia Facial Periférica:</strong> Deiscência do canal de Falópio expõe o nervo facial à infecção.</li>\n                </ul>\n              </li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.3",
+          "title": "Otite Externa e Afecções do Conduto",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Externa Aguda (OEA):</strong> Inflamação do conduto auditivo externo (CAE). <strong>Fatores de risco:</strong> Natação, cotonetes (microtrauma). <strong>Palavra-chave:</strong> Otalgia intensa que piora à tração do pavilhão auricular ou pressão no trago. <strong>Agentes:</strong> <em>Pseudomonas aeruginosa</em> e <em>Staphylococcus aureus</em>. Tratamento: Limpeza e gotas otológicas tópicas (Ciprofloxacino + Dexametasona). ATB oral apenas se celulite periauricular ou diabetes/imunodepressão grave.</li>\n              <li><strong>Otite Externa Fúngica (Otomicose):</strong> Prurido intenso, sensação de ouvido tapado. Otoscopia com hifas e esporos (aspecto de \"algodão mofado\" ou \"papel molhado com pontinhos pretos\" - <em>Aspergillus niger</em>). Tratamento: Limpeza rigorosa, antifúngico tópico (clotrimazol).</li>\n              <li><strong>Otite Externa Necrosante (Maligna):</strong> <strong>Pegadinha Clássica:</strong> NÃO é câncer! É uma osteomielite da base do crânio iniciada no CAE. <strong>Perfil:</strong> Idoso diabético descompensado ou imunossuprimido com otalgia excruciante desproporcional, otorreia crônica não responsiva, tecido de granulação no assoalho do conduto (patognomônico). Pode evoluir com paralisia de nervos cranianos (VII, IX, X, XI). <strong>Agente:</strong> <em>Pseudomonas aeruginosa</em> (95%). <strong>Conduta:</strong> Internação, TC temporal e Ciprofloxacino venoso em altas doses por semanas.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.4",
+          "title": "Perda Auditiva, Surdez e Zumbido",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Diferenciação Condutiva x Neurossensorial (Teste de Weber e Rinne):</strong>\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Tipo de Perda</th><th>Rinne (Diapasão 512Hz)</th><th>Weber (Topo da cabeça)</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>Normal</td><td>Positivo (Aéreo > Ósseo)</td><td>Centraliza (não lateraliza)</td></tr>\n                    <tr><td>Condutiva (ex: Rolha, OMA, Otosclerose)</td><td>Negativo (Ósseo > Aéreo) no ouvido doente</td><td>Lateraliza para o ouvido DOENTE (surdo)</td></tr>\n                    <tr><td>Neurossensorial (ex: PAIR, Presbiacusia)</td><td>Positivo (Aéreo > Ósseo)</td><td>Lateraliza para o ouvido SAUDÁVEL</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              </li>\n              <li><strong>Otosclerose:</strong> Perda auditiva condutiva ou mista, progressiva, bilateral assimétrica, mais comum em mulheres brancas (piora na gravidez). Fisiopatologia: Fixação da platina do estribo na janela oval. <strong>Palavra-chave:</strong> Tinnitus, herança familiar, Rinne negativo. Tratamento: Estapedotomia ou AASI (aparelho auditivo).</li>\n              <li><strong>Presbiacusia:</strong> Perda auditiva neurossensorial, bilateral, simétrica e descendente (inicia em frequências AGUDAS). Ocorre por degeneração das células ciliadas da cóclea no idoso. <strong>Palavra-chave:</strong> \"Escuto mas não entendo\" (dificuldade de discriminação em ambientes ruidosos).</li>\n              <li><strong>Perda Auditiva Induzida por Ruído (PAIR):</strong> Neurossensorial, neurossensorial, simétrica, irreversível e NÃO progressiva após cessar a exposição. <strong>Pegadinha:</strong> A gota acústica (entalhe) no audiograma ocorre CLASSICAMENTE nas frequências de 3.000, 4.000 (mais comum) e 6.000 Hz, com recuperação em 8.000 Hz.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.5",
+          "title": "Vertigem e Otoneurologia",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> <strong>É a causa mais comum de vertigem.</strong> <strong>Clássico:</strong> Crises vertiginosas CURTAS (segundos a menos de 1 minuto), desencadeadas por movimentos específicos da cabeça (deitar, levantar, rolar na cama). SEM sintomas auditivos associados. Fisiopatologia: Canalitíase (otólitos flutuando no canal semicircular posterior). <strong>Diagnóstico:</strong> Manobra de Dix-Hallpike (provoca vertigem e nistagmo rotatório geotrópico - batendo para o chão). <strong>Tratamento:</strong> Manobra de Epley (reposicionamento). Drogas (dimenidrinato) têm pouco valor.</li>\n              <li><strong>Doença de Ménière (Hidropsia Endolinfática):</strong> <strong>Tríade Clássica (Palavra-chave):</strong> Vertigem episódica espontânea (dura de 20 min a horas) + Zumbido (tipo concha, motor) + Hipoacusia flutuante (predomina em graves) e plenitude aural. Tratamento agudo: Supressores vestibulares. Tratamento profilático: Restrição de sal, cafeína e uso de betaistina e diuréticos.</li>\n              <li><strong>Neurite Vestibular (Neuropatia):</strong> Vertigem intensa, SÚBITA, espontânea, durando DIAS, acompanhada de náuseas e vômitos intensos, incapacitante, muitas vezes após um quadro viral prévio. <strong>Diferencial chave:</strong> SEM sintomas auditivos (audição normal). Tratamento: Corticosteroides no início, sintomáticos por poucos dias (prometazina, ondansetrona) e reabilitação vestibular precoce (para compensação central). <strong>Pegadinha:</strong> O uso prolongado de sedativos vestibulares atrasa a compensação!</li>\n              <li><strong>Schwannoma Vestibular (Neuroma do Acústico):</strong> Tumor benigno do VIII par. <strong>Palavra-chave:</strong> Perda auditiva neurossensorial unilateral progressiva + zumbido unilateral + alterações do reflexo estapediano (fadiga). Se crescer, comprime o trigêmeo (hipoestesia facial) e facial (paralisia). Exame Padrão-Ouro: RM de ouvidos com contraste.</li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "2. Faringologia e Laringologia",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Infecções de Laringe e Via Aérea na Infância",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epiglotite Aguda (Supraglotite):</strong> Emergência pediátrica de instalação hiperaguda. <strong>Perfil (Palavra-chave):</strong> Pré-escolar com VACINAS ATRASADAS, aspecto toxemiado, febre alta, dor de garganta, <strong>voz abafada (voz de batata quente) e sialorreia (babando)</strong> com estridor inspiratório. A criança adota a posição de tripé (sentada, inclinada para frente, pescoço estendido). <strong>Agente clássico:</strong> <em>Haemophilus influenzae tipo B</em> (a vacina pentavalente reduziu drasticamente; hoje S. pyogenes e S. pneumoniae também são causas). <strong>Conduta Imediata:</strong> GARANTIR VIA AÉREA (Intubação orotraqueal em bloco cirúrgico sob anestesia inalatória). <strong>Pegadinha absoluta:</strong> NUNCA inspecionar a cavidade oral ou orofaringe com abaixador de língua na suspeita de epiglotite -> Risco de laringoespasmo e obstrução total. Rx lateral de pescoço mostra o \"Sinal do Polegar\", mas não deve atrasar a via aérea. ATB de escolha: Ceftriaxona.</li>\n              <li><strong>Laringotraqueobronquite Viral (Crupe):</strong> <strong>Perfil (Palavra-chave):</strong> Lactente (6m - 3a) com pródromos catarrais (IVAS) que evolui com febre baixa/moderada, estridor leve, rouquidão e tosse ladrante (tosse de cachorro). <strong>Agente:</strong> Vírus Parainfluenza. Raio-X de pescoço AP: \"Sinal da ponta de lápis\" ou \"Torre de igreja\" (estreitamento infraglótico). <strong>Tratamento:</strong> Dexametasona dose única VO ou IM. Se estridor em repouso (moderado/grave): Adrenalina nebulizada (L-epinefrina). <strong>Atenção:</strong> Se crupe não melhora ou piora subitamente e evolui para toxemia, pensar em Traqueíte Bacteriana (S. aureus), que requer ATB venoso.</li>\n              <li><strong>Laringomalácia:</strong> <strong>Causa mais comum de estridor congênito crônico.</strong> <strong>Palavra-chave:</strong> Bebê jovem (<2 meses) com estridor inspiratório que <strong>piora no choro, na agitação e em decúbito dorsal</strong>, e melhora no repouso ou prono. Evolução benigna, pico aos 6-9 meses, resolução espontânea até os 2 anos. Diagnóstico: Nasofibrolaringoscopia mostrando prolapso supraglótico (\"epiglote em ômega\"). Conduta: Expectante na maioria; se grave (déficit de peso/cor pulmonale), cirurgia (supraglotoplastia).</li>\n            </ul>\n          "
+        },
+        {
+          "num": "2.2",
+          "title": "Faringotonsilites e Complicações",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Faringotonsilite Bacteriana:</strong> Agente: <em>Streptococcus pyogenes</em> (EBHGA). Pico 5 a 15 anos. Raro < 3 anos (nessa idade é viral). <strong>Critérios de Centor (para definir ATB empírico):</strong> Febre, exsudato tonsilar, adenopatia cervical anterior dolorosa e AUSÊNCIA de tosse (+1 se idade 3-14a; -1 se >44a). Tratamento: Penicilina G benzatina IM DU ou Amoxicilina VO por 10 dias. O objetivo não é só tratar a infecção, mas prevenir a <strong>Febre Reumática</strong> (a glomerulonefrite pós-estrepto NÃO previne com ATB).</li>\n              <li><strong>Mononucleose Infecciosa:</strong> Epstein-Barr Vírus. <strong>Palavra-chave:</strong> Faringite exsudativa intensa prolongada + poliadenopatia generalizada (incluindo cervical POSTERIOR) + esplenomegalia. <strong>Pegadinha de prova:</strong> Paciente com \"amigdalite\" tratado com amoxicilina que desenvolve rash cutâneo maculopapular (exantema) difuso. Diagnóstico: Linfocitose atípica, Anticorpos heterófilos (Paul-Bunnell-Davidsohn). Conduta: Sintomáticos, afastar esportes de contato por 4 semanas (risco de ruptura esplênica).</li>\n              <li><strong>Abscesso Peritonsilar:</strong> Complicação bacteriana de amigdalite aguda. <strong>Clássico:</strong> Adolescente/jovem com dor de garganta unilateral intensa, trismo, voz de batata quente, desvio da úvula para o lado CONTRALÁRIO à lesão, e abaulamento do pilar amigdaliano anterior. <strong>Tratamento:</strong> Internação, ATB venoso (Clindamicina ou Ceftriaxona+Metronidazol) e <strong>Drenagem imediata (punção/incisão)</strong>.</li>\n              <li><strong>Hipertrofia Adenotonsilar e SAOS:</strong> Causa primária de apneia do sono infantil. Criança respiradora oral, fácies adenoideana (lábio superior curto, palato ogival, dentição alterada), cor pulmonale. Tratamento: Adenotonsilectomia.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "2.3",
+          "title": "Lesões Benignas e Malignas da Laringe",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Nódulos Vocais (Kissing nodules):</strong> Lesão benigna MAIS COMUM de prega vocal, bilaterais, no terço médio, simétricos. <strong>Causa:</strong> Abuso/mau uso vocal crônico (professores, cantores, crianças gritadoras). <strong>Tratamento:</strong> Fonoterapia (foniatria). A cirurgia é exceção.</li>\n              <li><strong>Pólipos Vocais:</strong> Unilaterais, base séssil ou pediculada, causados por trauma fonatório AGUDO associado frequentemente a fatores irritantes (refluxo, tabagismo). Tratamento: Microcirurgia de laringe + fonoterapia de apoio.</li>\n              <li><strong>Edema de Reinke:</strong> Acúmulo de fluido no espaço de Reinke (lâmina própria superficial). <strong>Palavra-chave:</strong> Mulher idosa, TABAGISTA pesada, que adquire voz grave (virilizada). Tratamento: Cessar tabagismo + microcirurgia.</li>\n              <li><strong>Câncer de Laringe:</strong> Mais de 95% são Carcinoma Espinocelular (CEC). Fatores de risco maiores: <strong>Tabagismo e Etilismo (sinergismo)</strong>.\n                <ul>\n                  <li><strong>CA Glótico:</strong> <strong>Palavra-chave:</strong> Rouquidão crônica e persistente (>3-4 semanas). Tem diagnóstico PRECOCE (a voz avisa cedo). Como a glote tem drenagem linfática escassa, demora a dar metástase linfonodal.</li>\n                  <li><strong>CA Supraglótico:</strong> <strong>Palavra-chave:</strong> Assintomático nas fases iniciais, depois causa disfagia, odinofagia, sensação de corpo estranho e engasgos. Diagnóstico TARDIO, e frequentemente o paciente abre o quadro com linfonodomegalia cervical (rica rede linfática).</li>\n                </ul>\n              </li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "3. Rinologia e Seios da Face",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Rinossinusites",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinossinusite Aguda:</strong> Inflamação de mucosa nasal e seios paranasais < 12 semanas. Maioria esmagadora é VIRAL.\n              <br><strong>Diagnóstico Clínico (Critérios Maiores):</strong> Rinorreia purulenta/obstrução nasal + Dor/pressão facial ou hiposmia/anosmia.\n              <br><strong>Viral vs Bacteriana:</strong> Suspeita de BACTERIANA (pneumococo, hemófilo, moraxela) se:\n                <ol>\n                  <li>Sintomas persistem por > 10 dias SEM melhora;</li>\n                  <li>Início grave (febre alta, rinorreia purulenta, dor facial excruciante) por > 3-4 dias;</li>\n                  <li>Piora dupla (Double sickening): Estava melhorando de um resfriado (após 5-6 dias) e volta a ter febre alta, dor facial e secreção pior.</li>\n                </ol>\n              <strong>Tratamento da Bacteriana:</strong> Amoxicilina ou Amoxicilina-Clavulanato (5-10 dias adultos, 10-14d crianças), associado a Lavagem Nasal exaustiva com soro fisiológico e corticoide tópico (mometasona, budesonida). <strong>Pegadinha:</strong> Raio-X de seios da face NÃO deve ser solicitado (não diferencia viral de bacteriana). Tomografia é indicada APENAS se houver suspeita de complicação ou pré-operatório, ou falha de tratamento.\n              </li>\n              <li><strong>Complicações das Rinossinusites:</strong>\n                <ul>\n                  <li><strong>Celulite Periorbitária (Pré-septal):</strong> Edema, eritema de pálpebra, SEM acometimento da órbita. Olho move normal, visão normal, sem proptose. Tratamento: ATB oral/venoso dependendo da idade e reavaliação.</li>\n                  <li><strong>Celulite Orbitária (Pós-septal):</strong> Extensão da infecção do seio etmoidal através da lâmina papirácea para dentro da órbita. <strong>Sinais de alarme:</strong> Proptose (exoftalmia), oftalmoplegia (dor/restrição à movimentação ocular), quemose e diminuição de acuidade visual. <strong>Conduta:</strong> INTERNAÇÃO de emergência, TC de seios da face/órbitas com contraste, ATB EV (Ceftriaxona + Clindamicina/Vancomicina). Se não melhorar em 48h ou abscesso grande: Drenagem cirúrgica (endoscópica nasal).</li>\n                </ul>\n              </li>\n              <li><strong>Rinossinusite Crônica:</strong> > 12 semanas de sintomas ininterruptos. Pode ser com ou sem polipose nasal. <strong>Doença de Samter (Tríade da Aspirina / DREA):</strong> Paciente com asma grave + rinossinusite crônica com pólipos nasais + intolerância à AAS/AINEs (broncoespasmo grave). Tratamento crônico: Corticoides tópicos, lavagem, cirurgia endoscópica funcional (FESS).</li>\n            </ul>\n          "
+        },
+        {
+          "num": "3.2",
+          "title": "Epistaxe",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epistaxe Anterior:</strong> Responde por 90% dos casos. Sangramento originário do <strong>Plexo de Kiesselbach (Área de Little)</strong> na porção anterior do septo cartilaginoso. <strong>Causas:</strong> Trauma digital (dedo no nariz), clima seco, rinite. <strong>Conduta inicial:</strong> Compressão digital firme das asas do nariz por 10-15 min, inclinar cabeça PARA FRENTE (não para trás, para evitar broncoaspiração), algodão com vasoconstritor tópico (oximetazolina). Se o vaso for visualizado: Cauterização química (Nitrato de Prata 70%) ou elétrica. Se falhar: Tampão nasal anterior.</li>\n              <li><strong>Epistaxe Posterior:</strong> Menos comum, mas MUITO mais grave e profusa, comum em idosos hipertensos. Origem no <strong>Plexo de Woodruff (Artéria Esfenopalatina)</strong>. Sangra mais pela faringe e pelas duas fossas nasais. <strong>Conduta:</strong> ABCDE primeiro (acesso venoso, volume), tamponamento posterior com sonda de Foley ou tampões específicos (ex: Epistat) + tamponamento anterior simultâneo. Requer internação hospitalar. Se não resolver em 48-72h: Cirurgia endoscópica para ligadura da artéria esfenopalatina (Padrão-Ouro atual) ou embolização por radiologia intervencionista.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "3.3",
+          "title": "Rinite Alérgica e Tumores",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinite Alérgica:</strong> Prurido nasal, espirros em salva, coriza hialina, congestão nasal. Tríade do exame: Mucosa pálida/cianótica, hipertrofia de cornetos inferiores e secreção clara. <strong>Tratamento Padrão-ouro:</strong> Corticoide nasal tópico (Budesonida, Fluticasona) diariamente. Anti-histamínicos de 2ª geração VO ajudam muito em coriza/espirro, mas pouco na obstrução. Controle ambiental fundamental (evitar ácaros, tapetes, mofo, cortinas de pano).</li>\n              <li><strong>Angiofibroma Nasofaríngeo Juvenil:</strong> <strong>Perfil Absoluto:</strong> Menino adolescente masculino com obstrução nasal progressiva unilateral ou bilateral profunda, associada a episódios de EPISTAXE SEVERA recorrente. Tumor altamente vascularizado benigno. <strong>Pegadinha Crítica:</strong> NUNCA BIPSAR EM CONSULTÓRIO (Risco de hemorragia fatal). Diagnóstico por TC e RM. Tratamento: Embolização pré-operatória seguida de ressecção cirúrgica.</li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "4. Urgências e Traumas Otorrinolaringológicos",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Traumas Nasais e Hematoma Septal",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Fratura Nasal:</strong> Osso mais fraturado da face. Diagnóstico é CLÍNICO (crepitação, desvio, edema). Raio-X tem pouco valor. O mais importante é palpar e realizar a rinoscopia anterior.</li>\n              <li><strong>Hematoma de Septo Nasal:</strong> <strong>Emergência Otorrinolaringológica!</strong> Coleção de sangue entre o mucopericôndrio e a cartilagem do septo. Causa isquemia da cartilagem quadrangular, levando à necrose cartilaginosa em 48-72h. <strong>Complicação clássica (Palavra-chave):</strong> Nariz em sela (desabamento do dorso) crônico e perfuração septal permanente, além de infecção (abscesso). <strong>Conduta OBRIGATÓRIA:</strong> Drenagem incisional de urgência do hematoma + tamponamento nasal bilateral compressivo (para evitar que acumule de novo) + antibiótico.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "4.2",
+          "title": "Paralisia Facial Periférica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Paralisia de Bell (Idiopática):</strong> Causada provavelmente por reativação viral (Herpes Simplex tipo 1). É PERIFÉRICA: Acomete TODA a hemiface (inclui porção superior - incapacidade de enrugar a testa e fechar o olho, \"Sinal de Bell\" - desvio do globo ocular para cima e para fora ao tentar fechar), ao contrário da Central (que poupa a testa). <strong>Tratamento:</strong> Corticoterapia em altas doses iniciada precocemente (< 72h) para diminuir edema do nervo + Proteção Ocular rigorosa (colírio lubrificante, oclusão noturna para evitar úlcera de córnea).</li>\n              <li><strong>Síndrome de Ramsay Hunt:</strong> Reativação do Varicela-Zoster (Herpes Zoster Oticus) no gânglio geniculado. <strong>Palavra-chave:</strong> Paralisia facial periférica intensa + otalgia excruciante + vesículas no pavilhão auricular/conduto auditivo/concha. O prognóstico de recuperação facial é pior que a de Bell. <strong>Tratamento:</strong> Corticoides em altas doses + Aciclovir/Valaciclovir.</li>\n            </ul>\n          "
+        }
+      ]
+    }
+  ]
+},
+    "uepa_ortopedia": {
+  "area": "Ortopedia",
+  "title": "Rapid Review Ortopedia - ENAMED",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Traumatologia Básica e Fraturas Abertas",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Fraturas Expostas (Classificação de Gustilo-Anderson)",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura Exposta:</strong> Urgência ortopédica clássica. A conduta inicial é o suporte de vida (ATLS), seguido de proteção da ferida com curativo estéril, alinhamento, imobilização provisória e antibioticoterapia PRECOCE (principal fator prognóstico para infecção). <strong>Pegadinha:</strong> Retardar o antibiótico aguardando cultura (NUNCA fazer isso, inicie profilaxia empírica na primeira hora).</li>\n<li><strong>Avaliação:</strong> Avaliar pulsos periféricos e função neurológica ANTES e DEPOIS da redução provisória. <strong>Palavra-chave:</strong> \"osso exposto com sangramento ativo e ausência de pulso distal\".</li>\n<li><strong>Antibioticoterapia empírica:</strong> Depende do grau de contaminação e tamanho da lesão pela Classificação de Gustilo-Anderson.\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Grau (Gustilo)</th><th>Características</th><th>Antibioticoterapia Padrão</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Grau I</td><td>Ferida &lt; 1 cm, limpa, trauma de baixa energia, de dentro para fora</td><td>Cefalosporina de 1ª geração (Cefazolina)</td></tr>\n      <tr><td>Grau II</td><td>Ferida 1 a 10 cm, contaminação moderada, dano de partes moles moderado</td><td>Cefalosporina de 1ª geração (Cefazolina)</td></tr>\n      <tr><td>Grau III</td><td>Ferida &gt; 10 cm, trauma de alta energia, grande destruição de partes moles, projétil de arma de fogo, ou acidentes rurais</td><td>Cefalosporina 1ª ger. + Aminoglicosídeo (Gentamicina)</td></tr>\n      <tr><td>Grau IIIa</td><td>Adequada cobertura cutânea do osso, apesar do tamanho da ferida</td><td>Cefazolina + Gentamicina</td></tr>\n      <tr><td>Grau IIIb</td><td>Osso exposto com necessidade de retalho para cobertura cutânea</td><td>Cefazolina + Gentamicina</td></tr>\n      <tr><td>Grau IIIc</td><td>Lesão vascular associada que necessita de reparo arterial para salvar o membro</td><td>Cefazolina + Gentamicina</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Conduta Cirúrgica:</strong> Limpeza cirúrgica (desbridamento) exaustiva em centro cirúrgico (até 6h idealmente) + estabilização óssea. A fixação externa é de eleição no trauma de alta energia (Damage Control) até melhora das partes moles.</li>\n<li><strong>Prevenção Antitetânica:</strong> Atualizar vacina e soro conforme protocolo do Ministério da Saúde. Se contaminação rural intensa (fezes de animais, terra), associar Penicilina ou Metronidazol para cobrir Clostridium (embora protocolos recentes incluam apenas desbridamento agressivo + ATB de largo espectro).</li>\n</ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Síndrome Compartimental",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome Compartimental:</strong> Aumento da pressão dentro de um compartimento fascial fechado, comprometendo a perfusão capilar e a viabilidade dos tecidos (músculos e nervos). <strong>Palavra-chave:</strong> \"Dor desproporcional ao trauma, que piora com o alongamento passivo\".</li>\n<li><strong>Quadro Clínico (Os 6 P's):</strong> <strong>P</strong>ain (Dor excruciante), <strong>P</strong>arestesia (sinal precoce), <strong>P</strong>alidez, <strong>P</strong>aralisia, <strong>P</strong>ulselessness (Ausência de pulso - SINAL TARDIO, a isquemia capilar ocorre antes da oclusão arterial). <strong>Pegadinha:</strong> Achar que pulso presente descarta síndrome compartimental (o pulso periférico pode estar preservado enquanto o músculo morre).</li>\n<li><strong>Locais mais comuns:</strong> Perna (compartimento anterior) associada a fraturas de tíbia e antebraço (compartimento volar) associada a fraturas supracondilianas do úmero em crianças.</li>\n<li><strong>Diagnóstico:</strong> Eminente CLÍNICO. Em pacientes irresponsivos (coma, politrauma), pode-se medir a pressão intracompartimental (anormal se &gt; 30 mmHg ou se Delta P [PAD - Pressão do Compartimento] &lt; 30 mmHg).</li>\n<li><strong>Tratamento e Conduta:</strong>\n<pre class=\"reader-pre-card\">\nSuspeita de Síndrome Compartimental\n↓\nRetirar todo enfaixamento, gesso e curativos compressivos\n↓\nManter o membro no nível do coração (NÃO elevar, pois diminui perfusão arterial)\n↓\nSe não melhorar rapidamente:\nFASCIOTOMIA DESCOMPRESSIVA DE URGÊNCIA\n</pre>\n</li>\n<li><strong>Complicação:</strong> Contraturas isquêmicas de Volkmann (sequela clássica no antebraço, com mão em garra).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "2. Ortopedia Pediátrica",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Doenças do Quadril Pediátrico",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>O quadril da criança é tema de ouro.</strong> As doenças se dividem classicamente pela faixa etária de acometimento.\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Idade Típica</th><th>Doença</th><th>Quadro Clínico Clássico</th><th>Achado Radiográfico</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Recém-nascido a 6 meses</td><td>Displasia do Desenvolvimento do Quadril (DDQ)</td><td>Fatores de risco (menina, pélvico, oligoidrâmnio). Ortolani/Barlow positivos.</td><td>USG é o padrão ouro &lt; 4-6 meses. Rx após núcleo de ossificação (Linha de Hilgenreiner/Perkins)</td></tr>\n      <tr><td>3 a 8 anos</td><td>Sinovite Transitória do Quadril</td><td>Dor no quadril/joelho de início súbito após IVAS. Claudicação. Limitação leve.</td><td>Rx normal. USG com derrame articular.</td></tr>\n      <tr><td>4 a 8 anos</td><td>Doença de Legg-Calvé-Perthes</td><td>Menino, claudicação insidiosa e indolor (ou dor leve), déficit de abdução e rotação interna.</td><td>Rx com achatamento, esclerose e fragmentação da cabeça do fêmur.</td></tr>\n      <tr><td>10 a 16 anos</td><td>Epifisiólise do Fêmur Proximal</td><td>Menino obeso, dor crônica ou súbita na virilha/coxa/joelho. Rotação externa obrigatória à flexão do quadril (Sinal de Drehmann).</td><td>Rx com escorregamento da epífise (\"sinal de Trethowan\", linha de Klein não corta a epífise).</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Displasia do Desenvolvimento do Quadril (DDQ):</strong> Instabilidade articular do recém-nascido. Manobra de <strong>Barlow</strong> (Luxa o quadril, \"Bad\") e <strong>Ortolani</strong> (Reduz o quadril, \"Out to IN\"). <strong>Conduta:</strong> Uso de Suspensório de Pavlik por 6-12 semanas se &lt; 6 meses. Após 6 meses, redução fechada e gesso pelvipodálico.</li>\n<li><strong>Doença de Legg-Calvé-Perthes:</strong> Necrose avascular idiopática da cabeça do fêmur na criança em crescimento. <strong>Tratamento:</strong> Depende da idade e grau (Pilares de Herring). Menores de 6 anos geralmente observação e fisioterapia. Maiores de 8 anos frequentemente cirurgia (osteotomia). Objetivo é a \"contenção\" da cabeça dentro do acetábulo.</li>\n<li><strong>Epifisiólise do Fêmur Proximal (EFP):</strong> Escorregamento da epífise através da placa de crescimento. <strong>Palavra-chave:</strong> \"Sinal de Drehmann positivo (rotação externa ao flexionar quadril)\". <strong>Conduta:</strong> Urgência ortopédica! Fixação in situ (parafuso epifisário único). NÃO se tenta reduzir agressivamente pelo risco de necrose avascular.</li>\n<li><strong>Sinovite Transitória do Quadril vs Artrite Séptica:</strong> Diferenciação através dos Critérios de Kocher (Febre &gt; 38.5, Incapacidade de deambular, VHS &gt; 40, Leucócitos &gt; 12.000). 3 ou 4 critérios predizem artrite séptica com alta probabilidade (>93%). Conduta Artrite Séptica: Drenagem cirúrgica imediata e ATB sistêmico.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Fraturas e Anomalias Infantis",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura Supracondiliana de Úmero:</strong> Fratura mais comum do cotovelo em crianças (5-7 anos). Mecanismo de queda sobre a mão espalmada. <strong>Complicações:</strong> Lesão do nervo interósseo anterior (ramo do mediano - não consegue fazer o \"OK\" com os dedos), lesão da artéria braquial e Síndrome Compartimental.</li>\n<li><strong>Lesão Fisária (Salter-Harris):</strong> Fraturas envolvendo a placa de crescimento (fise). Classificação:\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Tipo</th><th>Mnemônico (SALTR)</th><th>Descrição da Linha de Fratura</th><th>Prognóstico e Conduta</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>I</td><td><strong>S</strong>lip / Straight across</td><td>Fratura através da fise (escorregamento)</td><td>Bom prognóstico. Conservador (gesso).</td></tr>\n      <tr><td>II</td><td><strong>A</strong>bove</td><td>Através da fise e da metáfise (sinal de Thurston-Holland)</td><td>O mais COMUM. Bom prognóstico. Conservador.</td></tr>\n      <tr><td>III</td><td><strong>L</strong>ower / beLow</td><td>Através da fise e epífise (intra-articular)</td><td>Prognóstico reservado. Requer redução anatômica cirúrgica.</td></tr>\n      <tr><td>IV</td><td><strong>T</strong>hrough or Two</td><td>Através de metáfise, fise e epífise</td><td>Alto risco de parada de crescimento. Cirúrgico.</td></tr>\n      <tr><td>V</td><td><strong>R</strong>am / cRushed</td><td>Compressão (esmagamento) da fise</td><td>Pior prognóstico. Diagnóstico muitas vezes retrospectivo após parada do crescimento (epifisiodese).</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Pé Torto Congênito (PTC):</strong> Deformidade em CAVE: <strong>C</strong>avo, <strong>A</strong>duto, <strong>V</strong>aro, <strong>E</strong>quino. <strong>Tratamento:</strong> Método de Ponseti (trocas gessadas semanais seguidas de tenotomia percutânea do tendão de Aquiles e uso da órtese de abdução de Denis Browne). O tratamento deve iniciar nos primeiros dias de vida.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Fraturas Específicas do Adulto",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Fraturas do Membro Superior",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura de Clavícula:</strong> Mais comum no terço médio. Tratamento geralmente conservador com tipoia \"oito\" ou americana. Cirúrgico se exposta, lesão neurovascular, iminência de exposição de pele, ou desvio/encurtamento muito grave (>2cm).</li>\n<li><strong>Fratura do Colo Cirúrgico do Úmero:</strong> Risco de lesão do <strong>Nervo Axilar</strong> e da artéria circunflexa umeral. Avaliar parestesia na face lateral do ombro (área da insígnia militar) e incapacidade de abdução (deltoide).</li>\n<li><strong>Fratura da Diáfise do Úmero:</strong> Risco clássico de lesão do <strong>Nervo Radial</strong>. <strong>Palavra-chave:</strong> \"Mão caída\" e perda de extensão dos dedos/punho. Maioria consolida com tratamento conservador (gesso pendente ou brace tipo Sarmiento).</li>\n<li><strong>Fratura de Rádio Distal (Colles vs Smith):</strong> \n  - <strong>Fratura de Colles:</strong> Queda com punho em EXTENSÃO. Desvio DORSAL do fragmento distal. Deformidade em \"dorso de garfo\". Tratamento: Redução fechada e gesso antebraquiopalmar.\n  - <strong>Fratura de Smith:</strong> Queda com punho em FLEXÃO. Desvio VOLAR do fragmento distal. Deformidade em \"pá de jardim\". Mais instável, frequentemente requer cirurgia.\n</li>\n<li><strong>Fratura de Escafoide:</strong> Queda espalmada. Dor na <strong>Tabaqueira Anatômica</strong>. <strong>Pegadinha:</strong> Radiografia inicial pode ser NORMAL (até 30% dos casos). Se há forte suspeita clínica e Rx normal: IMOBILIZAR e repetir Rx em 1-2 semanas, ou solicitar RM. Complicação frequente: <strong>Necrose avascular do polo proximal</strong> do escafoide (vascularização é distal para proximal).</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Fraturas do Membro Inferior e Pelve",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura de Pelve:</strong> Trauma de alta energia (motocicleta, atropelamento). <strong>Risco altíssimo de choque hemorrágico</strong> (sangramento retroperitoneal venoso ou do plexo sacral). <strong>Conduta inicial:</strong> Estabilizar bacia com lençol ou cinta pélvica a nível dos trocanteres maiores para diminuir o volume pélvico e conter sangramento por tamponamento (Damage Control).</li>\n<li><strong>Fratura do Colo do Fêmur:</strong> Muito comum em idosos, osteoporose. Trauma de baixa energia (queda da própria altura). <strong>Clínica:</strong> Membro encurtado e em ROTAÇÃO EXTERNA. <strong>Risco altíssimo:</strong> Necrose avascular da cabeça do fêmur (lesão da artéria circunflexa medial).\n  - <strong>Classificação de Garden:</strong> I (incompleta/impactada em valgo), II (completa, sem desvio), III (completa, desvio parcial), IV (completa, desvio total).\n  - <strong>Tratamento Idoso:</strong> Garden I e II -> Fixação com parafusos canulados (osteossíntese). Garden III e IV -> Artroplastia do quadril (prótese).\n  - <strong>Tratamento Jovem:</strong> SEMPRE urgência absoluta para fixação interna para tentar salvar a cabeça (osteossíntese).\n</li>\n<li><strong>Fratura Intertrocantérica:</strong> Ocorre entre os trocanteres (região muito vascularizada). Não costuma dar necrose da cabeça. Maior risco de instabilidade biomecânica. <strong>Tratamento padrão:</strong> Haste cefalomedular (PFN) ou placa-parafuso deslizante (DHS). Membro fica ainda mais encurtado e em ROTAÇÃO EXTERNA Acentuada.</li>\n<li><strong>Fraturas do Tornozelo (Classificação de Danis-Weber):</strong> Baseada no nível da fratura da fíbula em relação à sindesmose tibiofibular:\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Tipo</th><th>Nível da fratura fibular</th><th>Sindesmose</th><th>Tratamento</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Weber A</td><td>Abaixo da sindesmose (infrasindesmal)</td><td>Intacta</td><td>Geralmente conservador (Gesso).</td></tr>\n      <tr><td>Weber B</td><td>No nível da sindesmose (transindesmal)</td><td>Pode estar lesada (até 50%)</td><td>Depende da estabilidade. Avaliar lesão medial associada.</td></tr>\n      <tr><td>Weber C</td><td>Acima da sindesmose (suprasindesmal)</td><td>Sempre lesada (instável)</td><td>Cirúrgico obrigatório. Redução aberta e fixação interna.</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "4. Medicina Esportiva e Lesões Ligamentares",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Lesões do Joelho",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Lesão do Ligamento Cruzado Anterior (LCA):</strong> Trauma torcional (pé fixo, rotação do tronco, valgo). <strong>Quadro clínico:</strong> Estalido audível, hemartrose imediata volumosa, incapacidade de continuar a prática esportiva. <strong>Testes:</strong> Lachman (mais sensível e específico), Gaveta Anterior, Pivot Shift. <strong>Tratamento:</strong> Cirúrgico (reconstrução com enxerto) em pacientes jovens, ativos, atletas.</li>\n<li><strong>Lesão do Ligamento Cruzado Posterior (LCP):</strong> Trauma direto na tíbia proximal (joelho fletido) - clássico \"trauma de painel de carro\". <strong>Testes:</strong> Gaveta posterior, teste do sag (queda da tíbia para trás). Tratamento predominantemente conservador com fortalecimento de quadríceps, cirurgia se instabilidade severa.</li>\n<li><strong>Lesão Meniscal:</strong> Dor intermitente, derrames de repetição menores (liquido sinovial, não hemartrose franca como LCA), sensação de bloqueio articular ou \"falseio\". <strong>Testes:</strong> McMurray, Apley. Menisco MEDIAL lesa mais que o lateral, frequentemente associado a lesão do LCA.</li>\n<li><strong>Tríade de O'Donoghue (Tríade Infeliz):</strong> Lesão combinada clássica por estresse em valgo severo + rotação: <strong>LCA + Ligamento Colateral Medial (LCM) + Menisco Medial.</strong></li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "5. Ortopedia Infecciosa e Tumoral",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Osteomielite e Artrite Séptica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteomielite Aguda:</strong> Infecção óssea mais comum em crianças via hematogênica (metáfise dos ossos longos devido a fluxo sanguíneo lento e microtraumas). Agente mais comum: <strong>S. aureus.</strong> Em falcêmicos, lembrar de <strong>Salmonella</strong>. <strong>Quadro:</strong> Febre, dor óssea intensa, claudicação, recusa alimentar. <strong>Diagnóstico:</strong> RX (pode ser normal até o 10º-14º dia! Útil apenas para descartar outras causas no início). RM é o padrão-ouro precoce. <strong>Tratamento:</strong> Antibioticoterapia sistêmica venosa prolongada. Cirurgia apenas se abscesso subperiosteal crônico ou falha no tratamento conservador.</li>\n<li><strong>Artrite Séptica:</strong> Emergência absoluta! Destrói a cartilagem articular em 24-48 horas por enzimas condrolíticas e aumento de pressão. Mais comum no joelho e quadril. <strong>Agentes:</strong> S. aureus em todas as faixas etárias; Neisseria gonorrhoeae em adultos jovens sexualmente ativos (poliartrite migratória evoluindo para monoartrite + lesões pustulosas cutâneas).\n<pre class=\"reader-pre-card\">\nSuspeita de Artrite Séptica (dor, bloqueio articular, febre)\n↓\nArtrocentese (Líquido turvo/purulento, Leucócitos &gt; 50.000, PMN &gt; 90%, Glicose &lt; sangue)\n↓\nDrenagem cirúrgica imediata (lavagem articular) + Antibiótico IV empírico\n</pre>\n</li>\n</ul>"
+        },
+        {
+          "num": "5.2",
+          "title": "Tumores Ósseos Principais",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteossarcoma:</strong> Tumor ósseo maligno PRIMÁRIO mais comum. Predomina em adolescentes (10-25 anos). Afeta a <strong>METÁFISE</strong> de ossos longos (Fêmur distal e Tíbia proximal - perto do joelho). <strong>Clínica:</strong> Dor persistente, piora à noite, aumento de volume local. <strong>Radiografia:</strong> Lesão lítica e blástica destrutiva, reação periosteal tipo \"Triângulo de Codman\" e imagem em \"raios de sol\" (sunburst). <strong>Conduta:</strong> Biópsia cirúrgica + Quimioterapia Neoadjuvante + Ressecção ampla + QT Adjuvante.</li>\n<li><strong>Sarcoma de Ewing:</strong> Afeta faixa etária semelhante (mais em crianças 5-15 anos), porém acomete a <strong>DIÁFISE</strong> dos ossos longos. Mimetiza infecção (causa febre, aumento de VHS/PCR). <strong>Radiografia:</strong> Reação periosteal em \"casca de cebola\". Associado a translocação t(11;22). Tumor neuroectodérmico primitivo.</li>\n<li><strong>Osteocondroma:</strong> Tumor ósseo BENIGNO mais comum. Crescimento cartilaginoso exofítico coberto por capuz cartilaginoso na metáfise (\"ponta de osso\" crescendo para longe da articulação). Indolor, só tratado se comprimir estruturas ou causar sintomas mecânicos. Pode degenerar para condrossarcoma em &lt;1% dos casos (suspeitar se capuz cartilaginoso &gt; 2 cm de espessura no adulto ou crescimento após fim da maturidade esquelética).</li>\n<li><strong>Cisto Ósseo Simples:</strong> Tumor pseudotumoral benigno. Lesão lítica central, na metáfise do úmero proximal ou fêmur proximal, muito comum em crianças. Costuma abrir o quadro com fratura patológica com \"sinal do fragmento caído\".</li>\n<li><strong>Mieloma Múltiplo:</strong> Tumor ósseo primário maligno MAIS COMUM se considerar &gt; 50 anos. Doença sistêmica dos plasmócitos. Causas lesões líticas \"em saca-bocado\", hipercalcemia, anemia e disfunção renal (CRAB).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "6. Afecções da Coluna Vertebral e Compressões",
+      "subchapters": [
+        {
+          "num": "6.1",
+          "title": "Patologias da Coluna",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hérnia de Disco Lombar:</strong> Compressão radicular do núcleo pulposo. Níveis mais comuns: L4-L5 e L5-S1. <strong>Clínica:</strong> Dor lombar irradiada para membro inferior (Lombociatalgia), piora com Valsalva ou tosse. <strong>Teste de Lasègue:</strong> Dor radicular à elevação do membro inferior esticado entre 30-70 graus. <strong>Tratamento:</strong> 90% melhoram com conservador (repouso relativo, AINES, pregabalina, fisioterapia). Cirurgia (Microdiscectomia) se síndrome da cauda equina, déficit neurológico progressivo ou falha do tratamento conservador > 6-8 semanas.</li>\n<li><strong>Raízes e Reflexos (Dica ENAMED):</strong>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Raiz Acometida</th><th>Déficit Motor (Força)</th><th>Reflexo Diminuído</th><th>Alteração Sensitiva</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>L4</td><td>Extensão do Joelho (Quadríceps) / Inversão do pé</td><td>Patelar</td><td>Face medial da perna e maléolo medial</td></tr>\n      <tr><td>L5</td><td>Extensão do Hálux (Tibial anterior/Extensor do hálux) - \"Mão e pé caídos\"</td><td>(Nenhum confiável)</td><td>Dorso do pé, região entre 1º e 2º dedos</td></tr>\n      <tr><td>S1</td><td>Flexão plantar (Tríceps sural) / Eversaõ do pé</td><td>Aquileu</td><td>Borda lateral do pé e maléolo lateral</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Síndrome da Cauda Equina:</strong> URGÊNCIA neurocirúrgica! Compressão maciça central das raízes lombossacrais. <strong>Sintomas de alerta (Red Flags):</strong> Anestesia em \"sela\" (períneo), disfunção esfincteriana (retenção ou incontinência urinária/fecal), déficit motor bilateral severo. <strong>Conduta:</strong> Descompressão cirúrgica de urgência (dentro de 48h para evitar lesão definitiva).</li>\n<li><strong>Escoliose Idiopática do Adolescente:</strong> Curvatura lateral > 10 graus e rotação vertebral (Gibosidade costal no Teste de Adams). <strong>Tratamento:</strong> < 20º acompanhamento e exercícios; 20-40º uso de colete (Colete de Milwaukee/Boston) para pacientes em crescimento (Risser baixo); > 40-50º correção cirúrgica (Artrodese posterior).</li>\n</ul>"
+        },
+        {
+          "num": "6.2",
+          "title": "Síndromes Compressivas Periféricas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome do Túnel do Carpo:</strong> Compressão do <strong>Nervo Mediano</strong> no punho pelo retináculo dos flexores. Mais comum em mulheres, gestantes, hipotireoidismo, diabetes e acromegalia. <strong>Clínica:</strong> Parestesia noturna nos primeiros 3 dedos e metade do 4º dedo, dor que acorda o paciente, fraqueza na oponência do polegar. Hipotrofia tenar em casos avançados. <strong>Manobras:</strong> Teste de Phalen (flexão do punho por 1 min reprodutora de dor) e Sinal de Tinel (percussão do nervo). <strong>Padrão Ouro:</strong> Eletroneuromiografia (ENMG). <strong>Tratamento:</strong> Conservador (tala de punho, injeção de corticoide local). Cirúrgico (liberação do retináculo) nos refratários ou perda motora.</li>\n<li><strong>Compressão do Nervo Ulnar:</strong>\n  - No cotovelo (Síndrome do Túnel Cubital): Mais comum, parestesia no 4º e 5º dedos.\n  - No punho (Síndrome do Canal de Guyon): Menos comum, afeta o nervo ulnar no punho, geralmente ciclistas ou traumas compressivos locais. Hipotrofia hipotenar e sinal de Froment.\n</li>\n<li><strong>Dedo em Gatilho e Tenossinovite de De Quervain:</strong> \n  - <strong>De Quervain:</strong> Tenossinovite do extensor curto e abdutor longo do polegar. <strong>Teste de Finkelstein</strong> positivo (dor ao desviar o punho ulnarmente com o polegar aduzido).\n  - <strong>Dedo em Gatilho:</strong> Estenose da polia A1 impedindo o deslizamento fluido dos tendões flexores, gerando um \"travamento\".\n</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "7. Doenças Osteometabólicas",
+      "subchapters": [
+        {
+          "num": "7.1",
+          "title": "Osteoporose e Doença de Paget",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteoporose:</strong> Perda de massa óssea e deterioração da microarquitetura trabecular, aumentando o risco de fratura por fragilidade (especialmente colo de fêmur, vértebra e rádio distal). <strong>Diagnóstico Ouro:</strong> Densitometria Óssea com T-score &le; -2,5 DP em coluna lombar, fêmur total ou colo femoral. <strong>Pegadinha:</strong> Diagnóstico pode ser clínico caso já tenha fratura por fragilidade.</li>\n<li><strong>Tratamento da Osteoporose:</strong> Mudança de estilo de vida (cálcio e vitamina D adequados, exercício resistido). Fármacos de primeira linha: <strong>Bisfosfonatos</strong> (Alendronato, Risedronato). Instrução de uso do alendronato: Tomar em jejum, com copo cheio de água, não deitar por 30 minutos (risco de esofagite erosiva). Medicações mais potentes incluem Denosumabe (inibidor do RANKL) e Teriparatida (anabólico, para osteoporose severa).</li>\n<li><strong>Doença de Paget (Osteíte Deformante):</strong> Remodelamento ósseo desorganizado e excessivo, levando a ossos frágeis e alargados. Maioria assintomática, detectada por <strong>Fosfatase Alcalina isoladamente muito elevada</strong> com transaminases/GGT normais. <strong>Clínica:</strong> Dor óssea, surdez (acometimento dos ossículos do ouvido/crânio), aumento do tamanho do crânio, sabre tibial. <strong>Complicação temida:</strong> Transformação para osteossarcoma (em cerca de 1% dos casos no adulto idoso). <strong>Tratamento:</strong> Bisfosfonatos intravenosos (Zoledronato é a droga de escolha) para inibir a fase osteoclástica.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "8. Afecções do Pé e Tornozelo do Adulto",
+      "subchapters": [
+        {
+          "num": "8.1",
+          "title": "Fasceíte Plantar e Hálux Valgo",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fasceíte Plantar:</strong> Causa mais comum de talalgia (dor no calcanhar). Processo degenerativo e microtraumático na origem da fáscia plantar no tubérculo medial do calcâneo. <strong>Quadro clássico:</strong> Dor intensa ao dar os primeiros passos pela manhã ou após longo período de repouso, melhorando com a deambulação. O achado de \"esporão de calcâneo\" no Rx NÃO é a causa da dor, apenas uma calcificação pela tração crônica. <strong>Tratamento:</strong> Analgesia, alongamento específico da fáscia e do tendão de Aquiles, palmilhas calcanheiras de silicone e fisioterapia. Infiltração com corticoide é de exceção pelo risco de ruptura da fáscia e atrofia do coxim adiposo.</li>\n<li><strong>Hálux Valgo (Joanete):</strong> Deformidade complexa do primeiro raio (desvio em valgo do hálux e varo do 1º metatarso) com proeminência dolorosa da cabeça do 1º metatarso (bursa). Mais comum em mulheres e uso de calçados de bico fino. <strong>Tratamento:</strong> Inicialmente mudança de calçados (bico largo, sem salto). Casos refratários e dor crônica: Osteotomias cirúrgicas e realinhamento de partes moles (ex: técnica de Chevron, Scarf).</li>\n<li><strong>Pé Plano do Adulto:</strong> Secundário à insuficiência do tendão do músculo tibial posterior. O paciente relata dor na face medial do tornozelo que progride com o colapso do arco longitudinal plantar (\"pé chato\" progressivo) e deformidade em valgo do retropé. Sinal clássico no exame físico: Teste de elevação na ponta dos pés (o paciente não consegue realizar a inversão fisiológica do calcanhar, ou simplesmente não consegue se erguer em um pé só).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "9. Princípios de Imobilização e Complicações Ortopédicas Gerais",
+      "subchapters": [
+        {
+          "num": "9.1",
+          "title": "Trombose Venosa Profunda e Embolia Gordurosa",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Embolia Gordurosa:</strong> Complicação sistêmica de fraturas de ossos longos (especialmente fêmur e tíbia) e pelve. Gotículas de gordura da medula óssea entram na circulação venosa e embolizam para o pulmão, cérebro e pele. <strong>Tríade Clínica (Critérios de Gurd):</strong> Hipoxemia/Insuficiência Respiratória aguda + Alteração Neurológica (confusão, agitação) + Petéquias (em tronco, axilas e conjuntiva ocular). <strong>Palavra-chave:</strong> \"Paciente politraumatizado com fratura de fêmur que desenvolve taquipneia, confusão mental e manchas puntiformes no tórax 24-72h depois\". <strong>Prevenção:</strong> Fixação óssea PRECOCE. O tratamento é de suporte hemodinâmico e respiratório, não existindo droga específica (corticoides controversos).</li>\n<li><strong>TVP em Ortopedia:</strong> Cirurgias de Artroplastia de Quadril e Joelho, além de fraturas pélvicas, têm altíssimo risco de TVP e TEP. A profilaxia farmacológica (HBPM - Enoxaparina, ou NOACs - Rivaroxabana) é mandatória e estendida por 28-35 dias em geral.</li>\n<li><strong>Princípios da Imobilização Gessada:</strong> Deve incluir a articulação proximal e a articulação distal ao foco da fratura. Complicações incluem lesão de pele (úlceras de pressão no calcâneo ou maléolos), lesão nervosa compressiva (Nervo fibular comum na cabeça da fíbula causando pé caído se o gesso for mal moldado).\n<pre class=\"reader-pre-card\">\nSe dor localizada progressiva sob um gesso ou parestesias:\n↓\nJanelar o gesso no ponto doloroso ou abri-lo (fendê-lo) longitudinalmente até a pele para excluir compressão ou úlcera.\n</pre>\n</li>\n<li><strong>Fissuras Ósseas ou \"Stress Fractures\":</strong> Fraturas de estresse, mais comuns no terço distal de metatarsos (Fratura do Recruta, 2º metatarso), colo do fêmur ou tíbia em atletas, corredores ou militares após mudança abrupta de treinamento. O Rx inicial é NORMAL na maioria dos casos, o diagnóstico precoce é feito por Ressonância Magnética ou cintilografia. Tratamento com repouso esportivo relativo.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_neurologia": {
+  "area": "Neurologia",
+  "title": "Rapid Review: Neurologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Acidentes Vasculares Cerebrais (AVC) e Doenças Cerebrovasculares",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Acidente Vascular Cerebral Isquêmico (AVCi)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O AVC isquêmico decorre de uma oclusão arterial aguda e se manifesta por déficits focais de início súbito (hemiparesia, afasia, hemianopsia).</li>\n<li><strong>Diagnóstico:</strong> A primeira conduta diante de suspeita é solicitar <strong>TC de crânio sem contraste</strong> para descartar hemorragia, juntamente com a glicemia capilar (para descartar hipoglicemia). <strong>Pegadinha:</strong> não é recomendado aguardar dosagem de plaquetas ou coagulograma para iniciar a trombólise, exceto na suspeita de distúrbio prévio de coagulação ou uso de anticoagulantes.</li>\n<li><strong>Tratamento na fase aguda:</strong> Trombólise venosa (Alteplase - rtPA) se paciente apresentar-se em até 4,5 horas do início dos sintomas (delta T). <strong>Palavra-chave:</strong> Trombectomia mecânica pode ser indicada até 24 horas em oclusões de grandes vasos da circulação anterior.</li>\n<li><strong>Controle pressórico:</strong> Em candidatos à trombólise, a PA deve ser mantida < 185x110 mmHg. Se não for trombolisar, só reduzir se PA > 220x120 mmHg (permissividade hipertensiva para proteger a área de penumbra isquêmica). <strong>Pegadinha:</strong> após trombólise, a PA não deve ser mantida > 180/105 mmHg, o alvo é abaixo disso.</li>\n<li><strong>Manejo de temperatura e suporte:</strong> <strong>Pegadinha:</strong> a hipertermia (>38ºC) piora o prognóstico neurológico e não deve ser tolerada. Deve-se tratar a febre.</li>\n<li><strong>Contraindicações à Trombólise:</strong> Hemorragia intracraniana prévia, PA não controlada > 185/110, plaquetas < 100.000, INR > 1.7. <strong>Pegadinha:</strong> O uso prévio de droga antiplaquetária (ex: AAS) em monoterapia <strong>NÃO</strong> contraindica a trombólise.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo AVC Agudo:\nPaciente com déficit focal súbito\n↓\nColetar Glicemia Capilar + TC de Crânio sem contraste imediata\n↓\nTC exclui hemorragia? \n  → Não: Manejo de AVCH.\n  → Sim: Avaliar tempo de início dos sintomas (Delta T < 4.5h) e contraindicações.\n↓\nSe Delta T < 4.5h e sem contraindicações:\n  → Controlar PA < 185x110\n  → Trombólise com Alteplase 0,9 mg/kg IV\n</pre>"
+        },
+        {
+          "num": "1.2",
+          "title": "Hemorragia Intraparenquimatosa (AVCh) e Subaracnóidea (HSA)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemorragia Intraparenquimatosa (AVCh)</strong> mais comum é a hipertensiva, acometendo principalmente os núcleos da base (putâmen), tálamo e ponte. Apresenta cefaleia, vômitos e déficit focal súbito, muitas vezes com rebaixamento da consciência precoce.</li>\n<li>O controle da PA no AVCh foca em alvo sistólico em torno de 140 mmHg, para evitar a expansão do hematoma, sem prejudicar a perfusão.</li>\n<li>A <strong>Hemorragia Subaracnóidea (HSA)</strong> cursa com a <strong>Palavra-chave:</strong> \"A pior cefaleia da vida\", explosiva, associada a rigidez de nuca e vômitos. Geralmente secundária à ruptura de aneurisma sacular.</li>\n<li>O diagnóstico da HSA é feito com TC de crânio sem contraste. Se TC normal e alta suspeita: punção lombar (buscando xantocromia após 12h ou líquor hemorrágico que não clareia nas três amostras).</li>\n<li><strong>Escala de Hunt-Hess:</strong> (Avalia a clínica da HSA). Grau 1: assintomático ou leve cefaleia. Grau 2: paralisia de nervo craniano, cefaleia grave, rigidez nucal. Grau 3: confusão, letargia. Grau 4: estupor, hemiparesia. Grau 5: coma.</li>\n<li><strong>Complicações da HSA:</strong> Ressangramento (maior risco nas primeiras 24-72h), Vasoespasmo (pico do 3º ao 14º dia) tratado com Nimodipino 60mg 4/4h, e Hidrocefalia.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Complicação da HSA</th>\n      <th>Período de Maior Risco</th>\n      <th>Prevenção/Tratamento</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Ressangramento</td>\n      <td>24h a 72h</td>\n      <td>Clipping cirúrgico ou embolização endovascular do aneurisma precoce</td>\n    </tr>\n    <tr>\n      <td>Vasoespasmo isquêmico</td>\n      <td>3 a 14 dias (pico 7º dia)</td>\n      <td>Nimodipino VO. Se ocorrer, induzir hipertensão arterial.</td>\n    </tr>\n    <tr>\n      <td>Hidrocefalia aguda</td>\n      <td>Primeiras 24h</td>\n      <td>Derivação Ventricular Externa (DVE) se rebaixamento de consciência</td>\n    </tr>\n    <tr>\n      <td>Hiponatremia (Síndrome Perdedora de Sal)</td>\n      <td>Primeira a segunda semana</td>\n      <td>Reposição com soro hipertônico. Não restringir fluidos!</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        }
+      ]
+    },
+    {
+      "title": "2. Coma e Alterações da Consciência",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Estado Confusional Agudo (Delirium)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O <strong>Delirium</strong> é uma alteração aguda e flutuante do nível de consciência, com inatenção e desorganização do pensamento, desencadeado por causas orgânicas (infecções, DHE, medicamentos) muito comum em idosos internados.</li>\n<li>O diagnóstico e rastreamento, mesmo em pacientes internados em Unidade de Terapia Intensiva (UTI), devem utilizar ferramentas validadas. <strong>Pegadinha:</strong> a Richmond Agitation-Sedation Scale (RASS) avalia a agitação/sedação (onde zero é alerta e calmo), mas a ferramenta clássica de triagem para delirium na UTI é o <strong>CAM-ICU</strong> (Confusion Assessment Method for the ICU). É falso afirmar que não há ferramentas validadas.</li>\n<li><strong>Tratamento:</strong> A base do tratamento é a correção do fator precipitante (ex: tratar infecção urinária, suspender drogas anticolinérgicas, corrigir hiponatremia) e medidas não farmacológicas (orientação temporal, evitar contenção física, promover sono adequado). Existem sim evidências de medidas recomendadas para prevenir a condição, como o manejo do ambiente e mobilização precoce.</li>\n<li>No polo <strong>hiperativo</strong> do delirium, quando há agitação psicomotora que coloca o paciente ou a equipe em risco (e quando as medidas não farmacológicas falharam), o tratamento pode ser feito com a prescrição de <strong>antipsicóticos</strong> (ex: Haloperidol ou atípicos como Quetiapina, Risperidona).</li>\n<li><strong>Pegadinha:</strong> Sendo um estado confusional agudo (e não crônico), o uso de <strong>benzodiazepínicos é PROSCRITO</strong> como primeira escolha no tratamento do delirium hiperativo, pois podem paradoxalmente agravar a confusão, sendo reservados apenas para delirium tremens (abstinência alcoólica) ou abstinência a sedativos.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipertensão Intracraniana (HIC)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A Síndrome de <strong>Hipertensão Intracraniana (HIC)</strong> caracteriza-se pela tríade clássica: cefaleia progressiva (pior deitada ou ao tossir), vômitos em jato e papiledema no fundo de olho. Alteração no nível de consciência e Tríade de Cushing (bradicardia, hipertensão arterial, alteração do ritmo respiratório) indicam iminência de herniação.</li>\n<li><strong>Monitorização:</strong> A Pressão Intracraniana (PIC) normal é até 20 mmHg. A Pressão de Perfusão Cerebral (PPC) é igual à PAM - PIC. <strong>Pegadinha:</strong> O alvo no manejo da HIC é manter a PPC geralmente entre 60 e 70 mmHg. Não se deve manter a PPC abaixo do limite inferior (30-40 mmHg) pois causaria isquemia cerebral global severa.</li>\n<li><strong>Suporte Hemodinâmico:</strong> <strong>Pegadinha:</strong> Quando indicado elevar a PAM para atingir a PPC alvo em pacientes com HIC grave, o vasopressor de escolha é a <strong>noradrenalina</strong>, que deve ser titulada conforme a necessidade de manter a PPC > 60 mmHg.</li>\n<li><strong>Medidas gerais de HIC:</strong> Elevação da cabeceira a 30 graus, alinhamento cervical, analgesia e sedação otimizada (Propofol ou Midazolam, não o Tiopental como primeira escolha de sedação rotineira). <strong>Pegadinha:</strong> Deve-se EVITAR e são <strong>contraindicadas as soluções hipotônicas</strong> (ex: glicose a 5%, Ringer Lactato) e água livre, pois aumentam o edema cerebral. O alvo é manter normovolemia com solução salina isotônica (SF 0,9%).</li>\n<li><strong>Terapia de resgate:</strong> Osmoterapia com Manitol a 20% ou Salina Hipertônica a 3% em bôlus. Hiperventilação temporária aguda (alvo de pCO2 entre 30-35 mmHg) para diminuir o fluxo sanguíneo cerebral via vasoconstrição, útil apenas por breves períodos.</li>\n<li><strong>Pegadinha sobre Hipotermia:</strong> A hipotermia terapêutica como controle de HIC no traumatismo cranioencefálico (TCE) <strong>NÃO</strong> demonstrou benefício significativo no desfecho neurológico em ensaios robustos (estudo POLAR), não sendo medida de primeira linha para tratamento de HIC.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Doenças Neuromusculares e Mielopatias",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Neuropatias Periféricas: Guillain-Barré e Miastenia Gravis",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A queixa de fraqueza muscular aguda na emergência necessita diferenciação. <strong>Síndrome de Guillain-Barré (SGB):</strong> Polirradiculoneuropatia desmielinizante inflamatória aguda. Cursa com fraqueza muscular aguda, ascendente, simétrica, <strong>arreflexia</strong> ou hiporreflexia global, associada a sintomas disautonômicos. Muitas vezes precedida por infecção gastrintestinal (Campylobacter jejuni) ou respiratória.</li>\n<li><strong>Pegadinha na SGB:</strong> A queixa de <strong>dor</strong> pode estar presente de forma exuberante (dor radicular, mialgia), especialmente na fase aguda e na fase de recuperação, sendo uma importante manifestação não-motora.</li>\n<li>O tratamento da SGB baseia-se no uso de <strong>Imunoglobulina Humana Intravenosa (IVIG)</strong> ou <strong>Plasmaférese</strong>. Ambas têm eficácia equivalente. <strong>Pegadinha:</strong> É FALSO afirmar que a plasmaférese está contraindicada; ela é tratamento de primeira linha junto com a IVIG. Corticosteroides NÃO são eficazes na SGB.</li>\n<li><strong>Miastenia Gravis:</strong> Doença da junção neuromuscular por autoanticorpos (anti-AChR). Cursa com fraqueza flutuante, que piora com o esforço e ao final do dia. <strong>Pegadinha:</strong> A ptose palpebral e a diplopia são <strong>achados clássicos</strong> associados à Miastenia Gravis (comprometimento ocular). É FALSO afirmar que não ocorrem.</li>\n<li>No manejo da Miastenia Gravis, os anticolinesterásicos (ex: <strong>Piridostigmina</strong>) são a primeira linha sintomática. <strong>Pegadinha:</strong> Piridostigmina NÃO está indicada na Guillain-Barré. Ademais, bloqueadores neuromusculares em pacientes com suspeita de MG devem ser usados com extrema cautela ou evitados, pois há altíssima sensibilidade a eles, não sendo indicados de rotina na doença.</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Síndromes Medulares",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemisecção Medular (Síndrome de Brown-Séquard)</strong> ocorre em traumas penetrantes (faca, tiro) ou acidentes, afetando apenas metade da medula espinhal (lado direito ou esquerdo).</li>\n<li>A medula transmite: sensibilidade dolorosa e térmica pelo trato espinotalâmico lateral (que cruza a linha média logo ao entrar na medula) e função motora (trato corticoespinhal lateral) e sensibilidade profunda/proprioceptiva (fascículo grácil/cuneiforme), que cruzam no bulbo, portanto correm ipsilateralmente na medula.</li>\n<li><strong>Palavra-chave: Clínica do Brown-Séquard:</strong> Abaixo do nível da lesão teremos: <strong>1) Perda da força motora IPSILATERAL</strong>, <strong>2) Perda da propriocepção, tátil epicrítico e estereognosia IPSILATERAL</strong> e <strong>3) Perda da sensibilidade térmica e dolorosa CONTRALATERAL</strong> à lesão medular.</li>\n<li><strong>Pegadinha:</strong> Se um paciente teve hemisecção da medula à <strong>direita</strong> no nível de T8: a perda de função motora será à <strong>direita</strong>. A perda de estereognosia será à <strong>direita</strong>. Porém, a <strong>perda da sensibilidade térmica e dolorosa abaixo do segmento medular lesionado será à ESQUERDA</strong>.</li>\n<li>Além disso, o paciente evoluirá com síndrome do PRIMEIRO neurônio motor (piramidal) abaixo do nível da lesão (espasticidade, hiperreflexia, Babinski), e não do segundo neurônio (flacidez, arreflexia).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Síndrome Medular</th>\n      <th>Mecanismo principal</th>\n      <th>Clínica principal</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Síndrome Centro-medular</td>\n      <td>Trauma em hiperextensão (idosos c/ artrose)</td>\n      <td>Fraqueza muito maior em membros superiores do que inferiores (forma de xale)</td>\n    </tr>\n    <tr>\n      <td>Síndrome Medular Anterior</td>\n      <td>Oclusão da artéria espinhal anterior</td>\n      <td>Paralisia e perda de dor/temperatura bilaterais. Preserva propriocepção (cordão posterior íntegro)</td>\n    </tr>\n    <tr>\n      <td>Síndrome de Brown-Séquard</td>\n      <td>Hemisecção penetrante</td>\n      <td>Motor e propriocepção ipsilateral perdidos. Dor/temperatura contralateral perdidos.</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        }
+      ]
+    },
+    {
+      "title": "4. Epilepsias e Cefaleias",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Estado de Mal Epiléptico (Status Epilepticus)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O Estado de Mal Epiléptico é definido como uma crise convulsiva contínua por mais de 5 minutos, ou 2 ou mais crises sucessivas sem recuperação completa da consciência entre elas. É uma emergência médica neurológica.</li>\n<li><strong>Principais Causas:</strong> A causa MAIS comum é a não adesão ou retirada abrupta de medicamentos anticonvulsivantes prévios. <strong>Pegadinha:</strong> É falso afirmar que a retirada do medicamento não está entre as causas principais; é a primeiríssima.</li>\n<li><strong>Diagnóstico e Monitorização:</strong> A <strong>dosagem sérica de drogas anticonvulsivantes</strong> (fenitoína, ácido valproico, fenobarbital), quando disponível, é fortemente recomendada para guiar o manejo na emergência (descobrir níveis subterapêuticos). <strong>Pegadinha:</strong> O Eletroencefalograma (EEG) contínuo tem altíssimo valor no diagnóstico, sobretudo para excluir status não-convulsivo após controle motor da crise, sendo incorreto afirmar que tem pouco valor.</li>\n<li><strong>Tratamento - 1ª Linha (Fase Inicial 5-20 min):</strong> Benzodiazepínicos intravenosos são as drogas de escolha (ex: <strong>Diazepam</strong> IV ou Midazolam IM). <strong>Pegadinha:</strong> É falso que estejam proscritos; são os salvadores na emergência pré e intra-hospitalar.</li>\n<li><strong>Tratamento - 2ª Linha (Fase de Controle 20-40 min):</strong> Para evitar recorrência, impregnação com um fármaco anticrise venoso (ex: Fenitoína em dose de ataque 20 mg/kg diluída em SF 0,9%, ou Ácido Valproico, ou Levetiracetam). <strong>Pegadinha:</strong> O Propofol é reservado para a fase de status epiléptico refratário (após falha da 2ª linha, requer intubação), e não meramente porque o paciente tem alergia à fenitoína (poderia usar ácido valproico ou levetiracetam).</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo do Status Convulsivo:\nT = 0-5 min: ABC, Glicemia, acesso IV.\nT = 5-20 min: Benzodiazepínico (Diazepam 0,15 mg/kg IV ou Midazolam 10mg IM). Pode repetir 1x.\nT = 20-40 min: Fenitoína 20 mg/kg IV (velocidade max 50mg/min) ou Valproato ou Levetiracetam.\nT > 40 min (Refratário): IOT + Propofol IV, Midazolam IV em bomba ou Tiopental. Monitorar com EEG contínuo.\n</pre>"
+        },
+        {
+          "num": "4.2",
+          "title": "Cefaleias Primárias: Cefaleia Tensional e Enxaqueca",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Cefaleia Tipo Tensão (CTT)</strong> é a cefaleia primária mais frequente na população. Caracteriza-se por dor de caráter <strong>Palavra-chave:</strong> compressivo/aperto, de intensidade leve a moderada, bilateral, que não impede as atividades diárias e NÃO está associada a vômitos (pode ter leve fotofobia OU fonofobia, mas não ambos intensos).</li>\n<li><strong>Pegadinha clássica:</strong> Diferentemente da enxaqueca (migrânea), a <strong>atividade física habitual (como andar ou subir escadas) NÃO costuma agravar a Cefaleia Tensional</strong>.</li>\n<li>Ao exame físico, o dolorimento à palpação manual pericraniana (sensibilidade da musculatura cervical e pericraniana) é <strong>frequentemente encontrado</strong> (CTT associada à tensão muscular).</li>\n<li><strong>Tratamento da crise:</strong> Analgésicos simples (dipirona, paracetamol) e <strong>Anti-inflamatórios Não Esteroidais (AINEs)</strong> (ibuprofeno, naproxeno) são a primeira linha. É falso que estejam proscritos.</li>\n<li><strong>Classificação:</strong> A CTT é considerada crônica quando as crises ocorrem ≥ 15 dias/mês (e não < 07 dias/mês). Para a profilaxia da CTT crônica, o medicamento de escolha é a Amitriptilina.</li>\n<li>Em contraste, a <strong>Enxaqueca (Migrânea)</strong> é uma cefaleia de forte intensidade, latejante/pulsátil, unilateral, associada a fotofobia, fonofobia, náuseas, vômitos e que <strong>piora com o esforço físico rotineiro</strong>.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Característica</th>\n      <th>Cefaleia Tensional</th>\n      <th>Enxaqueca (Migrânea)</th>\n      <th>Cefaleia em Salvas</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Localização</td>\n      <td>Bilateral, em faixa</td>\n      <td>Unilateral</td>\n      <td>Estritamente Unilateral (periorbital)</td>\n    </tr>\n    <tr>\n      <td>Padrão da dor</td>\n      <td>Aperto / Pressão</td>\n      <td>Pulsátil / Latejante</td>\n      <td>Em facada, lancinante</td>\n    </tr>\n    <tr>\n      <td>Intensidade e Duração</td>\n      <td>Leve/Moderada (30min a 7 dias)</td>\n      <td>Moderada/Grave (4 a 72 horas)</td>\n      <td>Insuportável (15 a 180 min, \"clusters\")</td>\n    </tr>\n    <tr>\n      <td>Sintomas associados</td>\n      <td>Rigidez pericraniana, sem náuseas severas</td>\n      <td>Náuseas, vômitos, fotofobia, fonofobia</td>\n      <td>Sintomas autonômicos ipsilaterais (lacrimejamento, ptose, congestão nasal)</td>\n    </tr>\n    <tr>\n      <td>Fator agravante</td>\n      <td>Estresse emocional. Não piora com esforço.</td>\n      <td>Piora com atividade física rotineira</td>\n      <td>Álcool precipita crises</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        }
+      ]
+    },
+    {
+      "title": "5. Demências e Distúrbios do Movimento/Sono/Vestibular",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Demência com Corpos de Lewy e Outras Demências",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O declínio cognitivo e comportamental na terceira idade requer diagnóstico diferencial preciso. A Doença de Alzheimer é a causa mais comum, de instalação insidiosa com perda de memória episódica recente.</li>\n<li>A <strong>Demência com Corpos de Lewy (DCL)</strong> é a segunda causa mais frequente de demência neurodegenerativa. Caracteriza-se pelo depósito da proteína alfa-sinucleína intraneuronal.</li>\n<li><strong>Palavras-chave da DCL (Tríade Diagnóstica):</strong> 1) <strong>Flutuação cognitiva</strong> com variações marcantes na atenção e alerta; 2) <strong>Alucinações visuais</strong> vívidas, detalhadas e recorrentes, tipicamente precoces no quadro; e 3) <strong>Sintomas parkinsonianos</strong> espontâneos (bradicinesia, rigidez, tremor) que se iniciam em menos de um ano ou concomitantemente ao declínio cognitivo.</li>\n<li>Além da tríade, os pacientes com DCL possuem altíssima sensibilidade neuroléptica, sofrendo grave piora motora com uso de antipsicóticos clássicos (como haloperidol). É muito comum também o distúrbio comportamental do sono REM (agir o próprio sonho à noite).</li>\n<li>A Demência Frontotemporal causa alterações comportamentais exuberantes precoces, apatia, hiperoralidade e perda de empatia. A Demência Vascular tem evolução em degraus associada a múltiplos pequenos AVCs e fatores de risco cardiovasculares.</li>\n</ul>"
+        },
+        {
+          "num": "5.2",
+          "title": "Neurologia Vestibular: Vertigem Central vs. Periférica",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A vertigem (tontura rotatória) pode ser de origem periférica (labirinto, nervo vestibular) ou central (tronco encefálico, cerebelo). O exame físico através de manobras provocativas e análise do nistagmo é mandatório.</li>\n<li><strong>Diferenças do Nistagmo:</strong> Na vertigem periférica, o nistagmo costuma ser unidirecional, horizontal-rotatório, inibido pela fixação ocular e associado a forte sintoma neurovegetativo (náuseas/vômitos intensos). Na <strong>Vertigem Central</strong>, o nistagmo pode ser puro (puramente vertical ou puramente torcional), multidirecional (bate para o lado que se olha) e <strong>NÃO é inibido pela fixação do olhar</strong>.</li>\n<li><strong>Palavra-chave do quadro central:</strong> Os quadros centrais (ex: AVE isquêmico cerebelar ou de tronco) frequentemente se acompanham de \"Sinais de Alarme\" (Red Flags dos 5 Ds): Diplopia, Disartria, Disfagia, Dismetria e Drop attacks (quedas súbitas), além de ausência de perda auditiva na maioria dos casos.</li>\n<li><strong>Diagnósticos Periféricos Principais:</strong>\n  <ul>\n    <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> Vertigem rápida (segundos), desencadeada por mudanças de decúbito. Diagnóstico pela manobra de Dix-Hallpike (nistagmo geotrópico) e tratamento pela manobra de reposicionamento de Epley.</li>\n    <li><strong>Doença de Ménière:</strong> Crises de vertigem durando horas (espontâneas), acompanhadas da clássica tríade: <strong>hipoacusia (perda auditiva neurossensorial flutuante), zumbido (acúfeno) e plenitude aural</strong>.</li>\n    <li><strong>Neurite Vestibular:</strong> Vertigem intensa contínua que dura dias, associada a infecção viral prévia, sem sintomas auditivos.</li>\n  </ul>\n</li>\n<li><strong>Pegadinha:</strong> Paciente idoso, hipertensa e diabética que acorda com vertigem isolada, dificuldade importante para deambular (dismetria/ataxia) e nistagmo que não inibe à fixação (ou nistagmo vertical), mesmo com audição normal, deve ter como principal hipótese <strong>Vertigem de origem central (AVC vertebrobasilar)</strong> e requer neuroimagem de urgência (TC ou RM).</li>\n</ul>"
+        },
+        {
+          "num": "5.3",
+          "title": "Fisiologia e Distúrbios do Sono",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O sono divide-se em NREM (N1, N2 e N3) e REM (Rapid Eye Movement).</li>\n<li><strong>Sono NREM fase N3 (Ondas Lentas):</strong> É o sono mais profundo e reparador do ponto de vista físico. Nele ocorre maior liberação de hormônio do crescimento (GH) em crianças, parassônias NREM como sonambulismo e terror noturno. A atividade no EEG é marcada por ondas delta de alta amplitude e baixa frequência.</li>\n<li><strong>Sono REM:</strong> Caracterizado por movimentos rápidos dos olhos, atonia muscular esquelética quase completa (para não agirmos os sonhos) e EEG rápido, semelhante à vigília (paradoxal). Os sonhos vívidos ocorrem nesta fase. No ciclo normal do adulto, o REM acontece em ciclos de aproximadamente 90 minutos, com os maiores períodos de REM ocorrendo na segunda metade da noite.</li>\n<li><strong>Pegadinha da fisiologia:</strong> A alternância entre vigília e sono é regulada pelo ciclo circadiano e pressão homeostática do sono. A melatonina, produzida pela glândula pineal, tem seu pico à noite com a escuridão e ajuda a sinalizar a hora de dormir. O núcleo supraquiasmático do hipotálamo é o marcapasso biológico central.</li>\n<li><strong>Narcolepsia:</strong> Distúrbio marcado por sonolência excessiva diurna, cataplexia (perda súbita do tônus induzida por emoção), paralisia do sono e alucinações hipnagógicas. Acorre pela deficiência de hipocretina/orexina no hipotálamo.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
     "uepa_hepatologia": {
   "area": "Hepatologia",
   "title": "Hepatologia",
   "isExample": false,
   "sections": [
     {
-      "title": "Complicações da Insuficiência Hepática e Cirrose",
+      "title": "1. Hepatites Virais",
       "subchapters": [
         {
           "num": "1.1",
-          "title": "Ascite",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Parâmetro</th><th>Característica</th></tr></thead><tbody><tr><td>Fisiopatologia</td><td><ul class=\"reader-list\"><li>Vasodilatação esplâncnica, ativação do SRAA, retenção de sódio e água</li></ul></td></tr><tr><td>Diagnóstico pelo GASA</td><td><ul class=\"reader-list\"><li>GASA ≥ 1,1 g/dL: Hipertensão portal (Cirrose, ICC, Síndrome de Budd-Chiari)</li><li>GASA < 1,1 g/dL: Doença peritoneal (Neoplasia, Tuberculose, Síndrome Nefrótica)</li></ul></td></tr><tr><td>Análise de Proteína</td><td><ul class=\"reader-list\"><li>Proteína > 2,5 g/dL: Causas cardíacas ou Budd-Chiari</li><li>Proteína < 2,5 g/dL: Cirrose</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Dieta hipossódica (2g/dia)</li><li>Espironolactona (100mg) + Furosemida (40mg)</li><li>Paracentese de alívio para ascite tensa (repor Albumina 8g/L de ascite se > 5L)</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "1.2",
-          "title": "Encefalopatia Hepática",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classificação e Manejo</th><th>Detalhes Clínicos</th></tr></thead><tbody><tr><td>Critérios de West-Haven</td><td><ul class=\"reader-list\"><li>Grau I: Alterações leves de comportamento/sono, sem asterixis</li><li>Grau II: Letargia, desorientação temporal, asterixis presente</li><li>Grau III: Sonolência, desorientação espacial, confusão franca</li><li>Grau IV: Coma</li></ul></td></tr><tr><td>Fatores Desencadeantes</td><td><ul class=\"reader-list\"><li>Hemorragia digestiva (principal)</li><li>Infecções (PBE)</li><li>Desidratação / Diuréticos em excesso</li><li>Constipação / Uso de sedativos</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Lactulose (objetivo: 2-3 evacuações pastosas/dia)</li><li>Antibióticos não absorvíveis (Rifaximina, Neomicina, Metronidazol)</li><li>Tratamento do fator precipitante</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "1.3",
-          "title": "Peritonite Bacteriana Espontânea (PBE)",
-          "tags": ["adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Etapa</th><th>Conduta Clínica</th></tr></thead><tbody><tr><td>Diagnóstico</td><td><ul class=\"reader-list\"><li>PMN (Polimorfonucleares) ≥ 250/mm³ no líquido ascítico</li><li>Cultura monomicrobiana (E. coli, Klebsiella)</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Cefotaxima ou Ceftriaxona por 5 dias</li><li>Profilaxia para SHR: Albumina 1,5 g/kg no D1 e 1,0 g/kg no D3</li></ul></td></tr><tr><td>Profilaxia Secundária</td><td><ul class=\"reader-list\"><li>Norfloxacino 400mg/dia (uso contínuo)</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "1.4",
-          "title": "Síndrome Hepatorrenal e Hepatopulmonar",
-          "tags": ["adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Características Principais</th></tr></thead><tbody><tr><td>Síndrome Hepatorrenal (SHR)</td><td><ul class=\"reader-list\"><li>IRA pré-renal que não responde a volume. Vasoconstrição renal severa.</li><li>Tratamento: Terlipressina + Albumina, transplante hepático.</li></ul></td></tr><tr><td>Síndrome Hepatopulmonar</td><td><ul class=\"reader-list\"><li>Tríade: Hepatopatia + Hipoxemia + Dilatações vasculares intrapulmonares</li><li>Achados: Platipneia, Ortodeoxia</li><li>Tratamento: Suporte de O2, transplante hepático.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Hepatopatias Metabólicas e Infecciosas",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Doença Hepática Esteatótica (MASLD/MASH)",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Descrição Clínica e Manejo</th></tr></thead><tbody><tr><td>Características Iniciais</td><td><ul class=\"reader-list\"><li>MASLD (antiga NAFLD): Esteatose associada à disfunção metabólica</li><li>Exclusão de etilismo significativo, hepatites virais e uso de drogas hepatotóxicas</li><li>Fatores de risco: Obesidade, DM2, Dislipidemia, HAS</li></ul></td></tr><tr><td>Diagnóstico</td><td><ul class=\"reader-list\"><li>USG: Fígado hiperecogênico (esteatose)</li><li>Biópsia hepática: Padrão-ouro para diferenciar MASLD simples de MASH (esteato-hepatite)</li><li>Critérios MASH: Esteatose + Balonização de hepatócitos + Inflamação lobular</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Modificação do estilo de vida: Dieta e perda de peso (base do tratamento)</li><li>Agonistas do GLP-1, Pioglitazona e Vitamina E (em não diabéticos) podem auxiliar na histologia</li><li>Não há recomendação de Silimarina ou Metformina para reversão histológica</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "2.2",
-          "title": "Hepatites Virais (Visão Geral)",
-          "tags": ["adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Infecção</th><th>Marcadores e Evolução</th></tr></thead><tbody><tr><td>Hepatite A</td><td><ul class=\"reader-list\"><li>Transmissão fecal-oral. Não cronifica.</li><li>Diagnóstico: Anti-HAV IgM</li><li>Clínica: Icterícia, febre, mal-estar. Tratamento de suporte.</li></ul></td></tr><tr><td>Hepatite B</td><td><ul class=\"reader-list\"><li>Marcadores: HBsAg (infecção ativa), Anti-HBc IgM (aguda), Anti-HBs (imunidade)</li><li>Risco de cronificação inversamente proporcional à idade da infecção.</li><li>Pode causar CHC sem presença de cirrose. Tratamento crônico: Tenofovir ou Entecavir.</li></ul></td></tr><tr><td>Hepatite C</td><td><ul class=\"reader-list\"><li>Alta taxa de cronificação (até 80%). Principal causa de transplante hepático.</li><li>Diagnóstico: Anti-HCV, confirmar com HCV-RNA quantitativo.</li><li>Tratamento: Antivirais de Ação Direta (Sofosbuvir + Velpatasvir) com alta taxa de cura.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    }
-  ]
-},
-    "uepa_nefrologia": {
-  "area": "Nefrologia",
-  "title": "Nefrologia (UEPA Master Rapid Review)",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "1. Glomerulopatias",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Síndrome Nefrótica",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema generalizado (anasarca), urina espumosa, ausência de hipertensão ou hematúria marcantes.</li>\n<li><strong>Critérios Diagnósticos:</strong> Proteinúria nefrótica (&gt; 3,5 g/24h em adultos ou &gt; 50 mg/kg/dia em crianças), hipoalbuminemia (&lt; 3,0 g/dL), hipercolesterolemia e edema.</li>\n<li><strong>Doença de Lesão Mínima (DLM):</strong> Principal causa em crianças (2-8 anos). Patogênese por fusão dos podócitos (microscopia eletrônica). Complemento normal. Responde bem a corticoides.</li>\n<li><strong>Tratamento na Pediatria:</strong> Dieta hipossódica, corticoterapia empírica (prednisona), reposição de albumina se sinais de hipovolemia, diuréticos com parcimônia. Restrição hídrica <strong>NÃO</strong> é rotina para nefrótica (ao contrário da nefrítica). Imunossupressores se corticodependente ou resistente.</li>\n</ul>"
-        },
-        {
-          "num": "1.2",
-          "title": "Síndrome Nefrítica (GNPE)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema (início periorbital), hipertensão arterial, hematúria (dismórfica/cilindros hemáticos) e oligúria.</li>\n<li><strong>GNPE:</strong> Ocorre pós infecção estreptocócica (faringite 1-2 sem, piodermite 3-6 sem).</li>\n<li><strong>Laboratório GNPE:</strong> Complemento (C3 e CH50) consumido (volta ao normal em 8 semanas). ASLO (faringe) e Anti-DNAse B (pele) positivos.</li>\n<li><strong>Tratamento GNPE:</strong> Suporte, restrição hídrica e sódica, diuréticos de alça (furosemida) para controle de PA e edema. Antibiótico (penicilina) não cura a GNPE, mas erradica a cepa nefritogênica.</li>\n</ul>"
-        },
-        {
-          "num": "1.3",
-          "title": "Nefrite Lúpica",
+          "title": "Hepatites A e E",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Patogênese:</strong> Depósito de imunocomplexos no lúpus.</li>\n<li><strong>Classificação:</strong>\n  <ul class=\"reader-list\">\n    <li>Classe IV (Proliferativa Difusa): Mais comum e mais grave. Apresenta síndrome nefrítica + proteinúria variável. Tratamento: Ciclofosfamida ou Micofenolato + Corticoides.</li>\n    <li>Classe V (Membranosa): Cursa com síndrome nefrótica.</li>\n  </ul>\n</li>\n<li><strong>Marcadores:</strong> Anti-dsDNA correlaciona-se com atividade da nefrite. Complemento (C3, C4) consumido na atividade.</li>\n</ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hepatite A:</strong> Doença viral autolimitada (vírus RNA), de transmissão fecal-oral. Tem período de incubação de ~30 dias. Quadro clínico inicia com fase prodrômica (febre, náuseas, anorexia, aversão ao cigarro) evoluindo para fase ictérica (icterícia, colúria, acolia fecal). <strong>Diagnóstico:</strong> Sorologia com Anti-HAV IgM reagente (fase aguda) ou Anti-HAV IgG reagente (cicatriz/imunidade). <strong>Pegadinha:</strong> Hepatite A NÃO cronifica e a taxa de falência hepática fulminante é menor que 1%. <strong>Tratamento:</strong> Suporte, repouso relativo, sintomáticos. <strong>Prevenção:</strong> Vacina (PNI aos 15 meses). Profilaxia pós-exposição com vacina em até 14 dias para contatos próximos.</li>\n  <li><strong>Hepatite E:</strong> Transmissão fecal-oral (vírus RNA) ou por consumo de carne de porco mal cozida. Quadro semelhante à hepatite A. <strong>Palavra-chave:</strong> <strong>Gestantes no 3º trimestre</strong>. Nestas pacientes, a taxa de hepatite fulminante e mortalidade chega a 20%. <strong>Diagnóstico:</strong> Anti-HEV IgM. <strong>Tratamento:</strong> Suporte. Cronifica apenas em imunossuprimidos (ex: transplantados).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Vírus</th><th>Transmissão</th><th>Cronificação</th><th>Risco Fulminante</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>HAV</td><td>Fecal-oral</td><td>Não</td><td>&lt; 1%</td></tr>\n      <tr><td>HEV</td><td>Fecal-oral</td><td>Não (exceto imunodeprimidos)</td><td>Alto em gestantes (20%)</td></tr>\n    </tbody>\n  </table>\n</div>\n"
+        },
+        {
+          "num": "1.2",
+          "title": "Hepatite B e D",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hepatite B (HBV):</strong> Vírus DNA (o único das hepatites virais). Transmissão sexual (principal no Brasil), vertical e parenteral. Incubação de 30-180 dias. Maioria dos adultos faz infecção aguda subclínica e cura (95%), enquanto recém-nascidos cronificam em 90%. Manifestações extra-hepáticas clássicas: <strong>Poliarterite Nodosa (PAN)</strong> e Glomerulonefrite Membranosa. <strong>Pegadinha:</strong> Artralgia, rash urticariforme e febre precedem a icterícia (doença do soro-símile).</li>\n  <li><strong>Diagnóstico Sorológico:</strong> \n    <br>- HBsAg: antígeno de superfície, marcador de infecção em curso (aguda ou crônica se > 6 meses).\n    <br>- Anti-HBs: marcador de cura e imunidade. <strong>Pegadinha:</strong> Presença isolada de Anti-HBs = Vacinado. Anti-HBs + Anti-HBc IgG = Imunidade natural pós-infecção.\n    <br>- Anti-HBc IgM: marcador de infecção aguda recente. Único marcador positivo na \"janela imunológica\" (HBsAg sumiu e Anti-HBs ainda não apareceu).\n    <br>- HBeAg: marcador de replicação viral ativa e alta infectividade.\n    <br>- Anti-HBe: indica fase não replicativa (mutante pré-core tem HBeAg negativo, mas continua replicando - checar HBV-DNA).\n  </li>\n  <li><strong>Tratamento da Hepatite B:</strong> Não tratamos a forma aguda (suporte). Tratamento da forma crônica indicado se: HBeAg+ com transaminases (ALT) alteradas, presença de cirrose (qualquer viremia), história familiar de CHC, manifestações extra-hepáticas graves, imunossuprimidos, ou mutante pré-core com HBV-DNA alto (>2.000 UI/mL) + ALT alta. <strong>Opção de 1ª linha:</strong> Tenofovir (TDF) ou Entecavir. <strong>Pegadinha:</strong> Entecavir é preferível no doente renal crônico, TDF é preferível na gestante.</li>\n  <li><strong>Hepatite D (Delta):</strong> Vírus RNA incompleto. Depende do HBV (do HBsAg) para infectar. <strong>Coinfecção:</strong> Adquire B e D juntos. Geralmente resolve e cura (parece hepatite B aguda severa). <strong>Superinfecção:</strong> Paciente já tem hepatite B crônica e adquire o D. <strong>Palavra-chave:</strong> Evolução rápida para cirrose e hepatite fulminante (até 20%). Suspeitar em áreas endêmicas (Amazônia).</li>\n</ul>\n<pre class=\"reader-pre-card\">\nDecisão de Profilaxia Vertical HBV:\n1. Mãe HBsAg positiva\n2. RN deve receber Vacina + Imunoglobulina (IGHA-B) nas primeiras 12h de vida\n3. Se carga viral materna alta (> 200.000 UI/mL) no 3º tri: iniciar Tenofovir materno com 28-32 semanas\n</pre>\n"
+        },
+        {
+          "num": "1.3",
+          "title": "Hepatite C",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hepatite C (HCV):</strong> Vírus RNA, transmissão parenteral (drogas injetáveis, transfusões pré-1993, tatuagens). <strong>Palavra-chave:</strong> A \"assassina silenciosa\", pois a infecção aguda é assintomática em mais de 80% dos casos, e <strong>mais de 80% cronificam</strong>. Manifestações extra-hepáticas: <strong>Crioglobulinemia Mista</strong> (vasculite, livedo reticular, glomerulonefrite membranoproliferativa), Líquen plano, Porfiria Cutânea Tarda.</li>\n  <li><strong>Diagnóstico:</strong> Triagem com Anti-HCV. <strong>Atenção:</strong> Anti-HCV positivo não define infecção ativa (pode ser cicatriz). <strong>Confirmação obrigatória:</strong> HCV-RNA por PCR. Se positivo, o paciente tem infecção ativa e deve ser tratado. Se negativo, curou. Em seguida, genotipagem para guiar tratamento.</li>\n  <li><strong>Tratamento (DAAs - Antivirais de Ação Direta):</strong> Objetivo = Resposta Virológica Sustentada (RVS) -> HCV-RNA indetectável 12 semanas após o fim do tratamento (cura). Tratar TODOS os pacientes com HCV-RNA positivo. Esquema pangenotípico (SUS): <strong>Sofosbuvir + Velpatasvir</strong> por 12 semanas.</li>\n</ul>\n"
         }
       ]
     },
     {
-      "title": "2. Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "title": "2. Doenças Infiltrativas e Metabólicas",
       "subchapters": [
         {
           "num": "2.1",
-          "title": "Hiponatremia e SIADH",
+          "title": "Doença Hepática Esteatótica Associada à Disfunção Metabólica (MASLD/NASH)",
           "tags": [
             "ja"
           ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hiponatremia:</strong> Sódio sérico &lt; 135 mEq/L. Reflete um excesso de água livre em relação ao sódio.</li>\n<li><strong>Clínica:</strong> Náuseas, vômitos, cefaleia, letargia, convulsões e coma (edema cerebral).</li>\n<li><strong>SIADH (Síndrome de Secreção Inapropriada do ADH):</strong>\n  <ul class=\"reader-list\">\n    <li>Causas: Doenças pulmonares (tuberculose, pneumonia), distúrbios do SNC, drogas (antidepressivos, anticonvulsivantes).</li>\n    <li>Laboratório: Hiponatremia (sódio baixo), osmolalidade plasmática baixa (&lt; 275 mOsm/kg), osmolalidade urinária alta (urina concentrada), sódio urinário alto (&gt; 40 mEq/L), ácido úrico baixo e ureia baixa. Volemia clínica normal (euvolemia).</li>\n  </ul>\n</li>\n<li><strong>Tratamento:</strong> Restrição hídrica. Em casos graves/sintomáticos (sódio &lt; 120), repor salina hipertônica 3% com cuidado para não causar síndrome de desmielinização osmótica.</li>\n</ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>MASLD:</strong> Acúmulo de gordura no fígado (esteatose) associado a pelo menos um critério metabólico (obesidade/sobrepeso, DM2, ou evidência de desregulação metabólica), na ausência de causas secundárias (álcool, drogas). É a causa mais comum de doença hepática crônica no mundo.</li>\n  <li><strong>Fisiopatologia e Quadro:</strong> Resistência à insulina gera lipólise periférica e influxo de ácidos graxos livres para o fígado. Geralmente assintomático, achado incidental de elevação leve de TGO/TGP (relação ALT > AST) ou esteatose na USG. Evolui para NASH (esteato-hepatite) quando há inflamação e balonização hepatocelular, e depois para cirrose e CHC.</li>\n  <li><strong>Diagnóstico:</strong> Exclusão de outras hepatopatias + consumo de álcool seguro (< 30g/dia H, < 20g/dia M). USG mostra hiperecogenicidade hepática. <strong>Padrão Ouro:</strong> Biópsia hepática (indicada se dúvida diagnóstica ou para estadiar fibrose severa). Alternativas não invasivas: Elastografia hepática transitória (FibroScan) e escores (FIB-4, NAFLD fibrosis score).</li>\n  <li><strong>Tratamento:</strong> Perda de peso é o pilar (perda > 7-10% resolve inflamação e fibrose inicial). Dieta do Mediterrâneo, exercício. Controle das comorbidades (DM, HAS, dislipidemia). <strong>Terapia Farmacológica:</strong> Análogos de GLP-1 (Semaglutida) ajudam na perda de peso. Pioglitazona e Vitamina E (apenas não diabéticos, sem cirrose) podem reverter esteato-hepatite.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nRastreio de Fibrose Avançada na MASLD:\nEscore FIB-4 (Idade, AST, ALT, Plaquetas)\n↓\nFIB-4 Baixo (< 1.30): Reavaliar em 1-2 anos\nFIB-4 Intermediário/Alto: Elastografia Hepática\n↓\nElastografia > 8 kPa: Avaliar biópsia ou tratar como fibrose avançada\n</pre>\n"
         },
         {
           "num": "2.2",
-          "title": "Hipercalemia",
+          "title": "Hemocromatose e Doença de Wilson",
           "tags": [
-            "ja"
+            "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Conceito:</strong> Potássio &gt; 5,5 mEq/L.</li>\n<li><strong>ECG na Hipercalemia:</strong> Ondas T apiculadas (\"em tenda\") &rarr; Achatamento da onda P &rarr; Aumento do intervalo PR &rarr; Alargamento do QRS &rarr; Ritmo idioventricular / Assistolia.</li>\n<li><strong>Conduta de Emergência (Alteração ECG):</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead>\n        <tr><th>Ação</th><th>Medicamento</th><th>Tempo de Ação</th></tr>\n      </thead>\n      <tbody>\n        <tr><td><strong>1º Estabilizar Membrana</strong></td><td>Gluconato de Cálcio a 10% IV</td><td>Imediato (não reduz potássio)</td></tr>\n        <tr><td><strong>2º Shift Intracelular</strong></td><td>Solução Polarizante (Insulina + Glicose), Bicarbonato de Sódio (se acidose), Beta-2 agonista inalatório</td><td>Minutos a horas</td></tr>\n        <tr><td><strong>3º Excreção Corporal</strong></td><td>Diuréticos de alça (Furosemida), Resinas de troca (Sorcal), Hemodiálise</td><td>Horas</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Importante:</strong> Gluconato de cálcio é a medida <strong>prioritária</strong> para prevenir arritmias letais.</li>\n</ul>"
-        },
-        {
-          "num": "2.3",
-          "title": "Distúrbios Acidobásicos (Acidose Metabólica)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Diagnóstico:</strong> pH &lt; 7.35 e HCO3 baixo.</li>\n<li><strong>Ânion Gap (AG):</strong> Na - (Cl + HCO3). Valor normal: 8 a 12.</li>\n<li><strong>Acidose Metabólica com AG Elevado (Normoclorêmica):</strong> Consumo de bicarbonato por ácidos orgânicos não medidos (MUDPILES: Metanol, Uremia, DKA, Paraldeído, Isoniazida/Infecção, Lactato, Etilenoglicol, Salicilatos).</li>\n<li><strong>Acidose Metabólica com AG Normal (Hiperclorêmica):</strong> Perda de bicarbonato (diarreia, fístula) ou incapacidade renal de excretar H+ (Acidose Tubular Renal - ATR).</li>\n<li><strong>Compensação (Fórmula de Winter):</strong> pCO2 esperado = (1.5 x HCO3) + 8 &plusmn; 2. Se pCO2 medido for menor, há alcalose respiratória associada; se maior, acidose respiratória associada.</li>\n</ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hemocromatose Hereditária:</strong> Doença autossômica recessiva (mutação C282Y no gene HFE) causando hiperabsorção de ferro e acúmulo tecidual. <strong>Quadro clássico:</strong> Homem > 40 anos (mulheres são protegidas até menopausa pelas perdas menstruais) com a tríade <strong>\"Diabetes Bronzeado\"</strong> + hepatomegalia (cirrose) + hipogonadismo. Outros: artropatia de 2ª e 3ª metacarpo-falangeanas, insuficiência cardíaca e arritmias. <strong>Diagnóstico:</strong> Saturação de transferrina > 45% (exame de triagem) e Ferritina alta. Confirmação com teste genético (HFE). <strong>Tratamento:</strong> Flebotomias terapêuticas seriadas para manter ferritina < 50 ng/mL. <strong>Pegadinha:</strong> Risco altíssimo de Carcinoma Hepatocelular (CHC) mesmo após depleção de ferro.</li>\n  <li><strong>Doença de Wilson:</strong> Autossômica recessiva (gene ATP7B). Falha na excreção biliar de cobre e deficiência de ceruloplasmina. Cobre acumula no fígado, cérebro e córnea. <strong>Quadro:</strong> Crianças/jovens (< 30 anos) com hepatopatia inexplicada (hepatite fulminante, cirrose) + alterações neurológicas/psiquiátricas (tremor, disartria, parkinsonismo). <strong>Palavra-chave:</strong> <strong>Anel de Kayser-Fleischer</strong> (depósito de cobre na córnea, visível à lâmpada de fenda) e Anemia hemolítica Coombs negativa associada a hepatite. <strong>Diagnóstico:</strong> Ceruloplasmina BAIXA, Cobre urinário de 24h ALTO (> 100 mcg). Biópsia hepática confirma. <strong>Tratamento:</strong> Quelantes de cobre (D-Penicilamina, Trientina) ou Zinco (bloqueia absorção intestinal). Transplante hepático se fulminante.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Doença</th><th>Metal Acumulado</th><th>Órgãos Alvo Clássicos</th><th>Tratamento Inicial</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Hemocromatose</td><td>Ferro</td><td>Fígado, Pâncreas (DM), Coração, Articulações</td><td>Flebotomia</td></tr>\n      <tr><td>Doença de Wilson</td><td>Cobre</td><td>Fígado, Cérebro (Gânglios da base), Córnea</td><td>D-Penicilamina ou Trientina</td></tr>\n    </tbody>\n  </table>\n</div>\n"
         }
       ]
     },
     {
-      "title": "3. Infecções e Nefrolitíase",
+      "title": "3. Doenças Hepáticas Autoimunes",
       "subchapters": [
         {
           "num": "3.1",
-          "title": "Infecção do Trato Urinário (ITU)",
+          "title": "Hepatite Autoimune, CBP e CEP",
           "tags": [
-            "ja"
+            "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Cistite Não Complicada (Mulheres):</strong> Tratamento empírico de primeira linha inclui <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5-7 dias). Cefalexina e Bactrim são alternativas a depender de resistência local.</li>\n<li><strong>ITU na Pediatria:</strong> \n  <ul class=\"reader-list\">\n    <li><strong>Coleta:</strong> Saco coletor tem alto índice de falso-positivo, serve apenas para <strong>excluir</strong> (se negativo). Para confirmar em pré-escolar sem controle esfincteriano, usar <strong>cateterismo vesical</strong> (sondagem) ou <strong>punção suprapúbica</strong>.</li>\n    <li><strong>Diagnóstico:</strong> A urocultura coletada por punção suprapúbica confirma o diagnóstico de ITU havendo crescimento de <strong>qualquer</strong> patógeno (qualquer UFC), pois a via é estéril.</li>\n  </ul>\n</li>\n<li><strong>Laboratório (EAS):</strong> Nitrito positivo indica bactérias redutoras de nitrato (ex. E. coli), mas nitrito negativo não exclui ITU (Staphylococcus, Enterococcus, Pseudomonas não reduzem nitrato).</li>\n</ul>"
-        },
-        {
-          "num": "3.2",
-          "title": "Nefrolitíase e Pielonefrite Obstrutiva",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica de Cólica Nefrética:</strong> Dor lombar de forte intensidade irradiando para flanco ou genitália (grandes lábios/testículo). Pode causar hematúria.</li>\n<li><strong>Tratamento Analgésico:</strong> AINEs (Cetoprofeno) são a primeira linha. Opiáceos são segunda linha.</li>\n<li><strong>Indicações de Intervenção Urgente (Pielonefrite Obstrutiva):</strong> Cálculo ureteral + sinais de infecção (febre, calafrios, leucocitose). Há risco iminente de sepse.</li>\n<li><strong>Conduta na Pielonefrite Obstrutiva:</strong> Desobstrução urgente da via urinária + Antibioticoterapia.\n  <ul class=\"reader-list\">\n    <li>A desobstrução é feita por drenagem urinária com inserção de <strong>Cateter Duplo J</strong> ou <strong>Nefrostomia percutânea</strong>, SEM a retirada do cálculo no mesmo momento (risco cirúrgico alto na fase aguda).</li>\n  </ul>\n</li>\n<li><strong>Terapia Expulsiva:</strong> Para cálculos &lt; 10 mm e paciente sem sinais de alarme. Uso de alfa-bloqueadores (Tansulosina) e hidratação.</li>\n</ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hepatite Autoimune (HAI):</strong> Inflamação crônica autoimune do fígado, mais comum em mulheres jovens/meia-idade. <strong>Diagnóstico:</strong> Hipergamaglobulinemia IgG, TGO/TGP elevadas (padrão hepatocelular). Autoanticorpos: <strong>FAN e Anti-músculo liso (Tipo 1)</strong> ou Anti-LKM1 / Anti-Citosol (Tipo 2, crianças). Biópsia: \"hepatite de interface\" e infiltrado plasmocitário. <strong>Tratamento:</strong> Corticosteroides (Prednisona) + Azatioprina.</li>\n  <li><strong>Colangite Biliar Primária (CBP):</strong> Doença autoimune que destrói os ductos biliares intra-hepáticos. <strong>Quadro:</strong> Mulher, 40-60 anos, com <strong>Prurido intenso que precede a icterícia</strong>, fadiga, xantelasmas. <strong>Diagnóstico:</strong> Padrão colestático (Fosfatase Alcalina e GGT muito altas). Autoanticorpo chave: <strong>Antimitocôndria (AMA)</strong> positivo em >90%. <strong>Tratamento:</strong> Ácido Ursodesoxicólico (UDCA). Atrasa progressão para cirrose. <strong>Pegadinha:</strong> Relacionada à Síndrome de Sjögren, hipotireoidismo e osteoporose.</li>\n  <li><strong>Colangite Esclerosante Primária (CEP):</strong> Inflamação fibrosante obliterativa dos ductos biliares intra e extra-hepáticos. <strong>Quadro:</strong> Homem jovem. <strong>Palavra-chave:</strong> Fortemente associada à <strong>Retocolite Ulcerativa (RCU)</strong> (presente em 70% dos casos). Risco de Colangiocarcinoma. <strong>Diagnóstico:</strong> P-ANCA positivo (não específico). Colangiorressonância (CPRM) mostra padrão em \"contas de rosário\" (estenoses e dilatações multifocais das vias biliares). Biópsia mostra fibrose periductal em \"casca de cebola\". <strong>Tratamento:</strong> Transplante hepático (único curativo).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Doença</th><th>Público Alvo</th><th>Autoanticorpo / Associação</th><th>Achado Clássico</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Hepatite Autoimune</td><td>Mulher jovem</td><td>FAN, Anti-músculo liso (Tipo 1)</td><td>Hipergamaglobulinemia (IgG), Infiltrado plasmocitário</td></tr>\n      <tr><td>CBP</td><td>Mulher 40-60 anos</td><td>Antimitocôndria (AMA)</td><td>Ductos intra-hepáticos, Prurido e Fadiga, Xantomas</td></tr>\n      <tr><td>CEP</td><td>Homem jovem</td><td>P-ANCA / RCU (doença inflamatória intestinal)</td><td>Ductos intra e extra, Contas de rosário (CPRM)</td></tr>\n    </tbody>\n  </table>\n</div>\n"
         }
       ]
     },
     {
-      "title": "4. Doenças Túbulo-Intersticiais",
+      "title": "4. Cirrose e Hipertensão Portal",
       "subchapters": [
         {
           "num": "4.1",
-          "title": "Nefrite Intersticial Aguda (NIA)",
+          "title": "Fisiopatologia e Avaliação da Cirrose",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Conceito:</strong> Fibrose hepática avançada com formação de nódulos de regeneração, alterando a arquitetura normal. Causa perda de função hepatocelular (síntese de albumina, fatores de coagulação, metabolização de toxinas) e Hipertensão Portal (HP).</li>\n  <li><strong>Hipertensão Portal:</strong> Gradiente de pressão venosa hepática (HVPG) > 5 mmHg. Manifestações surgem quando > 10 mmHg (varizes) e complicação (sangramento/ascite) quando > 12 mmHg. Causa vasodilatação esplâncnica (liberação de NO), reduzindo volume arterial efetivo e ativando sistema renina-angiotensina-aldosterona (SRAA).</li>\n  <li><strong>Sinais ao Exame Físico:</strong> Estigmas de hepatopatia crônica: eritema palmar, telangiectasias (spider angiomas), ginecomastia, rarefeição de pelos, atrofia testicular, circulação colateral (cabeça de medusa), esplenomegalia, ascite, flap (asterixis).</li>\n  <li><strong>Escores Prognósticos:</strong> \n    <br>- <strong>Child-Pugh (BEATA):</strong> Bilirrubina, Encefalopatia, Ascite, Tempo de Protrombina (TAP/INR), Albumina. Child A (5-6), B (7-9), C (10-15).\n    <br>- <strong>MELD (BIC):</strong> Bilirrubina, INR, Creatinina (atualmente incorpora o Na+ sérico: MELD-Na). Usado para fila de transplante hepático (quanto maior, pior e mais rápido transplanta).\n  </li>\n</ul>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Critério Child-Pugh</th><th>1 Ponto</th><th>2 Pontos</th><th>3 Pontos</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Bilirrubina Total</td><td>&lt; 2.0</td><td>2.0 a 3.0</td><td>> 3.0</td></tr>\n      <tr><td>Albumina</td><td>> 3.5</td><td>2.8 a 3.5</td><td>&lt; 2.8</td></tr>\n      <tr><td>INR</td><td>&lt; 1.7</td><td>1.7 a 2.3</td><td>> 2.3</td></tr>\n      <tr><td>Ascite</td><td>Ausente</td><td>Leve / Moderada</td><td>Tensa / Refratária</td></tr>\n      <tr><td>Encefalopatia</td><td>Ausente</td><td>Grau I ou II</td><td>Grau III ou IV</td></tr>\n    </tbody>\n  </table>\n</div>\n"
+        },
+        {
+          "num": "4.2",
+          "title": "Ascite e Peritonite Bacteriana Espontânea (PBE)",
           "tags": [
             "ja"
           ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Etiologia:</strong> Predominantemente induzida por drogas (Antibióticos - penicilinas, cefalosporinas; AINEs; IBP; Diuréticos) ou infecções (bactérias, vírus). Sarcoidose e doenças autoimunes também podem causar.</li>\n<li><strong>Clínica Clássica:</strong> Tríade clássica (febre, rash cutâneo e eosinofilia) está presente na minoria. Cursa com LRA oligúrica ou não oligúrica, e EAS com eosinofilúria, hematúria e piúria estéril.</li>\n<li><strong>Tratamento:</strong> Retirada imediata da droga agressora. Em casos específicos (ex. NIA granulomatosa associada à <strong>Sarcoidose</strong>), o uso de <strong>corticosteroides</strong> tem impacto favorável e alta probabilidade de influenciar a recuperação renal a longo prazo.</li>\n</ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Ascite na Cirrose:</strong> Decorre de hipertensão portal (vasodilatação esplâncnica → ativação SRAA → retenção renal de sódio e água) e hipoalbuminemia. <strong>Diagnóstico:</strong> Paracentese diagnóstica sempre que primeira descompensação ou suspeita de infecção. Avaliar <strong>GASA</strong> (Gradiente Albumina Soro - Ascite). GASA > 1,1 g/dL = Hipertensão portal (cirrose, IC). Proteína Total do líquido ascitico < 2,5 g/dL = Cirrose. PT > 2,5 g/dL = Insuficiência Cardíaca.</li>\n  <li><strong>Tratamento da Ascite:</strong> Restrição de Sódio (2g/dia ou 88mEq/dia). Restrição hídrica só se hiponatremia severa (Na < 125). <strong>Diuréticos:</strong> Espironolactona (iniciar com 100mg/dia) + Furosemida (40mg/dia). Manter proporção 100:40 para balancear potássio. Titular até máximo de 400:160. Meta de perda de peso: 0,5 kg/dia (sem edema) ou 1 kg/dia (com edema).</li>\n  <li><strong>Ascite Tensa / Refratária:</strong> Paracentese terapêutica de grande volume. <strong>Pegadinha de prova:</strong> Sempre repor <strong>Albumina EV (6 a 8g para cada litro retirado)</strong> se paracentese > 5 litros, para prevenir disfunção circulatória induzida pela paracentese. Considerar TIPS em ascite refratária.</li>\n  <li><strong>Peritonite Bacteriana Espontânea (PBE):</strong> Infecção monomicrobiana do líquido ascitico (translocação bacteriana, principal: E. coli, Klebsiella). <strong>Diagnóstico:</strong> PMN > 250 cél/mm³ no líquido ascitico, com cultura positiva monomicrobiana. Se PMN > 250 e cultura negativa = <strong>Ascite Neutrocítica</strong> (tratar igual). <strong>Tratamento da PBE:</strong> <strong>Cefotaxima</strong> (Cefalosporina 3ª geração) EV por 5 dias.</li>\n  <li><strong>Profilaxia para Síndrome Hepatorrenal em PBE:</strong> <strong>Palavra-chave:</strong> Todo paciente com PBE deve receber <strong>Albumina EV</strong> no 1º dia (1,5g/kg) e 3º dia (1,0g/kg) para prevenir SHR.</li>\n  <li><strong>Profilaxia Primária de PBE:</strong> Indicada se PT do líquido ascitico < 1,5 g/dL + Child >= 9 ou Bilirrubina > 3 ou Na < 130 ou Creatinina > 1.2. Droga: Norfloxacino oral contínuo. <strong>Profilaxia Secundária:</strong> Para todo paciente que teve PBE (Norfloxacino ad eternum). Paciente com hemorragia digestiva também faz profilaxia para PBE (Ceftriaxona EV por 7 dias).</li>\n  <li><strong>Peritonite Bacteriana Secundária (PBS):</strong> Perfuração de víscera ou abcesso. Líquido com PMN muito altos (geralmente milhares), polimicrobiano. <strong>Critérios de Runyon:</strong> 2 ou mais dos seguintes: PT > 1 g/dL, Glicose < 50 mg/dL, LDH > limite superior do soro. Conduta: Adicionar Metronidazol à Cefalosporina e Imagem (TC) urgente / Laparotomia.</li>\n</ul>\n"
+        },
+        {
+          "num": "4.3",
+          "title": "Encefalopatia Hepática",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Fisiopatologia:</strong> Fígado não consegue clarear toxinas intestinais (como a Amônia) e ocorrência de shunts portossistêmicos. Amônia cruza a barreira hematoencefálica, gerando glutamina nos astrócitos (edema cerebral) e alteração de neurotransmissores.</li>\n  <li><strong>Quadro Clínico:</strong> Alteração de sono-vigília, letargia, desorientação. Exame clássico: <strong>Asterixis (Flapping)</strong>. Grau 1: alteração de sono. Grau 2: letargia, desorientação, flap evidente. Grau 3: sonolência severa, agressividade. Grau 4: Coma.</li>\n  <li><strong>Desencadeantes (Fator Precipitante):</strong> <strong>Palavra-chave:</strong> A encefalopatia dificilmente vem do nada, SEMPRE buscar: Hemorragia Digestiva Alta, Constipação, Infecção (PBE), Distúrbios eletrolíticos (Hipocalemia, Alcalose), Uso de sedativos, Insuficiência Renal. O tratamento primário é tratar o fator desencadeante.</li>\n  <li><strong>Tratamento Específico:</strong> \n    <br>- <strong>Lactulose:</strong> Laxante osmótico não absorvível. Acidifica o cólon, transformando NH3 (absorvível) em NH4+ (íon amônio, não absorvível, excretado nas fezes). Meta: 2-3 evacuações pastosas/dia.\n    <br>- <strong>Antibióticos Não-Absorvíveis (Rifaximina):</strong> Altera a flora colônica produtora de amônia. Usado no Brasil como adjunto se falha de lactulose ou Neomicina/Metronidazol se Rifaximina não disponível.\n    <br>- <strong>LOLA (L-ornitina-L-aspartato):</strong> Aumenta o ciclo da ureia e glutamina muscular para clearance de amônia. Adjuvante.\n    <br>- <strong>Pegadinha:</strong> NÃO está indicada dieta restrita em proteínas! Doentes cirróticos são desnutridos. Manter ingestão proteica de 1 a 1,5 g/kg/dia (preferência proteínas vegetais e laticínios).\n  </li>\n</ul>\n"
+        },
+        {
+          "num": "4.4",
+          "title": "Varizes Esofagogástricas e Hemorragia Digestiva Alta (HDA)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Rastreio:</strong> Todo cirrótico com diagnóstico recente deve fazer EDA para rastreio de varizes. Critérios de Baveno VI evitam EDA se plaquetas > 150.000 e elastografia < 20 kPa.</li>\n  <li><strong>Profilaxia Primária (nunca sangrou):</strong> Indicada para varizes médias/grossas, ou pequenas com red spots (sinais vermelhos/risco) ou Child B/C. <strong>Opções:</strong> Betabloqueador Não-Seletivo (Propranolol, Nadolol, Carvedilol) OU Ligadura Elástica (LE). Não associar.</li>\n  <li><strong>Manejo do Sangramento Agudo:</strong> Emergência médica.\n    <br>1. Estabilização hemodinâmica (cristaloides, transfusão alvo de Hb entre 7-9 g/dL). Não hipertransfundir para não aumentar a pressão portal.\n    <br>2. <strong>Drogas Vasoativas:</strong> Iniciar imediatamente na suspeita, antes mesmo da EDA (Terlipressina, Octreotide ou Somatostatina). Mantém por 2-5 dias.\n    <br>3. <strong>Profilaxia PBE:</strong> Ceftriaxona EV por 7 dias (HDA no cirrótico tem altíssimo risco de infecção).\n    <br>4. <strong>EDA:</strong> Realizar em até 12 horas. Escolha é a Ligadura Elástica Endoscópica (ou escleroterapia se não houver LE). \n    <br>5. <strong>Falha Terapêutica (Sangramento incontrolável):</strong> Balão de Sengstaken-Blakemore (medida ponte por no máximo 24h) ou <strong>TIPS</strong> (Shunt Portossistêmico Intra-hepático Transjugular) como resgate.\n  </li>\n  <li><strong>Profilaxia Secundária (já sangrou):</strong> TODOS que sobreviveram ao episódio agudo devem receber terapia combinada: <strong>Betabloqueador + Ligadura Elástica (sessões sequenciais até erradicação)</strong>.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo HDA Varicosa:\nRessuscitação + Droga Vasoativa + Antibiótico profilático\n↓\nEDA de urgência (< 12h) + Ligadura Elástica\n↓\nSangramento cessa?\n SIM → Manter vasoativo até 5 dias → Profilaxia secundária (BB + LE)\n NÃO → TIPS de resgate (ou Balão como ponte)\n</pre>\n"
+        },
+        {
+          "num": "4.5",
+          "title": "Síndrome Hepatorrenal (SHR)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Fisiopatologia:</strong> Vasodilatação esplâncnica extrema leva a grave hipoperfusão renal reflexa (vasoconstrição da artéria renal). Trata-se de uma lesão renal aguda PRÉ-RENAL funcional (parênquima renal está normal).</li>\n  <li><strong>Critérios Diagnósticos (Critérios ICA):</strong> Cirrose com ascite, LRA (aumento de creatinina >= 0,3 mg/dL em 48h ou > 50% do basal), <strong>Ausência de resposta após 2 dias de suspensão de diuréticos e expansão volêmica com Albumina 1g/kg/dia</strong>, ausência de choque, exclusão de drogas nefrotóxicas e ausência de doença parenquimatosa renal (sem proteinúria/hematúria ou USG normal).</li>\n  <li><strong>Tratamento Específico:</strong> Reverter vasoconstrição renal e aumentar volume arterial efetivo com: <strong>Terlipressina EV + Albumina EV</strong>. A terapia definitiva, no entanto, é o <strong>Transplante Hepático</strong> (o rim volta a funcionar normal com fígado novo).</li>\n  <li><strong>Atenção:</strong> SHR Tipo 1 (rápida, dobra creatinina em < 2 semanas, precipitada frequentemente por PBE). SHR Tipo 2 (lenta e associada à ascite refratária).</li>\n</ul>\n"
+        }
+      ]
+    },
+    {
+      "title": "5. Tumores Hepáticos",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Nódulos Hepáticos Benignos e CHC",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hemangioma Hepático:</strong> Tumor hepático benigno mais comum. Típico em mulheres. Assintomático. Imagem (TC/RM dinâmica): Captação de contraste periférica e nodular na fase arterial, com preenchimento centrípeto tardio. Conduta: Conservadora.</li>\n  <li><strong>Hiperplasia Nodular Focal (HNF):</strong> 2º tumor benigno mais comum. Resposta a anomalia vascular. <strong>Palavra-chave:</strong> <strong>Cicatriz central estrelada</strong> à TC/RM. Captação arterial intensa com lavagem não total. Conduta: Conservadora.</li>\n  <li><strong>Adenoma Hepático:</strong> Benigno, risco de ruptura com sangramento e malignização (para CHC). <strong>Forte associação:</strong> Mulheres jovens em uso de <strong>Anticoncepcional Oral (ACO)</strong>. Diagnóstico: Captação homogênea na fase arterial com washout (pode confundir com CHC). Conduta: Suspender ACO. Se > 5cm ou paciente do sexo masculino -> Ressecção cirúrgica (devido alto risco de ruptura/malignização).</li>\n  <li><strong>Carcinoma Hepatocelular (CHC):</strong> Tumor maligno primário mais comum do fígado. Surge no contexto de cirrose em >80% dos casos. Fatores de risco: Cirrose (qualquer causa), HBV (pode dar CHC SEM cirrose), HCV, Álcool, MASLD, Hemocromatose. Rastreio: USG abdominal semestral em todo cirrótico.</li>\n  <li><strong>Diagnóstico de CHC:</strong> Imagem com padrão clássico basta em paciente cirrótico (não precisa de biópsia): <strong>Washout (Lavagem rápida)</strong>. Realiza hipercaptação precoce (fase arterial brilha) e lavagem rápida na fase venosa/tardia (fica escuro em relação ao parênquima). Alfafetoproteína (AFP) alta auxilia, mas não é diagnóstico isolado.</li>\n  <li><strong>Tratamento do CHC (Critérios de Milão para Transplante):</strong> Para curar o CHC no cirrótico frequentemente precisa transplantar para curar a doença de base. <strong>Critérios de Milão:</strong> 1 nódulo < 5 cm OU até 3 nódulos, todos < 3 cm (e sem invasão vascular/linfonodal). Se dentro de Milão -> Transplante. Se tumor único pequeno comChild A sem hipertensão portal grave -> Ressecção cirúrgica. Se fora de Milão mas não metastático -> Quimioembolização (TACE). Tumores avançados -> Terapia sistêmica (Sorafenibe).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Tumor</th><th>Perfil Típico</th><th>Padrão de Imagem (TC Dinâmica)</th><th>Conduta</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Hemangioma</td><td>Mulher assintomática</td><td>Preenchimento centrípeto (de fora para dentro)</td><td>Observar</td></tr>\n      <tr><td>HNF</td><td>Mulher jovem</td><td>Cicatriz central</td><td>Observar</td></tr>\n      <tr><td>Adenoma</td><td>Mulher com uso de ACO</td><td>Captação arterial / risco de sangramento</td><td>Suspender ACO / Ressecção se >5cm</td></tr>\n      <tr><td>CHC</td><td>Cirrótico</td><td>Hipercaptação arterial e Washout venoso</td><td>Depende do BCLC (Cirurgia, Tx, TACE)</td></tr>\n    </tbody>\n  </table>\n</div>\n"
         }
       ]
     }
   ]
 },
     "uepa_dermatologia": {
-  "area": "Dermatologia",
-  "title": "ENAMED Master - Dermatologia",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Hanseníase",
-      "subchapters": [
+    "area": "Dermatologia",
+    "title": "Rapid Review Mestre ENAMED - Dermatologia",
+    "isExample": false,
+    "sections": [
         {
-          "num": "1",
-          "title": "Diagnóstico e Exame",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Forma Clínica</th><th>Clínica e Exame Dermatoneurológico</th><th>Baciloscopia / Histopatologia</th></tr></thead><tbody><tr><td>Indeterminada</td><td>Mácula hipocrômica, alteração de sensibilidade (térmica &rarr; dolorosa &rarr; tátil).</td><td>Baciloscopia (-). Histopatologia: infiltrado inflamatório inespecífico.</td></tr><tr><td>Tuberculoide</td><td>Placa única ou poucas, bordas elevadas, centro eritematoso/hipocrômico, sem descamação, anestésica.</td><td>Baciloscopia (-). Histopatologia: granulomas bem formados (epitelioides).</td></tr><tr><td>Dimorfa (Borderline)</td><td>Placas eritematosas, limites imprecisos, assimétricas. Vários troncos nervosos acometidos.</td><td>Baciloscopia (+ ou -).</td></tr><tr><td>Virchowiana</td><td>Infiltração difusa, nódulos, fácies leonina, madarose, lesões simétricas.</td><td>Baciloscopia (+). Presença de <b>globias</b> (aglomerados de bacilos). Histopatologia: histiócitos espumosos (células de Virchow).</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Exame Dermatoneurológico:</b> Avaliar sensibilidade na ordem: 1º Térmica, 2º Dolorosa, 3º Tátil. Para lesões foveolares/tuberculoides, o teste de sensibilidade define o diagnóstico.</li></ul>"
+            "title": "1. Dermatologia Infecciosa e Parasitária",
+            "subchapters": [
+                {
+                    "num": "1.1",
+                    "title": "Hanseníase: Classificação, Diagnóstico e Tratamento",
+                    "tags": [
+                        "ja"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li>A hanseníase é causada pelo <em>Mycobacterium leprae</em>, com tropismo por pele e nervos periféricos. <strong>Palavra-chave:</strong> Placa com alteração de sensibilidade e espessamento neural. A ordem de perda da sensibilidade é: <strong>Térmica → Dolorosa → Tátil</strong>. <strong>Pegadinha:</strong> Achar que a tátil se perde primeiro; sempre testar térmica e dor antes.</li>\n    <li><strong>Diagnóstico Clínico:</strong> Lesão de pele com alteração de sensibilidade (anestésica, hipoestésica) + acometimento de tronco nervoso periférico (espessamento, dor). <strong>Exames complementares:</strong> A baciloscopia de índice (raspado intradérmico de 4 sítios: orelhas, cotovelos ou joelhos, lesão) define a forma: positiva nos multibacilares (MB) com <strong>globias na forma Virchowiana</strong>, e negativa nos paucibacilares (PB - Indeterminada e Tuberculóide). Histopatologia da forma Tuberculóide tem granulomas bem formados sem bacilos, enquanto a Virchowiana tem macrófagos espumosos (células de Virchow) repletos de bacilos.</li>\n    <li>\n        <strong>Classificação Operacional e Clínica:</strong>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Critério</th><th>Paucibacilar (PB)</th><th>Multibacilar (MB)</th></tr></thead>\n                <tbody>\n                    <tr><td>Lesões de pele</td><td>Até 5 lesões</td><td>6 ou mais lesões</td></tr>\n                    <tr><td>Nervos acometidos</td><td>Até 1 tronco nervoso</td><td>Mais de 1 tronco nervoso</td></tr>\n                    <tr><td>Baciloscopia</td><td>Negativa</td><td>Positiva</td></tr>\n                    <tr><td>Formas de Madrid</td><td>Indeterminada, Tuberculóide</td><td>Dimorfa, Virchowiana</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n    <li><strong>Tratamento (Poliquimioterapia - PQT-U):</strong> O esquema padronizado atual do MS (2021) unificou as cartelas: Rifampicina, Dapsona e Clofazimina para TODOS os pacientes. PB faz por 6 meses (até 9m) e MB faz por 12 meses (até 18m). <strong>Pegadinha:</strong> Achar que PB não usa Clofazimina; agora TODOS usam as 3 drogas.</li>\n    <li><strong>Efeitos Colaterais da PQT:</strong> <strong>Clofazimina</strong> causa <strong>pigmentação cutânea e ressecamento da pele</strong> (ictiose, cor acastanhada). <strong>Palavra-chave:</strong> Paciente reclama de \"pele escura e seca\". <strong>Conduta:</strong> NÃO SUSPENDER o remédio, apenas orientar hidratação intensa e fotoproteção; a pigmentação é benigna e reversível meses após o término. <strong>Dapsona</strong> causa hemólise, meta-hemoglobinemia (síndrome do bebê azul), agranulocitose e sulfona-síndrome. <strong>Rifampicina</strong> deixa urina laranja e tem interação hepática (indutor CYP).</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo de Investigação de Lesão Suspeita:\nLesão macular hipocrômica/eritematosa\n↓\nTestar sensibilidade (Térmica -> Dor -> Tátil)\n↓\nAlterada?\nSim -> Diagnóstico de Hanseníase! Classificar em PB (<= 5) ou MB (>= 6)\nNão -> Investigar diagnósticos diferenciais:\n       - Pitiríase versicolor (sinal de Zileri +)\n       - Pitiríase rósea (medalhão)\n       - Psoríase (Curetagem de Brocq/Auspitz +)\n</pre>\n                    "
+                },
+                {
+                    "num": "1.2",
+                    "title": "Estados Reacionais na Hanseníase",
+                    "tags": [
+                        "ja"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li>As reações hansênicas são episódios inflamatórios agudos do sistema imunológico. <strong>Pegadinha:</strong> Reação hansênica NÃO significa falha terapêutica nem resistência. NÃO se deve suspender ou reiniciar a PQT; deve-se manter ou concluir a PQT e tratar a reação. Fatores precipitantes incluem: estresse, infecções intercorrentes (ex: focos dentários), gravidez.</li>\n    <li><strong>Reação Tipo 1 (Reversa):</strong> Ocorre nas formas Tuberculóide e Dimorfa. Hipersensibilidade celular (Th1). Causa exacerbação de lesões antigas (ficam eritematosas, edemaciadas) e surgimento de novas lesões COM NEURITE e piora neurológica rápida (mão em garra, pé caído). <strong>Tratamento:</strong> Corticoterapia sistêmica (Prednisona 1 a 2 mg/kg/dia) para salvar o nervo.</li>\n    <li><strong>Reação Tipo 2 (Eritema Nodoso Hansênico - ENH):</strong> Ocorre nas formas Virchowiana e Dimorfa. Hipersensibilidade por imunocomplexos (Th2). Causa nódulos eritematosos, dolorosos, súbitos, sistêmicos (febre, mal-estar, orquite, iridociclite, glomerulonefrite). <strong>Tratamento de escolha:</strong> <strong>Talidomida</strong> (100 a 400 mg/dia). <strong>Pegadinha:</strong> Talidomida é ESTRITAMENTE PROIBIDA em mulheres em idade fértil (risco teratogênico extremo: focomelia). Nessas mulheres, usa-se Prednisona ou Pentoxifilina.</li>\n    <li>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Característica</th><th>Reação Tipo 1 (Reversa)</th><th>Reação Tipo 2 (ENH)</th></tr></thead>\n                <tbody>\n                    <tr><td>Mecanismo</td><td>Hipersensibilidade Celular (Imunidade inata/Th1)</td><td>Imunocomplexos (Th2/Humoral)</td></tr>\n                    <tr><td>Clínica</td><td>Placas edemaciadas + <strong>Neurite Aguda</strong></td><td>Nódulos dolorosos + febre + sintomas sistêmicos</td></tr>\n                    <tr><td>Tratamento 1ª linha</td><td>Corticóide (Prednisona)</td><td>Talidomida (se homem ou mulher não fértil)</td></tr>\n                    <tr><td>Tratamento alternativo</td><td>Imunossupressores</td><td>Corticóide (se neurite grave associada ou mulher fértil)</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n</ul>\n                    "
+                },
+                {
+                    "num": "1.3",
+                    "title": "Dermatoses Parasitárias: Escabiose e Pediculose",
+                    "tags": [
+                        "ja"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Escabiose (Sarna):</strong> Infecção pelo ácaro <em>Sarcoptes scabiei</em>. <strong>Palavra-chave:</strong> Prurido intenso, essencialmente <strong>NOTURNO</strong>. Piora à noite pelo aumento da temperatura corporal sob as cobertas, que aumenta a atividade do ácaro. Transmissão por contato direto e prolongado.</li>\n    <li><strong>Quadro Clínico:</strong> Lesões pápulo-eritematosas, escoriações e o patognomônico <strong>Túnel acarino</strong> (pequeno trajeto linear com vesícula perolada na ponta). Locais preferenciais em adultos: espaços interdigitais das mãos, punhos, axilas, região periumbilical e genitália (nódulos escabióticos no escroto ou pênis). <strong>Pegadinha:</strong> Em lactentes e crianças pequenas (< 2 anos), a escabiose <strong>POUPA a área das fraldas e ACOMETE couro cabeludo, palmas e plantas</strong>, diferente do adulto que poupa face e couro cabeludo.</li>\n    <li><strong>Diagnóstico e Conduta:</strong> Clínico e epidemiológico. SEMPRE investigar contactantes com sintomas semelhantes (família, escola, vizinhos). O tratamento deve ser feito por TODA a família simultaneamente, lavando roupas de cama e banho com água quente.</li>\n    <li><strong>Tratamento Tópico e Sistêmico:</strong> \n        - <strong>Permetrina 5% loção (1ª linha):</strong> Aplicar do pescoço para baixo em toda a superfície corporal, deixar por 8-14h (durante a noite), e retirar no banho. Repetir após 7-10 dias (para matar os ovos recém-eclodidos). Pode ser usada em bebês > 2 meses e gestantes.\n        - <strong>Ivermectina oral:</strong> 200 mcg/kg, dose única, repetindo após 7 a 14 dias. Não recomendada para < 15 kg ou gestantes. É excelente para surtos institucionais.\n        - <strong>Enxofre precipitado 5-10% em vaselina:</strong> Seguro para recém-nascidos < 2 meses e gestantes.\n    </li>\n    <li><strong>Sarna Norueguesa (Crostosa):</strong> Variante hiperqueratótica grave em imunossuprimidos (HIV, HTLV-1, uso crônico de corticoide). Placas crostosas, pouquíssimo prurido (pela falha imune), hiperinfestação (milhões de ácaros). Tratamento agressivo combinando Ivermectina VO + Permetrina tópica e queratolíticos.</li>\n    <li><strong>Pediculose (Piolho):</strong> Prurido intenso no couro cabeludo, ninfas (lêndeas) aderidas ao fio de cabelo, escoriações, adenopatia cervical. Tratamento com Permetrina 1% tópica, repetir em 7-10 dias.</li>\n</ul>\n                    "
+                },
+                {
+                    "num": "1.4",
+                    "title": "Piodermites: Impetigo, Erisipela e Celulite",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Impetigo:</strong> Infecção superficial da epiderme por <em>S. aureus</em> e <em>S. pyogenes</em>. Muito comum em crianças. O tipo <strong>não bolhoso</strong> tem crostas melicéricas (cor de mel) geralmente na face; o tipo <strong>bolhoso</strong> (exclusivo de S. aureus fago 71) forma bolhas flácidas com hipópio que rompem deixando colarete. Tratamento: limpeza, Mupirocina tópica. Se disseminado, usar Cefalexina oral. <strong>Pegadinha:</strong> Impetigo estreptocócico PODE causar GNPE (glomerulonefrite), mas NUNCA causa Febre Reumática.</li>\n    <li><strong>Síndrome da Pele Escalada Estafilocócica (SSSS):</strong> Toxina esfoliativa do S. aureus atinge a corrente sanguínea, clivando a desmogleína 1 na epiderme (granuoloso). Causa eritema difuso, descamação em grandes retalhos, sinal de Nikolsky positivo. Ocorre mais em crianças < 5 anos após foco de infecção (ex: impetigo ou faringite). Mucosas são POUPADAS. Tratamento com Oxacilina/Cefalotina EV.</li>\n    <li>\n        <strong>Erisipela vs Celulite:</strong>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Característica</th><th>Erisipela</th><th>Celulite</th></tr></thead>\n                <tbody>\n                    <tr><td>Agente principal</td><td>Streptococcus pyogenes (Grupo A)</td><td>Staphylococcus aureus e Streptococcus</td></tr>\n                    <tr><td>Plano anatômico</td><td>Derme superficial e vasos linfáticos</td><td>Derme profunda e tecido subcutâneo</td></tr>\n                    <tr><td>Características da placa</td><td>Bordas BEM delimitadas, elevadas, rubor intenso (em casca de laranja)</td><td>Bordas MAL delimitadas, dolorosa, eritema difuso, induração</td></tr>\n                    <tr><td>Tratamento</td><td>Penicilina (Benzatina ou Procaína/Cristalina), Amoxicilina</td><td>Cefalexina, Oxacilina (cobertura estafilo)</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n</ul>\n                    "
+                },
+                {
+                    "num": "1.5",
+                    "title": "Micoses Superficiais e Profundas",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Pitiríase Versicolor:</strong> Causada pelo fungo lipofílico <em>Malassezia furfur</em>. Máculas descamativas hipo/hipercrômicas ou eritematosas, acometendo tronco, pescoço e raiz dos membros. <strong>Sinal de Zileri:</strong> Estiramento da pele evidencia a descamação furfurácea. <strong>Sinal da Unhada (Besnier):</strong> Raspagem da lesão solta uma escama fina. Exame micológico revela \"macarrão com almôndegas\" (hifas curtas e esporos). Tratamento: Sulfeto de selênio xampu, Cetoconazol tópico; ou Itraconazol oral (em casos extensos).</li>\n    <li><strong>Dermatofitoses (Tineas):</strong> Causadas por fungos ceratinofílicos (Trichophyton, Microsporum). \n        - <em>Tinea corporis:</em> Placa eritemato-descamativa com borda ativa (vesículas na borda) e clareamento central.\n        - <em>Tinea capitis:</em> Alopecia focal com descamação, cabelos tonsurados. <strong>Pegadinha:</strong> Tinea capitis SEMPRE exige tratamento sistêmico (Griseofulvina ou Terbinafina), pois o tópico não penetra no folículo pilar.\n        - <em>Tinea unguium (Onicomicose):</em> Espessamento ungueal, hiperceratose subungueal. Tratamento longo oral (Terbinafina ou Itraconazol).\n    </li>\n    <li><strong>Esporotricose:</strong> Doença fúngica (fungo dimórfico <em>Sporothrix schenckii</em>) com manifestação linfocutânea. <strong>Palavra-chave:</strong> Lesão ulcerada no local de inoculação (trauma vegetal ou arranhadura de GATO) seguida de nódulos que acompanham o trajeto linfático regional (ascendente). Tratamento: Itraconazol oral por longo prazo; iodeto de potássio é opção clássica.</li>\n</ul>\n                    "
+                }
+            ]
         },
         {
-          "num": "2",
-          "title": "Estados Reacionais",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo de Reação</th><th>Características</th><th>Tratamento de Escolha</th></tr></thead><tbody><tr><td>Reação Tipo 1 (Reversa)</td><td>Surge novas lesões, exacerbação de lesões antigas (edema, eritema), neurite. Comum em Paucibacilares (Borderline/Tuberculoide). <b>Não tem sintomas sistêmicos graves</b>.</td><td><b>Corticoide</b> (Prednisona). <i>Manter PQT!</i></td></tr><tr><td>Reação Tipo 2 (Eritema Nodoso Hansênico)</td><td>Nódulos eritematosos e dolorosos subcutâneos, febre, mal-estar, orquite, neurite. Comum em Multibacilares (Virchowianos/Dimorfos).</td><td><b>Talidomida</b> (Exceto em mulheres em idade fértil &rarr; usar Corticoide/Pentoxifilina). <i>Manter PQT!</i></td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Fatores Precipitantes:</b> Coinfecções, estresse físico/emocional, focos infecciosos (ex: dentário), gravidez, vacinação.</li><li><b>Conduta PQT:</b> Os pacientes que desenvolvem reações <i>após</i> término do tratamento <b>NÃO</b> devem retomar a PQT, apenas tratar a reação. Durante o tratamento, a PQT nunca é suspensa pelas reações.</li></ul>"
+            "title": "2. Farmacodermias e Doenças Bolhosas",
+            "subchapters": [
+                {
+                    "num": "2.1",
+                    "title": "Farmacodermias Graves: DRESS, SSJ e NET",
+                    "tags": [
+                        "ja"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li>Reações adversas a medicamentos com manifestações cutâneas e risco de vida. Sempre avaliar o uso recente de anticonvulsivantes aromáticos (fenitoína, carbamazepina, fenobarbital), alopurinol, sulfas, lamotrigina ou AINEs (oxicams).</li>\n    <li><strong>Síndrome DRESS (Drug Reaction with Eosinophilia and Systemic Symptoms):</strong> Surge 2 a 6 semanas (início tardio) após introdução da droga. <strong>Quadro:</strong> Febre, exantema morbiliforme difuso, <strong>Linfadenopatia generalizada</strong>, <strong>Eosinofilia e/ou Linfócitos atípicos</strong>, e acometimento visceral (hepatite aguda é o mais comum e letal). Pode haver reativação viral (HHV-6). <strong>Pegadinha:</strong> A ausência de descolamento epidérmico grave diferencia da NET. Mucosa oral pode estar acometida, mas sem lesões alvo típicas extensas. Tratamento: Suspensão da droga e Corticoide sistêmico (imprescindível para o dano visceral).</li>\n    <li><strong>Síndrome de Stevens-Johnson (SSJ) e Necrólise Epidérmica Tóxica (NET):</strong> Mesmo espectro de doença com clivagem da junção dermoepidérmica (necrose celular programada extensa por linfócitos T citotóxicos e Fas-L).\n        - <strong>SSJ:</strong> Descolamento epidérmico de &lt; 10% da superfície corporal (SC). Lesões em alvo atípicas (duas zonas de cor), máculas purpúricas, acometimento SEVERO de 2 ou mais mucosas (oral, conjuntival, genital).\n        - <strong>Overlap (SSJ/NET):</strong> Descolamento entre 10% e 30% da SC.\n        - <strong>NET:</strong> Descolamento > 30% da SC. Áreas extensas de pele desnuda. <strong>Sinal de Nikolsky positivo</strong>. Mortalidade alta por sepse e distúrbio hidroeletrolítico.\n    </li>\n    <li>\n        <strong>Tabela Comparativa de Farmacodermias Graves:</strong>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Critério</th><th>DRESS</th><th>SSJ / NET</th></tr></thead>\n                <tbody>\n                    <tr><td>Tempo de latência</td><td>2 a 6 semanas (Tardio)</td><td>1 a 3 semanas</td></tr>\n                    <tr><td>Marca clínica</td><td>Linfadenopatia + Exantema morbiliforme + Edema facial</td><td>Máculas purpúricas / Bolhas flácidas / Clivagem da epiderme</td></tr>\n                    <tr><td>Mucosas</td><td>Pode ter acometimento leve/moderado</td><td>Acometimento grave e sangrante (muito doloroso)</td></tr>\n                    <tr><td>Marca laboratorial</td><td>Eosinofilia, alteração hepática (transaminases altas), reativação HHV-6</td><td>Anemia, neutropenia, distúrbios hidroeletrolíticos (como no grande queimado)</td></tr>\n                    <tr><td>Sinal de Nikolsky</td><td>Negativo</td><td>Positivo</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n    <li><strong>Conduta na SSJ/NET:</strong> Internação em UTI/Centro de Queimados. Suspensão imediata de todas as drogas suspeitas. Suporte hemodinâmico, cuidados locais com curativos não aderentes, vigilância oftalmológica diária. O uso de corticoide é controverso (pode aumentar risco de sepse), mas IVIG (Imunoglobulina humana) e Ciclosporina são utilizados em protocolos especializados.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo de Exantema Febril por Fármaco:\nFebre + Erupção Cutânea em uso de medicamento:\n↓\nAvaliar Mucosas, Sinal de Nikolsky e Órgãos (Fígado, Linfonodos):\n↓\nSe bolhas e clivagem epidérmica com acometimento mucoso grave:\n- &lt; 10%: SSJ\n- &gt; 30%: NET\n↓\nSe rash morbiliforme, adenopatia, eosinofilia > 1.500, hepatite aguda:\n- Síndrome DRESS\n</pre>\n                    "
+                },
+                {
+                    "num": "2.2",
+                    "title": "Doenças Imunobolhosas: Pênfigos e Penfigóides",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li>As doenças bolhosas autoimunes dividem-se em intraepidérmicas (pênfigos) e subepidérmicas (penfigoides e dermatite herpetiforme).</li>\n    <li><strong>Pênfigo Vulgar (PV):</strong> Autoanticorpos IgG contra Desmogleína 3 e 1. A clivagem é profunda na epiderme (suprabasal). <strong>Clínica:</strong> Inicia geralmente na <strong>mucosa oral</strong> (erosões dolorosas que não cicatrizam), seguido por bolhas flácidas na pele sã que se rompem facilmente, deixando extensas áreas erosadas e crostosas. <strong>Sinal de Nikolsky positivo</strong>. Alta mortalidade sem tratamento. Tratamento com altas doses de prednisona, associado a poupadores de corticoide (Azatioprina) ou Rituximabe.</li>\n    <li><strong>Pênfigo Foliáceo (PF):</strong> (Variante endêmica: Fogo Selvagem). Autoanticorpos contra Desmogleína 1. Clivagem superficial (subcórnea). <strong>Pegadinha:</strong> <strong>POUPA MUCOSAS</strong> (a desmogleína 1 não é expressa de forma predominante nas mucosas). Causa lesões bolhosas efêmeras, descamativas, crostosas, no tórax e face (seborreicas). Sinal de Nikolsky positivo.</li>\n    <li><strong>Penfigóide Bolhoso:</strong> Doença do idoso (> 70 anos). Autoanticorpos contra BP180 e BP230 na zona da membrana basal (hemidesmossomos). Clivagem subepidérmica. Causa <strong>bolhas TENSAS</strong> sobre base urticariforme/eritematosa, muito pruriginosas. <strong>Sinal de Nikolsky negativo</strong>. As bolhas não se rompem com facilidade. Tratamento: Corticoide tópico de alta potência ou sistêmico.</li>\n    <li>\n        <strong>Tabela de Diferenciação das Doenças Bolhosas Autoimunes:</strong>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Doença</th><th>Antígeno e Clivagem</th><th>Clínica Principal</th><th>Nikolsky</th><th>Imunofluorescência Direta (IFD)</th></tr></thead>\n                <tbody>\n                    <tr><td>Pênfigo Vulgar</td><td>Desmogleína 3 e 1 (Intraepidérmico profundo)</td><td>Bolhas flácidas, pele sã, <strong>lesão oral precoce</strong></td><td>Positivo</td><td>IgG intercelular (aspecto de \"rede\")</td></tr>\n                    <tr><td>Pênfigo Foliáceo</td><td>Desmogleína 1 (Intraepidérmico superficial)</td><td>Crosto-descamativas, seborreicas, <strong>poupa mucosas</strong></td><td>Positivo</td><td>IgG intercelular superior (\"rede\")</td></tr>\n                    <tr><td>Penfigóide Bolhoso</td><td>BP180 / BP230 (Subepidérmico)</td><td><strong>Idosos</strong>, bolhas tensas muito pruriginosas</td><td>Negativo</td><td>IgG/C3 linear na zona da membrana basal</td></tr>\n                    <tr><td>Dermatite Herpetiforme</td><td>Transglutaminase epidérmica (Subepidérmico)</td><td>Vesículas muito pruriginosas em cotovelos/joelhos + <strong>Doença Celíaca</strong></td><td>Negativo</td><td>Depósitos granulares de IgA nas papilas dérmicas</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n</ul>\n                    "
+                }
+            ]
         },
         {
-          "num": "3",
-          "title": "Tratamento e Efeitos Colaterais",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco (PQT)</th><th>Efeitos Colaterais Principais</th><th>Conduta / Manejo</th></tr></thead><tbody><tr><td>Rifampicina</td><td>Urina avermelhada, hepatotoxicidade, síndrome flu-like.</td><td>Sintomáticos, monitorar TGO/TGP.</td></tr><tr><td>Dapsona</td><td>Hemólise, metemoglobinemia, agranulocitose, Síndrome de Sulfona.</td><td>Suspender se grave.</td></tr><tr><td>Clofazimina</td><td><b>Pigmentação cutânea (hiperpigmentação castanho-acinzentada)</b>, ressecamento, dor abdominal.</td><td><b>Não suspender medicação.</b> Orientar hidratação da pele e fotoproteção. É uma alteração benigna e reversível.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Esquema Único (Atual):</b> Rifampicina, Dapsona e Clofazimina para TODOS os pacientes (Paucibacilares = 6 meses; Multibacilares = 12 meses).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Farmacodermias",
-      "subchapters": [
+            "title": "3. Câncer de Pele e Lesões Vasculares na Infância",
+            "subchapters": [
+                {
+                    "num": "3.1",
+                    "title": "Hemangiomas da Infância",
+                    "tags": [
+                        "ja"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Hemangiomas da Infância (HI):</strong> São os tumores vasculares benignos MAIS COMUNS na faixa etária pediátrica. Formam-se por proliferação endotelial verdadeira.</li>\n    <li><strong>Fases Evolutivas:</strong> \n        - Podem não estar presentes no momento do nascimento, aparecendo nas primeiras semanas de vida.\n        - Fases: Proliferação rápida (até o 6º-9º mês), Platô e <strong>Involução Espontânea</strong> (lenta e progressiva, durando anos, deixando a pele redundante ou normal). <strong>Pegadinha:</strong> A maioria resolve SOZINHA e não precisa de tratamento.\n    </li>\n    <li><strong>Classificação pela profundidade:</strong> Podem ser superficiais (cor vermelho vivo, \"morango\"), profundos (massa azulada sob pele normal) ou mistos. Não são sempre profundos, nem sempre graves.</li>\n    <li><strong>Tratamento:</strong> Conduta expectante na imensa maioria. <strong>Indicações de tratamento ativo:</strong> Lesões com risco de vida, comprometimento funcional (ex: obstrução visual causando ambliopia, obstrução de via aérea), ulceração dolorosa ou desfiguração cosmética grave.\n        - <strong>Primeira Linha:</strong> <strong>Propranolol sistêmico</strong> (beta-bloqueador). Revolucionou o tratamento, induzindo vasoconstrição e inibindo a proliferação. Monitorar bradicardia, hipotensão e hipoglicemia.\n        - <strong>Corticoides sistêmicos não são mais a primeira linha</strong> (têm muitos efeitos colaterais).\n        - Cirurgia raramente é feita na fase proliferativa. Pode ser útil após a regressão completa, para correção estética de sobras de pele ou resíduos fibrogordurosos.\n    </li>\n    <li><strong>Diferenciação - Malformações Vasculares:</strong> Estão sempre presentes ao nascimento, crescem proporcionalmente com a criança (sem fase de proliferação rápida e sem involução espontânea). Ex: Mancha Vinho do Porto (Capilar). Hemangiomas e Malformações são clinicamente e histologicamente diferentes, sendo importante diferenciá-los.</li>\n</ul>\n                    "
+                },
+                {
+                    "num": "3.2",
+                    "title": "Tumores Cutâneos Malignos: CBC, CEC e Melanoma",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li>O câncer de pele é classificado em Melanoma e Não Melanoma (CBC e CEC). A exposição ultravioleta (UVB para Não Melanoma, UVA/UVB para Melanoma) é o principal fator de risco.</li>\n    <li><strong>Carcinoma Basocelular (CBC):</strong> Tumor maligno mais frequente de humanos. <strong>Crescimento muito lento</strong>, malignidade local (altamente destrutivo), metástases são extremamente raras. Deriva das células basais. \n        - <strong>Clínica clássica:</strong> Nódulo de base eritematosa, translúcido ou perolado, com telangiectasias superficiais, frequentemente ulcerado centralmente (ulcus rodens) em áreas fotoexpostas crônicas (face, nariz).\n        - <strong>Dermatoscopia:</strong> Vasos arboriformes, ninhos ovoides cinza-azulados, ausência de rede pigmentar.\n        - <strong>Tratamento:</strong> Exérese cirúrgica com margens de 3-4 mm. Cirurgia de Mohs para áreas de risco (face central).\n    </li>\n    <li><strong>Carcinoma Espinocelular (CEC):</strong> Segundo tumor mais comum, derivado dos queratinócitos da epiderme espinhosa. Mais agressivo que o CBC, com <strong>potencial metastático real</strong> (via linfática). Associa-se a dano solar crônico, cicatrizes de queimadura de 3º grau (úlcera de Marjolin), radiação e HPV. \n        - Lesões precursoras: <strong>Queratose Actínica</strong> (placa eritemato-descamativa áspera como lixa em pele fotodanificada) e Doença de Bowen (CEC in situ).\n        - <strong>Clínica clássica:</strong> Pápula ou nódulo hiperceratótico, verrucoso, ulcerado com bordas endurecidas. Comum no lábio inferior, dorso das mãos e couro cabeludo.\n        - <strong>Tratamento:</strong> Cirurgia com margens de 4 a 6 mm. Avaliação de linfonodos cervicais.\n    </li>\n    <li><strong>Melanoma Cutâneo:</strong> Tumor dos melanócitos. Pior prognóstico, altamente letal se tardio. Fator de risco principal: queimaduras solares intermitentes (bolhas na infância) e histórico familiar.\n        - <strong>Regra do ABCDE:</strong> <strong>A</strong>ssimetria, <strong>B</strong>ordas irregulares, <strong>C</strong>oloração variada (mais de 2 cores), <strong>D</strong>iâmetro > 6 mm, <strong>E</strong>volução (crescimento rápido, mudança, sangramento - critério mais importante).\n        - <strong>Tipos Clínicos:</strong>\n          - <em>Extensivo Superficial:</em> Mais comum, fase de crescimento radial longo.\n          - <em>Nodular:</em> Crescimento vertical (profundo) rápido desde o início, sem fase radial. Pior prognóstico.\n          - <em>Lentigo Maligno:</em> Idosos em face (dano solar crônico).\n          - <em>Acral Lentiginoso:</em> Palmas, plantas, leito subungueal (Sinal de Hutchinson). Mais comum em populações não brancas.\n        - <strong>Índice de Breslow (Espessura):</strong> O fator prognóstico isolado mais importante. Mede em milímetros a profundidade desde a granulosa até a célula tumoral mais profunda. Define as margens cirúrgicas e a indicação de biópsia de linfonodo sentinela.\n    </li>\n    <li>\n        <strong>Conduta no Melanoma:</strong>\n        <div class=\"reader-table-wrap\">\n            <table class=\"reader-table\">\n                <thead><tr><th>Índice de Breslow</th><th>Margem de Excisão de Ampliação</th><th>Linfonodo Sentinela</th></tr></thead>\n                <tbody>\n                    <tr><td>In situ</td><td>0,5 a 1 cm</td><td>Não indicado</td></tr>\n                    <tr><td>Até 1,0 mm (fino)</td><td>1 cm</td><td>Geralmente não (apenas se ulceração ou mitoses)</td></tr>\n                    <tr><td>1,01 a 2,0 mm (intermediário)</td><td>1 a 2 cm</td><td>Sim, indicado rotineiramente</td></tr>\n                    <tr><td>> 2,0 mm (espesso)</td><td>2 cm</td><td>Sim, indicado rotineiramente</td></tr>\n                </tbody>\n            </table>\n        </div>\n    </li>\n</ul>\n                    "
+                }
+            ]
+        },
         {
-          "num": "1",
-          "title": "Farmacodermias Graves",
-          "tags": ["ja", "adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Quadro Clínico e Alterações Laboratoriais</th><th>Fármacos Associados</th></tr></thead><tbody><tr><td>Síndrome DRESS</td><td>Febre alta, edema facial, exantema morbiliforme difuso, linfadenopatia generalizada. <b>Laboratório: Eosinofilia intensa</b>, elevação de transaminases, linfócitos atípicos.</td><td>Anticonvulsivantes (Carbamazepina, Fenitoína), Alopurinol, Sulfas.</td></tr><tr><td>Stevens-Johnson (SSJ)</td><td>Necrose/descolamento epidérmico de <b>&lt; 10%</b> da superfície corporal (SC). Lesões em alvo atípicas, acometimento intenso de 2 ou mais mucosas.</td><td>Sulfas, Anticonvulsivantes, AINEs.</td></tr><tr><td>Necrólise Epidérmica Tóxica (NET)</td><td>Descolamento epidérmico <b>&gt; 30%</b> da SC (Sinal de Nikolsky +). Severo acometimento sistêmico, alta mortalidade.</td><td>Mesmos da SSJ.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Reativação Viral na DRESS:</b> É comum a reativação do Herpes Vírus Humano (<b>HHV-6</b> e HHV-7), que piora ou perpetua a inflamação sistêmica.</li><li><b>Diferenciação:</b> A ausência de descolamento epidérmico extenso (ausência de lesões alvo) e a forte eosinofilia favorecem o diagnóstico de DRESS em detrimento de SSJ/NET precoce.</li></ul>"
+            "title": "4. Doenças Pápulo-Descamativas, Eczemas e Acne",
+            "subchapters": [
+                {
+                    "num": "4.1",
+                    "title": "Psoríase e Pitiríase Rósea",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Psoríase:</strong> Doença inflamatória crônica, imunomediada (Th17/Th1), caracterizada por hiperproliferação epidérmica acelerada. Tem forte base genética (HLA-Cw6) e é deflagrada por estresse, infecções, álcool e medicamentos (lítio, betabloqueadores, antimaláricos, corticoide sistêmico - que pode causar rebote pustuloso).</li>\n    <li><strong>Quadro Clínico:</strong> Placas eritemato-descamativas BEM delimitadas com escamas branco-prateadas espessas. Áreas de trauma (cotovelos, joelhos, couro cabeludo, região sacral) por causa do <strong>Fenômeno de Koebner</strong> (surgimento de lesões no local de trauma, também presente no líquen plano e vitiligo).</li>\n    <li><strong>Sinais Semiológicos Clássicos (Diagnóstico Clínico):</strong>\n        - <em>Curetagem de Brocq:</em> Raspagem da lesão.\n        - <em>Sinal da Vela:</em> Destacamento de escamas semelhantes à raspa de vela.\n        - <em>Sinal de Auspitz (Orvalho Sangrento):</em> Sangramento puntiforme patognomônico, decorrente da hipertrofia das papilas dérmicas e tortuosidade capilar. <strong>Palavra-chave e Pegadinha:</strong> Auspitz confirma psoríase, NÃO outras descamativas.\n    </li>\n    <li><strong>Tipos e Tratamento:</strong> Vulgar (placas), Gutata (gotas difusas após infecção estreptocócica), Invertida (dobras), Pustulosa e Artropática. Tratamento: Casos leves (Tópicos: Corticóides, Análogos da vit D - Calcipotriol, Alcatrão). Casos graves (Fototerapia UVB/PUVA, Metotrexato, Acitretina, Imunobiológicos anti-TNF, anti-IL17). <strong>CONTRAINDICADO:</strong> Corticoide sistêmico (rebote grave).</li>\n    <li><strong>Pitiríase Rósea (de Gilbert):</strong> Doença eruptiva autolimitada (relação com HHV-6/HHV-7). <strong>Clínica patognomônica:</strong> Inicia com uma placa maior ovalada com colar descamativo periférico chamada <strong>Medalhão (ou Placa Mãe)</strong>. Dias depois, surgem múltiplas placas menores eritemato-descamativas ovais no tronco, seguindo as linhas de clivagem da pele, com aspecto de <strong>Árvore de Natal</strong>. Prurido leve/moderado. O diagnóstico diferencial mais importante na vida adulta (com lesões pápulo-descamativas difusas) é a Sífilis Secundária (onde há acometimento palmo-plantar). Conduta: Tratamento sintomático (anti-histamínicos, hidratantes, corticoides tópicos leves); resolve espontaneamente em 6-8 semanas.</li>\n</ul>\n                    "
+                },
+                {
+                    "num": "4.2",
+                    "title": "Eczemas e Dermatites",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Eczema (Dermatite):</strong> Resposta inflamatória cutânea pautada em hiperemia, edema e vesículas (aguda) evoluindo para espessamento, descamação e liquenificação (crônica). Prurido é SEMPRE presente.</li>\n    <li><strong>Dermatite Atópica (DA):</strong> Doença crônica recorrente associada à atopia (asma, rinite alérgica). Fisiopatologia: defeito na barreira cutânea (mutação filagrina) + desequilíbrio Th2 (aumento de IgE, IL-4, IL-13).\n        - <em>Lactentes:</em> Lesões eritemato-vesiculares e crostosas em face (POUPA triângulo nasolabial) e superfícies extensoras dos membros.\n        - <em>Crianças e Adultos:</em> Eczema crônico liquenificado (espessado) nas dobras de flexão (fossas cubitais e poplíteas) e pescoço.\n        - Tratamento: O pilar é a <strong>HIDRATAÇÃO INTENSA</strong> da pele logo após o banho (banho rápido, água morna, sem esfregar). Fases de agudização usam Corticóides tópicos ou Inibidores da calcineurina (Tacrolimo, Pimecrolimo).\n    </li>\n    <li><strong>Dermatite de Contato (DC):</strong>\n        - <em>Irritativa Primária:</em> Efeito citotóxico direto de substâncias (sabões, detergentes, solventes). Ocorre no primeiro contato, restrito à área de contato. Ex: \"Dermatite das donas de casa\" nas mãos.\n        - <em>Alérgica (DCA):</em> Reação de hipersensibilidade tipo IV (celular tardia). Exige sensibilização prévia. Pode ultrapassar a área de contato original. Exemplos clássicos: Níquel (botões, bijuterias - umbigo/lobos), Cimento/Borracha (EPIs), Plantas (Aroeira). Diagnóstico etiológico pelo <strong>Patch Test (Teste de Contato)</strong> com leitura em 48-72h.\n    </li>\n    <li><strong>Dermatite Seborreica:</strong> Doença inflamatória nas áreas ricas em glândulas sebáceas (couro cabeludo, sobrancelhas, sulco nasolabial, pré-esternal). Agravada por estresse e frio, associada à proliferação de <em>Malassezia</em>. Apresenta eritema e escamas amareladas gordurosas (caspa). Em bebês: Crosta Láctea. Tratamento com xampus de cetoconazol/ciclopirox/ácido salicílico e corticoides de baixa potência na face.</li>\n</ul>\n                    "
+                },
+                {
+                    "num": "4.3",
+                    "title": "Acne e Rosácea",
+                    "tags": [
+                        "adj"
+                    ],
+                    "bodyHtml": "\n<ul class=\"reader-list\">\n    <li><strong>Acne Vulgar:</strong> Doença da unidade pilossebácea. Fisiopatologia envolve 4 fatores: hiperqueratose folicular (comedogênese), aumento da produção sebácea (andrógenos), proliferação bacteriana (<em>Cutibacterium acnes</em>) e inflamação secundária.</li>\n    <li><strong>Graus e Tratamento:</strong>\n        - <strong>Grau I (Comedoniana):</strong> Só comedões abertos (cravos pretos) e fechados (brancos). <em>Tratamento:</em> Tópico com retinoide (Tretinoína, Adapaleno) ou Ácido Azelaico.\n        - <strong>Grau II (Pápulo-pustulosa):</strong> Comedões + pápulas eritematosas e pústulas. <em>Tratamento:</em> Retinoide tópico + Antibiótico tópico (Clindamicina, Eritromicina) e Peróxido de Benzoíla. Se moderado a grave: Adicionar ATB sistêmico (Tetraciclina, Limeciclina) por 3 meses.\n        - <strong>Grau III (Nódulo-cística):</strong> Lesões profundas, nódulos dolorosos, risco de cicatriz. <em>Tratamento:</em> Isotretinoína oral (Roacutan).\n        - <strong>Grau IV (Conglobata):</strong> Lesões coalescentes, fístulas, cicatrizes deformantes. <em>Tratamento:</em> Isotretinoína oral.\n    </li>\n    <li><strong>Isotretinoína Oral (Precauções):</strong> Extremamente TERATOGÊNICA. Obrigatório assinar termo, 2 métodos anticoncepcionais para mulheres, teste de gravidez mensal negativo. Eleva lípides (triglicerídeos e colesterol) e enzimas hepáticas. Causa queilite e ressecamento intenso das mucosas.</li>\n    <li><strong>Rosácea:</strong> Inflamação crônica centrofacial com alteração vascular (flushings intermitentes evoluindo para telangiectasias persistentes). <strong>Diferença crucial para Acne:</strong> Na rosácea NÃO há comedões. Exacerbada por sol, calor, estresse, álcool e comida picante. Mais comum em mulheres adultas/meia-idade. Formas clínicas: Eritemato-telangiectásica, Pápulo-pustulosa, Fimatosa (Rinofima - espessamento e hiperplasia nasal, mais no homem) e Ocular (blefarite, olho seco). Tratamento: Protetor solar sempre, Metronidazol tópico ou Ivermectina tópica (combate o ácaro Demodex associado). Casos sistêmicos com Tetraciclinas orais.</li>\n</ul>\n                    "
+                }
+            ]
         }
-      ]
-    },
-    {
-      "title": "Dermatoses Infecciosas e Parasitárias",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Escabiose",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><b>Etiologia:</b> <i>Sarcoptes scabiei</i>.</li><li><b>Quadro Clínico:</b> Prurido intenso, <b>com piora noturna</b>. Lesões papulares, pápulo-crostosas, escoriações, e <b>túneis (sulcos)</b>.</li><li><b>Topografia Comum:</b> Espaços interdigitais, punhos, axilas, região periumbilical, genitais (nódulos escabióticos) e nádegas. <i>Lactentes e imunossuprimidos podem ter lesões na cabeça, pescoço e palmo-plantares.</i></li><li><b>Conduta Epidemiológica:</b> É fundamental buscar ativamente <b>outras pessoas com quadro parecido em casa, vizinhança ou escola</b> (comunicantes), para tratar todos simultaneamente e evitar reinfecção.</li><li><b>Tratamento de Escolha:</b><ul class=\"reader-list\"><li><b>Permetrina 5% loção:</b> Aplicar do pescoço para baixo (ou na face/couro cabeludo em lactentes), deixar 8-14h e enxaguar. Repetir em 7-14 dias.</li><li><b>Ivermectina Oral:</b> 200 mcg/kg/dose, dose única, repetir em 7-14 dias (Não recomendada para crianças menores de 15kg ou gestantes, salvo diretrizes específicas).</li></ul></li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Dermatopediatria / Lesões Vasculares",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Hemangiomas da Infância",
-          "tags": ["ja", "adj"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><b>Conceito:</b> Os hemangiomas infantis são os <b>tumores vasculares benignos mais comuns na faixa etária pediátrica</b>.</li><li><b>Evolução Natural:</b> Diferente das malformações vasculares (que crescem com a criança e não regridem), os hemangiomas caracterizam-se por: <ul class=\"reader-list\"><li><b>Fase proliferativa rápida:</b> Crescimento intenso nos primeiros meses de vida.</li><li><b>Fase de platô.</b></li><li><b>Fase involutiva (regressão espontânea):</b> A maioria regride espontaneamente ao longo dos anos.</li></ul></li><li><b>Classificação:</b> Podem ser superficiais (cor vermelho vivo - \"morango\"), profundos (massa azulada), ou mistos. Não são sempre profundos ou graves.</li><li><b>Tratamento:</b> Conduta, na maioria das vezes, é <b>expectante (observação)</b>. <ul class=\"reader-list\"><li><b>Indicações Terapêuticas:</b> Risco de vida, comprometimento funcional (obstrução visual, via aérea), ulceração ou grandes lesões desfigurantes.</li><li><b>Primeira Linha (quando indicado):</b> <b>Betabloqueador oral (Propranolol)</b>. Corticoides sistêmicos não são mais a primeira linha isolada. A cirurgia é reservada para resíduos ou complicações muito específicas.</li></ul></li></ul>"
-        }
-      ]
-    }
-  ]
-}
-,
+    ]
+},
     "uepa_endocrinologia": {
   "area": "Endocrinologia",
-  "title": "Endocrinologia - UEPA",
+  "title": "Endocrinologia e Metabologia",
   "isExample": false,
   "sections": [
     {
-      "title": "Diabetes Mellitus",
+      "title": "Diabetes Mellitus e Complicações",
       "subchapters": [
         {
           "num": "1.1",
-          "title": "Diabetes Mellitus tipo 2 (DM2)",
+          "title": "Diabetes Mellitus Tipo 2 (DM2) e Tipo 1 (DM1)",
           "tags": [
             "ja"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Resistência insulínica progressiva e disfunção de células beta. Associado a obesidade e síndrome metabólica.</li><li><strong>Diagnóstico:</strong> Glicemia jejum ≥ 126 mg/dL, TOTG (2h) ≥ 200 mg/dL, HbA1c ≥ 6,5%. Confirmado com repetição do exame alterado ou se há sintomas (polidipsia, poliúria) associados à glicemia aleatória ≥ 200 mg/dL.</li><li><strong>Tratamento inicial e progressão:</strong> Mudanças de estilo de vida e Metformina. Se paciente tem Doença Renal do Diabético (DRC) ou alto risco cardiovascular, deve-se priorizar iSGLT2 (ex: Empagliflozina) ou agonistas GLP-1 (ex: Semaglutida, Liraglutida).</li><li><strong>Insulinoterapia:</strong> Indicada se o paciente tem sintomas de catabolismo (perda de peso), hiperglicemia severa (HbA1c > 9-10% com sintomas) ou falha no controle com múltiplas terapias orais.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classe</th><th>Mecanismo</th><th>Benefício Adicional</th><th>Efeitos Adversos</th></tr></thead><tbody><tr><td>Metformina</td><td>Reduz produção hepática de glicose</td><td>Não causa hipoglicemia, baixo custo</td><td>Distúrbios TGI, Deficiência de B12</td></tr><tr><td>Inibidores de SGLT2 (Empagliflozina)</td><td>Glicosúria (bloqueia reabsorção tubular)</td><td>Proteção Renal e Cardiovascular, controle de peso</td><td>Infecções genitourinárias, risco de CAD</td></tr><tr><td>Agonistas GLP-1 (Semaglutida)</td><td>Aumenta secreção de insulina dependente de glicose, lentifica esvaziamento gástrico</td><td>Perda de peso substancial, Proteção CV</td><td>Náusea, vômitos, diarreia</td></tr></tbody></table></div>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Conceito e Fisiopatologia:</strong> DM1 é caracterizado por destruição autoimune das células beta pancreáticas (insulinite), gerando deficiência absoluta de insulina, com abertura de quadro clássico (poliúria, polidipsia, polifagia e emagrecimento) muitas vezes em Cetoacidose Diabética (CAD). O DM2 tem base em resistência insulínica e disfunção progressiva das células beta, de caráter insidioso, tipicamente associado a síndrome metabólica e obesidade. <strong>Palavra-chave:</strong> Perda de peso com polifagia = descompensação insulínica.</li>\n  <li><strong>Diagnóstico:</strong> Glicemia de jejum ≥ 126 mg/dL; TOTG (2h) ≥ 200 mg/dL; HbA1c ≥ 6,5%; Glicemia ao acaso ≥ 200 mg/dL COM sintomas clássicos (único que não requer repetição). <strong>Pegadinha:</strong> Na ausência de sintomas inequívocos, testes alterados (jejum, TOTG ou HbA1c) devem ser repetidos (idealmente o mesmo teste) para confirmação diagnóstica. HbA1c pode falsear em hemoglobinopatias e anemias (hemólise diminui, deficiência de ferro aumenta).</li>\n  <li><strong>Tratamento e Conduta no DM2:</strong> A base inicial é a mudança do estilo de vida + Metformina (exceto se contraindicações como TFG < 30 mL/min). Se doença aterosclerótica (DAC, AVC, DAOP), insuficiência cardíaca (IC) ou doença renal crônica (DRC), adicionar iSGLT2 ou aGLP-1 com benefício cardiovascular comprovado, <strong>independente da HbA1c</strong>. <strong>Palavra-chave:</strong> \"Paciente com DM2 + infarto prévio ou IC com FE reduzida\" = iSGLT2 (Dapagliflozina, Empagliflozina) ou aGLP-1 (Liraglutida, Dulaglutida, Semaglutida). <strong>Pegadinha:</strong> iSGLT2 causa glicosúria e aumenta risco de candidíase genital e CAD euglicêmica; aGLP-1 reduz peso mas aumenta risco de pancreatite aguda e efeitos gastrointestinais.</li>\n  <li><strong>Classes Terapêuticas:</strong>\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead>\n          <tr>\n            <th>Classe</th>\n            <th>Mecanismo</th>\n            <th>Vantagens / Benefícios</th>\n            <th>Desvantagens / Contraindicações</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Metformina</td>\n            <td>Reduz resistência hepática (gliconeogênese)</td>\n            <td>Não causa hipoglicemia, neutra no peso, barata</td>\n            <td>TGI, deficiência de B12, contraindicada se TFG < 30</td>\n          </tr>\n          <tr>\n            <td>Sulfonilureias (Gliclazida, Glimepirida)</td>\n            <td>Secretagogo (fecha canal de K+)</td>\n            <td>Redução rápida de glicemia</td>\n            <td><strong>Risco de Hipoglicemia</strong>, ganho de peso</td>\n          </tr>\n          <tr>\n            <td>iSGLT2 (-gliflozinas)</td>\n            <td>Inibe reabsorção renal de glicose</td>\n            <td>Perda de peso, redução de PA, benefício em IC e DRC</td>\n            <td>Infecções fúngicas genitais, ITU, CAD euglicêmica, contraindicado na gestação</td>\n          </tr>\n          <tr>\n            <td>aGLP-1 (-glutidas)</td>\n            <td>Incretinomimético (aumenta insulina dependente de glicose)</td>\n            <td>Perda de peso intensa, benefício DAC aterosclerótica</td>\n            <td>Uso injetável, náuseas, risco de pancreatite, contraindicado se hx de Ca medular de tireoide</td>\n          </tr>\n          <tr>\n            <td>iDPP4 (-gliptinas)</td>\n            <td>Aumenta meia-vida do GLP-1 endógeno</td>\n            <td>Neutra no peso, não causa hipoglicemia, seguras na DRC avançada (Alogliptina)</td>\n            <td>Custo elevado, Saxagliptina aumenta risco de internação por IC</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n  <li><strong>Insulinoterapia:</strong> No DM1 é mandatório desde o diagnóstico (Esquema basal-bolus). No DM2, indicar se sintomas de catabolismo (perda de peso), HbA1c > 10% ou glicemia > 300 mg/dL na apresentação, ou falha terapêutica de agentes orais. A insulina basal (NPH, Glargina) é ajustada pela glicemia de jejum. <strong>Palavra-chave:</strong> Insulina NPH noturna para controle da glicemia de jejum.</li>\n  <li><strong>Rastreio de Complicações Crônicas (Nefropatia, Retinopatia, Neuropatia):</strong> No DM1 rastrear 5 anos APÓS o diagnóstico; no DM2 rastrear no MOMENTO do diagnóstico. Avaliar anualmente Relação Albuminúria/Creatininúria (RAC), fundoscopia, exame dos pés (monofilamento de 10g + diapasão de 128Hz).</li>\n</ul>\n          "
         },
         {
           "num": "1.2",
-          "title": "Diabetes Mellitus tipo 1 e Complicações Agudas",
+          "title": "Complicações Crônicas do Diabetes",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Nefropatia Diabética:</strong> Lesão glomerular progressiva (esclerose nodular - Kimmelstiel-Wilson). O diagnóstico inicial ocorre pela microalbuminúria (RAC entre 30-300 mg/g). Se RAC > 30 ou HAS associada, está indicado o uso de iECA ou BRA (efeito antiproteinúrico e nefroprotetor). <strong>Palavra-chave:</strong> Proteinúria ou microalbuminúria = iECA/BRA são os anti-hipertensivos de escolha. Não associar iECA com BRA.</li>\n  <li><strong>Retinopatia Diabética:</strong> Microaneurismas (primeira alteração na RD não proliferativa), exsudatos, hemorragias. A complicação que cega na Não-Proliferativa é o Edema Macular (tratar com anti-VEGF). A RD Proliferativa é marcada pela presença de neovasos (risco de hemorragia vítrea e descolamento tracional de retina), tratada com panfotocoagulação a laser. <strong>Pegadinha:</strong> Presença de \"neovasos\" indica estágio proliferativo e exige laser imediato.</li>\n  <li><strong>Neuropatia Diabética:</strong> A forma mais comum é a polineuropatia sensitivo-motora distal simétrica (\"em bota e luva\"). Há perda progressiva da sensibilidade protetora. O tratamento sintomático da dor neuropática é feito com Pregabalina, Duloxetina ou Amitriptilina. <strong>Neuropatia Autonômica:</strong> Pode causar gastroparesia (saciedade precoce, vômitos tardios - tratar com procinéticos como metoclopramida), enteropatia (diarreia noturna), bexiga neurogênica e hipotensão postural.</li>\n</ul>\n          "
+        },
+        {
+          "num": "1.3",
+          "title": "Complicações Agudas: CAD e EHH",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Cetoacidose Diabética (CAD):</strong> Deficiência absoluta de insulina. Clínica de poliúria, polidipsia, dor abdominal, respiração de Kussmaul. Laboratório: Glicemia > 250 mg/dL, pH < 7,3, HCO3 < 18, Cetonemia/Cetonúria.</li><li><strong>Estado Hiperglicêmico Hiperosmolar (EHH):</strong> Típico do DM2 idoso. Glicemia > 600, osmolaridade > 320, ausência de acidose grave.</li><li><strong>Tratamento CAD/EHH:</strong> VIP - Volume, Insulina, Potássio.</li></ul><pre class=\"reader-pre-card\">\nFluxograma CAD e VIP:\n1. Volume: SF 0.9% 10-20 mL/kg/h na 1ª hora.\n2. Potássio: Se K+ < 3.3, repor antes da insulina. Se 3.3 - 5.2, repor junto com hidratação.\n3. Insulina: 0.1 U/kg bólus + 0.1 U/kg/h BIC até resolução da acidose.\n</pre>"
-        }
-      ]
-    },
-    {
-      "title": "Tireoide",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Tireotoxicose e Doença de Graves",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireotoxicose:</strong> Síndrome clínica resultante do excesso de hormônios tireoidianos circulantes. Cursa com taquicardia, perda de peso, calor, tremores, irritabilidade e insônia.</li><li><strong>Doença de Graves:</strong> Causa mais comum de hipertireoidismo primário. Doença autoimune com anticorpo estimulador do receptor de TSH (TRAb). Apresenta bócio difuso, oftalmopatia (exoftalmia), e mixedema pré-tibial.</li><li><strong>Tratamento:</strong> Tionamidas (Metimazol é a escolha geral; Propiltiouracil no 1º trimestre de gestação ou crise tireotóxica). O tratamento geralmente requer 3 a 4 semanas para estabilizar as provas de função tireoidiana (T4L e T3, pois o TSH demora mais). Betabloqueadores ajudam no alívio sintomático.</li></ul>"
-        },
-        {
-          "num": "2.2",
-          "title": "Hipotireoidismo e Tireoidite de Hashimoto",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireoidite de Hashimoto:</strong> Principal causa de hipotireoidismo adquirido. Autoimune, caracterizada por Anti-TPO e Anti-Tg positivos. Pode associar-se a outras doenças autoimunes, como Doença de Addison e Doença Celíaca.</li><li><strong>Clínica:</strong> Fadiga, ganho de peso, pele seca, constipação, bradicardia. Laboratório revela TSH elevado e T4 livre baixo (hipotireoidismo primário).</li><li><strong>Tratamento:</strong> Levotiroxina (T4), tomada em jejum, com ajuste laboratorial do TSH a cada 4 a 6 semanas.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Adrenal",
-      "subchapters": [
-        {
-          "num": "3.1",
-          "title": "Insuficiência Adrenal (Doença de Addison)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Doença de Addison é a insuficiência adrenal primária, caracterizada pela destruição autoimune do córtex adrenal. Leva a deficiência de glicocorticoides, mineralocorticoides e andrógenos.</li><li><strong>Manifestações Clínicas:</strong> Fraqueza, perda de peso, hiperpigmentação cutâneo-mucosa (pelo aumento compensatório de ACTH), hipotensão ortostática e avidez por sal.</li><li><strong>Alterações Laboratoriais:</strong> Hiponatremia e hipercalemia (devido à falta de aldosterona).</li><li><strong>Tratamento e Prevenção de Crise:</strong> Reposição de glicocorticoide (hidrocortisona) e mineralocorticoide (fludrocortisona). Em situações de estresse clínico (febre, cirurgias, infecções), a dose de glicocorticoide DEVE ser aumentada, não suspensa.</li></ul>"
-        },
-        {
-          "num": "3.2",
-          "title": "Síndromes Poliglandulares Autoimunes (SPA)",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>SPA Tipo 1:</strong> Infância. Tríade: Candidíase mucocutânea crônica, Hipoparatireoidismo e Insuficiência Adrenal Primária.</li><li><strong>SPA Tipo 2 (Síndrome de Schmidt):</strong> Adultos. Associação de Doença de Addison com Tireoidite Autoimune (Hashimoto) e/ou Diabetes Mellitus tipo 1 (e possivelmente Doença Celíaca, como no caso histórico de John F. Kennedy).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Hipófise e Hipotálamo",
-      "subchapters": [
-        {
-          "num": "4.1",
-          "title": "Hiperprolactinemia e Prolactinomas",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Etiologia:</strong> O prolactinoma é o tumor hipofisário secretor mais comum. A secreção de prolactina é tonicamente inibida pela dopamina hipotalâmica.</li><li><strong>Clínica:</strong> Em mulheres: amenorreia secundária, galactorreia e infertilidade. Em homens: perda de libido, disfunção erétil; e cefaleia/hemianopsia bitemporal (pois tendem a ser diagnosticados na fase de macroadenomas > 1cm).</li><li><strong>Tratamento:</strong> Primeira linha é o tratamento farmacológico com agonistas dopaminérgicos (Cabergolina). Promove redução substancial do tumor e normalização da prolactina, sendo superior à cirurgia inicial mesmo para macroadenomas com compressão quiasmática.</li></ul>"
-        },
-        {
-          "num": "4.2",
-          "title": "Fisiologia do Hormônio do Crescimento e Acromegalia",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiologia do GH:</strong> Estimulado pelo GHRH, inibido pela somatostatina. Estimula o crescimento linear pós-natal. Atua estimulando a produção hepática de IGF-1 e tem efeito contrainsulínico (eleva glicemia, podendo causar diabetes).</li><li><strong>Acromegalia e Gigantismo:</strong> Excesso de GH pós-puberdade causa acromegalia (crescimento de extremidades, mandíbula, visceromegalia). Na infância, causa gigantismo. Tratamento de escolha é a cirurgia transesfenoidal para ressecção do adenoma hipofisário.</li></ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Cetoacidose Diabética (CAD):</strong> Complicação clássica do DM1. Resulta da deficiência absoluta de insulina e excesso de contrarreguladores (glucagon, catecolaminas), gerando lipólise e formação de corpos cetônicos. Quadro de náuseas, vômitos, dor abdominal, respiração de Kussmaul, desidratação e hálito cetônico. <strong>Diagnóstico:</strong> Glicemia > 250 mg/dL + Acidose metabólica (pH < 7,3 e HCO3 < 18) + Cetonemia/cetonúria. <strong>Palavra-chave:</strong> Dor abdominal que mimetiza abdome agudo, mas resolve com hidratação e insulina.</li>\n  <li><strong>Estado Hiperglicêmico Hiperosmolar (EHH):</strong> Típico de idosos com DM2. Glicemia muito elevada (> 600 mg/dL), osmolalidade > 320 mOsm/kg, sem cetose significativa (há insulina residual suficiente para inibir lipólise, mas não para controlar glicose). <strong>Palavra-chave:</strong> Rebaixamento do nível de consciência secundário à hiperosmolaridade.</li>\n  <li><strong>Tratamento (VIP - Volume, Insulina, Potássio):</strong> \n  <pre class=\"reader-pre-card\">\n1. VOLUME (Soro Fisiológico 0,9%):\n   - Etapa mais urgente (15-20 mL/kg na 1ª hora).\n   - Se Na+ normal/alto, trocar para SF 0,45%.\n   - Quando glicemia < 200 (CAD) ou < 300 (EHH), adicionar Soro Glicosado (SG 5%).\n\n2. POTÁSSIO (K+):\n   - Sempre checar antes da insulina.\n   - K < 3,3: Repor potássio (NÃO iniciar insulina ainda!).\n   - K entre 3,3 - 5,2: Iniciar insulina + Repor potássio (20-30 mEq/L de soro).\n   - K > 5,2: Iniciar insulina (NÃO repor potássio).\n\n3. INSULINA (Regular EV):\n   - Bolus 0,1 U/kg seguido de bomba de infusão (0,1 U/kg/h).\n   - Alvo de queda da glicose: 50 a 70 mg/dL por hora.\n  </pre>\n  <strong>Pegadinha:</strong> A insulina desloca o potássio para o intracelular. Se K+ for menor que 3,3, a insulina causará hipocalemia grave e arritmias fatais.</li>\n  <li><strong>Critérios de Resolução da CAD:</strong> Glicemia < 200 mg/dL E dois dos três: pH > 7,3; HCO3 > 15; Anion gap ≤ 12. Após resolução, iniciar insulina subcutânea e desligar a bomba 1 a 2 horas após a primeira dose SC.</li>\n</ul>\n          "
         }
       ]
     },
@@ -332,18 +733,384 @@
       "title": "Metabolismo Ósseo e Mineral",
       "subchapters": [
         {
-          "num": "5.1",
-          "title": "Osteoporose",
+          "num": "2.1",
+          "title": "Osteoporose e Distúrbios do Remodelamento",
           "tags": [
             "ja"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Diagnóstico e Indicação de Tratamento:</strong> Indicado iniciar terapia específica para mulheres pós-menopausa ou homens ≥ 50 anos quando: presença de fratura de fragilidade (ex: quadril ou vertebral documentada); T-score ≤ -2,5 em coluna lombar, fêmur total ou colo femoral; T-score entre -1,0 e -2,5 associado a risco elevado pelo FRAX (fratura maior ≥ 20% ou fratura de quadril ≥ 3%).</li><li><strong>Manejo:</strong> Bisfosfonatos (Alendronato, Zoledronato) ou anabólicos, sempre acompanhados da correção dos níveis de Vitamina D e ingestão adequada de cálcio. O foco principal é a prevenção de novas fraturas.</li></ul>"
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Fisiopatologia e Fatores de Risco:</strong> Redução da densidade e qualidade óssea, aumentando risco de fraturas por fragilidade. Mais comum em mulheres pós-menopausa (deficiência de estrogênio aumenta osteoclastos). Fatores: idade > 65 anos, tabagismo, corticoterapia crônica (glicocorticoide > 5mg/dia por > 3 meses), história de fratura de fragilidade prévia, IMC baixo. <strong>Palavra-chave:</strong> Mulher, 65 anos, menopausa precoce ou em uso de corticoide.</li>\n  <li><strong>Diagnóstico por Densitometria Óssea (DMO):</strong> Avaliado pelo T-score (comparação com adulto jovem do mesmo sexo). Normal: T-score ≥ -1,0. Osteopenia: -1,0 a -2,4. Osteoporose: T-score ≤ -2,5 (em coluna lombar, colo femoral ou fêmur total). <strong>Pegadinha:</strong> Fratura por fragilidade (ex: rádio distal pós-queda da própria altura) confere o diagnóstico CLÍNICO de osteoporose, independentemente da densitometria. Z-score (comparação com pares da mesma idade) ≤ -2,0 é usado para mulheres pré-menopausa e homens < 50 anos para definir \"baixa massa óssea para idade\".</li>\n  <li><strong>Indicações de Tratamento Farmacológico:</strong> 1) T-score ≤ -2,5. 2) Fratura por fragilidade prévia (fêmur, vértebra). 3) Osteopenia com alto risco de fratura pelo FRAX (ferramenta de cálculo de risco > 20% para fratura maior ou > 3% para fratura de quadril em 10 anos). <strong>Palavra-chave:</strong> A \"indicação de tratamento com bisfosfonatos\" quase sempre recai sobre paciente osteopênico com fratura prévia ou alto risco pelo FRAX, ou paciente com osteoporose densitométrica.</li>\n  <li><strong>Tratamento e Conduta:</strong> Medidas gerais incluem ingestão de cálcio (1000-1200 mg/dia, preferir dieta) e vitamina D (manter 25-OH-vitamina D > 30 ng/mL, com suplementação de 800-1000 UI/dia). Farmacológico:\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead>\n          <tr>\n            <th>Classe</th>\n            <th>Exemplos</th>\n            <th>Mecanismo / Indicações</th>\n            <th>Efeitos Adversos / Pegadinhas</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr>\n            <td>Bisfosfonatos (1ª linha)</td>\n            <td>Alendronato (VO), Risedronato (VO), Zoledronato (IV anual)</td>\n            <td>Antirreabsortivo (inibe osteoclastos). Primeira escolha geral.</td>\n            <td><strong>Esofagite</strong> (tomar em jejum, água plena, não deitar por 30min). Raro: osteonecrose de mandíbula, fratura atípica de fêmur.</td>\n          </tr>\n          <tr>\n            <td>Denosumabe</td>\n            <td>Injeção SC a cada 6 meses</td>\n            <td>Anticorpo monoclonal anti-RANKL (antirreabsortivo potente). Útil na DRC grave.</td>\n            <td>Risco de hipocalcemia severa. <strong>Efeito rebote</strong> grave se suspenso subitamente.</td>\n          </tr>\n          <tr>\n            <td>Teriparatida</td>\n            <td>Injeção SC diária</td>\n            <td>Análogo do PTH (formador ósseo - osteoanabólico). Uso máximo de 2 anos.</td>\n            <td>Contraindicado se câncer ósseo, Paget, hiperparatireoidismo, irradiação prévia (risco de osteossarcoma).</td>\n          </tr>\n          <tr>\n            <td>SERMs (Moduladores do Receptor de Estrogênio)</td>\n            <td>Raloxifeno</td>\n            <td>Age só na coluna, previne Ca de mama.</td>\n            <td>Aumenta risco de TVP e fogachos. Não previne fratura não-vertebral.</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>\n          "
+        },
+        {
+          "num": "2.2",
+          "title": "Distúrbios do Cálcio e Paratireoides",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hiperparatireoidismo Primário (HPP):</strong> Causa mais comum de hipercalcemia ambulatorial. Decorre de um adenoma de paratireoide único (80%). Laboratório: Cálcio ALTO, Fósforo BAIXO e PTH ALTO ou inadequadamente normal. <strong>Clínica:</strong> Maioria assintomática, mas pode ter nefrolitíase de repetição, osteoporose/osteíte fibrosa cística, fadiga, poliúria. <strong>Pegadinha:</strong> Em caso de hipercalcemia crônica, sempre dosar o PTH intacto para diferenciar HPP de malignidade (que terá PTH suprimido e PTHrP aumentado).</li>\n  <li><strong>Indicações de Paratireoidectomia no HPP assintomático:</strong>\n    <pre class=\"reader-pre-card\">\nIdade < 50 anos\nCálcio sérico > 1,0 mg/dL acima do LSN\nOsteoporose (T-score ≤ -2,5) ou fratura por fragilidade\nDisfunção renal (TFG < 60) ou Cálcio na urina > 400 mg/24h / nefrolitíase\n    </pre>\n    Se o paciente não tem esses critérios, o acompanhamento clínico e laboratorial anual (Ca, creatinina, DMO) é a conduta.\n  </li>\n  <li><strong>Hipercalcemia da Malignidade:</strong> Causa mais comum de hipercalcemia hospitalar. Geralmente cálcio > 13-14 mg/dL. Mecanismo: secreção de PTHrP (câncer de pulmão escamoso, mama, cabeça/pescoço) ou lesões osteolíticas diretas (Mieloma Múltiplo, metástases de mama). Laboratório: Cálcio ALTO, Fosfato baixo/normal, PTH SUPRIMIDO (< 20). <strong>Tratamento da Crise Hipercalcêmica:</strong> Hidratação venosa VIGOROSA com Soro Fisiológico 0,9% é o 1º passo! Só associar furosemida se houver sobrecarga hídrica. Para ação prolongada, prescrever Bisfosfonato IV (Ácido Zoledrônico) ou Denosumabe, mas estes demoram 48-72h para agir. <strong>Palavra-chave:</strong> \"Paciente internada com câncer de mama, confusa, letárgica, constipada, cálcio alto\" -> Conduta: Hidratação imediata com solução salina.</li>\n  <li><strong>Hipocalcemia:</strong> Causa mais comum é pós-paratireoidectomia ou pós-tireoidectomia total. Clínica: parestesias periorais/dedos, cãibras, tetania. Sinais de <strong>Chvostek</strong> (contração facial à percussão) e <strong>Trousseau</strong> (espasmo carpopedal após insuflar manguito acima da PA sistólica). ECG: alargamento do intervalo QT. Conduta grave sintomática: Gluconato de Cálcio IV (preferir via central). Forma crônica: Cálcio oral (Carbonato de cálcio) + Vitamina D ativa (Calcitriol, pois falta PTH para ativar a vit D).</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "Tireoide",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Hipotireoidismo e Semiologia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Hipotireoidismo de Hashimoto:</strong> Causa mais comum de hipotireoidismo em áreas suficientes de iodo. Doença autoimune mediada por Anti-TPO e Anti-Tireoglobulina. A apresentação inicial pode ser um bócio indolor de consistência fibroelástica (borrachuda). O quadro clínico evolui com lentidão: ganho de peso leve (por retenção hídrica/mixedema), fadiga, constipação, pele seca, intolerância ao frio, bradicardia, queda de cabelo e letargia. <strong>Palavra-chave:</strong> \"Queda de cabelo, madarose (perda terço distal da sobrancelha), hipermenorreia\". Laboratório: TSH alto e T4L baixo (hipotireoidismo primário clínico). Se TSH alto e T4L normal: Hipotireoidismo Subclínico. <strong>Pegadinha:</strong> O hipotireoidismo não causa obesidade grave, o ganho é geralmente 2-3kg de líquido (mixedema). Aumento de colesterol LDL (dislipidemia) é muito frequente.</li>\n  <li><strong>Tratamento:</strong> Reposição com Levotiroxina (T4) oral. Tomar em jejum absoluto (30-60 min antes do café). Dose habitual: 1,6 mcg/kg/dia. Em idosos e coronariopatas iniciar com dose mais baixa (12,5 a 25 mcg/dia) e ir titulando para evitar angina ou arritmias. O TSH deve ser monitorado após 6 semanas do ajuste.</li>\n</ul>\n          "
+        },
+        {
+          "num": "3.2",
+          "title": "Tireotoxicose e Hipertireoidismo",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Doença de Graves:</strong> Causa mais comum de hipertireoidismo. Autoimune, mediada pelo anticorpo estimulador do receptor de TSH (TRAb). O quadro da tireotoxicose é de catabolismo (perda de peso apesar de polifagia), intolerância ao calor, sudorese, palpitações, insônia, diarreia, agitação, tremor fino, taquicardia. <strong>Achados Específicos do Graves:</strong> Bócio difuso (simétrico, indolor e com frêmito/sopro vascular), Oftalmopatia de Graves (exoftalmia/proptose por depósito de glicosaminoglicanos nos músculos extraoculares) e Mixedema pré-tibial. <strong>Palavra-chave:</strong> Jovem com perda de peso, palpitação, tremor e \"olhos saltados\". Exame: TSH suprimido, T4L e T3 altos, TRAb positivo.</li>\n  <li><strong>Diagnóstico Diferencial:</strong> Tireoidite Subaguda (De Quervain) ocorre pós infecção viral, cursa com dor cervical intensa irradiada pra mandíbula/ouvido e tireotoxicose transitória por destruição folicular; o RAIU (captação iodo) é BAIXO. Adenoma Tóxico ou Bócio Multinodular Tóxico ocorrem mais em idosos, sem exoftalmia.\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead>\n        <tr>\n          <th>Doença</th>\n          <th>Quadro / Sinais</th>\n          <th>RAIU (Captação Iodo)</th>\n          <th>Conduta Inicial</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr>\n          <td>Doença de Graves</td>\n          <td>Bócio difuso, oftalmopatia, mixedema</td>\n          <td>Alto e Difuso</td>\n          <td>Drogas Antitireoidianas (Metimazol) + Betabloqueador</td>\n        </tr>\n        <tr>\n          <td>Tireoidite Subaguda (De Quervain)</td>\n          <td>Dor cervical pós-IVAS, TSH baixo temporário</td>\n          <td><strong>Baixo</strong> (pois a glândula não sintetiza, só libera T4 prévio)</td>\n          <td>AINEs, corticoide, sintomáticos. Não usar Metimazol!</td>\n        </tr>\n        <tr>\n          <td>Doença de Plummer (Adenoma Tóxico)</td>\n          <td>Nódulo único palpável, s/ oftalmopatia</td>\n          <td>Alto Focal (só o nódulo capta quente)</td>\n          <td>Radioiodo ou cirurgia</td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n  </li>\n  <li><strong>Tratamento do Graves:</strong> Iniciar Betabloqueador (Propranolol, Atenolol) para controle sintomático imediato da taquicardia, tremor e ansiedade. Usar Drogas Antitireoidianas (DAT): Metimazol (escolha geral) ou Propiltiouracil/PTU (escolha apenas no 1º trimestre de gestação e crise tireotóxica). <strong>Pegadinha:</strong> O efeito das DAT demora 4-6 semanas para aparecer, por isso o betabloqueador é essencial na fase aguda. Se refratário ou intolerância às drogas: Radioiodo-131 (contraindicado em gestantes e se oftalmopatia grave) ou Tireoidectomia.</li>\n</ul>\n          "
+        },
+        {
+          "num": "3.3",
+          "title": "Nódulos Tireoidianos e Câncer",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Manejo do Nódulo Tireoidiano:</strong> Muito comuns na população. O passo inicial para investigar um nódulo tireoidiano palpável ou incidental de imagem é dosar TSH + solicitar USG Cervical.\n    <pre class=\"reader-pre-card\">\nNódulo Tireoidiano ↓\nPedir TSH e USG\n├── TSH Suprimido (< 0,4) -> Pedir Cintilografia\n│   ├── Nódulo Quente (hiperfuncionante): Risco baixíssimo de malignidade. Tratar hipertireoidismo.\n│   └── Nódulo Frio (hipofuncionante): Risco de câncer. PAAAF conforme USG.\n└── TSH Normal ou Alto -> Avaliar USG para definir indicação de PAAF.\n    </pre>\n  <strong>Palavra-chave:</strong> A cintilografia só é indicada na avaliação inicial do nódulo quando o TSH estiver suprimido.</li>\n  <li><strong>Indicações de PAAF (Punção Aspirativa por Agulha Fina):</strong> Baseadas no sistema TIRADS ou características ultrassonográficas.\n    Nódulos suspeitos na USG: Sólidos, Hipoecoicos, Margens irregulares/lobuladas, Microcalcificações, Formato \"mais alto que largo\" (chamados de TIRADS 5).\n    - Nódulo altamente suspeito: PAAF se ≥ 1 cm.\n    - Nódulo com suspeita intermediária: PAAF se ≥ 1,5 cm.\n    - Nódulo espongiforme ou puramente cístico: Risco baixíssimo, observar sem PAAF ou drenar se compressivo.\n    <strong>Pegadinha:</strong> Nódulos < 1 cm, exceto se houver linfonodo suspeito associado ou invasão extracapsular, geralmente não recebem PAAF e são apenas acompanhados.</li>\n  <li><strong>Câncer Bem Diferenciado de Tireoide:</strong>\n    <br><strong>1) Carcinoma Papilífero:</strong> Mais comum (80%), melhor prognóstico. Disseminação linfática (gânglios cervicais). Marcador patológico: Corpos psamomatosos, núcleos em vidro fosco (\"Olhos da Órfã Annie\"). Fator de risco: radiação na infância. Tratamento: tireoidectomia (total ou parcial se <1-4cm bem delimitado). Marcador de seguimento pós-cirúrgico: Tireoglobulina.\n    <br><strong>2) Carcinoma Folicular:</strong> 15% dos casos. Pior que o papilífero, disseminação HEMATOGÊNICA (metástases para ossos e pulmão). <strong>Pegadinha:</strong> A PAAF <strong>NÃO</strong> diferencia adenoma folicular benigno de carcinoma folicular maligno (ambos aparecem como padrão folicular ou \"padrão Bethesda IV - neoplasia folicular\"). O diagnóstico final exige a cirurgia para avaliar invasão de cápsula ou vasos. Marcador pós-cirúrgico: Tireoglobulina.\n  </li>\n  <li><strong>Cânceres Indiferenciados e Raros:</strong>\n    <br><strong>3) Carcinoma Medular:</strong> Células C (parafoliculares). Produz Calcitonina. Associado à neoplasia endócrina múltipla tipo 2 (NEM 2). Pesquisar sempre mutação RET e rastrear feocromocitoma antes de operar. <strong>Marcador:</strong> Calcitonina. PAAF define diagnóstico.\n    <br><strong>4) Carcinoma Anaplásico:</strong> Mais raro, ocorre em idosos. Crescimento agressivo cervical, massa pétrea, invasão de traqueia. Prognóstico sombrio (sobrevida de meses). Tratamento paliativo.\n  </li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "Adrenal",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Doença de Addison e Insuficiência Adrenal",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Fisiopatologia:</strong> Insuficiência Adrenal (IA) Primária (Doença de Addison) ocorre por destruição crônica do córtex adrenal, mais comumente por adrenalite autoimune ou tuberculose. Há perda de todos os esteroides corticais (Cortisol, Aldosterona, Androgênios). A falta de cortisol elimina o feedback negativo, levando a TSH e ACTH ALTOS. <strong>Palavra-chave:</strong> O excesso de ACTH e POMC (pró-ópio-melanocortina) causa HIPERPIGMENTAÇÃO da pele e mucosas (gengivas, cicatrizes, mamilos). \"Presidente John Kennedy - homem mais jovem com hiperpigmentação na crise de IA\".</li>\n  <li><strong>Clínica e Laboratório:</strong> Astenia, fadiga crônica, emagrecimento, dor abdominal inexplicada, hipotensão postural e <i>craving</i> (desejo de comer) por sal. Laboratório: Hiponatremia (falta de cortisol e aldosterona), Hipercalemia e Acidose (falta de aldosterona, que normalmnete excretaria K+ e H+), Hipoglicemia (falta de cortisol). <strong>Pegadinha:</strong> Na IA Secundária (doença hipofisária, pan-hipopituitarismo, retirada abrupta de corticoide), o ACTH está baixo, logo NÃO HÁ HIPERPIGMENTAÇÃO, e a aldosterona é preservada (pois é controlada pelo sistema renina-angiotensina e não pelo ACTH), logo NÃO HÁ hipercalemia severa.</li>\n  <li><strong>Diagnóstico:</strong> Cortisol basal baixo às 8h da manhã (< 3 mcg/dL sugere IA). O melhor teste confirmatório é o Teste de Estímulo com Cosintropina (ACTH sintético): se após administrar ACTH o cortisol continuar < 18 mcg/dL, confirma Insuficiência Adrenal. ACTH plasmático alto (> 100) fecha o diagnóstico de origem primária.</li>\n  <li><strong>Tratamento:</strong> Reposição de glicocorticoide com Hidrocortisona oral fracionada para mimetizar ritmo circadiano. Na IA primária, também precisa repor mineralocorticoide com Fludrocortisona. Durante estresse (infecção grave, cirurgia), as doses de corticoide devem ser triplicadas para evitar crise adrenal. A Crise Adrenal aguda é tratada com bolus de Hidrocortisona 100mg IV imediato + expansão volumétrica.</li>\n</ul>\n          "
+        },
+        {
+          "num": "4.2",
+          "title": "Síndrome de Cushing (Hipercortisolismo)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Causas e Clínica:</strong> Causa exógena (uso crônico de corticoide) é a mais comum no mundo. Causas endógenas: Adenoma hipofisário produtor de ACTH (Doença de Cushing, 70%), Adenoma Adrenal autônomo, ou tumor ectópico produtor de ACTH (Oat cell de pulmão). Clínica: ganho de peso central, pletora facial, face de lua cheia, giba de búfalo, estrias violáceas (> 1cm) em abdome, miopatia proximal, osteoporose, DM2 secundário e HAS.</li>\n  <li><strong>Investigação Diagnóstica (Passo a Passo):</strong>\n    <pre class=\"reader-pre-card\">\nSuspeita de Síndrome de Cushing (após descartar uso exógeno)\n↓\n1) Rastreio: \n   - Teste de Supressão Noturna com 1mg de Dexametasona (deve estar > 1,8 para ser Cushing)\n   - OU Cortisol Livre Urinário de 24h\n   - OU Cortisol Salivar da meia-noite\n(Precisam ser anormais em ao menos 2 testes). Confirmou Hipercortisolismo!\n↓\n2) Dosagem de ACTH plasmático:\n   - ACTH SUPRIMIDO (< 10): Síndrome ACTH-Independente (lesão na própria adrenal). Fazer TC de abdome.\n   - ACTH ALTO ou normal-alto: Síndrome ACTH-Dependente. \n↓\n3) Diferenciar Doença de Cushing x Ectópico:\n   - Fazer RNM de Hipófise. Se macroadenoma evidente, operar.\n   - Fazer Teste de Supressão com alta dose de Dexametasona (8mg): A hipófise ainda responde (suprime parcialmente o cortisol), enquanto tumor ectópico NÃO suprime.\n    </pre>\n  <strong>Palavra-chave:</strong> O teste que diferencia a Doença de Cushing (hipófise) das outras causas endógenas dependentes de ACTH é a supressão com Dexametasona em alta dose ou o cateterismo de seios petrosos inferiores.</li>\n  <li><strong>Tratamento:</strong> Cirúrgico. Ressecção transesfenoidal do adenoma de hipófise ou adrenalectomia para adenomas adrenais. No pós-operatório, o paciente fará insuficiência adrenal transitória, devendo receber reposição de hidrocortisona.</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "Hipófise e Neuroendocrinologia",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Hiperprolactinemia e Adenomas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Fisiologia do Eixo:</strong> O hipotálamo secreta Dopamina, que inibe cronicamente a secreção de prolactina pela hipófise. A hiperprolactinemia pode ocorrer por causas fisiológicas (gestação, amamentação, estresse), uso de medicamentos (antipsicóticos típicos, metoclopramida, antidepressivos) ou Prolactinoma (tumor benigno secretor). Outra causa comum é o \"Efeito Haste\" (qualquer tumor grande sela a haste e impede a chegada da dopamina). <strong>Palavra-chave:</strong> \"Paciente jovem com galactorreia e amenorreia\". A prolactina em excesso inibe o eixo GnRH, causando hipogonadismo (amenorreia em mulheres, disfunção erétil/baixa libido em homens).</li>\n  <li><strong>Diagnóstico:</strong> Dosagem de prolactina (PRL).\n    - PRL > 100-200 ng/mL = muito sugestiva de Prolactinoma.\n    - PRL levemente aumentada (30-100) = sugere causa medicamentosa, hipotireoidismo primário (TRH alto estimula PRL) ou efeito haste.\n    Descartar gestação e uso de medicamentos. Em seguida, RNM de sela túrcica (se PRL persistentemente alta sem outra explicação).</li>\n  <li><strong>Tratamento:</strong> Diferente de todos os outros tumores da hipófise, o tratamento de escolha do Prolactinoma é <strong>CLÍNICO (medicamentoso)</strong>, independentemente do tamanho (mesmo macroadenomas)!\n    - Droga de escolha: Agonistas dopaminérgicos (Cabergolina - preferencial, melhor tolerada - ou Bromocriptina). <strong>Pegadinha:</strong> Cirurgia transesfenoidal é reservada APENAS para intolerância/resistência à medicação ou apoplexia com risco visual imediato.</li>\n</ul>\n          "
+        },
+        {
+          "num": "5.2",
+          "title": "Acromegalia e Distúrbios do GH",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Efeitos Fisiológicos do GH (Hormônio do Crescimento):</strong> O GH estimula a secreção hepática de IGF-1. Possui efeito anabólico em proteínas e ossos, mas metabolicamente é um hormônio contrarregulador da insulina: tem efeito <strong>diabetogênico</strong> (diminui captação de glicose nos tecidos) e <strong>lipolítico</strong> (quebra gordura). <strong>Palavra-chave:</strong> \"Efeitos do GH em tecidos e metabolismo = lipólise e diabetogênico\". Em excesso no adulto, causa Acromegalia; na criança (antes do fechamento das epífises), Gigantismo.</li>\n  <li><strong>Acromegalia - Clínica:</strong> Crescimento de extremidades (precisa aumentar número do sapato, alianças apertadas), fronte olímpica, prognatismo, macroglossia, alargamento do nariz, síndrome do túnel do carpo bilateral. Complicações metabólicas e cardiovasculares (hipertrofia biventricular, HAS, DM2) são as principais causas de óbito. Pode associar-se a apneia do sono grave e pólipos intestinais.</li>\n  <li><strong>Diagnóstico e Tratamento:</strong>\n    <pre class=\"reader-pre-card\">\nSuspeita clínica de Acromegalia\n↓\n1) Rastreio inicial: Dosagem de IGF-1 (aumentado para a faixa etária). O GH basal isolado não serve pois é muito pulsátil.\n↓\n2) Confirmação: Teste de Supressão do GH com TOTG (75g glicose oral). Em indivíduos normais, a glicose supre a liberação de GH (GH cai < 1,0 ou < 0,4 mcg/L). Na acromegalia, NÃO há supressão.\n↓\n3) Localização: RNM de sela túrcica (geralmente revela macroadenoma hipofisário produtor de GH).\n    </pre>\n    <strong>Tratamento:</strong> Primeira escolha é sempre a cirurgia (Ressecção transesfenoidal). Se falha, uso de análogos da somatostatina (Octreotida/Lanreotida) ou antagonista do receptor de GH (Pegvisomanto).\n  </li>\n</ul>\n          "
         }
       ]
     }
   ]
-}
-,
+},
+    "uepa_hematologia": {
+  "area": "Hematologia",
+  "title": "Rapid Review ENAMED - Hematologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Hemostasia e Trombose",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Hemostasia Primária e Distúrbios Plaquetários",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Avaliação Inicial da Hemostasia Primária:</strong> Envolve plaquetas e parede vascular. O sangramento costuma ser mucocutâneo (petéquias, púrpuras, equimoses, sangramento gengival). <strong>Palavra-chave:</strong> Sangramento imediato após trauma ou corte.</li>\n<li><strong>Distúrbios Plaquetários Quantitativos:</strong> Trombocitopenias (PTI - Púrpura Trombocitopênica Imune; PTT - Púrpura Trombocitopênica Trombótica). <strong>Pegadinha:</strong> Na PTT há alteração neurológica e renal associada à anemia hemolítica microangiopática, o tratamento NÃO inclui transfusão de plaquetas, mas sim plasmaférese.</li>\n<li><strong>Distúrbios Plaquetários Qualitativos:</strong> Doença de von Willebrand (distúrbio hereditário mais comum, fator de vW ajuda na adesão plaquetária e protege o Fator VIII; tempo de sangramento alargado, PTTa pode estar alargado), Tromboastenia de Glanzmann (falta de GP IIb/IIIa - <strong>Pegadinha:</strong> Foi cobrada como distúrbio genético que NÃO é fator de risco clássico para Trombose Venosa Profunda, pois causa SANGRAMENTO, não trombose).</li>\n</ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Hemostasia Secundária e Anticoagulação",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Avaliação da Hemostasia Secundária:</strong> Fatores de coagulação. Sangramento é caracteristicamente profundo (hemartroses, hematomas musculares) e tardio.</li>\n<li><strong>Testes de Coagulação:</strong> TAP (Via Extrínseca - Fator VII - Avalia ação da Varfarina); PTTa (Via Intrínseca - Fatores VIII, IX, XI, XII - Avalia ação da Heparina Não Fracionada).</li>\n<li><strong>Hemofilias:</strong> A (deficiência de Fator VIII) e B (deficiência de Fator IX). PTTa alargado.</li>\n<li><strong>Manejo e Antídotos de Anticoagulantes:</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead><tr><th>Anticoagulante</th><th>Monitoramento</th><th>Antídoto</th></tr></thead>\n      <tbody>\n        <tr><td>Heparina Não Fracionada (HNF)</td><td>PTTa</td><td>Sulfato de Protamina</td></tr>\n        <tr><td>Heparina de Baixo Peso Molecular (Enoxaparina)</td><td>Anti-Xa (raro uso clínico rotineiro)</td><td>Sulfato de Protamina (<strong>Palavra-chave:</strong> Antídoto da enoxaparina em dose tóxica com sangramento é a Protamina, reverte cerca de 60%)</td></tr>\n        <tr><td>Varfarina (Cumarínico)</td><td>TAP / INR</td><td>Vitamina K (se leve), Plasma Fresco Congelado ou Complexo Protrombínico (urgências e sangramento grave)</td></tr>\n        <tr><td>Novos Anticoagulantes Orais (NOACs)</td><td>Não requer</td><td>Idarucizumabe (para Dabigatrana), Andexanet Alfa (Rivaroxabana/Apixabana)</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Trombofilias e Trombose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Trombofilias Hereditárias:</strong> Estados de hipercoagulabilidade. As principais incluem Mutação do Fator V de Leiden (mais comum), Mutação do gene da Protrombina, Deficiência de Proteína C, Proteína S e Antitrombina.</li>\n<li><strong>Quadro Clínico e Investigação:</strong> Pacientes jovens, com TVP ou TEP imotivados, em locais atípicos ou recorrentes, ou início de uso de anticoncepcional oral desencadeando quadro. <strong>Palavra-chave:</strong> Tromboflebite de veia basílica após início de ACO em mulher jovem → suspeitar de trombofilia e pesquisar Mutação do Fator V de Leiden, Proteína C e S.</li>\n<li><strong>Trombose na População Pediátrica:</strong> Rara, tem pico em menores de 1 ano e adolescentes. <strong>Pegadinha:</strong> Neonatos POSSUEM risco de trombose, seus sistemas hemostáticos em desenvolvimento não os isentam de risco na cateterização. Trombose de veia renal é a mais comum no 1º mês (hematúria, proteinúria, trombocitopenia), e trombose de veia porta associa-se à cateterização umbilical.</li>\n<li><strong>Fatores de Risco para TVP:</strong> Idade, tabagismo, imobilidade, trombofilias, câncer. <strong>Pegadinha:</strong> Tromboastenia de Glanzmann é causa de sangramento primário, não de trombose!</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Medicina Transfusional",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Indicações de Hemocomponentes",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Concentrado de Hemácias:</strong> 1 unidade eleva a Hb em 1 g/dL e Ht em 3%. Gatilho habitual é Hb < 7 g/dL (ou < 8-9 em cardiopatas sintomáticos).</li>\n<li><strong>Concentrado de Plaquetas:</strong> Profilático: Transfundir se < 10.000/mm³ (risco espontâneo). Para procedimentos invasivos: > 50.000 para cirurgias gerais, e > 100.000 para neurocirurgias e oftalmológicas. <strong>Pegadinha:</strong> Na Trombocitopenia Induzida por Heparina (HIT), as transfusões de plaquetas aumentam consideravelmente o risco de trombose e são CONTRAINDICADAS!</li>\n<li><strong>Plasma Fresco Congelado (PFC):</strong> Contém todos os fatores de coagulação. Usado para reversão de Varfarina, coagulopatia intravascular disseminada (CIVD), sangramentos maciços.</li>\n<li><strong>Crioprecipitado:</strong> Rico em Fator VIII, Fator de von Willebrand e Fibrinogênio. Usado especialmente em hipofibrinogenemia.</li>\n<li><strong>Protocolo de Transfusão Maciça:</strong> Deve existir em hospitais de trauma (proporção 1:1:1 de CH, PFC e plaquetas).</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Reações Transfusionais",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>TRALI (Transfusion-Related Acute Lung Injury):</strong> Lesão pulmonar aguda imunomediada. É caracterizada por edema pulmonar não cardiogênico. <strong>Pegadinha:</strong> Se o paciente já possui fatores de risco para SDRA previamente, não se exclui TRALI, mas a condição é denominada \"possível TRALI\". Hipotensão, hipoxemia abrupta em < 6 horas pós transfusão. Diferencia-se de SDRA ou edema cardiogênico pelos critérios clínicos de ausência de sobrecarga de volume primária e temporalidade com transfusão.</li>\n<li><strong>TACO (Transfusion-Associated Circulatory Overload):</strong> Sobrecarga circulatória. Apresenta hipertensão, turgência jugular e BNP elevado, ao contrário da TRALI (que cursa com normo/hipotensão e ausência de hipervolemia).</li>\n<li><strong>Reação Hemolítica Aguda:</strong> Incompatibilidade ABO. Erro de identificação. Apresenta febre, calafrios, dor lombar, hemoglobinúria e choque logo no início da transfusão.</li>\n<li><strong>Reação Febril Não Hemolítica:</strong> Mais comum, reação aos leucócitos do doador. Manejo: Antipiréticos. Prevenção com hemocomponentes desleucocitados.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Anemias",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Investigação e Anemias Hemolíticas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Marcadores de Hemólise:</strong> Quando há destruição de hemácias (intravascular ou extravascular), os laboratórios mostram padrão clássico:\n  <ul>\n    <li>↑ Reticulócitos (medula óssea respondendo, policromatofilia).</li>\n    <li>↑ Desidrogenase Lática (LDH) - <strong>Palavra-chave:</strong> enzima intracelular liberada com a lise.</li>\n    <li>↑ Bilirrubina Indireta (degradação do heme).</li>\n    <li>↓ Haptoglobina (liga-se à hemoglobina livre intravascular e é consumida - <strong>Pegadinha:</strong> É o marcador que REDUZ na hemólise!).</li>\n  </ul>\n</li>\n<li><strong>Anemia Hemolítica Autoimune (AHAI):</strong> Anticorpos quentes (IgG) ou frios (IgM). Diagnóstico com Teste de Coombs Direto positivo. Tratamento com corticoide (IgG).</li>\n<li><strong>Esferocitose Hereditária:</strong> Defeito de membrana. CHCM elevado. Hemólise extravascular crônica no baço (esplenomegalia). Tratamento: Esplenectomia.</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Anemias Carenciais e Outras",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Anemia Ferropriva:</strong> A mais comum. Microcítica e hipocrômica. RDW elevado (anisocitose). Ferro sérico baixo, Ferritina baixa (melhor parâmetro inicial), TIBC alto, saturação de transferrina baixa. <strong>Conduta:</strong> Reposição de sulfato ferroso (dose: 3 a 5 mg/kg/dia de ferro elementar), investigar causa do sangramento crônico (TGI nas mulheres/idosos, verminose em crianças).</li>\n<li><strong>Anemia de Doença Crônica:</strong> Normo/normo (ou micro/hipo leve). Ferro baixo, mas <strong>Ferritina ALTA ou normal</strong> (ferro preso no macrófago pela hepcidina), TIBC baixo.</li>\n<li><strong>Anemia Megaloblástica:</strong> Macrocítica (VCM > 100). Deficiência de Vitamina B12 (cursa com sintomas neurológicos, metilmalonil-CoA aumentado, atrofia gástrica na Anemia Perniciosa) ou Ácido Fólico (sem sintomas neurológicos). Esfregaço: Neutrófilos hipersegmentados.</li>\n<li><strong>Doença Falciforme:</strong> Mutação do gene da cadeia beta (HbS). Crises vaso-oclusivas (dor óssea, síndrome torácica aguda). Crises de sequestro esplênico (crianças pequenas, choque e baço palpável). Prevenção: Hidroxiureia, vacinação contra encapsulados, ácido fólico.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "Oncohematologia",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Emergências e Síndrome de Lise Tumoral",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome de Lise Tumoral (SLT):</strong> Destruição maciça de células neoplásicas (Linfomas agressivos, Leucemias agudas) espontânea ou após quimioterapia. Liberação do conteúdo intracelular na circulação.</li>\n<li><strong>Alterações Laboratoriais:</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead><tr><th>Eletrólito</th><th>Alteração na SLT</th><th>Motivo</th></tr></thead>\n      <tbody>\n        <tr><td>Potássio</td><td>Aumentado</td><td>Íon intracelular liberado (risco de arritmia)</td></tr>\n        <tr><td>Fósforo</td><td>Aumentado</td><td>Íon intracelular liberado massivamente</td></tr>\n        <tr><td>Ácido Úrico</td><td>Aumentado</td><td>Degradação dos ácidos nucleicos liberados (pode causar LRA obstrutiva por cristais)</td></tr>\n        <tr><td>Cálcio</td><td><strong>Reduzido</strong></td><td>O Fósforo livre elevado se liga ao Cálcio sérico precipitando-o (calcificações e hipocalcemia grave). <strong>Palavra-chave:</strong> É o único que CAI.</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Clínica e Manejo da SLT:</strong> Arritmias, LRA, convulsão e confusão mental (hipocalcemia grave). Tratamento: Hidratação venosa vigorosa, Alopurinol ou Rasburicase, correção de distúrbios.</li>\n</ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Leucemias e Linfomas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Leucemia Mieloide Aguda (LMA):</strong> Adultos, bastonetes de Auer, mieloperoxidase positiva. Risco de CIVD na variante Promielocítica (LMA M3) cujo tratamento é com ATRA.</li>\n<li><strong>Leucemia Linfoide Aguda (LLA):</strong> Crianças. Infiltração do SNC e testículos. Tratamento quimioterápico.</li>\n<li><strong>Leucemia Mieloide Crônica (LMC):</strong> Esplenomegalia maciça. Cromossomo Philadelphia (t(9;22)), gene BCR-ABL. Tratamento revolucionário com Imatinibe.</li>\n<li><strong>Linfoma de Hodgkin:</strong> Jovens, adenopatia indolor (cervical/supraclavicular), sintomas B (febre, sudorese noturna, perda de peso). Prurido e dor após álcool. Células de Reed-Sternberg (olhos de coruja).</li>\n<li><strong>Linfoma Não-Hodgkin:</strong> Mais comum em idosos, adenopatias periféricas espalhadas, envolvimento extranodal frequente. O tipo Burkitt associa-se ao EBV e tem alta taxa de lise tumoral.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_psiquiatria": {
+  "area": "Psiquiatria",
+  "title": "Rapid Review - Psiquiatria",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Transtornos Psicóticos",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Esquizofrenia e Transtorno Delirante",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Esquizofrenia:</strong> Transtorno psicótico crônico caracterizado por sintomas positivos (delírios, alucinações, desorganização do pensamento/comportamento) e <strong>sintomas negativos</strong> (<strong>Pegadinha:</strong> afeto embotado, alogia, abulia, anedonia - representam perdas de funções psíquicas e empobrecimento global da vida afetiva e cognitiva). O diagnóstico exige pelo menos 2 sintomas (sendo 1 deles delírio, alucinação ou discurso desorganizado) por no mínimo 6 meses.\n  <br><strong>Diagnóstico e Conduta:</strong> Avaliação clínica exaustiva para descartar causas orgânicas. Tratamento com antipsicóticos.\n  <pre class=\"reader-pre-card\">\nPaciente com psicose ↓\n1º episódio? ↓ Descartar causas orgânicas (Tóxico/Metabólicas) ↓\nConfirma Esquizofrenia ↓ Iniciar Antipsicótico Atípico\n  </pre>\n  </li>\n  <li><strong>Transtorno Delirante Persistente:</strong> Presença de <strong>delírio</strong> (ex: persecutório) por > 1 mês, <strong>Palavra-chave:</strong> \"sem alucinações auditivas ou visuais proeminentes\" e, crucialmente, <strong>\"sem prejuízo grave no funcionamento\"</strong> global do indivíduo (ele trabalha e vive quase normalmente, exceto pelo tema do delírio). <strong>Pegadinha:</strong> Não fechar esquizofrenia se não houver declínio funcional acentuado ou outros sintomas psicóticos.</li>\n  <li><strong>Antipsicóticos:</strong> Divididos em típicos e atípicos. \n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Classe</th><th>Exemplos</th><th>Características / Efeitos Adversos</th></tr></thead>\n        <tbody>\n          <tr><td>Típicos (1ª Geração)</td><td>Haloperidol, Clorpromazina</td><td>Alta afinidade D2. Maior risco de sintomas extrapiramidais (acatisia, distonia) e discinesia tardia.</td></tr>\n          <tr><td>Atípicos (2ª Geração)</td><td><strong>Risperidona, Olanzapina, Aripiprazol</strong>, Quetiapina, Clozapina</td><td>Afinidade D2 e 5-HT2A. Menor risco extrapiramidal. Maior risco de <strong>Síndrome Metabólica</strong> (ganho de peso, dislipidemia). <strong>Pegadinha:</strong> Clozapina exige hemograma por risco de agranulocitose.</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "2. Psicopatologia e Semiologia Psiquiátrica",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Alterações do Estado Mental",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Delírio:</strong> Alteração do juízo de realidade. A crença é inabalável, absolutamente convicta e impermeável à argumentação lógica (ex: \"implantaram um chip em mim\"). <strong>Palavra-chave:</strong> \"a crença permanece mesmo diante de argumentos lógicos\".</li>\n  <li><strong>Alterações de Linguagem e Pensamento:</strong> \n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Alteração</th><th>Definição</th></tr></thead>\n        <tbody>\n          <tr><td>Ecolalia</td><td>Repetição em eco das palavras do interlocutor.</td></tr>\n          <tr><td>Neologismo</td><td>Criação de palavras novas ou atribuição de novo sentido a palavras existentes.</td></tr>\n          <tr><td>Logorreia</td><td>Aceleração do fluxo da fala, comum na mania.</td></tr>\n          <tr><td>Bradifasia</td><td>Lentidão da fala, comum na depressão grave.</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "3. Transtornos do Humor",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Depressão e Transtorno Bipolar",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno Depressivo Maior:</strong> Humor deprimido ou anedonia por pelo menos 2 semanas, associado a alterações de sono, apetite, energia, culpa, ideação suicida. O tratamento é feito com ISRS (Fluoxetina, Sertralina, Escitalopram).</li>\n  <li><strong>Transtorno do Humor Bipolar (THB):</strong> Alternância de episódios de mania/hipomania e depressão. <strong>Palavra-chave para mania:</strong> \"logorreia\", grandiosidade, redução da necessidade de sono, agitação psicomotora.\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead><tr><th>Tipo</th><th>Características</th></tr></thead>\n        <tbody>\n          <tr><td>THB Tipo I</td><td>Pelo menos 1 episódio de <strong>Mania</strong> (duração > 7 dias ou internação). Prejuízo grave.</td></tr>\n          <tr><td>THB Tipo II</td><td>Episódios de <strong>Hipomania</strong> (duração > 4 dias, sem prejuízo grave/internação) + Depressão.</td></tr>\n        </tbody>\n      </table>\n    </div>\n    <br><strong>Conduta:</strong> Estabilizadores de humor (Lítio, Ácido Valproico, Lamotrigina). <strong>Pegadinha:</strong> O uso isolado de antidepressivos no THB pode induzir \"virada maníaca\".\n  </li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "4. Transtornos Ansiosos",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Transtorno de Pânico e TAG",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno de Pânico:</strong> Episódios de ansiedade paroxística extrema. <strong>Palavra-chave:</strong> \"ataques súbitos de medo intenso\", palpitações, taquicardia, e a clássica \"sensação de morte iminente\". É comum o desenvolvimento de ansiedade antecipatória e agorafobia (esquiva de locais públicos).\n    <br><strong>Tratamento:</strong> ISRS (manutenção) + Benzodiazepínicos (resgate na fase inicial).\n  </li>\n  <li><strong>Transtorno de Ansiedade Generalizada (TAG):</strong> Preocupação excessiva e constante por > 6 meses, somatizações (tensão muscular, insônia). Tratamento com ISRS.</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "5. Dependência Química e Intoxicações Exógenas",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Álcool, Opioides, Tabaco e Metanol",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Álcool:</strong> A Síndrome de Abstinência Alcoólica (SAA) ocorre horas/dias após a suspensão. Manifesta-se com <strong>tremor</strong>, agitação psicomotora, sudorese, taquicardia. <strong>Pegadinha:</strong> Paciente etilista crônico trazido agitado, negando uso recente, deve ser avaliado para SAA. Pode evoluir para Delirium Tremens. Tratamento com Diazepam (ou Lorazepam se hepatopatia).</li>\n  <li><strong>Opioides:</strong> Intoxicação (Síndrome Narcótica) cursa com rebaixamento do nível de consciência, <strong>miose puntiforme</strong> e depressão respiratória. Antídoto: Naloxona. \n    <br>Já a <strong>Abstinência de Opioides</strong> causa quadro adrenérgico rebote, mas <strong>Palavra-chave:</strong> o paciente geralmente fica \"alerta e orientado\", com midríase, piloereção, rinorreia e diarreia. Não é comum rebaixamento na abstinência.\n  </li>\n  <li><strong>Tabagismo:</strong> Tratamento baseia-se em TCC associada a farmacoterapia: TRN (Adesivo/Goma de nicotina), Bupropiona (antidepressivo que reduz fissura; contraindicado em epilepsia) e Vareniclina.</li>\n  <li><strong>Intoxicação por Metanol:</strong> Álcool clandestino. Cursa com acidose metabólica grave (ânion gap alto) e alterações visuais (cegueira, \"visão em tempestade de neve\"). Tratamento com Etanol ou Fomepizol (bloqueiam a álcool desidrogenase).</li>\n  <pre class=\"reader-pre-card\">\nPaciente com depressão respiratória + Miose ↓\nSuspeita de Intoxicação por Opioide ↓\nConduta: Naloxona IV\n  </pre>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "6. Psiquiatria Infantil",
+      "subchapters": [
+        {
+          "num": "6.1",
+          "title": "TEA e TDAH",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Transtorno do Espectro Autista (TEA):</strong> Déficits persistentes na comunicação e interação social associados a padrões restritos e repetitivos de comportamento (estereotipias, apego a rotinas). Manifesta-se precocemente (ex: \"criança de 2 anos que ainda não fala e evita contato visual\"). Conduta: Intervenção multidisciplinar precoce (fono, TO, psicologia).</li>\n  <li><strong>Transtorno do Déficit de Atenção e Hiperatividade (TDAH):</strong> Padrão persistente de desatenção e/ou hiperatividade-impulsividade que interfere no funcionamento. Os sintomas devem ocorrer em pelo menos dois ambientes (ex: casa e escola) e surgir antes dos 12 anos. O tratamento padrão ouro envolve psicoestimulantes (Metilfenidato, Lisdexanfetamina).</li>\n</ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "7. Psiquiatria Social e Reforma Psiquiátrica",
+      "subchapters": [
+        {
+          "num": "7.1",
+          "title": "RAPS e Apoio Matricial",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n<ul class=\"reader-list\">\n  <li><strong>Reforma Psiquiátrica Brasileira:</strong> Tem como eixo central a <strong>desinstitucionalização</strong> (fechamento progressivo de manicômios e criação de serviços territoriais - CAPS). Os maiores desafios são: <strong>Palavra-chave:</strong> \"insuficiência de recursos financeiros destinados aos serviços comunitários, fragilidade da articulação entre CAPS e atenção básica, e persistência de estigmas\".</li>\n  <li><strong>Rede de Atenção Psicossocial (RAPS):</strong> Integra os serviços. O <strong>Apoio Matricial</strong> é a retaguarda especializada (ex: Psiquiatra do CAPS) dada à Atenção Básica (UBS). <strong>Pegadinha:</strong> O apoio matricial NÃO transfere a responsabilidade para o especialista, mas capacita e orienta a equipe de saúde da família para que o paciente permaneça sendo cuidado no seu território (ex: telemedicina, discussão de casos).</li>\n</ul>\n          "
+        }
+      ]
+    }
+  ]
+},
+    "uepa_nefrologia": {
+  "area": "Nefrologia",
+  "title": "Nefrologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Distúrbios Hidroeletrolíticos e Ácido-Básicos",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Distúrbios do Sódio e Osmolaridade",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiologia da Osmolaridade:</strong> O principal determinante da osmolaridade plasmática é o sódio. A fórmula de cálculo é Osm = 2xNa + Glicose/18 + Ureia/6. <strong>Palavra-chave: Osmolaridade normal:</strong> 285 a 295 mOsm/kg. O controle se dá pelo ADH e mecanismo da sede.</li><li><strong>Hiponatremia (< 135 mEq/L):</strong> O passo inicial é checar a osmolaridade plasmática. Se hipo-osmolar (verdadeira), avaliar o volume extracelular e o sódio urinário.</li><li><strong>SIADH:</strong> Hiponatremia hipo-osmolar euvolêmica com sódio urinário alto (>20-40) e ácido úrico baixo. <strong>Pegadinha:</strong> Pode ser desencadeada por <strong>tuberculose pulmonar</strong>, além de medicamentos (antidepressivos) e câncer de pulmão (oat cell). Conduta: restrição hídrica; em casos severos sintomáticos (sonolência, convulsão), reposição com NaCl 3%. Cuidado para não repor rápido (risco de Síndrome de Desmielinização Osmótica).</li><li><strong>Hipernatremia (> 145 mEq/L):</strong> Quase sempre indica déficit de água livre (ex: paciente intubado, idoso sem acesso a água, ou Diabetes Insipidus). O tratamento é repor água livre por via oral/enteral ou SG 5% / NaCl 0,45% endovenoso.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo de Hiponatremia</th><th>Osmolaridade</th><th>Volemia</th><th>Sódio Urinário</th><th>Exemplo Clássico</th></tr></thead><tbody><tr><td>Falsa (Pseudohiponatremia)</td><td>Normal ou Alta</td><td>Variável</td><td>-</td><td>Hiperglicemia severa, Hiperlipidemia</td></tr><tr><td>Hipovolêmica</td><td>Baixa</td><td>Baixa</td><td>Baixo (<20)</td><td>Perdas TGI (diarreia), Sudorese</td></tr><tr><td>Hipovolêmica Renal</td><td>Baixa</td><td>Baixa</td><td>Alto (>20)</td><td>Uso de tiazídicos, Hipoaldosteronismo</td></tr><tr><td>Hipervolêmica</td><td>Baixa</td><td>Alta</td><td>Baixo (<20)</td><td>IC, Cirrose, Síndrome Nefrótica</td></tr><tr><td>Euvolêmica</td><td>Baixa</td><td>Normal</td><td>Alto (>20)</td><td>SIADH, Hipotireoidismo, Polidipsia</td></tr></tbody></table></div><pre class=\"reader-pre-card\">Hiponatremia Aguda/Sintomática (Sódio < 120 ou neuro)\n↓\nReposição de NaCl 3% (Salina hipertônica)\n↓\nMeta: Aumentar Na em 1-2 mEq/h nas primeiras 3h (alívio dos sintomas)\n↓\nLimite diário: Não exceder 8 a 10 mEq/L em 24h para evitar Mielinólise Pontina.</pre>"
+        },
+        {
+          "num": "1.2",
+          "title": "Distúrbios do Potássio",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Hipercalemia (> 5,5 mEq/L):</strong> Causa clássica em doentes renais agudos (ex: pós-acidente ofídico, rabdomiólise) ou crônicos e IECA/BRA. <strong>Sinais no ECG:</strong> Onda T apiculada (\"em tenda\"), achatamento da onda P, alargamento de QRS, evoluindo para assistolia.</li><li><strong>Conduta Emergencial na Hipercalemia:</strong> Se houver alteração no ECG, a <strong>medida prioritária e imediata é estabilizar a membrana miocárdica com Gluconato de Cálcio a 10%</strong> (1 ampola IV em 2-3 min). <strong>Pegadinha:</strong> O cálcio NÃO diminui o potássio sérico, apenas protege o coração de arritmias. Logo após, inicia-se medidas de shift (insulina regular + glicose, beta-2 agonista) e eliminação (Sorcal, furosemida, diálise).</li><li><strong>Hipocalemia (< 3,5 mEq/L):</strong> Pode ser causada por diarreia, diuréticos (tiazídicos, de alça) e alcalose metabólica. ECG mostra onda T achatada, presença de onda U e prolongamento de QT. O tratamento é reposição oral ou venosa lenta (KCl). Caso refratário, suspeitar e tratar hipomagnesemia concomitante.</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Distúrbios Ácido-Básicos",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Acidose Metabólica (pH < 7,35; HCO3 < 22):</strong> O primeiro passo é calcular o Ânion Gap (AG = Na - [Cl + HCO3]). O normal é 8 a 12.</li><li><strong>Acidose Metabólica com AG aumentado (Normoclorêmica):</strong> Indica acúmulo de ácido (cetoacidose diabética, acidose lática por sepse/choque, uremia, intoxicações por salicilato ou metanol). <strong>Palavra-chave: Sepse / Hipoperfusão:</strong> A acidose lática cursa com hiperventilação compensatória (respiração de Kussmaul, pCO2 baixa) e ânion gap alto. Para checar se a compensação respiratória é <strong>apropriada</strong>, usar a fórmula de Winter: pCO2 esperada = (1,5 x HCO3) + 8 (±2).</li><li><strong>Acidose Metabólica com AG normal (Hiperclorêmica):</strong> Indica perda de bicarbonato, como na diarreia ou nas Acidoses Tubulares Renais (ATR). O Cloro plasmático sobe para compensar a perda do HCO3.</li><li><strong>Alcalose Metabólica (pH > 7,45; HCO3 > 26):</strong> Causas clássicas: vômitos repetidos (perda de H+ e Cl-) e uso de diuréticos tiazídicos/alça. Costuma ser responsiva a cloreto (hidratação com SF 0,9%).</li><li><strong>Alcalose e Acidose Respiratória:</strong> Distúrbios primários do pCO2 devidos a hipoventilação (DPOC retendo CO2) ou hiperventilação (ansiedade, dor, TEP expulsando CO2).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Doenças Glomerulares e Intersticiais",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Síndromes Glomerulares",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Síndrome Nefrótica:</strong> Caracteriza-se por proteinúria maciça (> 3,5 g/dia em adultos ou > 50 mg/kg/dia em crianças), hipoalbuminemia, edema generalizado e hiperlipidemia. <strong>Palavra-chave: Urina espumosa.</strong></li><li><strong>Tratamento da Síndrome Nefrótica em Crianças (Doença por Lesão Mínima):</strong> A maioria responde ao <strong>corticoide (prednisona)</strong> empírico. A dieta deve ser hipossódica e normoproteica. <strong>Pegadinha:</strong> <strong>Restrição hídrica não é indicada</strong> de rotina, pois há risco de trombose e hipovolemia mascarada; a restrição só ocorre em hiponatremia severa.</li><li><strong>Síndrome Nefrítica (Glomerulonefrite Aguda):</strong> Tríade clássica: Hematúria dismórfica, Hipertensão Arterial e Edema. Principal etiologia é a GNPE (Pós-Estreptocócica), típica em crianças 1 a 3 semanas pós-faringite ou 3 a 6 semanas pós-piodermite.</li><li><strong>Diagnóstico de GNPE:</strong> ASLO elevado ou Anti-DNAse B, e queda transitória do complemento (C3), que deve normalizar em até 8 semanas. Tratamento de suporte: restrição hídrica/salina e diurético (furosemida) para HAS e edema. O antibiótico (penicilina) erradica o estreptococo para evitar disseminação, mas NÃO altera a evolução da doença renal.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Glomerulopatia</th><th>Apresentação Típica</th><th>Complemento Consumido?</th><th>Tratamento Inicial</th></tr></thead><tbody><tr><td>Lesão Mínima</td><td>Nefrótica infantil, após infecção viral</td><td>Não</td><td>Corticoterapia empírica</td></tr><tr><td>GESF</td><td>Nefrótica adulto, HAS, negros, HIV</td><td>Não</td><td>Corticoide / iECA</td></tr><tr><td>Membranosa</td><td>Nefrótica, alto risco de TVP de veia renal, tumores sólidos</td><td>Não</td><td>iECA, Imunossupressão</td></tr><tr><td>GNPE</td><td>Nefrítica, criança pós-faringite/impetigo</td><td>Sim (C3, C4 normal)</td><td>Suporte, Furosemida</td></tr><tr><td>Doença de Berger (IgA)</td><td>Hematúria macroscópica SINCRÔNICA à faringite</td><td>Não</td><td>iECA / BRA</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2.2",
+          "title": "Nefrite Intersticial e Nefrotoxicidade",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Nefrite Intersticial Aguda (NIA):</strong> Lesão renal aguda por hipersensibilidade. Clínica: febre, rash cutâneo, eosinofilia e eosinofilúria, associados à oligúria pós-uso de fármacos (AINES, beta-lactâmicos, sulfas) ou doenças inflamatórias.</li><li><strong>Nefrite Intersticial por Sarcoidose:</strong> Uma causa não medicamentosa de NIA granulomatosa. <strong>Pegadinha de Tratamento:</strong> Em casos comprovados por biópsia de etiologia imunológica ou granulomatosa (como na sarcoidose), o uso de <strong>corticosteroides</strong> tem grande probabilidade de influenciar a recuperação renal a longo prazo e evitar diálise. (Lesões tóxicas puras, como chumbo ou analgésicos, não respondem bem ao corticoide).</li><li><strong>Necrose Tubular Aguda (NTA):</strong> Forma mais comum de LRA intrínseca em pacientes internados. Ocorre por isquemia (choque, sepse prolongada) ou toxinas (contraste iodado, aminoglicosídeos). Fração de excreção de sódio (FeNa) > 1%, cilindros granulosos pigmentados (muddy brown). Evolui classicamente com fase oligúrica seguida de fase poliúrica. Tratamento é suporte e remoção do insulto.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Infecção do Trato Urinário e Nefrolitíase",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Infecção do Trato Urinário (ITU)",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Cistite Não Complicada (Mulher não grávida):</strong> Sintomas baixos: disúria, polaciúria, urgência, sem febre ou sinais sistêmicos. Agente principal é E. coli. <strong>Tratamento de primeira linha:</strong> <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5 dias).</li><li><strong>Pielonefrite Aguda:</strong> ITU alta com febre, calafrios e sinal de Giordano positivo. Exame de urina com leucocitúria e cilindros leucocitários. Tratamento ambulatorial (se bom estado geral): Ciprofloxacino ou Levofloxacino oral. Se vômitos/sepse: internação com Ceftriaxona endovenosa.</li><li><strong>Bacteriúria Assintomática:</strong> Crescimento de bactérias em urocultura sem sintomas. O tratamento SÓ é indicado em <strong>gestantes</strong>, antes de procedimentos urológicos invasivos com sangramento mucoso ou em transplantados renais recentes. <strong>Pegadinha:</strong> Em idosos e portadores de sonda vesical, NÃO tratar a bacteriúria assintomática.</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Nefrolitíase e Pielonefrite Obstrutiva",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Nefrolitíase:</strong> Dor lombar tipo cólica, súbita, irradiada para genitália, com hematúria microscópica. Padrão-ouro diagnóstico: TC de abdome sem contraste. A maioria dos cálculos é de oxalato de cálcio (radiopacos).</li><li><strong>Tratamento Agudo da Cólica:</strong> Analgesia rigorosa (AINES como cetorolaco e opioides).</li><li><strong>Terapia Expulsiva:</strong> Para cálculos distais < 10 mm, usar alfa-bloqueadores (Tansulosina) para relaxar a junção ureterovesical.</li><li><strong>Pielonefrite Obstrutiva (Urgência Urológica):</strong> Cálculo ureteral associado a sinais de infecção (febre, calafrios, sepse, leucocitose). <strong>Conduta OBRIGATÓRIA:</strong> <strong>Drenagem imediata da via urinária com cateter Duplo J</strong> ou nefrostomia percutânea + Antibioticoterapia intravenosa de amplo espectro. <strong>Pegadinha:</strong> <strong>É contraindicada a retirada do cálculo</strong> (ureterolitotripsia ou LECO) no mesmo tempo cirúrgico devido à alta pressão e risco de choque séptico fatal. O cálculo só será tratado semanas depois, com a infecção resolvida.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tamanho / Posição do Cálculo</th><th>Tratamento Definitivo Eletivo</th></tr></thead><tbody><tr><td>< 5 mm</td><td>Terapia hídrica, expulsão espontânea</td></tr><tr><td>Cálculo Distal < 10 mm</td><td>Tansulosina (Terapia expulsiva) ou Ureterolitotripsia (URS)</td></tr><tr><td>Cálculo Proximal < 2 cm</td><td>LECO (Litotripsia Extracorpórea por Ondas de Choque)</td></tr><tr><td>Cálculo > 2 cm ou Coraliforme</td><td>Nefrolitotripsia Percutânea (NLP)</td></tr></tbody></table></div><pre class=\"reader-pre-card\">Cólica Nefrética na Emergência\n↓\nTC de Abdome Sem Contraste\n↓\nTem Febre ou Sinais de Sepse?\n- SIM -> Duplo J ou Nefrostomia de urgência + ATB\n- NÃO -> Tamanho < 10mm? -> Alta com analgesia e Tansulosina\n        -> Tamanho > 10mm ou refratário? -> Agendar intervenção (LECO/URS)</pre>"
+        }
+      ]
+    },
+    {
+      "title": "Lesão Renal Aguda e Doença Renal Crônica",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Lesão Renal Aguda (LRA)",
+          "tags": ["adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Definição KDIGO:</strong> Aumento da creatinina sérica ≥ 0,3 mg/dL em 48h; OU aumento de 1,5x o valor basal em 7 dias; OU débito urinário < 0,5 mL/kg/h por 6h.</li><li><strong>Classificação Etiológica:</strong><ul><li><strong>Pré-renal:</strong> Hipoperfusão (desidratação, hemorragia, IC, choque). Relação Ureia/Cr > 40, FeNa < 1%, urina concentrada (Osm > 500).</li><li><strong>Renal / Intrínseca:</strong> NTA (toxinas, isquemia prolongada), NIA, Glomerulonefrites. Relação Ureia/Cr < 20, FeNa > 1%, urina isostenúrica (Osm < 350).</li><li><strong>Pós-renal:</strong> Obstrução do fluxo (HPB, litíase bilateral, tumores pélvicos). Diagnóstico rápido via USG mostrando hidronefrose.</li></ul></li><li><strong>Indicações Clássicas de Diálise de Urgência (Vogais: A-E-I-O-U):</strong> Acidose metabólica severa refratária (pH < 7,1), Eletrólitos (Hipercalemia refratária), Intoxicações exógenas dialisáveis (lítio, salicilato, metanol), Overload de volume (Edema agudo de pulmão anúrico refratário a diurético), Uremia grave (Encefalopatia ou Pericardite urêmica).</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Doença Renal Crônica (DRC)",
+          "tags": ["adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Definição:</strong> Anormalidade estrutural ou funcional dos rins presente por <strong>mais de 3 meses</strong> (TFG < 60 mL/min ou presença de dano renal como albuminúria persistente > 30 mg/dia).</li><li><strong>Principais Causas:</strong> HAS e Diabetes Mellitus (no Brasil, a HAS é historicamente a maior causa de diálise). Na nefropatia diabética, o primeiro sinal é a microalbuminúria, tratada obrigatoriamente com iECA ou BRA para proteção renal, independentemente da pressão.</li><li><strong>Complicações da Uremia:</strong><ul><li><strong>Anemia da DRC:</strong> Normocítica e normocrômica, primariamente por déficit de eritropoietina. O tratamento envolve Reposição de EPO sintética, porém, antes, <strong>deve-se repor Ferro se houver deficiência</strong> (Ferritina < 100 ou Saturação de Transferrina < 20%).</li><li><strong>Osteodistrofia Renal (Hiperparatireoidismo Secundário):</strong> O rim doente não converte vitamina D e não excreta Fósforo. Ocorre hiperfosfatemia + hipocalcemia, o que estimula a PTH (causando osteíte fibrosa cística, reabsorção subperiosteal falangiana e \"crânio em sal e pimenta\"). Conduta: Restrição de fósforo, quelantes de fósforo junto às refeições (sevelamer, carbonato de cálcio) e reposição de calcitriol (vitamina D ativa).</li></ul></li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Estágio KDIGO (DRC)</th><th>Taxa de Filtração Glomerular (mL/min)</th><th>Conduta Clínica Principal</th></tr></thead><tbody><tr><td>G1</td><td>≥ 90</td><td>Controle de comorbidades, reduzir risco CV</td></tr><tr><td>G2</td><td>60 a 89</td><td>Estimar progressão</td></tr><tr><td>G3a e G3b</td><td>45-59 e 30-44</td><td>Manejo das complicações (anemia, osso)</td></tr><tr><td>G4</td><td>15 a 29</td><td>Preparo para Terapia de Substituição Renal (Fístula)</td></tr><tr><td>G5</td><td>< 15</td><td>Início de Diálise ou Transplante Renal</td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+},
+    
+    
+    
+    
     "uepa_gastroenterologia": {
   "area": "Gastroenterologia",
   "title": "Gastroenterologia - Rapid Review",
@@ -561,237 +1328,9 @@
     }
   ]
 },
-    "uepa_hematologia": {
-  "area": "Hematologia",
-  "title": "Hematologia - Master Rapid Review",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Anemias",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Anemias Microcíticas e Hipocrômicas (Foco em Ferropriva)",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Parâmetro</th><th>Anemia Ferropriva</th><th>Anemia de Doença Crônica</th><th>Talassemias</th></tr></thead><tbody><tr><td>Ferritina</td><td>Baixa (&lt; 15-30 ng/mL)</td><td>Normal ou Alta</td><td>Normal ou Alta</td></tr><tr><td>TIBC / Transferrina</td><td>Alto</td><td>Baixo</td><td>Normal</td></tr><tr><td>Ferro Sérico</td><td>Baixo</td><td>Baixo</td><td>Normal ou Alto</td></tr><tr><td>Saturação de Transferrina</td><td>Baixa (&lt; 16%)</td><td>Baixa ou Normal</td><td>Normal ou Alta</td></tr><tr><td>RDW</td><td>Elevado (&gt; 14-15%)</td><td>Normal</td><td>Normal</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Fisiopatologia da Anemia Ferropriva:</strong> Deficiência de ferro compromete síntese do heme. Causas: perda crônica de sangue (sangramento TGI, ginecológico), má absorção (doença celíaca, pós-bariátrica), aumento da demanda (crescimento, gestação).</li><li><strong>Clínica:</strong> Fadiga, palidez, queilite angular, glossite, coiloníquia (unhas em colher), pica (perversão do apetite, ex: pagofagia - gelo), Síndrome de Plummer-Vinson (disfagia + teia esofágica + anemia ferropriva).</li><li><strong>Diagnóstico:</strong> Ferropenia = primeira alteração é a queda da ferritina; depois, aumento do TIBC e queda do ferro sérico. Hemograma inicialmente normo/normo, evoluindo para micro/hipo.</li><li><strong>Tratamento:</strong> Reposição de ferro (VO: sulfato ferroso, IV se intolerância ou má absorção). A contagem de reticulócitos sobe em 7-10 dias (pico reticulocitário indica resposta terapêutica). Tratar a causa base.</li></ul>"
-        },
-        {
-          "num": "1.2",
-          "title": "Anemias Hemolíticas",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Exame Laboratorial</th><th>Hemólise Intravascular</th><th>Hemólise Extravascular</th></tr></thead><tbody><tr><td>Bilirrubina Indireta</td><td>Elevada</td><td>Elevada</td></tr><tr><td>DHL (Lactato Desidrogenase)</td><td>Muito Elevado</td><td>Elevado</td></tr><tr><td>Haptoglobina</td><td>Muito Baixa / Indetectável</td><td>Normal ou Levemente Baixa</td></tr><tr><td>Reticulócitos</td><td>Elevados (Policromatofilia)</td><td>Elevados (Policromatofilia)</td></tr><tr><td>Hemoglobinúria / Hemossiderinúria</td><td>Presentes</td><td>Ausentes</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Hemólise Intravascular:</strong> Destruição do RBC no vaso. Haptoglobina (proteína que se liga à Hb livre) cai drasticamente. Exemplos: PTT, SHU, CIVD, reações transfusionais agudas, HPN, malária.</li><li><strong>Hemólise Extravascular:</strong> Destruição no sistema reticuloendotelial (baço/fígado). Exemplos: Esferocitose hereditária, anemia falciforme, AHAI (quente e fria).</li><li><strong>Anemia Falciforme:</strong> Mutação no gene da cadeia beta da globina (HbS). Crises vaso-oclusivas (dor), síndrome torácica aguda, sequestro esplênico (crianças), suscetibilidade a germes encapsulados (autoesplenectomia).</li><li><strong>AHAI (Anemia Hemolítica Autoimune):</strong> Coombs direto (TAD) positivo. Quente (IgG, extravascular, idiopática/lúpus, trata com corticoide), Fria (IgM, intravascular, micoplasma/EBV, tratar o frio/rituximabe).</li></ul>"
-        },
-        {
-          "num": "1.3",
-          "title": "Anemias Macrocíticas e Normocíticas (Outras)",
-          "tags": ["adj"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Anemia Megaloblástica:</strong> Macrocitose (VCM > 100 fL), neutrófilos hipersegmentados, pancitopenia leve. Causas: deficiência de Vitamina B12 (homocisteína e ácido metilmalônico altos, clínica neurológica) e Ácido Fólico (homocisteína alta, sem alt. neurológica).</li><li><strong>Anemia Perniciosa:</strong> Principal causa de deficiência de B12. Autoimune contra células parietais gástricas ou fator intrínseco.</li><li><strong>Anemia Aplástica:</strong> Normocítica/normocrômica. Pancitopenia + reticulocitopenia + medula óssea hipocelular (substituição gordurosa). Sem esplenomegalia. Tratamento com imunossupressão ou TMO.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Hemostasia e Trombose",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Hemostasia Primária vs Secundária",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Característica</th><th>Alteração na Hemostasia Primária</th><th>Alteração na Hemostasia Secundária</th></tr></thead><tbody><tr><td>Fatores envolvidos</td><td>Plaquetas e Fator de von Willebrand (FvW)</td><td>Fatores de Coagulação (Cascata)</td></tr><tr><td>Clínica típica</td><td>Petéquias, púrpuras, equimoses, sangramento mucocutâneo (gengival, epistaxe, menorragia). Sangramento imediato ao trauma.</td><td>Hematomas profundos, hemartroses, sangramento muscular/articular. Sangramento tardio pós-trauma/cirurgia.</td></tr><tr><td>Exames alterados</td><td>Tempo de Sangramento (TS), Contagem de plaquetas.</td><td>TAP (Via Extrínseca), TTPa (Via Intrínseca).</td></tr><tr><td>Exemplos</td><td>PTI, PTT, Doença de von Willebrand, Trombastenia de Glanzmann, Bernard-Soulier, Uremia, uso de AAS.</td><td>Hemofilias (A e B), deficiência de Vitamina K, CIVD, Hepatopatias, uso de Varfarina/Heparina.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Doença de von Willebrand:</strong> Distúrbio hemorrágico hereditário mais comum. Deficiência/disfunção do FvW (necessário para adesão plaquetária e estabilização do fator VIII). TS prolongado, TTPa pode estar normal ou prolongado.</li><li><strong>PTI (Púrpura Trombocitopênica Imunológica):</strong> Plaquetopenia isolada, anticorpos antiplaquetários. Em crianças geralmente pós-viral e autolimitada. Em adultos, crônica. Tratar se sangramento ou plaquetas &lt; 20-30k (Corticoide, IVIG).</li><li><strong>Hemofilias:</strong> Herança ligada ao X. Hemofilia A (deficiência do fator VIII) e Hemofilia B (deficiência do fator IX). TTPa prolongado, TAP normal. Tratar com reposição do fator específico.</li></ul>"
-        },
-        {
-          "num": "2.2",
-          "title": "Trombofilias e Trombose",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Trombofilias Hereditárias:</strong> Fator V de Leiden (mais comum, resistência à proteína C ativada), Mutação do gene da Protrombina (G20210A), Deficiência de Antitrombina, Deficiências de Proteína C e S. Suspeitar em TVP jovens, recorrentes, locais atípicos ou história familiar.</li><li><strong>Trombofilias Adquiridas:</strong> Síndrome do Anticorpo Antifosfolípide (SAF) -> trombose + morbidade gestacional + anticorpos (anticardiolipina, anti-beta-2-glicoproteína I, anticoagulante lúpico). TTPa prolongado IN VITRO, mas causa trombose IN VIVO.</li><li><strong>Fatores de Risco para TVP:</strong> Tríade de Virchow (lesão endotelial, estase venosa, hipercoagulabilidade). Idade, tabagismo, imobilidade, cirurgia recente, neoplasia, uso de ACOs (estrogênio). Trombastenia de Glanzmann NÃO é fator de risco (é doença hemorrágica primária).</li><li><strong>Trombose Pediátrica:</strong> Neonatos têm sistema hemostático em desenvolvimento. Trombose de veia renal é a TVP não relacionada a cateter mais comum no primeiro mês (hematúria, massa lombar, plaquetopenia). Trombose de veia porta associa-se a cateterização umbilical.</li></ul>"
-        },
-        {
-          "num": "2.3",
-          "title": "Anticoagulantes e Reversão",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco</th><th>Mecanismo</th><th>Monitoramento</th><th>Antídoto / Reversão</th></tr></thead><tbody><tr><td>Heparina Não Fracionada (HNF)</td><td>Ativa antitrombina, inibe IIa e Xa</td><td>TTPa</td><td>Protamina</td></tr><tr><td>Heparina de Baixo Peso (HBPM - Ex: Enoxaparina)</td><td>Inibe Xa &gt; IIa</td><td>Geralmente não necessário (anti-Xa)</td><td>Protamina (reversão parcial)</td></tr><tr><td>Varfarina (Cumarínico)</td><td>Inibe fatores vit. K dep. (II, VII, IX, X, Prot. C e S)</td><td>TAP (RNI)</td><td>Vitamina K, Complexo Protrombínico, Plasma Fresco (em urgências)</td></tr><tr><td>DOACs (Dabigatrana, Rivaroxabana)</td><td>Inibição direta de IIa (Dabi) ou Xa (Riva/Apixa)</td><td>Não requer rotineiramente</td><td>Idarucizumabe (Dabi), Andexanet Alfa (Inib. Xa)</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Intoxicação / Sangramento por Enoxaparina:</strong> Se instabilidade hemorrágica/cirurgia, usar Sulfato de Protamina. Embora não reverta 100% como na HNF, é a droga de escolha.</li><li><strong>Trombocitopenia Induzida por Heparina (HIT):</strong> Queda de plaquetas após 5-10 dias de heparina + TROMBOSE (paradoxal). Formação de Ac contra complexo heparina-Fator Plaquetário 4 (PF4). Conduta: suspender heparina e iniciar inibidor direto da trombina (argatrobana) ou fondaparinux. Evitar transfusão de plaquetas (aumenta risco trombótico).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Medicina Transfusional e Oncohematologia",
-      "subchapters": [
-        {
-          "num": "3.1",
-          "title": "Hemocomponentes e Transfusão",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Concentrado de Hemácias (CH):</strong> 1 bolsa eleva Hb em 1 g/dL e Ht em 3%. Indicação: anemia sintomática ou Hb &lt; 7 g/dL (ou &lt; 8 g/dL em cardiopatas/ortopédicos agudos).</li><li><strong>Concentrado de Plaquetas (CP):</strong> Indicação profilática (Hb &lt; 10k geral; &lt; 50k p/ procedimentos menores/sangramento ativo; &lt; 100k p/ neuro/oftalmo cirurgias). Contraindicado em PTT e HIT (agrava o quadro trombótico).</li><li><strong>Plasma Fresco Congelado (PFC):</strong> Contém todos os fatores de coagulação. Uso em coagulopatias múltiplas (hepatopatia, CIVD, reversão de varfarina sem complexo protrombínico), transfusão maciça.</li><li><strong>Crioprecipitado:</strong> Rico em Fator VIII, FvW, Fibrinogênio e Fator XIII. Indicado em hipofibrinogenemia (&lt; 100 mg/dL), CIVD e uremia.</li></ul>"
-        },
-        {
-          "num": "3.2",
-          "title": "Reações Transfusionais",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Reação</th><th>Características e Fisiopatologia</th><th>Clínica e Manejo</th></tr></thead><tbody><tr><td>TRALI (Lesão Pulmonar Aguda Transfusional)</td><td>Edema pulmonar não cardiogênico. Acs do doador contra leucócitos (HLA/HNA) do receptor. Começa em até 6h.</td><td>Dispneia aguda, hipoxemia, infiltrado bilateral (Rx tórax). Diferente de SDRA prévia. Suporte ventilatório (não usar diurético). Fatores de risco de SDRA prévios denominam quadro como \"possível TRALI\".</td></tr><tr><td>TACO (Sobrecarga Circulatória)</td><td>Sobrecarga de volume. Comum em idosos/crianças ou renais crônicos rápidos demais.</td><td>EAP cardiogênico, dispneia, estertores, BNP alto. Tratar com diuréticos e oxigênio.</td></tr><tr><td>Hemolítica Aguda (Incompatibilidade ABO)</td><td>Erro de identificação (Acs anti-A/B naturais IgM). Hemólise intravascular aguda e maciça.</td><td>Febre, dor lombar, hipotensão, hemoglobinúria (urina escura). Suspender imediato, hiperidratação, diurese.</td></tr><tr><td>Hemolítica Tardia</td><td>Incompatibilidade em outros sistemas (Kidd, Duffy). Resposta anamnéstica IgG (dias a semanas após).</td><td>Hemólise extravascular leve, febre baixa, queda de Hb, icterícia. Maioria não requer tto agressivo.</td></tr><tr><td>Febre Não Hemolítica</td><td>Acs do receptor contra leucócitos do doador ou liberação de citocinas na bolsa.</td><td>Febre e calafrios durante a transfusão. Excluir hemólise. Prevenção: hemácias desleucocitadas.</td></tr></tbody></table></div>"
-        },
-        {
-          "num": "3.3",
-          "title": "Síndrome de Lise Tumoral e Oncohematologia",
-          "tags": ["ja"],
-          "bodyHtml": "<pre class=\"reader-pre-card\">\nLise de Células Tumorais (pós QT em neoplasias hematológicas de alta proliferação como LNH/Burkitt/LMA)\n|\nv\nLiberação Intracelular Maciça\n|\n+-> Potássio (HIPERCALEMIA) -> Arritmias, alterações ECG.\n+-> Fósforo (HIPERFOSFATEMIA) -> Liga-se ao Cálcio -> HIPOCALCEMIA secundária (cãibras, confusão, convulsões).\n+-> Ácidos Nucleicos -> ÁCIDO ÚRICO (HIPERURICEMIA) -> Lesão Renal Aguda obstrutiva.\n</pre><ul class=\"reader-list\"><li><strong>Marcadores da SLT:</strong> Espera-se <strong>aumento</strong> de Potássio, Fósforo e Ácido Úrico. Espera-se <strong>redução</strong> do Cálcio sérico (Hipocalcemia). A creatinina sobe devido à IRA por nefropatia por urato e precipitação de fosfato de cálcio.</li><li><strong>Clínica:</strong> Fraqueza, arritmias, espasmos musculares (tetania por hipocalcemia), convulsões, LRA oligúrica.</li><li><strong>Prevenção / Tratamento:</strong> Hidratação venosa vigorosa, Alopurinol (inibe xantina oxidase na formação de novo ác. úrico) ou Rasburicase (degrada ác. úrico existente). Manejo dos distúrbios hidroeletrolíticos agudos e diálise se indicação.</li></ul>"
-        }
-      ]
-    }
-  ]
-}
-,
-    "uepa_ortopedia": {
-  "area": "Ortopedia",
-  "title": "Ortopedia",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Trauma Ortopédico",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Complicações do Trauma Ortopédico",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Complicação</th><th>Apresentação Clínica</th><th>Conduta</th></tr></thead><tbody><tr><td>Síndrome da Embolia Gordurosa (SEG)</td><td>Tríade clássica (12-72h): Hipoxemia, Alteração do estado mental, Petéquias (axilas, conjuntiva, tórax). Associada a fraturas de ossos longos (fêmur, tíbia).</td><td>Suporte ventilatório (oxigênio, IOT se necessário), hidratação, fixação precoce da fratura.</td></tr><tr><td>Síndrome Compartimental</td><td>Dor desproporcional (piora ao estiramento passivo), parestesia, palidez, pulso preservado até fases tardias. Pressão compartimental aumentada.</td><td>Fasciotomia de urgência. Remover gessos/curativos compressivos.</td></tr><tr><td>Tromboembolismo Pulmonar (TEP) e TVP</td><td>Dispneia súbita, dor pleurítica, taquicardia, edema assimétrico de membro inferior. Alto risco em cirurgias ortopédicas maiores.</td><td>Profilaxia com HBPM. Tratamento com anticoagulação plena.</td></tr></tbody></table></div>"
-        },
-        {
-          "num": "2",
-          "title": "Fraturas e Luxações Comuns",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fratura do Colo do Fêmur:</strong> Comum em idosos, risco de necrose avascular da cabeça do fêmur. Tratamento cirúrgico (artroplastia ou fixação).</li><li><strong>Fratura Supracondilar do Úmero (Crianças):</strong> Risco de lesão da artéria braquial e nervo interósseo anterior. Tratamento conservador ou fixação percutânea.</li><li><strong>Luxação de Ombro:</strong> Maioria é anterior. Lesão de Bankart (labrum) e Hill-Sachs (impactação da cabeça umeral).</li><li><strong>Luxação de Quadril:</strong> Maioria é posterior (membro encurtado, aduzido e com rotação interna). Risco de necrose avascular e lesão do nervo ciático.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Infecções Ósseas e Articulares",
-      "subchapters": [
-        {
-          "num": "3",
-          "title": "Artrite Séptica e Osteomielite",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Artrite Séptica:</strong> Emergência ortopédica. S. aureus é o patógeno mais comum. Monoartrite aguda, calor, rubor, dor intensa. Diagnóstico por artrocentese (leucócitos > 50.000/mm³, neutrofilia). Tratamento: Drenagem cirúrgica e antibioticoterapia venosa (Cefazolina ou Oxacilina; Vancomicina se MRSA).</li><li><strong>Osteomielite:</strong> Infecção óssea. Em crianças, via hematogênica afeta metáfise de ossos longos. S. aureus é o mais comum; Salmonella em pacientes com doença falciforme. Diagnóstico: RM é o exame mais sensível precocemente. Tratamento com antibioticoterapia prolongada.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Ortopedia Pediátrica",
-      "subchapters": [
-        {
-          "num": "4",
-          "title": "Doenças do Quadril na Infância",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Faixa Etária</th><th>Clínica e Achados</th></tr></thead><tbody><tr><td>Displasia do Desenvolvimento do Quadril</td><td>Recém-nascidos</td><td>Manobras de Ortolani (reduz) e Barlow (luxa). Assimetria de pregas, sinal de Galeazzi. Tratamento: Suspensório de Pavlik (até 6 meses).</td></tr><tr><td>Doença de Legg-Calvé-Perthes</td><td>4 a 8 anos</td><td>Necrose avascular idiopática da cabeça do fêmur. Claudicação indolor ou dor leve no joelho/quadril. Tratamento: Contenção, órteses ou cirurgia em casos graves.</td></tr><tr><td>Epifisiólise da Cabeça do Fêmur</td><td>Adolescentes (obesos)</td><td>Deslizamento da epífise. Dor no quadril/joelho e marcha claudicante. Rotação externa obrigatória à flexão do quadril. Tratamento cirúrgico (fixação in situ).</td></tr><tr><td>Sinovite Transitória do Quadril</td><td>3 a 10 anos</td><td>Causa mais comum de dor no quadril. Frequente após IVAS. Conduta expectante, repouso e AINEs.</td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Tumores Ósseos",
-      "subchapters": [
-        {
-          "num": "5",
-          "title": "Principais Tumores e Lesões",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Osteossarcoma:</strong> Tumor ósseo maligno primário mais comum (excluindo mieloma). Adolescentes. Metáfise (fêmur distal, tíbia proximal). Rx com reação periosteal em \"raios de sol\" e triângulo de Codman.</li><li><strong>Sarcoma de Ewing:</strong> Crianças e adolescentes. Diáfise de ossos longos. Rx com reação periosteal em \"casca de cebola\". Associação com translocação t(11;22).</li><li><strong>Osteocondroma:</strong> Tumor ósseo benigno mais comum. Crescimento exofítico a partir da metáfise.</li><li><strong>Cisto Ósseo Simples:</strong> Lesão lítica central, benigna, em crianças (úmero proximal). Sinal do \"fragmento caído\" se fraturar.</li></ul>"
-        }
-      ]
-    }
-  ]
-}
-,
-    "uepa_psiquiatria": {
-  "area": "Psiquiatria",
-  "title": "Psiquiatria UEPA",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Transtornos Psicóticos",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Transtorno Delirante Persistente e Esquizofrenia",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Transtorno</th><th>Características Principais</th></tr></thead><tbody><tr><td><strong>Transtorno Delirante</strong></td><td><ul class=\"reader-list\"><li>Presença de delírios (ex: persecutórios) com duração &gt; 1 mês.</li><li>Sem alucinações proeminentes (ex: sem alucinações auditivas significativas).</li><li>Sem prejuízo grave no funcionamento social e ocupacional (preservado).</li></ul></td></tr><tr><td><strong>Esquizofrenia</strong></td><td><ul class=\"reader-list\"><li><strong>Sintomas Negativos:</strong> Perda de funções psíquicas, empobrecimento global da vida afetiva, cognitiva e social; distanciamento e aplainamento afetivo (embotamento).</li><li><strong>Sintomas Positivos:</strong> Distorção da realidade, delírios, alucinações, ilusões ou pseudoalucinações.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Transtornos de Ansiedade e Humor",
-      "subchapters": [
-        {
-          "num": "2",
-          "title": "Transtorno de Pânico e Transtorno Bipolar",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Transtorno de Pânico:</strong> Ataques súbitos e recorrentes de medo intenso, palpitações, sensação de morte iminente. Frequentemente associado a esquiva de locais públicos (Agorafobia).</li><li><strong>Transtorno Bipolar Tipo I:</strong> Caracterizado por episódios de mania. O paciente pode apresentar fala logorreica, aceleração do pensamento, grandiosidade e necessidade reduzida de sono.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Psicopatologia",
-      "subchapters": [
-        {
-          "num": "3",
-          "title": "Semiologia Psiquiátrica",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Conceito</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Delírio</strong></td><td>Crença irredutível e inabalável na veracidade de uma ideia (ex: chip implantado no corpo). Permanece mesmo diante de argumentos lógicos ou dados objetivos.</td></tr><tr><td><strong>Logorreia</strong></td><td>Aceleração e aumento no fluxo da fala, frequentemente ininterrupta, comum em episódios de mania.</td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Dependência Química",
-      "subchapters": [
-        {
-          "num": "4",
-          "title": "Síndromes de Abstinência",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Substância</th><th>Clínica na Abstinência</th></tr></thead><tbody><tr><td><strong>Álcool</strong></td><td><ul class=\"reader-list\"><li>Tremor, agitação psicomotora extrema, alterações autonômicas (taquicardia, sudorese).</li><li>Pode evoluir para <em>Delirium Tremens</em> (com rebaixamento do nível de consciência e alucinações).</li></ul></td></tr><tr><td><strong>Opioides</strong></td><td><ul class=\"reader-list\"><li>Pacientes habitualmente permanecem <strong>alertas e orientados</strong>.</li><li>Sintomas: midríase, piloereção, rinorreia, dores musculares, diarreia e náuseas.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Psicofarmacologia",
-      "subchapters": [
-        {
-          "num": "5",
-          "title": "Antipsicóticos",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Típicos (1ª geração):</strong> Haloperidol, Clorpromazina, Levomepromazina. Bloqueadores D2 mais potentes, maior risco de efeitos extrapiramidais (SEP).</li><li><strong>Atípicos (2ª geração):</strong> Risperidona, Olanzapina, Aripiprazol, Quetiapina. Menor risco de SEP, mas maior risco de efeitos metabólicos (ganho de peso, dislipidemia).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "Psiquiatria Social e Saúde Pública",
-      "subchapters": [
-        {
-          "num": "6",
-          "title": "Reforma Psiquiátrica e Apoio Matricial",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tema</th><th>Conceitos Importantes</th></tr></thead><tbody><tr><td><strong>Reforma Psiquiátrica</strong></td><td><ul class=\"reader-list\"><li>Desinstitucionalização como eixo central.</li><li><strong>Desafios:</strong> Insuficiência de recursos financeiros para serviços comunitários, fragilidade da articulação CAPS x APS (apoio matricial), persistência de estigmas socioculturais.</li></ul></td></tr><tr><td><strong>Apoio Matricial (Matriciamento)</strong></td><td><ul class=\"reader-list\"><li>Equipe de especialistas (ex: CAPS) fornece retaguarda especializada à equipe de Atenção Primária (APS).</li><li>Envolve <strong>orientação clínica, capacitação e suporte técnico contínuo</strong> (ex: teleconsultas, treinamentos).</li><li>Permite que o tratamento seja mantido no território do paciente, evitando novas internações e ampliando a resolutividade da APS.</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    }
-  ]
-},
+    
+    
+    
     "uepa_pneumologia": {
   "area": "Pneumologia",
   "title": "Pneumologia - UEPA Master",
@@ -851,169 +1390,8 @@
   ]
 }
 ,
-    "uepa_otorrinolaringologia": {
-  "area": "Otorrinolaringologia",
-  "title": "Master Rapid Review",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Questions",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Audiologia - Patologias Auditivas",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Paciente de 75 anos, vem a UBS pois vem apresentando quadro de zumbido em ouvido esquerdo, redução da audição do mesmo ouvido, relata uso diário de hastes de algodão (cotonetes) para higiene. Após otoscopia observa rolha de cera, sem ver membrana timpânica. Neste caso o tratamento instituído deve ser:</td><td><ul class=\"reader-list\"><li>A: iniciar lavagem auricular guiada por otoscópio na APS.</li><li>B: indicar solução otológica cerolitica por cinco dias e reavaliar em sete dias.</li><li>C: encaminhar ao otorrino para avaliação e manejo adequado.</li><li>D: orientar suspensão do uso de hastes de algodão e reavaliar após trinta dias.</li><li>E: orientações sobre a hipoacusia fisiológica do envelhecimento.</li></ul></td><td>B</td></tr></tbody></table></div>"
-        },
-        {
-          "num": "2",
-          "title": "Infecções das Vias Aéreas Superiores - Laringites",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Pré-Escolar com 4 anos de idade, vacinas atrasadas, iniciou quadro de febre seguida de dor de garganta, voz abafada e sialorréia há 24h. Ao exame físico: aspecto toxemiado, pálido, dispneico, estridor inspiratório; Of: não examinado; Ap: MV reduzido, sra ; FR: 54ipm; SO2: 92%; ban e tiragem intercostal; AC: bcnf rcr 2t, ss; Fc: 160 bpm; enchimento capilar 2 segundo; PA: 90x50 mmhg; Abd: flácido, sem vgm; SN: ecg 15; Pulsos cheios. Ante o exposto, o diagnostico provável, é:</td><td><ul class=\"reader-list\"><li>A: Crupe</li><li>B: Pneumonia</li><li>C: Aspiraçao de corpo estranho</li><li>D: Epiglotite</li><li>E: Anafilaxia</li></ul></td><td>D</td></tr></tbody></table></div>"
-        },
-        {
-          "num": "3",
-          "title": "Infecções das Vias Aéreas Superiores - Otites",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Os agentes bacterianos mais frequentemente implicados na etiologia das otites médias agudas na infância são:</td><td><ul class=\"reader-list\"><li>A: Streptococcus pneumoniae, Haemophilus influenzae não tipável e a Moraxella catarrhalis.</li><li>B: Streptococcus pyogenes do grupo A, Haemophilus influenzae tipo B e a Moraxella catarrhalis.</li><li>C: Streptococcus pneumoniae, Haemophilus influenzae tipo B e o Mycoplasma pneumoniae.</li><li>D: Streptococcus pneumoniae, Haemophilus influenzae tipo B e a Moraxella catarrhalis.</li><li>E: Streptococcus pyogenes do grupo A, Haemophilus influenzae não tipável e o Mycoplasma pneumoniae.</li></ul></td><td>A</td></tr></tbody></table></div>"
-        },
-        {
-          "num": "4",
-          "title": "Tópicos Adjacentes em Otorrinolaringologia",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Anatomia do Ouvido: Ouvido externo, médio, interno.</li><li>Otite Média Aguda: Infecção do ouvido médio, comum em crianças.</li><li>Rinite Alérgica: Inflamação da mucosa nasal induzida por alérgenos.</li><li>Sinusite: Inflamação dos seios paranasais.</li><li>Faringotonsilite: Infecção da faringe e amígdalas, causas virais e bacterianas.</li><li>Vertigem: Sensação de movimento rotatório, ex: VPPB.</li><li>Surdez: Condutiva ou neurossensorial.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Topic</th><th>Description</th></tr></thead><tbody><tr><td>Otoscopia</td><td>Visualização do conduto auditivo e membrana timpânica.</td></tr></tbody></table></div>"
-        }
-      ]
-    }
-  ]
-},
-    "uepa_neurologia": {
-  "area": "Neurologia",
-  "title": "Neurologia Master Rapid Review",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "1. Doenças Cerebrovasculares",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Acidente Vascular Cerebral Isquêmico (AVCi)",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Artéria Acometida</th><th>Quadro Clínico Clássico</th></tr></thead><tbody><tr><td>Artéria Cerebral Média (ACM)</td><td>Hemiparesia e hemi-hipoestesia contralateral (predomínio braquiofacial), afasia (se hemisfério dominante), heminegligência (se não dominante), hemianopsia homônima.</td></tr><tr><td>Artéria Cerebral Anterior (ACA)</td><td>Hemiparesia e hemi-hipoestesia contralateral (predomínio crural/membros inferiores), abulia, alterações de personalidade, incontinência urinária.</td></tr><tr><td>Artéria Cerebral Posterior (ACP)</td><td>Hemianopsia homônima contralateral com preservação macular, agnosia visual, alexia sem agrafia.</td></tr><tr><td>Sistema Vertebrobasilar</td><td>Déficits cruzados (nervo craniano ipsilateral + via longa contralateral), vertigem, ataxia, diplopia, disfagia.</td></tr></tbody></table></div><ul class=\"reader-list\"><li>Manejo Agudo: Tomografia computadorizada (TC) de crânio sem contraste é o exame inicial obrigatório para descartar hemorragia.</li><li>Trombolise (rt-PA): Janela terapêutica clássica de até 4,5 horas do início dos sintomas.</li><li>Contraindicações absolutas à trombólise: sangramento intracraniano prévio, neoplasia intracraniana, TCE grave recente, hemorragia ativa.</li><li>Trombectomia mecânica: Janela de até 24 horas para oclusão de grande vaso da circulação anterior (com mismatch clínico-radiológico adequado).</li><li>Prevenção Secundária: Antiagregação (AAS, Clopidogrel), estatinas alta potência, controle de HAS e DM. Em casos de fibrilação atrial (cardioembólico), anticoagulação.</li></ul>"
-        },
-        {
-          "num": "1.2",
-          "title": "Acidente Vascular Cerebral Hemorrágico e HSA",
-          "tags": ["adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo</th><th>Etiologia Principal</th><th>Clínica e Diagnóstico</th></tr></thead><tbody><tr><td>Intraparenquimatoso</td><td>Hipertensão Arterial Crônica (Charcot-Bouchard), Angiopatia Amiloide (idosos).</td><td>Déficit focal agudo + cefaleia + vômitos. Locais: Putâmen (mais comum), tálamo, cerebelo, ponte. TC sem contraste.</td></tr><tr><td>Hemorragia Subaracnoidea (HSA)</td><td>Ruptura de aneurisma sacular (comunicante anterior é o mais comum).</td><td>Cefaleia em trovoada (\"pior da vida\"), rigidez de nuca, perda de consciência. Escala de Hunt e Hess (clínica) e Fisher (TC).</td></tr></tbody></table></div><ul class=\"reader-list\"><li>HSA - Complicações: Ressangramento (maior risco nas primeiras 24h, tratar clipando ou embolizando aneurisma). Vasoespasmo (pico do 3º ao 14º dia, monitorar com Doppler transcraniano, usar Nimodipino para neuroproteção). Hidrocefalia (pode necessitar de DVE). Hiponatremia (Síndrome perdedora de sal ou SIADH).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "2. Demências e Declínio Cognitivo",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Demência com Corpos de Lewy (DCL)",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Tríade clássica: Flutuação cognitiva (atenção e estado de alerta variáveis), Alucinações visuais bem formadas e detalhadas, e Parkinsonismo (geralmente simétrico, bradicinesia, rigidez).</li><li>Características adicionais: Extrema sensibilidade aos neurolépticos (antipsicóticos típicos podem causar parkinsonismo grave e irreversível), Transtorno comportamental do sono REM (pode anteceder a demência em anos), disautonomia grave.</li><li>Fisiopatologia: Acúmulo de alfa-sinucleína (corpos de Lewy) difusamente pelo córtex e tronco encefálico.</li><li>Tratamento: Inibidores da colinesterase (Rivastigmina, Donepezila) melhoram cognição e sintomas comportamentais; Levodopa para sintomas motores (mas resposta é menor que na Doença de Parkinson e pode piorar alucinações). Quetiapina ou clozapina em doses muito baixas se antipsicótico for estritamente necessário.</li></ul>"
-        },
-        {
-          "num": "2.2",
-          "title": "Doença de Alzheimer e Demência Frontotemporal",
-          "tags": ["adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Demência</th><th>Clínica Principal</th><th>Achados Patológicos e de Imagem</th></tr></thead><tbody><tr><td>Alzheimer</td><td>Perda de memória episódica (recente) precoce, desorientação espacial, anomia.</td><td>Placas senis (beta-amiloide), emaranhados neurofibrilares (proteína tau). Atrofia hipocampal e temporal mesial (TC/RM).</td></tr><tr><td>Frontotemporal (DFT)</td><td>Variante comportamental: desinibição, apatia, hiperoralidade, perda de empatia. Variante linguagem (Afasias primárias progressivas).</td><td>Atrofia frontotemporal assimétrica. Inclusões de Tau ou TDP-43 (Doença de Pick).</td></tr><tr><td>Demência Vascular</td><td>Declínio em degraus, déficits focais, disfunção executiva. Relacionada a fatores de risco vascular.</td><td>Infartos múltiplos, leucoaraiose extensa.</td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "3. Coma e Alterações da Consciência",
-      "subchapters": [
-        {
-          "num": "3.1",
-          "title": "Estado Confusional Agudo (Delirium)",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Conceito: Alteração aguda e flutuante da atenção, consciência e cognição. É uma emergência médica, refletindo uma disfunção cerebral global reversível em resposta a estressores sistêmicos.</li><li>Fatores de risco predisponentes: Idade avançada, demência prévia, déficit sensorial, imobilização.</li><li>Fatores precipitantes: Infecções (ex: ITU, pneumonia), distúrbios hidroeletrolíticos (sódio, cálcio), polifarmácia (anticolinérgicos, benzodiazepínicos, opioides), dor, retenção urinária.</li><li>Subtipos: Hiperativo (agitação, alucinações), Hipoativo (letargia, lentificação - mais comum e pior prognóstico), Misto.</li><li>Diagnóstico: CAM (Confusion Assessment Method) - 1. Início agudo/flutuante + 2. Inatenção + (3. Pensamento desorganizado OU 4. Nível de consciência alterado).</li><li>Tratamento: Identificar e tratar a causa base. Medidas não farmacológicas: orientação, ciclo claro/escuro, mobilização, correção de déficits sensoriais (óculos, aparelho auditivo). Farmacológico (apenas para agitação severa/risco): Haloperidol ou antipsicóticos atípicos (Quetiapina).</li></ul>"
-        },
-        {
-          "num": "3.2",
-          "title": "Hipertensão Intracraniana (HIC)",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Fisiopatologia: Doutrina de Monro-Kellie (o volume intracraniano é constante; aumento de um componente - cérebro, líquor, sangue - exige diminuição dos outros). PIC normal: 5-15 mmHg.</li><li>Clínica: Cefaleia (piora matutina/decúbito), vômitos em jato, papiledema, paralisia do VI nervo craniano (falso sinal localizatório).</li><li>Tríade de Cushing (sinal de herniação iminente): Hipertensão arterial (com aumento da pressão de pulso), bradicardia e alteração do ritmo respiratório.</li><li>Herniações: Uncal (compressão do III nervo - midríase ipsilateral ipsilateral; compressão do pedúnculo - hemiparesia contralateral). Tonsilar (compressão bulbar, parada respiratória).</li><li>Manejo Agudo: Cabeceira elevada 30º e centrada, sedação e analgesia adequadas, hiperventilação transitória (alvo pCO2 30-35 mmHg), terapia hiperosmolar (Manitol 20% ou Salina Hipertônica 3%), DVE (se hidrocefalia), craniectomia descompressiva (casos refratários).</li></ul><pre class=\"reader-pre-card\">Manejo Escalonado HIC:\n1. Medidas Gerais (Cabeceira, analgesia, normotermia)\n   ↓ se PIC continua alta\n2. Drenagem liquórica (DVE) + Terapia Osmolar\n   ↓ se PIC continua alta\n3. Hiperventilação otimizada (breve)\n   ↓ se PIC continua alta\n4. Coma barbitúrico / Craniectomia descompressiva</pre>"
-        }
-      ]
-    },
-    {
-      "title": "4. Neurologia Vestibular e Distúrbios do Movimento",
-      "subchapters": [
-        {
-          "num": "4.1",
-          "title": "Síndromes Vestibulares Centrais vs Periféricas",
-          "tags": ["ja", "adj"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Característica</th><th>Vertigem Periférica</th><th>Vertigem Central</th></tr></thead><tbody><tr><td>Início e Duração</td><td>Súbito, intenso, episódico (segundos a dias)</td><td>Gradual, menos intenso, constante</td></tr><tr><td>Sintomas Auditivos</td><td>Comuns (zumbido, hipoacusia)</td><td>Raros</td></tr><tr><td>Nistagmo</td><td>Unidirecional (bate para o lado são), horizontal-rotatório, inibido por fixação visual, esgota.</td><td>Multidirecional, puramente vertical ou torcional, não inibido por fixação, não esgota.</td></tr><tr><td>Sintomas Neurológicos Associados</td><td>Ausentes</td><td>Comuns (diplopia, disartria, ataxia grave, paresia, paralisia de NC).</td></tr></tbody></table></div><ul class=\"reader-list\"><li>HINTS (Head Impulse, Nystagmus, Test of Skew): Utilizado em vertigem aguda contínua (Síndrome Vestibular Aguda) para diferenciar central (ex: AVC cerebelar) de periférica (Neurite vestibular). Sinal de central: Head impulse normal, Nistagmo bidirecional, Skew deviation presente (desalinhamento vertical ocular). INFARCT (Impulse Normal, Fast-phase Alternating, Refixation on Cover Test).</li><li>VPPB (Vertigem Posicional Paroxística Benigna): Periférica, duração de segundos, precipitada por mudança de decúbito. Diagnóstico: Dix-Hallpike. Tratamento: Manobra de Epley.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "5. Doenças Neuromusculares e da Medula",
-      "subchapters": [
-        {
-          "num": "5.1",
-          "title": "Neuropatias Periféricas e Síndrome de Guillain-Barré",
-          "tags": ["ja", "adj"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Polineuropatia Simétrica Distal: Padrão \"bota e luva\" (acometimento comprimento-dependente), sensitivo-motora. Causas mais comuns: Diabetes Mellitus, deficiência de B12, etilismo, uremia, quimioterápicos. Sintomas: dor neuropática, parestesias, abolição reflexo aquileu, hipotrofia distal.</li><li>Síndrome de Guillain-Barré (Polirradiculoneuropatia Desmielinizante Inflamatória Aguda - AIDP):</li><li>Clínica: Fraqueza muscular flácida, simétrica, ascendente (pés para cabeça), arreflexia/hiporreflexia global. Progressão em até 4 semanas. Sintomas autonômicos comuns. Paralisia facial bilateral e insuficiência respiratória são complicações temidas.</li><li>Gatilho: Infecção gastrointestinal prévia (Campylobacter jejuni é o mais clássico) ou infecção respiratória superior 1 a 3 semanas antes.</li><li>Diagnóstico: LCR com Dissociação Proteíno-Citológica (proteínas altas, células normais, aparece após a 1ª semana). Eletroneuromiografia mostra padrão desmielinizante.</li><li>Tratamento: Imunoglobulina venosa (IVIG) ou Plasmaférese. CORTICOIDE NÃO TEM BENEFÍCIO. Monitorar capacidade vital forçada para intubação precoce se declínio.</li></ul>"
-        },
-        {
-          "num": "5.2",
-          "title": "Síndromes Medulares",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Causas Comuns</th><th>Achados Clínicos</th></tr></thead><tbody><tr><td>Transeccional (Completa)</td><td>Trauma, Mielite transversa.</td><td>Perda total de função motora e sensitiva abaixo do nível, disfunção esfincteriana. Choque medular inicial (flacidez, arreflexia) que evolui para espasticidade e hiperreflexia.</td></tr><tr><td>Hemissecção Medular (Brown-Séquard)</td><td>Trauma penetrante, tumor extramedular.</td><td>Ipsilateral: Fraqueza piramidal e perda de propriocepção/vibração. Contralateral: Perda de dor e temperatura 1-2 níveis abaixo da lesão.</td></tr><tr><td>Síndrome da Artéria Espinhal Anterior</td><td>Isquemia (cirurgia aórtica, dissecção).</td><td>Perda motora (corticospinal) e de dor/temperatura (espinotalâmico) bilateral abaixo da lesão. Preserva propriocepção e vibração (cordão posterior íntegro).</td></tr><tr><td>Síndrome Centro-Medular</td><td>Siringomielia, hiperextensão cervical em idosos.</td><td>Perda de dor/temperatura suspensa \"em capa\" (cruzamento comissural). Acomete mais MMSS que MMII (distribuição somatotópica).</td></tr><tr><td>Degeneração Combinada Subaguda</td><td>Deficiência de Vitamina B12, Cobre.</td><td>Acometimento de cordão posterior (propriocepção, ataxia sensitiva) e trato corticospinal (fraqueza, Babinski).</td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "6. Epilepsias",
-      "subchapters": [
-        {
-          "num": "6.1",
-          "title": "Estado de Mal Epiléptico (Status Epilepticus)",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Definição Clínica: Crise contínua por &gt; 5 minutos ou duas ou mais crises sem recuperação plena da consciência entre elas. Risco de lesão neuronal irreversível após 30 minutos (Status Estabelecido).</li><li>Estabilização Inicial (0-5 min): Suporte ABC (Via aérea, respiração, circulação), glicemia capilar imediata, acesso venoso, monitorização.</li><li>Terapia de Primeira Linha (5-20 min): Benzodiazepínicos venosos. Diazepam 0,15 mg/kg IV (pode repetir 1x) ou Midazolam IM se sem acesso venoso. (Nos EUA usam muito Lorazepam IV, mas raramente disponível no Brasil).</li><li>Terapia de Segunda Linha (20-40 min, para prevenir recorrência ou se não cessar com BZD): Fármacos antiepilépticos IV. Fenitoína 20 mg/kg IV em bomba (monitorar arritmia/hipotensão) ou Ácido Valproico IV ou Levetiracetam IV. Fenobarbital é alternativa.</li><li>Terapia de Terceira Linha (Status Refratário &gt; 40 min): Intubação orotraqueal + anestesia geral contínua. Propofol, Midazolam contínuo ou Tiopental/Pentobarbital. Monitorização com EEG contínuo obrigatória (alvo de supressão de surto).</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "7. Distúrbios do Sono",
-      "subchapters": [
-        {
-          "num": "7.1",
-          "title": "Fisiologia do Sono Normal e Principais Distúrbios",
-          "tags": ["ja"],
-          "bodyHtml": "<ul class=\"reader-list\"><li>Arquitetura do Sono (Polissonografia): Dividido em NREM (75-80%) e REM (20-25%).</li><li>Fase NREM: Estágios N1 (transição vigília-sono, ondas teta), N2 (mais longo, fusos do sono e complexos K), N3 (sono profundo de ondas lentas delta, onde ocorre liberação de GH, terror noturno e sonambulismo).</li><li>Fase REM (Rapid Eye Movement): Ondas dessincronizadas rápidas e de baixa voltagem (lembra vigília), atonia muscular esquelética global (exceto diafragma e músculos extraoculares), sonhos vívidos, ereção noturna. Consolidação da memória.</li><li>Regulação: Processo C (ritmo circadiano, marca-passo no núcleo supraquiasmático hipotalâmico, melatonina inibida pela luz) e Processo S (homeostático, acúmulo de adenosina durante a vigília gerando propensão ao sono).</li><li>Narcolepsia: Sonolência excessiva diurna grave + intrusões do sono REM. Tétrade: Cataplexia (perda de tônus muscular por emoção), paralisia do sono, alucinações hipnagógicas/hipnopômpicas. Perda de neurônios produtores de hipocretina/orexina no hipotálamo lateral.</li><li>Apneia Obstrutiva do Sono (SAOS): Colapso da via aérea superior, roncos, paradas respiratórias observadas, sonolência diurna. Aumenta risco cardiovascular consideravelmente. Ouro padrão diagnóstico: Polissonografia (IAH &gt; 5 com sintomas ou &gt; 15 assintomático). Tratamento: CPAP.</li></ul>"
-        }
-      ]
-    },
-    {
-      "title": "8. Cefaleias",
-      "subchapters": [
-        {
-          "num": "8.1",
-          "title": "Cefaleias Primárias",
-          "tags": ["ja"],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo</th><th>Características Clínicas</th><th>Tratamento Agudo</th><th>Profilaxia</th></tr></thead><tbody><tr><td>Enxaqueca (Migrânea)</td><td>Unilateral, pulsátil, intensidade moderada a forte, piora com esforço. Duração 4-72h. Náuseas, fotofobia, fonofobia. Pode ter aura (escotomas, parestesias).</td><td>AINEs, Triptanos (Sumatriptano), Antieméticos. (Ergotamínicos não usar com triptanos).</td><td>Betabloqueadores (Propranolol), Antidepressivos (Amitriptilina), Anticonvulsivantes (Topiramato, Valproato), Anti-CGRP.</td></tr><tr><td>Tensional</td><td>Bilateral, constritiva (em faixa/peso), intensidade leve a moderada, não piora com esforço. Sem náusea. Fotofobia OU fonofobia.</td><td>Analgésicos simples (dipirona, paracetamol), AINEs.</td><td>Antidepressivos tricíclicos (Amitriptilina).</td></tr><tr><td>Em Salvas (Trigêmino-autonômica)</td><td>Estritamente unilateral (orbitária/temporal), extremamente intensa, dura 15-180 min. Agitação motora. Sinais disautonômicos ipsilaterais (lacrimejamento, ptose, miose, congestão nasal). Homens jovens.</td><td>Oxigênio 100% sob máscara de alto fluxo; Triptano subcutâneo ou intranasal.</td><td>Verapamil (primeira linha). Corticoide ponte no início. Lítio.</td></tr></tbody></table></div><ul class=\"reader-list\"><li>Sinais de Alarme em Cefaleias (Red Flags - SNNOOP10): S (Sistêmicos - febre, câncer, HIV), N (Neurológico - déficit focal), N (Neoinício - primeira cefaleia grave da vida ou &gt; 50 anos), O (Onset em trovoada), O (Papiledema), P (Piora progressiva, mudança de padrão postural).</li></ul>"
-        }
-      ]
-    }
-  ]
-},
+    
+    
     
     "uepa_infectologia": {
   "area": "Infectologia",

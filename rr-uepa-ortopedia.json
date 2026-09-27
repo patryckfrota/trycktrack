@@ -1,65 +1,166 @@
 {
   "area": "Ortopedia",
-  "title": "Ortopedia",
+  "title": "Rapid Review Ortopedia - ENAMED",
   "isExample": false,
   "sections": [
     {
-      "title": "Trauma Ortopédico",
+      "title": "1. Traumatologia Básica e Fraturas Abertas",
       "subchapters": [
         {
-          "num": "1",
-          "title": "Complicações do Trauma Ortopédico",
+          "num": "1.1",
+          "title": "Fraturas Expostas (Classificação de Gustilo-Anderson)",
           "tags": [
-            "ja"
+            "ja",
+            "adj"
           ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Complicação</th><th>Apresentação Clínica</th><th>Conduta</th></tr></thead><tbody><tr><td>Síndrome da Embolia Gordurosa (SEG)</td><td>Tríade clássica (12-72h): Hipoxemia, Alteração do estado mental, Petéquias (axilas, conjuntiva, tórax). Associada a fraturas de ossos longos (fêmur, tíbia).</td><td>Suporte ventilatório (oxigênio, IOT se necessário), hidratação, fixação precoce da fratura.</td></tr><tr><td>Síndrome Compartimental</td><td>Dor desproporcional (piora ao estiramento passivo), parestesia, palidez, pulso preservado até fases tardias. Pressão compartimental aumentada.</td><td>Fasciotomia de urgência. Remover gessos/curativos compressivos.</td></tr><tr><td>Tromboembolismo Pulmonar (TEP) e TVP</td><td>Dispneia súbita, dor pleurítica, taquicardia, edema assimétrico de membro inferior. Alto risco em cirurgias ortopédicas maiores.</td><td>Profilaxia com HBPM. Tratamento com anticoagulação plena.</td></tr></tbody></table></div>"
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura Exposta:</strong> Urgência ortopédica clássica. A conduta inicial é o suporte de vida (ATLS), seguido de proteção da ferida com curativo estéril, alinhamento, imobilização provisória e antibioticoterapia PRECOCE (principal fator prognóstico para infecção). <strong>Pegadinha:</strong> Retardar o antibiótico aguardando cultura (NUNCA fazer isso, inicie profilaxia empírica na primeira hora).</li>\n<li><strong>Avaliação:</strong> Avaliar pulsos periféricos e função neurológica ANTES e DEPOIS da redução provisória. <strong>Palavra-chave:</strong> \"osso exposto com sangramento ativo e ausência de pulso distal\".</li>\n<li><strong>Antibioticoterapia empírica:</strong> Depende do grau de contaminação e tamanho da lesão pela Classificação de Gustilo-Anderson.\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Grau (Gustilo)</th><th>Características</th><th>Antibioticoterapia Padrão</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Grau I</td><td>Ferida &lt; 1 cm, limpa, trauma de baixa energia, de dentro para fora</td><td>Cefalosporina de 1ª geração (Cefazolina)</td></tr>\n      <tr><td>Grau II</td><td>Ferida 1 a 10 cm, contaminação moderada, dano de partes moles moderado</td><td>Cefalosporina de 1ª geração (Cefazolina)</td></tr>\n      <tr><td>Grau III</td><td>Ferida &gt; 10 cm, trauma de alta energia, grande destruição de partes moles, projétil de arma de fogo, ou acidentes rurais</td><td>Cefalosporina 1ª ger. + Aminoglicosídeo (Gentamicina)</td></tr>\n      <tr><td>Grau IIIa</td><td>Adequada cobertura cutânea do osso, apesar do tamanho da ferida</td><td>Cefazolina + Gentamicina</td></tr>\n      <tr><td>Grau IIIb</td><td>Osso exposto com necessidade de retalho para cobertura cutânea</td><td>Cefazolina + Gentamicina</td></tr>\n      <tr><td>Grau IIIc</td><td>Lesão vascular associada que necessita de reparo arterial para salvar o membro</td><td>Cefazolina + Gentamicina</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Conduta Cirúrgica:</strong> Limpeza cirúrgica (desbridamento) exaustiva em centro cirúrgico (até 6h idealmente) + estabilização óssea. A fixação externa é de eleição no trauma de alta energia (Damage Control) até melhora das partes moles.</li>\n<li><strong>Prevenção Antitetânica:</strong> Atualizar vacina e soro conforme protocolo do Ministério da Saúde. Se contaminação rural intensa (fezes de animais, terra), associar Penicilina ou Metronidazol para cobrir Clostridium (embora protocolos recentes incluam apenas desbridamento agressivo + ATB de largo espectro).</li>\n</ul>"
         },
         {
-          "num": "2",
-          "title": "Fraturas e Luxações Comuns",
+          "num": "1.2",
+          "title": "Síndrome Compartimental",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fratura do Colo do Fêmur:</strong> Comum em idosos, risco de necrose avascular da cabeça do fêmur. Tratamento cirúrgico (artroplastia ou fixação).</li><li><strong>Fratura Supracondilar do Úmero (Crianças):</strong> Risco de lesão da artéria braquial e nervo interósseo anterior. Tratamento conservador ou fixação percutânea.</li><li><strong>Luxação de Ombro:</strong> Maioria é anterior. Lesão de Bankart (labrum) e Hill-Sachs (impactação da cabeça umeral).</li><li><strong>Luxação de Quadril:</strong> Maioria é posterior (membro encurtado, aduzido e com rotação interna). Risco de necrose avascular e lesão do nervo ciático.</li></ul>"
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome Compartimental:</strong> Aumento da pressão dentro de um compartimento fascial fechado, comprometendo a perfusão capilar e a viabilidade dos tecidos (músculos e nervos). <strong>Palavra-chave:</strong> \"Dor desproporcional ao trauma, que piora com o alongamento passivo\".</li>\n<li><strong>Quadro Clínico (Os 6 P's):</strong> <strong>P</strong>ain (Dor excruciante), <strong>P</strong>arestesia (sinal precoce), <strong>P</strong>alidez, <strong>P</strong>aralisia, <strong>P</strong>ulselessness (Ausência de pulso - SINAL TARDIO, a isquemia capilar ocorre antes da oclusão arterial). <strong>Pegadinha:</strong> Achar que pulso presente descarta síndrome compartimental (o pulso periférico pode estar preservado enquanto o músculo morre).</li>\n<li><strong>Locais mais comuns:</strong> Perna (compartimento anterior) associada a fraturas de tíbia e antebraço (compartimento volar) associada a fraturas supracondilianas do úmero em crianças.</li>\n<li><strong>Diagnóstico:</strong> Eminente CLÍNICO. Em pacientes irresponsivos (coma, politrauma), pode-se medir a pressão intracompartimental (anormal se &gt; 30 mmHg ou se Delta P [PAD - Pressão do Compartimento] &lt; 30 mmHg).</li>\n<li><strong>Tratamento e Conduta:</strong>\n<pre class=\"reader-pre-card\">\nSuspeita de Síndrome Compartimental\n↓\nRetirar todo enfaixamento, gesso e curativos compressivos\n↓\nManter o membro no nível do coração (NÃO elevar, pois diminui perfusão arterial)\n↓\nSe não melhorar rapidamente:\nFASCIOTOMIA DESCOMPRESSIVA DE URGÊNCIA\n</pre>\n</li>\n<li><strong>Complicação:</strong> Contraturas isquêmicas de Volkmann (sequela clássica no antebraço, com mão em garra).</li>\n</ul>"
         }
       ]
     },
     {
-      "title": "Infecções Ósseas e Articulares",
+      "title": "2. Ortopedia Pediátrica",
       "subchapters": [
         {
-          "num": "3",
-          "title": "Artrite Séptica e Osteomielite",
+          "num": "2.1",
+          "title": "Doenças do Quadril Pediátrico",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>O quadril da criança é tema de ouro.</strong> As doenças se dividem classicamente pela faixa etária de acometimento.\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Idade Típica</th><th>Doença</th><th>Quadro Clínico Clássico</th><th>Achado Radiográfico</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Recém-nascido a 6 meses</td><td>Displasia do Desenvolvimento do Quadril (DDQ)</td><td>Fatores de risco (menina, pélvico, oligoidrâmnio). Ortolani/Barlow positivos.</td><td>USG é o padrão ouro &lt; 4-6 meses. Rx após núcleo de ossificação (Linha de Hilgenreiner/Perkins)</td></tr>\n      <tr><td>3 a 8 anos</td><td>Sinovite Transitória do Quadril</td><td>Dor no quadril/joelho de início súbito após IVAS. Claudicação. Limitação leve.</td><td>Rx normal. USG com derrame articular.</td></tr>\n      <tr><td>4 a 8 anos</td><td>Doença de Legg-Calvé-Perthes</td><td>Menino, claudicação insidiosa e indolor (ou dor leve), déficit de abdução e rotação interna.</td><td>Rx com achatamento, esclerose e fragmentação da cabeça do fêmur.</td></tr>\n      <tr><td>10 a 16 anos</td><td>Epifisiólise do Fêmur Proximal</td><td>Menino obeso, dor crônica ou súbita na virilha/coxa/joelho. Rotação externa obrigatória à flexão do quadril (Sinal de Drehmann).</td><td>Rx com escorregamento da epífise (\"sinal de Trethowan\", linha de Klein não corta a epífise).</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Displasia do Desenvolvimento do Quadril (DDQ):</strong> Instabilidade articular do recém-nascido. Manobra de <strong>Barlow</strong> (Luxa o quadril, \"Bad\") e <strong>Ortolani</strong> (Reduz o quadril, \"Out to IN\"). <strong>Conduta:</strong> Uso de Suspensório de Pavlik por 6-12 semanas se &lt; 6 meses. Após 6 meses, redução fechada e gesso pelvipodálico.</li>\n<li><strong>Doença de Legg-Calvé-Perthes:</strong> Necrose avascular idiopática da cabeça do fêmur na criança em crescimento. <strong>Tratamento:</strong> Depende da idade e grau (Pilares de Herring). Menores de 6 anos geralmente observação e fisioterapia. Maiores de 8 anos frequentemente cirurgia (osteotomia). Objetivo é a \"contenção\" da cabeça dentro do acetábulo.</li>\n<li><strong>Epifisiólise do Fêmur Proximal (EFP):</strong> Escorregamento da epífise através da placa de crescimento. <strong>Palavra-chave:</strong> \"Sinal de Drehmann positivo (rotação externa ao flexionar quadril)\". <strong>Conduta:</strong> Urgência ortopédica! Fixação in situ (parafuso epifisário único). NÃO se tenta reduzir agressivamente pelo risco de necrose avascular.</li>\n<li><strong>Sinovite Transitória do Quadril vs Artrite Séptica:</strong> Diferenciação através dos Critérios de Kocher (Febre &gt; 38.5, Incapacidade de deambular, VHS &gt; 40, Leucócitos &gt; 12.000). 3 ou 4 critérios predizem artrite séptica com alta probabilidade (>93%). Conduta Artrite Séptica: Drenagem cirúrgica imediata e ATB sistêmico.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Fraturas e Anomalias Infantis",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Artrite Séptica:</strong> Emergência ortopédica. S. aureus é o patógeno mais comum. Monoartrite aguda, calor, rubor, dor intensa. Diagnóstico por artrocentese (leucócitos > 50.000/mm³, neutrofilia). Tratamento: Drenagem cirúrgica e antibioticoterapia venosa (Cefazolina ou Oxacilina; Vancomicina se MRSA).</li><li><strong>Osteomielite:</strong> Infecção óssea. Em crianças, via hematogênica afeta metáfise de ossos longos. S. aureus é o mais comum; Salmonella em pacientes com doença falciforme. Diagnóstico: RM é o exame mais sensível precocemente. Tratamento com antibioticoterapia prolongada.</li></ul>"
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura Supracondiliana de Úmero:</strong> Fratura mais comum do cotovelo em crianças (5-7 anos). Mecanismo de queda sobre a mão espalmada. <strong>Complicações:</strong> Lesão do nervo interósseo anterior (ramo do mediano - não consegue fazer o \"OK\" com os dedos), lesão da artéria braquial e Síndrome Compartimental.</li>\n<li><strong>Lesão Fisária (Salter-Harris):</strong> Fraturas envolvendo a placa de crescimento (fise). Classificação:\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Tipo</th><th>Mnemônico (SALTR)</th><th>Descrição da Linha de Fratura</th><th>Prognóstico e Conduta</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>I</td><td><strong>S</strong>lip / Straight across</td><td>Fratura através da fise (escorregamento)</td><td>Bom prognóstico. Conservador (gesso).</td></tr>\n      <tr><td>II</td><td><strong>A</strong>bove</td><td>Através da fise e da metáfise (sinal de Thurston-Holland)</td><td>O mais COMUM. Bom prognóstico. Conservador.</td></tr>\n      <tr><td>III</td><td><strong>L</strong>ower / beLow</td><td>Através da fise e epífise (intra-articular)</td><td>Prognóstico reservado. Requer redução anatômica cirúrgica.</td></tr>\n      <tr><td>IV</td><td><strong>T</strong>hrough or Two</td><td>Através de metáfise, fise e epífise</td><td>Alto risco de parada de crescimento. Cirúrgico.</td></tr>\n      <tr><td>V</td><td><strong>R</strong>am / cRushed</td><td>Compressão (esmagamento) da fise</td><td>Pior prognóstico. Diagnóstico muitas vezes retrospectivo após parada do crescimento (epifisiodese).</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Pé Torto Congênito (PTC):</strong> Deformidade em CAVE: <strong>C</strong>avo, <strong>A</strong>duto, <strong>V</strong>aro, <strong>E</strong>quino. <strong>Tratamento:</strong> Método de Ponseti (trocas gessadas semanais seguidas de tenotomia percutânea do tendão de Aquiles e uso da órtese de abdução de Denis Browne). O tratamento deve iniciar nos primeiros dias de vida.</li>\n</ul>"
         }
       ]
     },
     {
-      "title": "Ortopedia Pediátrica",
+      "title": "3. Fraturas Específicas do Adulto",
       "subchapters": [
         {
-          "num": "4",
-          "title": "Doenças do Quadril na Infância",
+          "num": "3.1",
+          "title": "Fraturas do Membro Superior",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura de Clavícula:</strong> Mais comum no terço médio. Tratamento geralmente conservador com tipoia \"oito\" ou americana. Cirúrgico se exposta, lesão neurovascular, iminência de exposição de pele, ou desvio/encurtamento muito grave (>2cm).</li>\n<li><strong>Fratura do Colo Cirúrgico do Úmero:</strong> Risco de lesão do <strong>Nervo Axilar</strong> e da artéria circunflexa umeral. Avaliar parestesia na face lateral do ombro (área da insígnia militar) e incapacidade de abdução (deltoide).</li>\n<li><strong>Fratura da Diáfise do Úmero:</strong> Risco clássico de lesão do <strong>Nervo Radial</strong>. <strong>Palavra-chave:</strong> \"Mão caída\" e perda de extensão dos dedos/punho. Maioria consolida com tratamento conservador (gesso pendente ou brace tipo Sarmiento).</li>\n<li><strong>Fratura de Rádio Distal (Colles vs Smith):</strong> \n  - <strong>Fratura de Colles:</strong> Queda com punho em EXTENSÃO. Desvio DORSAL do fragmento distal. Deformidade em \"dorso de garfo\". Tratamento: Redução fechada e gesso antebraquiopalmar.\n  - <strong>Fratura de Smith:</strong> Queda com punho em FLEXÃO. Desvio VOLAR do fragmento distal. Deformidade em \"pá de jardim\". Mais instável, frequentemente requer cirurgia.\n</li>\n<li><strong>Fratura de Escafoide:</strong> Queda espalmada. Dor na <strong>Tabaqueira Anatômica</strong>. <strong>Pegadinha:</strong> Radiografia inicial pode ser NORMAL (até 30% dos casos). Se há forte suspeita clínica e Rx normal: IMOBILIZAR e repetir Rx em 1-2 semanas, ou solicitar RM. Complicação frequente: <strong>Necrose avascular do polo proximal</strong> do escafoide (vascularização é distal para proximal).</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Fraturas do Membro Inferior e Pelve",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Faixa Etária</th><th>Clínica e Achados</th></tr></thead><tbody><tr><td>Displasia do Desenvolvimento do Quadril</td><td>Recém-nascidos</td><td>Manobras de Ortolani (reduz) e Barlow (luxa). Assimetria de pregas, sinal de Galeazzi. Tratamento: Suspensório de Pavlik (até 6 meses).</td></tr><tr><td>Doença de Legg-Calvé-Perthes</td><td>4 a 8 anos</td><td>Necrose avascular idiopática da cabeça do fêmur. Claudicação indolor ou dor leve no joelho/quadril. Tratamento: Contenção, órteses ou cirurgia em casos graves.</td></tr><tr><td>Epifisiólise da Cabeça do Fêmur</td><td>Adolescentes (obesos)</td><td>Deslizamento da epífise. Dor no quadril/joelho e marcha claudicante. Rotação externa obrigatória à flexão do quadril. Tratamento cirúrgico (fixação in situ).</td></tr><tr><td>Sinovite Transitória do Quadril</td><td>3 a 10 anos</td><td>Causa mais comum de dor no quadril. Frequente após IVAS. Conduta expectante, repouso e AINEs.</td></tr></tbody></table></div>"
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fratura de Pelve:</strong> Trauma de alta energia (motocicleta, atropelamento). <strong>Risco altíssimo de choque hemorrágico</strong> (sangramento retroperitoneal venoso ou do plexo sacral). <strong>Conduta inicial:</strong> Estabilizar bacia com lençol ou cinta pélvica a nível dos trocanteres maiores para diminuir o volume pélvico e conter sangramento por tamponamento (Damage Control).</li>\n<li><strong>Fratura do Colo do Fêmur:</strong> Muito comum em idosos, osteoporose. Trauma de baixa energia (queda da própria altura). <strong>Clínica:</strong> Membro encurtado e em ROTAÇÃO EXTERNA. <strong>Risco altíssimo:</strong> Necrose avascular da cabeça do fêmur (lesão da artéria circunflexa medial).\n  - <strong>Classificação de Garden:</strong> I (incompleta/impactada em valgo), II (completa, sem desvio), III (completa, desvio parcial), IV (completa, desvio total).\n  - <strong>Tratamento Idoso:</strong> Garden I e II -> Fixação com parafusos canulados (osteossíntese). Garden III e IV -> Artroplastia do quadril (prótese).\n  - <strong>Tratamento Jovem:</strong> SEMPRE urgência absoluta para fixação interna para tentar salvar a cabeça (osteossíntese).\n</li>\n<li><strong>Fratura Intertrocantérica:</strong> Ocorre entre os trocanteres (região muito vascularizada). Não costuma dar necrose da cabeça. Maior risco de instabilidade biomecânica. <strong>Tratamento padrão:</strong> Haste cefalomedular (PFN) ou placa-parafuso deslizante (DHS). Membro fica ainda mais encurtado e em ROTAÇÃO EXTERNA Acentuada.</li>\n<li><strong>Fraturas do Tornozelo (Classificação de Danis-Weber):</strong> Baseada no nível da fratura da fíbula em relação à sindesmose tibiofibular:\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Tipo</th><th>Nível da fratura fibular</th><th>Sindesmose</th><th>Tratamento</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>Weber A</td><td>Abaixo da sindesmose (infrasindesmal)</td><td>Intacta</td><td>Geralmente conservador (Gesso).</td></tr>\n      <tr><td>Weber B</td><td>No nível da sindesmose (transindesmal)</td><td>Pode estar lesada (até 50%)</td><td>Depende da estabilidade. Avaliar lesão medial associada.</td></tr>\n      <tr><td>Weber C</td><td>Acima da sindesmose (suprasindesmal)</td><td>Sempre lesada (instável)</td><td>Cirúrgico obrigatório. Redução aberta e fixação interna.</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n</ul>"
         }
       ]
     },
     {
-      "title": "Tumores Ósseos",
+      "title": "4. Medicina Esportiva e Lesões Ligamentares",
       "subchapters": [
         {
-          "num": "5",
-          "title": "Principais Tumores e Lesões",
+          "num": "4.1",
+          "title": "Lesões do Joelho",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Lesão do Ligamento Cruzado Anterior (LCA):</strong> Trauma torcional (pé fixo, rotação do tronco, valgo). <strong>Quadro clínico:</strong> Estalido audível, hemartrose imediata volumosa, incapacidade de continuar a prática esportiva. <strong>Testes:</strong> Lachman (mais sensível e específico), Gaveta Anterior, Pivot Shift. <strong>Tratamento:</strong> Cirúrgico (reconstrução com enxerto) em pacientes jovens, ativos, atletas.</li>\n<li><strong>Lesão do Ligamento Cruzado Posterior (LCP):</strong> Trauma direto na tíbia proximal (joelho fletido) - clássico \"trauma de painel de carro\". <strong>Testes:</strong> Gaveta posterior, teste do sag (queda da tíbia para trás). Tratamento predominantemente conservador com fortalecimento de quadríceps, cirurgia se instabilidade severa.</li>\n<li><strong>Lesão Meniscal:</strong> Dor intermitente, derrames de repetição menores (liquido sinovial, não hemartrose franca como LCA), sensação de bloqueio articular ou \"falseio\". <strong>Testes:</strong> McMurray, Apley. Menisco MEDIAL lesa mais que o lateral, frequentemente associado a lesão do LCA.</li>\n<li><strong>Tríade de O'Donoghue (Tríade Infeliz):</strong> Lesão combinada clássica por estresse em valgo severo + rotação: <strong>LCA + Ligamento Colateral Medial (LCM) + Menisco Medial.</strong></li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "5. Ortopedia Infecciosa e Tumoral",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Osteomielite e Artrite Séptica",
           "tags": [
             "adj"
           ],
-          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Osteossarcoma:</strong> Tumor ósseo maligno primário mais comum (excluindo mieloma). Adolescentes. Metáfise (fêmur distal, tíbia proximal). Rx com reação periosteal em \"raios de sol\" e triângulo de Codman.</li><li><strong>Sarcoma de Ewing:</strong> Crianças e adolescentes. Diáfise de ossos longos. Rx com reação periosteal em \"casca de cebola\". Associação com translocação t(11;22).</li><li><strong>Osteocondroma:</strong> Tumor ósseo benigno mais comum. Crescimento exofítico a partir da metáfise.</li><li><strong>Cisto Ósseo Simples:</strong> Lesão lítica central, benigna, em crianças (úmero proximal). Sinal do \"fragmento caído\" se fraturar.</li></ul>"
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteomielite Aguda:</strong> Infecção óssea mais comum em crianças via hematogênica (metáfise dos ossos longos devido a fluxo sanguíneo lento e microtraumas). Agente mais comum: <strong>S. aureus.</strong> Em falcêmicos, lembrar de <strong>Salmonella</strong>. <strong>Quadro:</strong> Febre, dor óssea intensa, claudicação, recusa alimentar. <strong>Diagnóstico:</strong> RX (pode ser normal até o 10º-14º dia! Útil apenas para descartar outras causas no início). RM é o padrão-ouro precoce. <strong>Tratamento:</strong> Antibioticoterapia sistêmica venosa prolongada. Cirurgia apenas se abscesso subperiosteal crônico ou falha no tratamento conservador.</li>\n<li><strong>Artrite Séptica:</strong> Emergência absoluta! Destrói a cartilagem articular em 24-48 horas por enzimas condrolíticas e aumento de pressão. Mais comum no joelho e quadril. <strong>Agentes:</strong> S. aureus em todas as faixas etárias; Neisseria gonorrhoeae em adultos jovens sexualmente ativos (poliartrite migratória evoluindo para monoartrite + lesões pustulosas cutâneas).\n<pre class=\"reader-pre-card\">\nSuspeita de Artrite Séptica (dor, bloqueio articular, febre)\n↓\nArtrocentese (Líquido turvo/purulento, Leucócitos &gt; 50.000, PMN &gt; 90%, Glicose &lt; sangue)\n↓\nDrenagem cirúrgica imediata (lavagem articular) + Antibiótico IV empírico\n</pre>\n</li>\n</ul>"
+        },
+        {
+          "num": "5.2",
+          "title": "Tumores Ósseos Principais",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteossarcoma:</strong> Tumor ósseo maligno PRIMÁRIO mais comum. Predomina em adolescentes (10-25 anos). Afeta a <strong>METÁFISE</strong> de ossos longos (Fêmur distal e Tíbia proximal - perto do joelho). <strong>Clínica:</strong> Dor persistente, piora à noite, aumento de volume local. <strong>Radiografia:</strong> Lesão lítica e blástica destrutiva, reação periosteal tipo \"Triângulo de Codman\" e imagem em \"raios de sol\" (sunburst). <strong>Conduta:</strong> Biópsia cirúrgica + Quimioterapia Neoadjuvante + Ressecção ampla + QT Adjuvante.</li>\n<li><strong>Sarcoma de Ewing:</strong> Afeta faixa etária semelhante (mais em crianças 5-15 anos), porém acomete a <strong>DIÁFISE</strong> dos ossos longos. Mimetiza infecção (causa febre, aumento de VHS/PCR). <strong>Radiografia:</strong> Reação periosteal em \"casca de cebola\". Associado a translocação t(11;22). Tumor neuroectodérmico primitivo.</li>\n<li><strong>Osteocondroma:</strong> Tumor ósseo BENIGNO mais comum. Crescimento cartilaginoso exofítico coberto por capuz cartilaginoso na metáfise (\"ponta de osso\" crescendo para longe da articulação). Indolor, só tratado se comprimir estruturas ou causar sintomas mecânicos. Pode degenerar para condrossarcoma em &lt;1% dos casos (suspeitar se capuz cartilaginoso &gt; 2 cm de espessura no adulto ou crescimento após fim da maturidade esquelética).</li>\n<li><strong>Cisto Ósseo Simples:</strong> Tumor pseudotumoral benigno. Lesão lítica central, na metáfise do úmero proximal ou fêmur proximal, muito comum em crianças. Costuma abrir o quadro com fratura patológica com \"sinal do fragmento caído\".</li>\n<li><strong>Mieloma Múltiplo:</strong> Tumor ósseo primário maligno MAIS COMUM se considerar &gt; 50 anos. Doença sistêmica dos plasmócitos. Causas lesões líticas \"em saca-bocado\", hipercalcemia, anemia e disfunção renal (CRAB).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "6. Afecções da Coluna Vertebral e Compressões",
+      "subchapters": [
+        {
+          "num": "6.1",
+          "title": "Patologias da Coluna",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hérnia de Disco Lombar:</strong> Compressão radicular do núcleo pulposo. Níveis mais comuns: L4-L5 e L5-S1. <strong>Clínica:</strong> Dor lombar irradiada para membro inferior (Lombociatalgia), piora com Valsalva ou tosse. <strong>Teste de Lasègue:</strong> Dor radicular à elevação do membro inferior esticado entre 30-70 graus. <strong>Tratamento:</strong> 90% melhoram com conservador (repouso relativo, AINES, pregabalina, fisioterapia). Cirurgia (Microdiscectomia) se síndrome da cauda equina, déficit neurológico progressivo ou falha do tratamento conservador > 6-8 semanas.</li>\n<li><strong>Raízes e Reflexos (Dica ENAMED):</strong>\n<div class=\"reader-table-wrap\">\n  <table class=\"reader-table\">\n    <thead>\n      <tr><th>Raiz Acometida</th><th>Déficit Motor (Força)</th><th>Reflexo Diminuído</th><th>Alteração Sensitiva</th></tr>\n    </thead>\n    <tbody>\n      <tr><td>L4</td><td>Extensão do Joelho (Quadríceps) / Inversão do pé</td><td>Patelar</td><td>Face medial da perna e maléolo medial</td></tr>\n      <tr><td>L5</td><td>Extensão do Hálux (Tibial anterior/Extensor do hálux) - \"Mão e pé caídos\"</td><td>(Nenhum confiável)</td><td>Dorso do pé, região entre 1º e 2º dedos</td></tr>\n      <tr><td>S1</td><td>Flexão plantar (Tríceps sural) / Eversaõ do pé</td><td>Aquileu</td><td>Borda lateral do pé e maléolo lateral</td></tr>\n    </tbody>\n  </table>\n</div>\n</li>\n<li><strong>Síndrome da Cauda Equina:</strong> URGÊNCIA neurocirúrgica! Compressão maciça central das raízes lombossacrais. <strong>Sintomas de alerta (Red Flags):</strong> Anestesia em \"sela\" (períneo), disfunção esfincteriana (retenção ou incontinência urinária/fecal), déficit motor bilateral severo. <strong>Conduta:</strong> Descompressão cirúrgica de urgência (dentro de 48h para evitar lesão definitiva).</li>\n<li><strong>Escoliose Idiopática do Adolescente:</strong> Curvatura lateral > 10 graus e rotação vertebral (Gibosidade costal no Teste de Adams). <strong>Tratamento:</strong> < 20º acompanhamento e exercícios; 20-40º uso de colete (Colete de Milwaukee/Boston) para pacientes em crescimento (Risser baixo); > 40-50º correção cirúrgica (Artrodese posterior).</li>\n</ul>"
+        },
+        {
+          "num": "6.2",
+          "title": "Síndromes Compressivas Periféricas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Síndrome do Túnel do Carpo:</strong> Compressão do <strong>Nervo Mediano</strong> no punho pelo retináculo dos flexores. Mais comum em mulheres, gestantes, hipotireoidismo, diabetes e acromegalia. <strong>Clínica:</strong> Parestesia noturna nos primeiros 3 dedos e metade do 4º dedo, dor que acorda o paciente, fraqueza na oponência do polegar. Hipotrofia tenar em casos avançados. <strong>Manobras:</strong> Teste de Phalen (flexão do punho por 1 min reprodutora de dor) e Sinal de Tinel (percussão do nervo). <strong>Padrão Ouro:</strong> Eletroneuromiografia (ENMG). <strong>Tratamento:</strong> Conservador (tala de punho, injeção de corticoide local). Cirúrgico (liberação do retináculo) nos refratários ou perda motora.</li>\n<li><strong>Compressão do Nervo Ulnar:</strong>\n  - No cotovelo (Síndrome do Túnel Cubital): Mais comum, parestesia no 4º e 5º dedos.\n  - No punho (Síndrome do Canal de Guyon): Menos comum, afeta o nervo ulnar no punho, geralmente ciclistas ou traumas compressivos locais. Hipotrofia hipotenar e sinal de Froment.\n</li>\n<li><strong>Dedo em Gatilho e Tenossinovite de De Quervain:</strong> \n  - <strong>De Quervain:</strong> Tenossinovite do extensor curto e abdutor longo do polegar. <strong>Teste de Finkelstein</strong> positivo (dor ao desviar o punho ulnarmente com o polegar aduzido).\n  - <strong>Dedo em Gatilho:</strong> Estenose da polia A1 impedindo o deslizamento fluido dos tendões flexores, gerando um \"travamento\".\n</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "7. Doenças Osteometabólicas",
+      "subchapters": [
+        {
+          "num": "7.1",
+          "title": "Osteoporose e Doença de Paget",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Osteoporose:</strong> Perda de massa óssea e deterioração da microarquitetura trabecular, aumentando o risco de fratura por fragilidade (especialmente colo de fêmur, vértebra e rádio distal). <strong>Diagnóstico Ouro:</strong> Densitometria Óssea com T-score &le; -2,5 DP em coluna lombar, fêmur total ou colo femoral. <strong>Pegadinha:</strong> Diagnóstico pode ser clínico caso já tenha fratura por fragilidade.</li>\n<li><strong>Tratamento da Osteoporose:</strong> Mudança de estilo de vida (cálcio e vitamina D adequados, exercício resistido). Fármacos de primeira linha: <strong>Bisfosfonatos</strong> (Alendronato, Risedronato). Instrução de uso do alendronato: Tomar em jejum, com copo cheio de água, não deitar por 30 minutos (risco de esofagite erosiva). Medicações mais potentes incluem Denosumabe (inibidor do RANKL) e Teriparatida (anabólico, para osteoporose severa).</li>\n<li><strong>Doença de Paget (Osteíte Deformante):</strong> Remodelamento ósseo desorganizado e excessivo, levando a ossos frágeis e alargados. Maioria assintomática, detectada por <strong>Fosfatase Alcalina isoladamente muito elevada</strong> com transaminases/GGT normais. <strong>Clínica:</strong> Dor óssea, surdez (acometimento dos ossículos do ouvido/crânio), aumento do tamanho do crânio, sabre tibial. <strong>Complicação temida:</strong> Transformação para osteossarcoma (em cerca de 1% dos casos no adulto idoso). <strong>Tratamento:</strong> Bisfosfonatos intravenosos (Zoledronato é a droga de escolha) para inibir a fase osteoclástica.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "8. Afecções do Pé e Tornozelo do Adulto",
+      "subchapters": [
+        {
+          "num": "8.1",
+          "title": "Fasceíte Plantar e Hálux Valgo",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Fasceíte Plantar:</strong> Causa mais comum de talalgia (dor no calcanhar). Processo degenerativo e microtraumático na origem da fáscia plantar no tubérculo medial do calcâneo. <strong>Quadro clássico:</strong> Dor intensa ao dar os primeiros passos pela manhã ou após longo período de repouso, melhorando com a deambulação. O achado de \"esporão de calcâneo\" no Rx NÃO é a causa da dor, apenas uma calcificação pela tração crônica. <strong>Tratamento:</strong> Analgesia, alongamento específico da fáscia e do tendão de Aquiles, palmilhas calcanheiras de silicone e fisioterapia. Infiltração com corticoide é de exceção pelo risco de ruptura da fáscia e atrofia do coxim adiposo.</li>\n<li><strong>Hálux Valgo (Joanete):</strong> Deformidade complexa do primeiro raio (desvio em valgo do hálux e varo do 1º metatarso) com proeminência dolorosa da cabeça do 1º metatarso (bursa). Mais comum em mulheres e uso de calçados de bico fino. <strong>Tratamento:</strong> Inicialmente mudança de calçados (bico largo, sem salto). Casos refratários e dor crônica: Osteotomias cirúrgicas e realinhamento de partes moles (ex: técnica de Chevron, Scarf).</li>\n<li><strong>Pé Plano do Adulto:</strong> Secundário à insuficiência do tendão do músculo tibial posterior. O paciente relata dor na face medial do tornozelo que progride com o colapso do arco longitudinal plantar (\"pé chato\" progressivo) e deformidade em valgo do retropé. Sinal clássico no exame físico: Teste de elevação na ponta dos pés (o paciente não consegue realizar a inversão fisiológica do calcanhar, ou simplesmente não consegue se erguer em um pé só).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "9. Princípios de Imobilização e Complicações Ortopédicas Gerais",
+      "subchapters": [
+        {
+          "num": "9.1",
+          "title": "Trombose Venosa Profunda e Embolia Gordurosa",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Embolia Gordurosa:</strong> Complicação sistêmica de fraturas de ossos longos (especialmente fêmur e tíbia) e pelve. Gotículas de gordura da medula óssea entram na circulação venosa e embolizam para o pulmão, cérebro e pele. <strong>Tríade Clínica (Critérios de Gurd):</strong> Hipoxemia/Insuficiência Respiratória aguda + Alteração Neurológica (confusão, agitação) + Petéquias (em tronco, axilas e conjuntiva ocular). <strong>Palavra-chave:</strong> \"Paciente politraumatizado com fratura de fêmur que desenvolve taquipneia, confusão mental e manchas puntiformes no tórax 24-72h depois\". <strong>Prevenção:</strong> Fixação óssea PRECOCE. O tratamento é de suporte hemodinâmico e respiratório, não existindo droga específica (corticoides controversos).</li>\n<li><strong>TVP em Ortopedia:</strong> Cirurgias de Artroplastia de Quadril e Joelho, além de fraturas pélvicas, têm altíssimo risco de TVP e TEP. A profilaxia farmacológica (HBPM - Enoxaparina, ou NOACs - Rivaroxabana) é mandatória e estendida por 28-35 dias em geral.</li>\n<li><strong>Princípios da Imobilização Gessada:</strong> Deve incluir a articulação proximal e a articulação distal ao foco da fratura. Complicações incluem lesão de pele (úlceras de pressão no calcâneo ou maléolos), lesão nervosa compressiva (Nervo fibular comum na cabeça da fíbula causando pé caído se o gesso for mal moldado).\n<pre class=\"reader-pre-card\">\nSe dor localizada progressiva sob um gesso ou parestesias:\n↓\nJanelar o gesso no ponto doloroso ou abri-lo (fendê-lo) longitudinalmente até a pele para excluir compressão ou úlcera.\n</pre>\n</li>\n<li><strong>Fissuras Ósseas ou \"Stress Fractures\":</strong> Fraturas de estresse, mais comuns no terço distal de metatarsos (Fratura do Recruta, 2º metatarso), colo do fêmur ou tíbia em atletas, corredores ou militares após mudança abrupta de treinamento. O Rx inicial é NORMAL na maioria dos casos, o diagnóstico precoce é feito por Ressonância Magnética ou cintilografia. Tratamento com repouso esportivo relativo.</li>\n</ul>"
         }
       ]
     }

@@ -1,97 +1,79 @@
 {
   "area": "Nefrologia",
-  "title": "Nefrologia (UEPA Master Rapid Review)",
+  "title": "Nefrologia",
   "isExample": false,
   "sections": [
     {
-      "title": "1. Glomerulopatias",
+      "title": "Distúrbios Hidroeletrolíticos e Ácido-Básicos",
       "subchapters": [
         {
           "num": "1.1",
-          "title": "Síndrome Nefrótica",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema generalizado (anasarca), urina espumosa, ausência de hipertensão ou hematúria marcantes.</li>\n<li><strong>Critérios Diagnósticos:</strong> Proteinúria nefrótica (&gt; 3,5 g/24h em adultos ou &gt; 50 mg/kg/dia em crianças), hipoalbuminemia (&lt; 3,0 g/dL), hipercolesterolemia e edema.</li>\n<li><strong>Doença de Lesão Mínima (DLM):</strong> Principal causa em crianças (2-8 anos). Patogênese por fusão dos podócitos (microscopia eletrônica). Complemento normal. Responde bem a corticoides.</li>\n<li><strong>Tratamento na Pediatria:</strong> Dieta hipossódica, corticoterapia empírica (prednisona), reposição de albumina se sinais de hipovolemia, diuréticos com parcimônia. Restrição hídrica <strong>NÃO</strong> é rotina para nefrótica (ao contrário da nefrítica). Imunossupressores se corticodependente ou resistente.</li>\n</ul>"
+          "title": "Distúrbios do Sódio e Osmolaridade",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiologia da Osmolaridade:</strong> O principal determinante da osmolaridade plasmática é o sódio. A fórmula de cálculo é Osm = 2xNa + Glicose/18 + Ureia/6. <strong>Palavra-chave: Osmolaridade normal:</strong> 285 a 295 mOsm/kg. O controle se dá pelo ADH e mecanismo da sede.</li><li><strong>Hiponatremia (< 135 mEq/L):</strong> O passo inicial é checar a osmolaridade plasmática. Se hipo-osmolar (verdadeira), avaliar o volume extracelular e o sódio urinário.</li><li><strong>SIADH:</strong> Hiponatremia hipo-osmolar euvolêmica com sódio urinário alto (>20-40) e ácido úrico baixo. <strong>Pegadinha:</strong> Pode ser desencadeada por <strong>tuberculose pulmonar</strong>, além de medicamentos (antidepressivos) e câncer de pulmão (oat cell). Conduta: restrição hídrica; em casos severos sintomáticos (sonolência, convulsão), reposição com NaCl 3%. Cuidado para não repor rápido (risco de Síndrome de Desmielinização Osmótica).</li><li><strong>Hipernatremia (> 145 mEq/L):</strong> Quase sempre indica déficit de água livre (ex: paciente intubado, idoso sem acesso a água, ou Diabetes Insipidus). O tratamento é repor água livre por via oral/enteral ou SG 5% / NaCl 0,45% endovenoso.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo de Hiponatremia</th><th>Osmolaridade</th><th>Volemia</th><th>Sódio Urinário</th><th>Exemplo Clássico</th></tr></thead><tbody><tr><td>Falsa (Pseudohiponatremia)</td><td>Normal ou Alta</td><td>Variável</td><td>-</td><td>Hiperglicemia severa, Hiperlipidemia</td></tr><tr><td>Hipovolêmica</td><td>Baixa</td><td>Baixa</td><td>Baixo (<20)</td><td>Perdas TGI (diarreia), Sudorese</td></tr><tr><td>Hipovolêmica Renal</td><td>Baixa</td><td>Baixa</td><td>Alto (>20)</td><td>Uso de tiazídicos, Hipoaldosteronismo</td></tr><tr><td>Hipervolêmica</td><td>Baixa</td><td>Alta</td><td>Baixo (<20)</td><td>IC, Cirrose, Síndrome Nefrótica</td></tr><tr><td>Euvolêmica</td><td>Baixa</td><td>Normal</td><td>Alto (>20)</td><td>SIADH, Hipotireoidismo, Polidipsia</td></tr></tbody></table></div><pre class=\"reader-pre-card\">Hiponatremia Aguda/Sintomática (Sódio < 120 ou neuro)\n↓\nReposição de NaCl 3% (Salina hipertônica)\n↓\nMeta: Aumentar Na em 1-2 mEq/h nas primeiras 3h (alívio dos sintomas)\n↓\nLimite diário: Não exceder 8 a 10 mEq/L em 24h para evitar Mielinólise Pontina.</pre>"
         },
         {
           "num": "1.2",
-          "title": "Síndrome Nefrítica (GNPE)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema (início periorbital), hipertensão arterial, hematúria (dismórfica/cilindros hemáticos) e oligúria.</li>\n<li><strong>GNPE:</strong> Ocorre pós infecção estreptocócica (faringite 1-2 sem, piodermite 3-6 sem).</li>\n<li><strong>Laboratório GNPE:</strong> Complemento (C3 e CH50) consumido (volta ao normal em 8 semanas). ASLO (faringe) e Anti-DNAse B (pele) positivos.</li>\n<li><strong>Tratamento GNPE:</strong> Suporte, restrição hídrica e sódica, diuréticos de alça (furosemida) para controle de PA e edema. Antibiótico (penicilina) não cura a GNPE, mas erradica a cepa nefritogênica.</li>\n</ul>"
+          "title": "Distúrbios do Potássio",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Hipercalemia (> 5,5 mEq/L):</strong> Causa clássica em doentes renais agudos (ex: pós-acidente ofídico, rabdomiólise) ou crônicos e IECA/BRA. <strong>Sinais no ECG:</strong> Onda T apiculada (\"em tenda\"), achatamento da onda P, alargamento de QRS, evoluindo para assistolia.</li><li><strong>Conduta Emergencial na Hipercalemia:</strong> Se houver alteração no ECG, a <strong>medida prioritária e imediata é estabilizar a membrana miocárdica com Gluconato de Cálcio a 10%</strong> (1 ampola IV em 2-3 min). <strong>Pegadinha:</strong> O cálcio NÃO diminui o potássio sérico, apenas protege o coração de arritmias. Logo após, inicia-se medidas de shift (insulina regular + glicose, beta-2 agonista) e eliminação (Sorcal, furosemida, diálise).</li><li><strong>Hipocalemia (< 3,5 mEq/L):</strong> Pode ser causada por diarreia, diuréticos (tiazídicos, de alça) e alcalose metabólica. ECG mostra onda T achatada, presença de onda U e prolongamento de QT. O tratamento é reposição oral ou venosa lenta (KCl). Caso refratário, suspeitar e tratar hipomagnesemia concomitante.</li></ul>"
         },
         {
           "num": "1.3",
-          "title": "Nefrite Lúpica",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Patogênese:</strong> Depósito de imunocomplexos no lúpus.</li>\n<li><strong>Classificação:</strong>\n  <ul class=\"reader-list\">\n    <li>Classe IV (Proliferativa Difusa): Mais comum e mais grave. Apresenta síndrome nefrítica + proteinúria variável. Tratamento: Ciclofosfamida ou Micofenolato + Corticoides.</li>\n    <li>Classe V (Membranosa): Cursa com síndrome nefrótica.</li>\n  </ul>\n</li>\n<li><strong>Marcadores:</strong> Anti-dsDNA correlaciona-se com atividade da nefrite. Complemento (C3, C4) consumido na atividade.</li>\n</ul>"
+          "title": "Distúrbios Ácido-Básicos",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Acidose Metabólica (pH < 7,35; HCO3 < 22):</strong> O primeiro passo é calcular o Ânion Gap (AG = Na - [Cl + HCO3]). O normal é 8 a 12.</li><li><strong>Acidose Metabólica com AG aumentado (Normoclorêmica):</strong> Indica acúmulo de ácido (cetoacidose diabética, acidose lática por sepse/choque, uremia, intoxicações por salicilato ou metanol). <strong>Palavra-chave: Sepse / Hipoperfusão:</strong> A acidose lática cursa com hiperventilação compensatória (respiração de Kussmaul, pCO2 baixa) e ânion gap alto. Para checar se a compensação respiratória é <strong>apropriada</strong>, usar a fórmula de Winter: pCO2 esperada = (1,5 x HCO3) + 8 (±2).</li><li><strong>Acidose Metabólica com AG normal (Hiperclorêmica):</strong> Indica perda de bicarbonato, como na diarreia ou nas Acidoses Tubulares Renais (ATR). O Cloro plasmático sobe para compensar a perda do HCO3.</li><li><strong>Alcalose Metabólica (pH > 7,45; HCO3 > 26):</strong> Causas clássicas: vômitos repetidos (perda de H+ e Cl-) e uso de diuréticos tiazídicos/alça. Costuma ser responsiva a cloreto (hidratação com SF 0,9%).</li><li><strong>Alcalose e Acidose Respiratória:</strong> Distúrbios primários do pCO2 devidos a hipoventilação (DPOC retendo CO2) ou hiperventilação (ansiedade, dor, TEP expulsando CO2).</li></ul>"
         }
       ]
     },
     {
-      "title": "2. Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "title": "Doenças Glomerulares e Intersticiais",
       "subchapters": [
         {
           "num": "2.1",
-          "title": "Hiponatremia e SIADH",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hiponatremia:</strong> Sódio sérico &lt; 135 mEq/L. Reflete um excesso de água livre em relação ao sódio.</li>\n<li><strong>Clínica:</strong> Náuseas, vômitos, cefaleia, letargia, convulsões e coma (edema cerebral).</li>\n<li><strong>SIADH (Síndrome de Secreção Inapropriada do ADH):</strong>\n  <ul class=\"reader-list\">\n    <li>Causas: Doenças pulmonares (tuberculose, pneumonia), distúrbios do SNC, drogas (antidepressivos, anticonvulsivantes).</li>\n    <li>Laboratório: Hiponatremia (sódio baixo), osmolalidade plasmática baixa (&lt; 275 mOsm/kg), osmolalidade urinária alta (urina concentrada), sódio urinário alto (&gt; 40 mEq/L), ácido úrico baixo e ureia baixa. Volemia clínica normal (euvolemia).</li>\n  </ul>\n</li>\n<li><strong>Tratamento:</strong> Restrição hídrica. Em casos graves/sintomáticos (sódio &lt; 120), repor salina hipertônica 3% com cuidado para não causar síndrome de desmielinização osmótica.</li>\n</ul>"
+          "title": "Síndromes Glomerulares",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Síndrome Nefrótica:</strong> Caracteriza-se por proteinúria maciça (> 3,5 g/dia em adultos ou > 50 mg/kg/dia em crianças), hipoalbuminemia, edema generalizado e hiperlipidemia. <strong>Palavra-chave: Urina espumosa.</strong></li><li><strong>Tratamento da Síndrome Nefrótica em Crianças (Doença por Lesão Mínima):</strong> A maioria responde ao <strong>corticoide (prednisona)</strong> empírico. A dieta deve ser hipossódica e normoproteica. <strong>Pegadinha:</strong> <strong>Restrição hídrica não é indicada</strong> de rotina, pois há risco de trombose e hipovolemia mascarada; a restrição só ocorre em hiponatremia severa.</li><li><strong>Síndrome Nefrítica (Glomerulonefrite Aguda):</strong> Tríade clássica: Hematúria dismórfica, Hipertensão Arterial e Edema. Principal etiologia é a GNPE (Pós-Estreptocócica), típica em crianças 1 a 3 semanas pós-faringite ou 3 a 6 semanas pós-piodermite.</li><li><strong>Diagnóstico de GNPE:</strong> ASLO elevado ou Anti-DNAse B, e queda transitória do complemento (C3), que deve normalizar em até 8 semanas. Tratamento de suporte: restrição hídrica/salina e diurético (furosemida) para HAS e edema. O antibiótico (penicilina) erradica o estreptococo para evitar disseminação, mas NÃO altera a evolução da doença renal.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Glomerulopatia</th><th>Apresentação Típica</th><th>Complemento Consumido?</th><th>Tratamento Inicial</th></tr></thead><tbody><tr><td>Lesão Mínima</td><td>Nefrótica infantil, após infecção viral</td><td>Não</td><td>Corticoterapia empírica</td></tr><tr><td>GESF</td><td>Nefrótica adulto, HAS, negros, HIV</td><td>Não</td><td>Corticoide / iECA</td></tr><tr><td>Membranosa</td><td>Nefrótica, alto risco de TVP de veia renal, tumores sólidos</td><td>Não</td><td>iECA, Imunossupressão</td></tr><tr><td>GNPE</td><td>Nefrítica, criança pós-faringite/impetigo</td><td>Sim (C3, C4 normal)</td><td>Suporte, Furosemida</td></tr><tr><td>Doença de Berger (IgA)</td><td>Hematúria macroscópica SINCRÔNICA à faringite</td><td>Não</td><td>iECA / BRA</td></tr></tbody></table></div>"
         },
         {
           "num": "2.2",
-          "title": "Hipercalemia",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Conceito:</strong> Potássio &gt; 5,5 mEq/L.</li>\n<li><strong>ECG na Hipercalemia:</strong> Ondas T apiculadas (\"em tenda\") &rarr; Achatamento da onda P &rarr; Aumento do intervalo PR &rarr; Alargamento do QRS &rarr; Ritmo idioventricular / Assistolia.</li>\n<li><strong>Conduta de Emergência (Alteração ECG):</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead>\n        <tr><th>Ação</th><th>Medicamento</th><th>Tempo de Ação</th></tr>\n      </thead>\n      <tbody>\n        <tr><td><strong>1º Estabilizar Membrana</strong></td><td>Gluconato de Cálcio a 10% IV</td><td>Imediato (não reduz potássio)</td></tr>\n        <tr><td><strong>2º Shift Intracelular</strong></td><td>Solução Polarizante (Insulina + Glicose), Bicarbonato de Sódio (se acidose), Beta-2 agonista inalatório</td><td>Minutos a horas</td></tr>\n        <tr><td><strong>3º Excreção Corporal</strong></td><td>Diuréticos de alça (Furosemida), Resinas de troca (Sorcal), Hemodiálise</td><td>Horas</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Importante:</strong> Gluconato de cálcio é a medida <strong>prioritária</strong> para prevenir arritmias letais.</li>\n</ul>"
-        },
-        {
-          "num": "2.3",
-          "title": "Distúrbios Acidobásicos (Acidose Metabólica)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Diagnóstico:</strong> pH &lt; 7.35 e HCO3 baixo.</li>\n<li><strong>Ânion Gap (AG):</strong> Na - (Cl + HCO3). Valor normal: 8 a 12.</li>\n<li><strong>Acidose Metabólica com AG Elevado (Normoclorêmica):</strong> Consumo de bicarbonato por ácidos orgânicos não medidos (MUDPILES: Metanol, Uremia, DKA, Paraldeído, Isoniazida/Infecção, Lactato, Etilenoglicol, Salicilatos).</li>\n<li><strong>Acidose Metabólica com AG Normal (Hiperclorêmica):</strong> Perda de bicarbonato (diarreia, fístula) ou incapacidade renal de excretar H+ (Acidose Tubular Renal - ATR).</li>\n<li><strong>Compensação (Fórmula de Winter):</strong> pCO2 esperado = (1.5 x HCO3) + 8 &plusmn; 2. Se pCO2 medido for menor, há alcalose respiratória associada; se maior, acidose respiratória associada.</li>\n</ul>"
+          "title": "Nefrite Intersticial e Nefrotoxicidade",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Nefrite Intersticial Aguda (NIA):</strong> Lesão renal aguda por hipersensibilidade. Clínica: febre, rash cutâneo, eosinofilia e eosinofilúria, associados à oligúria pós-uso de fármacos (AINES, beta-lactâmicos, sulfas) ou doenças inflamatórias.</li><li><strong>Nefrite Intersticial por Sarcoidose:</strong> Uma causa não medicamentosa de NIA granulomatosa. <strong>Pegadinha de Tratamento:</strong> Em casos comprovados por biópsia de etiologia imunológica ou granulomatosa (como na sarcoidose), o uso de <strong>corticosteroides</strong> tem grande probabilidade de influenciar a recuperação renal a longo prazo e evitar diálise. (Lesões tóxicas puras, como chumbo ou analgésicos, não respondem bem ao corticoide).</li><li><strong>Necrose Tubular Aguda (NTA):</strong> Forma mais comum de LRA intrínseca em pacientes internados. Ocorre por isquemia (choque, sepse prolongada) ou toxinas (contraste iodado, aminoglicosídeos). Fração de excreção de sódio (FeNa) > 1%, cilindros granulosos pigmentados (muddy brown). Evolui classicamente com fase oligúrica seguida de fase poliúrica. Tratamento é suporte e remoção do insulto.</li></ul>"
         }
       ]
     },
     {
-      "title": "3. Infecções e Nefrolitíase",
+      "title": "Infecção do Trato Urinário e Nefrolitíase",
       "subchapters": [
         {
           "num": "3.1",
           "title": "Infecção do Trato Urinário (ITU)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Cistite Não Complicada (Mulheres):</strong> Tratamento empírico de primeira linha inclui <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5-7 dias). Cefalexina e Bactrim são alternativas a depender de resistência local.</li>\n<li><strong>ITU na Pediatria:</strong> \n  <ul class=\"reader-list\">\n    <li><strong>Coleta:</strong> Saco coletor tem alto índice de falso-positivo, serve apenas para <strong>excluir</strong> (se negativo). Para confirmar em pré-escolar sem controle esfincteriano, usar <strong>cateterismo vesical</strong> (sondagem) ou <strong>punção suprapúbica</strong>.</li>\n    <li><strong>Diagnóstico:</strong> A urocultura coletada por punção suprapúbica confirma o diagnóstico de ITU havendo crescimento de <strong>qualquer</strong> patógeno (qualquer UFC), pois a via é estéril.</li>\n  </ul>\n</li>\n<li><strong>Laboratório (EAS):</strong> Nitrito positivo indica bactérias redutoras de nitrato (ex. E. coli), mas nitrito negativo não exclui ITU (Staphylococcus, Enterococcus, Pseudomonas não reduzem nitrato).</li>\n</ul>"
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Cistite Não Complicada (Mulher não grávida):</strong> Sintomas baixos: disúria, polaciúria, urgência, sem febre ou sinais sistêmicos. Agente principal é E. coli. <strong>Tratamento de primeira linha:</strong> <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5 dias).</li><li><strong>Pielonefrite Aguda:</strong> ITU alta com febre, calafrios e sinal de Giordano positivo. Exame de urina com leucocitúria e cilindros leucocitários. Tratamento ambulatorial (se bom estado geral): Ciprofloxacino ou Levofloxacino oral. Se vômitos/sepse: internação com Ceftriaxona endovenosa.</li><li><strong>Bacteriúria Assintomática:</strong> Crescimento de bactérias em urocultura sem sintomas. O tratamento SÓ é indicado em <strong>gestantes</strong>, antes de procedimentos urológicos invasivos com sangramento mucoso ou em transplantados renais recentes. <strong>Pegadinha:</strong> Em idosos e portadores de sonda vesical, NÃO tratar a bacteriúria assintomática.</li></ul>"
         },
         {
           "num": "3.2",
           "title": "Nefrolitíase e Pielonefrite Obstrutiva",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica de Cólica Nefrética:</strong> Dor lombar de forte intensidade irradiando para flanco ou genitália (grandes lábios/testículo). Pode causar hematúria.</li>\n<li><strong>Tratamento Analgésico:</strong> AINEs (Cetoprofeno) são a primeira linha. Opiáceos são segunda linha.</li>\n<li><strong>Indicações de Intervenção Urgente (Pielonefrite Obstrutiva):</strong> Cálculo ureteral + sinais de infecção (febre, calafrios, leucocitose). Há risco iminente de sepse.</li>\n<li><strong>Conduta na Pielonefrite Obstrutiva:</strong> Desobstrução urgente da via urinária + Antibioticoterapia.\n  <ul class=\"reader-list\">\n    <li>A desobstrução é feita por drenagem urinária com inserção de <strong>Cateter Duplo J</strong> ou <strong>Nefrostomia percutânea</strong>, SEM a retirada do cálculo no mesmo momento (risco cirúrgico alto na fase aguda).</li>\n  </ul>\n</li>\n<li><strong>Terapia Expulsiva:</strong> Para cálculos &lt; 10 mm e paciente sem sinais de alarme. Uso de alfa-bloqueadores (Tansulosina) e hidratação.</li>\n</ul>"
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Nefrolitíase:</strong> Dor lombar tipo cólica, súbita, irradiada para genitália, com hematúria microscópica. Padrão-ouro diagnóstico: TC de abdome sem contraste. A maioria dos cálculos é de oxalato de cálcio (radiopacos).</li><li><strong>Tratamento Agudo da Cólica:</strong> Analgesia rigorosa (AINES como cetorolaco e opioides).</li><li><strong>Terapia Expulsiva:</strong> Para cálculos distais < 10 mm, usar alfa-bloqueadores (Tansulosina) para relaxar a junção ureterovesical.</li><li><strong>Pielonefrite Obstrutiva (Urgência Urológica):</strong> Cálculo ureteral associado a sinais de infecção (febre, calafrios, sepse, leucocitose). <strong>Conduta OBRIGATÓRIA:</strong> <strong>Drenagem imediata da via urinária com cateter Duplo J</strong> ou nefrostomia percutânea + Antibioticoterapia intravenosa de amplo espectro. <strong>Pegadinha:</strong> <strong>É contraindicada a retirada do cálculo</strong> (ureterolitotripsia ou LECO) no mesmo tempo cirúrgico devido à alta pressão e risco de choque séptico fatal. O cálculo só será tratado semanas depois, com a infecção resolvida.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tamanho / Posição do Cálculo</th><th>Tratamento Definitivo Eletivo</th></tr></thead><tbody><tr><td>< 5 mm</td><td>Terapia hídrica, expulsão espontânea</td></tr><tr><td>Cálculo Distal < 10 mm</td><td>Tansulosina (Terapia expulsiva) ou Ureterolitotripsia (URS)</td></tr><tr><td>Cálculo Proximal < 2 cm</td><td>LECO (Litotripsia Extracorpórea por Ondas de Choque)</td></tr><tr><td>Cálculo > 2 cm ou Coraliforme</td><td>Nefrolitotripsia Percutânea (NLP)</td></tr></tbody></table></div><pre class=\"reader-pre-card\">Cólica Nefrética na Emergência\n↓\nTC de Abdome Sem Contraste\n↓\nTem Febre ou Sinais de Sepse?\n- SIM -> Duplo J ou Nefrostomia de urgência + ATB\n- NÃO -> Tamanho < 10mm? -> Alta com analgesia e Tansulosina\n        -> Tamanho > 10mm ou refratário? -> Agendar intervenção (LECO/URS)</pre>"
         }
       ]
     },
     {
-      "title": "4. Doenças Túbulo-Intersticiais",
+      "title": "Lesão Renal Aguda e Doença Renal Crônica",
       "subchapters": [
         {
           "num": "4.1",
-          "title": "Nefrite Intersticial Aguda (NIA)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Etiologia:</strong> Predominantemente induzida por drogas (Antibióticos - penicilinas, cefalosporinas; AINEs; IBP; Diuréticos) ou infecções (bactérias, vírus). Sarcoidose e doenças autoimunes também podem causar.</li>\n<li><strong>Clínica Clássica:</strong> Tríade clássica (febre, rash cutâneo e eosinofilia) está presente na minoria. Cursa com LRA oligúrica ou não oligúrica, e EAS com eosinofilúria, hematúria e piúria estéril.</li>\n<li><strong>Tratamento:</strong> Retirada imediata da droga agressora. Em casos específicos (ex. NIA granulomatosa associada à <strong>Sarcoidose</strong>), o uso de <strong>corticosteroides</strong> tem impacto favorável e alta probabilidade de influenciar a recuperação renal a longo prazo.</li>\n</ul>"
+          "title": "Lesão Renal Aguda (LRA)",
+          "tags": ["adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Definição KDIGO:</strong> Aumento da creatinina sérica ≥ 0,3 mg/dL em 48h; OU aumento de 1,5x o valor basal em 7 dias; OU débito urinário < 0,5 mL/kg/h por 6h.</li><li><strong>Classificação Etiológica:</strong><ul><li><strong>Pré-renal:</strong> Hipoperfusão (desidratação, hemorragia, IC, choque). Relação Ureia/Cr > 40, FeNa < 1%, urina concentrada (Osm > 500).</li><li><strong>Renal / Intrínseca:</strong> NTA (toxinas, isquemia prolongada), NIA, Glomerulonefrites. Relação Ureia/Cr < 20, FeNa > 1%, urina isostenúrica (Osm < 350).</li><li><strong>Pós-renal:</strong> Obstrução do fluxo (HPB, litíase bilateral, tumores pélvicos). Diagnóstico rápido via USG mostrando hidronefrose.</li></ul></li><li><strong>Indicações Clássicas de Diálise de Urgência (Vogais: A-E-I-O-U):</strong> Acidose metabólica severa refratária (pH < 7,1), Eletrólitos (Hipercalemia refratária), Intoxicações exógenas dialisáveis (lítio, salicilato, metanol), Overload de volume (Edema agudo de pulmão anúrico refratário a diurético), Uremia grave (Encefalopatia ou Pericardite urêmica).</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Doença Renal Crônica (DRC)",
+          "tags": ["adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Definição:</strong> Anormalidade estrutural ou funcional dos rins presente por <strong>mais de 3 meses</strong> (TFG < 60 mL/min ou presença de dano renal como albuminúria persistente > 30 mg/dia).</li><li><strong>Principais Causas:</strong> HAS e Diabetes Mellitus (no Brasil, a HAS é historicamente a maior causa de diálise). Na nefropatia diabética, o primeiro sinal é a microalbuminúria, tratada obrigatoriamente com iECA ou BRA para proteção renal, independentemente da pressão.</li><li><strong>Complicações da Uremia:</strong><ul><li><strong>Anemia da DRC:</strong> Normocítica e normocrômica, primariamente por déficit de eritropoietina. O tratamento envolve Reposição de EPO sintética, porém, antes, <strong>deve-se repor Ferro se houver deficiência</strong> (Ferritina < 100 ou Saturação de Transferrina < 20%).</li><li><strong>Osteodistrofia Renal (Hiperparatireoidismo Secundário):</strong> O rim doente não converte vitamina D e não excreta Fósforo. Ocorre hiperfosfatemia + hipocalcemia, o que estimula a PTH (causando osteíte fibrosa cística, reabsorção subperiosteal falangiana e \"crânio em sal e pimenta\"). Conduta: Restrição de fósforo, quelantes de fósforo junto às refeições (sevelamer, carbonato de cálcio) e reposição de calcitriol (vitamina D ativa).</li></ul></li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Estágio KDIGO (DRC)</th><th>Taxa de Filtração Glomerular (mL/min)</th><th>Conduta Clínica Principal</th></tr></thead><tbody><tr><td>G1</td><td>≥ 90</td><td>Controle de comorbidades, reduzir risco CV</td></tr><tr><td>G2</td><td>60 a 89</td><td>Estimar progressão</td></tr><tr><td>G3a e G3b</td><td>45-59 e 30-44</td><td>Manejo das complicações (anemia, osso)</td></tr><tr><td>G4</td><td>15 a 29</td><td>Preparo para Terapia de Substituição Renal (Fístula)</td></tr><tr><td>G5</td><td>< 15</td><td>Início de Diálise ou Transplante Renal</td></tr></tbody></table></div>"
         }
       ]
     }
