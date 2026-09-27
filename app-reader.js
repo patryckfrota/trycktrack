@@ -23,139 +23,6 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
-    "uepa_otorrinolaringologia": {
-  "area": "Otorrinolaringologia",
-  "title": "Otorrinolaringologia - Rapid Review",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "1. Otologia e Otoneurologia",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Rolha de Cerume e Corpos Estranhos",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rolha de Cerume:</strong> É a causa mais comum de perda auditiva condutiva reversível. <strong>Palavra-chave:</strong> Paciente idoso, uso de hastes flexíveis (cotonetes), queixa de hipoacusia e plenitude aural (ou zumbido) súbita ou progressiva. <strong>Conduta:</strong> O tratamento de primeira linha em atenção primária para rolha impactada (sem visualização de MT) não é a lavagem imediata, mas <strong>indicar solução otológica cerolítica (ex: peróxido de ureia, glicerina) por 5 a 7 dias</strong> e reavaliar. <strong>Pegadinha:</strong> Lavagem sem preparo prévio em rolha dura ou em pacientes com perfuração timpânica prévia (contraindicação absoluta para lavagem hídrica).\n              <pre class=\"reader-pre-card\">\nPaciente com Hipoacusia + Rolha de cera visível (sem MT visualizável)\n↓\nHistórico de perfuração timpânica ou cirurgia otológica?\n- SIM: Remoção mecânica (curetagem/aspiração) por Otorrino (NUNCA LAVAR).\n- NÃO: Prescrever cerolítico tópico por 5-7 dias.\n↓\nRetorno: Lavagem auricular com água morna (temperatura corporal para evitar vertigem térmica).</pre></li>\n              <li><strong>Corpo Estranho em Orelha:</strong> Muito comum em crianças (grãos, miçangas, insetos). <strong>Palavra-chave para Insetos (animados):</strong> Zumbido intenso, dor e agitação. <strong>Conduta imediata:</strong> Instilar óleo mineral, álcool ou lidocaína tópica para matar/imobilizar o inseto ANTES da remoção. <strong>Pegadinha:</strong> Tentar remover inseto vivo ou usar pinça em objetos esféricos (empurra mais para o fundo; preferir gancho ou lavagem). Sementes não devem ser lavadas, pois incham com água.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "1.2",
-          "title": "Otites Médias (Aguda, Efusão, Crônica) e Complicações",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Média Aguda (OMA):</strong> Infecção bacteriana do ouvido médio, pico de incidência entre 6-24 meses. <strong>Fisiopatologia:</strong> Disfunção da tuba auditiva (frequentemente após IVAS viral). <strong>Agentes etiológicos (Palavra-chave da banca):</strong> <em>Streptococcus pneumoniae</em>, <em>Haemophilus influenzae</em> não tipável e <em>Moraxella catarrhalis</em>. <strong>Quadro clínico:</strong> Otalgia (irritabilidade na criança), febre, hipoacusia. Otoscopia: Membrana timpânica (MT) hiperemiada, abaulada, com perda do triângulo luminoso e opaca/purulenta.\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Idade</th><th>Gravidade</th><th>Conduta Inicial</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>&lt; 6 meses</td><td>Qualquer</td><td>Sempre Antibiótico (Amoxicilina)</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Bilateral ou Sintomas Graves (Febre &gt;39C, otalgia intensa)</td><td>Sempre Antibiótico</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Unilateral leve/moderada</td><td>Observação (WASP) por 48-72h ou ATB</td></tr>\n                    <tr><td>&gt; 2 anos</td><td>Leve a moderada</td><td>Observação (WASP) por 48-72h</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              <strong>Tratamento de Escolha:</strong> Amoxicilina (45-90 mg/kg/dia) por 10 dias. <strong>Pegadinha:</strong> Falha terapêutica após 48-72h -> trocar para Amoxicilina com Clavulanato (cobre produtoras de beta-lactamase como H. influenzae e M. catarrhalis). Se alergia a penicilina (não anafilática): Cefuroxima; (anafilática): Azitromicina ou Claritromicina.</li>\n              <li><strong>Otite Média com Efusão (Serosa):</strong> Líquido no ouvido médio sem sinais de inflamação aguda (sem febre, sem hiperemia intensa). <strong>Clássico:</strong> Criança com atraso escolar/de fala, desatenta, MT retraída e opalescente, nível líquido ou bolhas na otoscopia. <strong>Tratamento:</strong> Expectante por até 3 meses. Se não resolver, tubos de ventilação (carretel). <strong>Atenção:</strong> Em adultos com OME unilateral persistente, SEMPRE afastar carcinoma de nasofaringe (obstrução tubária tumoral).</li>\n              <li><strong>Otite Média Crônica (OMC):</strong> Perfuração timpânica com duração > 3 meses.\n                <ul>\n                  <li><strong>OMC Simples:</strong> Perfuração central, otorreia intermitente (mucopurulenta) indolor que piora com entrada de água. Tratamento: Gotas tópicas (ciprofloxacino) nas agudizações; cirurgia (timpanoplastia) definitiva.</li>\n                  <li><strong>OMC Colesteatomatosa:</strong> Pele (epitélio escamoso) dentro do ouvido médio destruindo osso (ossículos). <strong>Palavra-chave:</strong> Otorreia fétida crônica e contínua, perfuração MARGINAL ou atical, massa branca perolada, lise óssea. Pode complicar com fístula labiríntica, paralisia facial ou meningite/abscesso cerebral. Tratamento: Cirúrgico OBRIGATÓRIO (Mastoidectomia).</li>\n                </ul>\n              </li>\n              <li><strong>Complicações das Otites Médias:</strong>\n                <ul>\n                  <li><strong>Mastoidite Aguda:</strong> Principal complicação da OMA. <strong>Clínica:</strong> OMA que evolui com eritema, edema e dor retroauricular, e apagamento do sulco retroauricular (deslocamento do pavilhão em abano). <strong>Conduta:</strong> Internação, TC de mastoides, ATB venoso (Ceftriaxona) e miringotomia +/- mastoidectomia.</li>\n                  <li><strong>Paralisia Facial Periférica:</strong> Deiscência do canal de Falópio expõe o nervo facial à infecção.</li>\n                </ul>\n              </li>\n            </ul>\n          "
-        },
-        {
-          "num": "1.3",
-          "title": "Otite Externa e Afecções do Conduto",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Externa Aguda (OEA):</strong> Inflamação do conduto auditivo externo (CAE). <strong>Fatores de risco:</strong> Natação, cotonetes (microtrauma). <strong>Palavra-chave:</strong> Otalgia intensa que piora à tração do pavilhão auricular ou pressão no trago. <strong>Agentes:</strong> <em>Pseudomonas aeruginosa</em> e <em>Staphylococcus aureus</em>. Tratamento: Limpeza e gotas otológicas tópicas (Ciprofloxacino + Dexametasona). ATB oral apenas se celulite periauricular ou diabetes/imunodepressão grave.</li>\n              <li><strong>Otite Externa Fúngica (Otomicose):</strong> Prurido intenso, sensação de ouvido tapado. Otoscopia com hifas e esporos (aspecto de \"algodão mofado\" ou \"papel molhado com pontinhos pretos\" - <em>Aspergillus niger</em>). Tratamento: Limpeza rigorosa, antifúngico tópico (clotrimazol).</li>\n              <li><strong>Otite Externa Necrosante (Maligna):</strong> <strong>Pegadinha Clássica:</strong> NÃO é câncer! É uma osteomielite da base do crânio iniciada no CAE. <strong>Perfil:</strong> Idoso diabético descompensado ou imunossuprimido com otalgia excruciante desproporcional, otorreia crônica não responsiva, tecido de granulação no assoalho do conduto (patognomônico). Pode evoluir com paralisia de nervos cranianos (VII, IX, X, XI). <strong>Agente:</strong> <em>Pseudomonas aeruginosa</em> (95%). <strong>Conduta:</strong> Internação, TC temporal e Ciprofloxacino venoso em altas doses por semanas.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "1.4",
-          "title": "Perda Auditiva, Surdez e Zumbido",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Diferenciação Condutiva x Neurossensorial (Teste de Weber e Rinne):</strong>\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Tipo de Perda</th><th>Rinne (Diapasão 512Hz)</th><th>Weber (Topo da cabeça)</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>Normal</td><td>Positivo (Aéreo > Ósseo)</td><td>Centraliza (não lateraliza)</td></tr>\n                    <tr><td>Condutiva (ex: Rolha, OMA, Otosclerose)</td><td>Negativo (Ósseo > Aéreo) no ouvido doente</td><td>Lateraliza para o ouvido DOENTE (surdo)</td></tr>\n                    <tr><td>Neurossensorial (ex: PAIR, Presbiacusia)</td><td>Positivo (Aéreo > Ósseo)</td><td>Lateraliza para o ouvido SAUDÁVEL</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              </li>\n              <li><strong>Otosclerose:</strong> Perda auditiva condutiva ou mista, progressiva, bilateral assimétrica, mais comum em mulheres brancas (piora na gravidez). Fisiopatologia: Fixação da platina do estribo na janela oval. <strong>Palavra-chave:</strong> Tinnitus, herança familiar, Rinne negativo. Tratamento: Estapedotomia ou AASI (aparelho auditivo).</li>\n              <li><strong>Presbiacusia:</strong> Perda auditiva neurossensorial, bilateral, simétrica e descendente (inicia em frequências AGUDAS). Ocorre por degeneração das células ciliadas da cóclea no idoso. <strong>Palavra-chave:</strong> \"Escuto mas não entendo\" (dificuldade de discriminação em ambientes ruidosos).</li>\n              <li><strong>Perda Auditiva Induzida por Ruído (PAIR):</strong> Neurossensorial, neurossensorial, simétrica, irreversível e NÃO progressiva após cessar a exposição. <strong>Pegadinha:</strong> A gota acústica (entalhe) no audiograma ocorre CLASSICAMENTE nas frequências de 3.000, 4.000 (mais comum) e 6.000 Hz, com recuperação em 8.000 Hz.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "1.5",
-          "title": "Vertigem e Otoneurologia",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> <strong>É a causa mais comum de vertigem.</strong> <strong>Clássico:</strong> Crises vertiginosas CURTAS (segundos a menos de 1 minuto), desencadeadas por movimentos específicos da cabeça (deitar, levantar, rolar na cama). SEM sintomas auditivos associados. Fisiopatologia: Canalitíase (otólitos flutuando no canal semicircular posterior). <strong>Diagnóstico:</strong> Manobra de Dix-Hallpike (provoca vertigem e nistagmo rotatório geotrópico - batendo para o chão). <strong>Tratamento:</strong> Manobra de Epley (reposicionamento). Drogas (dimenidrinato) têm pouco valor.</li>\n              <li><strong>Doença de Ménière (Hidropsia Endolinfática):</strong> <strong>Tríade Clássica (Palavra-chave):</strong> Vertigem episódica espontânea (dura de 20 min a horas) + Zumbido (tipo concha, motor) + Hipoacusia flutuante (predomina em graves) e plenitude aural. Tratamento agudo: Supressores vestibulares. Tratamento profilático: Restrição de sal, cafeína e uso de betaistina e diuréticos.</li>\n              <li><strong>Neurite Vestibular (Neuropatia):</strong> Vertigem intensa, SÚBITA, espontânea, durando DIAS, acompanhada de náuseas e vômitos intensos, incapacitante, muitas vezes após um quadro viral prévio. <strong>Diferencial chave:</strong> SEM sintomas auditivos (audição normal). Tratamento: Corticosteroides no início, sintomáticos por poucos dias (prometazina, ondansetrona) e reabilitação vestibular precoce (para compensação central). <strong>Pegadinha:</strong> O uso prolongado de sedativos vestibulares atrasa a compensação!</li>\n              <li><strong>Schwannoma Vestibular (Neuroma do Acústico):</strong> Tumor benigno do VIII par. <strong>Palavra-chave:</strong> Perda auditiva neurossensorial unilateral progressiva + zumbido unilateral + alterações do reflexo estapediano (fadiga). Se crescer, comprime o trigêmeo (hipoestesia facial) e facial (paralisia). Exame Padrão-Ouro: RM de ouvidos com contraste.</li>\n            </ul>\n          "
-        }
-      ]
-    },
-    {
-      "title": "2. Faringologia e Laringologia",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Infecções de Laringe e Via Aérea na Infância",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epiglotite Aguda (Supraglotite):</strong> Emergência pediátrica de instalação hiperaguda. <strong>Perfil (Palavra-chave):</strong> Pré-escolar com VACINAS ATRASADAS, aspecto toxemiado, febre alta, dor de garganta, <strong>voz abafada (voz de batata quente) e sialorreia (babando)</strong> com estridor inspiratório. A criança adota a posição de tripé (sentada, inclinada para frente, pescoço estendido). <strong>Agente clássico:</strong> <em>Haemophilus influenzae tipo B</em> (a vacina pentavalente reduziu drasticamente; hoje S. pyogenes e S. pneumoniae também são causas). <strong>Conduta Imediata:</strong> GARANTIR VIA AÉREA (Intubação orotraqueal em bloco cirúrgico sob anestesia inalatória). <strong>Pegadinha absoluta:</strong> NUNCA inspecionar a cavidade oral ou orofaringe com abaixador de língua na suspeita de epiglotite -> Risco de laringoespasmo e obstrução total. Rx lateral de pescoço mostra o \"Sinal do Polegar\", mas não deve atrasar a via aérea. ATB de escolha: Ceftriaxona.</li>\n              <li><strong>Laringotraqueobronquite Viral (Crupe):</strong> <strong>Perfil (Palavra-chave):</strong> Lactente (6m - 3a) com pródromos catarrais (IVAS) que evolui com febre baixa/moderada, estridor leve, rouquidão e tosse ladrante (tosse de cachorro). <strong>Agente:</strong> Vírus Parainfluenza. Raio-X de pescoço AP: \"Sinal da ponta de lápis\" ou \"Torre de igreja\" (estreitamento infraglótico). <strong>Tratamento:</strong> Dexametasona dose única VO ou IM. Se estridor em repouso (moderado/grave): Adrenalina nebulizada (L-epinefrina). <strong>Atenção:</strong> Se crupe não melhora ou piora subitamente e evolui para toxemia, pensar em Traqueíte Bacteriana (S. aureus), que requer ATB venoso.</li>\n              <li><strong>Laringomalácia:</strong> <strong>Causa mais comum de estridor congênito crônico.</strong> <strong>Palavra-chave:</strong> Bebê jovem (<2 meses) com estridor inspiratório que <strong>piora no choro, na agitação e em decúbito dorsal</strong>, e melhora no repouso ou prono. Evolução benigna, pico aos 6-9 meses, resolução espontânea até os 2 anos. Diagnóstico: Nasofibrolaringoscopia mostrando prolapso supraglótico (\"epiglote em ômega\"). Conduta: Expectante na maioria; se grave (déficit de peso/cor pulmonale), cirurgia (supraglotoplastia).</li>\n            </ul>\n          "
-        },
-        {
-          "num": "2.2",
-          "title": "Faringotonsilites e Complicações",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Faringotonsilite Bacteriana:</strong> Agente: <em>Streptococcus pyogenes</em> (EBHGA). Pico 5 a 15 anos. Raro < 3 anos (nessa idade é viral). <strong>Critérios de Centor (para definir ATB empírico):</strong> Febre, exsudato tonsilar, adenopatia cervical anterior dolorosa e AUSÊNCIA de tosse (+1 se idade 3-14a; -1 se >44a). Tratamento: Penicilina G benzatina IM DU ou Amoxicilina VO por 10 dias. O objetivo não é só tratar a infecção, mas prevenir a <strong>Febre Reumática</strong> (a glomerulonefrite pós-estrepto NÃO previne com ATB).</li>\n              <li><strong>Mononucleose Infecciosa:</strong> Epstein-Barr Vírus. <strong>Palavra-chave:</strong> Faringite exsudativa intensa prolongada + poliadenopatia generalizada (incluindo cervical POSTERIOR) + esplenomegalia. <strong>Pegadinha de prova:</strong> Paciente com \"amigdalite\" tratado com amoxicilina que desenvolve rash cutâneo maculopapular (exantema) difuso. Diagnóstico: Linfocitose atípica, Anticorpos heterófilos (Paul-Bunnell-Davidsohn). Conduta: Sintomáticos, afastar esportes de contato por 4 semanas (risco de ruptura esplênica).</li>\n              <li><strong>Abscesso Peritonsilar:</strong> Complicação bacteriana de amigdalite aguda. <strong>Clássico:</strong> Adolescente/jovem com dor de garganta unilateral intensa, trismo, voz de batata quente, desvio da úvula para o lado CONTRALÁRIO à lesão, e abaulamento do pilar amigdaliano anterior. <strong>Tratamento:</strong> Internação, ATB venoso (Clindamicina ou Ceftriaxona+Metronidazol) e <strong>Drenagem imediata (punção/incisão)</strong>.</li>\n              <li><strong>Hipertrofia Adenotonsilar e SAOS:</strong> Causa primária de apneia do sono infantil. Criança respiradora oral, fácies adenoideana (lábio superior curto, palato ogival, dentição alterada), cor pulmonale. Tratamento: Adenotonsilectomia.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "2.3",
-          "title": "Lesões Benignas e Malignas da Laringe",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Nódulos Vocais (Kissing nodules):</strong> Lesão benigna MAIS COMUM de prega vocal, bilaterais, no terço médio, simétricos. <strong>Causa:</strong> Abuso/mau uso vocal crônico (professores, cantores, crianças gritadoras). <strong>Tratamento:</strong> Fonoterapia (foniatria). A cirurgia é exceção.</li>\n              <li><strong>Pólipos Vocais:</strong> Unilaterais, base séssil ou pediculada, causados por trauma fonatório AGUDO associado frequentemente a fatores irritantes (refluxo, tabagismo). Tratamento: Microcirurgia de laringe + fonoterapia de apoio.</li>\n              <li><strong>Edema de Reinke:</strong> Acúmulo de fluido no espaço de Reinke (lâmina própria superficial). <strong>Palavra-chave:</strong> Mulher idosa, TABAGISTA pesada, que adquire voz grave (virilizada). Tratamento: Cessar tabagismo + microcirurgia.</li>\n              <li><strong>Câncer de Laringe:</strong> Mais de 95% são Carcinoma Espinocelular (CEC). Fatores de risco maiores: <strong>Tabagismo e Etilismo (sinergismo)</strong>.\n                <ul>\n                  <li><strong>CA Glótico:</strong> <strong>Palavra-chave:</strong> Rouquidão crônica e persistente (>3-4 semanas). Tem diagnóstico PRECOCE (a voz avisa cedo). Como a glote tem drenagem linfática escassa, demora a dar metástase linfonodal.</li>\n                  <li><strong>CA Supraglótico:</strong> <strong>Palavra-chave:</strong> Assintomático nas fases iniciais, depois causa disfagia, odinofagia, sensação de corpo estranho e engasgos. Diagnóstico TARDIO, e frequentemente o paciente abre o quadro com linfonodomegalia cervical (rica rede linfática).</li>\n                </ul>\n              </li>\n            </ul>\n          "
-        }
-      ]
-    },
-    {
-      "title": "3. Rinologia e Seios da Face",
-      "subchapters": [
-        {
-          "num": "3.1",
-          "title": "Rinossinusites",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinossinusite Aguda:</strong> Inflamação de mucosa nasal e seios paranasais < 12 semanas. Maioria esmagadora é VIRAL.\n              <br><strong>Diagnóstico Clínico (Critérios Maiores):</strong> Rinorreia purulenta/obstrução nasal + Dor/pressão facial ou hiposmia/anosmia.\n              <br><strong>Viral vs Bacteriana:</strong> Suspeita de BACTERIANA (pneumococo, hemófilo, moraxela) se:\n                <ol>\n                  <li>Sintomas persistem por > 10 dias SEM melhora;</li>\n                  <li>Início grave (febre alta, rinorreia purulenta, dor facial excruciante) por > 3-4 dias;</li>\n                  <li>Piora dupla (Double sickening): Estava melhorando de um resfriado (após 5-6 dias) e volta a ter febre alta, dor facial e secreção pior.</li>\n                </ol>\n              <strong>Tratamento da Bacteriana:</strong> Amoxicilina ou Amoxicilina-Clavulanato (5-10 dias adultos, 10-14d crianças), associado a Lavagem Nasal exaustiva com soro fisiológico e corticoide tópico (mometasona, budesonida). <strong>Pegadinha:</strong> Raio-X de seios da face NÃO deve ser solicitado (não diferencia viral de bacteriana). Tomografia é indicada APENAS se houver suspeita de complicação ou pré-operatório, ou falha de tratamento.\n              </li>\n              <li><strong>Complicações das Rinossinusites:</strong>\n                <ul>\n                  <li><strong>Celulite Periorbitária (Pré-septal):</strong> Edema, eritema de pálpebra, SEM acometimento da órbita. Olho move normal, visão normal, sem proptose. Tratamento: ATB oral/venoso dependendo da idade e reavaliação.</li>\n                  <li><strong>Celulite Orbitária (Pós-septal):</strong> Extensão da infecção do seio etmoidal através da lâmina papirácea para dentro da órbita. <strong>Sinais de alarme:</strong> Proptose (exoftalmia), oftalmoplegia (dor/restrição à movimentação ocular), quemose e diminuição de acuidade visual. <strong>Conduta:</strong> INTERNAÇÃO de emergência, TC de seios da face/órbitas com contraste, ATB EV (Ceftriaxona + Clindamicina/Vancomicina). Se não melhorar em 48h ou abscesso grande: Drenagem cirúrgica (endoscópica nasal).</li>\n                </ul>\n              </li>\n              <li><strong>Rinossinusite Crônica:</strong> > 12 semanas de sintomas ininterruptos. Pode ser com ou sem polipose nasal. <strong>Doença de Samter (Tríade da Aspirina / DREA):</strong> Paciente com asma grave + rinossinusite crônica com pólipos nasais + intolerância à AAS/AINEs (broncoespasmo grave). Tratamento crônico: Corticoides tópicos, lavagem, cirurgia endoscópica funcional (FESS).</li>\n            </ul>\n          "
-        },
-        {
-          "num": "3.2",
-          "title": "Epistaxe",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epistaxe Anterior:</strong> Responde por 90% dos casos. Sangramento originário do <strong>Plexo de Kiesselbach (Área de Little)</strong> na porção anterior do septo cartilaginoso. <strong>Causas:</strong> Trauma digital (dedo no nariz), clima seco, rinite. <strong>Conduta inicial:</strong> Compressão digital firme das asas do nariz por 10-15 min, inclinar cabeça PARA FRENTE (não para trás, para evitar broncoaspiração), algodão com vasoconstritor tópico (oximetazolina). Se o vaso for visualizado: Cauterização química (Nitrato de Prata 70%) ou elétrica. Se falhar: Tampão nasal anterior.</li>\n              <li><strong>Epistaxe Posterior:</strong> Menos comum, mas MUITO mais grave e profusa, comum em idosos hipertensos. Origem no <strong>Plexo de Woodruff (Artéria Esfenopalatina)</strong>. Sangra mais pela faringe e pelas duas fossas nasais. <strong>Conduta:</strong> ABCDE primeiro (acesso venoso, volume), tamponamento posterior com sonda de Foley ou tampões específicos (ex: Epistat) + tamponamento anterior simultâneo. Requer internação hospitalar. Se não resolver em 48-72h: Cirurgia endoscópica para ligadura da artéria esfenopalatina (Padrão-Ouro atual) ou embolização por radiologia intervencionista.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "3.3",
-          "title": "Rinite Alérgica e Tumores",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinite Alérgica:</strong> Prurido nasal, espirros em salva, coriza hialina, congestão nasal. Tríade do exame: Mucosa pálida/cianótica, hipertrofia de cornetos inferiores e secreção clara. <strong>Tratamento Padrão-ouro:</strong> Corticoide nasal tópico (Budesonida, Fluticasona) diariamente. Anti-histamínicos de 2ª geração VO ajudam muito em coriza/espirro, mas pouco na obstrução. Controle ambiental fundamental (evitar ácaros, tapetes, mofo, cortinas de pano).</li>\n              <li><strong>Angiofibroma Nasofaríngeo Juvenil:</strong> <strong>Perfil Absoluto:</strong> Menino adolescente masculino com obstrução nasal progressiva unilateral ou bilateral profunda, associada a episódios de EPISTAXE SEVERA recorrente. Tumor altamente vascularizado benigno. <strong>Pegadinha Crítica:</strong> NUNCA BIPSAR EM CONSULTÓRIO (Risco de hemorragia fatal). Diagnóstico por TC e RM. Tratamento: Embolização pré-operatória seguida de ressecção cirúrgica.</li>\n            </ul>\n          "
-        }
-      ]
-    },
-    {
-      "title": "4. Urgências e Traumas Otorrinolaringológicos",
-      "subchapters": [
-        {
-          "num": "4.1",
-          "title": "Traumas Nasais e Hematoma Septal",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Fratura Nasal:</strong> Osso mais fraturado da face. Diagnóstico é CLÍNICO (crepitação, desvio, edema). Raio-X tem pouco valor. O mais importante é palpar e realizar a rinoscopia anterior.</li>\n              <li><strong>Hematoma de Septo Nasal:</strong> <strong>Emergência Otorrinolaringológica!</strong> Coleção de sangue entre o mucopericôndrio e a cartilagem do septo. Causa isquemia da cartilagem quadrangular, levando à necrose cartilaginosa em 48-72h. <strong>Complicação clássica (Palavra-chave):</strong> Nariz em sela (desabamento do dorso) crônico e perfuração septal permanente, além de infecção (abscesso). <strong>Conduta OBRIGATÓRIA:</strong> Drenagem incisional de urgência do hematoma + tamponamento nasal bilateral compressivo (para evitar que acumule de novo) + antibiótico.</li>\n            </ul>\n          "
-        },
-        {
-          "num": "4.2",
-          "title": "Paralisia Facial Periférica",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Paralisia de Bell (Idiopática):</strong> Causada provavelmente por reativação viral (Herpes Simplex tipo 1). É PERIFÉRICA: Acomete TODA a hemiface (inclui porção superior - incapacidade de enrugar a testa e fechar o olho, \"Sinal de Bell\" - desvio do globo ocular para cima e para fora ao tentar fechar), ao contrário da Central (que poupa a testa). <strong>Tratamento:</strong> Corticoterapia em altas doses iniciada precocemente (< 72h) para diminuir edema do nervo + Proteção Ocular rigorosa (colírio lubrificante, oclusão noturna para evitar úlcera de córnea).</li>\n              <li><strong>Síndrome de Ramsay Hunt:</strong> Reativação do Varicela-Zoster (Herpes Zoster Oticus) no gânglio geniculado. <strong>Palavra-chave:</strong> Paralisia facial periférica intensa + otalgia excruciante + vesículas no pavilhão auricular/conduto auditivo/concha. O prognóstico de recuperação facial é pior que a de Bell. <strong>Tratamento:</strong> Corticoides em altas doses + Aciclovir/Valaciclovir.</li>\n            </ul>\n          "
-        }
-      ]
-    }
-  ]
-},
     "uepa_ortopedia": {
   "area": "Ortopedia",
   "title": "Rapid Review Ortopedia - ENAMED",
@@ -324,6 +191,284 @@
     }
   ]
 },
+    "uepa_gastroenterologia": {
+  "area": "Gastroenterologia",
+  "title": "Gastroenterologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Doenças do Esôfago",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Doença do Refluxo Gastroesofágico (DRGE)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Definição e Fisiopatologia:</strong> Fluxo retrógrado do conteúdo gástrico para o esôfago causando sintomas ou complicações. <strong>Pegadinha:</strong> O refluxo fisiológico ocorre principalmente <strong>acordado e de pé</strong> e no período pós-prandial, com duração curta e sem causar sintomas. A doença ocorre por relaxamento transitório excessivo do Esfíncter Esofágico Inferior (EEI), hipotonia do EEI ou hérnia de hiato.</li>\n  <li><strong>Quadro Clínico:</strong> Sintomas típicos (pirose e regurgitação). Sintomas atípicos (tosse crônica, asma, rouquidão, pigarro, dor torácica não cardíaca). <strong>Palavra-chave:</strong> Pirose retroesternal que piora ao deitar ou após refeições copiosas.</li>\n  <li><strong>Sinais de Alarme:</strong> Disfagia, odinofagia, perda de peso, anemia, sangramento, vômitos persistentes e história familiar de câncer. <strong>Conduta:</strong> Paciente com sinais de alarme ou > 40-45 anos DEVE realizar Endoscopia Digestiva Alta (EDA) imediatamente.</li>\n  <li><strong>Diagnóstico:</strong> Clínico se sintomas típicos e ausência de sinais de alarme (inicia teste terapêutico com IBP). EDA é o primeiro exame para investigar complicações (esofagite, Barret, estenose) ou se há sinais de alarme. pHmetria de 24h (com ou sem impedanciometria) é o padrão-ouro e confirma o diagnóstico (usado se EDA normal e falha ao IBP, ou pré-operatório). Manometria esofágica não faz diagnóstico de DRGE, mas é essencial antes da cirurgia para descartar acalasia/distúrbios motores e localizar o EEI.</li>\n  <li><strong>Tratamento Clínico:</strong> Medidas comportamentais (elevar cabeceira, perda de peso, evitar deitar 2-3h após refeição, cessar tabagismo/álcool, evitar gorduras, café, chocolate). Farmacológico: IBP em dose padrão por 4-8 semanas (omeprazol 20mg/dia). Se refratário: dose dobrada de IBP (ex: 20mg 12/12h).</li>\n  <li><strong>Tratamento Cirúrgico (Fundoplicatura):</strong> Indicações: refratariedade ao IBP, complicações (estenose, Barrett com displasia ou sangramento), pacientes jovens que não desejam IBP ad eternum. <pre class=\"reader-pre-card\">\nDecisão Cirúrgica:\nDRGE confirmada (pHmetria) ↓\nManometria esofágica ↓\nSe motilidade preservada → Fundoplicatura Total (Nissen - 360º)\nSe dismotilidade grave → Fundoplicatura Parcial (Lind/Toupet - 270º posterior ou Dor - anterior)</pre></li>\n  <li><strong>Esôfago de Barrett:</strong> Metaplasia intestinal no esôfago distal (substituição do epitélio escamoso por colunar com células caliciformes) devido à agressão ácida crônica. Lesão pré-maligna para Adenocarcinoma de esôfago. Diagnóstico: EDA (cor salmão) + biópsia confirmando células caliciformes. Conduta: Sem displasia (EDA + biópsia a cada 3 a 5 anos); Displasia de baixo grau (EDA a cada 6 meses ou ablação endoscópica); Displasia de alto grau (Ablação endoscópica / Ressecção mucosa endoscópica).</li>\n</ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Acalasia e Distúrbios Motores do Esôfago",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Acalasia:</strong> Destruição do plexo mioentérico de Auerbach (idiopática ou Doença de Chagas no Brasil). Caracteriza-se por aperistalse do corpo esofágico e falha de relaxamento do EEI.</li>\n  <li><strong>Quadro Clínico:</strong> Disfagia progressiva para sólidos e líquidos, regurgitação de alimentos não digeridos, perda de peso, halitose.</li>\n  <li><strong>Diagnóstico:</strong> Esofagograma baritado (Sinal do \"Bico de Pássaro\" ou \"Chama de Vela\", megaesôfago). Endoscopia (descarta câncer pseudoacalasia). Manometria esofágica (Padrão-Ouro): aperistalse e EEI hipertônico que não relaxa à deglutição.</li>\n  <li><strong>Classificação de Mascarenhas (Chagas) e Tratamento:</strong>\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead>\n          <tr><th>Grau</th><th>Calibre</th><th>Tratamento</th></tr>\n        </thead>\n        <tbody>\n          <tr><td>I (Anectásico)</td><td>Até 4 cm</td><td>Nitratos, BCC, Toxina botulínica.</td></tr>\n          <tr><td>II (Pequena dilatação)</td><td>4 a 7 cm</td><td>Dilatação pneumática por balão.</td></tr>\n          <tr><td>III (Grande dilatação)</td><td>7 a 10 cm</td><td>Miotomia de Heller a contento + Fundoplicatura (Nissen ou Dor).</td></tr>\n          <tr><td>IV (Dolicomegaesôfago)</td><td>> 10 cm</td><td>Esofagectomia (ou derivação se risco cirúrgico alto).</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n  <li><strong>Espasmo Esofagiano Difuso (EED):</strong> Dor torácica retroesternal severa (\"angina-like\") simulando IAM e disfagia intermitente. Esofagograma: \"Esôfago em saca-rolhas\". Manometria: contrações simultâneas, não coordenadas e vigorosas (>20% das deglutições). Tratamento: Nitratos, BCC, antidepressivos, sildenafila, miotomia longitudinal extensa (casos refratários).</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Câncer de Esôfago",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Carcinoma Epidermoide (Escamoso):</strong> Mais comum no mundo, terço médio/superior, fatores de risco: tabagismo, etilismo, acalasia, tilose, bebidas quentes, HPV.</li>\n  <li><strong>Adenocarcinoma:</strong> Mais comum no terço distal (transição esofagogástrica), fator de risco principal: DRGE → Esôfago de Barrett, obesidade. (Incidência crescente em países ocidentais).</li>\n  <li><strong>Quadro Clínico:</strong> Disfagia progressiva (primeiro sólidos, depois líquidos), emagrecimento rápido e importante, rouquidão (invasão do n. laríngeo recorrente).</li>\n  <li><strong>Diagnóstico e Estadiamento:</strong> EDA com biópsia. Estadiamento: USG endoscópica (Ecoendoscopia) é o melhor para T e N (infiltração na parede). TC de tórax e abdome, PET-scan para metástases (M).</li>\n  <li><strong>Tratamento:</strong>\n    Tumores T1a (restritos à mucosa): Ressecção endoscópica (mucosectomia).\n    Tumores locorregionais (T2-T4 ou N+): Quimio e Radioterapia Neoadjuvante seguida de Esofagectomia (cirurgia de Ivor-Lewis ou McKeown).\n    Tumores irressecáveis ou metastáticos (M1, T4b invadindo aorta/traqueia, ou paciente sem condições cirúrgicas): Tratamento paliativo com prótese metálica autoexpansível, braquiterapia ou quimioterapia/radioterapia definitiva.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "2. Doenças do Estômago e Duodeno",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Doença Ulcerosa Péptica e H. pylori",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Fisiopatologia:</strong> Desequilíbrio entre fatores agressores (ácido, pepsina, H. pylori, AINEs) e fatores protetores (muco, bicarbonato, fluxo sanguíneo, prostaglandinas). O H. pylori causa gastrite crônica, aumentando o risco de úlcera duodenal (por hipercloridria secundária à gastrite antral) e gástrica (por pan-gastrite e hipocloridria). AINEs inibem COX-1/2, reduzindo prostaglandinas, prejudicando a barreira mucosa.</li>\n  <li><strong>Quadro Clínico:</strong> Dor epigástrica (tipo queimação), empachamento, náuseas. <strong>Clássico:</strong> Úlcera Duodenal: dor que piora 2-3h após refeição e à noite, MELHORA com alimentação ou antiácido. Úlcera Gástrica: dor que PIORA com a alimentação.</li>\n  <li><strong>Diagnóstico:</strong> Endoscopia Digestiva Alta (EDA). Úlcera gástrica TEM QUE SER BIOPSIADA (risco de malignidade - Adenocarcinoma). Úlcera duodenal geralmente NÃO precisa de biópsia (risco maligno quase nulo), mas deve-se pesquisar H. pylori. Pesquisa de H. pylori: invasiva (teste rápido da urease, histopatologia, cultura) ou não invasiva (teste respiratório da ureia marcada - excelente para controle de cura, antígeno fecal). <strong>Pegadinha:</strong> Sorologia não serve para controle de cura, pois IgG fica positiva por anos.</li>\n  <li><strong>Tratamento do H. pylori (Esquema de 1ª linha no Brasil):</strong> Claritromicina 500mg 12/12h + Amoxicilina 1g 12/12h + IBP dose padrão 12/12h, durante 14 dias. Controle de cura deve ser feito após 4 semanas do fim do tratamento, idealmente com Teste Respiratório, Antígeno Fecal ou EDA (se precisar). Suspender IBP 2 semanas antes do teste de controle para evitar falso negativo.</li>\n  <li><strong>Complicações Cirúrgicas da Úlcera Péptica:</strong> Hemorragia (mais comum), Perfuração, Obstrução gástrica, Intratabilidade.\n  <strong>Perfuração:</strong> Dor abdominal súbita, abdome em tábua, sinal de Jobert (pneumoperitônio com perda da macicez hepática). Rx de tórax e abdome em pé e deitado mostra pneumoperitônio. Conduta: Laparotomia, ráfia primária + patch de Graham (epiplon).\n  <strong>Obstrução (Síndrome Pilórica):</strong> Vômitos de estase, alcalose metabólica hipoclorêmica hipocalêmica, sinal do vascolejo. Conduta: SNG, hidratação, reposição de K+ e Cl-. Se não resolver: dilatação endoscópica ou cirurgia.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hemorragia Digestiva Alta (HDA)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Definição e Abordagem Inicial:</strong> Sangramento acima do Ângulo de Treitz. Sintomas: Hematêmese (vômito de sangue vivo ou em borra de café) e Melena (fezes escuras e fétidas). A primeira conduta SEMPRE é a estabilização hemodinâmica! Acesso venoso calibroso, reposição volêmica com cristaloides, tipagem sanguínea, oxigênio se necessário. Sonda nasogástrica pode ser usada para lavagem e confirmar sangramento ativo.</li>\n  <li><strong>HDA Varicosa (Cirrose/Hipertensão Portal):</strong>\n    - <strong>Abordagem Imediata:</strong> <strong>Palavra-chave:</strong> História de doença hepática ou cirrose, paciente instável com hematêmese. Conduta: Cristaloides (cuidado para não hiper-hidratar e piorar portal), Ceftriaxona (profilaxia de PBE imediata - REDUZ MORTALIDADE), Terlipressina, Octreotida ou Somatostatina (vasoconstritores esplâncnicos para reduzir fluxo portal, iniciar ANTES da endoscopia).\n    - <strong>Endoscopia:</strong> Deve ser realizada preferencialmente nas primeiras 12h (até 24h). Terapia de escolha: Ligadura Elástica (melhor) ou Escleroterapia para varizes esofágicas. Cianocrilato para varizes gástricas.\n    - <strong>Se falha endoscópica/Sangramento incontrolável:</strong> Balão de Sengstaken-Blakemore (medida de resgate temporária por no máximo 24h, exige intubação prévia). TIPS (Shunt Portossistêmico Intra-hepático Transjugular) como ponte ou tratamento definitivo. Cirurgia de urgência (shunts portossistêmicos, alta mortalidade).</li>\n  <li><strong>HDA Não Varicosa (Úlcera Péptica):</strong> Causa mais comum de HDA. A artéria que mais sangra em úlcera duodenal de parede posterior é a <strong>Artéria Gastroduodenal</strong>. A artéria que mais sangra em úlcera gástrica pequena curvatura é a <strong>Artéria Gástrica Esquerda</strong>.\n    - <strong>Endoscopia:</strong> IBP em bolus + infusão contínua. EDA até 24h. Terapia endoscópica dupla (ex: injeção de adrenalina + termocoagulação ou hemoclipe).\n    - <strong>Classificação de Forrest:</strong> Avalia o risco de ressangramento e indicação de terapia endoscópica.\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead>\n          <tr><th>Forrest</th><th>Achado Endoscópico</th><th>Risco de Ressangramento</th><th>Terapia Endoscópica</th></tr>\n        </thead>\n        <tbody>\n          <tr><td>Ia</td><td>Sangramento arterial em jato (ativo)</td><td>~90% (Alto)</td><td>Sim</td></tr>\n          <tr><td>Ib</td><td>Sangramento babando (ativo)</td><td>Alta</td><td>Sim</td></tr>\n          <tr><td>IIa</td><td>Vaso visível não sangrante</td><td>~50% (Alto)</td><td>Sim</td></tr>\n          <tr><td>IIb</td><td>Coágulo aderido</td><td>Intermediário</td><td>Lavar o coágulo. Se não soltar, controverso. Geralmente Sim.</td></tr>\n          <tr><td>IIc</td><td>Mancha de hematina (fundo escuro)</td><td>Baixo</td><td>Não (apenas IBP)</td></tr>\n          <tr><td>III</td><td>Úlcera com base limpa (fibrina)</td><td>Muito baixo</td><td>Não (alta precoce com IBP oral)</td></tr>\n        </tbody>\n      </table>\n    </div>\n    - <strong>Refratariedade (Falha endoscópica dupla):</strong> Nova tentativa de EDA ou ir direto para <strong>Arteriografia com embolização</strong> (principalmente se alto risco cirúrgico) ou <strong>Cirurgia</strong>. Úlcera duodenal sangrante refratária: piloroplastia + ligadura da artéria gastroduodenal + vagotomia troncular.</li>\n</ul>"
+        },
+        {
+          "num": "2.3",
+          "title": "Câncer Gástrico e GIST",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Adenocarcinoma Gástrico:</strong> Tipo histológico mais comum (95%). Fatores de risco: H. pylori (fator principal), dieta rica em sal, defumados, nitratos, tabagismo, tipo sanguíneo A, pólipos adenomatosos, anemia perniciosa.</li>\n  <li><strong>Classificação de Laurén:</strong>\n    - <strong>Intestinal:</strong> Bem diferenciado, glândulas, mais em idosos e homens, disseminação hematogênica (fígado), relação forte com H. pylori e gastrite atrófica. Pior prognóstico em áreas de baixa incidência, mas melhor comparado ao difuso.\n    - <strong>Difuso:</strong> Indiferenciado, células em \"anel de sinete\", pior prognóstico, jovens e mulheres, disseminação linfática e transmural/peritoneal, sangue O, genética (mutação E-caderina / CDH1).</li>\n  <li><strong>Sinais Clássicos de Doença Avançada (Incurabilidade):</strong>\n    Linfonodo de Virchow (supraclavicular E); Nódulo de Irmã Maria José (periumbilical); Prateleira de Blumer (toque retal); Tumor de Krukenberg (metástase ovariana).</li>\n  <li><strong>Tratamento do Adenocarcinoma Gástrico:</strong>\n    - O padrão é ressecção em bloco (margens amplas > 5cm) + Linfadenectomia D2 (ressecção de linfonodos perigástricos e dos troncos celíacos - mínimo 15 linfonodos examinados).\n    - Tumores distais/antrais: Gastrectomia Subtotal + Y de Roux.\n    - Tumores proximais (corpo alto/fundo): Gastrectomia Total + Y de Roux.\n    - Lesões precoces (Câncer Gástrico Precoce: invade até submucosa, independentemente de linfonodo): se restrito à mucosa, não ulcerado, bem diferenciado e pequeno (< 2cm), pode ser feita Ressecção Endoscópica (Mucosectomia).</li>\n  <li><strong>GIST (Tumor Estromal Gastrointestinal):</strong> Origem nas Células Intersticiais de Cajal (marcapasso do TGI). Mais comum no estômago. Sintomas: sangramento digestivo alto (cresce submucoso, ulcera mucosa), dor abdominal, massa.\n  <strong>Diagnóstico:</strong> EDA mostra abaulamento submucoso. Confirmação histológica com imuno-histoquímica: <strong>c-Kit positivo (CD117)</strong>, CD34, DOG1.\n  <strong>Tratamento do GIST:</strong>\n  - Ressecção cirúrgica completa <strong>sem necessidade de linfadenectomia</strong> (raramente dá metástase linfonodal, dá metástase hematogênica para fígado). Ex: gastrectomia em cunha, parcial ou total dependendo do tamanho.\n  - <strong>Terapia Alvo:</strong> <strong>Imatinibe</strong> (inibidor de tirosina quinase). Indicado como adjuvante para pacientes de alto risco (tamanho > 5-10cm, alto índice mitótico, rotura do tumor), neoadjuvante para reduzir tumor irressecável/grande, ou no tratamento paliativo/doença metastática avançada (se mutação c-Kit).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Doenças dos Intestinos",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Doença Inflamatória Intestinal (DII)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Retocolite Ulcerativa (RCU):</strong> Acomete apenas CÓLON e RETO (começa no reto e ascende continuamente). Acomete APENAS a mucosa e submucosa. \n  <strong>Quadro:</strong> Diarreia sanguinolenta crônica com muco, tenesmo, urgência fecal. Tabagismo é FATOR PROTETOR.\n  <strong>Endoscopia/Biópsia:</strong> Erosões, úlceras rasas, pseudopólipos, perda do padrão vascular, inflamação contínua e difusa. Biópsia com criptite e microabscessos de criptas.\n  <strong>Complicações:</strong> Megacólon tóxico, Câncer colorretal (altíssimo risco após 8-10 anos de doença pancolônica).</li>\n  <li><strong>Doença de Crohn:</strong> Acomete TODO o TGI (da boca ao ânus). Poupa o reto com frequência. Doença TRANSMURAL (pega toda a parede) e DESCONTÍNUA (áreas saltadas).\n  <strong>Quadro:</strong> Dor abdominal, diarreia, massa palpável em QID (íleo terminal é o mais acometido), perda de peso, fístulas e doença perianal (fissuras múltiplas, plicomas dolorosos, abscessos). Tabagismo PIORA a doença.\n  <strong>Endoscopia/Biópsia:</strong> Úlceras aftóides, úlceras profundas longitudinais, aspecto de \"pedra calçamento\" (cobblestone). Biópsia: <strong>Granulomas não caseosos</strong>.\n  <strong>Complicações:</strong> Fístulas (entero-entéricas, entero-vesicais), Estenoses/obstrução, Abscessos.</li>\n  <li><strong>Manifestações Extraintestinais:</strong> \n  - Relacionadas à atividade da doença: Eritema nodoso, Artrite periférica, Aftas orais, Epiesclerite.\n  - Independentes da atividade da doença: Pioderma gangrenoso (mais na RCU), Uveíte, Espondilite anquilosante (HLA-B27), Colangite Esclerosante Primária (CEP - clássica na RCU).</li>\n  <li><strong>Tratamento DII:</strong>\n  - Indução remissão RCU leve/mod: Derivados 5-ASA (Mesalazina via oral e/ou tópica).\n  - Crohn: Corticoides sistêmicos, imunossupressores (Azatioprina), Biológicos (Anti-TNF como Infliximabe, Adalimumabe).\n  - Cirurgia na RCU (curativa): Proctocolectomia total com bolsa ileal (IPAA). Indicações: megacólon tóxico, displasia de alto grau/câncer, refratariedade.\n  - Cirurgia no Crohn (não curativa, reserva-se para complicações): Ressecção do segmento doente estenosado/fistulizado com anastomose, tentando preservar intestino para evitar Síndrome do Intestino Curto.</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Neoplasia de Cólon e Reto",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Câncer Colorretal (CCR):</strong> Adenocarcinoma é o mais comum. Desenvolve-se a partir da sequência adenoma-carcinoma (mutações APC, K-ras, p53). Pólipos adenomatosos vilosos e grandes (> 1-2cm) têm maior risco de malignização.\n  <strong>Fatores de risco:</strong> Idade, história familiar, síndromes genéticas (PAF, Lynch), RCU e Crohn, dieta pobre em fibras e rica em gordura/carne vermelha, obesidade, tabagismo.</li>\n  <li><strong>Quadro Clínico:</strong>\n  - <strong>Câncer de Cólon Direito (Ascendente):</strong> Calibre maior e fezes líquidas → tumor cresce vegetante sem obstruir. Quadro: anemia ferropriva inexplicada, sangue oculto positivo, fadiga, massa palpável. <strong>Pegadinha:</strong> Todo idoso/adulto >50 anos com anemia ferropriva DEVE fazer colonoscopia para descartar CCR.\n  - <strong>Câncer de Cólon Esquerdo (Descendente/Sigmóide):</strong> Calibre menor e fezes sólidas → tumor anelar constritivo. Quadro: alteração do hábito intestinal, fezes em fita, cólica, hematoquezia, quadro obstrutivo.\n  - <strong>Câncer de Reto:</strong> Tenesmo, hematoquezia (sangue vermelho vivo misturado ou no papel), sensação de evacuação incompleta.</li>\n  <li><strong>Diagnóstico e Rastreamento:</strong> Padrão-ouro é Colonoscopia com biópsia. \n  <strong>Rastreamento (População Risco Médio):</strong> A partir dos 45-50 anos, até 75 anos. Colonoscopia a cada 10 anos ou Pesquisa de Sangue Oculto anual. Se houver parente de 1º grau com CCR antes dos 60 anos: iniciar aos 40 anos ou 10 anos antes do diagnóstico do familiar (o que vier primeiro).</li>\n  <li><strong>Estadiamento:</strong>\n  - Para cólon: TC de tórax, abdome e pelve (rastrear metástases, sendo fígado o mais comum no cólon, e pulmão no reto distal) + CEA (marcador tumoral para seguimento).\n  - Para reto: RNM da pelve (melhor para avaliar a fáscia mesorretal e linfonodos) + USG endorretal (para T superficial) + TC de tórax e abdome.</li>\n  <li><strong>Tratamento Câncer de Cólon:</strong> Cirurgia de ressecção com margens livres + linfadenectomia (mínimo 12 linfonodos). \n  - Ceco/Ascendente: Colectomia Direita (ligadura da ileocólica, cólica direita).\n  - Descendente: Colectomia Esquerda.\n  - Adjuvância (Quimioterapia pós-op): Indicada se estadiamento III (N+, linfonodos acometidos) ou estágio II com fatores de alto risco (obstrução, perfuração, T4, <12 linfonodos).</li>\n  <li><strong>Tratamento Câncer de Reto:</strong>\n  - <strong>Critério anatômico:</strong> O reto extraperitoneal (médio e baixo) demanda terapia neoadjuvante se localmente avançado.\n  - <strong>Neoadjuvância (Qx + Rx antes da cirurgia):</strong> Indicada para Tumores de Reto Médio/Baixo (extraperitoneais) estágios T3, T4 ou N+ (Linfonodo positivo). A paciente com tumor a 1cm da linha pectínea e estadiamento T3N1 DEVE receber Quimiorradioterapia Neoadjuvante para tentar reduzir o tumor e salvar o esfíncter, sendo reestadiada 8-12 semanas depois.\n  - <strong>Cirurgias:</strong>\n    <pre class=\"reader-pre-card\">\nTumor no Reto Alto (> 5cm da margem anal) → Ressecção Anterior do Reto (Retossigmoidectomia) com anastomose colorretal.\nTumor no Reto Baixo (< 5cm, invadindo esfíncter) → Amputação Abdominoperineal de Miles (colostomia definitiva).</pre></li>\n</ul>"
+        },
+        {
+          "num": "3.3",
+          "title": "Doença Diverticular e Diverticulite Aguda",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Doença Diverticular:</strong> Herniações da mucosa e submucosa (falsos divertículos) em pontos de fraqueza da parede cólica (entrada dos vasa recta). 95% no sigmóide. Fator de risco: dieta pobre em fibras, constipação, aumento da pressão intraluminal.\n  Pode complicar de duas formas principais: <strong>Diverticulite</strong> (processo inflamatório, mais no cólon esquerdo) ou <strong>Sangramento/HDB</strong> (principal causa de HDB em idosos, ocorre mais frequentemente no cólon DIREITO).</li>\n  <li><strong>Diverticulite Aguda:</strong> Inflamação/infecção de um divertículo. \n  <strong>Quadro:</strong> \"Apendicite do lado esquerdo\". Dor fossa ilíaca esquerda (FIE), febre, alteração do hábito intestinal.\n  <strong>Diagnóstico:</strong> TC de abdome com contraste é o PADRÃO-OURO. <strong>Pegadinha:</strong> Colonoscopia e clister opaco são CONTRAINDICADOS na fase aguda pelo alto risco de perfuração. Deve-se fazer colonoscopia 4-6 semanas após o quadro agudo para descartar câncer colorretal.</li>\n  <li><strong>Classificação de Hinchey (Tomográfica/Cirúrgica) e Conduta:</strong>\n    <div class=\"reader-table-wrap\">\n      <table class=\"reader-table\">\n        <thead>\n          <tr><th>Estágio Hinchey</th><th>Achado</th><th>Tratamento</th></tr>\n        </thead>\n        <tbody>\n          <tr><td>I</td><td>Abscesso pericólico ou mesentérico pequeno.</td><td>I (sem abscesso ou pequeno < 4cm): Clínico (ATB venoso, dieta 0, suporte).</td></tr>\n          <tr><td>II</td><td>Abscesso pélvico, retroperitoneal ou a distância (maior).</td><td>II (Abscesso > 4cm): Drenagem percutânea guiada por TC + ATB. Após resfriar, programar cirurgia eletiva.</td></tr>\n          <tr><td>III</td><td>Peritonite Purulenta generalizada.</td><td>Cirurgia de Urgência (Cirurgia de Hartmann: retossigmoidectomia aural + colostomia terminal) OU Lavagem laparoscópica.</td></tr>\n          <tr><td>IV</td><td>Peritonite Fecal generalizada (ruptura do divertículo para cavidade).</td><td>Cirurgia de Urgência (Hartmann).</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "4. Doenças do Pâncreas",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Pancreatites",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Pancreatite Aguda - Etiologia:</strong> Litíase biliar (mais comum, 40-50%) e Álcool (2ª causa, após bebedeira). Outras: hipertrigliceridemia (>1000 mg/dL), pós-CPRE, drogas, hipercalcemia, picada de escorpião (Tityus trinitatis), trauma.</li>\n  <li><strong>Diagnóstico (2 dos 3 critérios):</strong>\n    1. Dor abdominal em faixa epigástrica irradiando para o dorso, vômitos incoercíveis que não aliviam a dor. Posição antálgica prece maometana.\n    2. Amilase ou Lipase elevadas (> 3x o limite superior normal). <strong>Palavra-chave:</strong> Lipase é mais sensível e específica. Os níveis das enzimas NÃO têm relação com a gravidade da doença.\n    3. Exame de imagem característico. TC de abdome com contraste é o exame de escolha, idealmente feita <strong>APÓS 48-72h</strong> do início do quadro para avaliar necrose.\n  - Sinais semiológicos clássicos (indicam necrose hemorrágica, baixa sensibilidade): Sinal de Cullen (equimose periumbilical), Sinal de Grey-Turner (equimose nos flancos), Sinal de Fox (equimose na base do pênis).</li>\n  <li><strong>Critérios de Gravidade:</strong>\n    - <strong>Critérios de Ranson:</strong> Calculados na admissão e em 48h. Avalia idade, leucócitos, glicemia, LDH, AST, queda do hematócrito, elevação do BUN (ureia), cálcio, pO2, déficit de bases, sequestro hídrico. Gravidade se >= 3 pontos.\n    - <strong>Classificação de Atlanta:</strong> Leve (sem disfunção orgânica), Moderada (disfunção < 48h ou complicação local), Grave (disfunção orgânica PERSISTENTE > 48h).\n    - <strong>Índice de Severidade Tomográfica (Balthazar):</strong> Avalia inflamação pancreática e presença de necrose.\n  </li>\n  <li><strong>Tratamento Inicial da Pancreatite Aguda:</strong>\n    - <strong>Reposição volêmica rigorosa (Cristaloides - Ringer Lactato de preferência). É o pilar do tratamento!</strong> Avaliar resposta pela diurese (manter débito > 0.5-1ml/kg/h). A presença de oligúria não contraindica reposição volêmica; pelo contrário, reforça a necessidade, a menos que haja choque refratário indicando necessidade de drogas vasoativas.\n    - <strong>Analgesia potente:</strong> Opioides como Morfina (antigamente temia-se espasmo de Oddi, mas hoje é permitida) ou Meperidina, tramadol, fentanil.\n    - <strong>Dieta Zero inicial:</strong> Retornar via oral assim que tolerado (sem dor/fome), dieta enteral precocemente (preferencialmente gástrica ou jejunal) em 24-48h é recomendada, pois preserva barreira intestinal. NPT é exceção.\n    - <strong>Antibioticoprofilaxia:</strong> NÃO É RECOMENDADA rotineiramente. Só usa carbapenêmicos (meropenem, imipenem) se houver sinal de <strong>NECROSE INFECTADA</strong> (gás na tomografia, piora clínica pós-melhora inicial com nova febre, ou punção aspirativa positiva por agulha fina).</li>\n  <li><strong>Tratamento Pancreatite Biliar (Colecistectomia):</strong>\n    - Se pancreatite biliar leve: colecistectomia NA MESMA INTERNAÇÃO.\n    - Se pancreatite biliar grave (necrose): colecistectomia postergada por 6 semanas.\n    - Se colangite associada ou icterícia obstrutiva grave: CPRE de urgência.</li>\n</ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Neoplasias do Pâncreas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Adenocarcinoma Ductal:</strong> Tipo mais comum (90%). Fatores de risco: Tabagismo (principal), pancreatite crônica, obesidade, diabetes mellitus recente no idoso. Prognóstico muito ruim, a maioria é diagnosticada em estágio avançado.</li>\n  <li><strong>Quadro Clínico e Localização:</strong> 70% ocorrem na <strong>Cabeça do Pâncreas</strong>.\n    - <strong>Câncer de Cabeça de Pâncreas:</strong> Obstrui a via biliar principal. Icterícia progressiva e indolor, acolia fecal, colúria, prurido. Perda de peso profunda.\n    - <strong>Sinal de Courvoisier-Terrier:</strong> Vesícula biliar distendida, palpável e indolor em paciente com icterícia obstrutiva progressiva. É clássico de tumores periampulares (Câncer de cabeça de pâncreas, colangiocarcinoma distal, tumor de ampola de Vater, tumor de duodeno). <strong>Pegadinha:</strong> Se a vesícula é dolorosa = colecistite. Se é indolor = sinal de Courvoisier, sugere neoplasia de cabeça de pâncreas!\n    - <strong>Tumor de Corpo e Cauda:</strong> Demoram mais a dar sintomas. Dor crônica intensa no dorso e perda de peso acentuada. Não cursam com icterícia inicial. Tromboembolismo venoso (Síndrome de Trousseau).</li>\n  <li><strong>Diagnóstico e Estadiamento:</strong>\n    - TC de abdome com protocolo pâncreas é o exame de escolha.\n    - USG abdome (inicial para icterícia, mostra dilatação de vias biliares intra e extra-hepáticas).\n    - Marcador Tumoral: CA 19-9 (usado para seguimento e prognóstico, não rastreio).</li>\n  <li><strong>Critérios de Irressecabilidade Absoluta:</strong> Metástases à distância, envolvimento arterial extenso (Artéria Mesentérica Superior, Tronco Celíaco) maior que 180 graus. Invasão venosa da veia mesentérica superior/porta não é contraindicação absoluta (pode-se fazer reconstrução).</li>\n  <li><strong>Tratamento Curativo:</strong>\n    - <strong>Tumores de Cabeça de Pâncreas:</strong> Gastroduodenopancreatectomia (Cirurgia de Whipple). Resseca antro gástrico, duodeno inteiro, cabeça do pâncreas, via biliar comum e vesícula biliar.\n    - <strong>Tumores de Corpo e Cauda:</strong> Pancreatectomia distal com esplenectomia.\n    - Terapia adjuvante (quimioterapia) é sempre recomendada.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "5. Doenças do Fígado e Vias Biliares",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Hemorragia Digestiva Alta na Cirrose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Contexto Clínico:</strong> O paciente cirrótico no pronto-socorro em choque, com hematêmese. Sinais de hipertensão portal (ascite, circulação colateral, esplenomegalia) ou insuficiência hepática (icterícia, flapping, ginecomastia).</li>\n  <li><strong>Estabilização Hemodinâmica:</strong> Prioridade absoluta. A reposição volêmica no cirrótico deve ser criteriosa e feita preferencialmente com cristaloides (Soro Fisiológico ou Ringer) até PAM de 65mmHg, evitando hiper-hidratação que aumenta a pressão portal e agrava o sangramento ou deflagra ascite refratária. A presença de ascite NÃO contraindica a infusão de cristaloides. Transfusão de concentrado de hemácias se Hb < 7g/dL (ou < 9 em coronariopata).</li>\n  <li><strong>Drogas Vasoativas:</strong> Uso imediato na suspeita (antes mesmo da EDA). Reduzem o fluxo esplâncnico e a pressão portal. Opções: <strong>Terlipressina</strong> (escolha), Octreotida, Somatostatina. Manter por 2 a 5 dias.</li>\n  <li><strong>Profilaxia de Infecções (PBE):</strong> <strong>Todo paciente cirrótico com HDA</strong> deve receber antibiótico profilático na admissão. Reduz mortalidade, ressangramento e infecções. A droga de escolha é <strong>Ceftriaxona EV por 7 dias</strong> (ou norfloxacino oral em casos leves, mas prefere-se EV na HDA).</li>\n  <li><strong>Prevenção de Encefalopatia:</strong> O sangue no TGI é proteína que vira amônia. Usar lactulose VO, SNG ou enema.</li>\n  <li><strong>Endoscopia Digestiva Alta (EDA):</strong> Realizar preferencialmente nas primeiras 12h. O tratamento definitivo de varizes esofágicas é a <strong>Ligadura Elástica Endoscópica</strong>. Se refratário após 2 tentativas, considera-se Balão Sengstaken-Blakemore ou TIPS.</li>\n</ul>"
+        },
+        {
+          "num": "5.2",
+          "title": "Complicações da Cirrose e Hipertensão Portal",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Ascite na Cirrose:</strong> Decorre da hipertensão portal sinusoidal e vasodilatação esplâncnica (GASA >= 1.1 e proteína total do líquido ascitico < 2.5 g/dL). \n  <strong>Tratamento:</strong> Restrição de sódio (2g/dia). Diuréticos de forma escalonada: Espironolactona (iniciar 100mg) associada à Furosemida (40mg) na proporção 100:40 para evitar distúrbios de potássio. Em caso de ascite tensa, Paracentese Terapêutica de grande volume. Se retirar > 5 litros, repor albumina endovenosa (8g por litro retirado) para evitar disfunção circulatória pós-paracentese.</li>\n  <li><strong>Peritonite Bacteriana Espontânea (PBE):</strong> Infecção do líquido ascítico sem foco intra-abdominal primário. Translocação de E. coli, Klebsiella, Pneumococo.\n  <strong>Diagnóstico:</strong> Paracentese diagnóstica (PMN > 250 cél/mm³) com cultura monomicrobiana (GASA > 1,1; PT < 1,0). <strong>Pegadinha:</strong> PBE tem PMN>250. Peritonite Secundária tem PMN>250 + 2 dos seguintes: proteína total > 1, glicose < 50, LDH alto (indicando ruptura de víscera, polimicrobiano).\n  <strong>Tratamento PBE:</strong> Cefotaxima ou Ceftriaxona EV 3ª geração por 5-7 dias. Deve-se administrar <strong>Albumina EV</strong> no 1º dia (1.5g/kg) e 3º dia (1g/kg) para prevenir Síndrome Hepatorrenal em todo paciente com PBE.\n  <strong>Profilaxia de PBE:</strong> Primária na HDA (Ceftriaxona). Primária em ascite com proteína < 1g/dL (Norfloxacino). Secundária (quem já teve PBE, Norfloxacino ad eternum).</li>\n  <li><strong>Encefalopatia Hepática:</strong> Acúmulo de neurotoxinas (amônia). Fatores precipitantes: HDA, infecções, constipação, hipocalemia, sedativos. Diagnóstico clínico (flapping / asterixis, sonolência). Tratamento: Tratar a causa base, Lactulose (laxativo osmótico e acidifica o lúmen para reduzir absorção de amônia), Rifaximina (antibiótico não absorvível, reduz flora produtora de amônia).</li>\n</ul>"
+        },
+        {
+          "num": "5.3",
+          "title": "Litíase Biliar e Complicações",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n  <li><strong>Colelitíase:</strong> Cálculos na vesícula. Maioria é de colesterol. \"Os 4 F's\": Female, Fat, Forty, Fertile. Sintoma: cólica biliar (dor em HD irradiada p/ escápula após ingesta gordurosa, duração < 6h). Diagnóstico: USG (cálculo ecogênico com sombra acústica posterior). Tratamento: Colecistectomia VLP se sintomático, ou cálculos grandes (>3cm), vesícula em porcelana (risco câncer), pólipo associado.</li>\n  <li><strong>Colecistite Aguda:</strong> Obstrução prolongada do ducto cístico. Dor persistente > 6h, febre, leucocitose. <strong>Sinal de Murphy positivo</strong> (parada súbita da inspiração à palpação profunda do HD). Diagnóstico: USG (parede espessada > 4mm, líquido perivesicular). Padrão-ouro: Cintilografia biliar (HIDA). Tratamento: Internação, hidratação, ATB (ceftriaxona + metronidazol), analgesia e Colecistectomia VLP precoce (ideal < 72h).</li>\n  <li><strong>Coledocolitíase:</strong> Cálculo impactado no colédoco. Cursa com icterícia flutuante e colúria/acolia. Fosfatase Alcalina e GGT muito aumentadas. BD alta. Diagnóstico: USG e ColangioRM (excelente para vias biliares). Tratamento: CPRE (Colangiopancreatografia Retrógrada Endoscópica) seguida de colecistectomia VLP, ou exploração de via biliar durante a CVLP.</li>\n  <li><strong>Colangite Aguda:</strong> Infecção das vias biliares associada à obstrução (bactérias + pus).\n  <strong>Tríade de Charcot:</strong> Febre + Icterícia + Dor no HD.\n  <strong>Pêntade de Reynolds (Forma grave, supurativa aguda):</strong> Tríade de Charcot + Hipotensão + Confusão Mental.\n  <strong>Tratamento:</strong> ATB endovenoso de amplo espectro + Drenagem da via biliar URGENTE (CPRE ou drenagem percutânea transparieto-hepática).</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_otorrinolaringologia": {
+  "area": "Otorrinolaringologia",
+  "title": "Otorrinolaringologia - Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Otologia e Otoneurologia",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Rolha de Cerume e Corpos Estranhos",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rolha de Cerume:</strong> É a causa mais comum de perda auditiva condutiva reversível. <strong>Palavra-chave:</strong> Paciente idoso, uso de hastes flexíveis (cotonetes), queixa de hipoacusia e plenitude aural (ou zumbido) súbita ou progressiva. <strong>Conduta:</strong> O tratamento de primeira linha em atenção primária para rolha impactada (sem visualização de MT) não é a lavagem imediata, mas <strong>indicar solução otológica cerolítica (ex: peróxido de ureia, glicerina) por 5 a 7 dias</strong> e reavaliar. <strong>Pegadinha:</strong> Lavagem sem preparo prévio em rolha dura ou em pacientes com perfuração timpânica prévia (contraindicação absoluta para lavagem hídrica).\n              <pre class=\"reader-pre-card\">\nPaciente com Hipoacusia + Rolha de cera visível (sem MT visualizável)\n↓\nHistórico de perfuração timpânica ou cirurgia otológica?\n- SIM: Remoção mecânica (curetagem/aspiração) por Otorrino (NUNCA LAVAR).\n- NÃO: Prescrever cerolítico tópico por 5-7 dias.\n↓\nRetorno: Lavagem auricular com água morna (temperatura corporal para evitar vertigem térmica).</pre></li>\n              <li><strong>Corpo Estranho em Orelha:</strong> Muito comum em crianças (grãos, miçangas, insetos). <strong>Palavra-chave para Insetos (animados):</strong> Zumbido intenso, dor e agitação. <strong>Conduta imediata:</strong> Instilar óleo mineral, álcool ou lidocaína tópica para matar/imobilizar o inseto ANTES da remoção. <strong>Pegadinha:</strong> Tentar remover inseto vivo ou usar pinça em objetos esféricos (empurra mais para o fundo; preferir gancho ou lavagem). Sementes não devem ser lavadas, pois incham com água.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.2",
+          "title": "Otites Médias (Aguda, Efusão, Crônica) e Complicações",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Média Aguda (OMA):</strong> Infecção bacteriana do ouvido médio, pico de incidência entre 6-24 meses. <strong>Fisiopatologia:</strong> Disfunção da tuba auditiva (frequentemente após IVAS viral). <strong>Agentes etiológicos (Palavra-chave da banca):</strong> <em>Streptococcus pneumoniae</em>, <em>Haemophilus influenzae</em> não tipável e <em>Moraxella catarrhalis</em>. <strong>Quadro clínico:</strong> Otalgia (irritabilidade na criança), febre, hipoacusia. Otoscopia: Membrana timpânica (MT) hiperemiada, abaulada, com perda do triângulo luminoso e opaca/purulenta.\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Idade</th><th>Gravidade</th><th>Conduta Inicial</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>&lt; 6 meses</td><td>Qualquer</td><td>Sempre Antibiótico (Amoxicilina)</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Bilateral ou Sintomas Graves (Febre &gt;39C, otalgia intensa)</td><td>Sempre Antibiótico</td></tr>\n                    <tr><td>6 meses a 2 anos</td><td>Unilateral leve/moderada</td><td>Observação (WASP) por 48-72h ou ATB</td></tr>\n                    <tr><td>&gt; 2 anos</td><td>Leve a moderada</td><td>Observação (WASP) por 48-72h</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              <strong>Tratamento de Escolha:</strong> Amoxicilina (45-90 mg/kg/dia) por 10 dias. <strong>Pegadinha:</strong> Falha terapêutica após 48-72h -> trocar para Amoxicilina com Clavulanato (cobre produtoras de beta-lactamase como H. influenzae e M. catarrhalis). Se alergia a penicilina (não anafilática): Cefuroxima; (anafilática): Azitromicina ou Claritromicina.</li>\n              <li><strong>Otite Média com Efusão (Serosa):</strong> Líquido no ouvido médio sem sinais de inflamação aguda (sem febre, sem hiperemia intensa). <strong>Clássico:</strong> Criança com atraso escolar/de fala, desatenta, MT retraída e opalescente, nível líquido ou bolhas na otoscopia. <strong>Tratamento:</strong> Expectante por até 3 meses. Se não resolver, tubos de ventilação (carretel). <strong>Atenção:</strong> Em adultos com OME unilateral persistente, SEMPRE afastar carcinoma de nasofaringe (obstrução tubária tumoral).</li>\n              <li><strong>Otite Média Crônica (OMC):</strong> Perfuração timpânica com duração > 3 meses.\n                <ul>\n                  <li><strong>OMC Simples:</strong> Perfuração central, otorreia intermitente (mucopurulenta) indolor que piora com entrada de água. Tratamento: Gotas tópicas (ciprofloxacino) nas agudizações; cirurgia (timpanoplastia) definitiva.</li>\n                  <li><strong>OMC Colesteatomatosa:</strong> Pele (epitélio escamoso) dentro do ouvido médio destruindo osso (ossículos). <strong>Palavra-chave:</strong> Otorreia fétida crônica e contínua, perfuração MARGINAL ou atical, massa branca perolada, lise óssea. Pode complicar com fístula labiríntica, paralisia facial ou meningite/abscesso cerebral. Tratamento: Cirúrgico OBRIGATÓRIO (Mastoidectomia).</li>\n                </ul>\n              </li>\n              <li><strong>Complicações das Otites Médias:</strong>\n                <ul>\n                  <li><strong>Mastoidite Aguda:</strong> Principal complicação da OMA. <strong>Clínica:</strong> OMA que evolui com eritema, edema e dor retroauricular, e apagamento do sulco retroauricular (deslocamento do pavilhão em abano). <strong>Conduta:</strong> Internação, TC de mastoides, ATB venoso (Ceftriaxona) e miringotomia +/- mastoidectomia.</li>\n                  <li><strong>Paralisia Facial Periférica:</strong> Deiscência do canal de Falópio expõe o nervo facial à infecção.</li>\n                </ul>\n              </li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.3",
+          "title": "Otite Externa e Afecções do Conduto",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Otite Externa Aguda (OEA):</strong> Inflamação do conduto auditivo externo (CAE). <strong>Fatores de risco:</strong> Natação, cotonetes (microtrauma). <strong>Palavra-chave:</strong> Otalgia intensa que piora à tração do pavilhão auricular ou pressão no trago. <strong>Agentes:</strong> <em>Pseudomonas aeruginosa</em> e <em>Staphylococcus aureus</em>. Tratamento: Limpeza e gotas otológicas tópicas (Ciprofloxacino + Dexametasona). ATB oral apenas se celulite periauricular ou diabetes/imunodepressão grave.</li>\n              <li><strong>Otite Externa Fúngica (Otomicose):</strong> Prurido intenso, sensação de ouvido tapado. Otoscopia com hifas e esporos (aspecto de \"algodão mofado\" ou \"papel molhado com pontinhos pretos\" - <em>Aspergillus niger</em>). Tratamento: Limpeza rigorosa, antifúngico tópico (clotrimazol).</li>\n              <li><strong>Otite Externa Necrosante (Maligna):</strong> <strong>Pegadinha Clássica:</strong> NÃO é câncer! É uma osteomielite da base do crânio iniciada no CAE. <strong>Perfil:</strong> Idoso diabético descompensado ou imunossuprimido com otalgia excruciante desproporcional, otorreia crônica não responsiva, tecido de granulação no assoalho do conduto (patognomônico). Pode evoluir com paralisia de nervos cranianos (VII, IX, X, XI). <strong>Agente:</strong> <em>Pseudomonas aeruginosa</em> (95%). <strong>Conduta:</strong> Internação, TC temporal e Ciprofloxacino venoso em altas doses por semanas.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.4",
+          "title": "Perda Auditiva, Surdez e Zumbido",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Diferenciação Condutiva x Neurossensorial (Teste de Weber e Rinne):</strong>\n              <div class=\"reader-table-wrap\">\n                <table class=\"reader-table\">\n                  <thead>\n                    <tr><th>Tipo de Perda</th><th>Rinne (Diapasão 512Hz)</th><th>Weber (Topo da cabeça)</th></tr>\n                  </thead>\n                  <tbody>\n                    <tr><td>Normal</td><td>Positivo (Aéreo > Ósseo)</td><td>Centraliza (não lateraliza)</td></tr>\n                    <tr><td>Condutiva (ex: Rolha, OMA, Otosclerose)</td><td>Negativo (Ósseo > Aéreo) no ouvido doente</td><td>Lateraliza para o ouvido DOENTE (surdo)</td></tr>\n                    <tr><td>Neurossensorial (ex: PAIR, Presbiacusia)</td><td>Positivo (Aéreo > Ósseo)</td><td>Lateraliza para o ouvido SAUDÁVEL</td></tr>\n                  </tbody>\n                </table>\n              </div>\n              </li>\n              <li><strong>Otosclerose:</strong> Perda auditiva condutiva ou mista, progressiva, bilateral assimétrica, mais comum em mulheres brancas (piora na gravidez). Fisiopatologia: Fixação da platina do estribo na janela oval. <strong>Palavra-chave:</strong> Tinnitus, herança familiar, Rinne negativo. Tratamento: Estapedotomia ou AASI (aparelho auditivo).</li>\n              <li><strong>Presbiacusia:</strong> Perda auditiva neurossensorial, bilateral, simétrica e descendente (inicia em frequências AGUDAS). Ocorre por degeneração das células ciliadas da cóclea no idoso. <strong>Palavra-chave:</strong> \"Escuto mas não entendo\" (dificuldade de discriminação em ambientes ruidosos).</li>\n              <li><strong>Perda Auditiva Induzida por Ruído (PAIR):</strong> Neurossensorial, neurossensorial, simétrica, irreversível e NÃO progressiva após cessar a exposição. <strong>Pegadinha:</strong> A gota acústica (entalhe) no audiograma ocorre CLASSICAMENTE nas frequências de 3.000, 4.000 (mais comum) e 6.000 Hz, com recuperação em 8.000 Hz.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "1.5",
+          "title": "Vertigem e Otoneurologia",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> <strong>É a causa mais comum de vertigem.</strong> <strong>Clássico:</strong> Crises vertiginosas CURTAS (segundos a menos de 1 minuto), desencadeadas por movimentos específicos da cabeça (deitar, levantar, rolar na cama). SEM sintomas auditivos associados. Fisiopatologia: Canalitíase (otólitos flutuando no canal semicircular posterior). <strong>Diagnóstico:</strong> Manobra de Dix-Hallpike (provoca vertigem e nistagmo rotatório geotrópico - batendo para o chão). <strong>Tratamento:</strong> Manobra de Epley (reposicionamento). Drogas (dimenidrinato) têm pouco valor.</li>\n              <li><strong>Doença de Ménière (Hidropsia Endolinfática):</strong> <strong>Tríade Clássica (Palavra-chave):</strong> Vertigem episódica espontânea (dura de 20 min a horas) + Zumbido (tipo concha, motor) + Hipoacusia flutuante (predomina em graves) e plenitude aural. Tratamento agudo: Supressores vestibulares. Tratamento profilático: Restrição de sal, cafeína e uso de betaistina e diuréticos.</li>\n              <li><strong>Neurite Vestibular (Neuropatia):</strong> Vertigem intensa, SÚBITA, espontânea, durando DIAS, acompanhada de náuseas e vômitos intensos, incapacitante, muitas vezes após um quadro viral prévio. <strong>Diferencial chave:</strong> SEM sintomas auditivos (audição normal). Tratamento: Corticosteroides no início, sintomáticos por poucos dias (prometazina, ondansetrona) e reabilitação vestibular precoce (para compensação central). <strong>Pegadinha:</strong> O uso prolongado de sedativos vestibulares atrasa a compensação!</li>\n              <li><strong>Schwannoma Vestibular (Neuroma do Acústico):</strong> Tumor benigno do VIII par. <strong>Palavra-chave:</strong> Perda auditiva neurossensorial unilateral progressiva + zumbido unilateral + alterações do reflexo estapediano (fadiga). Se crescer, comprime o trigêmeo (hipoestesia facial) e facial (paralisia). Exame Padrão-Ouro: RM de ouvidos com contraste.</li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "2. Faringologia e Laringologia",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Infecções de Laringe e Via Aérea na Infância",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epiglotite Aguda (Supraglotite):</strong> Emergência pediátrica de instalação hiperaguda. <strong>Perfil (Palavra-chave):</strong> Pré-escolar com VACINAS ATRASADAS, aspecto toxemiado, febre alta, dor de garganta, <strong>voz abafada (voz de batata quente) e sialorreia (babando)</strong> com estridor inspiratório. A criança adota a posição de tripé (sentada, inclinada para frente, pescoço estendido). <strong>Agente clássico:</strong> <em>Haemophilus influenzae tipo B</em> (a vacina pentavalente reduziu drasticamente; hoje S. pyogenes e S. pneumoniae também são causas). <strong>Conduta Imediata:</strong> GARANTIR VIA AÉREA (Intubação orotraqueal em bloco cirúrgico sob anestesia inalatória). <strong>Pegadinha absoluta:</strong> NUNCA inspecionar a cavidade oral ou orofaringe com abaixador de língua na suspeita de epiglotite -> Risco de laringoespasmo e obstrução total. Rx lateral de pescoço mostra o \"Sinal do Polegar\", mas não deve atrasar a via aérea. ATB de escolha: Ceftriaxona.</li>\n              <li><strong>Laringotraqueobronquite Viral (Crupe):</strong> <strong>Perfil (Palavra-chave):</strong> Lactente (6m - 3a) com pródromos catarrais (IVAS) que evolui com febre baixa/moderada, estridor leve, rouquidão e tosse ladrante (tosse de cachorro). <strong>Agente:</strong> Vírus Parainfluenza. Raio-X de pescoço AP: \"Sinal da ponta de lápis\" ou \"Torre de igreja\" (estreitamento infraglótico). <strong>Tratamento:</strong> Dexametasona dose única VO ou IM. Se estridor em repouso (moderado/grave): Adrenalina nebulizada (L-epinefrina). <strong>Atenção:</strong> Se crupe não melhora ou piora subitamente e evolui para toxemia, pensar em Traqueíte Bacteriana (S. aureus), que requer ATB venoso.</li>\n              <li><strong>Laringomalácia:</strong> <strong>Causa mais comum de estridor congênito crônico.</strong> <strong>Palavra-chave:</strong> Bebê jovem (<2 meses) com estridor inspiratório que <strong>piora no choro, na agitação e em decúbito dorsal</strong>, e melhora no repouso ou prono. Evolução benigna, pico aos 6-9 meses, resolução espontânea até os 2 anos. Diagnóstico: Nasofibrolaringoscopia mostrando prolapso supraglótico (\"epiglote em ômega\"). Conduta: Expectante na maioria; se grave (déficit de peso/cor pulmonale), cirurgia (supraglotoplastia).</li>\n            </ul>\n          "
+        },
+        {
+          "num": "2.2",
+          "title": "Faringotonsilites e Complicações",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Faringotonsilite Bacteriana:</strong> Agente: <em>Streptococcus pyogenes</em> (EBHGA). Pico 5 a 15 anos. Raro < 3 anos (nessa idade é viral). <strong>Critérios de Centor (para definir ATB empírico):</strong> Febre, exsudato tonsilar, adenopatia cervical anterior dolorosa e AUSÊNCIA de tosse (+1 se idade 3-14a; -1 se >44a). Tratamento: Penicilina G benzatina IM DU ou Amoxicilina VO por 10 dias. O objetivo não é só tratar a infecção, mas prevenir a <strong>Febre Reumática</strong> (a glomerulonefrite pós-estrepto NÃO previne com ATB).</li>\n              <li><strong>Mononucleose Infecciosa:</strong> Epstein-Barr Vírus. <strong>Palavra-chave:</strong> Faringite exsudativa intensa prolongada + poliadenopatia generalizada (incluindo cervical POSTERIOR) + esplenomegalia. <strong>Pegadinha de prova:</strong> Paciente com \"amigdalite\" tratado com amoxicilina que desenvolve rash cutâneo maculopapular (exantema) difuso. Diagnóstico: Linfocitose atípica, Anticorpos heterófilos (Paul-Bunnell-Davidsohn). Conduta: Sintomáticos, afastar esportes de contato por 4 semanas (risco de ruptura esplênica).</li>\n              <li><strong>Abscesso Peritonsilar:</strong> Complicação bacteriana de amigdalite aguda. <strong>Clássico:</strong> Adolescente/jovem com dor de garganta unilateral intensa, trismo, voz de batata quente, desvio da úvula para o lado CONTRALÁRIO à lesão, e abaulamento do pilar amigdaliano anterior. <strong>Tratamento:</strong> Internação, ATB venoso (Clindamicina ou Ceftriaxona+Metronidazol) e <strong>Drenagem imediata (punção/incisão)</strong>.</li>\n              <li><strong>Hipertrofia Adenotonsilar e SAOS:</strong> Causa primária de apneia do sono infantil. Criança respiradora oral, fácies adenoideana (lábio superior curto, palato ogival, dentição alterada), cor pulmonale. Tratamento: Adenotonsilectomia.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "2.3",
+          "title": "Lesões Benignas e Malignas da Laringe",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Nódulos Vocais (Kissing nodules):</strong> Lesão benigna MAIS COMUM de prega vocal, bilaterais, no terço médio, simétricos. <strong>Causa:</strong> Abuso/mau uso vocal crônico (professores, cantores, crianças gritadoras). <strong>Tratamento:</strong> Fonoterapia (foniatria). A cirurgia é exceção.</li>\n              <li><strong>Pólipos Vocais:</strong> Unilaterais, base séssil ou pediculada, causados por trauma fonatório AGUDO associado frequentemente a fatores irritantes (refluxo, tabagismo). Tratamento: Microcirurgia de laringe + fonoterapia de apoio.</li>\n              <li><strong>Edema de Reinke:</strong> Acúmulo de fluido no espaço de Reinke (lâmina própria superficial). <strong>Palavra-chave:</strong> Mulher idosa, TABAGISTA pesada, que adquire voz grave (virilizada). Tratamento: Cessar tabagismo + microcirurgia.</li>\n              <li><strong>Câncer de Laringe:</strong> Mais de 95% são Carcinoma Espinocelular (CEC). Fatores de risco maiores: <strong>Tabagismo e Etilismo (sinergismo)</strong>.\n                <ul>\n                  <li><strong>CA Glótico:</strong> <strong>Palavra-chave:</strong> Rouquidão crônica e persistente (>3-4 semanas). Tem diagnóstico PRECOCE (a voz avisa cedo). Como a glote tem drenagem linfática escassa, demora a dar metástase linfonodal.</li>\n                  <li><strong>CA Supraglótico:</strong> <strong>Palavra-chave:</strong> Assintomático nas fases iniciais, depois causa disfagia, odinofagia, sensação de corpo estranho e engasgos. Diagnóstico TARDIO, e frequentemente o paciente abre o quadro com linfonodomegalia cervical (rica rede linfática).</li>\n                </ul>\n              </li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "3. Rinologia e Seios da Face",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Rinossinusites",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinossinusite Aguda:</strong> Inflamação de mucosa nasal e seios paranasais < 12 semanas. Maioria esmagadora é VIRAL.\n              <br><strong>Diagnóstico Clínico (Critérios Maiores):</strong> Rinorreia purulenta/obstrução nasal + Dor/pressão facial ou hiposmia/anosmia.\n              <br><strong>Viral vs Bacteriana:</strong> Suspeita de BACTERIANA (pneumococo, hemófilo, moraxela) se:\n                <ol>\n                  <li>Sintomas persistem por > 10 dias SEM melhora;</li>\n                  <li>Início grave (febre alta, rinorreia purulenta, dor facial excruciante) por > 3-4 dias;</li>\n                  <li>Piora dupla (Double sickening): Estava melhorando de um resfriado (após 5-6 dias) e volta a ter febre alta, dor facial e secreção pior.</li>\n                </ol>\n              <strong>Tratamento da Bacteriana:</strong> Amoxicilina ou Amoxicilina-Clavulanato (5-10 dias adultos, 10-14d crianças), associado a Lavagem Nasal exaustiva com soro fisiológico e corticoide tópico (mometasona, budesonida). <strong>Pegadinha:</strong> Raio-X de seios da face NÃO deve ser solicitado (não diferencia viral de bacteriana). Tomografia é indicada APENAS se houver suspeita de complicação ou pré-operatório, ou falha de tratamento.\n              </li>\n              <li><strong>Complicações das Rinossinusites:</strong>\n                <ul>\n                  <li><strong>Celulite Periorbitária (Pré-septal):</strong> Edema, eritema de pálpebra, SEM acometimento da órbita. Olho move normal, visão normal, sem proptose. Tratamento: ATB oral/venoso dependendo da idade e reavaliação.</li>\n                  <li><strong>Celulite Orbitária (Pós-septal):</strong> Extensão da infecção do seio etmoidal através da lâmina papirácea para dentro da órbita. <strong>Sinais de alarme:</strong> Proptose (exoftalmia), oftalmoplegia (dor/restrição à movimentação ocular), quemose e diminuição de acuidade visual. <strong>Conduta:</strong> INTERNAÇÃO de emergência, TC de seios da face/órbitas com contraste, ATB EV (Ceftriaxona + Clindamicina/Vancomicina). Se não melhorar em 48h ou abscesso grande: Drenagem cirúrgica (endoscópica nasal).</li>\n                </ul>\n              </li>\n              <li><strong>Rinossinusite Crônica:</strong> > 12 semanas de sintomas ininterruptos. Pode ser com ou sem polipose nasal. <strong>Doença de Samter (Tríade da Aspirina / DREA):</strong> Paciente com asma grave + rinossinusite crônica com pólipos nasais + intolerância à AAS/AINEs (broncoespasmo grave). Tratamento crônico: Corticoides tópicos, lavagem, cirurgia endoscópica funcional (FESS).</li>\n            </ul>\n          "
+        },
+        {
+          "num": "3.2",
+          "title": "Epistaxe",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Epistaxe Anterior:</strong> Responde por 90% dos casos. Sangramento originário do <strong>Plexo de Kiesselbach (Área de Little)</strong> na porção anterior do septo cartilaginoso. <strong>Causas:</strong> Trauma digital (dedo no nariz), clima seco, rinite. <strong>Conduta inicial:</strong> Compressão digital firme das asas do nariz por 10-15 min, inclinar cabeça PARA FRENTE (não para trás, para evitar broncoaspiração), algodão com vasoconstritor tópico (oximetazolina). Se o vaso for visualizado: Cauterização química (Nitrato de Prata 70%) ou elétrica. Se falhar: Tampão nasal anterior.</li>\n              <li><strong>Epistaxe Posterior:</strong> Menos comum, mas MUITO mais grave e profusa, comum em idosos hipertensos. Origem no <strong>Plexo de Woodruff (Artéria Esfenopalatina)</strong>. Sangra mais pela faringe e pelas duas fossas nasais. <strong>Conduta:</strong> ABCDE primeiro (acesso venoso, volume), tamponamento posterior com sonda de Foley ou tampões específicos (ex: Epistat) + tamponamento anterior simultâneo. Requer internação hospitalar. Se não resolver em 48-72h: Cirurgia endoscópica para ligadura da artéria esfenopalatina (Padrão-Ouro atual) ou embolização por radiologia intervencionista.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "3.3",
+          "title": "Rinite Alérgica e Tumores",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Rinite Alérgica:</strong> Prurido nasal, espirros em salva, coriza hialina, congestão nasal. Tríade do exame: Mucosa pálida/cianótica, hipertrofia de cornetos inferiores e secreção clara. <strong>Tratamento Padrão-ouro:</strong> Corticoide nasal tópico (Budesonida, Fluticasona) diariamente. Anti-histamínicos de 2ª geração VO ajudam muito em coriza/espirro, mas pouco na obstrução. Controle ambiental fundamental (evitar ácaros, tapetes, mofo, cortinas de pano).</li>\n              <li><strong>Angiofibroma Nasofaríngeo Juvenil:</strong> <strong>Perfil Absoluto:</strong> Menino adolescente masculino com obstrução nasal progressiva unilateral ou bilateral profunda, associada a episódios de EPISTAXE SEVERA recorrente. Tumor altamente vascularizado benigno. <strong>Pegadinha Crítica:</strong> NUNCA BIPSAR EM CONSULTÓRIO (Risco de hemorragia fatal). Diagnóstico por TC e RM. Tratamento: Embolização pré-operatória seguida de ressecção cirúrgica.</li>\n            </ul>\n          "
+        }
+      ]
+    },
+    {
+      "title": "4. Urgências e Traumas Otorrinolaringológicos",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Traumas Nasais e Hematoma Septal",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Fratura Nasal:</strong> Osso mais fraturado da face. Diagnóstico é CLÍNICO (crepitação, desvio, edema). Raio-X tem pouco valor. O mais importante é palpar e realizar a rinoscopia anterior.</li>\n              <li><strong>Hematoma de Septo Nasal:</strong> <strong>Emergência Otorrinolaringológica!</strong> Coleção de sangue entre o mucopericôndrio e a cartilagem do septo. Causa isquemia da cartilagem quadrangular, levando à necrose cartilaginosa em 48-72h. <strong>Complicação clássica (Palavra-chave):</strong> Nariz em sela (desabamento do dorso) crônico e perfuração septal permanente, além de infecção (abscesso). <strong>Conduta OBRIGATÓRIA:</strong> Drenagem incisional de urgência do hematoma + tamponamento nasal bilateral compressivo (para evitar que acumule de novo) + antibiótico.</li>\n            </ul>\n          "
+        },
+        {
+          "num": "4.2",
+          "title": "Paralisia Facial Periférica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "\n            <ul class=\"reader-list\">\n              <li><strong>Paralisia de Bell (Idiopática):</strong> Causada provavelmente por reativação viral (Herpes Simplex tipo 1). É PERIFÉRICA: Acomete TODA a hemiface (inclui porção superior - incapacidade de enrugar a testa e fechar o olho, \"Sinal de Bell\" - desvio do globo ocular para cima e para fora ao tentar fechar), ao contrário da Central (que poupa a testa). <strong>Tratamento:</strong> Corticoterapia em altas doses iniciada precocemente (< 72h) para diminuir edema do nervo + Proteção Ocular rigorosa (colírio lubrificante, oclusão noturna para evitar úlcera de córnea).</li>\n              <li><strong>Síndrome de Ramsay Hunt:</strong> Reativação do Varicela-Zoster (Herpes Zoster Oticus) no gânglio geniculado. <strong>Palavra-chave:</strong> Paralisia facial periférica intensa + otalgia excruciante + vesículas no pavilhão auricular/conduto auditivo/concha. O prognóstico de recuperação facial é pior que a de Bell. <strong>Tratamento:</strong> Corticoides em altas doses + Aciclovir/Valaciclovir.</li>\n            </ul>\n          "
+        }
+      ]
+    }
+  ]
+},
+    
     "uepa_neurologia": {
   "area": "Neurologia",
   "title": "Rapid Review: Neurologia",
@@ -1111,110 +1256,7 @@
     
     
     
-    "uepa_gastroenterologia": {
-  "area": "Gastroenterologia",
-  "title": "Gastroenterologia - Rapid Review",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "Esôfago e Estômago",
-      "subchapters": [
-        {
-          "num": "1",
-          "title": "Doença do Refluxo Gastroesofágico e Motilidade",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Fisiologia</td><td><ul class=\"reader-list\"><li>Refluxo fisiológico ocorre principalmente em posição ereta (acordado)</li></ul></td></tr><tr><td>Tratamento Cirúrgico (Fundoplicatura)</td><td><ul class=\"reader-list\"><li>Indicações: refratariedade ao IBP, complicações (estenose, esôfago de Barrett grave), intolerância ao IBP</li><li>Exames pré-operatórios obrigatórios: EDA, pHmetria de 24h e Manometria Esofágica</li><li>Fundoplicatura parcial (Toupet) é indicada em distúrbios de motilidade do corpo esofágico (ex: esclerodermia) associados para evitar disfagia pós-operatória</li><li>Fundoplicatura total (Nissen) é a escolha padrão na ausência de hipomotilidade</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "2",
-          "title": "H. Pylori e Úlcera Péptica",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Erradicação do H. Pylori</td><td><ul class=\"reader-list\"><li>Controle de cura obrigatório: indicado teste respiratório da ureia (ou antígeno fecal) após no mínimo 4 semanas do fim do tratamento antimicrobiano</li><li>Sorologia IgG não é recomendada para controle de cura, pois não diferencia infecção ativa de cicatriz sorológica (permanece positiva)</li></ul></td></tr><tr><td>Úlcera Duodenal Sangrante</td><td><ul class=\"reader-list\"><li>Úlcera em parede posterior da segunda porção do duodeno sangra caracteristicamente por erosão da artéria gastroduodenal</li><li>Tratamento endoscópico duplo (ex: injeção de adrenalina + clipe/termocoagulação) é a conduta inicial</li><li>Em caso de falha endoscópica com sangramento ativo: indicada arteriografia com embolização ou tratamento cirúrgico</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Hemorragia Digestiva",
-      "subchapters": [
-        {
-          "num": "3",
-          "title": "HDA e Varizes",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo</th><th>Características e Conduta</th></tr></thead><tbody><tr><td>HDA Varicosa</td><td><ul class=\"reader-list\"><li>Cenário: paciente cirrótico, estigmas de hepatopatia (ascite, icterícia, flapping), apresentando hematêmese e choque</li><li>Ressuscitação: estabilização hemodinâmica inicial (cristaloides e hemotransfusão se Hb < 7, ou < 9 se cardiopata); droga vasoativa (Terlipressina, Octreotide) antes mesmo da endoscopia</li><li>Intervenção: EDA precoce (nas primeiras 12h) para ligadura elástica</li><li>Profilaxia de PBE é mandatória (ex: Ceftriaxone ou Norfloxacino) em cirróticos com HDA</li></ul></td></tr><tr><td>HDB e Obscura</td><td><ul class=\"reader-list\"><li>Hemorragia Digestiva Obscura: sangramento evidente (macroscópico ou oculto) com EDA e colonoscopia normais; a fonte mais comum é o intestino delgado (angiodisplasias, tumores)</li><li>HDB Volumosa: estabilização hemodinâmica em primeiro lugar. Após estável, realiza-se colonoscopia. Se sangramento maciço e instabilidade hemodinâmica refratária, a conduta é arteriografia ou angiotomografia</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Intestinos",
-      "subchapters": [
-        {
-          "num": "4",
-          "title": "Síndromes Disabsortivas",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Detalhes</th></tr></thead><tbody><tr><td>Doença Celíaca</td><td><ul class=\"reader-list\"><li>Quadro clínico: diarreia crônica, esteatorreia, perda de peso, anemia ferropriva refratária</li><li>Marcador sorológico de escolha: Anticorpo Antitransglutaminase tecidual (Anti-tTG) IgA associado à dosagem de IgA total (para excluir deficiência seletiva de IgA)</li><li>Biópsia duodenal (padrão-ouro): atrofia de vilosidades, hiperplasia de criptas e infiltrado linfocítico intraepitelial</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "5",
-          "title": "Doença Diverticular e DII",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Características</th></tr></thead><tbody><tr><td>Diverticulite Aguda</td><td><ul class=\"reader-list\"><li>Dor em fossa ilíaca esquerda, febre, defesa localizada</li><li>Classificação de Hinchey III (peritonite purulenta) e Hinchey IV (peritonite fecal) exigem tratamento cirúrgico de urgência (frequentemente Cirurgia a Hartmann)</li></ul></td></tr><tr><td>Retocolite Ulcerativa (RCU)</td><td><ul class=\"reader-list\"><li>Acometimento de mucosa e submucosa, contínuo, iniciando no reto e estendendo-se proximalmente</li><li>Apresentação clássica: diarreia mucosanguinolenta (disenteria)</li><li>Associação com Colangite Esclerosante Primária e marcador p-ANCA positivo</li></ul></td></tr><tr><td>Doença de Crohn</td><td><ul class=\"reader-list\"><li>Acometimento transmural e saltatório de qualquer segmento do trato gastrointestinal (da boca ao ânus), frequentemente acometendo íleo terminal</li><li>Pode cursar com massa no QID, fístulas, estenoses e fissuras perianais complexas</li><li>Marcador ASCA positivo</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Pâncreas, Vias Biliares e Fígado",
-      "subchapters": [
-        {
-          "num": "6",
-          "title": "Pancreatites",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Pancreatite Aguda Grave</td><td><ul class=\"reader-list\"><li>Hidratação venosa vigorosa imediata com cristaloides (Ringer Lactato preferencialmente) visando perfusão tecidual</li><li>Uso de analgesia multimodal (opioides como fentanil ou morfina, se necessário)</li><li>Suporte nutricional: preferir nutrição enteral precoce se tolerado; NPT apenas se enteral contraindicada ou falha</li><li>Antibioticoterapia profilática é CONTRAINDICADA, mesmo em presença de necrose estéril extensa. Antibióticos são restritos a infecção comprovada (gás na TC, cultura positiva) ou alta suspeita clínica (deterioração pós 7-10 dias)</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    },
-    {
-      "title": "Neoplasias do Sistema Digestivo",
-      "subchapters": [
-        {
-          "num": "7",
-          "title": "Câncer de Pâncreas e Estômago",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Topografia</th><th>Detalhes e Conduta</th></tr></thead><tbody><tr><td>Câncer de Pâncreas (Cabeça)</td><td><ul class=\"reader-list\"><li>Apresentação clássica: síndrome consumptiva severa, icterícia obstrutiva progressiva, colúria, acolia fecal</li><li>Sinal de Courvoisier-Terrier: vesícula biliar palpável e indolor no hipocôndrio direito na vigência de icterícia</li></ul></td></tr><tr><td>GIST (Tumor do Estroma Gastrointestinal)</td><td><ul class=\"reader-list\"><li>Originam-se das células intersticiais de Cajal; mutação do gene c-KIT é positiva em >90% (CD117)</li><li>Estômago é o local mais frequente</li><li>O tratamento de tumores grandes (>5cm) ou com alto índice mitótico submetidos à ressecção completa (R0) envolve terapia-alvo adjuvante com Inibidor da Tirosina Quinase (Imatinibe)</li></ul></td></tr></tbody></table></div>"
-        },
-        {
-          "num": "8",
-          "title": "Câncer Colorretal",
-          "tags": [
-            "ja",
-            "adj"
-          ],
-          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Adenocarcinoma de Reto</td><td><ul class=\"reader-list\"><li>Diagnóstico: colonoscopia e toque retal para estimar altura da lesão</li><li>Estadiamento local obrigatório: Ressonância Magnética (RM) de pelve (para avaliar invasão em profundidade T e linfonodos N)</li><li>Se tumor de reto médio ou baixo for localmente avançado (T3, T4 ou N+), a conduta padrão é a Quimio-Radioterapia Neoadjuvante, seguida de reestadiamento e posterior cirurgia de ressecção</li><li>Tumores extremamente baixos sem possibilidade de margem distal de segurança exigem Amputação Abdominoperineal (Cirurgia de Miles)</li></ul></td></tr></tbody></table></div>"
-        }
-      ]
-    }
-  ]
-},
+    
     "uepa_reumatologia": {
   "area": "Reumatologia",
   "title": "Reumatologia - Master",
