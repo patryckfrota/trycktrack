@@ -6092,17 +6092,21 @@
             #reviewTab.active { padding-top: 28px !important; }
         }
 
-        /* Rapid Review em telas amplas (tablet/iPad/desktop): o CONTAINER
-           (.reader-header/.reader-content) cresce pra usar a tela toda, mas
-           quem trava o comprimento da linha de leitura é .reader-chapter-block
-           (número + título + tags + corpo, tudo junto — pra não desalinhar
-           título e texto), com um max-width em "ch" (unidade de largura de
-           caractere) e margin-inline:auto pra CENTRALIZAR essa coluna dentro
-           do espaço sobrando. Sem o auto-margin, a coluna estreita fica
-           encostada à esquerda e o resto da tela (quase metade dela, numa
-           tela larga/deitada) sobra vazio — foi exatamente o bug visto no
-           iPad: texto "espremido" contra a borda esquerda, em vez de
-           centralizado. */
+        /* Rapid Review em telas amplas (tablet/iPad/desktop): o container
+           (.reader-header/.reader-content) cresce pra usar a tela toda, e
+           .reader-chapter-block (número + título + tags + corpo, tudo
+           junto — pra não desalinhar título e texto) preenche esse
+           container inteiro, sem um max-width em "ch" travando a coluna
+           bem mais estreita que a tela. Um max-width em ch tornava a
+           leitura tecnicamente "correta" (~70 caracteres por linha), mas
+           num iPad isso sobrava quase metade da tela vazia — o pedido foi
+           explicitamente usar bem o espaço da tela, não seguir a régua
+           tipográfica à risca. margin-inline:auto entra como segurança:
+           se algum dia o max-width voltar a ser menor que o container, a
+           coluna centraliza em vez de ficar encostada à esquerda (foi
+           assim que o texto "espremido" apareceu da primeira vez). Só em
+           monitor de desktop bem largo (1600px+, ver abaixo) a linha
+           ganha um teto, pra não passar de ~100 caracteres. */
         @media (min-width: 768px) {
             .reader-header,
             .reader-content {
@@ -6115,7 +6119,6 @@
                 padding-right: 56px !important;
             }
             .reader-chapter-block {
-                max-width: 70ch;
                 margin-inline: auto;
             }
         }
@@ -6128,8 +6131,10 @@
                 padding-left: 72px !important;
                 padding-right: 72px !important;
             }
+        }
+        @media (min-width: 1600px) {
             .reader-chapter-block {
-                max-width: 74ch;
+                max-width: 980px;
             }
         }
 
