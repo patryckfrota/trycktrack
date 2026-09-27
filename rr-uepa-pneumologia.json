@@ -1,0 +1,58 @@
+{
+  "area": "Pneumologia",
+  "title": "Pneumologia - UEPA Master",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Doenças Obstrutivas e Testes Funcionais",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "DPOC - Diagnóstico e Tratamento",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classificação GOLD</th><th>Manejo Terapêutico</th></tr></thead><tbody><tr><td>Grupo A (Poucos sintomas, 0-1 exacerbação sem internação)</td><td><ul class=\"reader-list\"><li>Broncodilatador de curta ou longa ação (SABA, SAMA, LABA ou LAMA)</li></ul></td></tr><tr><td>Grupo B (Muitos sintomas, 0-1 exacerbação sem internação)</td><td><ul class=\"reader-list\"><li>LABA + LAMA</li></ul></td></tr><tr><td>Grupo E (≥2 exacerbações ou ≥1 com internação)</td><td><ul class=\"reader-list\"><li>LABA + LAMA</li><li>Considerar + ICS se eosinófilos ≥ 300 (Terapia tripla)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.2",
+          "title": "Asma - Tratamento e Exacerbação",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Manutenção:</strong> O tratamento preferencial (Step 1 e 2 GINA) envolve o uso de ICS + Formoterol sob demanda.</li><li><strong>Exacerbação Leve/Moderada:</strong> SABA repetido, corticoide sistêmico (oral preferencialmente) e oxigênio alvo 93-95%.</li><li><strong>Exacerbação Grave:</strong> SABA + Ipratrópio, corticoide IV, considerar sulfato de magnésio IV, oxigênio. Aferição do Peak Flow (PFE) é útil para reavaliação.</li><li><strong>Doença Respiratória Exacerbada por Aspirina (AERD):</strong> Tríade de Samter inclui Asma, Polipose Nasal e sensibilidade à Aspirina (AINEs).</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Exames Funcionais - Espirometria",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Distúrbio</th><th>Padrão Espirométrico</th></tr></thead><tbody><tr><td>Obstrutivo</td><td><ul class=\"reader-list\"><li>VEF1/CVF < Limite Inferior da Normalidade (LIN) ou < 0,70</li><li>CVF normal ou reduzida</li></ul></td></tr><tr><td>Restritivo</td><td><ul class=\"reader-list\"><li>VEF1/CVF normal ou aumentado</li><li>CVF < LIN</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Pneumologia Intensiva",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Cuidados com a Via Aérea e SRI",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Preditores de Via Aérea Difícil (LEMON):</strong> L (Look externally - Obesidade, trauma), E (Evaluate 3-3-2: abertura de boca < 3 dedos), M (Mallampati III/IV), O (Obstruction/Obesity), N (Neck mobility restrita). Intubação prévia não é um preditor direto no momento do exame físico da VAD.</li><li><strong>Sequência Rápida de Intubação (SRI):</strong> Fases incluem Preparação, Pré-oxigenação, Otimização pré-intubação (correção de hipoxemia, hipotensão com aminas se necessário), Paralisia com indução, Posicionamento, Posicionamento do tubo e Cuidados pós-intubação.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Ventilação Mecânica",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Pressão de Suporte (PSV):</strong> Modo espontâneo. O paciente inicia o ciclo (disparo a fluxo ou pressão) e finaliza o ciclo (ciclagem a fluxo). O volume corrente e a frequência respiratória são variáveis e determinados pelo paciente.</li><li><strong>Insuficiência Respiratória Aguda (IRpA):</strong> Tipo I (Hipoxêmica) e Tipo II (Hipercápnica). Em pacientes com IRpA grave (ex: SARA), a posição prona por > 12-16h ao dia é recomendada quando a relação PaO2/FiO2 < 150 mmHg.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Oncologia Torácica",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Câncer de Pulmão",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tumor de Pancoast (Ápice Pulmonar):</strong> Causa dor no ombro/braço pela compressão do plexo braquial.</li><li><strong>Síndrome de Horner:</strong> Decorre do acometimento da cadeia simpática cervical pelo tumor apical. Apresenta-se com a tríade ipsilateral: miose, ptose palpebral e anidrose facial.</li></ul>"
+        }
+      ]
+    }
+  ]
+}

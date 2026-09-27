@@ -23,6 +23,109 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_pneumologia": {
+  "area": "Pneumologia",
+  "title": "Pneumologia - UEPA Master",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Doenças Obstrutivas e Testes Funcionais",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "DPOC - Diagnóstico e Tratamento",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classificação GOLD</th><th>Manejo Terapêutico</th></tr></thead><tbody><tr><td>Grupo A (Poucos sintomas, 0-1 exacerbação sem internação)</td><td><ul class=\"reader-list\"><li>Broncodilatador de curta ou longa ação (SABA, SAMA, LABA ou LAMA)</li></ul></td></tr><tr><td>Grupo B (Muitos sintomas, 0-1 exacerbação sem internação)</td><td><ul class=\"reader-list\"><li>LABA + LAMA</li></ul></td></tr><tr><td>Grupo E (≥2 exacerbações ou ≥1 com internação)</td><td><ul class=\"reader-list\"><li>LABA + LAMA</li><li>Considerar + ICS se eosinófilos ≥ 300 (Terapia tripla)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.2",
+          "title": "Asma - Tratamento e Exacerbação",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Manutenção:</strong> O tratamento preferencial (Step 1 e 2 GINA) envolve o uso de ICS + Formoterol sob demanda.</li><li><strong>Exacerbação Leve/Moderada:</strong> SABA repetido, corticoide sistêmico (oral preferencialmente) e oxigênio alvo 93-95%.</li><li><strong>Exacerbação Grave:</strong> SABA + Ipratrópio, corticoide IV, considerar sulfato de magnésio IV, oxigênio. Aferição do Peak Flow (PFE) é útil para reavaliação.</li><li><strong>Doença Respiratória Exacerbada por Aspirina (AERD):</strong> Tríade de Samter inclui Asma, Polipose Nasal e sensibilidade à Aspirina (AINEs).</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Exames Funcionais - Espirometria",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Distúrbio</th><th>Padrão Espirométrico</th></tr></thead><tbody><tr><td>Obstrutivo</td><td><ul class=\"reader-list\"><li>VEF1/CVF < Limite Inferior da Normalidade (LIN) ou < 0,70</li><li>CVF normal ou reduzida</li></ul></td></tr><tr><td>Restritivo</td><td><ul class=\"reader-list\"><li>VEF1/CVF normal ou aumentado</li><li>CVF < LIN</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Pneumologia Intensiva",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Cuidados com a Via Aérea e SRI",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Preditores de Via Aérea Difícil (LEMON):</strong> L (Look externally - Obesidade, trauma), E (Evaluate 3-3-2: abertura de boca < 3 dedos), M (Mallampati III/IV), O (Obstruction/Obesity), N (Neck mobility restrita). Intubação prévia não é um preditor direto no momento do exame físico da VAD.</li><li><strong>Sequência Rápida de Intubação (SRI):</strong> Fases incluem Preparação, Pré-oxigenação, Otimização pré-intubação (correção de hipoxemia, hipotensão com aminas se necessário), Paralisia com indução, Posicionamento, Posicionamento do tubo e Cuidados pós-intubação.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Ventilação Mecânica",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Pressão de Suporte (PSV):</strong> Modo espontâneo. O paciente inicia o ciclo (disparo a fluxo ou pressão) e finaliza o ciclo (ciclagem a fluxo). O volume corrente e a frequência respiratória são variáveis e determinados pelo paciente.</li><li><strong>Insuficiência Respiratória Aguda (IRpA):</strong> Tipo I (Hipoxêmica) e Tipo II (Hipercápnica). Em pacientes com IRpA grave (ex: SARA), a posição prona por > 12-16h ao dia é recomendada quando a relação PaO2/FiO2 < 150 mmHg.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Oncologia Torácica",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Câncer de Pulmão",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tumor de Pancoast (Ápice Pulmonar):</strong> Causa dor no ombro/braço pela compressão do plexo braquial.</li><li><strong>Síndrome de Horner:</strong> Decorre do acometimento da cadeia simpática cervical pelo tumor apical. Apresenta-se com a tríade ipsilateral: miose, ptose palpebral e anidrose facial.</li></ul>"
+        }
+      ]
+    }
+  ]
+}
+,
+    "uepa_otorrinolaringologia": {
+  "area": "Otorrinolaringologia",
+  "title": "Master Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Questions",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Audiologia - Patologias Auditivas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Paciente de 75 anos, vem a UBS pois vem apresentando quadro de zumbido em ouvido esquerdo, redução da audição do mesmo ouvido, relata uso diário de hastes de algodão (cotonetes) para higiene. Após otoscopia observa rolha de cera, sem ver membrana timpânica. Neste caso o tratamento instituído deve ser:</td><td><ul class=\"reader-list\"><li>A: iniciar lavagem auricular guiada por otoscópio na APS.</li><li>B: indicar solução otológica cerolitica por cinco dias e reavaliar em sete dias.</li><li>C: encaminhar ao otorrino para avaliação e manejo adequado.</li><li>D: orientar suspensão do uso de hastes de algodão e reavaliar após trinta dias.</li><li>E: orientações sobre a hipoacusia fisiológica do envelhecimento.</li></ul></td><td>B</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2",
+          "title": "Infecções das Vias Aéreas Superiores - Laringites",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Pré-Escolar com 4 anos de idade, vacinas atrasadas, iniciou quadro de febre seguida de dor de garganta, voz abafada e sialorréia há 24h. Ao exame físico: aspecto toxemiado, pálido, dispneico, estridor inspiratório; Of: não examinado; Ap: MV reduzido, sra ; FR: 54ipm; SO2: 92%; ban e tiragem intercostal; AC: bcnf rcr 2t, ss; Fc: 160 bpm; enchimento capilar 2 segundo; PA: 90x50 mmhg; Abd: flácido, sem vgm; SN: ecg 15; Pulsos cheios. Ante o exposto, o diagnostico provável, é:</td><td><ul class=\"reader-list\"><li>A: Crupe</li><li>B: Pneumonia</li><li>C: Aspiraçao de corpo estranho</li><li>D: Epiglotite</li><li>E: Anafilaxia</li></ul></td><td>D</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "3",
+          "title": "Infecções das Vias Aéreas Superiores - Otites",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Stem</th><th>Options</th><th>Answer</th></tr></thead><tbody><tr><td>Os agentes bacterianos mais frequentemente implicados na etiologia das otites médias agudas na infância são:</td><td><ul class=\"reader-list\"><li>A: Streptococcus pneumoniae, Haemophilus influenzae não tipável e a Moraxella catarrhalis.</li><li>B: Streptococcus pyogenes do grupo A, Haemophilus influenzae tipo B e a Moraxella catarrhalis.</li><li>C: Streptococcus pneumoniae, Haemophilus influenzae tipo B e o Mycoplasma pneumoniae.</li><li>D: Streptococcus pneumoniae, Haemophilus influenzae tipo B e a Moraxella catarrhalis.</li><li>E: Streptococcus pyogenes do grupo A, Haemophilus influenzae não tipável e o Mycoplasma pneumoniae.</li></ul></td><td>A</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "4",
+          "title": "Tópicos Adjacentes em Otorrinolaringologia",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Anatomia do Ouvido: Ouvido externo, médio, interno.</li><li>Otite Média Aguda: Infecção do ouvido médio, comum em crianças.</li><li>Rinite Alérgica: Inflamação da mucosa nasal induzida por alérgenos.</li><li>Sinusite: Inflamação dos seios paranasais.</li><li>Faringotonsilite: Infecção da faringe e amígdalas, causas virais e bacterianas.</li><li>Vertigem: Sensação de movimento rotatório, ex: VPPB.</li><li>Surdez: Condutiva ou neurossensorial.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Topic</th><th>Description</th></tr></thead><tbody><tr><td>Otoscopia</td><td>Visualização do conduto auditivo e membrana timpânica.</td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+},
     "uepa_neurologia": {
   "area": "Neurologia",
   "title": "Neurologia Master Rapid Review",
