@@ -209,9 +209,10 @@ Para cada uma das questões médicas fornecidas abaixo, sua missão é produzir:
 2. RESOLUÇÃO MÉDICA DE PADRÃO OURO (PADRÃO 4 SEÇÕES UEPA):
    - "nucleo": Regra geral universal da medicina para este quadro (2 a 4 frases).
    - "armadilha": Identificação minuciosa da pegadinha da banca e do raciocínio fisiopatológico correto.
-   - "alternativas": Análise detalhada de CADA alternativa (A, B, C, D). Para a certa: "X) Correta..." Para as erradas: "X) Errada... Justifique fisiopatologicamente e diga em qual situação clínica ela seria a conduta indicada".
+   - "alternativas": OBRIGATÓRIO analisar TODAS as alternativas presentes na questão (A, B, C, D e E se houver). Inicie CADA uma com a letra e parêntese: "A) Correta (ou Errada)...", "B) Errada...", "C) Errada...", "D) Errada...", "E) Errada...". NUNCA comente apenas a alternativa correta; a omissão de qualquer letra causa reprovação imediata no portão.
    - "fixacao": Síntese prática mnemônica finalizando OBRIGATORIAMENTE com a fórmula:
      "Portanto, o gabarito é a alternativa X." (ou "Portanto, a questão foi anulada pela banca.").
+   - "annulled": NUNCA marque uma questão como anulada (annulled: true) por dúvida ou inferência própria. Só marque anulada se o gabarito oficial trouxer asterisco (*) ou "ANULADA", fornecendo obrigatoriamente "annulledSource". Caso contrário, indique a alternativa do gabarito.
 
 QUESTÕES A RESOLVER:
 ${JSON.stringify(questions, null, 2)}
