@@ -25,25 +25,66 @@ for (const a of ['Oftalmologia', 'Otorrinolaringologia', 'Psiquiatria', 'Ortoped
 // subtópico for um caminho real. Exportada pro pipeline/validar.cjs usar
 // a mesma regra nos lotes novos antes de entrarem no banco.
 function problemaTaxonomia(q) {
-    const r = ROOTS[q.area];
+    const areaTrimmed = (q.area || '').trim();
+    const r = ROOTS[areaTrimmed];
     if (!r) return `área "${q.area}" sem árvore`;
     if (!q.assunto) return 'sem assunto';
+    const assuntoTrimmed = q.assunto.trim();
     // some() e não find(): a árvore tem irmãos com nome repetido.
-    const assuntos = r.children.filter(c => c.name === q.assunto);
+    const assuntos = r.children.filter(c => c.name.trim() === assuntoTrimmed);
     if (!assuntos.length) return `assunto inválido "${q.assunto}"`;
     const temFilhos = assuntos.some(a => a.children.length);
     if (!q.topico) return temFilhos ? 'falta tópico' : null;
-    const topicos = assuntos.flatMap(a => a.children).filter(c => c.name === q.topico);
+    const topicoTrimmed = q.topico.trim();
+    const topicos = assuntos.flatMap(a => a.children).filter(c => c.name.trim() === topicoTrimmed);
     if (!topicos.length) return `tópico inválido "${q.topico}"`;
-    if (q.subtopico && !topicos.some(t => t.children.some(s => s.name === q.subtopico))) return `subtópico inválido "${q.subtopico}"`;
+    if (q.subtopico) {
+        const subtopicoTrimmed = q.subtopico.trim();
+        if (!topicos.some(t => t.children.some(s => s.name.trim() === subtopicoTrimmed))) return `subtópico inválido "${q.subtopico}"`;
+    }
     return null;
 }
 
 function ajudaTaxonomia(q) {
     const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-    const r = ROOTS[q.area];
+    const targetAssunto = norm(q.assunto);
+    const targetTopico = norm(q.topico);
+
+    // Dicionário de atalhos determinísticos para termos e síndromes frequentes
+    const ATALHOS = [
+        { terms: ['poems'], area: 'Hematologia', assunto: 'Gamopatias monoclonais', topico: 'Classificação das gamopatias monoclonais' },
+        { terms: ['lupus', 'les'], area: 'Reumatologia', assunto: 'Doenças autoimunes do tecido conjuntivo', topico: 'Lúpus Eritematoso Sistêmico (LES)' },
+        { terms: ['evans'], area: 'Hematologia', assunto: 'Anemias hemolíticas', topico: 'Anemias hemolíticas autoimunes (AHAI)' },
+        { terms: ['anemia megaloblastica', 'megaloblastica'], area: 'Hematologia', assunto: 'Anemias macrocíticas', topico: 'Anemia megaloblástica' },
+    ];
+
+    for (const atalho of ATALHOS) {
+        if (atalho.terms.some(t => targetAssunto.includes(t) || targetTopico.includes(t))) {
+            return `Use o caminho exato oficial:\n  area: "${atalho.area}"\n  assunto: "${atalho.assunto}"\n  topico: "${atalho.topico}"`;
+        }
+    }
+
+    const areaTrimmed = (q.area || '').trim();
+    const r = ROOTS[areaTrimmed];
 
     if (!r) {
+        // Se a área for genérica ("Clínica Médica") ou inválida, busca em TODAS as 20 especialidades
+        for (const [outraArea, rootNode] of Object.entries(ROOTS)) {
+            for (const a of rootNode.children) {
+                const aNorm = norm(a.name);
+                if (aNorm === targetAssunto || (targetAssunto.length > 4 && (aNorm.includes(targetAssunto) || targetAssunto.includes(aNorm)))) {
+                    const topicos = a.children.map(c => c.name.trim());
+                    return `A área correta é "${outraArea}". Use o caminho exato:\n  area: "${outraArea}"\n  assunto: "${a.name.trim()}"\n  topico: ${topicos[0] ? `"${topicos[0]}"` : 'null'}`;
+                }
+                for (const t of a.children) {
+                    const tNorm = norm(t.name);
+                    if (tNorm === targetAssunto || tNorm === targetTopico || (targetTopico.length > 4 && (tNorm.includes(targetTopico) || targetTopico.includes(tNorm)))) {
+                        return `A área correta é "${outraArea}". Use o caminho exato:\n  area: "${outraArea}"\n  assunto: "${a.name.trim()}"\n  topico: "${t.name.trim()}"`;
+                    }
+                }
+            }
+        }
+
         const areaNorm = norm(q.area);
         const areaMatch = Object.keys(ROOTS).find(k => norm(k) === areaNorm);
         if (areaMatch) {
@@ -52,53 +93,50 @@ function ajudaTaxonomia(q) {
         return `Área "${q.area}" é inválida. As 20 especialidades válidas são: ${Object.keys(ROOTS).join(', ')}`;
     }
 
-    const targetAssunto = norm(q.assunto);
-    const targetTopico = norm(q.topico);
-
     // 1. Checa se o "assunto" fornecido é na verdade um tópico de algum assunto na área
     for (const a of r.children) {
         for (const t of a.children) {
             const tNorm = norm(t.name);
             if (tNorm === targetAssunto || (targetAssunto.length > 4 && (tNorm.includes(targetAssunto) || targetAssunto.includes(tNorm)))) {
-                return `O termo "${q.assunto}" é um TÓPICO, não um assunto. Use o caminho exato:\n  area: "${q.area}"\n  assunto: "${a.name}"\n  topico: "${t.name}"`;
+                return `O termo "${q.assunto}" é um TÓPICO, não um assunto. Use o caminho exato:\n  area: "${areaTrimmed}"\n  assunto: "${a.name.trim()}"\n  topico: "${t.name.trim()}"`;
             }
         }
     }
 
-    // 2. Se o assunto for válido, orienta sobre tópicos
-    const assuntos = r.children.filter(c => c.name === q.assunto);
+    // 2. Se o assunto for válido (com trim), orienta sobre tópicos
+    const assuntos = r.children.filter(c => c.name.trim() === (q.assunto || '').trim());
     if (assuntos.length > 0) {
-        const topicos = assuntos.flatMap(a => a.children).map(c => c.name);
+        const topicos = assuntos.flatMap(a => a.children).map(c => c.name.trim());
         if (topicos.length > 0) {
-            return `O assunto "${q.assunto}" é válido. Escolha um destes tópicos exatos:\n  ${topicos.slice(0, 15).join(', ')}`;
+            return `O assunto "${q.assunto.trim()}" é válido. Escolha um destes tópicos exatos:\n  ${topicos.slice(0, 15).join(', ')}`;
         }
-        return `O assunto "${q.assunto}" é válido e não possui tópicos filhos. Deixe 'topico' como null.`;
+        return `O assunto "${q.assunto.trim()}" é válido e não possui tópicos filhos. Deixe 'topico' como null.`;
     }
 
     // 3. Checa se o assunto foi escrito com variação de caixa/espaço/acentuação
     const assuntoFlex = r.children.find(a => norm(a.name) === targetAssunto);
     if (assuntoFlex) {
-        return `O assunto correto é "${assuntoFlex.name}". Use a grafia exata com maiúsculas/minúsculas.`;
+        return `O assunto correto é "${assuntoFlex.name.trim()}". Use a grafia exata.`;
     }
 
     // 4. Se não achou na área, busca se existe em outra especialidade
     for (const [outraArea, rootNode] of Object.entries(ROOTS)) {
-        if (outraArea === q.area) continue;
+        if (outraArea === areaTrimmed) continue;
         for (const a of rootNode.children) {
             if (norm(a.name) === targetAssunto) {
-                return `O assunto "${a.name}" pertence à área "${outraArea}", não a "${q.area}". Use area: "${outraArea}", assunto: "${a.name}".`;
+                return `O assunto "${a.name.trim()}" pertence à área "${outraArea}", não a "${q.area}". Use area: "${outraArea}", assunto: "${a.name.trim()}".`;
             }
             for (const t of a.children) {
-                if (norm(t.name) === targetAssunto) {
-                    return `O termo "${q.assunto}" é um tópico de "${outraArea}". Use area: "${outraArea}", assunto: "${a.name}", topico: "${t.name}".`;
+                if (norm(t.name) === targetAssunto || norm(t.name) === targetTopico) {
+                    return `O termo "${q.assunto || q.topico}" é um tópico de "${outraArea}". Use area: "${outraArea}", assunto: "${a.name.trim()}", topico: "${t.name.trim()}".`;
                 }
             }
         }
     }
 
     // 5. Lista assuntos válidos da área informada
-    const listaAssuntos = r.children.map(c => c.name);
-    return `Assunto "${q.assunto}" não existe na árvore de ${q.area}.\nAssuntos válidos em ${q.area}:\n  - ${listaAssuntos.join('\n  - ')}`;
+    const listaAssuntos = r.children.map(c => c.name.trim());
+    return `Assunto "${q.assunto}" não existe na árvore de ${areaTrimmed}.\nAssuntos válidos em ${areaTrimmed}:\n  - ${listaAssuntos.join('\n  - ')}`;
 }
 
 module.exports = { problemaTaxonomia, ajudaTaxonomia, ROOTS };

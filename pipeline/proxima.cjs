@@ -16,7 +16,7 @@ const path = require('path');
 
 const FONTES = path.join(__dirname, 'fontes.json');
 const ESTADO = path.join(__dirname, 'estado.json');
-const LIMITE = Number(process.env.QUESTOES_POR_DIA || 25);
+const LIMITE = Number(process.env.QUESTOES_POR_DIA || 250);
 
 const ler = (f, padrao) => (fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : padrao);
 const gravar = (f, dados) => fs.writeFileSync(f, JSON.stringify(dados, null, 2) + '\n');

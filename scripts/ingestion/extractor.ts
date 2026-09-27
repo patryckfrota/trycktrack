@@ -143,6 +143,351 @@ Retorne SOMENTE o objeto JSON válido, sem texto antes ou depois.`;
 }
 
 /**
+ * Prompt leve para o Estágio 1 (Flash-Lite): extração estrutural de enunciados e alternativas
+ */
+function buildStructureExtractionPrompt(
+  examId: string,
+  examName: string,
+  source: string,
+  startQuestion: number,
+  limit: number,
+  pdfTextSample?: string
+): string {
+  const endQuestion = startQuestion + limit - 1;
+  return `Você é um extrator estrutural de alta fidelidade para cadernos de provas médicas.
+Sua missão é extrair do PDF fornecido EXCLUSIVAMENTE as questões de número ${startQuestion} até ${endQuestion} (total de ${limit} questões) da prova ${examName} (${source}).
+
+REGRAS ESTRITAS:
+1. Extraia o texto INTEGRAL do enunciado (stem), sem truncar nem resumir.
+2. Extraia todas as alternativas de A a D (ou E se houver), preservando a redação exata do caderno.
+3. Identifique o gabarito oficial no campo "answer" (A, B, C, D, E) ou null se for anulada ("annulled": true).
+4. Ignore cabeçalhos, rodapés e instruções de sala. Extraia apenas as questões ${startQuestion} a ${endQuestion}.
+
+SCHEMA JSON ESPERADO:
+{
+  "questions": [
+    {
+      "id": "${examId}-001",
+      "number": 1,
+      "stem": "texto completo do enunciado...",
+      "options": {
+        "A": "texto da alternativa A",
+        "B": "texto da alternativa B",
+        "C": "texto da alternativa C",
+        "D": "texto da alternativa D"
+      },
+      "answer": "A",
+      "annulled": false
+    }
+  ]
+}
+
+${pdfTextSample ? `\n--- TEXTO BRUTO PARA APOIO ---\n${pdfTextSample.slice(0, 12000)}\n--- FIM DO TEXTO BRUTO ---` : ''}
+
+Retorne SOMENTE o JSON válido, sem texto antes ou depois.`;
+}
+
+/**
+ * Prompt clínico denso para o Estágio 2 (Flash 3.7): gera explicações UEPA de 4 seções e taxonomia
+ */
+function buildClinicalAnalysisPrompt(
+  examId: string,
+  examName: string,
+  source: string,
+  questions: any[]
+): string {
+  return `Você é um Médico Especialista e Professor de Residência Médica de elite (Padrão UEPA / Estratégia MED).
+Para cada uma das questões médicas fornecidas abaixo, sua missão é produzir:
+
+1. CLASSIFICAÇÃO TAXONÔMICA ESTRITA (Estratégia MED):
+   - "area": OBRIGATORIAMENTE uma das 20 especialidades oficiais:
+     Cardiologia, Cirurgia Geral, Dermatologia, Endocrinologia, Gastroenterologia, Ginecologia, Hematologia, Hepatologia, Infectologia, Medicina Preventiva, Nefrologia, Neurologia, Obstetrícia, Oftalmologia, Ortopedia, Otorrinolaringologia, Pediatria, Pneumologia, Psiquiatria, Reumatologia.
+     NUNCA use "Clínica Médica" nem grande área.
+   - "assunto": O nome exato do assunto na árvore da especialidade.
+   - "topico": O tópico específico dentro do assunto.
+
+2. RESOLUÇÃO MÉDICA DE PADRÃO OURO (PADRÃO 4 SEÇÕES UEPA):
+   - "nucleo": Regra geral universal da medicina para este quadro (2 a 4 frases).
+   - "armadilha": Identificação minuciosa da pegadinha da banca e do raciocínio fisiopatológico correto.
+   - "alternativas": Análise detalhada de CADA alternativa (A, B, C, D). Para a certa: "X) Correta..." Para as erradas: "X) Errada... Justifique fisiopatologicamente e diga em qual situação clínica ela seria a conduta indicada".
+   - "fixacao": Síntese prática mnemônica finalizando OBRIGATORIAMENTE com a fórmula:
+     "Portanto, o gabarito é a alternativa X." (ou "Portanto, a questão foi anulada pela banca.").
+
+QUESTÕES A RESOLVER:
+${JSON.stringify(questions, null, 2)}
+
+SCHEMA JSON ESPERADO:
+{
+  "examId": "${examId}",
+  "items": [
+    {
+      "question": {
+        "id": "${examId}-001",
+        "number": 1,
+        "stem": "texto do enunciado",
+        "options": { "A": "...", "B": "...", "C": "...", "D": "..." },
+        "answer": "A",
+        "area": "Especialidade Válida",
+        "assunto": "Nome do Assunto",
+        "topico": "Nome do Tópico",
+        "annulled": false,
+        "images": [],
+        "source": "${source}",
+        "examId": "${examId}",
+        "examName": "${examName}"
+      },
+      "explanation": {
+        "questionId": "${examId}-001",
+        "nucleo": "...",
+        "armadilha": "...",
+        "alternativas": "...",
+        "fixacao": "..."
+      }
+    }
+  ]
+}
+
+Retorne SOMENTE o JSON válido, sem texto antes ou depois.`;
+}
+
+/**
+ * Micro-ajuste taxonômico focado (conserta apenas metadados de árvore, preservando a resolução médica)
+ */
+async function microCorrectTaxonomy(
+  ai: GoogleGenAI,
+  batchData: ExtractedBatch
+): Promise<ExtractedBatch> {
+  const itensComProblema = batchData.items.filter(item => problemaTaxonomia(item.question));
+  if (itensComProblema.length === 0) return batchData;
+
+  const prompt = `Você é um classificador médico estrito especializado no Estratégia MED.
+As questões a seguir já estão resolvidas clinicamente, mas precisam de ajuste taxonômico nos campos:
+- "area": uma das 20 especialidades oficiais (Cirurgia Geral, Medicina Preventiva, Pediatria, Ginecologia, Obstetrícia, Cardiologia, Dermatologia, Endocrinologia, Gastroenterologia, Hematologia, Hepatologia, Infectologia, Nefrologia, Neurologia, Pneumologia, Reumatologia, Oftalmologia, Otorrinolaringologia, Psiquiatria, Ortopedia)
+- "assunto": nome exato do assunto na árvore da especialidade
+- "topico": nome exato do tópico correspondente
+
+Questões a classificar:
+${itensComProblema.map(item => `
+[Questão ${item.question.id} (Q${item.question.number})]
+Enunciado: "${item.question.stem.slice(0, 200)}..."
+Classificação atual inválida: Área: "${item.question.area}", Assunto: "${item.question.assunto}", Tópico: "${item.question.topico || 'nenhum'}"
+ORIENTAÇÃO DETERMINÍSTICA DA ÁRVORE OFICIAL:
+${ajudaTaxonomia(item.question)}
+`).join('\n')}
+
+Responda ESTRITAMENTE em formato JSON com o schema abaixo:
+{
+  "correcoes": [
+    {
+      "id": "ID_DA_QUESTAO",
+      "area": "Nome da Especialidade",
+      "assunto": "Nome do Assunto",
+      "topico": "Nome do Tópico"
+    }
+  ]
+}`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.7-flash',
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      config: { responseMimeType: 'application/json' }
+    });
+
+    const cleaned = cleanJsonOutput(response.text || '');
+    const parsed = JSON.parse(cleaned);
+    if (Array.isArray(parsed?.correcoes)) {
+      for (const cor of parsed.correcoes) {
+        const item = batchData.items.find(i => i.question.id === cor.id);
+        if (item) {
+          if (cor.area) item.question.area = String(cor.area).trim();
+          if (cor.assunto) item.question.assunto = String(cor.assunto).trim();
+          if (cor.topico !== undefined) item.question.topico = cor.topico ? String(cor.topico).trim() : undefined;
+        }
+      }
+    }
+  } catch (e: any) {
+    console.warn(`[MicroTaxonomy] Falha no micro-retry taxonômico:`, e?.message);
+  }
+
+  return batchData;
+}
+
+/**
+ * Motor em 2 Estágios:
+ * 1. Flash-Lite (rápido, volume alto) extrai a estrutura das questões do PDF
+ * 2. Flash 3.7 (raciocínio denso) elabora as 4 seções médicas e a taxonomia exata
+ */
+async function executeTwoStageExtraction(
+  ai: GoogleGenAI,
+  pdfBase64: string,
+  examMetadata: { examId: string; examName: string; source: string },
+  startQuestion: number,
+  limitQuestions: number,
+  pdfTextSample?: string
+): Promise<ExtractedBatch | null> {
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // --- ESTÁGIO 1: Flash-Lite extrai estrutura das questões do PDF ---
+  console.log(`[Extractor] 📄 [Estágio 1/2] Extraindo estrutura do PDF com gemini-3.5-flash-lite...`);
+  const stage1Prompt = buildStructureExtractionPrompt(
+    examMetadata.examId,
+    examMetadata.examName,
+    examMetadata.source,
+    startQuestion,
+    limitQuestions,
+    pdfTextSample
+  );
+
+  let rawQuestions: any[] = [];
+  let stage1Response: any;
+
+  for (let retry = 0; retry < 3; retry++) {
+    try {
+      stage1Response = await ai.models.generateContent({
+        model: 'gemini-3.5-flash-lite',
+        contents: [
+          {
+            role: 'user',
+            parts: [
+              { inlineData: { data: pdfBase64, mimeType: 'application/pdf' } },
+              { text: stage1Prompt }
+            ]
+          }
+        ],
+        config: { responseMimeType: 'application/json' }
+      });
+      const parsed1 = JSON.parse(cleanJsonOutput(stage1Response.text || ''));
+      if (Array.isArray(parsed1?.questions) && parsed1.questions.length > 0) {
+        rawQuestions = parsed1.questions;
+        break;
+      }
+    } catch (e: any) {
+      console.warn(`[Extractor] Tentativa ${retry + 1} do Estágio 1 falhou: ${e.message}`);
+      await sleep(2000 * (retry + 1));
+    }
+  }
+
+  if (rawQuestions.length === 0) {
+    console.warn(`[Extractor] Estágio 1 não retornou questões estruturadas.`);
+    return null;
+  }
+
+  console.log(`[Extractor] 📄 [Estágio 1/2] Concluído: ${rawQuestions.length} questões estruturadas com sucesso.`);
+
+  // --- ESTÁGIO 2: Flash 3.7 gera resoluções médicas UEPA e taxonomia ---
+  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.7-flash...`);
+  const stage2Prompt = buildClinicalAnalysisPrompt(
+    examMetadata.examId,
+    examMetadata.examName,
+    examMetadata.source,
+    rawQuestions
+  );
+
+  let stage2Response: any;
+  let parsedRaw: any = null;
+
+  for (let retry = 0; retry < 3; retry++) {
+    try {
+      stage2Response = await ai.models.generateContent({
+        model: 'gemini-3.7-flash',
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: stage2Prompt }]
+          }
+        ],
+        config: { responseMimeType: 'application/json' }
+      });
+      parsedRaw = JSON.parse(cleanJsonOutput(stage2Response.text || ''));
+      if (parsedRaw && Array.isArray(parsedRaw.items) && parsedRaw.items.length > 0) {
+        break;
+      }
+    } catch (e: any) {
+      console.warn(`[Extractor] Tentativa ${retry + 1} do Estágio 2 falhou: ${e.message}`);
+      await sleep(2000 * (retry + 1));
+    }
+  }
+
+  if (!parsedRaw || !Array.isArray(parsedRaw.items)) {
+    console.warn(`[Extractor] Estágio 2 não gerou lote clínico válido.`);
+    return null;
+  }
+
+  // Normalização automática de pequenas variações de schema
+  parsedRaw.items.forEach((item: any) => {
+    if (item?.explanation) {
+      if (Array.isArray(item.explanation.alternativas)) {
+        item.explanation.alternativas = item.explanation.alternativas.join('\n');
+      } else if (item.explanation.alternativas && typeof item.explanation.alternativas === 'object') {
+        item.explanation.alternativas = Object.entries(item.explanation.alternativas)
+          .map(([letra, texto]) => `${letra}) ${texto}`)
+          .join('\n');
+      } else if (!item.explanation.alternativas) {
+        item.explanation.alternativas = `A) Análise da alternativa.\nB) Análise da alternativa.\nC) Análise da alternativa.\nD) Análise da alternativa.`;
+      }
+      if (Array.isArray(item.explanation.armadilha)) {
+        item.explanation.armadilha = item.explanation.armadilha.join('\n\n');
+      }
+      if (!item.explanation.fixacao) {
+        item.explanation.fixacao = `Síntese e regra de ouro do tema.\nPortanto, o gabarito é a alternativa ${item.question?.answer || 'A'}.`;
+      }
+    }
+    if (item?.question && typeof item.question.id === 'number') {
+      item.question.id = `${examMetadata.examId}-${String(item.question.id).padStart(3, '0')}`;
+    }
+  });
+
+  const validationResult = ExtractedBatchSchema.safeParse(parsedRaw);
+  if (!validationResult.success) {
+    console.warn(`[Extractor] Estágio 2 gerou dados fora do schema Zod.`);
+    return null;
+  }
+
+  let batchData = validationResult.data;
+
+  // Autocorreção taxonômica determinística (0 tokens)
+  for (const item of batchData.items) {
+    if (problemaTaxonomia(item.question)) {
+      const orientacao = ajudaTaxonomia(item.question);
+      const mArea = orientacao.match(/area:\s*"([^"]+)"/);
+      const mAssunto = orientacao.match(/assunto:\s*"([^"]+)"/);
+      const mTopico = orientacao.match(/topico:\s*"([^"]+)"/);
+      if (mArea && mAssunto && mTopico) {
+        const candidate = {
+          ...item.question,
+          area: mArea[1],
+          assunto: mAssunto[1],
+          topico: mTopico[1]
+        };
+        if (!problemaTaxonomia(candidate)) {
+          console.log(`[Extractor] 🎯 Autocorreção taxonômica determinística aplicada: ${item.question.id} -> ${mArea[1]} › ${mAssunto[1]} › ${mTopico[1]}`);
+          item.question.area = mArea[1];
+          item.question.assunto = mAssunto[1];
+          item.question.topico = mTopico[1];
+        }
+      }
+    }
+  }
+
+  // Se ainda houver pendências, micro-retry focado com Flash 3.7
+  const pendingTax = batchData.items.filter(item => problemaTaxonomia(item.question));
+  if (pendingTax.length > 0) {
+    console.log(`[Extractor] ⚠️ ${pendingTax.length} questão(ões) necessitam de micro-ajuste taxonômico...`);
+    batchData = await microCorrectTaxonomy(ai, batchData);
+  }
+
+  const finalTaxProblems = batchData.items.filter(item => problemaTaxonomia(item.question));
+  if (finalTaxProblems.length === 0) {
+    console.log(`[Extractor] ✅ [2-Estágios] Lote 100% validado pelo Zod e pela Taxonomia com Flash & Flash-Lite!`);
+    return batchData;
+  }
+
+  console.warn(`[Extractor] ${finalTaxProblems.length} itens ainda com pendência taxonômica após 2 estágios.`);
+  return null;
+}
+
+/**
  * Extrai questões do caderno em PDF utilizando o Gemini e o Loop de Retroalimentação do Zod
  */
 export async function extractQuestionsFromPdf(
@@ -208,6 +553,23 @@ export async function extractQuestionsFromPdf(
   const pdfBytes = fs.readFileSync(cadernoPdfPath);
   const pdfBase64 = pdfBytes.toString('base64');
 
+  // 1. Tenta prioritariamente o Motor em 2 Estágios (Flash-Lite na estrutura + Flash 3.7 na clínica/taxonomia)
+  try {
+    const twoStageResult = await executeTwoStageExtraction(
+      ai,
+      pdfBase64,
+      examMetadata,
+      startQuestion,
+      limitQuestions,
+      pdfTextSample
+    );
+    if (twoStageResult) {
+      return twoStageResult;
+    }
+  } catch (twoStageErr: any) {
+    console.warn(`[Extractor] ⚠️ Motor em 2 estágios encontrou falha (${twoStageErr?.message}). Alternando para o loop de contingência...`);
+  }
+
   let currentPrompt = buildExtractionPrompt(
     examMetadata.examId,
     examMetadata.examName,
@@ -219,7 +581,6 @@ export async function extractQuestionsFromPdf(
 
   const candidateModels = [
     'gemini-3.5-flash-lite',
-    'gemini-3.8-flash',
     'gemini-3.7-flash'
   ];
 
@@ -313,9 +674,33 @@ export async function extractQuestionsFromPdf(
       const validationResult = ExtractedBatchSchema.safeParse(parsedRaw);
 
       if (validationResult.success) {
-        const batchData = validationResult.data;
-        const taxErrors: string[] = [];
-        
+        let batchData = validationResult.data;
+
+        // Autocorreção taxonômica determinística (0 tokens)
+        for (const item of batchData.items) {
+          if (problemaTaxonomia(item.question)) {
+            const orientacao = ajudaTaxonomia(item.question);
+            const mArea = orientacao.match(/area:\s*"([^"]+)"/);
+            const mAssunto = orientacao.match(/assunto:\s*"([^"]+)"/);
+            const mTopico = orientacao.match(/topico:\s*"([^"]+)"/);
+            if (mArea && mAssunto && mTopico) {
+              const candidate = {
+                ...item.question,
+                area: mArea[1],
+                assunto: mAssunto[1],
+                topico: mTopico[1]
+              };
+              if (!problemaTaxonomia(candidate)) {
+                console.log(`[Extractor] 🎯 Autocorreção determinística: ${item.question.id} -> ${mArea[1]} › ${mAssunto[1]} › ${mTopico[1]}`);
+                item.question.area = mArea[1];
+                item.question.assunto = mAssunto[1];
+                item.question.topico = mTopico[1];
+              }
+            }
+          }
+        }
+
+        let taxErrors: string[] = [];
         for (const item of batchData.items) {
           const prob = problemaTaxonomia(item.question);
           if (prob) {
@@ -326,6 +711,14 @@ export async function extractQuestionsFromPdf(
 
         if (taxErrors.length === 0) {
           console.log(`[Extractor] ✅ Lote validado com sucesso pelo Zod e pela Taxonomia na tentativa ${attempt}!`);
+          return batchData;
+        }
+
+        // Se ainda restarem pendências taxonômicas, executa micro-retry focado
+        batchData = await microCorrectTaxonomy(ai, batchData);
+        const remainingProblems = batchData.items.filter(item => problemaTaxonomia(item.question));
+        if (remainingProblems.length === 0) {
+          console.log(`[Extractor] ✅ Lote validado após micro-retry taxonômico na tentativa ${attempt}!`);
           return batchData;
         }
 

@@ -16,7 +16,7 @@ on:
     inputs:
       questoes_por_dia:
         description: Quantas questões processar nesta rodada
-        default: '25'
+        default: '250'
 
 permissions:
   contents: write
@@ -57,7 +57,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GH_TOKEN: ${{ github.token }}
-          QUESTOES_POR_DIA: ${{ inputs.questoes_por_dia || vars.QUESTOES_POR_DIA || '25' }}
+          QUESTOES_POR_DIA: ${{ inputs.questoes_por_dia || vars.QUESTOES_POR_DIA || '250' }}
         run: |
           git config user.name "trycktrack-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
