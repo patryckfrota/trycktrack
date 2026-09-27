@@ -19,10 +19,17 @@ fi
 
 publicar() { git push; gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null 2>&1 || true; }
 
+# Escreve o resultado do dia no resumo do próprio run do Actions — é o que
+# aparece na aba Actions e no corpo do e-mail de notificação do GitHub
+# (Settings → Notifications → Actions, "All workflow runs"), sem depender
+# de ninguém rodar isso ou ficar de olho manualmente.
+resumo() { echo "$1" | tee -a "${GITHUB_STEP_SUMMARY:-/dev/null}" >/dev/null; echo "$1"; }
+
 trabalho=$(node pipeline/proxima.cjs)
 if [ "$trabalho" = "null" ]; then
   semFonte=$(node -p 'require("./pipeline/estado.json").semFonte.length')
-  echo "Nenhuma banca/ano com página cadastrada na fila. Aguardando fonte: $semFonte (ver pipeline/estado.json)."
+  resumo "## Ingestão diária — $(date -u +%F)
+Nenhuma banca/ano com página cadastrada na fila. Aguardando fonte: $semFonte (ver \`pipeline/estado.json\`)."
   git add pipeline/estado.json
   git diff --cached --quiet || { git commit -m "fila: atualiza bancas sem fonte cadastrada"; publicar; }
   exit 0
@@ -39,7 +46,8 @@ descartar_gravacoes() {
 
 rm -f tmp/extracted-*.json
 if ! npx tsx scripts/ingestion/index.ts --url "$url" --prefix "$prefixo" --start "$inicio" --limit "$limite"; then
-  echo "::warning::O motor falhou nesta rodada; amanhã tenta de novo do mesmo ponto."
+  resumo "## Ingestão diária — $(date -u +%F)
+❌ **$prefixo, questões $inicio–$((inicio + limite - 1))**: motor falhou (erro técnico ou API do Gemini fora do ar). Sem alteração no banco. Tenta de novo amanhã do mesmo ponto."
   descartar_gravacoes
   git add pipeline/estado.json
   git diff --cached --quiet || { git commit -m "fila: começa $prefixo"; publicar; }
@@ -59,13 +67,14 @@ if node pipeline/validar.cjs "$entrada"; then
   git add -- 'questions-*.js' "${CONTEUDO[@]}" pipeline/entrada pipeline/estado.json pipeline/revisoes
   git commit -m "conteúdo: $prefixo, questões $inicio–$fim (aprovadas no portão)"
   publicar
+  dbMsg="⚠️ \`DATABASE_URL\` não configurada — o Postgres não foi sincronizado."
   if [ -n "${DATABASE_URL:-}" ]; then
     (cd backend && npm ci --no-audit --no-fund && npx prisma generate && node scripts/import-questions.js)
-  else
-    echo "::warning::DATABASE_URL não configurada — o Postgres não foi sincronizado."
+    dbMsg="Postgres sincronizado."
   fi
+  resumo "## Ingestão diária — $(date -u +%F)
+✅ **$prefixo, questões $inicio–$fim** ($n questões): aprovadas no portão e publicadas. $dbMsg"
 else
-  echo "::warning::Lote reprovado no portão; guardado em pipeline/pendencias/."
   descartar_gravacoes
   mkdir -p pipeline/pendencias
   git mv -f "$entrada" "pipeline/pendencias/" 2>/dev/null || mv "$entrada" pipeline/pendencias/
@@ -73,4 +82,6 @@ else
   git add pipeline/pendencias pipeline/estado.json pipeline/revisoes
   git commit -m "pendência: $prefixo, questões $inicio–$fim reprovadas no portão"
   publicar
+  resumo "## Ingestão diária — $(date -u +%F)
+🚫 **$prefixo, questões $inicio–$fim** ($n questões): reprovadas no portão, nada publicado. Lote guardado em \`pipeline/pendencias/\` para revisão. Detalhe por categoria: ver o relatório em \`pipeline/relatorios/\` deste run."
 fi
