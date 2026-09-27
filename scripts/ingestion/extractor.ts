@@ -514,25 +514,56 @@ export async function extractQuestionsFromPdf(
   if (limitQuestions > CHUNK_SIZE) {
     console.log(`[Extractor] 📦 Dividindo lote de ${limitQuestions} questões em sub-lotes de até ${CHUNK_SIZE} para garantir integridade do JSON e evitar estouro de tokens.`);
     const allItems: ExtractedItem[] = [];
+    const failedChunks: { start: number; limit: number; error: string }[] = [];
     let currentStart = startQuestion;
     const endQuestion = startQuestion + limitQuestions - 1;
 
     while (currentStart <= endQuestion) {
       const currentChunkLimit = Math.min(CHUNK_SIZE, endQuestion - currentStart + 1);
       console.log(`\n[Extractor] === Sub-lote: Q${currentStart} a Q${currentStart + currentChunkLimit - 1} (${currentChunkLimit} questões) ===`);
-      const chunkBatch = await extractQuestionsFromPdf(cadernoPdfPath, examMetadata, {
-        ...options,
-        startQuestion: currentStart,
-        limitQuestions: currentChunkLimit
-      });
+      try {
+        const chunkBatch = await extractQuestionsFromPdf(cadernoPdfPath, examMetadata, {
+          ...options,
+          startQuestion: currentStart,
+          limitQuestions: currentChunkLimit
+        });
 
-      allItems.push(...chunkBatch.items);
+        if (chunkBatch && Array.isArray(chunkBatch.items) && chunkBatch.items.length > 0) {
+          allItems.push(...chunkBatch.items);
+          console.log(`[Extractor] ✅ Sub-lote Q${currentStart}-Q${currentStart + currentChunkLimit - 1} aprovado com sucesso (${chunkBatch.items.length} questões acumuladas).`);
+        }
+      } catch (chunkErr: any) {
+        console.warn(`[Extractor] ⚠️ Sub-lote Q${currentStart}-Q${currentStart + currentChunkLimit - 1} não convergiu após tentativas (${chunkErr?.message}).`);
+        console.warn(`[Extractor] 🛡️ Isolando falha deste sub-lote para proteger o throughput da rodada diária. Seguindo para o próximo sub-lote...`);
+        failedChunks.push({
+          start: currentStart,
+          limit: currentChunkLimit,
+          error: chunkErr?.message || 'Falha na validação'
+        });
+      }
+
       currentStart += currentChunkLimit;
 
       if (currentStart <= endQuestion) {
         console.log(`[Extractor] Aguardando 2s antes do próximo sub-lote...`);
         await sleep(2000);
       }
+    }
+
+    if (failedChunks.length > 0) {
+      console.warn(`\n[Extractor] 📊 Resumo de isolamento: ${allItems.length} questão(ões) aprovadas em ${Math.ceil(limitQuestions / CHUNK_SIZE) - failedChunks.length} sub-lote(s) | ${failedChunks.length} sub-lote(s) com pendência isolados.`);
+      try {
+        const pendenciaDir = fs.existsSync('./pipeline/pendencias') ? './pipeline/pendencias' : './tmp';
+        const pendenciaFile = `${pendenciaDir}/sublotes-pendentes-${examMetadata.examId}-q${startQuestion}.json`;
+        fs.writeFileSync(pendenciaFile, JSON.stringify(failedChunks, null, 2), 'utf-8');
+        console.log(`[Extractor] 📁 Metadados dos sub-lotes pendentes salvos em: ${pendenciaFile}`);
+      } catch (e) {
+        // Ignora erro de gravação secundária
+      }
+    }
+
+    if (allItems.length === 0) {
+      throw new Error(`Nenhum sub-lote conseguiu convergir no intervalo Q${startQuestion}-Q${endQuestion}.`);
     }
 
     return {
