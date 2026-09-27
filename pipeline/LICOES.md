@@ -59,6 +59,18 @@ sem verificação.
   (revalida-2022-2-094→C, revalida-2023-1-008→A, revalida-2023-1-092→D;
   só a revalida-2023-1-049 era anulação real)
 
+### L7 — `git push` de conteúdo sempre para no commit local, nunca sozinho
+Mesmo com o lote 100% aprovado no portão (Zod + taxonomia + Postgres
+sincronizado corretamente), o passo de `git push` exige autorização explícita
+do usuário para aquele push específico — autorização de uma vez não vale
+pra próxima, e "o conteúdo está correto" não substitui a autorização. O
+commit local pode e deve acontecer assim que o portão aprova; o `push` é um
+passo separado, sempre depois de o usuário revisar e liberar.
+· origem: revisão de 2026-09-27 · ocorrências: 2 — commit `9ce1522` no início
+  da sessão (582 questões do Revalida, 74% sem explicação) e o commit
+  `bd32a0c` (46 questões do ENARE, conteúdo correto mas pushado sem esperar
+  autorização, fora do fluxo supervisionado de `pipeline/rodar-dia.sh`)
+
 ---
 
 ## Para o Claude (encontradas na revisão do Gemini)
