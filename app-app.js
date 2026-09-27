@@ -809,7 +809,6 @@
                     : `<div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Tudo em dia — nenhuma revisão pendente e nenhuma questão nova sobrando.</span></div>`}
                 <button type="button" class="trail-exam-btn" onclick="openTrailDashboard('cronograma')">Ver cronograma até a prova</button>
                 ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
-                ${catalog.examPerArea ? `<div class="trail-area-exams">${window.UEPA_GRANDE_AREAS.map(area => `<button class="trail-area-exam-btn" onclick="startTrailAreaExam('${trailId}','${area.replace(/'/g, "\\'")}')">${area} · ${catalog.examPerArea}</button>`).join('')}</div>` : ''}
 
                 ${hoje.length ? `<h3 class="trail-section-title">Revisar hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
                 <h3 class="trail-section-title">Próximos blocos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
@@ -1202,26 +1201,6 @@
             if (exam.length < expectedTotal) { revealQuestionNotice('Ainda não há questões suficientes pra montar o simulado completo.'); return; }
             await ensureQuestionExplanationsLoaded().catch(() => {});
             activeQuestionSession = { mode: 'exam', questions: exam, index: 0, answers: [], trailExam: trailId, startedAt: new Date().toISOString() };
-            document.getElementById('questionPlayer').hidden = false;
-            document.body.style.overflow = 'hidden';
-            renderQuestionPlayer();
-        }
-
-        // Simulado de uma grande área só (fase 4, item 4) — mesmo motor
-        // do simulado completo (buildWeightedExam), só que o pool de
-        // entrada já vem filtrado pra uma grande área, então só aquele
-        // bloco de 20 é montado.
-        async function startTrailAreaExam(trailId, areaName) {
-            const catalog = TRAIL_CATALOG[trailId];
-            if (!catalog.examPerArea) return;
-            const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
-            const questions = bank
-                .filter(catalog.weightFilter)
-                .filter(q => window.grandeAreaForUepaQuestion(q) === areaName);
-            const exam = window.buildWeightedExam(questions, catalog.examPerArea);
-            if (exam.length < catalog.examPerArea) { revealQuestionNotice(`Ainda não há questões suficientes de ${areaName} pra montar esse simulado.`); return; }
-            await ensureQuestionExplanationsLoaded().catch(() => {});
-            activeQuestionSession = { mode: 'exam', questions: exam, index: 0, answers: [], trailExam: trailId, trailExamArea: areaName, startedAt: new Date().toISOString() };
             document.getElementById('questionPlayer').hidden = false;
             document.body.style.overflow = 'hidden';
             renderQuestionPlayer();
