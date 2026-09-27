@@ -97,26 +97,27 @@ export function updatePrincipalAnnulled(questionId, annulled) {
     fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids], null, 2) + after);
 }
 
-export function updatePrincipalExplanation(questionId, body) {
+export function updatePrincipalExplanations(updates) {
     const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
     const { before, literal, after } = extractObjectLiteral(text, PREFIX);
     const explanations = parseObjectLiteral(literal);
+    const aliasesLiteral = extractObjectLiteral(text, ALIASES_PREFIX).literal;
+    const aliases = parseObjectLiteral(aliasesLiteral);
 
-    // questionId pode ser um alias (explanationAliases mapeia pro id
-    // "canônico" que de fato guarda o texto) — editar o alias direto
-    // criaria uma entrada nova e duplicada em vez de atualizar a
-    // explicação que as duas questões já compartilham.
-    let canonicalId = questionId;
-    if (!(questionId in explanations)) {
-        const aliasesLiteral = extractObjectLiteral(text, ALIASES_PREFIX).literal;
-        const aliases = parseObjectLiteral(aliasesLiteral);
-        if (aliases[questionId]) canonicalId = aliases[questionId];
-    }
-    if (!(canonicalId in explanations)) {
-        // Questão nova: cria entrada diretamente
-        canonicalId = questionId;
+    for (const [questionId, body] of Object.entries(updates)) {
+        let canonicalId = questionId;
+        if (!(questionId in explanations)) {
+            if (aliases[questionId]) canonicalId = aliases[questionId];
+        }
+        if (!(canonicalId in explanations)) {
+            canonicalId = questionId;
+        }
+        explanations[canonicalId] = body;
     }
 
-    explanations[canonicalId] = body;
     fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations, null, 2) + after);
+}
+
+export function updatePrincipalExplanation(questionId, body) {
+    updatePrincipalExplanations({ [questionId]: body });
 }
