@@ -23,6 +23,160 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_ortopedia": {
+  "area": "Ortopedia",
+  "title": "Ortopedia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Trauma Ortopédico",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Complicações do Trauma Ortopédico",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Complicação</th><th>Apresentação Clínica</th><th>Conduta</th></tr></thead><tbody><tr><td>Síndrome da Embolia Gordurosa (SEG)</td><td>Tríade clássica (12-72h): Hipoxemia, Alteração do estado mental, Petéquias (axilas, conjuntiva, tórax). Associada a fraturas de ossos longos (fêmur, tíbia).</td><td>Suporte ventilatório (oxigênio, IOT se necessário), hidratação, fixação precoce da fratura.</td></tr><tr><td>Síndrome Compartimental</td><td>Dor desproporcional (piora ao estiramento passivo), parestesia, palidez, pulso preservado até fases tardias. Pressão compartimental aumentada.</td><td>Fasciotomia de urgência. Remover gessos/curativos compressivos.</td></tr><tr><td>Tromboembolismo Pulmonar (TEP) e TVP</td><td>Dispneia súbita, dor pleurítica, taquicardia, edema assimétrico de membro inferior. Alto risco em cirurgias ortopédicas maiores.</td><td>Profilaxia com HBPM. Tratamento com anticoagulação plena.</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2",
+          "title": "Fraturas e Luxações Comuns",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fratura do Colo do Fêmur:</strong> Comum em idosos, risco de necrose avascular da cabeça do fêmur. Tratamento cirúrgico (artroplastia ou fixação).</li><li><strong>Fratura Supracondilar do Úmero (Crianças):</strong> Risco de lesão da artéria braquial e nervo interósseo anterior. Tratamento conservador ou fixação percutânea.</li><li><strong>Luxação de Ombro:</strong> Maioria é anterior. Lesão de Bankart (labrum) e Hill-Sachs (impactação da cabeça umeral).</li><li><strong>Luxação de Quadril:</strong> Maioria é posterior (membro encurtado, aduzido e com rotação interna). Risco de necrose avascular e lesão do nervo ciático.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Infecções Ósseas e Articulares",
+      "subchapters": [
+        {
+          "num": "3",
+          "title": "Artrite Séptica e Osteomielite",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Artrite Séptica:</strong> Emergência ortopédica. S. aureus é o patógeno mais comum. Monoartrite aguda, calor, rubor, dor intensa. Diagnóstico por artrocentese (leucócitos > 50.000/mm³, neutrofilia). Tratamento: Drenagem cirúrgica e antibioticoterapia venosa (Cefazolina ou Oxacilina; Vancomicina se MRSA).</li><li><strong>Osteomielite:</strong> Infecção óssea. Em crianças, via hematogênica afeta metáfise de ossos longos. S. aureus é o mais comum; Salmonella em pacientes com doença falciforme. Diagnóstico: RM é o exame mais sensível precocemente. Tratamento com antibioticoterapia prolongada.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Ortopedia Pediátrica",
+      "subchapters": [
+        {
+          "num": "4",
+          "title": "Doenças do Quadril na Infância",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Faixa Etária</th><th>Clínica e Achados</th></tr></thead><tbody><tr><td>Displasia do Desenvolvimento do Quadril</td><td>Recém-nascidos</td><td>Manobras de Ortolani (reduz) e Barlow (luxa). Assimetria de pregas, sinal de Galeazzi. Tratamento: Suspensório de Pavlik (até 6 meses).</td></tr><tr><td>Doença de Legg-Calvé-Perthes</td><td>4 a 8 anos</td><td>Necrose avascular idiopática da cabeça do fêmur. Claudicação indolor ou dor leve no joelho/quadril. Tratamento: Contenção, órteses ou cirurgia em casos graves.</td></tr><tr><td>Epifisiólise da Cabeça do Fêmur</td><td>Adolescentes (obesos)</td><td>Deslizamento da epífise. Dor no quadril/joelho e marcha claudicante. Rotação externa obrigatória à flexão do quadril. Tratamento cirúrgico (fixação in situ).</td></tr><tr><td>Sinovite Transitória do Quadril</td><td>3 a 10 anos</td><td>Causa mais comum de dor no quadril. Frequente após IVAS. Conduta expectante, repouso e AINEs.</td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Tumores Ósseos",
+      "subchapters": [
+        {
+          "num": "5",
+          "title": "Principais Tumores e Lesões",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Osteossarcoma:</strong> Tumor ósseo maligno primário mais comum (excluindo mieloma). Adolescentes. Metáfise (fêmur distal, tíbia proximal). Rx com reação periosteal em \"raios de sol\" e triângulo de Codman.</li><li><strong>Sarcoma de Ewing:</strong> Crianças e adolescentes. Diáfise de ossos longos. Rx com reação periosteal em \"casca de cebola\". Associação com translocação t(11;22).</li><li><strong>Osteocondroma:</strong> Tumor ósseo benigno mais comum. Crescimento exofítico a partir da metáfise.</li><li><strong>Cisto Ósseo Simples:</strong> Lesão lítica central, benigna, em crianças (úmero proximal). Sinal do \"fragmento caído\" se fraturar.</li></ul>"
+        }
+      ]
+    }
+  ]
+}
+,
+    "uepa_psiquiatria": {
+  "area": "Psiquiatria",
+  "title": "Psiquiatria UEPA",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Transtornos Psicóticos",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Transtorno Delirante Persistente e Esquizofrenia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Transtorno</th><th>Características Principais</th></tr></thead><tbody><tr><td><strong>Transtorno Delirante</strong></td><td><ul class=\"reader-list\"><li>Presença de delírios (ex: persecutórios) com duração &gt; 1 mês.</li><li>Sem alucinações proeminentes (ex: sem alucinações auditivas significativas).</li><li>Sem prejuízo grave no funcionamento social e ocupacional (preservado).</li></ul></td></tr><tr><td><strong>Esquizofrenia</strong></td><td><ul class=\"reader-list\"><li><strong>Sintomas Negativos:</strong> Perda de funções psíquicas, empobrecimento global da vida afetiva, cognitiva e social; distanciamento e aplainamento afetivo (embotamento).</li><li><strong>Sintomas Positivos:</strong> Distorção da realidade, delírios, alucinações, ilusões ou pseudoalucinações.</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Transtornos de Ansiedade e Humor",
+      "subchapters": [
+        {
+          "num": "2",
+          "title": "Transtorno de Pânico e Transtorno Bipolar",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Transtorno de Pânico:</strong> Ataques súbitos e recorrentes de medo intenso, palpitações, sensação de morte iminente. Frequentemente associado a esquiva de locais públicos (Agorafobia).</li><li><strong>Transtorno Bipolar Tipo I:</strong> Caracterizado por episódios de mania. O paciente pode apresentar fala logorreica, aceleração do pensamento, grandiosidade e necessidade reduzida de sono.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Psicopatologia",
+      "subchapters": [
+        {
+          "num": "3",
+          "title": "Semiologia Psiquiátrica",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Conceito</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Delírio</strong></td><td>Crença irredutível e inabalável na veracidade de uma ideia (ex: chip implantado no corpo). Permanece mesmo diante de argumentos lógicos ou dados objetivos.</td></tr><tr><td><strong>Logorreia</strong></td><td>Aceleração e aumento no fluxo da fala, frequentemente ininterrupta, comum em episódios de mania.</td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Dependência Química",
+      "subchapters": [
+        {
+          "num": "4",
+          "title": "Síndromes de Abstinência",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Substância</th><th>Clínica na Abstinência</th></tr></thead><tbody><tr><td><strong>Álcool</strong></td><td><ul class=\"reader-list\"><li>Tremor, agitação psicomotora extrema, alterações autonômicas (taquicardia, sudorese).</li><li>Pode evoluir para <em>Delirium Tremens</em> (com rebaixamento do nível de consciência e alucinações).</li></ul></td></tr><tr><td><strong>Opioides</strong></td><td><ul class=\"reader-list\"><li>Pacientes habitualmente permanecem <strong>alertas e orientados</strong>.</li><li>Sintomas: midríase, piloereção, rinorreia, dores musculares, diarreia e náuseas.</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Psicofarmacologia",
+      "subchapters": [
+        {
+          "num": "5",
+          "title": "Antipsicóticos",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Típicos (1ª geração):</strong> Haloperidol, Clorpromazina, Levomepromazina. Bloqueadores D2 mais potentes, maior risco de efeitos extrapiramidais (SEP).</li><li><strong>Atípicos (2ª geração):</strong> Risperidona, Olanzapina, Aripiprazol, Quetiapina. Menor risco de SEP, mas maior risco de efeitos metabólicos (ganho de peso, dislipidemia).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Psiquiatria Social e Saúde Pública",
+      "subchapters": [
+        {
+          "num": "6",
+          "title": "Reforma Psiquiátrica e Apoio Matricial",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tema</th><th>Conceitos Importantes</th></tr></thead><tbody><tr><td><strong>Reforma Psiquiátrica</strong></td><td><ul class=\"reader-list\"><li>Desinstitucionalização como eixo central.</li><li><strong>Desafios:</strong> Insuficiência de recursos financeiros para serviços comunitários, fragilidade da articulação CAPS x APS (apoio matricial), persistência de estigmas socioculturais.</li></ul></td></tr><tr><td><strong>Apoio Matricial (Matriciamento)</strong></td><td><ul class=\"reader-list\"><li>Equipe de especialistas (ex: CAPS) fornece retaguarda especializada à equipe de Atenção Primária (APS).</li><li>Envolve <strong>orientação clínica, capacitação e suporte técnico contínuo</strong> (ex: teleconsultas, treinamentos).</li><li>Permite que o tratamento seja mantido no território do paciente, evitando novas internações e ampliando a resolutividade da APS.</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+},
     "uepa_pneumologia": {
   "area": "Pneumologia",
   "title": "Pneumologia - UEPA Master",

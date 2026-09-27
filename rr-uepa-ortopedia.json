@@ -1,0 +1,67 @@
+{
+  "area": "Ortopedia",
+  "title": "Ortopedia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Trauma Ortopédico",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Complicações do Trauma Ortopédico",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Complicação</th><th>Apresentação Clínica</th><th>Conduta</th></tr></thead><tbody><tr><td>Síndrome da Embolia Gordurosa (SEG)</td><td>Tríade clássica (12-72h): Hipoxemia, Alteração do estado mental, Petéquias (axilas, conjuntiva, tórax). Associada a fraturas de ossos longos (fêmur, tíbia).</td><td>Suporte ventilatório (oxigênio, IOT se necessário), hidratação, fixação precoce da fratura.</td></tr><tr><td>Síndrome Compartimental</td><td>Dor desproporcional (piora ao estiramento passivo), parestesia, palidez, pulso preservado até fases tardias. Pressão compartimental aumentada.</td><td>Fasciotomia de urgência. Remover gessos/curativos compressivos.</td></tr><tr><td>Tromboembolismo Pulmonar (TEP) e TVP</td><td>Dispneia súbita, dor pleurítica, taquicardia, edema assimétrico de membro inferior. Alto risco em cirurgias ortopédicas maiores.</td><td>Profilaxia com HBPM. Tratamento com anticoagulação plena.</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2",
+          "title": "Fraturas e Luxações Comuns",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fratura do Colo do Fêmur:</strong> Comum em idosos, risco de necrose avascular da cabeça do fêmur. Tratamento cirúrgico (artroplastia ou fixação).</li><li><strong>Fratura Supracondilar do Úmero (Crianças):</strong> Risco de lesão da artéria braquial e nervo interósseo anterior. Tratamento conservador ou fixação percutânea.</li><li><strong>Luxação de Ombro:</strong> Maioria é anterior. Lesão de Bankart (labrum) e Hill-Sachs (impactação da cabeça umeral).</li><li><strong>Luxação de Quadril:</strong> Maioria é posterior (membro encurtado, aduzido e com rotação interna). Risco de necrose avascular e lesão do nervo ciático.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Infecções Ósseas e Articulares",
+      "subchapters": [
+        {
+          "num": "3",
+          "title": "Artrite Séptica e Osteomielite",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Artrite Séptica:</strong> Emergência ortopédica. S. aureus é o patógeno mais comum. Monoartrite aguda, calor, rubor, dor intensa. Diagnóstico por artrocentese (leucócitos > 50.000/mm³, neutrofilia). Tratamento: Drenagem cirúrgica e antibioticoterapia venosa (Cefazolina ou Oxacilina; Vancomicina se MRSA).</li><li><strong>Osteomielite:</strong> Infecção óssea. Em crianças, via hematogênica afeta metáfise de ossos longos. S. aureus é o mais comum; Salmonella em pacientes com doença falciforme. Diagnóstico: RM é o exame mais sensível precocemente. Tratamento com antibioticoterapia prolongada.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Ortopedia Pediátrica",
+      "subchapters": [
+        {
+          "num": "4",
+          "title": "Doenças do Quadril na Infância",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Faixa Etária</th><th>Clínica e Achados</th></tr></thead><tbody><tr><td>Displasia do Desenvolvimento do Quadril</td><td>Recém-nascidos</td><td>Manobras de Ortolani (reduz) e Barlow (luxa). Assimetria de pregas, sinal de Galeazzi. Tratamento: Suspensório de Pavlik (até 6 meses).</td></tr><tr><td>Doença de Legg-Calvé-Perthes</td><td>4 a 8 anos</td><td>Necrose avascular idiopática da cabeça do fêmur. Claudicação indolor ou dor leve no joelho/quadril. Tratamento: Contenção, órteses ou cirurgia em casos graves.</td></tr><tr><td>Epifisiólise da Cabeça do Fêmur</td><td>Adolescentes (obesos)</td><td>Deslizamento da epífise. Dor no quadril/joelho e marcha claudicante. Rotação externa obrigatória à flexão do quadril. Tratamento cirúrgico (fixação in situ).</td></tr><tr><td>Sinovite Transitória do Quadril</td><td>3 a 10 anos</td><td>Causa mais comum de dor no quadril. Frequente após IVAS. Conduta expectante, repouso e AINEs.</td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Tumores Ósseos",
+      "subchapters": [
+        {
+          "num": "5",
+          "title": "Principais Tumores e Lesões",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Osteossarcoma:</strong> Tumor ósseo maligno primário mais comum (excluindo mieloma). Adolescentes. Metáfise (fêmur distal, tíbia proximal). Rx com reação periosteal em \"raios de sol\" e triângulo de Codman.</li><li><strong>Sarcoma de Ewing:</strong> Crianças e adolescentes. Diáfise de ossos longos. Rx com reação periosteal em \"casca de cebola\". Associação com translocação t(11;22).</li><li><strong>Osteocondroma:</strong> Tumor ósseo benigno mais comum. Crescimento exofítico a partir da metáfise.</li><li><strong>Cisto Ósseo Simples:</strong> Lesão lítica central, benigna, em crianças (úmero proximal). Sinal do \"fragmento caído\" se fraturar.</li></ul>"
+        }
+      ]
+    }
+  ]
+}
