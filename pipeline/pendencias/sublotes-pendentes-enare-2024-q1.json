@@ -1,0 +1,22 @@
+[
+  {
+    "start": 9,
+    "limit": 8,
+    "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+  },
+  {
+    "start": 25,
+    "limit": 8,
+    "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+  },
+  {
+    "start": 33,
+    "limit": 8,
+    "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+  },
+  {
+    "start": 49,
+    "limit": 8,
+    "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+  }
+]
