@@ -1,0 +1,104 @@
+{
+  "area": "Endocrinologia",
+  "title": "Endocrinologia - UEPA",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Diabetes Mellitus",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Diabetes Mellitus tipo 2 (DM2)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Resistência insulínica progressiva e disfunção de células beta. Associado a obesidade e síndrome metabólica.</li><li><strong>Diagnóstico:</strong> Glicemia jejum ≥ 126 mg/dL, TOTG (2h) ≥ 200 mg/dL, HbA1c ≥ 6,5%. Confirmado com repetição do exame alterado ou se há sintomas (polidipsia, poliúria) associados à glicemia aleatória ≥ 200 mg/dL.</li><li><strong>Tratamento inicial e progressão:</strong> Mudanças de estilo de vida e Metformina. Se paciente tem Doença Renal do Diabético (DRC) ou alto risco cardiovascular, deve-se priorizar iSGLT2 (ex: Empagliflozina) ou agonistas GLP-1 (ex: Semaglutida, Liraglutida).</li><li><strong>Insulinoterapia:</strong> Indicada se o paciente tem sintomas de catabolismo (perda de peso), hiperglicemia severa (HbA1c > 9-10% com sintomas) ou falha no controle com múltiplas terapias orais.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classe</th><th>Mecanismo</th><th>Benefício Adicional</th><th>Efeitos Adversos</th></tr></thead><tbody><tr><td>Metformina</td><td>Reduz produção hepática de glicose</td><td>Não causa hipoglicemia, baixo custo</td><td>Distúrbios TGI, Deficiência de B12</td></tr><tr><td>Inibidores de SGLT2 (Empagliflozina)</td><td>Glicosúria (bloqueia reabsorção tubular)</td><td>Proteção Renal e Cardiovascular, controle de peso</td><td>Infecções genitourinárias, risco de CAD</td></tr><tr><td>Agonistas GLP-1 (Semaglutida)</td><td>Aumenta secreção de insulina dependente de glicose, lentifica esvaziamento gástrico</td><td>Perda de peso substancial, Proteção CV</td><td>Náusea, vômitos, diarreia</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.2",
+          "title": "Diabetes Mellitus tipo 1 e Complicações Agudas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Cetoacidose Diabética (CAD):</strong> Deficiência absoluta de insulina. Clínica de poliúria, polidipsia, dor abdominal, respiração de Kussmaul. Laboratório: Glicemia > 250 mg/dL, pH < 7,3, HCO3 < 18, Cetonemia/Cetonúria.</li><li><strong>Estado Hiperglicêmico Hiperosmolar (EHH):</strong> Típico do DM2 idoso. Glicemia > 600, osmolaridade > 320, ausência de acidose grave.</li><li><strong>Tratamento CAD/EHH:</strong> VIP - Volume, Insulina, Potássio.</li></ul><pre class=\"reader-pre-card\">\nFluxograma CAD e VIP:\n1. Volume: SF 0.9% 10-20 mL/kg/h na 1ª hora.\n2. Potássio: Se K+ < 3.3, repor antes da insulina. Se 3.3 - 5.2, repor junto com hidratação.\n3. Insulina: 0.1 U/kg bólus + 0.1 U/kg/h BIC até resolução da acidose.\n</pre>"
+        }
+      ]
+    },
+    {
+      "title": "Tireoide",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Tireotoxicose e Doença de Graves",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireotoxicose:</strong> Síndrome clínica resultante do excesso de hormônios tireoidianos circulantes. Cursa com taquicardia, perda de peso, calor, tremores, irritabilidade e insônia.</li><li><strong>Doença de Graves:</strong> Causa mais comum de hipertireoidismo primário. Doença autoimune com anticorpo estimulador do receptor de TSH (TRAb). Apresenta bócio difuso, oftalmopatia (exoftalmia), e mixedema pré-tibial.</li><li><strong>Tratamento:</strong> Tionamidas (Metimazol é a escolha geral; Propiltiouracil no 1º trimestre de gestação ou crise tireotóxica). O tratamento geralmente requer 3 a 4 semanas para estabilizar as provas de função tireoidiana (T4L e T3, pois o TSH demora mais). Betabloqueadores ajudam no alívio sintomático.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipotireoidismo e Tireoidite de Hashimoto",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireoidite de Hashimoto:</strong> Principal causa de hipotireoidismo adquirido. Autoimune, caracterizada por Anti-TPO e Anti-Tg positivos. Pode associar-se a outras doenças autoimunes, como Doença de Addison e Doença Celíaca.</li><li><strong>Clínica:</strong> Fadiga, ganho de peso, pele seca, constipação, bradicardia. Laboratório revela TSH elevado e T4 livre baixo (hipotireoidismo primário).</li><li><strong>Tratamento:</strong> Levotiroxina (T4), tomada em jejum, com ajuste laboratorial do TSH a cada 4 a 6 semanas.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Adrenal",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Insuficiência Adrenal (Doença de Addison)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Doença de Addison é a insuficiência adrenal primária, caracterizada pela destruição autoimune do córtex adrenal. Leva a deficiência de glicocorticoides, mineralocorticoides e andrógenos.</li><li><strong>Manifestações Clínicas:</strong> Fraqueza, perda de peso, hiperpigmentação cutâneo-mucosa (pelo aumento compensatório de ACTH), hipotensão ortostática e avidez por sal.</li><li><strong>Alterações Laboratoriais:</strong> Hiponatremia e hipercalemia (devido à falta de aldosterona).</li><li><strong>Tratamento e Prevenção de Crise:</strong> Reposição de glicocorticoide (hidrocortisona) e mineralocorticoide (fludrocortisona). Em situações de estresse clínico (febre, cirurgias, infecções), a dose de glicocorticoide DEVE ser aumentada, não suspensa.</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Síndromes Poliglandulares Autoimunes (SPA)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>SPA Tipo 1:</strong> Infância. Tríade: Candidíase mucocutânea crônica, Hipoparatireoidismo e Insuficiência Adrenal Primária.</li><li><strong>SPA Tipo 2 (Síndrome de Schmidt):</strong> Adultos. Associação de Doença de Addison com Tireoidite Autoimune (Hashimoto) e/ou Diabetes Mellitus tipo 1 (e possivelmente Doença Celíaca, como no caso histórico de John F. Kennedy).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Hipófise e Hipotálamo",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Hiperprolactinemia e Prolactinomas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Etiologia:</strong> O prolactinoma é o tumor hipofisário secretor mais comum. A secreção de prolactina é tonicamente inibida pela dopamina hipotalâmica.</li><li><strong>Clínica:</strong> Em mulheres: amenorreia secundária, galactorreia e infertilidade. Em homens: perda de libido, disfunção erétil; e cefaleia/hemianopsia bitemporal (pois tendem a ser diagnosticados na fase de macroadenomas > 1cm).</li><li><strong>Tratamento:</strong> Primeira linha é o tratamento farmacológico com agonistas dopaminérgicos (Cabergolina). Promove redução substancial do tumor e normalização da prolactina, sendo superior à cirurgia inicial mesmo para macroadenomas com compressão quiasmática.</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Fisiologia do Hormônio do Crescimento e Acromegalia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiologia do GH:</strong> Estimulado pelo GHRH, inibido pela somatostatina. Estimula o crescimento linear pós-natal. Atua estimulando a produção hepática de IGF-1 e tem efeito contrainsulínico (eleva glicemia, podendo causar diabetes).</li><li><strong>Acromegalia e Gigantismo:</strong> Excesso de GH pós-puberdade causa acromegalia (crescimento de extremidades, mandíbula, visceromegalia). Na infância, causa gigantismo. Tratamento de escolha é a cirurgia transesfenoidal para ressecção do adenoma hipofisário.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Metabolismo Ósseo e Mineral",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Osteoporose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Diagnóstico e Indicação de Tratamento:</strong> Indicado iniciar terapia específica para mulheres pós-menopausa ou homens ≥ 50 anos quando: presença de fratura de fragilidade (ex: quadril ou vertebral documentada); T-score ≤ -2,5 em coluna lombar, fêmur total ou colo femoral; T-score entre -1,0 e -2,5 associado a risco elevado pelo FRAX (fratura maior ≥ 20% ou fratura de quadril ≥ 3%).</li><li><strong>Manejo:</strong> Bisfosfonatos (Alendronato, Zoledronato) ou anabólicos, sempre acompanhados da correção dos níveis de Vitamina D e ingestão adequada de cálcio. O foco principal é a prevenção de novas fraturas.</li></ul>"
+        }
+      ]
+    }
+  ]
+}

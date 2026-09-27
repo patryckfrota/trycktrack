@@ -1,0 +1,63 @@
+{
+  "area": "Dermatologia",
+  "title": "ENAMED Master - Dermatologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Hanseníase",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Diagnóstico e Exame",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Forma Clínica</th><th>Clínica e Exame Dermatoneurológico</th><th>Baciloscopia / Histopatologia</th></tr></thead><tbody><tr><td>Indeterminada</td><td>Mácula hipocrômica, alteração de sensibilidade (térmica &rarr; dolorosa &rarr; tátil).</td><td>Baciloscopia (-). Histopatologia: infiltrado inflamatório inespecífico.</td></tr><tr><td>Tuberculoide</td><td>Placa única ou poucas, bordas elevadas, centro eritematoso/hipocrômico, sem descamação, anestésica.</td><td>Baciloscopia (-). Histopatologia: granulomas bem formados (epitelioides).</td></tr><tr><td>Dimorfa (Borderline)</td><td>Placas eritematosas, limites imprecisos, assimétricas. Vários troncos nervosos acometidos.</td><td>Baciloscopia (+ ou -).</td></tr><tr><td>Virchowiana</td><td>Infiltração difusa, nódulos, fácies leonina, madarose, lesões simétricas.</td><td>Baciloscopia (+). Presença de <b>globias</b> (aglomerados de bacilos). Histopatologia: histiócitos espumosos (células de Virchow).</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Exame Dermatoneurológico:</b> Avaliar sensibilidade na ordem: 1º Térmica, 2º Dolorosa, 3º Tátil. Para lesões foveolares/tuberculoides, o teste de sensibilidade define o diagnóstico.</li></ul>"
+        },
+        {
+          "num": "2",
+          "title": "Estados Reacionais",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo de Reação</th><th>Características</th><th>Tratamento de Escolha</th></tr></thead><tbody><tr><td>Reação Tipo 1 (Reversa)</td><td>Surge novas lesões, exacerbação de lesões antigas (edema, eritema), neurite. Comum em Paucibacilares (Borderline/Tuberculoide). <b>Não tem sintomas sistêmicos graves</b>.</td><td><b>Corticoide</b> (Prednisona). <i>Manter PQT!</i></td></tr><tr><td>Reação Tipo 2 (Eritema Nodoso Hansênico)</td><td>Nódulos eritematosos e dolorosos subcutâneos, febre, mal-estar, orquite, neurite. Comum em Multibacilares (Virchowianos/Dimorfos).</td><td><b>Talidomida</b> (Exceto em mulheres em idade fértil &rarr; usar Corticoide/Pentoxifilina). <i>Manter PQT!</i></td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Fatores Precipitantes:</b> Coinfecções, estresse físico/emocional, focos infecciosos (ex: dentário), gravidez, vacinação.</li><li><b>Conduta PQT:</b> Os pacientes que desenvolvem reações <i>após</i> término do tratamento <b>NÃO</b> devem retomar a PQT, apenas tratar a reação. Durante o tratamento, a PQT nunca é suspensa pelas reações.</li></ul>"
+        },
+        {
+          "num": "3",
+          "title": "Tratamento e Efeitos Colaterais",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco (PQT)</th><th>Efeitos Colaterais Principais</th><th>Conduta / Manejo</th></tr></thead><tbody><tr><td>Rifampicina</td><td>Urina avermelhada, hepatotoxicidade, síndrome flu-like.</td><td>Sintomáticos, monitorar TGO/TGP.</td></tr><tr><td>Dapsona</td><td>Hemólise, metemoglobinemia, agranulocitose, Síndrome de Sulfona.</td><td>Suspender se grave.</td></tr><tr><td>Clofazimina</td><td><b>Pigmentação cutânea (hiperpigmentação castanho-acinzentada)</b>, ressecamento, dor abdominal.</td><td><b>Não suspender medicação.</b> Orientar hidratação da pele e fotoproteção. É uma alteração benigna e reversível.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Esquema Único (Atual):</b> Rifampicina, Dapsona e Clofazimina para TODOS os pacientes (Paucibacilares = 6 meses; Multibacilares = 12 meses).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Farmacodermias",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Farmacodermias Graves",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Quadro Clínico e Alterações Laboratoriais</th><th>Fármacos Associados</th></tr></thead><tbody><tr><td>Síndrome DRESS</td><td>Febre alta, edema facial, exantema morbiliforme difuso, linfadenopatia generalizada. <b>Laboratório: Eosinofilia intensa</b>, elevação de transaminases, linfócitos atípicos.</td><td>Anticonvulsivantes (Carbamazepina, Fenitoína), Alopurinol, Sulfas.</td></tr><tr><td>Stevens-Johnson (SSJ)</td><td>Necrose/descolamento epidérmico de <b>&lt; 10%</b> da superfície corporal (SC). Lesões em alvo atípicas, acometimento intenso de 2 ou mais mucosas.</td><td>Sulfas, Anticonvulsivantes, AINEs.</td></tr><tr><td>Necrólise Epidérmica Tóxica (NET)</td><td>Descolamento epidérmico <b>&gt; 30%</b> da SC (Sinal de Nikolsky +). Severo acometimento sistêmico, alta mortalidade.</td><td>Mesmos da SSJ.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Reativação Viral na DRESS:</b> É comum a reativação do Herpes Vírus Humano (<b>HHV-6</b> e HHV-7), que piora ou perpetua a inflamação sistêmica.</li><li><b>Diferenciação:</b> A ausência de descolamento epidérmico extenso (ausência de lesões alvo) e a forte eosinofilia favorecem o diagnóstico de DRESS em detrimento de SSJ/NET precoce.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Dermatoses Infecciosas e Parasitárias",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Escabiose",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><b>Etiologia:</b> <i>Sarcoptes scabiei</i>.</li><li><b>Quadro Clínico:</b> Prurido intenso, <b>com piora noturna</b>. Lesões papulares, pápulo-crostosas, escoriações, e <b>túneis (sulcos)</b>.</li><li><b>Topografia Comum:</b> Espaços interdigitais, punhos, axilas, região periumbilical, genitais (nódulos escabióticos) e nádegas. <i>Lactentes e imunossuprimidos podem ter lesões na cabeça, pescoço e palmo-plantares.</i></li><li><b>Conduta Epidemiológica:</b> É fundamental buscar ativamente <b>outras pessoas com quadro parecido em casa, vizinhança ou escola</b> (comunicantes), para tratar todos simultaneamente e evitar reinfecção.</li><li><b>Tratamento de Escolha:</b><ul class=\"reader-list\"><li><b>Permetrina 5% loção:</b> Aplicar do pescoço para baixo (ou na face/couro cabeludo em lactentes), deixar 8-14h e enxaguar. Repetir em 7-14 dias.</li><li><b>Ivermectina Oral:</b> 200 mcg/kg/dose, dose única, repetir em 7-14 dias (Não recomendada para crianças menores de 15kg ou gestantes, salvo diretrizes específicas).</li></ul></li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Dermatopediatria / Lesões Vasculares",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Hemangiomas da Infância",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><b>Conceito:</b> Os hemangiomas infantis são os <b>tumores vasculares benignos mais comuns na faixa etária pediátrica</b>.</li><li><b>Evolução Natural:</b> Diferente das malformações vasculares (que crescem com a criança e não regridem), os hemangiomas caracterizam-se por: <ul class=\"reader-list\"><li><b>Fase proliferativa rápida:</b> Crescimento intenso nos primeiros meses de vida.</li><li><b>Fase de platô.</b></li><li><b>Fase involutiva (regressão espontânea):</b> A maioria regride espontaneamente ao longo dos anos.</li></ul></li><li><b>Classificação:</b> Podem ser superficiais (cor vermelho vivo - \"morango\"), profundos (massa azulada), ou mistos. Não são sempre profundos ou graves.</li><li><b>Tratamento:</b> Conduta, na maioria das vezes, é <b>expectante (observação)</b>. <ul class=\"reader-list\"><li><b>Indicações Terapêuticas:</b> Risco de vida, comprometimento funcional (obstrução visual, via aérea), ulceração ou grandes lesões desfigurantes.</li><li><b>Primeira Linha (quando indicado):</b> <b>Betabloqueador oral (Propranolol)</b>. Corticoides sistêmicos não são mais a primeira linha isolada. A cirurgia é reservada para resíduos ou complicações muito específicas.</li></ul></li></ul>"
+        }
+      ]
+    }
+  ]
+}

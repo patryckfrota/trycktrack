@@ -1,0 +1,99 @@
+{
+  "area": "Nefrologia",
+  "title": "Nefrologia (UEPA Master Rapid Review)",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Glomerulopatias",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Síndrome Nefrótica",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema generalizado (anasarca), urina espumosa, ausência de hipertensão ou hematúria marcantes.</li>\n<li><strong>Critérios Diagnósticos:</strong> Proteinúria nefrótica (&gt; 3,5 g/24h em adultos ou &gt; 50 mg/kg/dia em crianças), hipoalbuminemia (&lt; 3,0 g/dL), hipercolesterolemia e edema.</li>\n<li><strong>Doença de Lesão Mínima (DLM):</strong> Principal causa em crianças (2-8 anos). Patogênese por fusão dos podócitos (microscopia eletrônica). Complemento normal. Responde bem a corticoides.</li>\n<li><strong>Tratamento na Pediatria:</strong> Dieta hipossódica, corticoterapia empírica (prednisona), reposição de albumina se sinais de hipovolemia, diuréticos com parcimônia. Restrição hídrica <strong>NÃO</strong> é rotina para nefrótica (ao contrário da nefrítica). Imunossupressores se corticodependente ou resistente.</li>\n</ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Síndrome Nefrítica (GNPE)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema (início periorbital), hipertensão arterial, hematúria (dismórfica/cilindros hemáticos) e oligúria.</li>\n<li><strong>GNPE:</strong> Ocorre pós infecção estreptocócica (faringite 1-2 sem, piodermite 3-6 sem).</li>\n<li><strong>Laboratório GNPE:</strong> Complemento (C3 e CH50) consumido (volta ao normal em 8 semanas). ASLO (faringe) e Anti-DNAse B (pele) positivos.</li>\n<li><strong>Tratamento GNPE:</strong> Suporte, restrição hídrica e sódica, diuréticos de alça (furosemida) para controle de PA e edema. Antibiótico (penicilina) não cura a GNPE, mas erradica a cepa nefritogênica.</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Nefrite Lúpica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Patogênese:</strong> Depósito de imunocomplexos no lúpus.</li>\n<li><strong>Classificação:</strong>\n  <ul class=\"reader-list\">\n    <li>Classe IV (Proliferativa Difusa): Mais comum e mais grave. Apresenta síndrome nefrítica + proteinúria variável. Tratamento: Ciclofosfamida ou Micofenolato + Corticoides.</li>\n    <li>Classe V (Membranosa): Cursa com síndrome nefrótica.</li>\n  </ul>\n</li>\n<li><strong>Marcadores:</strong> Anti-dsDNA correlaciona-se com atividade da nefrite. Complemento (C3, C4) consumido na atividade.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "2. Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Hiponatremia e SIADH",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hiponatremia:</strong> Sódio sérico &lt; 135 mEq/L. Reflete um excesso de água livre em relação ao sódio.</li>\n<li><strong>Clínica:</strong> Náuseas, vômitos, cefaleia, letargia, convulsões e coma (edema cerebral).</li>\n<li><strong>SIADH (Síndrome de Secreção Inapropriada do ADH):</strong>\n  <ul class=\"reader-list\">\n    <li>Causas: Doenças pulmonares (tuberculose, pneumonia), distúrbios do SNC, drogas (antidepressivos, anticonvulsivantes).</li>\n    <li>Laboratório: Hiponatremia (sódio baixo), osmolalidade plasmática baixa (&lt; 275 mOsm/kg), osmolalidade urinária alta (urina concentrada), sódio urinário alto (&gt; 40 mEq/L), ácido úrico baixo e ureia baixa. Volemia clínica normal (euvolemia).</li>\n  </ul>\n</li>\n<li><strong>Tratamento:</strong> Restrição hídrica. Em casos graves/sintomáticos (sódio &lt; 120), repor salina hipertônica 3% com cuidado para não causar síndrome de desmielinização osmótica.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipercalemia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Conceito:</strong> Potássio &gt; 5,5 mEq/L.</li>\n<li><strong>ECG na Hipercalemia:</strong> Ondas T apiculadas (\"em tenda\") &rarr; Achatamento da onda P &rarr; Aumento do intervalo PR &rarr; Alargamento do QRS &rarr; Ritmo idioventricular / Assistolia.</li>\n<li><strong>Conduta de Emergência (Alteração ECG):</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead>\n        <tr><th>Ação</th><th>Medicamento</th><th>Tempo de Ação</th></tr>\n      </thead>\n      <tbody>\n        <tr><td><strong>1º Estabilizar Membrana</strong></td><td>Gluconato de Cálcio a 10% IV</td><td>Imediato (não reduz potássio)</td></tr>\n        <tr><td><strong>2º Shift Intracelular</strong></td><td>Solução Polarizante (Insulina + Glicose), Bicarbonato de Sódio (se acidose), Beta-2 agonista inalatório</td><td>Minutos a horas</td></tr>\n        <tr><td><strong>3º Excreção Corporal</strong></td><td>Diuréticos de alça (Furosemida), Resinas de troca (Sorcal), Hemodiálise</td><td>Horas</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Importante:</strong> Gluconato de cálcio é a medida <strong>prioritária</strong> para prevenir arritmias letais.</li>\n</ul>"
+        },
+        {
+          "num": "2.3",
+          "title": "Distúrbios Acidobásicos (Acidose Metabólica)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Diagnóstico:</strong> pH &lt; 7.35 e HCO3 baixo.</li>\n<li><strong>Ânion Gap (AG):</strong> Na - (Cl + HCO3). Valor normal: 8 a 12.</li>\n<li><strong>Acidose Metabólica com AG Elevado (Normoclorêmica):</strong> Consumo de bicarbonato por ácidos orgânicos não medidos (MUDPILES: Metanol, Uremia, DKA, Paraldeído, Isoniazida/Infecção, Lactato, Etilenoglicol, Salicilatos).</li>\n<li><strong>Acidose Metabólica com AG Normal (Hiperclorêmica):</strong> Perda de bicarbonato (diarreia, fístula) ou incapacidade renal de excretar H+ (Acidose Tubular Renal - ATR).</li>\n<li><strong>Compensação (Fórmula de Winter):</strong> pCO2 esperado = (1.5 x HCO3) + 8 &plusmn; 2. Se pCO2 medido for menor, há alcalose respiratória associada; se maior, acidose respiratória associada.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Infecções e Nefrolitíase",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Infecção do Trato Urinário (ITU)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Cistite Não Complicada (Mulheres):</strong> Tratamento empírico de primeira linha inclui <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5-7 dias). Cefalexina e Bactrim são alternativas a depender de resistência local.</li>\n<li><strong>ITU na Pediatria:</strong> \n  <ul class=\"reader-list\">\n    <li><strong>Coleta:</strong> Saco coletor tem alto índice de falso-positivo, serve apenas para <strong>excluir</strong> (se negativo). Para confirmar em pré-escolar sem controle esfincteriano, usar <strong>cateterismo vesical</strong> (sondagem) ou <strong>punção suprapúbica</strong>.</li>\n    <li><strong>Diagnóstico:</strong> A urocultura coletada por punção suprapúbica confirma o diagnóstico de ITU havendo crescimento de <strong>qualquer</strong> patógeno (qualquer UFC), pois a via é estéril.</li>\n  </ul>\n</li>\n<li><strong>Laboratório (EAS):</strong> Nitrito positivo indica bactérias redutoras de nitrato (ex. E. coli), mas nitrito negativo não exclui ITU (Staphylococcus, Enterococcus, Pseudomonas não reduzem nitrato).</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Nefrolitíase e Pielonefrite Obstrutiva",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica de Cólica Nefrética:</strong> Dor lombar de forte intensidade irradiando para flanco ou genitália (grandes lábios/testículo). Pode causar hematúria.</li>\n<li><strong>Tratamento Analgésico:</strong> AINEs (Cetoprofeno) são a primeira linha. Opiáceos são segunda linha.</li>\n<li><strong>Indicações de Intervenção Urgente (Pielonefrite Obstrutiva):</strong> Cálculo ureteral + sinais de infecção (febre, calafrios, leucocitose). Há risco iminente de sepse.</li>\n<li><strong>Conduta na Pielonefrite Obstrutiva:</strong> Desobstrução urgente da via urinária + Antibioticoterapia.\n  <ul class=\"reader-list\">\n    <li>A desobstrução é feita por drenagem urinária com inserção de <strong>Cateter Duplo J</strong> ou <strong>Nefrostomia percutânea</strong>, SEM a retirada do cálculo no mesmo momento (risco cirúrgico alto na fase aguda).</li>\n  </ul>\n</li>\n<li><strong>Terapia Expulsiva:</strong> Para cálculos &lt; 10 mm e paciente sem sinais de alarme. Uso de alfa-bloqueadores (Tansulosina) e hidratação.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "4. Doenças Túbulo-Intersticiais",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Nefrite Intersticial Aguda (NIA)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Etiologia:</strong> Predominantemente induzida por drogas (Antibióticos - penicilinas, cefalosporinas; AINEs; IBP; Diuréticos) ou infecções (bactérias, vírus). Sarcoidose e doenças autoimunes também podem causar.</li>\n<li><strong>Clínica Clássica:</strong> Tríade clássica (febre, rash cutâneo e eosinofilia) está presente na minoria. Cursa com LRA oligúrica ou não oligúrica, e EAS com eosinofilúria, hematúria e piúria estéril.</li>\n<li><strong>Tratamento:</strong> Retirada imediata da droga agressora. Em casos específicos (ex. NIA granulomatosa associada à <strong>Sarcoidose</strong>), o uso de <strong>corticosteroides</strong> tem impacto favorável e alta probabilidade de influenciar a recuperação renal a longo prazo.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+}

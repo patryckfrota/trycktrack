@@ -23,6 +23,274 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_nefrologia": {
+  "area": "Nefrologia",
+  "title": "Nefrologia (UEPA Master Rapid Review)",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Glomerulopatias",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Síndrome Nefrótica",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema generalizado (anasarca), urina espumosa, ausência de hipertensão ou hematúria marcantes.</li>\n<li><strong>Critérios Diagnósticos:</strong> Proteinúria nefrótica (&gt; 3,5 g/24h em adultos ou &gt; 50 mg/kg/dia em crianças), hipoalbuminemia (&lt; 3,0 g/dL), hipercolesterolemia e edema.</li>\n<li><strong>Doença de Lesão Mínima (DLM):</strong> Principal causa em crianças (2-8 anos). Patogênese por fusão dos podócitos (microscopia eletrônica). Complemento normal. Responde bem a corticoides.</li>\n<li><strong>Tratamento na Pediatria:</strong> Dieta hipossódica, corticoterapia empírica (prednisona), reposição de albumina se sinais de hipovolemia, diuréticos com parcimônia. Restrição hídrica <strong>NÃO</strong> é rotina para nefrótica (ao contrário da nefrítica). Imunossupressores se corticodependente ou resistente.</li>\n</ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Síndrome Nefrítica (GNPE)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica Clássica:</strong> Edema (início periorbital), hipertensão arterial, hematúria (dismórfica/cilindros hemáticos) e oligúria.</li>\n<li><strong>GNPE:</strong> Ocorre pós infecção estreptocócica (faringite 1-2 sem, piodermite 3-6 sem).</li>\n<li><strong>Laboratório GNPE:</strong> Complemento (C3 e CH50) consumido (volta ao normal em 8 semanas). ASLO (faringe) e Anti-DNAse B (pele) positivos.</li>\n<li><strong>Tratamento GNPE:</strong> Suporte, restrição hídrica e sódica, diuréticos de alça (furosemida) para controle de PA e edema. Antibiótico (penicilina) não cura a GNPE, mas erradica a cepa nefritogênica.</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Nefrite Lúpica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Patogênese:</strong> Depósito de imunocomplexos no lúpus.</li>\n<li><strong>Classificação:</strong>\n  <ul class=\"reader-list\">\n    <li>Classe IV (Proliferativa Difusa): Mais comum e mais grave. Apresenta síndrome nefrítica + proteinúria variável. Tratamento: Ciclofosfamida ou Micofenolato + Corticoides.</li>\n    <li>Classe V (Membranosa): Cursa com síndrome nefrótica.</li>\n  </ul>\n</li>\n<li><strong>Marcadores:</strong> Anti-dsDNA correlaciona-se com atividade da nefrite. Complemento (C3, C4) consumido na atividade.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "2. Distúrbios Hidroeletrolíticos e Acidobásicos",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Hiponatremia e SIADH",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Hiponatremia:</strong> Sódio sérico &lt; 135 mEq/L. Reflete um excesso de água livre em relação ao sódio.</li>\n<li><strong>Clínica:</strong> Náuseas, vômitos, cefaleia, letargia, convulsões e coma (edema cerebral).</li>\n<li><strong>SIADH (Síndrome de Secreção Inapropriada do ADH):</strong>\n  <ul class=\"reader-list\">\n    <li>Causas: Doenças pulmonares (tuberculose, pneumonia), distúrbios do SNC, drogas (antidepressivos, anticonvulsivantes).</li>\n    <li>Laboratório: Hiponatremia (sódio baixo), osmolalidade plasmática baixa (&lt; 275 mOsm/kg), osmolalidade urinária alta (urina concentrada), sódio urinário alto (&gt; 40 mEq/L), ácido úrico baixo e ureia baixa. Volemia clínica normal (euvolemia).</li>\n  </ul>\n</li>\n<li><strong>Tratamento:</strong> Restrição hídrica. Em casos graves/sintomáticos (sódio &lt; 120), repor salina hipertônica 3% com cuidado para não causar síndrome de desmielinização osmótica.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipercalemia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Conceito:</strong> Potássio &gt; 5,5 mEq/L.</li>\n<li><strong>ECG na Hipercalemia:</strong> Ondas T apiculadas (\"em tenda\") &rarr; Achatamento da onda P &rarr; Aumento do intervalo PR &rarr; Alargamento do QRS &rarr; Ritmo idioventricular / Assistolia.</li>\n<li><strong>Conduta de Emergência (Alteração ECG):</strong>\n  <div class=\"reader-table-wrap\">\n    <table class=\"reader-table\">\n      <thead>\n        <tr><th>Ação</th><th>Medicamento</th><th>Tempo de Ação</th></tr>\n      </thead>\n      <tbody>\n        <tr><td><strong>1º Estabilizar Membrana</strong></td><td>Gluconato de Cálcio a 10% IV</td><td>Imediato (não reduz potássio)</td></tr>\n        <tr><td><strong>2º Shift Intracelular</strong></td><td>Solução Polarizante (Insulina + Glicose), Bicarbonato de Sódio (se acidose), Beta-2 agonista inalatório</td><td>Minutos a horas</td></tr>\n        <tr><td><strong>3º Excreção Corporal</strong></td><td>Diuréticos de alça (Furosemida), Resinas de troca (Sorcal), Hemodiálise</td><td>Horas</td></tr>\n      </tbody>\n    </table>\n  </div>\n</li>\n<li><strong>Importante:</strong> Gluconato de cálcio é a medida <strong>prioritária</strong> para prevenir arritmias letais.</li>\n</ul>"
+        },
+        {
+          "num": "2.3",
+          "title": "Distúrbios Acidobásicos (Acidose Metabólica)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Diagnóstico:</strong> pH &lt; 7.35 e HCO3 baixo.</li>\n<li><strong>Ânion Gap (AG):</strong> Na - (Cl + HCO3). Valor normal: 8 a 12.</li>\n<li><strong>Acidose Metabólica com AG Elevado (Normoclorêmica):</strong> Consumo de bicarbonato por ácidos orgânicos não medidos (MUDPILES: Metanol, Uremia, DKA, Paraldeído, Isoniazida/Infecção, Lactato, Etilenoglicol, Salicilatos).</li>\n<li><strong>Acidose Metabólica com AG Normal (Hiperclorêmica):</strong> Perda de bicarbonato (diarreia, fístula) ou incapacidade renal de excretar H+ (Acidose Tubular Renal - ATR).</li>\n<li><strong>Compensação (Fórmula de Winter):</strong> pCO2 esperado = (1.5 x HCO3) + 8 &plusmn; 2. Se pCO2 medido for menor, há alcalose respiratória associada; se maior, acidose respiratória associada.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Infecções e Nefrolitíase",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Infecção do Trato Urinário (ITU)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Cistite Não Complicada (Mulheres):</strong> Tratamento empírico de primeira linha inclui <strong>Fosfomicina trometamol</strong> (dose única) e <strong>Nitrofurantoína</strong> (5-7 dias). Cefalexina e Bactrim são alternativas a depender de resistência local.</li>\n<li><strong>ITU na Pediatria:</strong> \n  <ul class=\"reader-list\">\n    <li><strong>Coleta:</strong> Saco coletor tem alto índice de falso-positivo, serve apenas para <strong>excluir</strong> (se negativo). Para confirmar em pré-escolar sem controle esfincteriano, usar <strong>cateterismo vesical</strong> (sondagem) ou <strong>punção suprapúbica</strong>.</li>\n    <li><strong>Diagnóstico:</strong> A urocultura coletada por punção suprapúbica confirma o diagnóstico de ITU havendo crescimento de <strong>qualquer</strong> patógeno (qualquer UFC), pois a via é estéril.</li>\n  </ul>\n</li>\n<li><strong>Laboratório (EAS):</strong> Nitrito positivo indica bactérias redutoras de nitrato (ex. E. coli), mas nitrito negativo não exclui ITU (Staphylococcus, Enterococcus, Pseudomonas não reduzem nitrato).</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Nefrolitíase e Pielonefrite Obstrutiva",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Clínica de Cólica Nefrética:</strong> Dor lombar de forte intensidade irradiando para flanco ou genitália (grandes lábios/testículo). Pode causar hematúria.</li>\n<li><strong>Tratamento Analgésico:</strong> AINEs (Cetoprofeno) são a primeira linha. Opiáceos são segunda linha.</li>\n<li><strong>Indicações de Intervenção Urgente (Pielonefrite Obstrutiva):</strong> Cálculo ureteral + sinais de infecção (febre, calafrios, leucocitose). Há risco iminente de sepse.</li>\n<li><strong>Conduta na Pielonefrite Obstrutiva:</strong> Desobstrução urgente da via urinária + Antibioticoterapia.\n  <ul class=\"reader-list\">\n    <li>A desobstrução é feita por drenagem urinária com inserção de <strong>Cateter Duplo J</strong> ou <strong>Nefrostomia percutânea</strong>, SEM a retirada do cálculo no mesmo momento (risco cirúrgico alto na fase aguda).</li>\n  </ul>\n</li>\n<li><strong>Terapia Expulsiva:</strong> Para cálculos &lt; 10 mm e paciente sem sinais de alarme. Uso de alfa-bloqueadores (Tansulosina) e hidratação.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "4. Doenças Túbulo-Intersticiais",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Nefrite Intersticial Aguda (NIA)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li><strong>Etiologia:</strong> Predominantemente induzida por drogas (Antibióticos - penicilinas, cefalosporinas; AINEs; IBP; Diuréticos) ou infecções (bactérias, vírus). Sarcoidose e doenças autoimunes também podem causar.</li>\n<li><strong>Clínica Clássica:</strong> Tríade clássica (febre, rash cutâneo e eosinofilia) está presente na minoria. Cursa com LRA oligúrica ou não oligúrica, e EAS com eosinofilúria, hematúria e piúria estéril.</li>\n<li><strong>Tratamento:</strong> Retirada imediata da droga agressora. Em casos específicos (ex. NIA granulomatosa associada à <strong>Sarcoidose</strong>), o uso de <strong>corticosteroides</strong> tem impacto favorável e alta probabilidade de influenciar a recuperação renal a longo prazo.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_dermatologia": {
+  "area": "Dermatologia",
+  "title": "ENAMED Master - Dermatologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Hanseníase",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Diagnóstico e Exame",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Forma Clínica</th><th>Clínica e Exame Dermatoneurológico</th><th>Baciloscopia / Histopatologia</th></tr></thead><tbody><tr><td>Indeterminada</td><td>Mácula hipocrômica, alteração de sensibilidade (térmica &rarr; dolorosa &rarr; tátil).</td><td>Baciloscopia (-). Histopatologia: infiltrado inflamatório inespecífico.</td></tr><tr><td>Tuberculoide</td><td>Placa única ou poucas, bordas elevadas, centro eritematoso/hipocrômico, sem descamação, anestésica.</td><td>Baciloscopia (-). Histopatologia: granulomas bem formados (epitelioides).</td></tr><tr><td>Dimorfa (Borderline)</td><td>Placas eritematosas, limites imprecisos, assimétricas. Vários troncos nervosos acometidos.</td><td>Baciloscopia (+ ou -).</td></tr><tr><td>Virchowiana</td><td>Infiltração difusa, nódulos, fácies leonina, madarose, lesões simétricas.</td><td>Baciloscopia (+). Presença de <b>globias</b> (aglomerados de bacilos). Histopatologia: histiócitos espumosos (células de Virchow).</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Exame Dermatoneurológico:</b> Avaliar sensibilidade na ordem: 1º Térmica, 2º Dolorosa, 3º Tátil. Para lesões foveolares/tuberculoides, o teste de sensibilidade define o diagnóstico.</li></ul>"
+        },
+        {
+          "num": "2",
+          "title": "Estados Reacionais",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo de Reação</th><th>Características</th><th>Tratamento de Escolha</th></tr></thead><tbody><tr><td>Reação Tipo 1 (Reversa)</td><td>Surge novas lesões, exacerbação de lesões antigas (edema, eritema), neurite. Comum em Paucibacilares (Borderline/Tuberculoide). <b>Não tem sintomas sistêmicos graves</b>.</td><td><b>Corticoide</b> (Prednisona). <i>Manter PQT!</i></td></tr><tr><td>Reação Tipo 2 (Eritema Nodoso Hansênico)</td><td>Nódulos eritematosos e dolorosos subcutâneos, febre, mal-estar, orquite, neurite. Comum em Multibacilares (Virchowianos/Dimorfos).</td><td><b>Talidomida</b> (Exceto em mulheres em idade fértil &rarr; usar Corticoide/Pentoxifilina). <i>Manter PQT!</i></td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Fatores Precipitantes:</b> Coinfecções, estresse físico/emocional, focos infecciosos (ex: dentário), gravidez, vacinação.</li><li><b>Conduta PQT:</b> Os pacientes que desenvolvem reações <i>após</i> término do tratamento <b>NÃO</b> devem retomar a PQT, apenas tratar a reação. Durante o tratamento, a PQT nunca é suspensa pelas reações.</li></ul>"
+        },
+        {
+          "num": "3",
+          "title": "Tratamento e Efeitos Colaterais",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco (PQT)</th><th>Efeitos Colaterais Principais</th><th>Conduta / Manejo</th></tr></thead><tbody><tr><td>Rifampicina</td><td>Urina avermelhada, hepatotoxicidade, síndrome flu-like.</td><td>Sintomáticos, monitorar TGO/TGP.</td></tr><tr><td>Dapsona</td><td>Hemólise, metemoglobinemia, agranulocitose, Síndrome de Sulfona.</td><td>Suspender se grave.</td></tr><tr><td>Clofazimina</td><td><b>Pigmentação cutânea (hiperpigmentação castanho-acinzentada)</b>, ressecamento, dor abdominal.</td><td><b>Não suspender medicação.</b> Orientar hidratação da pele e fotoproteção. É uma alteração benigna e reversível.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Esquema Único (Atual):</b> Rifampicina, Dapsona e Clofazimina para TODOS os pacientes (Paucibacilares = 6 meses; Multibacilares = 12 meses).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Farmacodermias",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Farmacodermias Graves",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Quadro Clínico e Alterações Laboratoriais</th><th>Fármacos Associados</th></tr></thead><tbody><tr><td>Síndrome DRESS</td><td>Febre alta, edema facial, exantema morbiliforme difuso, linfadenopatia generalizada. <b>Laboratório: Eosinofilia intensa</b>, elevação de transaminases, linfócitos atípicos.</td><td>Anticonvulsivantes (Carbamazepina, Fenitoína), Alopurinol, Sulfas.</td></tr><tr><td>Stevens-Johnson (SSJ)</td><td>Necrose/descolamento epidérmico de <b>&lt; 10%</b> da superfície corporal (SC). Lesões em alvo atípicas, acometimento intenso de 2 ou mais mucosas.</td><td>Sulfas, Anticonvulsivantes, AINEs.</td></tr><tr><td>Necrólise Epidérmica Tóxica (NET)</td><td>Descolamento epidérmico <b>&gt; 30%</b> da SC (Sinal de Nikolsky +). Severo acometimento sistêmico, alta mortalidade.</td><td>Mesmos da SSJ.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><b>Reativação Viral na DRESS:</b> É comum a reativação do Herpes Vírus Humano (<b>HHV-6</b> e HHV-7), que piora ou perpetua a inflamação sistêmica.</li><li><b>Diferenciação:</b> A ausência de descolamento epidérmico extenso (ausência de lesões alvo) e a forte eosinofilia favorecem o diagnóstico de DRESS em detrimento de SSJ/NET precoce.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Dermatoses Infecciosas e Parasitárias",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Escabiose",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><b>Etiologia:</b> <i>Sarcoptes scabiei</i>.</li><li><b>Quadro Clínico:</b> Prurido intenso, <b>com piora noturna</b>. Lesões papulares, pápulo-crostosas, escoriações, e <b>túneis (sulcos)</b>.</li><li><b>Topografia Comum:</b> Espaços interdigitais, punhos, axilas, região periumbilical, genitais (nódulos escabióticos) e nádegas. <i>Lactentes e imunossuprimidos podem ter lesões na cabeça, pescoço e palmo-plantares.</i></li><li><b>Conduta Epidemiológica:</b> É fundamental buscar ativamente <b>outras pessoas com quadro parecido em casa, vizinhança ou escola</b> (comunicantes), para tratar todos simultaneamente e evitar reinfecção.</li><li><b>Tratamento de Escolha:</b><ul class=\"reader-list\"><li><b>Permetrina 5% loção:</b> Aplicar do pescoço para baixo (ou na face/couro cabeludo em lactentes), deixar 8-14h e enxaguar. Repetir em 7-14 dias.</li><li><b>Ivermectina Oral:</b> 200 mcg/kg/dose, dose única, repetir em 7-14 dias (Não recomendada para crianças menores de 15kg ou gestantes, salvo diretrizes específicas).</li></ul></li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Dermatopediatria / Lesões Vasculares",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Hemangiomas da Infância",
+          "tags": ["ja", "adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><b>Conceito:</b> Os hemangiomas infantis são os <b>tumores vasculares benignos mais comuns na faixa etária pediátrica</b>.</li><li><b>Evolução Natural:</b> Diferente das malformações vasculares (que crescem com a criança e não regridem), os hemangiomas caracterizam-se por: <ul class=\"reader-list\"><li><b>Fase proliferativa rápida:</b> Crescimento intenso nos primeiros meses de vida.</li><li><b>Fase de platô.</b></li><li><b>Fase involutiva (regressão espontânea):</b> A maioria regride espontaneamente ao longo dos anos.</li></ul></li><li><b>Classificação:</b> Podem ser superficiais (cor vermelho vivo - \"morango\"), profundos (massa azulada), ou mistos. Não são sempre profundos ou graves.</li><li><b>Tratamento:</b> Conduta, na maioria das vezes, é <b>expectante (observação)</b>. <ul class=\"reader-list\"><li><b>Indicações Terapêuticas:</b> Risco de vida, comprometimento funcional (obstrução visual, via aérea), ulceração ou grandes lesões desfigurantes.</li><li><b>Primeira Linha (quando indicado):</b> <b>Betabloqueador oral (Propranolol)</b>. Corticoides sistêmicos não são mais a primeira linha isolada. A cirurgia é reservada para resíduos ou complicações muito específicas.</li></ul></li></ul>"
+        }
+      ]
+    }
+  ]
+}
+,
+    "uepa_endocrinologia": {
+  "area": "Endocrinologia",
+  "title": "Endocrinologia - UEPA",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Diabetes Mellitus",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Diabetes Mellitus tipo 2 (DM2)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Resistência insulínica progressiva e disfunção de células beta. Associado a obesidade e síndrome metabólica.</li><li><strong>Diagnóstico:</strong> Glicemia jejum ≥ 126 mg/dL, TOTG (2h) ≥ 200 mg/dL, HbA1c ≥ 6,5%. Confirmado com repetição do exame alterado ou se há sintomas (polidipsia, poliúria) associados à glicemia aleatória ≥ 200 mg/dL.</li><li><strong>Tratamento inicial e progressão:</strong> Mudanças de estilo de vida e Metformina. Se paciente tem Doença Renal do Diabético (DRC) ou alto risco cardiovascular, deve-se priorizar iSGLT2 (ex: Empagliflozina) ou agonistas GLP-1 (ex: Semaglutida, Liraglutida).</li><li><strong>Insulinoterapia:</strong> Indicada se o paciente tem sintomas de catabolismo (perda de peso), hiperglicemia severa (HbA1c > 9-10% com sintomas) ou falha no controle com múltiplas terapias orais.</li></ul><div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classe</th><th>Mecanismo</th><th>Benefício Adicional</th><th>Efeitos Adversos</th></tr></thead><tbody><tr><td>Metformina</td><td>Reduz produção hepática de glicose</td><td>Não causa hipoglicemia, baixo custo</td><td>Distúrbios TGI, Deficiência de B12</td></tr><tr><td>Inibidores de SGLT2 (Empagliflozina)</td><td>Glicosúria (bloqueia reabsorção tubular)</td><td>Proteção Renal e Cardiovascular, controle de peso</td><td>Infecções genitourinárias, risco de CAD</td></tr><tr><td>Agonistas GLP-1 (Semaglutida)</td><td>Aumenta secreção de insulina dependente de glicose, lentifica esvaziamento gástrico</td><td>Perda de peso substancial, Proteção CV</td><td>Náusea, vômitos, diarreia</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.2",
+          "title": "Diabetes Mellitus tipo 1 e Complicações Agudas",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Cetoacidose Diabética (CAD):</strong> Deficiência absoluta de insulina. Clínica de poliúria, polidipsia, dor abdominal, respiração de Kussmaul. Laboratório: Glicemia > 250 mg/dL, pH < 7,3, HCO3 < 18, Cetonemia/Cetonúria.</li><li><strong>Estado Hiperglicêmico Hiperosmolar (EHH):</strong> Típico do DM2 idoso. Glicemia > 600, osmolaridade > 320, ausência de acidose grave.</li><li><strong>Tratamento CAD/EHH:</strong> VIP - Volume, Insulina, Potássio.</li></ul><pre class=\"reader-pre-card\">\nFluxograma CAD e VIP:\n1. Volume: SF 0.9% 10-20 mL/kg/h na 1ª hora.\n2. Potássio: Se K+ < 3.3, repor antes da insulina. Se 3.3 - 5.2, repor junto com hidratação.\n3. Insulina: 0.1 U/kg bólus + 0.1 U/kg/h BIC até resolução da acidose.\n</pre>"
+        }
+      ]
+    },
+    {
+      "title": "Tireoide",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Tireotoxicose e Doença de Graves",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireotoxicose:</strong> Síndrome clínica resultante do excesso de hormônios tireoidianos circulantes. Cursa com taquicardia, perda de peso, calor, tremores, irritabilidade e insônia.</li><li><strong>Doença de Graves:</strong> Causa mais comum de hipertireoidismo primário. Doença autoimune com anticorpo estimulador do receptor de TSH (TRAb). Apresenta bócio difuso, oftalmopatia (exoftalmia), e mixedema pré-tibial.</li><li><strong>Tratamento:</strong> Tionamidas (Metimazol é a escolha geral; Propiltiouracil no 1º trimestre de gestação ou crise tireotóxica). O tratamento geralmente requer 3 a 4 semanas para estabilizar as provas de função tireoidiana (T4L e T3, pois o TSH demora mais). Betabloqueadores ajudam no alívio sintomático.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipotireoidismo e Tireoidite de Hashimoto",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Tireoidite de Hashimoto:</strong> Principal causa de hipotireoidismo adquirido. Autoimune, caracterizada por Anti-TPO e Anti-Tg positivos. Pode associar-se a outras doenças autoimunes, como Doença de Addison e Doença Celíaca.</li><li><strong>Clínica:</strong> Fadiga, ganho de peso, pele seca, constipação, bradicardia. Laboratório revela TSH elevado e T4 livre baixo (hipotireoidismo primário).</li><li><strong>Tratamento:</strong> Levotiroxina (T4), tomada em jejum, com ajuste laboratorial do TSH a cada 4 a 6 semanas.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Adrenal",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Insuficiência Adrenal (Doença de Addison)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiopatologia:</strong> Doença de Addison é a insuficiência adrenal primária, caracterizada pela destruição autoimune do córtex adrenal. Leva a deficiência de glicocorticoides, mineralocorticoides e andrógenos.</li><li><strong>Manifestações Clínicas:</strong> Fraqueza, perda de peso, hiperpigmentação cutâneo-mucosa (pelo aumento compensatório de ACTH), hipotensão ortostática e avidez por sal.</li><li><strong>Alterações Laboratoriais:</strong> Hiponatremia e hipercalemia (devido à falta de aldosterona).</li><li><strong>Tratamento e Prevenção de Crise:</strong> Reposição de glicocorticoide (hidrocortisona) e mineralocorticoide (fludrocortisona). Em situações de estresse clínico (febre, cirurgias, infecções), a dose de glicocorticoide DEVE ser aumentada, não suspensa.</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Síndromes Poliglandulares Autoimunes (SPA)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>SPA Tipo 1:</strong> Infância. Tríade: Candidíase mucocutânea crônica, Hipoparatireoidismo e Insuficiência Adrenal Primária.</li><li><strong>SPA Tipo 2 (Síndrome de Schmidt):</strong> Adultos. Associação de Doença de Addison com Tireoidite Autoimune (Hashimoto) e/ou Diabetes Mellitus tipo 1 (e possivelmente Doença Celíaca, como no caso histórico de John F. Kennedy).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Hipófise e Hipotálamo",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Hiperprolactinemia e Prolactinomas",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Etiologia:</strong> O prolactinoma é o tumor hipofisário secretor mais comum. A secreção de prolactina é tonicamente inibida pela dopamina hipotalâmica.</li><li><strong>Clínica:</strong> Em mulheres: amenorreia secundária, galactorreia e infertilidade. Em homens: perda de libido, disfunção erétil; e cefaleia/hemianopsia bitemporal (pois tendem a ser diagnosticados na fase de macroadenomas > 1cm).</li><li><strong>Tratamento:</strong> Primeira linha é o tratamento farmacológico com agonistas dopaminérgicos (Cabergolina). Promove redução substancial do tumor e normalização da prolactina, sendo superior à cirurgia inicial mesmo para macroadenomas com compressão quiasmática.</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Fisiologia do Hormônio do Crescimento e Acromegalia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Fisiologia do GH:</strong> Estimulado pelo GHRH, inibido pela somatostatina. Estimula o crescimento linear pós-natal. Atua estimulando a produção hepática de IGF-1 e tem efeito contrainsulínico (eleva glicemia, podendo causar diabetes).</li><li><strong>Acromegalia e Gigantismo:</strong> Excesso de GH pós-puberdade causa acromegalia (crescimento de extremidades, mandíbula, visceromegalia). Na infância, causa gigantismo. Tratamento de escolha é a cirurgia transesfenoidal para ressecção do adenoma hipofisário.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Metabolismo Ósseo e Mineral",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Osteoporose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Diagnóstico e Indicação de Tratamento:</strong> Indicado iniciar terapia específica para mulheres pós-menopausa ou homens ≥ 50 anos quando: presença de fratura de fragilidade (ex: quadril ou vertebral documentada); T-score ≤ -2,5 em coluna lombar, fêmur total ou colo femoral; T-score entre -1,0 e -2,5 associado a risco elevado pelo FRAX (fratura maior ≥ 20% ou fratura de quadril ≥ 3%).</li><li><strong>Manejo:</strong> Bisfosfonatos (Alendronato, Zoledronato) ou anabólicos, sempre acompanhados da correção dos níveis de Vitamina D e ingestão adequada de cálcio. O foco principal é a prevenção de novas fraturas.</li></ul>"
+        }
+      ]
+    }
+  ]
+}
+,
     "uepa_gastroenterologia": {
   "area": "Gastroenterologia",
   "title": "Gastroenterologia - Rapid Review",
