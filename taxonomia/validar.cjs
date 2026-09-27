@@ -57,6 +57,9 @@ function ajudaTaxonomia(q) {
         { terms: ['evans'], area: 'Hematologia', assunto: 'Anemias hemolíticas', topico: 'Anemias hemolíticas autoimunes (AHAI)' },
         { terms: ['anemia megaloblastica', 'megaloblastica'], area: 'Hematologia', assunto: 'Anemias macrocíticas', topico: 'Anemia megaloblástica' },
         { terms: ['litiase', 'nefrolitiase', 'calculo renal', 'colica nefretica'], area: 'Nefrologia', assunto: 'Nefrolitíase', topico: 'Apresentação clínica' },
+        { terms: ['lombalgia', 'coluna vertebral', 'dor lombar'], area: 'Ortopedia', assunto: 'Ortopedia Geral', topico: 'Doenças da coluna vertebral' },
+        { terms: ['intersticial', 'intersticiais', 'fibrose pulmonar', 'poc'], area: 'Pneumologia', assunto: 'Pneumopatias Intersticiais, Hipertensão Pulmonar, Bronquiectasias e Pneumotórax Espontâneo', topico: 'Pneumopatias Intersticiais' },
+        { terms: ['esofagite', 'esofago'], area: 'Gastroenterologia', assunto: 'Esôfago', topico: 'Esofagites Não Pépticas' },
     ];
 
     for (const atalho of ATALHOS) {
@@ -116,10 +119,14 @@ function ajudaTaxonomia(q) {
         return `O assunto "${q.assunto.trim()}" é válido e não possui tópicos filhos. Deixe 'topico' como null.`;
     }
 
-    // 3. Checa se o assunto foi escrito com variação de caixa/espaço/acentuação
-    const assuntoFlex = r.children.find(a => norm(a.name) === targetAssunto);
-    if (assuntoFlex) {
-        return `O assunto correto é "${assuntoFlex.name.trim()}". Use a grafia exata.`;
+    // 3. Checa se o assunto foi escrito com variação ou substring na mesma área
+    for (const a of r.children) {
+        const aNorm = norm(a.name);
+        if (aNorm === targetAssunto || (targetAssunto.length >= 4 && (targetAssunto.includes(aNorm) || aNorm.includes(targetAssunto)))) {
+            const topicoMatch = a.children.find(c => norm(c.name) === targetTopico || (targetTopico.length >= 4 && (norm(c.name).includes(targetTopico) || targetTopico.includes(norm(c.name)))));
+            const topicoNome = topicoMatch ? topicoMatch.name.trim() : (a.children[0] ? a.children[0].name.trim() : null);
+            return `Use o caminho exato oficial:\n  area: "${areaTrimmed}"\n  assunto: "${a.name.trim()}"\n  topico: ${topicoNome ? `"${topicoNome}"` : 'null'}`;
+        }
     }
 
     // 4. Se não achou na área, busca se existe em outra especialidade
