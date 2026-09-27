@@ -105,13 +105,7 @@ export function updatePrincipalExplanations(updates) {
     const aliases = parseObjectLiteral(aliasesLiteral);
 
     for (const [questionId, body] of Object.entries(updates)) {
-        let canonicalId = questionId;
-        if (!(questionId in explanations)) {
-            if (aliases[questionId]) canonicalId = aliases[questionId];
-        }
-        if (!(canonicalId in explanations)) {
-            canonicalId = questionId;
-        }
+        const canonicalId = aliases[questionId] || questionId;
         explanations[canonicalId] = body;
     }
 

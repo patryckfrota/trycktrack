@@ -211,14 +211,15 @@ cropped.save('${outputPath}', optimize=True)
   console.log('='.repeat(70));
 
   if (totalQuestionsWithAssets === 0) {
-    return;
+    return {};
   }
 
-  // 1. Atualiza questions-revalida.js
-  const revalidaFile = path.join(ROOT_DIR, 'questions-revalida.js');
-  if (fs.existsSync(revalidaFile)) {
-    console.log(`\n[VisualExtractor] Atualizando ${revalidaFile}...`);
-    let fileContent = fs.readFileSync(revalidaFile, 'utf8');
+  // 1. Atualiza o arquivo de questões correspondente à banca (ex: questions-enare.js, questions-revalida.js)
+  const prefix = examId.split('-')[0];
+  const targetFile = path.join(ROOT_DIR, `questions-${prefix}.js`);
+  if (fs.existsSync(targetFile)) {
+    console.log(`\n[VisualExtractor] Atualizando ${targetFile}...`);
+    let fileContent = fs.readFileSync(targetFile, 'utf8');
 
     for (const [qNumStr, images] of Object.entries(extractedMap)) {
       const paddedNum = qNumStr.padStart(3, '0');
@@ -233,29 +234,33 @@ cropped.save('${outputPath}', optimize=True)
       }
     }
 
-    fs.writeFileSync(revalidaFile, fileContent, 'utf8');
+    fs.writeFileSync(targetFile, fileContent, 'utf8');
   }
 
-  // 2. Atualiza Neon Postgres
-  console.log(`\n[VisualExtractor] Sincronizando imagens com o banco de dados Neon Postgres...`);
-  try {
-    const updatedIds = Object.keys(extractedMap).map(qNumStr => {
-      const paddedNum = qNumStr.padStart(3, '0');
-      return `${examId}-${paddedNum}`;
-    });
-
-    if (updatedIds.length > 0) {
-      const idsArg = updatedIds.join(',');
-      console.log(`   ⚡ Executando sincronismo incremental para ${updatedIds.length} questões com imagens...`);
-      execSync(`node backend/scripts/import-questions.js --ids "${idsArg}"`, {
-        stdio: 'inherit',
-        cwd: ROOT_DIR
+  // 2. Atualiza Neon Postgres se configurado
+  if (process.env.DATABASE_URL) {
+    console.log(`\n[VisualExtractor] Sincronizando imagens com o banco de dados Neon Postgres...`);
+    try {
+      const updatedIds = Object.keys(extractedMap).map(qNumStr => {
+        const paddedNum = qNumStr.padStart(3, '0');
+        return `${examId}-${paddedNum}`;
       });
-      console.log(`   🎉 Neon Postgres atualizado com sucesso para todas as questões com imagens!`);
+
+      if (updatedIds.length > 0) {
+        const idsArg = updatedIds.join(',');
+        console.log(`   ⚡ Executando sincronismo incremental para ${updatedIds.length} questões com imagens...`);
+        execSync(`node backend/scripts/import-questions.js --ids "${idsArg}"`, {
+          stdio: 'inherit',
+          cwd: ROOT_DIR
+        });
+        console.log(`   🎉 Neon Postgres atualizado com sucesso para todas as questões com imagens!`);
+      }
+    } catch (err: any) {
+      console.error(`   ❌ Erro ao sincronizar com Postgres:`, err.message);
     }
-  } catch (err: any) {
-    console.error(`   ❌ Erro ao sincronizar com Postgres:`, err.message);
   }
+
+  return extractedMap;
 }
 
 // Suporte para execução direta via CLI

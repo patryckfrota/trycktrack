@@ -122,6 +122,34 @@ async function runPipeline() {
       console.log('\n' + '-'.repeat(70) + '\n');
     });
 
+    // -------------------------------------------------------------
+    // PASSO B2: Extração Multimodal de Imagens & Recursos Visuais
+    // -------------------------------------------------------------
+    console.log('-------------------------------------------------------------');
+    console.log('PASSO B2: EXTRAÇÃO DE IMAGENS E RECURSOS VISUAIS COM GEMINI MULTIMODAL');
+    console.log('-------------------------------------------------------------');
+    try {
+      const { extractVisualAssetsFromExam } = await import('./visual-extractor.js');
+      const bancaPrefix = downloadResult.examId.split('-')[0];
+      const visualMap = await extractVisualAssetsFromExam({
+        pdfPath: downloadResult.cadernoPdfPath,
+        examId: downloadResult.examId,
+        assetsDirName: bancaPrefix
+      });
+
+      if (visualMap && Object.keys(visualMap).length > 0) {
+        extractedBatch.items.forEach(item => {
+          const qNum = item.question.number;
+          if (visualMap[qNum] && visualMap[qNum].length > 0) {
+            item.question.images = visualMap[qNum];
+            console.log(`[Visual] 📸 Questão Q${qNum} associada a ${visualMap[qNum].length} imagem(ns): ${visualMap[qNum].join(', ')}`);
+          }
+        });
+      }
+    } catch (visErr: any) {
+      console.warn(`[Visual] ⚠️ Extração visual concluída sem novas figuras ou com alerta: ${visErr?.message}`);
+    }
+
     // Grava dump em JSON para auditoria na pasta tmp/
     const dumpPath = path.join(OUTPUT_DIR, `extracted-${downloadResult.examId}.json`);
     fs.writeFileSync(dumpPath, JSON.stringify(extractedBatch, null, 2), 'utf-8');
