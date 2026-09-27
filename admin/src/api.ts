@@ -96,6 +96,20 @@ export function getQuality(): Promise<AdminQuality> {
   return authedFetch("/quality");
 }
 
+export interface AgentePlacar {
+  autor: string;
+  lotes: number;
+  itens: number;
+  reprovados: number;
+  taxaReprovacao: number;
+  categorias: { cat: string; nome: string; itens: number; taxa: number }[];
+  evolucao: { data: string; lote: string; revisor: string; itens: number; taxaReprovacao: number }[];
+}
+
+export function getPlacar(): Promise<{ geradoEm: string; agentes: AgentePlacar[] }> {
+  return authedFetch("/placar");
+}
+
 export function listQuestions(params: { bank?: string; rodizio?: string; search?: string; cursor?: string } = {}) {
   const qs = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v) as [string, string][],

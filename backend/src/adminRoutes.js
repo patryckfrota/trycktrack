@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { Router } from 'express';
 import { requireAdminAuth } from './adminAuth.js';
 import { getPrismaClient } from './prismaClient.js';
@@ -17,8 +18,17 @@ import { autoWrapAsyncRoutes } from './asyncHandler.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 
+// pipeline/ é CommonJS (roda também fora do backend, direto no terminal e
+// no GitHub Actions); createRequire deixa esse módulo ESM reaproveitar o
+// mesmo cálculo em vez de duplicar a soma do placar aqui.
+const { calcularPlacar } = createRequire(import.meta.url)('../../pipeline/placar.cjs');
+
 export const adminRouter = autoWrapAsyncRoutes(Router());
 adminRouter.use(requireAdminAuth());
+
+adminRouter.get('/placar', (req, res) => {
+    res.json(calcularPlacar());
+});
 
 adminRouter.get('/stats', async (req, res) => {
     const prisma = getPrismaClient();

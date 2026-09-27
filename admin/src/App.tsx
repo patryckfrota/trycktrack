@@ -7,6 +7,7 @@ import { Questions } from "./Questions";
 import { Quality } from "./Quality";
 import { Users } from "./Users";
 import { Errors } from "./Errors";
+import { Placar } from "./Placar";
 import logo from "./assets/logo.png";
 
 export function App() {
@@ -41,6 +42,7 @@ export function App() {
       )}
       {view === "usuarios" && <Users />}
       {view === "erros" && <Errors />}
+      {view === "placar" && <Placar />}
       {view === "dashboard" && <Dashboard />}
     </Layout>
   );

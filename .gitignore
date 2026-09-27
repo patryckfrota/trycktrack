@@ -28,3 +28,24 @@ output/
 # Cache/estado local do wrangler (deploy do proxy da Groq em
 # cloudflare-worker/) — nunca precisa ser versionado.
 cloudflare-worker/.wrangler/
+
+# Scripts ad-hoc do Gemini na raiz — rodam com a chave do .env e vão
+# ser substituídos pelo pipeline/ (Fase 1). Ficam fora do git pra um
+# `git add` amplo nunca publicar nada deles por engano.
+/add-card*.cjs
+/inject-rr.cjs
+/fix-injector.cjs
+/fix-prompt-again.cjs
+/fix-tax.js
+/retry-gen*.sh
+/generate-all-remaining.sh
+/batch-run.cjs
+/smart-batch.cjs
+/test-key.js
+/test-generate.js
+/test-all-models.js
+/list-models.ts
+/tmp/
+
+# Relatórios gerados a cada rodada do validador (artefato, não fonte).
+/pipeline/relatorios/

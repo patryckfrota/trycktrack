@@ -1,14 +1,15 @@
 import type { ReactNode } from "react";
 import logo from "./assets/logo.png";
 import { initials } from "./ui";
-import { IconAlertTriangle, IconBook, IconCheckShield, IconChart, IconLogout, IconUpload, IconUsers } from "./Icons";
+import { IconAlertTriangle, IconBook, IconCheckShield, IconChart, IconLogout, IconTag, IconUpload, IconUsers } from "./Icons";
 
-export type PanelView = "dashboard" | "questoes" | "qualidade" | "importar" | "usuarios" | "erros";
+export type PanelView = "dashboard" | "questoes" | "qualidade" | "importar" | "usuarios" | "erros" | "placar";
 
 const NAV_ITEMS: { key: PanelView; label: string; Icon: typeof IconChart; enabled: boolean }[] = [
   { key: "dashboard", label: "Visão geral", Icon: IconChart, enabled: true },
   { key: "questoes", label: "Questões", Icon: IconBook, enabled: true },
   { key: "qualidade", label: "Qualidade", Icon: IconCheckShield, enabled: true },
+  { key: "placar", label: "Placar das IAs", Icon: IconTag, enabled: true },
   { key: "usuarios", label: "Usuários", Icon: IconUsers, enabled: true },
   { key: "erros", label: "Erros", Icon: IconAlertTriangle, enabled: true },
   { key: "importar", label: "Importar prova", Icon: IconUpload, enabled: false },

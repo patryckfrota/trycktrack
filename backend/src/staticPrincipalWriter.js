@@ -113,7 +113,8 @@ export function updatePrincipalExplanation(questionId, body) {
         if (aliases[questionId]) canonicalId = aliases[questionId];
     }
     if (!(canonicalId in explanations)) {
-        throw new Error(`Questão ${questionId} não encontrada em question-explanations.js`);
+        // Questão nova: cria entrada diretamente
+        canonicalId = questionId;
     }
 
     explanations[canonicalId] = body;
