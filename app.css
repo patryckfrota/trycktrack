@@ -5676,6 +5676,15 @@
             .header-bar { margin-bottom: 24px; }
             .content { padding-top: 8px; }
             .bottom-nav { bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px)); }
+            /* Mesma folga do .header acima, para os cabeçalhos que abrem por
+               cima do app inteiro (Simulado/Guiado, painel de instituição
+               das Trilhas, arquivo do Rapid Review) — sem ela, o topo desses
+               painéis nasce colado na borda física do iPad e o botão de
+               voltar fica embaixo da câmera/borda, sem como tocar. */
+            .question-player-header,
+            .reader-header {
+                padding-top: max(48px, calc(env(safe-area-inset-top) + 24px)) !important;
+            }
         }
 
         /* Mac/desktop: composição central com largura de leitura controlada,
