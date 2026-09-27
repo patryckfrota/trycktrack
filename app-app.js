@@ -3484,12 +3484,6 @@ Regras obrigatórias:
                     document.getElementById('questionReviewRating').hidden = false;
                 } else {
                     updateReviewQueue(question.id, window.RATING.AGAIN);
-                    // Erro sem ler o porquê não corrige nada — trava "Próxima"
-                    // pelo tempo de leitura da explicação (14 caracteres/s,
-                    // ritmo de leitura pausada), 3-12s.
-                    const readMs = Math.min(12000, Math.max(3000, (question.explanation || '').length / 14 * 1000));
-                    setTimeout(() => { if (activeQuestionSession === session) document.getElementById('questionNext').disabled = false; }, readMs);
-                    return;
                 }
             } else {
                 // Simulado/Imersão: sem feedback de certo/errado agora — só
