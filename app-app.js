@@ -697,8 +697,11 @@
         // shared/trail-blocks.js. Reta final: bloco puxado por assunto de
         // peso baixo sai da lista.
         function trailNextBlocks(ctx) {
-            const { subjects, queue, goal, finalStretch } = ctx;
-            const blocks = window.buildStudyBlocks(window.studyCandidates(subjects, queue, goal));
+            const { subjects, queue, goal, finalStretch, dailyGoal } = ctx;
+            // Bloco proporcional à meta diária: meta baixa (ex. 10) não deve
+            // gerar bloco que sozinho já estoura o dia.
+            const targetSize = Math.min(12, Math.max(6, Math.round((dailyGoal || 20) * 0.6)));
+            const blocks = window.buildStudyBlocks(window.studyCandidates(subjects, queue, goal), { targetSize });
             return finalStretch ? blocks.filter(b => !window.isLowWeightForFinalStretch(b.subjects[0], subjects)) : blocks;
         }
 
@@ -759,7 +762,7 @@
         async function startTrailBlock(blockId) {
             const trailId = getTrailState().active;
             const ctx = buildTrailContext(trailId);
-            const block = trailNextBlocks(ctx).find(b => b.id === blockId) || window.buildStudyBlocks(window.studyCandidates(ctx.subjects, ctx.queue, ctx.goal)).find(b => b.id === blockId);
+            const block = trailNextBlocks(ctx).find(b => b.id === blockId);
             if (!block) { refreshTrailViews(); return; }
             await startTrailQuestionSession(trailId, trailBlockQuestionIds(block, ctx), { trailBlock: { trailId, blockId } });
         }
@@ -1005,7 +1008,8 @@
         function trailDashCronogramaHtml(ctx) {
             const { subjects, queue, today, track, dailyGoal, goal, trailId } = ctx;
             const options = { subjectsWithStatus: subjects, reviewQueue: queue, todayIso: today, examDateIso: track.examDate || null, goal };
-            const { days, summary } = window.buildSchedule({ ...options, dailyCapacity: dailyGoal });
+            const blockSize = Math.min(12, Math.max(6, Math.round(dailyGoal * 0.6)));
+            const { days, summary } = window.buildSchedule({ ...options, dailyCapacity: dailyGoal, blockSize });
             const minimum = window.minimumDailyCapacity(options);
 
             let banner;
@@ -3480,6 +3484,12 @@ Regras obrigatórias:
                     document.getElementById('questionReviewRating').hidden = false;
                 } else {
                     updateReviewQueue(question.id, window.RATING.AGAIN);
+                    // Erro sem ler o porquê não corrige nada — trava "Próxima"
+                    // pelo tempo de leitura da explicação (14 caracteres/s,
+                    // ritmo de leitura pausada), 3-12s.
+                    const readMs = Math.min(12000, Math.max(3000, (question.explanation || '').length / 14 * 1000));
+                    setTimeout(() => { if (activeQuestionSession === session) document.getElementById('questionNext').disabled = false; }, readMs);
+                    return;
                 }
             } else {
                 // Simulado/Imersão: sem feedback de certo/errado agora — só
