@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 // @ts-ignore
 import { updatePrincipalExplanation, updatePrincipalAnnulled } from '../../backend/src/staticPrincipalWriter.js';
 import { ExtractedBatchSchema, formatFullExplanation, ExtractedItem } from './types.js';
@@ -102,7 +103,6 @@ export function writeExtractedData(dumpFilePath: string) {
     console.log('\n========================================');
     console.log('Executando verificação taxonômica local...');
     try {
-        const { execSync } = require('node:child_process');
         const output = execSync('node taxonomia/validar.cjs', { cwd: ROOT, encoding: 'utf-8' });
         console.log(output);
         console.log('✅ Taxonomia validada!');
