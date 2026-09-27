@@ -289,7 +289,7 @@ Responda ESTRITAMENTE em formato JSON com o schema abaixo:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: { responseMimeType: 'application/json' }
     });
@@ -316,7 +316,7 @@ Responda ESTRITAMENTE em formato JSON com o schema abaixo:
 /**
  * Motor em 2 Estágios:
  * 1. Flash-Lite (rápido, volume alto) extrai a estrutura das questões do PDF
- * 2. Flash 3.7 (raciocínio denso) elabora as 4 seções médicas e a taxonomia exata
+ * 2. Flash-Lite (workhorse de volume) elabora as 4 seções médicas e a taxonomia exata
  */
 async function executeTwoStageExtraction(
   ai: GoogleGenAI,
@@ -375,8 +375,8 @@ async function executeTwoStageExtraction(
 
   console.log(`[Extractor] 📄 [Estágio 1/2] Concluído: ${rawQuestions.length} questões estruturadas com sucesso.`);
 
-  // --- ESTÁGIO 2: Flash 3.5 (Workhorse) gera resoluções médicas UEPA e taxonomia ---
-  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.5-flash...`);
+  // --- ESTÁGIO 2: Flash-Lite gera resoluções médicas UEPA (4 seções) e taxonomia ---
+  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.5-flash-lite...`);
   const stage2Prompt = buildClinicalAnalysisPrompt(
     examMetadata.examId,
     examMetadata.examName,
@@ -390,7 +390,7 @@ async function executeTwoStageExtraction(
   for (let retry = 0; retry < 3; retry++) {
     try {
       stage2Response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: [
           {
             role: 'user',
@@ -499,7 +499,7 @@ export async function extractQuestionsFromPdf(
     startQuestion = 1,
     limitQuestions = 3,
     maxAttempts = 5,
-    modelName = 'gemini-3.5-flash'
+    modelName = 'gemini-3.5-flash-lite'
   } = options;
 
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
@@ -553,7 +553,7 @@ export async function extractQuestionsFromPdf(
   const pdfBytes = fs.readFileSync(cadernoPdfPath);
   const pdfBase64 = pdfBytes.toString('base64');
 
-  // 1. Tenta prioritariamente o Motor em 2 Estágios (Flash-Lite na estrutura + Flash 3.7 na clínica/taxonomia)
+  // 1. Tenta prioritariamente o Motor em 2 Estágios (Flash-Lite na estrutura + Flash-Lite na clínica/taxonomia)
   try {
     const twoStageResult = await executeTwoStageExtraction(
       ai,
@@ -580,7 +580,6 @@ export async function extractQuestionsFromPdf(
   );
 
   const candidateModels = [
-    'gemini-3.5-flash',
     'gemini-3.5-flash-lite'
   ];
 
