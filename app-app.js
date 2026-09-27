@@ -715,9 +715,9 @@
         }
 
         function trailTodayHint(divida, block) {
-            if (divida && block) return `Primeiro as revisões, misturadas entre assuntos; depois ${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}. Errou? A questão volta no fim da sessão.`;
-            if (block) return `${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}. Errou? A questão volta no fim da sessão.`;
-            return `Revisões misturadas entre assuntos${divida > 0 ? ' — o bloco novo fica pra quando a revisão couber na meta do dia' : ''}. Errou? A questão volta no fim da sessão.`;
+            if (divida && block) return `Primeiro as revisões, misturadas entre assuntos; depois ${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}.`;
+            if (block) return `${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}.`;
+            return `Revisões misturadas entre assuntos${divida > 0 ? ' — o bloco novo fica pra quando a revisão couber na meta do dia' : ''}.`;
         }
 
         function trailBlockCardHtml(block) {
