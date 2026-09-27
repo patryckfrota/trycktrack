@@ -1,0 +1,305 @@
+{
+  "examId": "enare-2024",
+  "items": [
+    {
+      "question": {
+        "id": "enare-2024-001",
+        "number": 1,
+        "stem": "Uma paciente de 60 anos foi internada para investigação de anemia associada a déficit cognitivo. O médico percebeu lentidão de raciocínio e redução da capacidade executiva. A paciente estava atenta e cooperando com o examinador quando se queixou de parestesias (dormência e queimação) simétricas em ambos os membros inferiores. Em relação à anemia, havia macrocitose e reticulocitopenia. O nível de vitamina B12 sérica foi 125 pg/mL (normal: acima de 200 pg/mL).\nDiante desse quadro clínico, além da investigação da causa da anemia, deve-se proceder à reposição:",
+        "options": {
+          "A": "oral de cianocobalamina (1000 microgramas por dia) e manutenção da mesma dose uma vez por mês;",
+          "B": "de cianocobalamina parenteral (1000 microgramas por dia) e manutenção da mesma dose por via oral a cada mês;",
+          "C": "de cianocobalamina intramuscular (1000 microgramas por dia) e posterior injeção intramuscular uma vez por semana até reavaliação dos sintomas e investigação da causa;",
+          "D": "de hidroxicobalamina parenteral ou oral três vezes por semana seguida da dose de 1000 microgramas, uma vez por semana, para o resto da vida;",
+          "E": "de hidroxicobalamina parenteral (1000 microgramas por dia) até a mitigação dos sintomas."
+        },
+        "answer": "C",
+        "area": "Clínica Médica",
+        "assunto": "Hematologia",
+        "topico": "Anemia Megaloblástica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-001",
+        "nucleo": "A deficiência grave de vitamina B12 com manifestações neurológicas exige reposição parenteral com cianocobalamina em altas doses diárias iniciais, seguida de manutenção com injeções semanais ou mensais conforme a gravidade e persistência da causa de base.",
+        "armadilha": "O principal erro é optar pela via oral imaginando que a correção seja semelhante à deficiência puramente hematológica ou leve. Embora estudos mostrem que doses orais elevadas possam ser absorvidas por difusão passiva, a presença de comprometimento neurológico exuberante (parestesias simétricas e déficit cognitivo) contraindica o risco de falha de absorção intestinal e obriga o uso da via parenteral (intramuscular).\n\nRaciocínio: diante de uma anemia megaloblástica com vitamina B12 sérica reduzida e sintomas neurológicos evidentes, a conduta padrão ouro envolve a administração de cianocobalamina por via intramuscular na dose de 1000 mcg diários por uma a duas semanas, passando posteriormente para doses semanais até a estabilização hematológica e melhora clínica, com manutenção vitalícia ou mensal dependendo da etiologia (ex: anemia perniciosa ou gastrectomia).",
+        "alternativas": "A) Errada. A via oral isolada não é recomendada como primeira escolha na vigência de sintomas neurológicos graves devidos à deficiência de vitamina B12, devido ao risco de subtratamento e progressão do dano medular e cerebral.\nB) Errada. A manutenção descrita 'por via oral a cada mês' não faz sentido farmacológico prático, pois a administração oral requer uso diário contínuo, enquanto a via de escolha na fase inicial com sintomas neurológicos é a intramuscular.\nC) Correta. A administração de cianocobalamina intramuscular (1000 mcg por dia) na fase de ataque, seguida de injeções intramusculares semanais até a reavaliação, é o protocolo clássico e seguro para garantir a saturação tecidual e reversão dos sintomas neurológicos.\nD) Errada. O uso de hidroxicobalamina com o esquema e intervalos descritos de forma vaga e 'para o resto da vida' sem a devida fase de ataque intramuscular diária inicial distorce as recomendações terapêuticas hematológicas estabelecidas.\nE) Errada. A reposição parenteral não deve ser interrompida na 'mitigação dos sintomas', pois pacientes com deficiência crônica (como anemia perniciosa) necessitam de manutenção por toda a vida para evitar recidivas.",
+        "fixacao": "Deficiência de vitamina B12 com sintomas neurológicos (mielopatia, neuropatia periférica ou déficit cognitivo) exige obrigatoriamente reposição parenteral (intramuscular) inicial. A dose padrão é de 1000 mcg por dia por 1-2 semanas, seguida de manutenção periódica. Distratores apostam na via oral ou suspensão precoce.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-002",
+        "number": 2,
+        "stem": "Após o início de tratamento antirretroviral (TARV) há 1 mês, um paciente com síndrome consumptiva, candidíase e diarreia crônica foi internado por outras manifestações. O grupo de residentes da clínica médica percebeu, durante os primeiros três dias de internação, febre vespertina, linfadenomegalias cervicais e axilares com fistulização e constipação intestinal com cólicas abdominais. Os exames demonstraram anemia e VHS e PCR elevados, bem como imagens reticulonodulares difusas e bilaterais em ambos os hemitóraces. As tomografias reforçaram os infiltrados reticulonodulares com linfadenomegalias mediastinais com centro necrótico, além de linfadenomegalias mesentéricas com espessamento de íleo distal. O paciente piorou clinicamente, apresentando-se prostrado e com hipoxemia no 4º dia de internação. A contagem de linfócitos CD4 no início do tratamento era de 45 células/mm³ e a PPD (prova tuberculínica anérgica) era 0 mm.\nDiante do exposto, a conduta mais adequada é:",
+        "options": {
+          "A": "suspender a TARV até finalizar a investigação para infecções intestinais relacionadas ao HIV;",
+          "B": "proceder à biópsia de linfonodo por provável diagnóstico de linfoma;",
+          "C": "iniciar tratamento empírico para tuberculose e micobactérias atípicas e prescrever procinéticos e laxativos;",
+          "D": "realizar biópsia de linfonodo e coleta de escarro para análise de baciloscopia, teste rápido molecular para tuberculose e cultura para micobactéria; suspender a TARV e avaliar início de corticoide;",
+          "E": "manter a TARV e acrescentar corticoide até o final da investigação, devido a reação imune."
+        },
+        "answer": "E",
+        "area": "Clínica Médica",
+        "assunto": "Infectologia",
+        "topico": "Síndrome da Resposta Inflamatória da Reconstituição Imune (IRIS)",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-002",
+        "nucleo": "A ocorrência de piora clínica e inflamatória exuberante (febre, adenomegalias com fistulização, piora pulmonar) semanas após o início da TARV em paciente com imunodeficiência grave caracteriza a Síndrome da Reconstituição Imune (IRIS), cuja conduta envolve manter a TARV e tratar a infecção de base, associando corticoide em casos graves.",
+        "armadilha": "O examinador tenta induzir o candidato ao erro clássico de suspender a TARV por acreditar que o paciente está 'falhando' ou tendo uma reação adversa grave aos antirretrovirais ou à infecção oportunista descontrolada. Suspender a TARV na IRIS sem justificativa imperiosa aumenta a morbimortalidade.\n\nRaciocínio: o paciente iniciou TARV há 1 mês com CD4 muito baixo (45 céls/mm³) e apresenta quadro típico de tuberculose disseminada (linfonodos com necrose central, infiltrado reticulonodular, acometimento ileal) que sofreu um 'flare-up' inflamatório devido à recuperação da imunidade celular (IRIS paradoxal). Segundo os protocolos do Ministério da Saúde e PCDT para manejo do HIV, a TARV não deve ser suspensa (exceto em hepatotoxicidade grave ou risco iminente de vida não relacionado à IRIS), devendo-se manter o tratamento antirretroviral, tratar a infecção oportunista e introduzir corticoiterapia sistêmica para controle da resposta inflamatória exacerbada.",
+        "alternativas": "A) Errada. Suspender a TARV diante de uma provável IRIS é uma conduta inadequada que retarda a recuperação imunológica e piora o prognóstico global do paciente com HIV avançado.\nB) Errada. Embora linfoma possa cursar com sintomas B e adenomegalias, o quadro exibe forte evidência de infecção micobacteriana disseminada (tuberculose) com resposta inflamatória à reconstituição imune.\nC) Errada. O tratamento meramente empírico sem investigação diagnóstica invasiva ou microbiológica e o uso inadequado de laxativos ignoram a gravidade da inflamação sistêmica e a necessidade de bloqueio da resposta imune com corticoide.\nD) Errada. Suspender a TARV é o erro conceitual desta alternativa; embora a investigação diagnóstica e o uso de corticoide estejam corretos, a interrupção da TARV é desnecessária e deletéria.\nE) Correta. A conduta ideal diante da Síndrome da Reconstituição Imune (IRIS) grave é manter a TARV, investigar e tratar a infecção oportunista concomitante (tuberculose) e associar corticoide sistêmico para mitigar a resposta inflamatória exuberante.",
+        "fixacao": "Pacientes com CD4 muito baixo que iniciam TARV e desenvolvem piora inflamatória semanas depois apresentam Síndrome da Reconstituição Imune (IRIS). A regra de ouro é: mantenha a TARV, trate o patógeno oportunista e utilize corticoide se houver acometimento grave ou risco de compressão de estruturas. Nunca suspenda a TARV rotineiramente.\nPortanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-003",
+        "number": 3,
+        "stem": "Durante o atendimento ambulatorial, José, de 68 anos, queixou-se de dor toracolombar de intensidade moderada, constante, iniciada há 3 semanas. Foi associada a dormência nas duas pernas, havendo piora da dor quando ele ficava muito tempo em pé e melhora quando se sentava ou se deitava. O paciente já estava em tratamento para diabetes mellitus há 10 anos, com elevação recente da dose de metformina para 2 g/dia. Segundo ele, a glicemia estava bem controlada, mas o tabagismo e o alcoolismo persistiam (75 maços x ano e 40 g de álcool por dia). Na anamnese dirigida, revelou-se constipação de início recente, sem mudança do volume ou consistência das fezes. Não houve qualquer outra queixa ou sintoma relatado. No exame físico, notam-se dor à palpação da musculatura paravertebral bilateralmente, bem como dor em queimação agravada em flexão de quadril e coxa. Sinais de Lasègue e Kernig positivos bilateralmente. O restante do exame físico não mostrou alterações.\nConsiderando o quadro exposto, é correto afirmar que:",
+        "options": {
+          "A": "uma conduta mais agressiva deve ser adotada, com investigação de tumores devido à idade e ao tabagismo, apesar de se tratar de uma dor lombar aguda;",
+          "B": "a ressonância de coluna torácica e lombar é obrigatória devido à localização da dor, ao tempo de acometimento e aos sinais neurológicos;",
+          "C": "radiografia de tórax, VHS, proteína C-reativa e hemograma devem ser solicitados, mas pode ser necessário solicitar também uma ressonância nuclear magnética (RNM) de coluna torácica e lombar se as medidas comportamentais e analgesia não melhorarem;",
+          "D": "a dor lombar em pessoa acima de 50 anos deve ser sempre investigada, independentemente dos sintomas e sinais associados. O principal exame é a ressonância nuclear magnética (RNM) de coluna lombar com contraste venoso;",
+          "E": "os sinais de alarme ('red flags') associados a dor lombar subaguda ou crônica (respectivamente, 4 a 12 semanas e mais de 12 semanas) em indivíduos com mais de 50 anos são desnecessários para indicação de exame específico, pois todos esses pacientes devem ter exame de imagem."
+        },
+        "answer": "B",
+        "area": "Clínica Médica",
+        "assunto": "Reumatologia / Ortopedia",
+        "topico": "Lombalgia e Sinais de Alarme",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-003",
+        "nucleo": "A presença de dor lombar em idosos associada a sinais de alarme ('red flags'), como idade superior a 50 anos, dor constante não mecânica, déficit neurológico e história de tabagismo/tabagismo pesado, obriga a investigação com exames de imagem avançados (Ressonância Magnética).",
+        "armadilha": "O candidato pode cair na armadilha de classificar o caso como simples lombalgia mecânica inespecífica e prescrever apenas analgésicos e repouso com base no tempo de evolução de 3 semanas, ignorando os 'red flags' neurológicos e sistêmicos do paciente.\n\nRaciocínio: o paciente possui múltiplos fatores de risco e sinais de alerta: idade avançada (> 50 anos), tabagismo pesado (75 maços-ano), dor toracolombar constante (sugerindo origem visceral, neoplásica ou infecciosa/espondilodiscite) e achados neurológicos (dormência em membros inferiores, dor agravada em flexão, sinais de irritação radicular). Diante de 'red flags' consistentes, a conduta recomendada pelas diretrizes ortopédicas e reumatológicas exige a realização mandatória de exames de imagem estruturais detalhados, como a Ressonância Magnética de coluna, para afastar patologias graves como neoplasias, infecções ou compressão medular grave.",
+        "alternativas": "A) Errada. Classificar a dor como puramente 'aguda' e sugerir que a investigação de tumor é opcional desconsidera a presença de múltiplos sinais de alarme de gravidade.\nB) Correta. A combinação de localização toracolombar, idade > 50 anos, tabagismo, dor constante e sinais neurológicos configura indicações absolutas para a realização imediata de ressonância magnética de coluna torácica e lombar.\nC) Errada. Aguardar a falha de medidas comportamentais e analgesia em um paciente com sinais de alarme neurológicos e sistêmicos de alto risco para malignidade ou infecção é conduta inadequada e arriscada.\nD) Errada. Afirmar que toda dor lombar em maiores de 50 anos deve ter RNM com contraste venoso de rotina é generalização incorreta; a indicação baseia-se na presença conjugada de sintomas de alarme e achados clínicos suspeitos.\nE) Errada. Os sinais de alarme continuam sendo fundamentais para a tomada de decisão médica e não são 'desnecessários'; eles direcionam a investigação imediata em vez do manejo conservador cego.",
+        "fixacao": "Lombalgia em pacientes com mais de 50 anos, associada a dor constante, história de tabagismo, perda de peso ou déficits neurológicos ('red flags'), exige investigação por imagem avançada (Ressonância Magnética) de imediato. Não se deve tratar como lombalgia mecânica simples.\nPortanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-004",
+        "number": 4,
+        "stem": "Um rapaz de 18 anos foi atendido no ambulatório de clínica médica para acompanhamento de lúpus eritematoso sistêmico com nefrite e cardite. Estava em bom estado geral após 3 pulsoterapias com corticoide e ciclofosfamida, mas deveria fazer nova dose de corticoide sistêmico naquele mês. No entanto, apresentava lesões hiperemiadas com vesículas e algumas pústulas em dermátomos oftálmico e maxilar da hemiface direita. A impressão do médico foi de herpes-zóster.\nA conduta adequada para esse caso é:",
+        "options": {
+          "A": "prescrição de aciclovir oral 800 mg, 5 vezes ao dia, por 14 dias, e encaminhar o paciente para casa;",
+          "B": "profilaxia dos contactantes domiciliares e hospitalares com a vacina contra varicela-zóster, independentemente do estado de imunização, do estado imunológico e do tempo de exposição;",
+          "C": "internação hospitalar para isolamento respiratório e de contato, prescrição de aciclovir parenteral e acompanhamento de complicações pelo herpes-zóster disseminado;",
+          "D": "prescrição de aciclovir parenteral apenas se o rash e as vesículas tiverem iniciado há menos de 72 horas. Caso contrário, fazer apenas a profilaxia dos contactantes com vacina e do paciente com antibiótico devido à alta prevalência de infecção bacteriana secundária;",
+          "E": "internação hospitalar em quarto com pressão negativa e precauções de contato como máscara cirúrgica, capote, luva, gorro e óculos para toda a equipe assistencial. O aciclovir de 800 mg pode ser feito de forma oral, 5 vezes ao dia, por 7 a 10 dias ou até a alta hospitalar."
+        },
+        "answer": "C",
+        "area": "Clínica Médica",
+        "assunto": "Infectologia / Reumatologia",
+        "topico": "Herpes-Zóster em Imunossuprimidos",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-004",
+        "nucleo": "Pacientes imunossuprimidos graves (como portadores de lúpus em uso recente de pulsoterapia com ciclofosfamida e corticoides) que desenvolvem herpes-zóster com acometimento multidermatômico ou risco de disseminação necessitam de internação hospitalar, isolamento e tratamento com antiviral venoso (aciclovir parenteral).",
+        "armadilha": "O candidato pode se precipitar e marcar a alternativa de tratamento ambulatorial oral (como aciclovir 800 mg 5x/dia), que é o padrão para pacientes imunocompetentes com zóster localizado, ignorando que o paciente do caso é gravemente imunossuprimido e apresenta acometimento em múltiplos dermátomos na face (oftálmico e maxilar).\n\nRaciocínio: o paciente é jovem com lúpus grave submetido a pulsoterapia recente com imunossupressores (ciclofosfamida e altas doses de corticoide). A infecção por herpes-zóster acometendo os ramos oftálmico e maxilar do trigêmeo representa herpes-zóster oftálmico e comporta alto risco de disseminação sistêmica e complicações graves (como neurite óptica, encefalite ou disseminação cutânea generalizada). Segundo as diretrizes de infectologia para pacientes imunocomprometidos, o quadro exige internação hospitalar, instituição de precauções de contato e respiratórias, além de administração de aciclovir intravenoso.",
+        "alternativas": "A) Errada. O tratamento oral ambulatorial é inadequado para pacientes gravemente imunossuprimidos com herpes-zóster extenso ou com risco de disseminação e acometimento oftalmológico/facial complexo.\nB) Errada. A profilaxia universal de contactantes com vacina varicela-zóster independentemente do status imune não é recomendada desta forma ampla, além de ignorar a prioridade clínica do paciente acometido.\nC) Correta. Paciente gravemente imunossuprimido com zóster extenso/multidermatômico na face requer internação, isolamento para prevenir transmissão e formas disseminadas, e aciclovir parenteral.\nD) Errada. A restrição do aciclovir parenteral apenas a < 72 horas em imunossuprimidos está incorreta; nesta população, o antiviral IV é indicado mesmo após 72 horas se houver novas lesões ou risco de disseminação, e a profilaxia com antibióticos de rotina não se sustenta.\nE) Errada. Embora traga aspectos de precaução, o uso de aciclovir exclusivamente oral em paciente gravemente imunossuprimido com zóster facial extenso subestima o risco de disseminação visceral e neurológica, que requer via parenteral.",
+        "fixacao": "Imunossuprimidos graves (pós-pulsoterapia, quimioterapia, transplante) com herpes-zóster extenso ou acometimento de face/multidermatômico têm indicação de internação hospitalar e aciclovir parenteral (intravenoso) para prevenir formas disseminadas e complicações graves. O tratamento oral restringe-se a pacientes imunocompetentes com doença localizada.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-005",
+        "number": 5,
+        "stem": "Uma paciente de 49 anos foi internada na enfermaria de clínica médica por quadro de síndrome consumptiva, ascite e fraqueza em membros inferiores. A paciente conta que tudo começou 1 ano antes com dormência nas pernas ascendendo até o meio da perna e posterior redução de força em membros inferiores. Naquela época, houve turvação visual e cefaleia. Com aproximadamente 4 meses de sintomas, sem limitação para trabalhar e realizar as tarefas da vida diária, a cefaleia e a turvação visual ficaram mais proeminentes. Segundo a paciente, foram realizados diversos exames (ressonância de crânio, coluna cervical e lombar), sem evidência de alterações. A pressão do liquor estava alta, motivando o uso de acetazolamida por 8 meses (até a internação). No dia da internação, pôde-se observar hepatoesplenomegalia, ascite de grande volume, déficit sensitivo-motor distal em membros inferiores com hiporreflexia, fenômeno de Raynaud, cistos em tireoide (ultrassom confirmando e uso prévio de levotiroxina) e lesões cutâneas hipercrômicas. Outros exames demonstraram lesões osteoescleróticas em esterno, derrame pleural e pericárdico e padrão de polirradiculoneuropatia desmielinizante crônica.",
+        "options": {
+          "A": "dosagem de fator reumatoide, fator antinuclear, anti-Scl-70, anticentrômero e pulsoterapia por provável doença do tecido conjuntivo indiferenciada ou sobreposição de lúpus com esclerodermia em evolução grave;",
+          "B": "dosagem de eletroforese de proteínas séricas e urinárias com imunofixação em busca de pico monoclonal;",
+          "C": "biópsia de gordura abdominal em busca de proteína amiloide;",
+          "D": "biópsia de peritônio se o gradiente soro-ascite for menor que 1,1;",
+          "E": "punção aspirativa de cisto tireoidiano."
+        },
+        "answer": "B",
+        "area": "Clínica Médica",
+        "assunto": "Hematologia / Neurologia",
+        "topico": "Síndrome POEMS",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-005",
+        "nucleo": "A associação de polineuropatia desmielinizante, organomegalia, endocrinopatia, proteína monoclonal (gamopatia) e alterações cutâneas/lesões osteoescleróticas define a Síndrome POEMS, cuja investigação diagnóstica requer a pesquisa de componente monoclonal no soro e na urina.",
+        "armadilha": "O candidato pode ser seduzido a focar em doenças reumatológicas difusas (como esclerodermia ou lúpus) devido ao fenômeno de Raynaud, alterações cutâneas e serosite, solicitando autoanticorpos (anti-Scl-70, FAN), o que representa um erro de reconhecimento clínico da síndrome multissistêmica em questão.\n\nRaciocínio: o quadro clínico apresentado reúne os critérios clássicos da Síndrome POEMS (sigla em inglês para Polineuropatia, Organomegalia, Endocrinopatia, proteína Monoclonal e lesões de Pele/Skin, além de lesões ósseas osteoescleróticas, papiledema/hipertensão intracraniana idiopática e extravasamento capilar com ascite e derrames serosos). Para a confirmação diagnóstica desta discrasia plasmocitária multissistêmica, o exame laboratorial fundamental é a eletroforese de proteínas com imunofixação (soro e urina) para detecção da proteína monoclonal (geralmente cadeia leve lambda).",
+        "alternativas": "A) Errada. Solicitar exames para doenças do tecido conjuntivo ignora o conjunto característico de lesões osteoescleróticas, polineuropatia desmielinizante e organomegalia que compõem o acrônimo POEMS.\nB) Correta. A Síndrome POEMS é uma discrasia plasmocitária associada a pico monoclonal obrigatório (geralmente lambda), sendo a eletroforese de proteínas séricas/urinárias com imunofixação essencial para o diagnóstico.\nC) Errada. A biópsia de gordura abdominal busca amiloidose sistêmica (AL), que pode cursar com neuropatia, mas não explica o quadro completo com lesões osteoescleróticas e perfil POEMS.\nD) Errada. A análise do gradiente de albumina soro-ascite (GASA) é útil em hepatopatias, mas desvia o foco da investigação da etiologia hematológica de base da paciente.\nE) Errada. A punção de cisto tireoidiano avalia nódulos tireoidianos isolados e não aborda a endocrinopatia global e a polineuropatia da paciente.",
+        "fixacao": "Polineuropatia crônica desmielinizante associada a lesões ósseas osteoescleróticas, organomegalia, endocrinopatia e alterações cutâneas define a Síndrome POEMS. O diagnóstico exige a demonstração de componente monoclonal (gamopatia monoclonal). Pense em POEMS diante de neuropatia + lesão óssea esclerótica.\nPortanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-006",
+        "number": 6,
+        "stem": "Uma mulher de 20 anos se queixa de edema generalizado iniciado há 3 semanas, que evoluiu com piora progressiva. Relata hiporexia e astenia nesse período. Desconhece ser portadora de doenças atuais ou prévias e não faz uso de quaisquer medicamentos ou drogas. Ao exame físico, PA: 160 x 90 mmHg, FC: 97 bpm, FR: 22 ipm, SpO2 98% (em ar ambiente). As mucosas estão hipocoradas, ictéricas e hidratadas. Há edema na face, pálpebras, parede abdominal e membros inferiores. Há também ascite e síndrome de derrame pleural.\nExames de laboratório: sangue: Hb: 7,0 g/dL; Hct: 24%; VCM: 98 fL; HCM: 31 pg; CHCM: 32 g/dL; RDW: 18,3%; leucócitos: 3.400/mm³; neutrófilos segmentados: 1.500/mm³; linfócitos: 700/mm³; Plq.: 201.000/mm³; PCR: 28m g/dL; FAN reagente: 1:320 padrão nuclear homogêneo; anti-DNA reagente; anti-SSA reagente; anti-SSB reagente; anti-Sm reagente; ANCA não reagente; C3: 43 mg/dL (90-170 mg/dL); C4: 10 mg/dL (VR: 12-36 mg/dL); exame de urina: densidade 1.020; pH 6,0; nitrito negativo; proteínas ++++; hemoglobina ++; 4 piócitos/campo, 145 hemácias/campo; presença de cilindros hemáticos. Para investigação da anemia apresentada pela paciente, são solicitados os seguintes exames:\nLDL: 1150 UI/L (VR: 120-246 UI/L); BT: 4,2 mg/dL; BD: 0,4 mg/dL; reticulócitos: 18%, Coombs direto positivo; ferro sérico: 52 mcg/dL (VR: 65-175 mcg/dL); ferritina 650 ng/mL (VR: 10-291 ng/mL); capacidade total de ligação do ferro: 200 mcg/dL (250-425 mcg/dL).\nA conduta imediata mais adequada para o tratamento da anemia é:",
+        "options": {
+          "A": "administração de eritropoetina;",
+          "B": "administração de corticoide;",
+          "C": "reposição de ferro parenteral;",
+          "D": "hemotransfusão;",
+          "E": "prescrição de hidroxicloroquina oral."
+        },
+        "answer": "B",
+        "area": "Clínica Médica",
+        "assunto": "Reumatologia / Hematologia",
+        "topico": "Lúpus Eritematoso Sistêmico (LES) e Anemia Hemolítica Autoimune (AHAI) / Síndrome de Evans",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-006",
+        "nucleo": "A anemia hemolítica autoimune com Coombs direto positivo associada à exacerbação grave de Lúpus Eritematoso Sistêmico (nefrite lúpica e consumo de complemento) responde primariamente ao tratamento imunossupressor sistêmico com glicocorticoides em altas doses.",
+        "armadilha": "O candidato pode ser induzido a diagnosticar uma anemia ferropriva ou anemia de doença crônica devido aos níveis de ferro e ferritina, prescrevendo ferro parenteral, ou focar apenas na alteração renal, esquecendo que a hemólise autoimune ativa (Coombs direto positivo, reticulocitose de 18% e LDH muito elevada) requer tratamento da doença autoimune de base com corticoide.\n\nRaciocínio: a paciente apresenta quadro florido de Lúpus Eritematoso Sistêmico (LES) novo, com nefrite lúpica ativa (proteinuração nefrótica, hematúria, cilindros hemáticos, consumo de C3/C4 e FAN/anti-DNA positivos) e anemia hemolítica autoimune Coombs direto positivo (evidenciada por Hb 7,0 g/dL, reticulócitos 18%, LDH de 1150 UI/L, bilirrubina indireta aumentada). Como se trata de uma manifestação autoimune grave mediada por anticorpos contra hemácias no contexto de atividade lúpica multissistémica, o tratamento imediato de escolha para controlar a hemólise e a nefrite é a administração de corticoide em dose imunossupressora (corticoterapia sistêmica).",
+        "alternativas": "A) Errada. A eritropoetina é indicada para anemia da doença renal crônica por deficiência de eritropoetina, e não para anemia hemolítica autoimune aguda decorrente de atividade autoimune lúpica.\nB) Correta. O tratamento da anemia hemolítica autoimune (AHAI) associada ao LES ativo baseia-se no uso de corticoide em altas doses para suprimir a destruição imune das hemácias e tratar a nefrite lúpica concomitante.\nC) Errada. A reposição de ferro é ineficaz e incorreta, pois a anemia não decorre de deficiência de ferro, mas sim de hemólise autoimune com sequestro reticuloendotelial (ferritina elevada por ser reagente de fase aguda e ferro de depósito).\nD) Errada. A transfusão sanguínea em AHAI com Coombs positivo acarreta riscos imunológicos adicionais de incompatibilidade e só deve ser reservada para casos de extrema urgência com instabilidade hemodinâmica grave.\nE) Errada. Embora a hidroxicloroquina seja base do tratamento do LES de manutenção, no quadro agudo grave com nefrite e AHAI grave, ela é insuficiente como terapia isolada de resgate, sendo imprescindível o uso de corticoide.",
+        "fixacao": "Anemia hemolítica autoimune (Coombs direto positivo, reticulocitose, LDH alta, BI alta) no contexto de Lúpus Eritematoso Sistêmico (LES) ativo é tratada primordialmente com corticoide sistêmico em doses imunossupressoras para cessar a destruição periférica dos eritrócitos. Distratores incluem ferro e eritropoetina.\nPortanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-007",
+        "number": 7,
+        "stem": "A pneumonia em organização criptogênica (POC) tem sua forma idiopática de pneumonia em organização, anteriormente chamada de bronquiolite obliterante com pneumonia em organização (BOOP). É uma doença pulmonar intersticial difusa decorrente de lesão na parede alveolar tipicamente caracterizada por infiltrados pulmonares periféricos e difusos com áreas de preenchimento alveolar e responsividade a terapia sistêmica com glicocorticoides. A manifestação clínica é de uma pneumonia subaguda ou de difícil resolução, com tosse pouco produtiva, dispneia, febre baixa e fraqueza ou cansaço. No entanto, há diversas condições autoimunes, pneumonias de hipersensibilidade e efeitos colaterais que devem ser excluídos para que a POC seja dada como idiopática.\nEm uma análise mais profunda sobre a POC, o quadro descrito acima pode indicar pneumonia em organização caso se verifique(m):",
+        "options": {
+          "A": "paciente com tosse, febre e dispneia há 3 semanas e imagem apical fibrótica e cavitação adjacente;",
+          "B": "aspecto tomográfico reticulonodular difuso em paciente com dispneia importante iniciada há 1 semana;",
+          "C": "aspecto radiográfico de consolidação lobar em paciente com febre alta de início recente;",
+          "D": "aspecto tomográfico de consolidação irregular do espaço aéreo, opacidades em vidro fosco e pequenas opacidades nodulares em paciente usuário de cocaína;",
+          "E": "aspecto tomográfico com opacidades evanescentes, bronquiectasias e achados relacionados a impactação mucoide e obstrução brônquica em paciente com eosinofilia e broncoespasmo."
+        },
+        "answer": "D",
+        "area": "Clínica Médica",
+        "assunto": "Pneumologia",
+        "topico": "Pneumonia em Organização Criptogênica (POC / BOOP)",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-007",
+        "nucleo": "A Pneumonia em Organização Criptogênica (POC) caracteriza-se por sintomas subagudos (se semanas) e achados tomográficos típicos de consolidações alveolares periféricas ou peribroncovasculares, opacidades em vidro fosco e pequenos nódulos, podendo estar associada a exposições a drogas, toxinas ou pneumonite por inalação (como cocaína).",
+        "armadilha": "O candidato pode confundir o padrão radiológico da POC (consolidações migratórias, vidro fosco e nódulos) com infecções bacterianas lobares comuns ou com fibroses pulmonares avançadas com padrão apical e cavitação (típicas de tuberculose ou fibrose pulmonar idiopática usual), errando na identificação do padrão intersticial.\n\nRaciocínio: a Pneumonia em Organização (PO) manifesta-se tipicamente com tosse subaguda, dispneia e febre baixa de semanas de evolução. Na tomografia computadorizada de alta resolução (TCAR), os achados clássicos incluem consolidações do espaço aéreo (frequentemente periféricas e subpleurais ou peribroncovasculares), opacidades em vidro fosco, bandas parenquimatosas e pequenos nódulos centrolobulares. A inalação de drogas ilícitas como a cocaína é uma causa conhecida de pneumonia em organização secundária. As demais alternativas descrevem quadros como tuberculose/fibrose avançada (A), quadro puramente agudo viral/vascular (B), pneumonia lobar bacteriana clássica (C) ou aspergilose broncopulmonar alérgica/asma com eosinofilia (E).",
+        "alternativas": "A) Errada. Achados apicais fibróticos com cavitação sugerem infecções crônicas (como tuberculose) ou fibrose pulmonar avançada, e não o padrão inflamatório alveolar da pneumonia em organização.\nB) Errada. Um quadro de instalação hiperaguda em 1 semana com padrão reticulonodular difuso é mais sugestivo de edema pulmonar, infecção viral difusa ou síndrome do desconforto respiratório do que a POC subaguda.\nC) Errada. Consolidação lobar com febre alta de início recente descreve perfeitamente uma pneumonia bacteriana comunitária típica (ex: pneumococo), e não a POC.\nD) Correta. A tomografia demonstrando consolidação irregular do espaço aéreo, opacidades em vidro fosco e pequenos nódulos em paciente exposto a drogas (como cocaína) alinha-se aos critérios secundários de pneumonia em organização.\nE) Errada. Opacidades evanescentes com bronquiectasias e impactação mucoide em paciente com eosinofilia e broncoespasmo definem aspergilose broncopulmonar alérgica (ABPA) ou pneumonia eosinofílica crônica, e não a POC.",
+        "fixacao": "A Pneumonia em Organização (PO) apresenta-se com sintomas subagudos (semanas) e imagem tomográfica clássica com consolidações alveolares periféricas/peribroncovasculares, vidro fosco e pequenos nódulos. Pode ser idiopática (POC) ou secundária a drogas (ex: cocaína), infecções e colagenoses.\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-008",
+        "number": 8,
+        "stem": "Um homem de 31 anos, previamente saudável, apresenta-se com uma história de 2 anos de disfagia intermitente, principalmente para alimentos sólidos. Relatou 2 episódios de impactação alimentar, com necessidade de endoscopia digestiva alta de urgência. Estava em uso de esomeprazol (40 mg ao dia) há 6 meses, sem melhora significativa dos sintomas de disfagia. Realizou recentemente nova endoscopia, em que a biópsia foi compatível com esofagite eosinofílica, sem estenose esofágica. Foi orientado a restringir alimentos que pudessem estar associados com essa forma de esofagite. Contudo, não houve resposta satisfatória.\nNesse caso, a estratégia de intervenção mais adequada é:",
+        "options": {
+          "A": "associar sucralfato antes das refeições e à noite, antes de deitar;",
+          "B": "trocar esomeprazol por outro bloqueador da bomba de prótons;",
+          "C": "encaminhar para tratamento com terapia biológica específica;",
+          "D": "associar um procinético (como domperidona) antes das refeições;",
+          "E": "associar um esteroide tópico (como fluticasona ou budesonida) por via oral."
+        },
+        "answer": "E",
+        "area": "Clínica Médica",
+        "assunto": "Gastroenterologia",
+        "topico": "Esofagite Eosinofílica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-008",
+        "nucleo": "O tratamento de primeira linha para esofagite eosinofílica refratária a inibidores da bomba de prótons e restrições dietéticas baseia-se no uso de corticoide tópico deglutido (como fluticasona ou budesonida oral).",
+        "armadilha": "O candidato pode pensar em apenas trocar o inibidor da bomba de prótons (IBP) por outro da mesma classe ou considerar que a falha do IBP exige cirurgia ou terapia biológica de cara, ignorando a diretriz terapêutica padrão para escalonamento na esofagite eosinofílica.\n\nRaciocínio: o paciente tem diagnóstico confirmado de esofagite eosinofílica por biópsia, mas manteve sintomas e falhou ao tratamento inicial com IBP em dose plena (esomeprazol 40 mg/dia) e restrição alimentar. Segundo as diretrizes internacionais e nacionais de gastroenterologia para manejo da esofagite eosinofílica, a próxima etapa terapêutica após a falha dos IBPs e dieta é a introdução de corticosteroides tópicos deglutidos (como budesonida viscosa oral ou fluticasona inalatória usada de forma deglutida), que promovem remissão histológica e sintomática da inflamação eosinofílica esofágica.",
+        "alternativas": "A) Errada. O sucralfato atua como protetor de mucosa na doença do refluxo e úlceras, não tendo papel no tratamento da inflamação imunomediada da esofagite eosinofílica.\nB) Errada. Como o paciente já fez uso de IBP em dose adequada por 6 meses sem resposta clínica, a simples troca por outro IBP não constitui a conduta de escalonamento recomendada.\nC) Errada. Terapias biológicas (como anticorpos monoclonais anti-IL4/IL13, ex: dupilumabe) são reservadas para casos refratários graves após falha de corticoide tópico ou dilatadores, não sendo a primeira escolha imediata após IBP.\nD) Errada. Procinéticos melhoram o esvaziamento gástrico e o tônus do esfíncter esofagiano inferior na DRGE, mas não tratam a infiltração eosinofílica alérgico-imune da esofagite eosinofílica.\nE) Correta. Diante da falha com inibidores da bomba de prótons e restrição dietética, a diretriz indica a associação de corticoides tópicos deglutidos (fluticasona ou budesonida oral) para induzir remissão.",
+        "fixacao": "Esofagite eosinofílica sintomática com falha ao IBP e dieta requer escalonamento terapêutico com corticoides tópicos deglutidos (budesonida ou fluticasona). Biológicos ficam para casos estritamente refratários. A via de administração do corticoide deve ser tópica/deglutida para atingir a mucosa esofágica.\nPortanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-009",
+        "number": 9,
+        "stem": "Uma mulher de 42 anos, com história de “reumatismo” na infância, procura ambulatório com um quadro de cansaço aos esforços. Tem história de “isquemia cerebral” há 2 anos, sem sequelas motoras. Ao exame físico, a pressão arterial é de 110 x 68 mmHg e a frequência cardíaca é de 60 batimentos por minuto. Apresenta ritmo cardíaco regular, bulhas normofonéticas e B1 acentuada. Na ausculta cardíaca, há um sopro diastólico em foco mitral. Nos exames laboratoriais, há um clearance de creatinina estimado em 46 mL/min/1,73 m². No ecocardiograma, foram observados estenose mitral moderada e episódios de fibrilação atrial no Holter de 24 horas.\nEm relação à prevenção de embolização sistêmica, está mais indicado o uso de:",
+        "options": {
+          "A": "rivaroxabana de 15 mg, uma vez ao dia;",
+          "B": "aspirina na dosagem de 200 mg ao dia;",
+          "C": "apixabana de 2,5 mg, duas vezes ao dia;",
+          "D": "varfarina, com a dose de acordo com o INR;",
+          "E": "metoprolol para manutenção do ritmo sinusal."
+        },
+        "answer": "D",
+        "area": "Clínica Médica",
+        "assunto": "Cardiologia",
+        "topico": "Valvopatias / Fibrilação Atrial Reumática",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-009",
+        "nucleo": "A presença de estenose mitral reumática moderada a grave associada a fibrilação atrial constitui indicação absoluta de anticoagulação plena com antagonista da vitamina K (varfarina), sendo os anticoagulantes orais diretos (DOACs) contraindicados.",
+        "armadilha": "O candidato pode tentar utilizar os anticoagulantes orais diretos (DOACs, como rivaroxabana ou apixabana), que são amplamente indicados para prevenção de AVC na fibrilação atrial não valvular, cometendo um erro grave, pois a estenose mitral reumática moderada/grave ('valvular') exclui o uso de DOACs.\n\nRaciocínio: a paciente apresenta história de febre reumática na infância ('reumatismo'), estenose mitral moderada confirmada ao ecocardiograma, fibrilação atrial documentada em Holter e antecedente de evento embólico cerebral ('isquemia cerebral'). Na vigência de estenose mitral reumática moderada a grave ou prótese mecânica valvular, a fibrilação atrial é classificada como 'valvular'. As diretrizes internacionais e da SBC determinam que apenas os antagonistas da vitamina K (varfarina) são seguros e eficazes para profilaxia tromboembólica nesta população, mantendo o INR na faixa terapêutica (geralmente 2,0 a 3,0).",
+        "alternativas": "A) Errada. A rivaroxabana (assim como outros DOACs) é contraindicada para prevenção de tromboembolismo em pacientes com estenose mitral reumática moderada a grave.\nB) Errada. Antiagregantes plaquetários como a aspirina são ineficazes na prevenção de cardioembolismo em pacientes com fibrilação atrial e valvopatia reumática de alto risco.\nC) Errada. Os DOACs (como apixabana) não devem ser utilizados na presença de estenose mitral reumática, pois os ensaios clínicos pivotais excluíram essa população devido ao risco elevado de falha terapêutica e eventos embólicos.\nD) Correta. A varfarina monitorada pelo INR é o único anticoagulante oral indicado e aprovado para a prevenção de embolização sistêmica em pacientes com fibrilação atrial associada à estenose mitral reumática.\nE) Errada. O uso de metoprolol controla a frequência cardíaca, mas não substitui a anticoagulação sistêmica obrigatória para a prevenção do tromboembolismo cerebral em vigência de fibrilação atrial com estenose mitral.",
+        "fixacao": "Fibrilação atrial associada a estenose mitral reumática ou prótese valvular mecânica configura FA 'valvular'. O único anticoagulante oral aceito é a varfarina (com controle de INR). Os DOACs (rivaroxabana, apixabana, dabigatrana, edoxabana) são estritamente contraindicados nessa situação.\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-010",
+        "number": 10,
+        "stem": "Uma paciente de 47 anos, que vinha em uso de medicações para controle de transtorno bipolar, é levada para atendimento com alteração do nível de consciência, confusão mental, sudorese e desorientação. Ao exame, foi observada rigidez muscular generalizada, especialmente em membros superiores e inferiores. Apresentou pressão arterial de 172 por 104 mmHg, frequência cardíaca de 109 batimentos por minuto, frequência respiratória de 24 incursões respiratórias por minuto e temperatura axilar de 39,2 °C. O exame laboratorial revelou aumento significativo de creatinofosfoquinase sérica, sem alterações nas transaminases. Como a equipe médica suspeitou de síndrome neuroléptica maligna, suspendeu as medicações em uso e iniciou terapia de suporte clínico.\nFazem parte do arsenal terapêutico da síndrome neuroléptica maligna as seguintes medicações:",
+        "options": {
+          "A": "haloperidol e fenitoína;",
+          "B": "quetiapina e olanzapina;",
+          "C": "dantrolene e bromocriptina;",
+          "D": "risperidona e carbamazepina;",
+          "E": "oxcarbazepina e prometazina."
+        },
+        "answer": "C",
+        "area": "Clínica Médica",
+        "assunto": "Neurologia / Toxicologia / Psiquiatria",
+        "topico": "Síndrome Neuroléptica Maligna (SNM)",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-010",
+        "nucleo": "O tratamento específico da Síndrome Neuroléptica Maligna (SNM), além da suspensão do agente causal e suporte clínico rigoroso, inclui o uso de relaxantes musculares de ação direta como o dantrolene e agonistas dopaminérgicos como a bromocriptina.",
+        "armadilha": "O candidato pode se confundir e escolher alternativas que contenham antipsicóticos (como haloperidol, quetiapina, olanzapina ou risperidona), que são exatamente os agentes causadores da Síndrome Neuroléptica Maligna, perpetuando o quadro clínico grave.\n\nRaciocínio: a paciente apresenta quadro clássico de Síndrome Neuroléptica Maligna (SNM): hipertermia grave, rigidez muscular extrema ('em tubo de chumbo'), disautonomia (hipertensão, taquicardia, taquipneia), alteração do estado mental e elevação acentuada de CPK, desencadeada pelo uso de bloqueadores dopaminérgicos para transtorno bipolar. O manejo imediato exige suspensão do antipsicótico, suporte clínico intensivo e, nos casos moderados a graves, farmacoterapia específica com relaxante muscular (dantrolene) e agonista dopaminérgico central (bromocriptina).",
+        "alternativas": "A) Errada. O haloperidol é um antipsicótico clássico indutor de SNM, e a fenitoína é um anticonvulsivante que não faz parte do tratamento específico da síndrome.\nB) Errada. Quetiapina e olanzapina são antipsicóticos atípicos que também podem precipitar ou agravar a SNM, sendo contraindicados.\nC) Correta. O dantrolene (relaxante muscular que inibe a liberação de cálcio no retículo sarcoplasmático) e a bromocriptina (agonista dopaminérgico que repõe o bloqueio central) compõem o arsenal farmacológico específico da SNM.\nD) Errada. Risperidona é antipsicótico e carbamazepina é anticonvulsivante/estabilizador de humor, não constituindo o tratamento específico da SNM.\nE) Errada. Oxcarbazepina é anticonvulsivante e prometazina é anti-histamínico/anticolinérgico, sem indicação como terapia específica de primeira linha para a SNM.\n",
+        "fixacao": "Síndrome Neuroléptica Maligna caracteriza-se por hipertermia, rigidez muscular, instabilidade autonômica e alteração mental induzidas por bloqueadores dopaminérgicos. Tratamento: suspender a droga, suporte clínico, dantrolene e bromocriptina. Nunca reinstituir antipsicóticos precipitantes.\nPortanto, o gabarito é a alternativa C."
+      }
+    }
+  ]
+}

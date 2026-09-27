@@ -1,0 +1,12 @@
+{
+  "data": "2026-09-27T16:35:49.105Z",
+  "autor": "gemini",
+  "revisor": "validador",
+  "lote": "extracted-enare-2024-q1.json",
+  "examId": "enare-2024",
+  "itens": 10,
+  "reprovados": 10,
+  "porCategoria": {
+    "taxonomia": 10
+  }
+}
