@@ -1,0 +1,12 @@
+{
+  "antigravity.agent.mode": "autonomous",
+  "antigravity.terminal.autoExecution": "always-proceed",
+  "antigravity.terminal.sandbox": "bypass",
+  "antigravity.permissions.commands": {
+    "npm": "allow",
+    "node": "allow",
+    "npx": "allow",
+    "git": "allow"
+  },
+  "antigravity.permissions.network": "allow"
+}

@@ -19,6 +19,7 @@
  */
 
 import { createRequire } from 'node:module';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -35,17 +36,13 @@ const require = createRequire(path.join(ROOT, 'noop.cjs'));
 
 globalThis.window = globalThis.window || {};
 
-const PRINCIPAL_FILES = [
-    'questions-clinica-medica.js',
-    'questions-cirurgia.js',
-    'questions-pediatria.js',
-    'questions-ginecologia.js',
-    'questions-obstetricia.js',
-    'questions-preventiva.js',
-    'questions-psiquiatria.js',
-    'questions-revalida.js',
-    'questions-uepa.js'
-];
+// Descobre os arquivos em vez de listar na mão: o motor de ingestão cria
+// um questions-<banca>.js novo a cada banca, e uma lista fixa aqui deixava
+// essas provas fora do Postgres sem erro nenhum. O Internato fica de fora
+// porque é um banco separado, carregado mais abaixo.
+const PRINCIPAL_FILES = fs.readdirSync(ROOT)
+    .filter(f => /^questions-.*\.js$/.test(f) && f !== 'questions-internato.js')
+    .sort();
 
 function loadStaticFile(relPath) {
     require(path.join(ROOT, relPath));
@@ -119,10 +116,31 @@ async function run() {
     const dryRun = process.argv.includes('--dry-run') || process.argv.includes('--verify');
     const verify = process.argv.includes('--verify');
 
-    const { questions, optionsByQuestionId, explanations } = buildImportPlan();
-    const totalOptions = [...optionsByQuestionId.values()].reduce((n, opts) => n + opts.length, 0);
+    const idsArgIndex = process.argv.indexOf('--ids');
+    const examArgIndex = process.argv.indexOf('--exam');
+    const targetIds = idsArgIndex !== -1 && process.argv[idsArgIndex + 1]
+        ? new Set(process.argv[idsArgIndex + 1].split(',').map(s => s.trim()))
+        : null;
+    const targetExam = examArgIndex !== -1 && process.argv[examArgIndex + 1]
+        ? process.argv[examArgIndex + 1].trim()
+        : null;
 
-    console.log(`Questões: ${questions.length} (${principalBank.length} principal + ${internatoBank.length} internato)`);
+    let { questions, optionsByQuestionId, explanations } = buildImportPlan();
+
+    if (targetIds) {
+        questions = questions.filter(q => targetIds.has(q.id));
+        explanations = explanations.filter(ex => targetIds.has(ex.questionId));
+        console.log(`[Incremental] Filtrado por ${targetIds.size} ID(s) específico(s).`);
+    } else if (targetExam) {
+        questions = questions.filter(q => q.examId === targetExam);
+        const questionIdSet = new Set(questions.map(q => q.id));
+        explanations = explanations.filter(ex => questionIdSet.has(ex.questionId));
+        console.log(`[Incremental] Filtrado pelo exame "${targetExam}".`);
+    }
+
+    const totalOptions = questions.reduce((n, q) => n + (optionsByQuestionId.get(q.id)?.length || 0), 0);
+
+    console.log(`Questões a importar: ${questions.length}`);
     console.log(`Alternativas: ${totalOptions}`);
     console.log(`Explicações: ${explanations.length}`);
 
@@ -200,14 +218,15 @@ async function run() {
     }
     console.log();
 
-    for (let i = 0; i < explanations.length; i += CHUNK) {
-        const chunk = explanations.slice(i, i + CHUNK);
+    const safeExplanations = explanations.filter(ex => validIds.has(ex.questionId));
+    for (let i = 0; i < safeExplanations.length; i += CHUNK) {
+        const chunk = safeExplanations.slice(i, i + CHUNK);
         await runChunk(p => chunk.map(ex => p.questionExplanation.upsert({
             where: { questionId: ex.questionId },
             create: ex,
             update: { body: ex.body }
         })), 'explicações');
-        process.stdout.write(`\r  explicações: ${Math.min(i + CHUNK, explanations.length)}/${explanations.length}`);
+        process.stdout.write(`\r  explicações: ${Math.min(i + CHUNK, safeExplanations.length)}/${safeExplanations.length}`);
     }
     console.log('\nImportação concluída.');
 
@@ -222,18 +241,23 @@ async function run() {
     // especialidade (o merge preserva o ID mais estabelecido), então
     // nenhum progresso de usuário referenciando o ID sobrevivente é
     // perdido.
-    const idsNoBanco = (await prisma.question.findMany({ select: { id: true } })).map(r => r.id);
-    const orfaos = idsNoBanco.filter(id => !validIds.has(id));
-    if (orfaos.length) {
-        console.log(`\nRemovendo ${orfaos.length} questões órfãs (não existem mais nos arquivos estáticos)...`);
-        for (let i = 0; i < orfaos.length; i += CHUNK) {
-            const chunk = orfaos.slice(i, i + CHUNK);
-            await prisma.question.deleteMany({ where: { id: { in: chunk } } });
-            process.stdout.write(`\r  removidas: ${Math.min(i + CHUNK, orfaos.length)}/${orfaos.length}`);
+    // Remoção de órfãs apenas quando for sincronismo global total (sem filtros)
+    if (!targetIds && !targetExam) {
+        const idsNoBanco = (await prisma.question.findMany({ select: { id: true } })).map(r => r.id);
+        const orfaos = idsNoBanco.filter(id => !validIds.has(id));
+        if (orfaos.length) {
+            console.log(`\nRemovendo ${orfaos.length} questões órfãs (não existem mais nos arquivos estáticos)...`);
+            for (let i = 0; i < orfaos.length; i += CHUNK) {
+                const chunk = orfaos.slice(i, i + CHUNK);
+                await prisma.question.deleteMany({ where: { id: { in: chunk } } });
+                process.stdout.write(`\r  removidas: ${Math.min(i + CHUNK, orfaos.length)}/${orfaos.length}`);
+            }
+            console.log();
+        } else {
+            console.log('\nNenhuma questão órfã encontrada.');
         }
-        console.log();
     } else {
-        console.log('\nNenhuma questão órfã encontrada.');
+        console.log('\n[Incremental] Sincronismo rápido finalizado (limpeza de órfãs ignorada).');
     }
 
     await prisma.$disconnect();
