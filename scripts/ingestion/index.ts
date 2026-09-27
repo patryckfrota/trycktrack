@@ -26,6 +26,7 @@ async function runPipeline() {
     let startQuestion = 1;
     let genericUrl = '';
     let genericPrefix = '';
+    let maxAttempts = 5;
 
     args.forEach((arg, index) => {
       if (arg === '--year' && args[index + 1]) {
@@ -45,6 +46,9 @@ async function runPipeline() {
       }
       if (arg === '--prefix' && args[index + 1]) {
         genericPrefix = args[index + 1];
+      }
+      if (arg === '--max-attempts' && args[index + 1]) {
+        maxAttempts = parseInt(args[index + 1], 10);
       }
     });
 
@@ -91,7 +95,7 @@ async function runPipeline() {
       {
         startQuestion: startQuestion,
         limitQuestions: limitQuestions,
-        maxAttempts: 3
+        maxAttempts: maxAttempts
       }
     );
 
