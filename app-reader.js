@@ -23,6 +23,300 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_gastroenterologia": {
+  "area": "Gastroenterologia",
+  "title": "Gastroenterologia - Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Esôfago e Estômago",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Doença do Refluxo Gastroesofágico e Motilidade",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Fisiologia</td><td><ul class=\"reader-list\"><li>Refluxo fisiológico ocorre principalmente em posição ereta (acordado)</li></ul></td></tr><tr><td>Tratamento Cirúrgico (Fundoplicatura)</td><td><ul class=\"reader-list\"><li>Indicações: refratariedade ao IBP, complicações (estenose, esôfago de Barrett grave), intolerância ao IBP</li><li>Exames pré-operatórios obrigatórios: EDA, pHmetria de 24h e Manometria Esofágica</li><li>Fundoplicatura parcial (Toupet) é indicada em distúrbios de motilidade do corpo esofágico (ex: esclerodermia) associados para evitar disfagia pós-operatória</li><li>Fundoplicatura total (Nissen) é a escolha padrão na ausência de hipomotilidade</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2",
+          "title": "H. Pylori e Úlcera Péptica",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Erradicação do H. Pylori</td><td><ul class=\"reader-list\"><li>Controle de cura obrigatório: indicado teste respiratório da ureia (ou antígeno fecal) após no mínimo 4 semanas do fim do tratamento antimicrobiano</li><li>Sorologia IgG não é recomendada para controle de cura, pois não diferencia infecção ativa de cicatriz sorológica (permanece positiva)</li></ul></td></tr><tr><td>Úlcera Duodenal Sangrante</td><td><ul class=\"reader-list\"><li>Úlcera em parede posterior da segunda porção do duodeno sangra caracteristicamente por erosão da artéria gastroduodenal</li><li>Tratamento endoscópico duplo (ex: injeção de adrenalina + clipe/termocoagulação) é a conduta inicial</li><li>Em caso de falha endoscópica com sangramento ativo: indicada arteriografia com embolização ou tratamento cirúrgico</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Hemorragia Digestiva",
+      "subchapters": [
+        {
+          "num": "3",
+          "title": "HDA e Varizes",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo</th><th>Características e Conduta</th></tr></thead><tbody><tr><td>HDA Varicosa</td><td><ul class=\"reader-list\"><li>Cenário: paciente cirrótico, estigmas de hepatopatia (ascite, icterícia, flapping), apresentando hematêmese e choque</li><li>Ressuscitação: estabilização hemodinâmica inicial (cristaloides e hemotransfusão se Hb < 7, ou < 9 se cardiopata); droga vasoativa (Terlipressina, Octreotide) antes mesmo da endoscopia</li><li>Intervenção: EDA precoce (nas primeiras 12h) para ligadura elástica</li><li>Profilaxia de PBE é mandatória (ex: Ceftriaxone ou Norfloxacino) em cirróticos com HDA</li></ul></td></tr><tr><td>HDB e Obscura</td><td><ul class=\"reader-list\"><li>Hemorragia Digestiva Obscura: sangramento evidente (macroscópico ou oculto) com EDA e colonoscopia normais; a fonte mais comum é o intestino delgado (angiodisplasias, tumores)</li><li>HDB Volumosa: estabilização hemodinâmica em primeiro lugar. Após estável, realiza-se colonoscopia. Se sangramento maciço e instabilidade hemodinâmica refratária, a conduta é arteriografia ou angiotomografia</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Intestinos",
+      "subchapters": [
+        {
+          "num": "4",
+          "title": "Síndromes Disabsortivas",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Detalhes</th></tr></thead><tbody><tr><td>Doença Celíaca</td><td><ul class=\"reader-list\"><li>Quadro clínico: diarreia crônica, esteatorreia, perda de peso, anemia ferropriva refratária</li><li>Marcador sorológico de escolha: Anticorpo Antitransglutaminase tecidual (Anti-tTG) IgA associado à dosagem de IgA total (para excluir deficiência seletiva de IgA)</li><li>Biópsia duodenal (padrão-ouro): atrofia de vilosidades, hiperplasia de criptas e infiltrado linfocítico intraepitelial</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "5",
+          "title": "Doença Diverticular e DII",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Características</th></tr></thead><tbody><tr><td>Diverticulite Aguda</td><td><ul class=\"reader-list\"><li>Dor em fossa ilíaca esquerda, febre, defesa localizada</li><li>Classificação de Hinchey III (peritonite purulenta) e Hinchey IV (peritonite fecal) exigem tratamento cirúrgico de urgência (frequentemente Cirurgia a Hartmann)</li></ul></td></tr><tr><td>Retocolite Ulcerativa (RCU)</td><td><ul class=\"reader-list\"><li>Acometimento de mucosa e submucosa, contínuo, iniciando no reto e estendendo-se proximalmente</li><li>Apresentação clássica: diarreia mucosanguinolenta (disenteria)</li><li>Associação com Colangite Esclerosante Primária e marcador p-ANCA positivo</li></ul></td></tr><tr><td>Doença de Crohn</td><td><ul class=\"reader-list\"><li>Acometimento transmural e saltatório de qualquer segmento do trato gastrointestinal (da boca ao ânus), frequentemente acometendo íleo terminal</li><li>Pode cursar com massa no QID, fístulas, estenoses e fissuras perianais complexas</li><li>Marcador ASCA positivo</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Pâncreas, Vias Biliares e Fígado",
+      "subchapters": [
+        {
+          "num": "6",
+          "title": "Pancreatites",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Pancreatite Aguda Grave</td><td><ul class=\"reader-list\"><li>Hidratação venosa vigorosa imediata com cristaloides (Ringer Lactato preferencialmente) visando perfusão tecidual</li><li>Uso de analgesia multimodal (opioides como fentanil ou morfina, se necessário)</li><li>Suporte nutricional: preferir nutrição enteral precoce se tolerado; NPT apenas se enteral contraindicada ou falha</li><li>Antibioticoterapia profilática é CONTRAINDICADA, mesmo em presença de necrose estéril extensa. Antibióticos são restritos a infecção comprovada (gás na TC, cultura positiva) ou alta suspeita clínica (deterioração pós 7-10 dias)</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Neoplasias do Sistema Digestivo",
+      "subchapters": [
+        {
+          "num": "7",
+          "title": "Câncer de Pâncreas e Estômago",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Topografia</th><th>Detalhes e Conduta</th></tr></thead><tbody><tr><td>Câncer de Pâncreas (Cabeça)</td><td><ul class=\"reader-list\"><li>Apresentação clássica: síndrome consumptiva severa, icterícia obstrutiva progressiva, colúria, acolia fecal</li><li>Sinal de Courvoisier-Terrier: vesícula biliar palpável e indolor no hipocôndrio direito na vigência de icterícia</li></ul></td></tr><tr><td>GIST (Tumor do Estroma Gastrointestinal)</td><td><ul class=\"reader-list\"><li>Originam-se das células intersticiais de Cajal; mutação do gene c-KIT é positiva em >90% (CD117)</li><li>Estômago é o local mais frequente</li><li>O tratamento de tumores grandes (>5cm) ou com alto índice mitótico submetidos à ressecção completa (R0) envolve terapia-alvo adjuvante com Inibidor da Tirosina Quinase (Imatinibe)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "8",
+          "title": "Câncer Colorretal",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Adenocarcinoma de Reto</td><td><ul class=\"reader-list\"><li>Diagnóstico: colonoscopia e toque retal para estimar altura da lesão</li><li>Estadiamento local obrigatório: Ressonância Magnética (RM) de pelve (para avaliar invasão em profundidade T e linfonodos N)</li><li>Se tumor de reto médio ou baixo for localmente avançado (T3, T4 ou N+), a conduta padrão é a Quimio-Radioterapia Neoadjuvante, seguida de reestadiamento e posterior cirurgia de ressecção</li><li>Tumores extremamente baixos sem possibilidade de margem distal de segurança exigem Amputação Abdominoperineal (Cirurgia de Miles)</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_reumatologia": {
+  "area": "Reumatologia",
+  "title": "Reumatologia - Master",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Artropatias Inflamatórias e Microcristalinas",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Espondiloartrites",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Grupo que inclui Espondilite Anquilosante, Artrite Psoriásica, Artrite Reativa e Artrite Enteropática.</li><li><strong>Espondilite Anquilosante:</strong> Acomete homens adultos jovens (<40 anos). Dor lombar de caráter inflamatório (insidiosa, dura >3 meses, piora com repouso, melhora com exercício, rigidez matinal >1h, desperta à noite).</li><li>Forte associação com HLA-B27. Envolvimento axial predominante, cursando com sacroileíte bilateral simétrica.</li><li>Formação de sindesmófitos marginais (aspecto de \"coluna em bambu\").</li><li>Pode haver manifestações extra-articulares: Uveíte anterior aguda (mais comum), insuficiência aórtica, fibrose pulmonar apical.</li><li>Tratamento: AINEs em dose plena contínua (primeira linha). Inibidores de TNF-alfa em refratários.</li></ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Artrite Reumatoide",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Poliartrite crônica, simétrica, inflamatória. Predileção por pequenas articulações das mãos (IFP, MCF) e punhos. <strong>Poupa as distais (IFD).</strong></li><li>Rigidez matinal > 1 hora, erosões ósseas marginais no RX, nódulos reumatoides, deformidades (pescoço de cisne, botoeira, desvio ulnar).</li><li>Sorologia: Fator Reumatoide (sensível) e Anti-CCP (muito específico, indica pior prognóstico).</li><li>Tratamento: Metotrexato (DMARd de escolha). Associar ácido fólico. Alternativas/Adjuvantes: Leflunomida, Hidroxicloroquina, Imunobiológicos.</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Artrites Microcristalinas (Gota e Pseudogota)",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Características</th><th>Gota</th><th>Pseudogota</th></tr></thead><tbody><tr><td><strong>Cristal</strong></td><td>Monourato de Sódio (Agulha, birrefringência negativa)</td><td>Pirofosfato de Cálcio (Romboide, birrefringência fraca/positiva)</td></tr><tr><td><strong>Articulação</strong></td><td>1ª Metatarsofalangeana (Podagra), Joelho, Tornozelo</td><td>Joelho, Punho (Condrocalcinose)</td></tr><tr><td><strong>Fatores de risco</strong></td><td>Álcool, carne, tiazídicos, hiperuricemia</td><td>Idosos, hiperparatireoidismo, hemocromatose</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Crise Aguda de Gota:</strong> AINEs, Colchicina, Corticoides. <strong>NUNCA</strong> iniciar alopurinol na crise.</li><li><strong>Prevenção:</strong> Alopurinol (inibidor da xantina oxidase). Uricosúricos (Benzbromarona).</li><li><strong>Efeito de medicações associadas:</strong> A <strong>Losartana</strong> (BRA) possui um leve efeito uricosúrico, sendo o anti-hipertensivo de escolha no hipertenso gotoso, protegendo contra crises. Diuréticos (tiazídicos e de alça) <em>aumentam</em> o ácido úrico.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Colagenoses",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Lúpus Eritematoso Sistêmico (LES)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença autoimune multissistêmica. Predomina em mulheres jovens.</li><li>Clínica: Rash malar (poupando sulco nasolabial), fotossensibilidade, úlceras orais indolores, artrite não erosiva (artropatia de Jaccoud).</li><li>Sorologia: FAN (positivo em >98%), Anti-dsDNA (atividade de nefrite lúpica), Anti-Sm (mais específico), Anti-Ro (LES neonatal/lúpus cutâneo subagudo).</li><li>Nefrite Lúpica: Classe IV (proliferativa difusa) é a mais comum e grave.</li><li>Consumo de complemento: C3 e C4 frequentemente baixos em atividade.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Síndrome de Sjögren e Esclerose Sistêmica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Características Principais</th><th>Anticorpos</th></tr></thead><tbody><tr><td><strong>Sjögren</strong></td><td>Xeroftalmia, Xerostomia, Aumento de parótidas, alto risco de Linfoma</td><td>Anti-Ro (SSA), Anti-La (SSB)</td></tr><tr><td><strong>Esclerose Limitada</strong></td><td>CREST (Calcinose, Raynaud, Esofagopatia, Esclerodactilia, Telangiectasia), Hipertensão Pulmonar tardia</td><td>Anticentrômero</td></tr><tr><td><strong>Esclerose Difusa</strong></td><td>Espessamento cutâneo difuso, Crise Renal Esclerodérmica, Fibrose pulmonar precoce</td><td>Anti-Scl 70 (Topoisomerase I)</td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Vasculites Sistêmicas",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Vasculites de Pequenos Vasos e Crioglobulinemia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Crioglobulinemia:</strong> Caracterizada por imunocomplexos que precipitam no frio. <strong>Forte associação com Hepatite C.</strong></li><li>Quadro clínico: Tríade de Meltzer (púrpura palpável, astenia e artralgia) + Glomerulonefrite membranoproliferativa (GNMP) que pode ser rapidamente progressiva, mononeurite múltipla.</li><li>Exames laboratoriais: <strong>Intenso consumo de complemento, com C4 notadamente muito baixo (< 2 mg/dl)</strong>. C3 pode estar normal baixo. Fator Reumatoide frequentemente positivo.</li><li><strong>Vasculites ANCA-Associadas (adj):</strong> Granulomatose com Poliangiite (GPA/Wegener, c-ANCA), Poliangiite Microscópica (PAM, p-ANCA), Granulomatose Eosinofílica com Poliangiite (GEPA/Churg-Strauss, p-ANCA com eosinofilia e asma).</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Polimialgia Reumática e Arterite de Células Gigantes",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Ambas acometem idosos (>50 anos), com VHS e PCR muito elevados.</li><li><strong>Polimialgia Reumática (PMR):</strong> Dor e rigidez matinal marcante (frequentemente >1h) nas cinturas escapular (ombros) e pélvica (quadril). <em>Não cursa com fraqueza muscular verdadeira.</em> Rápida e dramática resposta a corticoides em dose baixa (10-20 mg/dia prednisona).</li><li><strong>Arterite de Células Gigantes (Arterite Temporal):</strong> Vasculite de grandes vasos. Cefaleia temporal, claudicação de mandíbula, espessamento e dor do trajeto da artéria temporal. Complicação temida: <strong>Amaurose (cegueira irreversível)</strong> por isquemia do nervo óptico. Tratar <em>imediatamente</em> com altas doses de corticoide antes da biópsia.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Doenças Sistêmicas e Metabólicas",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Artropatia Diabética",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Queiroartropatia Diabética (Síndrome da Mão Diabética):</strong> Afecção limitante do movimento articular em pacientes com diabetes mellitus de longa data e mal controlado.</li><li>Caracterizada por espessamento da pele e fascias, com contratura em flexão dos quirodáctilos.</li><li>Apresenta dificuldade para realizar movimentos finos.</li><li><strong>Sinal da Prece (Sinal do Orador):</strong> Quando solicitado que o paciente una as palmas das mãos, há uma incapacidade de encostar completamente a superfície palmar e os dedos, mantendo um espaço residual entre elas.</li><li>Distinta da Doença de Dupuytren, que costuma acometer o 4º e 5º dedos com nodulações e cordões palmares, enquanto a artropatia diabética acomete de forma mais difusa (poupando polegares).</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Amiloidose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença causada pela deposição extracelular de fibrilas proteicas (material amiloide).</li><li>Pode ser do tipo AL (cadeias leves de imunoglobulinas, associada a mieloma), AA (inflamação crônica, artrite reumatoide), ATTR (transtirretina, hereditária ou senil).</li><li><strong>Clínica:</strong> Macroglossia, púrpura periorbitária (sinal do guaxinim), síndrome nefrótica, neuropatia periférica autonômica e sensitiva.</li><li><strong>Cardiologia:</strong> Causa miocardiopatia restritiva evoluindo para Insuficiência Cardíaca com Fração de Ejeção Preservada (ICFEP).</li><li><strong>Diagnóstico:</strong> Biópsia (ex: gordura abdominal ou tecido acometido) corada com <strong>Vermelho-Congo</strong>. Mostra birrefringência verde-maçã à luz polarizada.</li><li><strong>Tratamento:</strong> Historicamente de suporte, <strong>mas atualmente HÁ TRATAMENTOS CLÍNICOS ESPECÍFICOS</strong> que alteram o curso da doença, como o <strong>Tafamidis</strong> para amiloidose por transtirretina e quimioterapia para tipo AL.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Imunologia Básica Aplicada",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Angioedema Hereditário",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença genética caracterizada por deficiência ou disfunção do <strong>Inibidor de C1 esterase (C1-INH)</strong>.</li><li>Gera aumento descontrolado de bradicinina, resultando em aumento da permeabilidade vascular.</li><li><strong>Clínica:</strong> Episódios de angioedema súbitos (ex: lábios, língua, face, laringe, extremidades), <strong>SEM urticária</strong> e que NÃO respondem a anti-histamínicos ou corticoides.</li><li>Crises podem ser desencadeadas por estresse, infecções ou trauma (ex: cirurgia dentária).</li><li><strong>Acometimento Gastrointestinal:</strong> Edema da parede intestinal causa dor abdominal intensa, vômitos e distensão, simulando quadro de abdome agudo, com ascite fugaz em exames de imagem.</li><li><strong>Diagnóstico laboratorial:</strong> O complemento <strong>C4 está reduzido</strong> mesmo fora das crises, confirmando-se a disfunção pela dosagem quantitativa e funcional do C1 inibidor.</li></ul>"
+        }
+      ]
+    }
+  ]
+},
+    "uepa_hematologia": {
+  "area": "Hematologia",
+  "title": "Hematologia - Master Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Anemias",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Anemias Microcíticas e Hipocrômicas (Foco em Ferropriva)",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Parâmetro</th><th>Anemia Ferropriva</th><th>Anemia de Doença Crônica</th><th>Talassemias</th></tr></thead><tbody><tr><td>Ferritina</td><td>Baixa (&lt; 15-30 ng/mL)</td><td>Normal ou Alta</td><td>Normal ou Alta</td></tr><tr><td>TIBC / Transferrina</td><td>Alto</td><td>Baixo</td><td>Normal</td></tr><tr><td>Ferro Sérico</td><td>Baixo</td><td>Baixo</td><td>Normal ou Alto</td></tr><tr><td>Saturação de Transferrina</td><td>Baixa (&lt; 16%)</td><td>Baixa ou Normal</td><td>Normal ou Alta</td></tr><tr><td>RDW</td><td>Elevado (&gt; 14-15%)</td><td>Normal</td><td>Normal</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Fisiopatologia da Anemia Ferropriva:</strong> Deficiência de ferro compromete síntese do heme. Causas: perda crônica de sangue (sangramento TGI, ginecológico), má absorção (doença celíaca, pós-bariátrica), aumento da demanda (crescimento, gestação).</li><li><strong>Clínica:</strong> Fadiga, palidez, queilite angular, glossite, coiloníquia (unhas em colher), pica (perversão do apetite, ex: pagofagia - gelo), Síndrome de Plummer-Vinson (disfagia + teia esofágica + anemia ferropriva).</li><li><strong>Diagnóstico:</strong> Ferropenia = primeira alteração é a queda da ferritina; depois, aumento do TIBC e queda do ferro sérico. Hemograma inicialmente normo/normo, evoluindo para micro/hipo.</li><li><strong>Tratamento:</strong> Reposição de ferro (VO: sulfato ferroso, IV se intolerância ou má absorção). A contagem de reticulócitos sobe em 7-10 dias (pico reticulocitário indica resposta terapêutica). Tratar a causa base.</li></ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Anemias Hemolíticas",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Exame Laboratorial</th><th>Hemólise Intravascular</th><th>Hemólise Extravascular</th></tr></thead><tbody><tr><td>Bilirrubina Indireta</td><td>Elevada</td><td>Elevada</td></tr><tr><td>DHL (Lactato Desidrogenase)</td><td>Muito Elevado</td><td>Elevado</td></tr><tr><td>Haptoglobina</td><td>Muito Baixa / Indetectável</td><td>Normal ou Levemente Baixa</td></tr><tr><td>Reticulócitos</td><td>Elevados (Policromatofilia)</td><td>Elevados (Policromatofilia)</td></tr><tr><td>Hemoglobinúria / Hemossiderinúria</td><td>Presentes</td><td>Ausentes</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Hemólise Intravascular:</strong> Destruição do RBC no vaso. Haptoglobina (proteína que se liga à Hb livre) cai drasticamente. Exemplos: PTT, SHU, CIVD, reações transfusionais agudas, HPN, malária.</li><li><strong>Hemólise Extravascular:</strong> Destruição no sistema reticuloendotelial (baço/fígado). Exemplos: Esferocitose hereditária, anemia falciforme, AHAI (quente e fria).</li><li><strong>Anemia Falciforme:</strong> Mutação no gene da cadeia beta da globina (HbS). Crises vaso-oclusivas (dor), síndrome torácica aguda, sequestro esplênico (crianças), suscetibilidade a germes encapsulados (autoesplenectomia).</li><li><strong>AHAI (Anemia Hemolítica Autoimune):</strong> Coombs direto (TAD) positivo. Quente (IgG, extravascular, idiopática/lúpus, trata com corticoide), Fria (IgM, intravascular, micoplasma/EBV, tratar o frio/rituximabe).</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Anemias Macrocíticas e Normocíticas (Outras)",
+          "tags": ["adj"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Anemia Megaloblástica:</strong> Macrocitose (VCM > 100 fL), neutrófilos hipersegmentados, pancitopenia leve. Causas: deficiência de Vitamina B12 (homocisteína e ácido metilmalônico altos, clínica neurológica) e Ácido Fólico (homocisteína alta, sem alt. neurológica).</li><li><strong>Anemia Perniciosa:</strong> Principal causa de deficiência de B12. Autoimune contra células parietais gástricas ou fator intrínseco.</li><li><strong>Anemia Aplástica:</strong> Normocítica/normocrômica. Pancitopenia + reticulocitopenia + medula óssea hipocelular (substituição gordurosa). Sem esplenomegalia. Tratamento com imunossupressão ou TMO.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Hemostasia e Trombose",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Hemostasia Primária vs Secundária",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Característica</th><th>Alteração na Hemostasia Primária</th><th>Alteração na Hemostasia Secundária</th></tr></thead><tbody><tr><td>Fatores envolvidos</td><td>Plaquetas e Fator de von Willebrand (FvW)</td><td>Fatores de Coagulação (Cascata)</td></tr><tr><td>Clínica típica</td><td>Petéquias, púrpuras, equimoses, sangramento mucocutâneo (gengival, epistaxe, menorragia). Sangramento imediato ao trauma.</td><td>Hematomas profundos, hemartroses, sangramento muscular/articular. Sangramento tardio pós-trauma/cirurgia.</td></tr><tr><td>Exames alterados</td><td>Tempo de Sangramento (TS), Contagem de plaquetas.</td><td>TAP (Via Extrínseca), TTPa (Via Intrínseca).</td></tr><tr><td>Exemplos</td><td>PTI, PTT, Doença de von Willebrand, Trombastenia de Glanzmann, Bernard-Soulier, Uremia, uso de AAS.</td><td>Hemofilias (A e B), deficiência de Vitamina K, CIVD, Hepatopatias, uso de Varfarina/Heparina.</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Doença de von Willebrand:</strong> Distúrbio hemorrágico hereditário mais comum. Deficiência/disfunção do FvW (necessário para adesão plaquetária e estabilização do fator VIII). TS prolongado, TTPa pode estar normal ou prolongado.</li><li><strong>PTI (Púrpura Trombocitopênica Imunológica):</strong> Plaquetopenia isolada, anticorpos antiplaquetários. Em crianças geralmente pós-viral e autolimitada. Em adultos, crônica. Tratar se sangramento ou plaquetas &lt; 20-30k (Corticoide, IVIG).</li><li><strong>Hemofilias:</strong> Herança ligada ao X. Hemofilia A (deficiência do fator VIII) e Hemofilia B (deficiência do fator IX). TTPa prolongado, TAP normal. Tratar com reposição do fator específico.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Trombofilias e Trombose",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Trombofilias Hereditárias:</strong> Fator V de Leiden (mais comum, resistência à proteína C ativada), Mutação do gene da Protrombina (G20210A), Deficiência de Antitrombina, Deficiências de Proteína C e S. Suspeitar em TVP jovens, recorrentes, locais atípicos ou história familiar.</li><li><strong>Trombofilias Adquiridas:</strong> Síndrome do Anticorpo Antifosfolípide (SAF) -> trombose + morbidade gestacional + anticorpos (anticardiolipina, anti-beta-2-glicoproteína I, anticoagulante lúpico). TTPa prolongado IN VITRO, mas causa trombose IN VIVO.</li><li><strong>Fatores de Risco para TVP:</strong> Tríade de Virchow (lesão endotelial, estase venosa, hipercoagulabilidade). Idade, tabagismo, imobilidade, cirurgia recente, neoplasia, uso de ACOs (estrogênio). Trombastenia de Glanzmann NÃO é fator de risco (é doença hemorrágica primária).</li><li><strong>Trombose Pediátrica:</strong> Neonatos têm sistema hemostático em desenvolvimento. Trombose de veia renal é a TVP não relacionada a cateter mais comum no primeiro mês (hematúria, massa lombar, plaquetopenia). Trombose de veia porta associa-se a cateterização umbilical.</li></ul>"
+        },
+        {
+          "num": "2.3",
+          "title": "Anticoagulantes e Reversão",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Fármaco</th><th>Mecanismo</th><th>Monitoramento</th><th>Antídoto / Reversão</th></tr></thead><tbody><tr><td>Heparina Não Fracionada (HNF)</td><td>Ativa antitrombina, inibe IIa e Xa</td><td>TTPa</td><td>Protamina</td></tr><tr><td>Heparina de Baixo Peso (HBPM - Ex: Enoxaparina)</td><td>Inibe Xa &gt; IIa</td><td>Geralmente não necessário (anti-Xa)</td><td>Protamina (reversão parcial)</td></tr><tr><td>Varfarina (Cumarínico)</td><td>Inibe fatores vit. K dep. (II, VII, IX, X, Prot. C e S)</td><td>TAP (RNI)</td><td>Vitamina K, Complexo Protrombínico, Plasma Fresco (em urgências)</td></tr><tr><td>DOACs (Dabigatrana, Rivaroxabana)</td><td>Inibição direta de IIa (Dabi) ou Xa (Riva/Apixa)</td><td>Não requer rotineiramente</td><td>Idarucizumabe (Dabi), Andexanet Alfa (Inib. Xa)</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Intoxicação / Sangramento por Enoxaparina:</strong> Se instabilidade hemorrágica/cirurgia, usar Sulfato de Protamina. Embora não reverta 100% como na HNF, é a droga de escolha.</li><li><strong>Trombocitopenia Induzida por Heparina (HIT):</strong> Queda de plaquetas após 5-10 dias de heparina + TROMBOSE (paradoxal). Formação de Ac contra complexo heparina-Fator Plaquetário 4 (PF4). Conduta: suspender heparina e iniciar inibidor direto da trombina (argatrobana) ou fondaparinux. Evitar transfusão de plaquetas (aumenta risco trombótico).</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Medicina Transfusional e Oncohematologia",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Hemocomponentes e Transfusão",
+          "tags": ["ja"],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Concentrado de Hemácias (CH):</strong> 1 bolsa eleva Hb em 1 g/dL e Ht em 3%. Indicação: anemia sintomática ou Hb &lt; 7 g/dL (ou &lt; 8 g/dL em cardiopatas/ortopédicos agudos).</li><li><strong>Concentrado de Plaquetas (CP):</strong> Indicação profilática (Hb &lt; 10k geral; &lt; 50k p/ procedimentos menores/sangramento ativo; &lt; 100k p/ neuro/oftalmo cirurgias). Contraindicado em PTT e HIT (agrava o quadro trombótico).</li><li><strong>Plasma Fresco Congelado (PFC):</strong> Contém todos os fatores de coagulação. Uso em coagulopatias múltiplas (hepatopatia, CIVD, reversão de varfarina sem complexo protrombínico), transfusão maciça.</li><li><strong>Crioprecipitado:</strong> Rico em Fator VIII, FvW, Fibrinogênio e Fator XIII. Indicado em hipofibrinogenemia (&lt; 100 mg/dL), CIVD e uremia.</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Reações Transfusionais",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Reação</th><th>Características e Fisiopatologia</th><th>Clínica e Manejo</th></tr></thead><tbody><tr><td>TRALI (Lesão Pulmonar Aguda Transfusional)</td><td>Edema pulmonar não cardiogênico. Acs do doador contra leucócitos (HLA/HNA) do receptor. Começa em até 6h.</td><td>Dispneia aguda, hipoxemia, infiltrado bilateral (Rx tórax). Diferente de SDRA prévia. Suporte ventilatório (não usar diurético). Fatores de risco de SDRA prévios denominam quadro como \"possível TRALI\".</td></tr><tr><td>TACO (Sobrecarga Circulatória)</td><td>Sobrecarga de volume. Comum em idosos/crianças ou renais crônicos rápidos demais.</td><td>EAP cardiogênico, dispneia, estertores, BNP alto. Tratar com diuréticos e oxigênio.</td></tr><tr><td>Hemolítica Aguda (Incompatibilidade ABO)</td><td>Erro de identificação (Acs anti-A/B naturais IgM). Hemólise intravascular aguda e maciça.</td><td>Febre, dor lombar, hipotensão, hemoglobinúria (urina escura). Suspender imediato, hiperidratação, diurese.</td></tr><tr><td>Hemolítica Tardia</td><td>Incompatibilidade em outros sistemas (Kidd, Duffy). Resposta anamnéstica IgG (dias a semanas após).</td><td>Hemólise extravascular leve, febre baixa, queda de Hb, icterícia. Maioria não requer tto agressivo.</td></tr><tr><td>Febre Não Hemolítica</td><td>Acs do receptor contra leucócitos do doador ou liberação de citocinas na bolsa.</td><td>Febre e calafrios durante a transfusão. Excluir hemólise. Prevenção: hemácias desleucocitadas.</td></tr></tbody></table></div>"
+        },
+        {
+          "num": "3.3",
+          "title": "Síndrome de Lise Tumoral e Oncohematologia",
+          "tags": ["ja"],
+          "bodyHtml": "<pre class=\"reader-pre-card\">\nLise de Células Tumorais (pós QT em neoplasias hematológicas de alta proliferação como LNH/Burkitt/LMA)\n|\nv\nLiberação Intracelular Maciça\n|\n+-> Potássio (HIPERCALEMIA) -> Arritmias, alterações ECG.\n+-> Fósforo (HIPERFOSFATEMIA) -> Liga-se ao Cálcio -> HIPOCALCEMIA secundária (cãibras, confusão, convulsões).\n+-> Ácidos Nucleicos -> ÁCIDO ÚRICO (HIPERURICEMIA) -> Lesão Renal Aguda obstrutiva.\n</pre><ul class=\"reader-list\"><li><strong>Marcadores da SLT:</strong> Espera-se <strong>aumento</strong> de Potássio, Fósforo e Ácido Úrico. Espera-se <strong>redução</strong> do Cálcio sérico (Hipocalcemia). A creatinina sobe devido à IRA por nefropatia por urato e precipitação de fosfato de cálcio.</li><li><strong>Clínica:</strong> Fraqueza, arritmias, espasmos musculares (tetania por hipocalcemia), convulsões, LRA oligúrica.</li><li><strong>Prevenção / Tratamento:</strong> Hidratação venosa vigorosa, Alopurinol (inibe xantina oxidase na formação de novo ác. úrico) ou Rasburicase (degrada ác. úrico existente). Manejo dos distúrbios hidroeletrolíticos agudos e diálise se indicação.</li></ul>"
+        }
+      ]
+    }
+  ]
+}
+,
     "uepa_ortopedia": {
   "area": "Ortopedia",
   "title": "Ortopedia",

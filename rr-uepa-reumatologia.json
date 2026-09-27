@@ -1,0 +1,113 @@
+{
+  "area": "Reumatologia",
+  "title": "Reumatologia - Master",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Artropatias Inflamatórias e Microcristalinas",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Espondiloartrites",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Grupo que inclui Espondilite Anquilosante, Artrite Psoriásica, Artrite Reativa e Artrite Enteropática.</li><li><strong>Espondilite Anquilosante:</strong> Acomete homens adultos jovens (<40 anos). Dor lombar de caráter inflamatório (insidiosa, dura >3 meses, piora com repouso, melhora com exercício, rigidez matinal >1h, desperta à noite).</li><li>Forte associação com HLA-B27. Envolvimento axial predominante, cursando com sacroileíte bilateral simétrica.</li><li>Formação de sindesmófitos marginais (aspecto de \"coluna em bambu\").</li><li>Pode haver manifestações extra-articulares: Uveíte anterior aguda (mais comum), insuficiência aórtica, fibrose pulmonar apical.</li><li>Tratamento: AINEs em dose plena contínua (primeira linha). Inibidores de TNF-alfa em refratários.</li></ul>"
+        },
+        {
+          "num": "1.2",
+          "title": "Artrite Reumatoide",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Poliartrite crônica, simétrica, inflamatória. Predileção por pequenas articulações das mãos (IFP, MCF) e punhos. <strong>Poupa as distais (IFD).</strong></li><li>Rigidez matinal > 1 hora, erosões ósseas marginais no RX, nódulos reumatoides, deformidades (pescoço de cisne, botoeira, desvio ulnar).</li><li>Sorologia: Fator Reumatoide (sensível) e Anti-CCP (muito específico, indica pior prognóstico).</li><li>Tratamento: Metotrexato (DMARd de escolha). Associar ácido fólico. Alternativas/Adjuvantes: Leflunomida, Hidroxicloroquina, Imunobiológicos.</li></ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Artrites Microcristalinas (Gota e Pseudogota)",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Características</th><th>Gota</th><th>Pseudogota</th></tr></thead><tbody><tr><td><strong>Cristal</strong></td><td>Monourato de Sódio (Agulha, birrefringência negativa)</td><td>Pirofosfato de Cálcio (Romboide, birrefringência fraca/positiva)</td></tr><tr><td><strong>Articulação</strong></td><td>1ª Metatarsofalangeana (Podagra), Joelho, Tornozelo</td><td>Joelho, Punho (Condrocalcinose)</td></tr><tr><td><strong>Fatores de risco</strong></td><td>Álcool, carne, tiazídicos, hiperuricemia</td><td>Idosos, hiperparatireoidismo, hemocromatose</td></tr></tbody></table></div><ul class=\"reader-list\"><li><strong>Crise Aguda de Gota:</strong> AINEs, Colchicina, Corticoides. <strong>NUNCA</strong> iniciar alopurinol na crise.</li><li><strong>Prevenção:</strong> Alopurinol (inibidor da xantina oxidase). Uricosúricos (Benzbromarona).</li><li><strong>Efeito de medicações associadas:</strong> A <strong>Losartana</strong> (BRA) possui um leve efeito uricosúrico, sendo o anti-hipertensivo de escolha no hipertenso gotoso, protegendo contra crises. Diuréticos (tiazídicos e de alça) <em>aumentam</em> o ácido úrico.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Colagenoses",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Lúpus Eritematoso Sistêmico (LES)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença autoimune multissistêmica. Predomina em mulheres jovens.</li><li>Clínica: Rash malar (poupando sulco nasolabial), fotossensibilidade, úlceras orais indolores, artrite não erosiva (artropatia de Jaccoud).</li><li>Sorologia: FAN (positivo em >98%), Anti-dsDNA (atividade de nefrite lúpica), Anti-Sm (mais específico), Anti-Ro (LES neonatal/lúpus cutâneo subagudo).</li><li>Nefrite Lúpica: Classe IV (proliferativa difusa) é a mais comum e grave.</li><li>Consumo de complemento: C3 e C4 frequentemente baixos em atividade.</li></ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Síndrome de Sjögren e Esclerose Sistêmica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Características Principais</th><th>Anticorpos</th></tr></thead><tbody><tr><td><strong>Sjögren</strong></td><td>Xeroftalmia, Xerostomia, Aumento de parótidas, alto risco de Linfoma</td><td>Anti-Ro (SSA), Anti-La (SSB)</td></tr><tr><td><strong>Esclerose Limitada</strong></td><td>CREST (Calcinose, Raynaud, Esofagopatia, Esclerodactilia, Telangiectasia), Hipertensão Pulmonar tardia</td><td>Anticentrômero</td></tr><tr><td><strong>Esclerose Difusa</strong></td><td>Espessamento cutâneo difuso, Crise Renal Esclerodérmica, Fibrose pulmonar precoce</td><td>Anti-Scl 70 (Topoisomerase I)</td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Vasculites Sistêmicas",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Vasculites de Pequenos Vasos e Crioglobulinemia",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Crioglobulinemia:</strong> Caracterizada por imunocomplexos que precipitam no frio. <strong>Forte associação com Hepatite C.</strong></li><li>Quadro clínico: Tríade de Meltzer (púrpura palpável, astenia e artralgia) + Glomerulonefrite membranoproliferativa (GNMP) que pode ser rapidamente progressiva, mononeurite múltipla.</li><li>Exames laboratoriais: <strong>Intenso consumo de complemento, com C4 notadamente muito baixo (< 2 mg/dl)</strong>. C3 pode estar normal baixo. Fator Reumatoide frequentemente positivo.</li><li><strong>Vasculites ANCA-Associadas (adj):</strong> Granulomatose com Poliangiite (GPA/Wegener, c-ANCA), Poliangiite Microscópica (PAM, p-ANCA), Granulomatose Eosinofílica com Poliangiite (GEPA/Churg-Strauss, p-ANCA com eosinofilia e asma).</li></ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Polimialgia Reumática e Arterite de Células Gigantes",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Ambas acometem idosos (>50 anos), com VHS e PCR muito elevados.</li><li><strong>Polimialgia Reumática (PMR):</strong> Dor e rigidez matinal marcante (frequentemente >1h) nas cinturas escapular (ombros) e pélvica (quadril). <em>Não cursa com fraqueza muscular verdadeira.</em> Rápida e dramática resposta a corticoides em dose baixa (10-20 mg/dia prednisona).</li><li><strong>Arterite de Células Gigantes (Arterite Temporal):</strong> Vasculite de grandes vasos. Cefaleia temporal, claudicação de mandíbula, espessamento e dor do trajeto da artéria temporal. Complicação temida: <strong>Amaurose (cegueira irreversível)</strong> por isquemia do nervo óptico. Tratar <em>imediatamente</em> com altas doses de corticoide antes da biópsia.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Doenças Sistêmicas e Metabólicas",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Artropatia Diabética",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li><strong>Queiroartropatia Diabética (Síndrome da Mão Diabética):</strong> Afecção limitante do movimento articular em pacientes com diabetes mellitus de longa data e mal controlado.</li><li>Caracterizada por espessamento da pele e fascias, com contratura em flexão dos quirodáctilos.</li><li>Apresenta dificuldade para realizar movimentos finos.</li><li><strong>Sinal da Prece (Sinal do Orador):</strong> Quando solicitado que o paciente una as palmas das mãos, há uma incapacidade de encostar completamente a superfície palmar e os dedos, mantendo um espaço residual entre elas.</li><li>Distinta da Doença de Dupuytren, que costuma acometer o 4º e 5º dedos com nodulações e cordões palmares, enquanto a artropatia diabética acomete de forma mais difusa (poupando polegares).</li></ul>"
+        },
+        {
+          "num": "4.2",
+          "title": "Amiloidose",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença causada pela deposição extracelular de fibrilas proteicas (material amiloide).</li><li>Pode ser do tipo AL (cadeias leves de imunoglobulinas, associada a mieloma), AA (inflamação crônica, artrite reumatoide), ATTR (transtirretina, hereditária ou senil).</li><li><strong>Clínica:</strong> Macroglossia, púrpura periorbitária (sinal do guaxinim), síndrome nefrótica, neuropatia periférica autonômica e sensitiva.</li><li><strong>Cardiologia:</strong> Causa miocardiopatia restritiva evoluindo para Insuficiência Cardíaca com Fração de Ejeção Preservada (ICFEP).</li><li><strong>Diagnóstico:</strong> Biópsia (ex: gordura abdominal ou tecido acometido) corada com <strong>Vermelho-Congo</strong>. Mostra birrefringência verde-maçã à luz polarizada.</li><li><strong>Tratamento:</strong> Historicamente de suporte, <strong>mas atualmente HÁ TRATAMENTOS CLÍNICOS ESPECÍFICOS</strong> que alteram o curso da doença, como o <strong>Tafamidis</strong> para amiloidose por transtirretina e quimioterapia para tipo AL.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Imunologia Básica Aplicada",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Angioedema Hereditário",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\"><li>Doença genética caracterizada por deficiência ou disfunção do <strong>Inibidor de C1 esterase (C1-INH)</strong>.</li><li>Gera aumento descontrolado de bradicinina, resultando em aumento da permeabilidade vascular.</li><li><strong>Clínica:</strong> Episódios de angioedema súbitos (ex: lábios, língua, face, laringe, extremidades), <strong>SEM urticária</strong> e que NÃO respondem a anti-histamínicos ou corticoides.</li><li>Crises podem ser desencadeadas por estresse, infecções ou trauma (ex: cirurgia dentária).</li><li><strong>Acometimento Gastrointestinal:</strong> Edema da parede intestinal causa dor abdominal intensa, vômitos e distensão, simulando quadro de abdome agudo, com ascite fugaz em exames de imagem.</li><li><strong>Diagnóstico laboratorial:</strong> O complemento <strong>C4 está reduzido</strong> mesmo fora das crises, confirmando-se a disfunção pela dosagem quantitativa e funcional do C1 inibidor.</li></ul>"
+        }
+      ]
+    }
+  ]
+}

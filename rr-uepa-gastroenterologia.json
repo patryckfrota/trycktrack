@@ -1,0 +1,104 @@
+{
+  "area": "Gastroenterologia",
+  "title": "Gastroenterologia - Rapid Review",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Esôfago e Estômago",
+      "subchapters": [
+        {
+          "num": "1",
+          "title": "Doença do Refluxo Gastroesofágico e Motilidade",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Fisiologia</td><td><ul class=\"reader-list\"><li>Refluxo fisiológico ocorre principalmente em posição ereta (acordado)</li></ul></td></tr><tr><td>Tratamento Cirúrgico (Fundoplicatura)</td><td><ul class=\"reader-list\"><li>Indicações: refratariedade ao IBP, complicações (estenose, esôfago de Barrett grave), intolerância ao IBP</li><li>Exames pré-operatórios obrigatórios: EDA, pHmetria de 24h e Manometria Esofágica</li><li>Fundoplicatura parcial (Toupet) é indicada em distúrbios de motilidade do corpo esofágico (ex: esclerodermia) associados para evitar disfagia pós-operatória</li><li>Fundoplicatura total (Nissen) é a escolha padrão na ausência de hipomotilidade</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2",
+          "title": "H. Pylori e Úlcera Péptica",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Detalhes</th></tr></thead><tbody><tr><td>Erradicação do H. Pylori</td><td><ul class=\"reader-list\"><li>Controle de cura obrigatório: indicado teste respiratório da ureia (ou antígeno fecal) após no mínimo 4 semanas do fim do tratamento antimicrobiano</li><li>Sorologia IgG não é recomendada para controle de cura, pois não diferencia infecção ativa de cicatriz sorológica (permanece positiva)</li></ul></td></tr><tr><td>Úlcera Duodenal Sangrante</td><td><ul class=\"reader-list\"><li>Úlcera em parede posterior da segunda porção do duodeno sangra caracteristicamente por erosão da artéria gastroduodenal</li><li>Tratamento endoscópico duplo (ex: injeção de adrenalina + clipe/termocoagulação) é a conduta inicial</li><li>Em caso de falha endoscópica com sangramento ativo: indicada arteriografia com embolização ou tratamento cirúrgico</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Hemorragia Digestiva",
+      "subchapters": [
+        {
+          "num": "3",
+          "title": "HDA e Varizes",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Tipo</th><th>Características e Conduta</th></tr></thead><tbody><tr><td>HDA Varicosa</td><td><ul class=\"reader-list\"><li>Cenário: paciente cirrótico, estigmas de hepatopatia (ascite, icterícia, flapping), apresentando hematêmese e choque</li><li>Ressuscitação: estabilização hemodinâmica inicial (cristaloides e hemotransfusão se Hb < 7, ou < 9 se cardiopata); droga vasoativa (Terlipressina, Octreotide) antes mesmo da endoscopia</li><li>Intervenção: EDA precoce (nas primeiras 12h) para ligadura elástica</li><li>Profilaxia de PBE é mandatória (ex: Ceftriaxone ou Norfloxacino) em cirróticos com HDA</li></ul></td></tr><tr><td>HDB e Obscura</td><td><ul class=\"reader-list\"><li>Hemorragia Digestiva Obscura: sangramento evidente (macroscópico ou oculto) com EDA e colonoscopia normais; a fonte mais comum é o intestino delgado (angiodisplasias, tumores)</li><li>HDB Volumosa: estabilização hemodinâmica em primeiro lugar. Após estável, realiza-se colonoscopia. Se sangramento maciço e instabilidade hemodinâmica refratária, a conduta é arteriografia ou angiotomografia</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Intestinos",
+      "subchapters": [
+        {
+          "num": "4",
+          "title": "Síndromes Disabsortivas",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Doença</th><th>Detalhes</th></tr></thead><tbody><tr><td>Doença Celíaca</td><td><ul class=\"reader-list\"><li>Quadro clínico: diarreia crônica, esteatorreia, perda de peso, anemia ferropriva refratária</li><li>Marcador sorológico de escolha: Anticorpo Antitransglutaminase tecidual (Anti-tTG) IgA associado à dosagem de IgA total (para excluir deficiência seletiva de IgA)</li><li>Biópsia duodenal (padrão-ouro): atrofia de vilosidades, hiperplasia de criptas e infiltrado linfocítico intraepitelial</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "5",
+          "title": "Doença Diverticular e DII",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Características</th></tr></thead><tbody><tr><td>Diverticulite Aguda</td><td><ul class=\"reader-list\"><li>Dor em fossa ilíaca esquerda, febre, defesa localizada</li><li>Classificação de Hinchey III (peritonite purulenta) e Hinchey IV (peritonite fecal) exigem tratamento cirúrgico de urgência (frequentemente Cirurgia a Hartmann)</li></ul></td></tr><tr><td>Retocolite Ulcerativa (RCU)</td><td><ul class=\"reader-list\"><li>Acometimento de mucosa e submucosa, contínuo, iniciando no reto e estendendo-se proximalmente</li><li>Apresentação clássica: diarreia mucosanguinolenta (disenteria)</li><li>Associação com Colangite Esclerosante Primária e marcador p-ANCA positivo</li></ul></td></tr><tr><td>Doença de Crohn</td><td><ul class=\"reader-list\"><li>Acometimento transmural e saltatório de qualquer segmento do trato gastrointestinal (da boca ao ânus), frequentemente acometendo íleo terminal</li><li>Pode cursar com massa no QID, fístulas, estenoses e fissuras perianais complexas</li><li>Marcador ASCA positivo</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Pâncreas, Vias Biliares e Fígado",
+      "subchapters": [
+        {
+          "num": "6",
+          "title": "Pancreatites",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Pancreatite Aguda Grave</td><td><ul class=\"reader-list\"><li>Hidratação venosa vigorosa imediata com cristaloides (Ringer Lactato preferencialmente) visando perfusão tecidual</li><li>Uso de analgesia multimodal (opioides como fentanil ou morfina, se necessário)</li><li>Suporte nutricional: preferir nutrição enteral precoce se tolerado; NPT apenas se enteral contraindicada ou falha</li><li>Antibioticoterapia profilática é CONTRAINDICADA, mesmo em presença de necrose estéril extensa. Antibióticos são restritos a infecção comprovada (gás na TC, cultura positiva) ou alta suspeita clínica (deterioração pós 7-10 dias)</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Neoplasias do Sistema Digestivo",
+      "subchapters": [
+        {
+          "num": "7",
+          "title": "Câncer de Pâncreas e Estômago",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Topografia</th><th>Detalhes e Conduta</th></tr></thead><tbody><tr><td>Câncer de Pâncreas (Cabeça)</td><td><ul class=\"reader-list\"><li>Apresentação clássica: síndrome consumptiva severa, icterícia obstrutiva progressiva, colúria, acolia fecal</li><li>Sinal de Courvoisier-Terrier: vesícula biliar palpável e indolor no hipocôndrio direito na vigência de icterícia</li></ul></td></tr><tr><td>GIST (Tumor do Estroma Gastrointestinal)</td><td><ul class=\"reader-list\"><li>Originam-se das células intersticiais de Cajal; mutação do gene c-KIT é positiva em >90% (CD117)</li><li>Estômago é o local mais frequente</li><li>O tratamento de tumores grandes (>5cm) ou com alto índice mitótico submetidos à ressecção completa (R0) envolve terapia-alvo adjuvante com Inibidor da Tirosina Quinase (Imatinibe)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "8",
+          "title": "Câncer Colorretal",
+          "tags": [
+            "ja",
+            "adj"
+          ],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Condutas e Detalhes</th></tr></thead><tbody><tr><td>Adenocarcinoma de Reto</td><td><ul class=\"reader-list\"><li>Diagnóstico: colonoscopia e toque retal para estimar altura da lesão</li><li>Estadiamento local obrigatório: Ressonância Magnética (RM) de pelve (para avaliar invasão em profundidade T e linfonodos N)</li><li>Se tumor de reto médio ou baixo for localmente avançado (T3, T4 ou N+), a conduta padrão é a Quimio-Radioterapia Neoadjuvante, seguida de reestadiamento e posterior cirurgia de ressecção</li><li>Tumores extremamente baixos sem possibilidade de margem distal de segurança exigem Amputação Abdominoperineal (Cirurgia de Miles)</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+}
