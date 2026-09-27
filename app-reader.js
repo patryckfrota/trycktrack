@@ -23,6 +23,158 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_neurologia": {
+  "area": "Neurologia",
+  "title": "Rapid Review: Neurologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "1. Acidentes Vasculares Cerebrais (AVC) e Doenças Cerebrovasculares",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Acidente Vascular Cerebral Isquêmico (AVCi)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O AVC isquêmico decorre de uma oclusão arterial aguda e se manifesta por déficits focais de início súbito (hemiparesia, afasia, hemianopsia).</li>\n<li><strong>Diagnóstico:</strong> A primeira conduta diante de suspeita é solicitar <strong>TC de crânio sem contraste</strong> para descartar hemorragia, juntamente com a glicemia capilar (para descartar hipoglicemia). <strong>Pegadinha:</strong> não é recomendado aguardar dosagem de plaquetas ou coagulograma para iniciar a trombólise, exceto na suspeita de distúrbio prévio de coagulação ou uso de anticoagulantes.</li>\n<li><strong>Tratamento na fase aguda:</strong> Trombólise venosa (Alteplase - rtPA) se paciente apresentar-se em até 4,5 horas do início dos sintomas (delta T). <strong>Palavra-chave:</strong> Trombectomia mecânica pode ser indicada até 24 horas em oclusões de grandes vasos da circulação anterior.</li>\n<li><strong>Controle pressórico:</strong> Em candidatos à trombólise, a PA deve ser mantida < 185x110 mmHg. Se não for trombolisar, só reduzir se PA > 220x120 mmHg (permissividade hipertensiva para proteger a área de penumbra isquêmica). <strong>Pegadinha:</strong> após trombólise, a PA não deve ser mantida > 180/105 mmHg, o alvo é abaixo disso (180x105).</li>\n<li><strong>Manejo de temperatura e suporte:</strong> <strong>Pegadinha:</strong> a hipertermia (>38ºC) piora o prognóstico neurológico e não deve ser tolerada. Deve-se tratar a febre.</li>\n<li><strong>Contraindicações à Trombólise:</strong> Hemorragia intracraniana prévia, PA não controlada > 185/110, plaquetas < 100.000, INR > 1.7. <strong>Pegadinha:</strong> O uso prévio de droga antiplaquetária (ex: AAS) em monoterapia <strong>NÃO</strong> contraindica a trombólise.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo AVC Agudo:\nPaciente com déficit focal súbito\n↓\nColetar Glicemia Capilar + TC de Crânio sem contraste imediata\n↓\nTC exclui hemorragia? \n  → Não: Manejo de AVCH.\n  → Sim: Avaliar tempo de início dos sintomas (Delta T < 4.5h) e contraindicações.\n↓\nSe Delta T < 4.5h e sem contraindicações:\n  → Controlar PA < 185x110\n  → Trombólise com Alteplase 0,9 mg/kg IV\n</pre>"
+        },
+        {
+          "num": "1.2",
+          "title": "Hemorragia Intraparenquimatosa (AVCh)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemorragia Intraparenquimatosa (AVCh)</strong> mais comum é a hipertensiva, acometendo principalmente os núcleos da base (putâmen), tálamo e ponte. Apresenta cefaleia, vômitos e déficit focal súbito, muitas vezes com rebaixamento da consciência precoce.</li>\n<li>O controle da PA no AVCh foca em alvo sistólico em torno de 140 mmHg (se a PAS estiver entre 150-220 mmHg), para evitar a expansão do hematoma, sem prejudicar a perfusão cerebral.</li>\n<li>O tratamento neurocirúrgico descompressivo está indicado apenas em hemorragias de fossa posterior (cerebelares > 3 cm) com compressão de tronco ou deterioração neurológica.</li>\n<li>A angiopatia amiloide cerebral é a principal causa de hemorragias lobares recidivantes em idosos. Nestes pacientes, evitar uso de anticoagulantes.</li>\n</ul>"
+        },
+        {
+          "num": "1.3",
+          "title": "Hemorragia Subaracnóidea (HSA)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemorragia Subaracnóidea (HSA)</strong> cursa com a <strong>Palavra-chave:</strong> \"A pior cefaleia da vida\", explosiva, associada a rigidez de nuca e vômitos. Geralmente secundária à ruptura de aneurisma sacular.</li>\n<li>O diagnóstico da HSA é feito com TC de crânio sem contraste. Se TC normal e alta suspeita: punção lombar (buscando xantocromia após 12h ou líquor hemorrágico que não clareia nas três amostras).</li>\n<li><strong>Escala de Hunt-Hess:</strong> (Avalia a clínica da HSA). Grau 1: assintomático ou leve cefaleia. Grau 2: paralisia de nervo craniano, cefaleia grave, rigidez nucal. Grau 3: confusão, letargia. Grau 4: estupor, hemiparesia. Grau 5: coma.</li>\n<li><strong>Complicações da HSA:</strong> Ressangramento (maior risco nas primeiras 24-72h), Vasoespasmo (pico do 3º ao 14º dia) tratado com Nimodipino 60mg 4/4h, e Hidrocefalia.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Complicação da HSA</th>\n      <th>Período de Maior Risco</th>\n      <th>Prevenção/Tratamento</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Ressangramento</td>\n      <td>24h a 72h</td>\n      <td>Clipping cirúrgico ou embolização endovascular do aneurisma precoce</td>\n    </tr>\n    <tr>\n      <td>Vasoespasmo isquêmico</td>\n      <td>3 a 14 dias (pico 7º dia)</td>\n      <td>Nimodipino VO para todos. Se déficit isquêmico, induzir hipertensão arterial.</td>\n    </tr>\n    <tr>\n      <td>Hidrocefalia aguda</td>\n      <td>Primeiras 24h</td>\n      <td>Derivação Ventricular Externa (DVE) se rebaixamento de consciência</td>\n    </tr>\n    <tr>\n      <td>Hiponatremia (Síndrome Perdedora de Sal)</td>\n      <td>Primeira a segunda semana</td>\n      <td>Reposição com soro hipertônico. Não restringir fluidos!</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        }
+      ]
+    },
+    {
+      "title": "2. Coma e Alterações da Consciência",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Estado Confusional Agudo (Delirium)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O <strong>Delirium</strong> é uma alteração aguda e flutuante do nível de consciência, com inatenção e desorganização do pensamento, desencadeado por causas orgânicas (infecções, distúrbios hidroeletrolíticos, medicamentos) muito comum em idosos internados.</li>\n<li>O diagnóstico e rastreamento, mesmo em pacientes internados em UTI, devem utilizar ferramentas validadas. <strong>Pegadinha:</strong> a Richmond Agitation-Sedation Scale (RASS) avalia a agitação/sedação, mas a ferramenta clássica de triagem para delirium na UTI é o <strong>CAM-ICU</strong> (Confusion Assessment Method for the ICU). É falso afirmar que não há ferramentas.</li>\n<li><strong>Tratamento:</strong> A base do tratamento é a correção do fator precipitante (ex: tratar infecção urinária, suspender drogas anticolinérgicas, corrigir hiponatremia) e medidas não farmacológicas (orientação temporal, evitar contenção física, promover sono). Existem evidências de medidas recomendadas para prevenir a condição, como mobilização precoce.</li>\n<li>No polo <strong>hiperativo</strong> do delirium, quando há agitação psicomotora que coloca o paciente ou equipe em risco (e quando medidas não farmacológicas falharam), o tratamento pode ser feito com a prescrição de <strong>antipsicóticos</strong> (ex: Haloperidol ou atípicos como Quetiapina, Risperidona).</li>\n<li><strong>Pegadinha:</strong> Sendo um estado confusional agudo, o uso de <strong>benzodiazepínicos é PROSCRITO</strong> como primeira escolha no tratamento do delirium hiperativo, pois podem paradoxalmente agravar a confusão, sendo reservados apenas para delirium tremens (abstinência alcoólica) ou abstinência a sedativos.</li>\n</ul>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hipertensão Intracraniana (HIC)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A Síndrome de <strong>Hipertensão Intracraniana (HIC)</strong> caracteriza-se pela tríade clássica: cefaleia progressiva (pior deitada ou ao tossir), vômitos em jato e papiledema no fundo de olho. Alteração no nível de consciência e Tríade de Cushing (bradicardia, hipertensão, ritmo respiratório irregular) indicam iminência de herniação.</li>\n<li><strong>Monitorização:</strong> A Pressão Intracraniana (PIC) normal é até 20 mmHg. A Pressão de Perfusão Cerebral (PPC) é igual à PAM - PIC. <strong>Pegadinha:</strong> O alvo no manejo da HIC é manter a PPC geralmente entre 60 e 70 mmHg. Não se deve manter a PPC abaixo do limite inferior (30-40 mmHg) pois causaria isquemia cerebral global.</li>\n<li><strong>Suporte Hemodinâmico:</strong> <strong>Pegadinha:</strong> Quando indicado elevar a PAM para atingir a PPC alvo em pacientes com HIC grave, o vasopressor de escolha é a <strong>noradrenalina</strong>.</li>\n<li><strong>Medidas gerais de HIC:</strong> Elevação da cabeceira a 30 graus, alinhamento cervical, analgesia e sedação otimizada (Propofol ou Midazolam). <strong>Pegadinha:</strong> Deve-se EVITAR e são <strong>contraindicadas as soluções hipotônicas</strong> (ex: glicose a 5%, Ringer Lactato), pois aumentam o edema cerebral. O alvo é manter normovolemia com solução isotônica.</li>\n<li><strong>Terapia de resgate:</strong> Osmoterapia com Manitol a 20% ou Salina Hipertônica a 3% em bôlus. Hiperventilação temporária aguda (alvo de pCO2 30-35 mmHg) útil apenas para pontes cirúrgicas.</li>\n<li><strong>Pegadinha sobre Hipotermia:</strong> A hipotermia terapêutica profilática no controle de HIC <strong>NÃO</strong> demonstrou benefício significativo no desfecho neurológico em ensaios robustos e aumenta complicações infecciosas.</li>\n</ul>"
+        },
+        {
+          "num": "2.3",
+          "title": "Morte Encefálica",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O diagnóstico de <strong>Morte Encefálica (ME)</strong> exige a perda completa e irreversível das funções do encéfalo e tronco encefálico. É um diagnóstico clínico e complementar que atesta o óbito legal do paciente.</li>\n<li><strong>Pré-requisitos:</strong> Presença de lesão encefálica de causa conhecida e irreversível; ausência de distúrbios hidroeletrolíticos graves (sódio < 120 ou > 160 mEq/L), distúrbios acidobásicos intratáveis ou hipotermia (Temp > 35ºC); e exclusão de efeito de drogas depressoras do SNC.</li>\n<li><strong>O Exame Clínico (realizado por 2 médicos diferentes):</strong> Deve atestar Coma não reativo (Glasgow 3) e <strong>ausência completa de reflexos de tronco</strong>: pupilar (ausência de fotorreação, pupilas fixas), córneo-palpebral, oculocefálico, oculovestibular, e reflexo de tosse/vômito à sucção traqueal.</li>\n<li><strong>Teste de Apneia:</strong> Realizado apenas 1 vez, comprova a ausência de movimento respiratório após desconexão do ventilador, com estímulo do centro respiratório por pCO2 > 55 mmHg.</li>\n<li><strong>Exame Complementar Obrigatório:</strong> No Brasil, é obrigatório 1 exame confirmatório demonstrando ausência de fluxo sanguíneo encefálico (ex: Arteriografia, Doppler Transcraniano), ausência de atividade elétrica (EEG plano) ou ausência de metabolismo (PET/Cintilografia).</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "3. Doenças Neuromusculares e Mielopatias",
+      "subchapters": [
+        {
+          "num": "3.1",
+          "title": "Neuropatias Periféricas: Guillain-Barré",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Síndrome de Guillain-Barré (SGB)</strong> é uma polirradiculoneuropatia desmielinizante inflamatória aguda. Cursa com fraqueza muscular aguda, ascendente, simétrica, <strong>arreflexia</strong> ou hiporreflexia global, associada a sintomas disautonômicos (taquicardia, PA lábil). Geralmente precedida por infecção respiratória ou gastrointestinal (Campylobacter jejuni).</li>\n<li><strong>Pegadinha na SGB:</strong> A queixa de <strong>dor</strong> pode estar presente de forma exuberante (dor radicular, mialgia), especialmente na fase aguda e na fase de recuperação, sendo uma importante manifestação não-motora que requer analgesia intensa.</li>\n<li>O exame do líquor mostra <strong>dissociação proteíno-citológica</strong> (proteína alta com células normais), o que se torna mais evidente após a primeira semana.</li>\n<li>O tratamento da SGB baseia-se no uso de <strong>Imunoglobulina Humana Intravenosa (IVIG)</strong> ou <strong>Plasmaférese</strong>, com eficácia equivalente. <strong>Pegadinha:</strong> É FALSO afirmar que a plasmaférese está contraindicada; ela é terapêutica de primeira linha. Os Corticosteroides NÃO são eficazes e não devem ser usados.</li>\n</ul>"
+        },
+        {
+          "num": "3.2",
+          "title": "Miastenia Gravis e Doenças da Placa Motora",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Miastenia Gravis (MG)</strong> é uma doença autoimune da junção neuromuscular, caracterizada por autoanticorpos contra os receptores de acetilcolina pós-sinápticos (anti-AChR) em 85% dos casos, ou anti-MuSK.</li>\n<li>A clínica clássica é a <strong>fraqueza flutuante</strong> que piora com o esforço repetitivo e melhora com o repouso. <strong>Pegadinha:</strong> O acometimento ocular é clássico! A <strong>ptose palpebral e a diplopia</strong> são os achados iniciais mais associados à MG. É FALSO afirmar que não ocorrem.</li>\n<li><strong>Investigação:</strong> Eletroneuromiografia com padrão decremental à estimulação repetitiva; teste terapêutico e pesquisa de anticorpos. A MG é frequentemente associada a anormalidades do timo (hiperplasia ou timoma), exigindo sempre TC de tórax.</li>\n<li>No manejo crônico, os anticolinesterásicos (ex: <strong>Piridostigmina</strong>) são a primeira linha sintomática. <strong>Pegadinha:</strong> Piridostigmina NÃO está indicada na Guillain-Barré. Corticoides e imunossupressores mudam a história da doença.</li>\n<li><strong>Pegadinha:</strong> Fármacos bloqueadores neuromusculares em pacientes com suspeita de MG devem ser usados com extrema cautela, pois há altíssima sensibilidade a eles, podendo precipitar crise miastênica aguda e necessidade prolongada de ventilação mecânica.</li>\n<li>A <strong>Crise Miastênica</strong> (insuficiência respiratória aguda) é tratada com internação em UTI, VNI ou intubação, e IVIG ou Plasmaférese. Piridostigmina pode ser temporariamente suspensa na crise grave entubada.</li>\n</ul>"
+        },
+        {
+          "num": "3.3",
+          "title": "Síndromes Medulares",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemisecção Medular (Síndrome de Brown-Séquard)</strong> ocorre em traumas penetrantes (faca, tiro), afetando apenas metade da medula espinhal (lado direito ou esquerdo).</li>\n<li>A anatomia medular dita que o trato espinotalâmico lateral (sensibilidade dolorosa e térmica) cruza a linha média logo que entra na medula, enquanto o trato corticoespinhal lateral (motor) e os fascículos posteriores (propriocepção) cruzam lá no bulbo superiormente.</li>\n<li><strong>Palavra-chave: Clínica do Brown-Séquard:</strong> Abaixo do nível da lesão teremos: <strong>1) Perda da força motora IPSILATERAL</strong>, <strong>2) Perda da propriocepção, tátil epicrítico e estereognosia IPSILATERAL</strong> e <strong>3) Perda da sensibilidade térmica e dolorosa CONTRALATERAL</strong> à lesão.</li>\n<li><strong>Pegadinha:</strong> Se um paciente teve hemisecção da medula à <strong>direita</strong> no nível de T8: a perda de função motora será à <strong>direita</strong>. A perda de estereognosia será à <strong>direita</strong>. Porém, a <strong>perda da sensibilidade térmica e dolorosa abaixo do segmento será à ESQUERDA</strong>.</li>\n<li>O paciente evoluirá com síndrome do PRIMEIRO neurônio motor (piramidal) abaixo da lesão (espasticidade, hiperreflexia, sinal de Babinski).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Síndrome Medular</th>\n      <th>Mecanismo principal</th>\n      <th>Clínica principal</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Síndrome Centro-medular</td>\n      <td>Trauma em hiperextensão (idosos) e Siringomielia</td>\n      <td>Fraqueza muito maior em membros superiores do que inferiores (\"forma de xale\")</td>\n    </tr>\n    <tr>\n      <td>Síndrome Medular Anterior</td>\n      <td>Oclusão da artéria espinhal anterior</td>\n      <td>Paralisia flácida inicial e perda de dor/temperatura bilaterais. Preserva propriocepção.</td>\n    </tr>\n    <tr>\n      <td>Síndrome de Brown-Séquard</td>\n      <td>Hemisecção penetrante</td>\n      <td>Motor e propriocepção ipsilateral perdidos. Dor/temperatura contralateral perdidos.</td>\n    </tr>\n    <tr>\n      <td>Síndrome da Cauda Equina</td>\n      <td>Compressão de raízes lombares/sacrais inferiores</td>\n      <td>Arreflexia de membros inferiores, anestesia em sela, incontinência urinária/fecal por atonia.</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        }
+      ]
+    },
+    {
+      "title": "4. Epilepsias e Cefaleias",
+      "subchapters": [
+        {
+          "num": "4.1",
+          "title": "Estado de Mal Epiléptico (Status Epilepticus)",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O Estado de Mal Epiléptico é definido como uma crise convulsiva contínua prolongada (convulsiva > 5 min, focal > 10 min, ausência > 10 min), ou 2 ou mais crises sucessivas sem recuperação da consciência.</li>\n<li><strong>Principais Causas:</strong> A causa MAIS comum é a não adesão ou retirada abrupta de medicamentos anticonvulsivantes prévios. <strong>Pegadinha:</strong> É falso afirmar que a retirada do medicamento não está entre as causas principais.</li>\n<li><strong>Diagnóstico e Monitorização:</strong> A <strong>dosagem sérica de drogas anticonvulsivantes</strong>, quando disponível, é recomendada para guiar o manejo na emergência. <strong>Pegadinha:</strong> O Eletroencefalograma (EEG) contínuo tem extremo valor, principalmente para excluir status não-convulsivo (paciente comatoso não recobra a consciência).</li>\n<li><strong>Tratamento - 1ª Linha (Fase Inicial 5-20 min):</strong> Benzodiazepínicos IV. <strong>Diazepam</strong> IV ou Midazolam IM são as drogas de escolha. <strong>Pegadinha:</strong> É falso que estejam proscritos na emergência.</li>\n<li><strong>Tratamento - 2ª Linha (Fase de Controle 20-40 min):</strong> Impregnação venosa rápida para prevenir nova crise. Fenitoína IV, ou Ácido Valproico, ou Levetiracetam. <strong>Pegadinha:</strong> O Propofol é reservado para a terceira linha (Status Refratário), onde paciente deve ser entubado, e não indicado puramente por \"alergia a fenitoína\".</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo do Status Convulsivo:\nT = 0-5 min: Estabilização ABC, Acesso IV, Glicemia capilar\nT = 5-20 min: Benzodiazepínico (Diazepam 0,15 mg/kg IV ou Midazolam 10mg IM). Repetir se crise não cessar.\nT = 20-40 min: Fármaco anticrise (Fenitoína 20 mg/kg IV a max 50mg/min ou Ácido Valproico IV ou Levetiracetam)\nT > 40 min (Status Refratário): Intubação Orotraqueal + Anestésico em bomba (Propofol, Midazolam IV, ou Tiopental). Acoplar EEG contínuo.\n</pre>"
+        },
+        {
+          "num": "4.2",
+          "title": "Cefaleias Primárias: Cefaleia Tensional e Enxaqueca",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Cefaleia Tipo Tensão (CTT)</strong> é a cefaleia primária mais frequente na população. Caracteriza-se por dor de caráter <strong>Palavra-chave:</strong> compressivo/aperto, bilateral, de intensidade leve a moderada, que NÃO está associada a náuseas e vômitos significativos.</li>\n<li><strong>Pegadinha clássica:</strong> Diferentemente da enxaqueca, a <strong>atividade física habitual (como andar ou subir escadas) NÃO costuma agravar a Cefaleia Tensional</strong>.</li>\n<li>Ao exame físico, o <strong>dolorimento à palpação manual pericraniana</strong> é frequentemente encontrado, refletindo a tensão muscular.</li>\n<li><strong>Tratamento da crise:</strong> Analgésicos simples e <strong>AINEs</strong> são a primeira linha. É falso que estejam proscritos.</li>\n<li><strong>Classificação e Profilaxia:</strong> A CTT é considerada crônica quando as crises ocorrem ≥ 15 dias/mês (e não < 07 dias/mês). Para profilaxia da CTT crônica, a Amitriptilina é o fármaco de escolha.</li>\n<li>Em contraste, a <strong>Enxaqueca (Migrânea)</strong> é uma dor de forte intensidade, pulsátil, unilateral, associada a fotofobia e náuseas, e que <strong>piora muito com esforço físico</strong>. O tratamento profilático inclui betabloqueadores (Propranolol), antidepressivos tricíclicos, ou neuromoduladores (Topiramato).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Característica</th>\n      <th>Cefaleia Tensional</th>\n      <th>Enxaqueca (Migrânea)</th>\n      <th>Cefaleia em Salvas</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Localização</td>\n      <td>Bilateral, difusa em faixa</td>\n      <td>Unilateral (hemicraniana)</td>\n      <td>Estritamente Unilateral (periorbital)</td>\n    </tr>\n    <tr>\n      <td>Padrão da dor</td>\n      <td>Aperto / Pressão</td>\n      <td>Pulsátil / Latejante</td>\n      <td>Em facada, excruciante, paciente agitado</td>\n    </tr>\n    <tr>\n      <td>Sintomas associados</td>\n      <td>Rigidez muscular cervical</td>\n      <td>Náuseas, vômitos, fotofobia</td>\n      <td>Sintomas autonômicos ipsilaterais (lacrimejamento, miose, ptose)</td>\n    </tr>\n    <tr>\n      <td>Fator agravante</td>\n      <td>Estresse emocional</td>\n      <td>Piora com atividade física rotineira</td>\n      <td>Álcool desencadeia crise aguda</td>\n    </tr>\n    <tr>\n      <td>Tratamento da crise</td>\n      <td>Analgésicos comuns, AINEs</td>\n      <td>Triptanos (Sumatriptano), AINEs</td>\n      <td>Oxigênio a 100% sob máscara, Sumatriptano subcutâneo</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
+        },
+        {
+          "num": "4.3",
+          "title": "Cefaleias Secundárias (Red Flags)",
+          "tags": [
+            "adj"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>Diante de toda cefaleia, deve-se excluir ativamente os sinais de alarme (\"Red Flags\", mnemônico SNOOP) que indicam causa secundária grave (tumor, infecção, hemorragia).</li>\n<li><strong>S - Sintomas Sistêmicos:</strong> Febre, perda de peso, calafrios (sugere meningite, encefalite, arterite temporal).</li>\n<li><strong>N - Neurológico Foco/Sinal:</strong> Alteração de consciência, confusão mental, hemiparesia, papiledema (sugere HIC, AVE, tumor).</li>\n<li><strong>O - Onset (Início Súbito):</strong> <strong>Palavra-chave:</strong> \"Thunderclap headache\" (cefaleia em trovoada), que atinge o pico em < 1 minuto. Principal suspeita: Hemorragia Subaracnóidea por ruptura de aneurisma.</li>\n<li><strong>O - Older (Idade > 50 anos):</strong> Uma cefaleia que surge pela primeira vez após os 50 anos é altamente suspeita de tumor ou Arterite de Células Gigantes (Arterite Temporal).</li>\n<li><strong>P - Pattern change (Mudança no Padrão):</strong> Agravamento progressivo, piora importante ao deitar ou na manobra de Valsalva (tosse, espirro), perda do padrão habitual de crises.</li>\n<li>Qualquer Red Flag exige investigação rigorosa com neuroimagem (TC ou RM) e, se necessário, análise do líquor.</li>\n</ul>"
+        }
+      ]
+    },
+    {
+      "title": "5. Demências e Distúrbios do Movimento/Sono/Vestibular",
+      "subchapters": [
+        {
+          "num": "5.1",
+          "title": "Demência com Corpos de Lewy e Outras Demências",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>O declínio cognitivo na terceira idade exige diferenciação entre causas reversíveis (B12, hipotireoidismo, neurossífilis) e degenerativas. A Doença de Alzheimer é a principal, com perda de memória anterógrada episódica.</li>\n<li>A <strong>Demência com Corpos de Lewy (DCL)</strong> é caracterizada por corpos de inclusão intracelulares contendo alfa-sinucleína.</li>\n<li><strong>Palavras-chave da Tríade Diagnóstica da DCL:</strong> 1) <strong>Flutuação cognitiva</strong> com variações marcantes no nível de atenção; 2) <strong>Alucinações visuais</strong> vívidas, detalhadas e recorrentes, muito precoces na doença; e 3) <strong>Sintomas parkinsonianos</strong> espontâneos (bradicinesia, rigidez plástica) iniciados há menos de 1 ano do déficit cognitivo.</li>\n<li>Além da tríade, pacientes com DCL possuem sensibilidade extrema neuroléptica. O uso de antipsicóticos típicos (como Haloperidol) precipita piora motora severa irreversível. Para controle de agitação psicótica grave nesta demência, dá-se preferência a antipsicóticos atípicos (Quetiapina ou Clozapina).</li>\n<li><strong>Demência Vascular:</strong> Evolução em degraus, ligada a fatores de risco cardiovasculares e achados de infartos lacunares múltiplos na RM.</li>\n<li><strong>Demência Frontotemporal:</strong> Alteração primária de personalidade (apatia, desinibição sexual/social, perda de empatia) e de linguagem (afasias primárias progressivas), com memória preservada nas fases iniciais.</li>\n</ul>"
+        },
+        {
+          "num": "5.2",
+          "title": "Neurologia Vestibular: Vertigem Central vs. Periférica",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A vertigem (tontura rotatória, ilusão de movimento) divide-se em periférica (labiríntica) e central (tronco/cerebelo).</li>\n<li><strong>Diferenças do Nistagmo:</strong> Na vertigem periférica, o nistagmo é unidirecional (bate sempre pro mesmo lado), horizontal/torcional, e é <strong>inibido pela fixação do olhar</strong> (o paciente foca num ponto e diminui a intensidade). Na <strong>Vertigem Central</strong>, o nistagmo pode ser puramente vertical ou torcional, bater para o lado para o qual se olha (multidirecional) e <strong>NÃO é inibido pela fixação ocular</strong>.</li>\n<li><strong>Palavra-chave do quadro central:</strong> Muitas vezes não tem perda auditiva. Acompanha-se de déficits neurológicos, os \"Sinais dos 5 Ds\": Diplopia, Disartria, Disfagia, Dismetria e Drop attacks.</li>\n<li><strong>Diagnósticos Periféricos Principais:</strong>\n  <ul>\n    <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> Vertigem de segundos desencadeada por virar a cabeça na cama. Diagnóstico por <strong>Dix-Hallpike</strong>. Tratamento primário: <strong>Manobra de Epley</strong>. Medicamentos antivertiginosos não curam VPPB.</li>\n    <li><strong>Doença de Ménière:</strong> Vertigem durando horas, associada à clássica tríade: <strong>hipoacusia flutuante, zumbido e plenitude aural</strong>. Fisiopatologia: hidropisia endolinfática.</li>\n    <li><strong>Neurite Vestibular:</strong> Vertigem contínua que dura dias a semanas, muitas vezes pós-infecção viral de vias aéreas, sem qualquer déficit auditivo.</li>\n  </ul>\n</li>\n<li><strong>Pegadinha:</strong> Paciente idoso, com fatores de risco cardiovasculares, que desenvolve quadro de vertigem aguda isolada e ataxia importante, com nistagmo que não diminui à fixação, tem altíssima suspeita de <strong>Vertigem de Origem Central</strong> (AVC isquêmico de cerebelo ou fossa posterior). Tais pacientes não melhoram com manobras de reposicionamento, não é Meniere, e exigem RM encefálica urgente.</li>\n</ul>"
+        },
+        {
+          "num": "5.3",
+          "title": "Fisiologia e Distúrbios do Sono",
+          "tags": [
+            "ja"
+          ],
+          "bodyHtml": "<ul class=\"reader-list\">\n<li>A arquitetura do sono divide-se em sono não-REM (NREM: N1, N2, N3) e sono REM (Rapid Eye Movement).</li>\n<li><strong>Sono NREM fase N3 (Sono de Ondas Lentas):</strong> Ocorre o sono fisiológico mais profundo e restaurador. É a fase onde há liberação do hormônio do crescimento (GH) nas crianças, e a fase em que incidem os eventos de parassônias NREM como o <strong>sonambulismo e o terror noturno</strong>.</li>\n<li><strong>Sono REM:</strong> Caracterizado por rápido movimento ocular, atonia muscular generalizada (para não agirmos nossos sonhos) e aumento da atividade simpática e da frequência cardíaca/respiratória. O REM ocorre em ciclos periódicos, com as maiores porções ao final da noite. <strong>Pegadinha:</strong> É nesta fase que ocorrem os sonhos vívidos e a consolidação da memória emocional.</li>\n<li>A alternância vigília/sono é ditada pela melatonina (glândula pineal) e pela pressão homeostática da adenosina (acúmulo progressivo durante o dia induz a pressão para o sono).</li>\n<li><strong>Síndrome da Apneia Obstrutiva do Sono (SAOS):</strong> Obstrução das vias aéreas superiores, causando microdespertares. <strong>Tríade clássica:</strong> Roncos altos noturnos + Pausas respiratórias testemunhadas + Sonolência Excessiva Diurna. Forte fator de risco para Hipertensão Arterial Sistêmica de difícil controle, AVE e Arritmias (FA). Padrão ouro diagnóstico: Polissonografia. Tratamento padrão: CPAP nasal.</li>\n<li><strong>Narcolepsia:</strong> Distúrbio marcado por intrusão do sono REM na vigília, causando sonolência diurna extrema, episódios de cataplexia (perda súbita do tônus deflagrada por gargalhadas/susto), alucinações hipnagógicas e paralisia do sono. Decorre da deficiência do neurotransmissor hipocretina no LCR.</li>\n</ul>"
+        }
+      ]
+    }
+  ]
+},
     "uepa_reumatologia": {
   "area": "Reumatologia",
   "title": "Mestre ENAMED - Reumatologia",
@@ -1038,126 +1190,7 @@
 },
     
     
-    "uepa_neurologia": {
-  "area": "Neurologia",
-  "title": "Rapid Review: Neurologia",
-  "isExample": false,
-  "sections": [
-    {
-      "title": "1. Acidentes Vasculares Cerebrais (AVC) e Doenças Cerebrovasculares",
-      "subchapters": [
-        {
-          "num": "1.1",
-          "title": "Acidente Vascular Cerebral Isquêmico (AVCi)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>O AVC isquêmico decorre de uma oclusão arterial aguda e se manifesta por déficits focais de início súbito (hemiparesia, afasia, hemianopsia).</li>\n<li><strong>Diagnóstico:</strong> A primeira conduta diante de suspeita é solicitar <strong>TC de crânio sem contraste</strong> para descartar hemorragia, juntamente com a glicemia capilar (para descartar hipoglicemia). <strong>Pegadinha:</strong> não é recomendado aguardar dosagem de plaquetas ou coagulograma para iniciar a trombólise, exceto na suspeita de distúrbio prévio de coagulação ou uso de anticoagulantes.</li>\n<li><strong>Tratamento na fase aguda:</strong> Trombólise venosa (Alteplase - rtPA) se paciente apresentar-se em até 4,5 horas do início dos sintomas (delta T). <strong>Palavra-chave:</strong> Trombectomia mecânica pode ser indicada até 24 horas em oclusões de grandes vasos da circulação anterior.</li>\n<li><strong>Controle pressórico:</strong> Em candidatos à trombólise, a PA deve ser mantida < 185x110 mmHg. Se não for trombolisar, só reduzir se PA > 220x120 mmHg (permissividade hipertensiva para proteger a área de penumbra isquêmica). <strong>Pegadinha:</strong> após trombólise, a PA não deve ser mantida > 180/105 mmHg, o alvo é abaixo disso.</li>\n<li><strong>Manejo de temperatura e suporte:</strong> <strong>Pegadinha:</strong> a hipertermia (>38ºC) piora o prognóstico neurológico e não deve ser tolerada. Deve-se tratar a febre.</li>\n<li><strong>Contraindicações à Trombólise:</strong> Hemorragia intracraniana prévia, PA não controlada > 185/110, plaquetas < 100.000, INR > 1.7. <strong>Pegadinha:</strong> O uso prévio de droga antiplaquetária (ex: AAS) em monoterapia <strong>NÃO</strong> contraindica a trombólise.</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo AVC Agudo:\nPaciente com déficit focal súbito\n↓\nColetar Glicemia Capilar + TC de Crânio sem contraste imediata\n↓\nTC exclui hemorragia? \n  → Não: Manejo de AVCH.\n  → Sim: Avaliar tempo de início dos sintomas (Delta T < 4.5h) e contraindicações.\n↓\nSe Delta T < 4.5h e sem contraindicações:\n  → Controlar PA < 185x110\n  → Trombólise com Alteplase 0,9 mg/kg IV\n</pre>"
-        },
-        {
-          "num": "1.2",
-          "title": "Hemorragia Intraparenquimatosa (AVCh) e Subaracnóidea (HSA)",
-          "tags": [
-            "adj"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemorragia Intraparenquimatosa (AVCh)</strong> mais comum é a hipertensiva, acometendo principalmente os núcleos da base (putâmen), tálamo e ponte. Apresenta cefaleia, vômitos e déficit focal súbito, muitas vezes com rebaixamento da consciência precoce.</li>\n<li>O controle da PA no AVCh foca em alvo sistólico em torno de 140 mmHg, para evitar a expansão do hematoma, sem prejudicar a perfusão.</li>\n<li>A <strong>Hemorragia Subaracnóidea (HSA)</strong> cursa com a <strong>Palavra-chave:</strong> \"A pior cefaleia da vida\", explosiva, associada a rigidez de nuca e vômitos. Geralmente secundária à ruptura de aneurisma sacular.</li>\n<li>O diagnóstico da HSA é feito com TC de crânio sem contraste. Se TC normal e alta suspeita: punção lombar (buscando xantocromia após 12h ou líquor hemorrágico que não clareia nas três amostras).</li>\n<li><strong>Escala de Hunt-Hess:</strong> (Avalia a clínica da HSA). Grau 1: assintomático ou leve cefaleia. Grau 2: paralisia de nervo craniano, cefaleia grave, rigidez nucal. Grau 3: confusão, letargia. Grau 4: estupor, hemiparesia. Grau 5: coma.</li>\n<li><strong>Complicações da HSA:</strong> Ressangramento (maior risco nas primeiras 24-72h), Vasoespasmo (pico do 3º ao 14º dia) tratado com Nimodipino 60mg 4/4h, e Hidrocefalia.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Complicação da HSA</th>\n      <th>Período de Maior Risco</th>\n      <th>Prevenção/Tratamento</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Ressangramento</td>\n      <td>24h a 72h</td>\n      <td>Clipping cirúrgico ou embolização endovascular do aneurisma precoce</td>\n    </tr>\n    <tr>\n      <td>Vasoespasmo isquêmico</td>\n      <td>3 a 14 dias (pico 7º dia)</td>\n      <td>Nimodipino VO. Se ocorrer, induzir hipertensão arterial.</td>\n    </tr>\n    <tr>\n      <td>Hidrocefalia aguda</td>\n      <td>Primeiras 24h</td>\n      <td>Derivação Ventricular Externa (DVE) se rebaixamento de consciência</td>\n    </tr>\n    <tr>\n      <td>Hiponatremia (Síndrome Perdedora de Sal)</td>\n      <td>Primeira a segunda semana</td>\n      <td>Reposição com soro hipertônico. Não restringir fluidos!</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
-        }
-      ]
-    },
-    {
-      "title": "2. Coma e Alterações da Consciência",
-      "subchapters": [
-        {
-          "num": "2.1",
-          "title": "Estado Confusional Agudo (Delirium)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>O <strong>Delirium</strong> é uma alteração aguda e flutuante do nível de consciência, com inatenção e desorganização do pensamento, desencadeado por causas orgânicas (infecções, DHE, medicamentos) muito comum em idosos internados.</li>\n<li>O diagnóstico e rastreamento, mesmo em pacientes internados em Unidade de Terapia Intensiva (UTI), devem utilizar ferramentas validadas. <strong>Pegadinha:</strong> a Richmond Agitation-Sedation Scale (RASS) avalia a agitação/sedação (onde zero é alerta e calmo), mas a ferramenta clássica de triagem para delirium na UTI é o <strong>CAM-ICU</strong> (Confusion Assessment Method for the ICU). É falso afirmar que não há ferramentas validadas.</li>\n<li><strong>Tratamento:</strong> A base do tratamento é a correção do fator precipitante (ex: tratar infecção urinária, suspender drogas anticolinérgicas, corrigir hiponatremia) e medidas não farmacológicas (orientação temporal, evitar contenção física, promover sono adequado). Existem sim evidências de medidas recomendadas para prevenir a condição, como o manejo do ambiente e mobilização precoce.</li>\n<li>No polo <strong>hiperativo</strong> do delirium, quando há agitação psicomotora que coloca o paciente ou a equipe em risco (e quando as medidas não farmacológicas falharam), o tratamento pode ser feito com a prescrição de <strong>antipsicóticos</strong> (ex: Haloperidol ou atípicos como Quetiapina, Risperidona).</li>\n<li><strong>Pegadinha:</strong> Sendo um estado confusional agudo (e não crônico), o uso de <strong>benzodiazepínicos é PROSCRITO</strong> como primeira escolha no tratamento do delirium hiperativo, pois podem paradoxalmente agravar a confusão, sendo reservados apenas para delirium tremens (abstinência alcoólica) ou abstinência a sedativos.</li>\n</ul>"
-        },
-        {
-          "num": "2.2",
-          "title": "Hipertensão Intracraniana (HIC)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A Síndrome de <strong>Hipertensão Intracraniana (HIC)</strong> caracteriza-se pela tríade clássica: cefaleia progressiva (pior deitada ou ao tossir), vômitos em jato e papiledema no fundo de olho. Alteração no nível de consciência e Tríade de Cushing (bradicardia, hipertensão arterial, alteração do ritmo respiratório) indicam iminência de herniação.</li>\n<li><strong>Monitorização:</strong> A Pressão Intracraniana (PIC) normal é até 20 mmHg. A Pressão de Perfusão Cerebral (PPC) é igual à PAM - PIC. <strong>Pegadinha:</strong> O alvo no manejo da HIC é manter a PPC geralmente entre 60 e 70 mmHg. Não se deve manter a PPC abaixo do limite inferior (30-40 mmHg) pois causaria isquemia cerebral global severa.</li>\n<li><strong>Suporte Hemodinâmico:</strong> <strong>Pegadinha:</strong> Quando indicado elevar a PAM para atingir a PPC alvo em pacientes com HIC grave, o vasopressor de escolha é a <strong>noradrenalina</strong>, que deve ser titulada conforme a necessidade de manter a PPC > 60 mmHg.</li>\n<li><strong>Medidas gerais de HIC:</strong> Elevação da cabeceira a 30 graus, alinhamento cervical, analgesia e sedação otimizada (Propofol ou Midazolam, não o Tiopental como primeira escolha de sedação rotineira). <strong>Pegadinha:</strong> Deve-se EVITAR e são <strong>contraindicadas as soluções hipotônicas</strong> (ex: glicose a 5%, Ringer Lactato) e água livre, pois aumentam o edema cerebral. O alvo é manter normovolemia com solução salina isotônica (SF 0,9%).</li>\n<li><strong>Terapia de resgate:</strong> Osmoterapia com Manitol a 20% ou Salina Hipertônica a 3% em bôlus. Hiperventilação temporária aguda (alvo de pCO2 entre 30-35 mmHg) para diminuir o fluxo sanguíneo cerebral via vasoconstrição, útil apenas por breves períodos.</li>\n<li><strong>Pegadinha sobre Hipotermia:</strong> A hipotermia terapêutica como controle de HIC no traumatismo cranioencefálico (TCE) <strong>NÃO</strong> demonstrou benefício significativo no desfecho neurológico em ensaios robustos (estudo POLAR), não sendo medida de primeira linha para tratamento de HIC.</li>\n</ul>"
-        }
-      ]
-    },
-    {
-      "title": "3. Doenças Neuromusculares e Mielopatias",
-      "subchapters": [
-        {
-          "num": "3.1",
-          "title": "Neuropatias Periféricas: Guillain-Barré e Miastenia Gravis",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A queixa de fraqueza muscular aguda na emergência necessita diferenciação. <strong>Síndrome de Guillain-Barré (SGB):</strong> Polirradiculoneuropatia desmielinizante inflamatória aguda. Cursa com fraqueza muscular aguda, ascendente, simétrica, <strong>arreflexia</strong> ou hiporreflexia global, associada a sintomas disautonômicos. Muitas vezes precedida por infecção gastrintestinal (Campylobacter jejuni) ou respiratória.</li>\n<li><strong>Pegadinha na SGB:</strong> A queixa de <strong>dor</strong> pode estar presente de forma exuberante (dor radicular, mialgia), especialmente na fase aguda e na fase de recuperação, sendo uma importante manifestação não-motora.</li>\n<li>O tratamento da SGB baseia-se no uso de <strong>Imunoglobulina Humana Intravenosa (IVIG)</strong> ou <strong>Plasmaférese</strong>. Ambas têm eficácia equivalente. <strong>Pegadinha:</strong> É FALSO afirmar que a plasmaférese está contraindicada; ela é tratamento de primeira linha junto com a IVIG. Corticosteroides NÃO são eficazes na SGB.</li>\n<li><strong>Miastenia Gravis:</strong> Doença da junção neuromuscular por autoanticorpos (anti-AChR). Cursa com fraqueza flutuante, que piora com o esforço e ao final do dia. <strong>Pegadinha:</strong> A ptose palpebral e a diplopia são <strong>achados clássicos</strong> associados à Miastenia Gravis (comprometimento ocular). É FALSO afirmar que não ocorrem.</li>\n<li>No manejo da Miastenia Gravis, os anticolinesterásicos (ex: <strong>Piridostigmina</strong>) são a primeira linha sintomática. <strong>Pegadinha:</strong> Piridostigmina NÃO está indicada na Guillain-Barré. Ademais, bloqueadores neuromusculares em pacientes com suspeita de MG devem ser usados com extrema cautela ou evitados, pois há altíssima sensibilidade a eles, não sendo indicados de rotina na doença.</li>\n</ul>"
-        },
-        {
-          "num": "3.2",
-          "title": "Síndromes Medulares",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Hemisecção Medular (Síndrome de Brown-Séquard)</strong> ocorre em traumas penetrantes (faca, tiro) ou acidentes, afetando apenas metade da medula espinhal (lado direito ou esquerdo).</li>\n<li>A medula transmite: sensibilidade dolorosa e térmica pelo trato espinotalâmico lateral (que cruza a linha média logo ao entrar na medula) e função motora (trato corticoespinhal lateral) e sensibilidade profunda/proprioceptiva (fascículo grácil/cuneiforme), que cruzam no bulbo, portanto correm ipsilateralmente na medula.</li>\n<li><strong>Palavra-chave: Clínica do Brown-Séquard:</strong> Abaixo do nível da lesão teremos: <strong>1) Perda da força motora IPSILATERAL</strong>, <strong>2) Perda da propriocepção, tátil epicrítico e estereognosia IPSILATERAL</strong> e <strong>3) Perda da sensibilidade térmica e dolorosa CONTRALATERAL</strong> à lesão medular.</li>\n<li><strong>Pegadinha:</strong> Se um paciente teve hemisecção da medula à <strong>direita</strong> no nível de T8: a perda de função motora será à <strong>direita</strong>. A perda de estereognosia será à <strong>direita</strong>. Porém, a <strong>perda da sensibilidade térmica e dolorosa abaixo do segmento medular lesionado será à ESQUERDA</strong>.</li>\n<li>Além disso, o paciente evoluirá com síndrome do PRIMEIRO neurônio motor (piramidal) abaixo do nível da lesão (espasticidade, hiperreflexia, Babinski), e não do segundo neurônio (flacidez, arreflexia).</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Síndrome Medular</th>\n      <th>Mecanismo principal</th>\n      <th>Clínica principal</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Síndrome Centro-medular</td>\n      <td>Trauma em hiperextensão (idosos c/ artrose)</td>\n      <td>Fraqueza muito maior em membros superiores do que inferiores (forma de xale)</td>\n    </tr>\n    <tr>\n      <td>Síndrome Medular Anterior</td>\n      <td>Oclusão da artéria espinhal anterior</td>\n      <td>Paralisia e perda de dor/temperatura bilaterais. Preserva propriocepção (cordão posterior íntegro)</td>\n    </tr>\n    <tr>\n      <td>Síndrome de Brown-Séquard</td>\n      <td>Hemisecção penetrante</td>\n      <td>Motor e propriocepção ipsilateral perdidos. Dor/temperatura contralateral perdidos.</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
-        }
-      ]
-    },
-    {
-      "title": "4. Epilepsias e Cefaleias",
-      "subchapters": [
-        {
-          "num": "4.1",
-          "title": "Estado de Mal Epiléptico (Status Epilepticus)",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>O Estado de Mal Epiléptico é definido como uma crise convulsiva contínua por mais de 5 minutos, ou 2 ou mais crises sucessivas sem recuperação completa da consciência entre elas. É uma emergência médica neurológica.</li>\n<li><strong>Principais Causas:</strong> A causa MAIS comum é a não adesão ou retirada abrupta de medicamentos anticonvulsivantes prévios. <strong>Pegadinha:</strong> É falso afirmar que a retirada do medicamento não está entre as causas principais; é a primeiríssima.</li>\n<li><strong>Diagnóstico e Monitorização:</strong> A <strong>dosagem sérica de drogas anticonvulsivantes</strong> (fenitoína, ácido valproico, fenobarbital), quando disponível, é fortemente recomendada para guiar o manejo na emergência (descobrir níveis subterapêuticos). <strong>Pegadinha:</strong> O Eletroencefalograma (EEG) contínuo tem altíssimo valor no diagnóstico, sobretudo para excluir status não-convulsivo após controle motor da crise, sendo incorreto afirmar que tem pouco valor.</li>\n<li><strong>Tratamento - 1ª Linha (Fase Inicial 5-20 min):</strong> Benzodiazepínicos intravenosos são as drogas de escolha (ex: <strong>Diazepam</strong> IV ou Midazolam IM). <strong>Pegadinha:</strong> É falso que estejam proscritos; são os salvadores na emergência pré e intra-hospitalar.</li>\n<li><strong>Tratamento - 2ª Linha (Fase de Controle 20-40 min):</strong> Para evitar recorrência, impregnação com um fármaco anticrise venoso (ex: Fenitoína em dose de ataque 20 mg/kg diluída em SF 0,9%, ou Ácido Valproico, ou Levetiracetam). <strong>Pegadinha:</strong> O Propofol é reservado para a fase de status epiléptico refratário (após falha da 2ª linha, requer intubação), e não meramente porque o paciente tem alergia à fenitoína (poderia usar ácido valproico ou levetiracetam).</li>\n</ul>\n<pre class=\"reader-pre-card\">\nAlgoritmo do Status Convulsivo:\nT = 0-5 min: ABC, Glicemia, acesso IV.\nT = 5-20 min: Benzodiazepínico (Diazepam 0,15 mg/kg IV ou Midazolam 10mg IM). Pode repetir 1x.\nT = 20-40 min: Fenitoína 20 mg/kg IV (velocidade max 50mg/min) ou Valproato ou Levetiracetam.\nT > 40 min (Refratário): IOT + Propofol IV, Midazolam IV em bomba ou Tiopental. Monitorar com EEG contínuo.\n</pre>"
-        },
-        {
-          "num": "4.2",
-          "title": "Cefaleias Primárias: Cefaleia Tensional e Enxaqueca",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A <strong>Cefaleia Tipo Tensão (CTT)</strong> é a cefaleia primária mais frequente na população. Caracteriza-se por dor de caráter <strong>Palavra-chave:</strong> compressivo/aperto, de intensidade leve a moderada, bilateral, que não impede as atividades diárias e NÃO está associada a vômitos (pode ter leve fotofobia OU fonofobia, mas não ambos intensos).</li>\n<li><strong>Pegadinha clássica:</strong> Diferentemente da enxaqueca (migrânea), a <strong>atividade física habitual (como andar ou subir escadas) NÃO costuma agravar a Cefaleia Tensional</strong>.</li>\n<li>Ao exame físico, o dolorimento à palpação manual pericraniana (sensibilidade da musculatura cervical e pericraniana) é <strong>frequentemente encontrado</strong> (CTT associada à tensão muscular).</li>\n<li><strong>Tratamento da crise:</strong> Analgésicos simples (dipirona, paracetamol) e <strong>Anti-inflamatórios Não Esteroidais (AINEs)</strong> (ibuprofeno, naproxeno) são a primeira linha. É falso que estejam proscritos.</li>\n<li><strong>Classificação:</strong> A CTT é considerada crônica quando as crises ocorrem ≥ 15 dias/mês (e não < 07 dias/mês). Para a profilaxia da CTT crônica, o medicamento de escolha é a Amitriptilina.</li>\n<li>Em contraste, a <strong>Enxaqueca (Migrânea)</strong> é uma cefaleia de forte intensidade, latejante/pulsátil, unilateral, associada a fotofobia, fonofobia, náuseas, vômitos e que <strong>piora com o esforço físico rotineiro</strong>.</li>\n</ul>\n<div class=\"reader-table-wrap\">\n<table class=\"reader-table\">\n  <thead>\n    <tr>\n      <th>Característica</th>\n      <th>Cefaleia Tensional</th>\n      <th>Enxaqueca (Migrânea)</th>\n      <th>Cefaleia em Salvas</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Localização</td>\n      <td>Bilateral, em faixa</td>\n      <td>Unilateral</td>\n      <td>Estritamente Unilateral (periorbital)</td>\n    </tr>\n    <tr>\n      <td>Padrão da dor</td>\n      <td>Aperto / Pressão</td>\n      <td>Pulsátil / Latejante</td>\n      <td>Em facada, lancinante</td>\n    </tr>\n    <tr>\n      <td>Intensidade e Duração</td>\n      <td>Leve/Moderada (30min a 7 dias)</td>\n      <td>Moderada/Grave (4 a 72 horas)</td>\n      <td>Insuportável (15 a 180 min, \"clusters\")</td>\n    </tr>\n    <tr>\n      <td>Sintomas associados</td>\n      <td>Rigidez pericraniana, sem náuseas severas</td>\n      <td>Náuseas, vômitos, fotofobia, fonofobia</td>\n      <td>Sintomas autonômicos ipsilaterais (lacrimejamento, ptose, congestão nasal)</td>\n    </tr>\n    <tr>\n      <td>Fator agravante</td>\n      <td>Estresse emocional. Não piora com esforço.</td>\n      <td>Piora com atividade física rotineira</td>\n      <td>Álcool precipita crises</td>\n    </tr>\n  </tbody>\n</table>\n</div>"
-        }
-      ]
-    },
-    {
-      "title": "5. Demências e Distúrbios do Movimento/Sono/Vestibular",
-      "subchapters": [
-        {
-          "num": "5.1",
-          "title": "Demência com Corpos de Lewy e Outras Demências",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>O declínio cognitivo e comportamental na terceira idade requer diagnóstico diferencial preciso. A Doença de Alzheimer é a causa mais comum, de instalação insidiosa com perda de memória episódica recente.</li>\n<li>A <strong>Demência com Corpos de Lewy (DCL)</strong> é a segunda causa mais frequente de demência neurodegenerativa. Caracteriza-se pelo depósito da proteína alfa-sinucleína intraneuronal.</li>\n<li><strong>Palavras-chave da DCL (Tríade Diagnóstica):</strong> 1) <strong>Flutuação cognitiva</strong> com variações marcantes na atenção e alerta; 2) <strong>Alucinações visuais</strong> vívidas, detalhadas e recorrentes, tipicamente precoces no quadro; e 3) <strong>Sintomas parkinsonianos</strong> espontâneos (bradicinesia, rigidez, tremor) que se iniciam em menos de um ano ou concomitantemente ao declínio cognitivo.</li>\n<li>Além da tríade, os pacientes com DCL possuem altíssima sensibilidade neuroléptica, sofrendo grave piora motora com uso de antipsicóticos clássicos (como haloperidol). É muito comum também o distúrbio comportamental do sono REM (agir o próprio sonho à noite).</li>\n<li>A Demência Frontotemporal causa alterações comportamentais exuberantes precoces, apatia, hiperoralidade e perda de empatia. A Demência Vascular tem evolução em degraus associada a múltiplos pequenos AVCs e fatores de risco cardiovasculares.</li>\n</ul>"
-        },
-        {
-          "num": "5.2",
-          "title": "Neurologia Vestibular: Vertigem Central vs. Periférica",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>A vertigem (tontura rotatória) pode ser de origem periférica (labirinto, nervo vestibular) ou central (tronco encefálico, cerebelo). O exame físico através de manobras provocativas e análise do nistagmo é mandatório.</li>\n<li><strong>Diferenças do Nistagmo:</strong> Na vertigem periférica, o nistagmo costuma ser unidirecional, horizontal-rotatório, inibido pela fixação ocular e associado a forte sintoma neurovegetativo (náuseas/vômitos intensos). Na <strong>Vertigem Central</strong>, o nistagmo pode ser puro (puramente vertical ou puramente torcional), multidirecional (bate para o lado que se olha) e <strong>NÃO é inibido pela fixação do olhar</strong>.</li>\n<li><strong>Palavra-chave do quadro central:</strong> Os quadros centrais (ex: AVE isquêmico cerebelar ou de tronco) frequentemente se acompanham de \"Sinais de Alarme\" (Red Flags dos 5 Ds): Diplopia, Disartria, Disfagia, Dismetria e Drop attacks (quedas súbitas), além de ausência de perda auditiva na maioria dos casos.</li>\n<li><strong>Diagnósticos Periféricos Principais:</strong>\n  <ul>\n    <li><strong>VPPB (Vertigem Posicional Paroxística Benigna):</strong> Vertigem rápida (segundos), desencadeada por mudanças de decúbito. Diagnóstico pela manobra de Dix-Hallpike (nistagmo geotrópico) e tratamento pela manobra de reposicionamento de Epley.</li>\n    <li><strong>Doença de Ménière:</strong> Crises de vertigem durando horas (espontâneas), acompanhadas da clássica tríade: <strong>hipoacusia (perda auditiva neurossensorial flutuante), zumbido (acúfeno) e plenitude aural</strong>.</li>\n    <li><strong>Neurite Vestibular:</strong> Vertigem intensa contínua que dura dias, associada a infecção viral prévia, sem sintomas auditivos.</li>\n  </ul>\n</li>\n<li><strong>Pegadinha:</strong> Paciente idoso, hipertensa e diabética que acorda com vertigem isolada, dificuldade importante para deambular (dismetria/ataxia) e nistagmo que não inibe à fixação (ou nistagmo vertical), mesmo com audição normal, deve ter como principal hipótese <strong>Vertigem de origem central (AVC vertebrobasilar)</strong> e requer neuroimagem de urgência (TC ou RM).</li>\n</ul>"
-        },
-        {
-          "num": "5.3",
-          "title": "Fisiologia e Distúrbios do Sono",
-          "tags": [
-            "ja"
-          ],
-          "bodyHtml": "<ul class=\"reader-list\">\n<li>O sono divide-se em NREM (N1, N2 e N3) e REM (Rapid Eye Movement).</li>\n<li><strong>Sono NREM fase N3 (Ondas Lentas):</strong> É o sono mais profundo e reparador do ponto de vista físico. Nele ocorre maior liberação de hormônio do crescimento (GH) em crianças, parassônias NREM como sonambulismo e terror noturno. A atividade no EEG é marcada por ondas delta de alta amplitude e baixa frequência.</li>\n<li><strong>Sono REM:</strong> Caracterizado por movimentos rápidos dos olhos, atonia muscular esquelética quase completa (para não agirmos os sonhos) e EEG rápido, semelhante à vigília (paradoxal). Os sonhos vívidos ocorrem nesta fase. No ciclo normal do adulto, o REM acontece em ciclos de aproximadamente 90 minutos, com os maiores períodos de REM ocorrendo na segunda metade da noite.</li>\n<li><strong>Pegadinha da fisiologia:</strong> A alternância entre vigília e sono é regulada pelo ciclo circadiano e pressão homeostática do sono. A melatonina, produzida pela glândula pineal, tem seu pico à noite com a escuridão e ajuda a sinalizar a hora de dormir. O núcleo supraquiasmático do hipotálamo é o marcapasso biológico central.</li>\n<li><strong>Narcolepsia:</strong> Distúrbio marcado por sonolência excessiva diurna, cataplexia (perda súbita do tônus induzida por emoção), paralisia do sono e alucinações hipnagógicas. Acorre pela deficiência de hipocretina/orexina no hipotálamo.</li>\n</ul>"
-        }
-      ]
-    }
-  ]
-},
+    
     
     
     "uepa_endocrinologia": {
