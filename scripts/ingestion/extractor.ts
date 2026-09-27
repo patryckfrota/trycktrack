@@ -162,6 +162,40 @@ export async function extractQuestionsFromPdf(
   console.log(`[Extractor] Iniciando extração clínica de alta fidelidade para: ${cadernoPdfPath}`);
   console.log(`[Extractor] Intervalo: Questões ${startQuestion} a ${startQuestion + limitQuestions - 1} | Modelo: ${modelName} | Padrão: UEPA/MODELO-ANALISE`);
 
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Divisão automática em sub-lotes para evitar truncamento por limite de tokens de saída (maxOutputTokens)
+  const CHUNK_SIZE = 8;
+  if (limitQuestions > CHUNK_SIZE) {
+    console.log(`[Extractor] 📦 Dividindo lote de ${limitQuestions} questões em sub-lotes de até ${CHUNK_SIZE} para garantir integridade do JSON e evitar estouro de tokens.`);
+    const allItems: ExtractedItem[] = [];
+    let currentStart = startQuestion;
+    const endQuestion = startQuestion + limitQuestions - 1;
+
+    while (currentStart <= endQuestion) {
+      const currentChunkLimit = Math.min(CHUNK_SIZE, endQuestion - currentStart + 1);
+      console.log(`\n[Extractor] === Sub-lote: Q${currentStart} a Q${currentStart + currentChunkLimit - 1} (${currentChunkLimit} questões) ===`);
+      const chunkBatch = await extractQuestionsFromPdf(cadernoPdfPath, examMetadata, {
+        ...options,
+        startQuestion: currentStart,
+        limitQuestions: currentChunkLimit
+      });
+
+      allItems.push(...chunkBatch.items);
+      currentStart += currentChunkLimit;
+
+      if (currentStart <= endQuestion) {
+        console.log(`[Extractor] Aguardando 2s antes do próximo sub-lote...`);
+        await sleep(2000);
+      }
+    }
+
+    return {
+      examId: examMetadata.examId,
+      items: allItems
+    };
+  }
+
   const pdfTextSample = extractTextFromPdf(cadernoPdfPath);
 
   if (!apiKey) {
@@ -185,37 +219,59 @@ export async function extractQuestionsFromPdf(
 
   const candidateModels = [
     'gemini-3.5-flash-lite',
-    'gemini-3.1-flash-lite',
+    'gemini-3.8-flash',
     'gemini-3.7-flash'
   ];
 
   let lastZodErrors: string | null = null;
-  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const currentModel = candidateModels[(attempt - 1) % candidateModels.length];
     console.log(`[Extractor] [Tentativa ${attempt}/${maxAttempts}] Chamando Gemini API (modelo: ${currentModel})...`);
 
     try {
-      const response = await ai.models.generateContent({
-        model: currentModel,
-        contents: [
-          {
-            role: 'user',
-            parts: [
+      let response: any;
+      let apiRetry = 0;
+      const MAX_API_RETRIES = 3;
+
+      while (true) {
+        try {
+          response = await ai.models.generateContent({
+            model: currentModel,
+            contents: [
               {
-                inlineData: {
-                  data: pdfBase64,
-                  mimeType: 'application/pdf'
-                }
-              },
-              {
-                text: currentPrompt
+                role: 'user',
+                parts: [
+                  {
+                    inlineData: {
+                      data: pdfBase64,
+                      mimeType: 'application/pdf'
+                    }
+                  },
+                  {
+                    text: currentPrompt
+                  }
+                ]
               }
             ]
+          });
+          break;
+        } catch (apiErr: any) {
+          const errMsg = apiErr?.message || '';
+          const isTransient = errMsg.includes('503') || errMsg.includes('429') ||
+                              errMsg.includes('high demand') || errMsg.includes('ResourceExhausted') ||
+                              errMsg.includes('UNAVAILABLE') || errMsg.includes('overloaded');
+
+          if (isTransient && apiRetry < MAX_API_RETRIES) {
+            apiRetry++;
+            const backoffMs = Math.min(15000, Math.pow(2, apiRetry) * 2000 + Math.floor(Math.random() * 1000));
+            console.warn(`[Extractor] ⏳ Erro transitório da API (${errMsg.slice(0, 80)}...). Backoff de ${(backoffMs / 1000).toFixed(1)}s (tentativa transitória ${apiRetry}/${MAX_API_RETRIES})...`);
+            await sleep(backoffMs);
+            continue;
           }
-        ]
-      });
+          throw apiErr;
+        }
+      }
 
       const responseText = response.text || '';
       const cleanedJson = cleanJsonOutput(responseText);
