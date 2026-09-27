@@ -714,12 +714,6 @@
             return (ctx.divida === 0 || ctx.divida + block.questions <= ctx.dailyGoal) ? block : null;
         }
 
-        function trailTodayHint(divida, block) {
-            if (divida && block) return `Primeiro as revisões, misturadas entre assuntos; depois ${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}.`;
-            if (block) return `${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}.`;
-            return `Revisões misturadas entre assuntos${divida > 0 ? ' — o bloco novo fica pra quando a revisão couber na meta do dia' : ''}.`;
-        }
-
         function trailBlockCardHtml(block) {
             const id = block.id.replace(/'/g, "\\'");
             const pct = Math.round(block.weight * 1000) / 10;
@@ -811,8 +805,7 @@
                 ${ctx.pace.status === 'sem-data' ? trailPaceHtml(trailId, track.examDate, ctx.daysLeft, ctx.pace, finalStretch) : ''}
 
                 ${divida > 0 || todayBlock
-                    ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${[divida ? `${divida} ${divida === 1 ? 'revisão' : 'revisões'}` : '', todayBlock ? `bloco ${todayBlock.area}` : ''].filter(Boolean).join(' + ')}</button>
-                       <p class="trail-today-hint">${trailTodayHint(divida, todayBlock)}</p>`
+                    ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${[divida ? `${divida} ${divida === 1 ? 'revisão' : 'revisões'}` : '', todayBlock ? `bloco ${todayBlock.area}` : ''].filter(Boolean).join(' + ')}</button>`
                     : `<div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Tudo em dia — nenhuma revisão pendente e nenhuma questão nova sobrando.</span></div>`}
                 <button type="button" class="trail-exam-btn" onclick="openTrailDashboard('cronograma')">Ver cronograma até a prova</button>
                 ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
