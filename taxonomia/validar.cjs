@@ -56,6 +56,7 @@ function ajudaTaxonomia(q) {
         { terms: ['lupus', 'les'], area: 'Reumatologia', assunto: 'Doenças autoimunes do tecido conjuntivo', topico: 'Lúpus Eritematoso Sistêmico (LES)' },
         { terms: ['evans'], area: 'Hematologia', assunto: 'Anemias hemolíticas', topico: 'Anemias hemolíticas autoimunes (AHAI)' },
         { terms: ['anemia megaloblastica', 'megaloblastica'], area: 'Hematologia', assunto: 'Anemias macrocíticas', topico: 'Anemia megaloblástica' },
+        { terms: ['litiase', 'nefrolitiase', 'calculo renal', 'colica nefretica'], area: 'Nefrologia', assunto: 'Nefrolitíase', topico: 'Apresentação clínica' },
     ];
 
     for (const atalho of ATALHOS) {
@@ -66,6 +67,7 @@ function ajudaTaxonomia(q) {
 
     const areaTrimmed = (q.area || '').trim();
     const r = ROOTS[areaTrimmed];
+    const PALAVRAS_GENERICAS = new Set(['manejo', 'tratamento', 'diagnostico', 'introducao', 'classificacao', 'quadro clinico', 'fisiopatologia', 'prevencao', 'rastreamento', 'conduta', 'exames', 'prognostico', 'geral', 'outros', 'definicao']);
 
     if (!r) {
         // Se a área for genérica ("Clínica Médica") ou inválida, busca em TODAS as 20 especialidades
@@ -78,6 +80,7 @@ function ajudaTaxonomia(q) {
                 }
                 for (const t of a.children) {
                     const tNorm = norm(t.name);
+                    if (PALAVRAS_GENERICAS.has(tNorm) || PALAVRAS_GENERICAS.has(targetTopico)) continue;
                     if (tNorm === targetAssunto || tNorm === targetTopico || (targetTopico.length > 4 && (tNorm.includes(targetTopico) || targetTopico.includes(tNorm)))) {
                         return `A área correta é "${outraArea}". Use o caminho exato:\n  area: "${outraArea}"\n  assunto: "${a.name.trim()}"\n  topico: "${t.name.trim()}"`;
                     }
@@ -127,7 +130,9 @@ function ajudaTaxonomia(q) {
                 return `O assunto "${a.name.trim()}" pertence à área "${outraArea}", não a "${q.area}". Use area: "${outraArea}", assunto: "${a.name.trim()}".`;
             }
             for (const t of a.children) {
-                if (norm(t.name) === targetAssunto || norm(t.name) === targetTopico) {
+                const tNorm = norm(t.name);
+                if (PALAVRAS_GENERICAS.has(tNorm) || PALAVRAS_GENERICAS.has(targetTopico)) continue;
+                if (tNorm === targetAssunto || tNorm === targetTopico) {
                     return `O termo "${q.assunto || q.topico}" é um tópico de "${outraArea}". Use area: "${outraArea}", assunto: "${a.name.trim()}", topico: "${t.name.trim()}".`;
                 }
             }
