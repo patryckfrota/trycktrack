@@ -64,7 +64,7 @@ export function updateInternatoQuestionFields(questionId, fields) {
     const q = questions.find(item => item.id === questionId);
     if (!q) throw new Error(`Questão ${questionId} não encontrada em questions-internato.js`);
     Object.assign(q, fields);
-    fs.writeFileSync(QUESTIONS_FILE, before + JSON.stringify(questions) + after);
+    fs.writeFileSync(QUESTIONS_FILE, before + JSON.stringify(questions, null, 2) + after);
 }
 
 export function updateInternatoExplanation(questionId, body) {
@@ -72,5 +72,5 @@ export function updateInternatoExplanation(questionId, body) {
     const { before, json, after } = extract(text, EXPLANATIONS_PREFIX);
     const explanations = JSON.parse(json);
     explanations[questionId] = body;
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations) + after);
+    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations, null, 2) + after);
 }

@@ -94,7 +94,7 @@ export function updatePrincipalAnnulled(questionId, annulled) {
     const { before, literal, after } = extractArrayLiteral(text, ANNULLED_PREFIX);
     const ids = new Set(parseObjectLiteral(literal));
     if (annulled) ids.add(questionId); else ids.delete(questionId);
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids]) + after);
+    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids], null, 2) + after);
 }
 
 export function updatePrincipalExplanation(questionId, body) {
@@ -118,5 +118,5 @@ export function updatePrincipalExplanation(questionId, body) {
     }
 
     explanations[canonicalId] = body;
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations) + after);
+    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations, null, 2) + after);
 }
