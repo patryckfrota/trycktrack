@@ -5273,10 +5273,7 @@
             .dashboard-areas { grid-column: 2; grid-row: 5; }
             .dashboard-areas + .dashboard-section-title, .dashboard-empty { grid-column: 1 / -1; }
 
-            .reader-header { width: min(900px, 100%); box-sizing: border-box; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
-            .reader-content { width: min(860px, 100%); box-sizing: border-box; margin: 0 auto; padding: 34px 48px 120px; }
             .reader-chapter-title { font-size: 24px; }
-            .reader-body { max-width: 65ch; }
             .reader-footer { bottom: 18px; }
             .chapter-list-panel { width: min(390px, 42vw); }
 
@@ -5401,7 +5398,6 @@
             .container { max-width: 1600px; }
             .header { padding-left: 96px; padding-right: 96px; }
             .tab-content, #questoesTab, #metricasTab { padding-left: 88px; padding-right: 88px; }
-            .reader-content { width: min(980px, 100%); }
         }
 
         /* Padronização definitiva do menu de modalidades.
@@ -6096,29 +6092,31 @@
             #reviewTab.active { padding-top: 28px !important; }
         }
 
-        /* Rapid Review em telas amplas: usa a largura disponível sem deixar o
-           texto preso à coluna estreita do celular. A leitura continua com
-           comprimento confortável de linha, enquanto tabelas e fluxogramas
-           podem ocupar toda a superfície do leitor. */
+        /* Rapid Review em telas amplas (tablet/iPad/desktop): o CONTAINER
+           (.reader-header/.reader-content) cresce pra usar a tela toda, mas
+           quem trava o comprimento da linha de leitura é .reader-chapter-block
+           (número + título + tags + corpo, tudo junto — pra não desalinhar
+           título e texto), com um max-width em "ch" (unidade de largura de
+           caractere) e margin-inline:auto pra CENTRALIZAR essa coluna dentro
+           do espaço sobrando. Sem o auto-margin, a coluna estreita fica
+           encostada à esquerda e o resto da tela (quase metade dela, numa
+           tela larga/deitada) sobra vazio — foi exatamente o bug visto no
+           iPad: texto "espremido" contra a borda esquerda, em vez de
+           centralizado. */
         @media (min-width: 768px) {
             .reader-header,
             .reader-content {
                 width: min(1180px, calc(100% - 64px)) !important;
                 max-width: none !important;
+                margin-inline: auto;
             }
             .reader-content {
                 padding-left: 56px !important;
                 padding-right: 56px !important;
             }
-            .reader-body {
-                max-width: 78ch !important;
-            }
-            .reader-chapter-block,
-            .reader-table-wrap,
-            .reader-pre-card,
-            .reader-chart-card,
-            .reader-callout {
-                width: 100%;
+            .reader-chapter-block {
+                max-width: 70ch;
+                margin-inline: auto;
             }
         }
         @media (min-width: 1200px) {
@@ -6130,8 +6128,8 @@
                 padding-left: 72px !important;
                 padding-right: 72px !important;
             }
-            .reader-body {
-                max-width: 92ch !important;
+            .reader-chapter-block {
+                max-width: 74ch;
             }
         }
 
