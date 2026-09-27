@@ -23,6 +23,59 @@
            a seção some/aparece com o subcapítulos ao tocar a seta — a
            seção sozinha nunca tem conteúdo próprio. */
         const RAPID_REVIEW_DATA = {
+    "uepa_hepatologia": {
+  "area": "Hepatologia",
+  "title": "Hepatologia",
+  "isExample": false,
+  "sections": [
+    {
+      "title": "Complicações da Insuficiência Hepática e Cirrose",
+      "subchapters": [
+        {
+          "num": "1.1",
+          "title": "Ascite",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Parâmetro</th><th>Característica</th></tr></thead><tbody><tr><td>Fisiopatologia</td><td><ul class=\"reader-list\"><li>Vasodilatação esplâncnica, ativação do SRAA, retenção de sódio e água</li></ul></td></tr><tr><td>Diagnóstico pelo GASA</td><td><ul class=\"reader-list\"><li>GASA ≥ 1,1 g/dL: Hipertensão portal (Cirrose, ICC, Síndrome de Budd-Chiari)</li><li>GASA < 1,1 g/dL: Doença peritoneal (Neoplasia, Tuberculose, Síndrome Nefrótica)</li></ul></td></tr><tr><td>Análise de Proteína</td><td><ul class=\"reader-list\"><li>Proteína > 2,5 g/dL: Causas cardíacas ou Budd-Chiari</li><li>Proteína < 2,5 g/dL: Cirrose</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Dieta hipossódica (2g/dia)</li><li>Espironolactona (100mg) + Furosemida (40mg)</li><li>Paracentese de alívio para ascite tensa (repor Albumina 8g/L de ascite se > 5L)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.2",
+          "title": "Encefalopatia Hepática",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Classificação e Manejo</th><th>Detalhes Clínicos</th></tr></thead><tbody><tr><td>Critérios de West-Haven</td><td><ul class=\"reader-list\"><li>Grau I: Alterações leves de comportamento/sono, sem asterixis</li><li>Grau II: Letargia, desorientação temporal, asterixis presente</li><li>Grau III: Sonolência, desorientação espacial, confusão franca</li><li>Grau IV: Coma</li></ul></td></tr><tr><td>Fatores Desencadeantes</td><td><ul class=\"reader-list\"><li>Hemorragia digestiva (principal)</li><li>Infecções (PBE)</li><li>Desidratação / Diuréticos em excesso</li><li>Constipação / Uso de sedativos</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Lactulose (objetivo: 2-3 evacuações pastosas/dia)</li><li>Antibióticos não absorvíveis (Rifaximina, Neomicina, Metronidazol)</li><li>Tratamento do fator precipitante</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.3",
+          "title": "Peritonite Bacteriana Espontânea (PBE)",
+          "tags": ["adj"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Etapa</th><th>Conduta Clínica</th></tr></thead><tbody><tr><td>Diagnóstico</td><td><ul class=\"reader-list\"><li>PMN (Polimorfonucleares) ≥ 250/mm³ no líquido ascítico</li><li>Cultura monomicrobiana (E. coli, Klebsiella)</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Cefotaxima ou Ceftriaxona por 5 dias</li><li>Profilaxia para SHR: Albumina 1,5 g/kg no D1 e 1,0 g/kg no D3</li></ul></td></tr><tr><td>Profilaxia Secundária</td><td><ul class=\"reader-list\"><li>Norfloxacino 400mg/dia (uso contínuo)</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "1.4",
+          "title": "Síndrome Hepatorrenal e Hepatopulmonar",
+          "tags": ["adj"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Síndrome</th><th>Características Principais</th></tr></thead><tbody><tr><td>Síndrome Hepatorrenal (SHR)</td><td><ul class=\"reader-list\"><li>IRA pré-renal que não responde a volume. Vasoconstrição renal severa.</li><li>Tratamento: Terlipressina + Albumina, transplante hepático.</li></ul></td></tr><tr><td>Síndrome Hepatopulmonar</td><td><ul class=\"reader-list\"><li>Tríade: Hepatopatia + Hipoxemia + Dilatações vasculares intrapulmonares</li><li>Achados: Platipneia, Ortodeoxia</li><li>Tratamento: Suporte de O2, transplante hepático.</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    },
+    {
+      "title": "Hepatopatias Metabólicas e Infecciosas",
+      "subchapters": [
+        {
+          "num": "2.1",
+          "title": "Doença Hepática Esteatótica (MASLD/MASH)",
+          "tags": ["ja"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Aspecto</th><th>Descrição Clínica e Manejo</th></tr></thead><tbody><tr><td>Características Iniciais</td><td><ul class=\"reader-list\"><li>MASLD (antiga NAFLD): Esteatose associada à disfunção metabólica</li><li>Exclusão de etilismo significativo, hepatites virais e uso de drogas hepatotóxicas</li><li>Fatores de risco: Obesidade, DM2, Dislipidemia, HAS</li></ul></td></tr><tr><td>Diagnóstico</td><td><ul class=\"reader-list\"><li>USG: Fígado hiperecogênico (esteatose)</li><li>Biópsia hepática: Padrão-ouro para diferenciar MASLD simples de MASH (esteato-hepatite)</li><li>Critérios MASH: Esteatose + Balonização de hepatócitos + Inflamação lobular</li></ul></td></tr><tr><td>Tratamento</td><td><ul class=\"reader-list\"><li>Modificação do estilo de vida: Dieta e perda de peso (base do tratamento)</li><li>Agonistas do GLP-1, Pioglitazona e Vitamina E (em não diabéticos) podem auxiliar na histologia</li><li>Não há recomendação de Silimarina ou Metformina para reversão histológica</li></ul></td></tr></tbody></table></div>"
+        },
+        {
+          "num": "2.2",
+          "title": "Hepatites Virais (Visão Geral)",
+          "tags": ["adj"],
+          "bodyHtml": "<div class=\"reader-table-wrap\"><table class=\"reader-table\"><thead><tr><th>Infecção</th><th>Marcadores e Evolução</th></tr></thead><tbody><tr><td>Hepatite A</td><td><ul class=\"reader-list\"><li>Transmissão fecal-oral. Não cronifica.</li><li>Diagnóstico: Anti-HAV IgM</li><li>Clínica: Icterícia, febre, mal-estar. Tratamento de suporte.</li></ul></td></tr><tr><td>Hepatite B</td><td><ul class=\"reader-list\"><li>Marcadores: HBsAg (infecção ativa), Anti-HBc IgM (aguda), Anti-HBs (imunidade)</li><li>Risco de cronificação inversamente proporcional à idade da infecção.</li><li>Pode causar CHC sem presença de cirrose. Tratamento crônico: Tenofovir ou Entecavir.</li></ul></td></tr><tr><td>Hepatite C</td><td><ul class=\"reader-list\"><li>Alta taxa de cronificação (até 80%). Principal causa de transplante hepático.</li><li>Diagnóstico: Anti-HCV, confirmar com HCV-RNA quantitativo.</li><li>Tratamento: Antivirais de Ação Direta (Sofosbuvir + Velpatasvir) com alta taxa de cura.</li></ul></td></tr></tbody></table></div>"
+        }
+      ]
+    }
+  ]
+},
     "uepa_nefrologia": {
   "area": "Nefrologia",
   "title": "Nefrologia (UEPA Master Rapid Review)",
