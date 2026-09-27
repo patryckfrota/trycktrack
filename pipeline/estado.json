@@ -1,5 +1,11 @@
 {
-  "emAndamento": null,
+  "emAndamento": {
+    "banca": "enare",
+    "ano": 2024,
+    "url": "https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/acesso-direto/ACESSO%20DIRETO%20(ADACEDIRT01)%20-%20Tipo%201.pdf|https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/ENARE%202024%20Gabarito%20Definitivo%20-%20Medica.pdf",
+    "prefixo": "enare-2024",
+    "inicio": 1
+  },
   "concluidas": [],
   "semFonte": [
     {
