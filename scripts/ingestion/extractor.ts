@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import * as fs from 'node:fs';
 import { execSync } from 'node:child_process';
+import { createRequire } from 'node:module';
 import {
   ExtractedBatch,
   ExtractedBatchSchema,
@@ -8,6 +9,10 @@ import {
   Question,
   QuestionExplanation
 } from './types.js';
+
+const require = createRequire(import.meta.url);
+// @ts-ignore
+const { problemaTaxonomia } = require('../../taxonomia/validar.cjs');
 
 export interface ExtractionOptions {
   startQuestion?: number;
@@ -62,7 +67,11 @@ DIRETRIZES CLÍNICAS E DE EXTRAÇÃO:
 1. Enunciado (stem): Extraia o texto integral e fiel da respectiva questão, eliminando cabeçalhos de página vazados e textos de apoio externos.
 2. Alternativas (options): Extraia um objeto com chaves "A", "B", "C", "D" (e "E" se houver). Não inclua a letra da alternativa dentro do texto do valor.
 3. Gabarito (answer): Indique a letra correta ("A", "B", etc.) ou null se a questão for claramente anulada pela banca.
-4. Área médica (area): Classifique na respectiva grande área: "Clínica Médica", "Cirurgia Geral", "Pediatria", "Ginecologia e Obstetrícia" ou "Medicina Preventiva".
+4. Taxonomia médica (area, assunto, topico) — REGRA ESTRITA:
+   - 'area': NUNCA use "Clínica Médica" ou termos genéricos. Deve ser EXATAMENTE uma das 20 especialidades oficiais do projeto:
+     Cardiologia, Cirurgia Geral, Dermatologia, Endocrinologia, Gastroenterologia, Ginecologia, Hematologia, Hepatologia, Infectologia, Medicina Preventiva, Nefrologia, Neurologia, Obstetrícia, Oftalmologia, Ortopedia, Otorrinolaringologia, Pediatria, Pneumologia, Psiquiatria, Reumatologia.
+   - 'assunto': OBRIGATÓRIO. Deve ser um assunto real pertencente à árvore taxonômica da especialidade escolhida (padrão Estratégia MED).
+   - 'topico': Subtema do assunto (ex: "Diagnóstico", "Tratamento", "Quadro Clínico", etc., conforme a árvore do tema).
 5. Explicação comentada (explanation) — OBRIGATÓRIO seguir as 4 seções com profundidade médica real (Padrão UEPA):
    - nucleo: Regra geral clínica universal que extrapola este caso específico (1-2 frases densas, ~40 palavras). Proibido resumir enunciado ou usar "neste caso".
    - armadilha: OBRIGATORIAMENTE DOIS PARÁGRAFOS DENSOS (60 a 150 palavras):
@@ -107,10 +116,10 @@ SCHEMA JSON ESPERADO:
           "C": "texto da alternativa C",
           "D": "texto da alternativa D"
         },
-        "answer": "C",
-        "area": "Clínica Médica",
-        "assunto": "Nefrologia",
-        "topico": "Litíase Urinária",
+        "answer": "A",
+        "area": "Cardiologia",
+        "assunto": "Hipertensão arterial sistêmica (HAS)",
+        "topico": "Hipertensão arterial resistente",
         "annulled": false,
         "images": [],
         "source": "${source}",
@@ -248,22 +257,38 @@ export async function extractQuestionsFromPdf(
       const validationResult = ExtractedBatchSchema.safeParse(parsedRaw);
 
       if (validationResult.success) {
-        console.log(`[Extractor] ✅ Lote validado com sucesso pelo Zod na tentativa ${attempt}!`);
-        return validationResult.data;
+        const batchData = validationResult.data;
+        const taxErrors: string[] = [];
+        
+        for (const item of batchData.items) {
+          const prob = problemaTaxonomia(item.question);
+          if (prob) {
+            taxErrors.push(`- Questão ${item.question.id} (Q${item.question.number}): erro taxonômico '${prob}' (Área informada: "${item.question.area}", Assunto: "${item.question.assunto}"). Lembre-se: 'area' DEVE ser uma das 20 especialidades oficiais (Cardiologia, Cirurgia Geral, Dermatologia, Endocrinologia, Gastroenterologia, Ginecologia, Hematologia, Hepatologia, Infectologia, Medicina Preventiva, Nefrologia, Neurologia, Obstetrícia, Oftalmologia, Ortopedia, Otorrinolaringologia, Pediatria, Pneumologia, Psiquiatria, Reumatologia). Assunto e tópico devem pertencer à árvore da especialidade.`);
+          }
+        }
+
+        if (taxErrors.length === 0) {
+          console.log(`[Extractor] ✅ Lote validado com sucesso pelo Zod e pela Taxonomia na tentativa ${attempt}!`);
+          return batchData;
+        }
+
+        lastZodErrors = taxErrors.join('\n');
+        console.warn(`[Extractor] ⚠️ Taxonomia reprovou ${taxErrors.length} questão(ões) na tentativa ${attempt}:`);
+        console.warn(lastZodErrors);
+      } else {
+        // Se falhar na validação do Zod, aciona o Loop de Retroalimentação
+        lastZodErrors = validationResult.error.issues
+          .map(issue => `- Campo '${issue.path.join('.')}': ${issue.message}`)
+          .join('\n');
+
+        console.warn(`[Extractor] ⚠️ Zod detectou ${validationResult.error.issues.length} erro(s) de validação na tentativa ${attempt}:`);
+        console.warn(lastZodErrors);
       }
-
-      // Se falhar na validação do Zod, aciona o Loop de Retroalimentação
-      lastZodErrors = validationResult.error.issues
-        .map(issue => `- Campo '${issue.path.join('.')}': ${issue.message}`)
-        .join('\n');
-
-      console.warn(`[Extractor] ⚠️ Zod detectou ${validationResult.error.issues.length} erro(s) de validação na tentativa ${attempt}:`);
-      console.warn(lastZodErrors);
 
       // Constrói prompt de retroalimentação mantendo o contrato estrito
       currentPrompt = `${buildExtractionPrompt(examMetadata.examId, examMetadata.examName, examMetadata.source, startQuestion, limitQuestions, pdfTextSample)}
       
-ATENÇÃO: A sua resposta anterior falhou na validação estrita do Zod com os seguintes erros:
+ATENÇÃO: A sua resposta anterior falhou na validação estrita com os seguintes erros:
 ${lastZodErrors}
 
 Por favor, gere novamente o JSON rigorosamente completo corrigindo todos os pontos acima.`;

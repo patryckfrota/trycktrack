@@ -100,32 +100,38 @@ export function writeExtractedData(dumpFilePath: string) {
     console.log(`=> ${expAdded} explicações atualizadas no question-explanations.js!`);
 
     console.log('\n========================================');
-    console.log('Executando validação taxonômica...');
-    import('node:child_process').then(({ execSync }) => {
-        try {
-            const output = execSync('node taxonomia/validar.cjs', { cwd: ROOT, encoding: 'utf-8' });
-            console.log(output);
-            console.log('✅ Taxonomia validada com sucesso!');
-        } catch (e: any) {
-            console.error('⚠️ Atenção: A validação apontou erros na taxonomia extraída pelo LLM:');
-            console.error(e.stdout || e.message);
-        }
-        
+    console.log('Executando verificação taxonômica local...');
+    try {
+        const { execSync } = require('node:child_process');
+        const output = execSync('node taxonomia/validar.cjs', { cwd: ROOT, encoding: 'utf-8' });
+        console.log(output);
+        console.log('✅ Taxonomia validada!');
+    } catch (e: any) {
+        console.warn('⚠️ Nota: Validação taxonômica apontou pendências (o portão pipeline/validar.cjs avaliará o lote):');
+        console.warn(e.stdout || e.message);
+    }
+
+    // Sincronização com o Postgres só ocorre se a flag --sync-db for explicitamente fornecida.
+    // No fluxo do pipeline (rodar-dia.sh), o sync com Postgres é responsabilidade exclusiva
+    // do portão de validação (apenas para lotes 100% aprovados).
+    const syncDbRequested = process.argv.includes('--sync-db');
+    if (syncDbRequested) {
         const targetIds = batch.items.map(item => item.question.id).join(',');
         console.log('\n========================================');
-        console.log('⚡ Sincronizando lote incrementalmente com o Postgres...');
+        console.log('⚡ Sincronizando lote com o Postgres (--sync-db explícito)...');
         console.log('========================================');
         try {
+            const { execSync } = require('node:child_process');
             const syncOutput = execSync(`node backend/scripts/import-questions.js --ids "${targetIds}"`, {
                 cwd: ROOT,
                 encoding: 'utf-8'
             });
             console.log(syncOutput);
-            console.log('🎉 Sincronismo incremental concluído em menos de 1 segundo!');
+            console.log('🎉 Sincronismo concluído!');
         } catch (syncErr: any) {
-            console.error('Falha no sincronismo incremental:', syncErr.message);
+            console.error('Falha no sincronismo com Postgres:', syncErr.message);
         }
-    });
+    }
 }
 
 // Permitir rodar diretamente do terminal
