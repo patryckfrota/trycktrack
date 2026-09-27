@@ -33,7 +33,7 @@ async function run() {
     const areaQuestions = questions.filter(q => q.area && q.area.toLowerCase() === area.toLowerCase());
     if (areaQuestions.length === 0) process.exit(0);
     
-    console.log(`Encontradas ${areaQuestions.length} questões para ${area}. Analisando com o modelo Mestre ENAMED...`);
+    console.log(`Encontradas ${areaQuestions.length} questões para ${area}. Analisando com o modelo Mestre ENAMED (V3 Fixed Tables)...`);
     
     const promptsData = areaQuestions.map(q => ({
         assunto: q.assunto, stem: q.stem, answer: q.answer
@@ -85,8 +85,24 @@ ROTEIRO DE ESTILO E REDAÇÃO (Baseado no Padrão ENAMED/Revalida):
 - **Regras de escrita (Fase 4 do padrão):**
   - O formato é denso e corrido: um bloco de bullets (<ul class="reader-list"><li>...</li></ul>) por doença, contendo quadro clínico, diagnóstico, conduta, tratamento e seguimento juntos no mesmo bloco lógico.
   - **Pistas e pegadinhas INLINE:** a palavra-chave do enunciado e o distrator clássico ficam DENTRO do bullet do tema (ex: "<strong>Pegadinha:</strong>...", "<strong>Palavra-chave:</strong>...").
-  - **Tabelas HTML** (<table border="1" style="border-collapse: collapse; width: 100%;">) para comparar diferenciais, critérios, antídotos, esquemas, calendários. Integradas ao texto, nunca como enfeite.
-  - **Fluxogramas em bloco de código monoespaçado** (<pre class="reader-pre-card">) quando o raciocínio é de decisão ou diagnóstico diferencial (ex: "Paciente com X ↓ Avaliar Y ↓ Se Z").
+  - **Tabelas HTML NATIVAS E SEM STYLES INLINE:** Para comparar diferenciais, critérios, antídotos e calendários, você DEVE criar tabelas. É ESTRITAMENTE PROIBIDO usar atributos \`style\`, \`bgcolor\`, \`border\` ou qualquer CSS inline nas tabelas (para não quebrar o modo escuro do app). Você deve usar APENAS as classes CSS do nosso aplicativo:
+    <div class="reader-table-wrap">
+      <table class="reader-table">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Doença A</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  - **Fluxogramas em bloco de código monoespaçado** (<pre class="reader-pre-card">) quando o raciocínio é de decisão (ex: "Paciente com X ↓ Avaliar Y ↓ Se Z").
   - Nada de caixas coloridas isoladas que fragmentam o texto.
   - Nada de subtítulos separados ("Diagnóstico", "Tratamento") quebrando a leitura. Tudo em bullets ricos.
 
@@ -96,7 +112,7 @@ ${JSON.stringify(promptsData).substring(0, 100000)}
 INSTRUÇÕES DE ESTRUTURA DO JSON:
 1. Analise as questões, extraia a frequência e o perfil da banca.
 2. Crie \`sections\` ordenadas da mais frequente para a menos frequente. A última seção deve ser "Checklist Final e Temas Adjacentes" ou alocada logicamente.
-3. Para cada \`subchapter\`, preencha o \`bodyHtml\` usando ESTRITAMENTE HTML (<ul>, <li>, <table>, <pre>, <strong>) seguindo as regras de escrita acima. O conteúdo deve ser incrivelmente denso e detalhado, simulando o PDF do Revalida.
+3. Para cada \`subchapter\`, preencha o \`bodyHtml\` usando ESTRITAMENTE HTML (<ul>, <li>, <table>, <pre>, <strong>) seguindo as regras de escrita acima. O conteúdo deve ser incrivelmente denso e detalhado.
 4. Preencha o array \`tags\` do subchapter com "ja" se o assunto caiu nas questões da banca, ou "adj" se for um tema adjacente inserido por você para completar a área médica.
 
 Retorne APENAS um JSON válido. É VITAL SER EXAUSTIVO E LONGO. NÃO OMITA NADA, SEJA VERBOSO E COMPLETO.
