@@ -22,6 +22,19 @@ test('buildSubjectCatalog só inclui ids presentes no recorte de questões', () 
     assert.deepEqual(pueri.questionIds.sort(), ['a1', 'a2']);
 });
 
+test('buildSubjectCatalog: peso vem das provas reais, prova irmã só soma questões praticáveis', () => {
+    const reais = [{ id: 'r1', area: 'Pediatria', assunto: 'Puericultura' }, { id: 'r2', area: 'Cirurgia Geral', assunto: 'Trauma' }];
+    const irmas = [
+        { id: 'i1', area: 'Pediatria', assunto: 'Puericultura', trilha: 'uepa' },
+        { id: 'i2', area: 'Pediatria', assunto: 'Assunto que a banca nunca cobrou', trilha: 'uepa' },
+    ];
+    const subjects = buildSubjectCatalog([...reais, ...irmas], computeSubjectWeights(reais));
+    const pueri = subjects.find((s) => s.key === 'Pediatria > Puericultura');
+    assert.deepEqual(pueri.questionIds.sort(), ['i1', 'r1']);
+    assert.equal(pueri.weight, 0.5); // peso não mudou por causa da irmã
+    assert.equal(subjects.length, 2); // assunto só da irmã não entra
+});
+
 test('subjectStatus: sem nenhuma questão na fila é "novo"', () => {
     const [subject] = catalog();
     const status = subjectStatus(subject, {}, '2026-01-10');

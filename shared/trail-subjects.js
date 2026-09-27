@@ -11,21 +11,28 @@
  * trail-priority.js já usa pra Trilhas por área.
  */
 import { urgencyMultiplierForAccuracy } from './trail-priority.js';
+import { subjectKey } from './subject-weights.js';
 
-// questions: já filtradas pela banca (ex.: só uepa-*).
-// weights: Map devolvido por computeSubjectWeights (mesma banca).
-// Devolve um array de { key, area, assunto, weight, questionIds }.
+// questions: as questões PRATICÁVEIS da trilha — as provas reais da banca
+// e, com o tempo, provas irmãs marcadas pra ela (R-10).
+// weights: Map de computeSubjectWeights calculado SÓ com as provas reais
+// (o peso é da banca; prova irmã só aumenta o que dá pra praticar).
+// Assunto que só existe em prova irmã não entra: não tem peso na banca.
+// Devolve [{ key, area, assunto, weight, questionIds }].
 export function buildSubjectCatalog(questions, weights) {
-    const byId = new Map(questions.map((q) => [q.id, q]));
+    const idsByKey = new Map();
+    for (const q of questions) {
+        const key = subjectKey(q);
+        if (!weights.has(key)) continue;
+        if (!idsByKey.has(key)) idsByKey.set(key, []);
+        idsByKey.get(key).push(q.id);
+    }
     return [...weights.values()].map((entry) => ({
         key: entry.key,
         area: entry.area,
         assunto: entry.assunto,
         weight: entry.weight,
-        // só ids que de fato existem no recorte de questões passado —
-        // um weights calculado sobre um recorte maior/desatualizado não
-        // deveria fantasiar questões que não estão mais aqui.
-        questionIds: entry.questionIds.filter((id) => byId.has(id)),
+        questionIds: idsByKey.get(entry.key) || [],
     }));
 }
 

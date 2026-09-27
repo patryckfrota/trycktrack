@@ -1101,6 +1101,9 @@
         window.UEPA_GRANDE_AREAS = UEPA_GRANDE_AREAS;
         // Cronograma até a prova (painel da trilha, R-9).
         import { buildSchedule, minimumDailyCapacity } from "./shared/trail-schedule.js";
+        import { buildStudyBlocks, studyCandidates } from "./shared/trail-blocks.js";
+        window.buildStudyBlocks = buildStudyBlocks;
+        window.studyCandidates = studyCandidates;
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto

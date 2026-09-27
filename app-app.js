@@ -208,20 +208,19 @@
                 name: 'Trilha Enamed',
                 logo: 'assets/logo-enamed-sigla.png',
                 description: 'Prioriza incidência nacional e o seu desempenho.',
-                // R-8: banco principal inteiro (Revalida INEP + INEP,
-                // 955 questões, todas classificadas em assunto/tópico) —
-                // são as mesmas provas que o ENAMED aplica, só fundidas
-                // nos arquivos por especialidade durante a importação
-                // (ver comentário em import-questions.js), sem prefixo de
-                // id comum como a UEPA tem. Sem `examPerArea`: ao
-                // contrário da UEPA (sempre 20 por grande área, mesma
-                // ordem), essas provas foram fundidas/recortadas por
-                // especialidade e não preservam um layout fixo por
-                // posição de questão — não dá pra montar um "simulado
-                // formato real" a partir disso, só a trilha por assunto
-                // (nota projetada, pontos fracos, carga de revisão etc.).
+                // R-8/R-10: o PESO vem só das provas INEP/Revalida (955
+                // questões, as mesmas provas do ENAMED — fundidas nos
+                // arquivos por especialidade na importação, sem prefixo de
+                // id comum). Antes era `() => true`, que puxava também as
+                // 500 da UEPA pro peso do ENAMED (o app junta todos os
+                // bancos numa lista só). As QUESTÕES praticáveis são essas +
+                // provas irmãs marcadas com `trilha: 'enamed'` na importação.
+                // Sem `examPerArea`: essas provas não preservam um layout
+                // fixo por posição de questão, então não há simulado
+                // "formato real" — só a trilha por assunto.
                 subjectBased: true,
-                bankFilter: () => true,
+                weightFilter: q => /inep|revalida/i.test(`${q.source || ''} ${q.examName || ''} ${q.examId || ''}`) && !q.trilha,
+                poolFilter: q => (/inep|revalida/i.test(`${q.source || ''} ${q.examName || ''} ${q.examId || ''}`) && !q.trilha) || q.trilha === 'enamed',
                 phases: [
                     { id: 'clinica', title: 'Clínica Médica', area: 'Clínica Médica', topicKey: 'clinica-medica', focus: 'Cardiologia, Infectologia e Pneumologia', incidence: 96 },
                     { id: 'go', title: 'Ginecologia e Obstetrícia', area: 'Ginecologia e Obstetrícia', topicKey: 'go-completo', focus: 'Pré-natal, parto e urgências obstétricas', incidence: 88 },
@@ -234,15 +233,15 @@
                 name: 'Trilha UEPA',
                 logo: 'assets/logo-uepa-sigla.png',
                 description: 'Organiza o estudo com a matriz de prioridade UEPA.',
-                // R-6: só a UEPA tem prova o suficiente no acervo (500
-                // questões, 2022-2026) pra um peso por ASSUNTO confiável —
-                // ver shared/subject-weights.js. `subjectBased` troca o
-                // caminho de fases fixas (usado por ENAMED, sem essa
-                // profundidade de dado ainda) pela visão por assunto em
-                // renderSubjectTrail. `bankPrefix` filtra quais questões do
-                // banco principal pertencem a esta trilha.
+                // R-6/R-10: o PESO vem só das provas reais da UEPA (500
+                // questões, 2022-2026, ids 'uepa-*'); as QUESTÕES
+                // praticáveis são essas + provas irmãs marcadas com
+                // `trilha: 'uepa'` na importação (ver shared/trail-subjects.js,
+                // buildSubjectCatalog). O simulado "formato real" usa só as
+                // reais: o layout 20 por grande área é da prova da UEPA.
                 subjectBased: true,
-                bankPrefix: 'uepa-',
+                weightFilter: q => q.id.startsWith('uepa-'),
+                poolFilter: q => q.id.startsWith('uepa-') || q.trilha === 'uepa',
                 examPerArea: 20, // formato real: 100 questões, 20 por grande área (ver shared/exam-areas.js)
                 // `incidence` igual (20) nas 5 — a prova real da UEPA
                 // aplica exatamente 20 questões por grande área em toda
@@ -475,14 +474,9 @@
         function buildTrailSubjects(trailId) {
             const catalog = TRAIL_CATALOG[trailId];
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
-            // `bankFilter` (função) tem prioridade sobre `bankPrefix`
-            // (string) — a UEPA filtra por prefixo do id (todo o banco
-            // dela é 'uepa-*'), o ENAMED usa o banco principal inteiro
-            // (revalida+INEP fundidos em vários arquivos por
-            // especialidade, sem prefixo comum — ver comentário no
-            // catálogo).
-            const questions = catalog.bankFilter ? bank.filter(catalog.bankFilter) : bank.filter(q => q.id.startsWith(catalog.bankPrefix));
-            const weights = window.computeSubjectWeights(questions);
+            // Peso = provas reais da banca; questões = reais + provas irmãs.
+            const weights = window.computeSubjectWeights(bank.filter(catalog.weightFilter));
+            const questions = bank.filter(catalog.poolFilter);
             const catalogSubjects = window.buildSubjectCatalog(questions, weights);
             const queue = getTrailQueue(trailId);
             const today = new Date().toISOString().slice(0, 10);
@@ -697,6 +691,79 @@
             </div>`;
         }
 
+        // ---------- Blocos de estudo (R-10) ----------
+        // Conteúdo novo sai em blocos coerentes (assuntos da mesma área,
+        // ~12 questões), não em assuntos soltos de 2–3 questões — ver
+        // shared/trail-blocks.js. Reta final: bloco puxado por assunto de
+        // peso baixo sai da lista.
+        function trailNextBlocks(ctx) {
+            const { subjects, queue, goal, finalStretch } = ctx;
+            const blocks = window.buildStudyBlocks(window.studyCandidates(subjects, queue, goal));
+            return finalStretch ? blocks.filter(b => !window.isLowWeightForFinalStretch(b.subjects[0], subjects)) : blocks;
+        }
+
+        // O bloco entra na sessão de hoje se couber na meta junto com as
+        // revisões (ou se não há revisão nenhuma). Revisão vem primeiro:
+        // manter o que já foi estudado rende mais que abrir conteúdo novo.
+        function trailTodayBlock(ctx, blocks) {
+            const block = blocks[0];
+            if (!block) return null;
+            return (ctx.divida === 0 || ctx.divida + block.questions <= ctx.dailyGoal) ? block : null;
+        }
+
+        function trailTodayHint(divida, block) {
+            if (divida && block) return `Primeiro as revisões, misturadas entre assuntos; depois ${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}. Errou? A questão volta no fim da sessão.`;
+            if (block) return `${trailQuestionsText(block.questions)} novas de ${block.subjects.map(s => s.assunto.trim()).join(', ')}. Errou? A questão volta no fim da sessão.`;
+            return `Revisões misturadas entre assuntos${divida > 0 ? ' — o bloco novo fica pra quando a revisão couber na meta do dia' : ''}. Errou? A questão volta no fim da sessão.`;
+        }
+
+        function trailBlockCardHtml(block) {
+            const id = block.id.replace(/'/g, "\\'");
+            const pct = Math.round(block.weight * 1000) / 10;
+            const cont = block.subjects.some(s => s.continuation);
+            return `<article class="trail-phase trail-phase-new" onclick="startTrailBlock('${id}')">
+                <span class="trail-phase-marker"></span>
+                <div class="trail-phase-content">
+                    <div class="trail-phase-kicker">${block.area} · ${pct}% da prova</div>
+                    <h3>${block.subjects.map(s => s.assunto.trim()).join(' · ')}</h3>
+                    <p>${trailQuestionsText(block.questions)} novas${block.subjects.length > 1 ? ` · ${block.subjects.length} assuntos da mesma área` : ''}${cont ? ' · continuação' : ''}</p>
+                </div>
+                <span class="trail-phase-action" aria-label="Estudar bloco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>
+            </article>`;
+        }
+
+        // Questões novas de um bloco: por assunto, a quantidade do bloco,
+        // sorteadas entre as ainda não vistas; depois embaralhadas entre si
+        // (intercalar temas parecidos, da mesma área).
+        function trailBlockQuestionIds(block, ctx) {
+            const byKey = new Map(ctx.subjects.map(s => [s.key, s]));
+            const ids = block.subjects.flatMap(part => {
+                const subject = byKey.get(part.key);
+                const unseen = subject ? subject.questionIds.filter(id => !ctx.queue[id]) : [];
+                return randomSample(unseen, part.questions);
+            });
+            return randomSample(ids, ids.length);
+        }
+
+        async function startTrailQuestionSession(trailId, ids, extra) {
+            const index = getQuestionIndex();
+            const questions = ids.map(id => index.get(id)).filter(Boolean);
+            if (!questions.length) { revealQuestionNotice('Sem questões disponíveis agora.'); return; }
+            await ensureQuestionExplanationsLoaded().catch(() => {});
+            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], relearn: true, retryOf: {}, retryCount: {}, startedAt: new Date().toISOString(), ...extra };
+            document.getElementById('questionPlayer').hidden = false;
+            document.body.style.overflow = 'hidden';
+            renderQuestionPlayer();
+        }
+
+        async function startTrailBlock(blockId) {
+            const trailId = getTrailState().active;
+            const ctx = buildTrailContext(trailId);
+            const block = trailNextBlocks(ctx).find(b => b.id === blockId) || window.buildStudyBlocks(window.studyCandidates(ctx.subjects, ctx.queue, ctx.goal)).find(b => b.id === blockId);
+            if (!block) { refreshTrailViews(); return; }
+            await startTrailQuestionSession(trailId, trailBlockQuestionIds(block, ctx), { trailBlock: { trailId, blockId } });
+        }
+
         // Aba Trilhas = o que fazer HOJE. As métricas completas moram no
         // Painel da trilha (openTrailDashboard) — antes tudo ficava empilhado
         // numa rolagem só e o aluno não sabia por onde começar.
@@ -711,9 +778,8 @@
             const hoje = subjects
                 .filter(s => s.status.status === 'atrasado' || s.status.status === 'faça agora')
                 .sort((a, b) => (b.status.overdue - a.status.overdue) || (b.weight - a.weight));
-            let novos = window.prioritizeNewSubjects(subjects, goal);
-            if (finalStretch) novos = novos.filter(s => !window.isLowWeightForFinalStretch(s, subjects));
-            novos = novos.slice(0, 5);
+            const blocks = trailNextBlocks(ctx);
+            const todayBlock = trailTodayBlock(ctx, blocks);
             const todayPct = Math.min(100, Math.round((answeredToday / dailyGoal) * 100));
 
             hub.innerHTML = `
@@ -741,16 +807,17 @@
 
                 ${ctx.pace.status === 'sem-data' ? trailPaceHtml(trailId, track.examDate, ctx.daysLeft, ctx.pace, finalStretch) : ''}
 
-                ${divida > 0
-                    ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${trailQuestionsText(divida)} pra revisar</button>`
-                    : `<div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Nenhuma revisão pendente — comece um assunto novo abaixo.</span></div>`}
+                ${divida > 0 || todayBlock
+                    ? `<button class="trail-today-btn" onclick="startTodaySession('${trailId}')">Sessão de hoje · ${[divida ? `${divida} ${divida === 1 ? 'revisão' : 'revisões'}` : '', todayBlock ? `bloco ${todayBlock.area}` : ''].filter(Boolean).join(' + ')}</button>
+                       <p class="trail-today-hint">${trailTodayHint(divida, todayBlock)}</p>`
+                    : `<div class="trail-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Tudo em dia — nenhuma revisão pendente e nenhuma questão nova sobrando.</span></div>`}
                 <button type="button" class="trail-exam-btn" onclick="openTrailDashboard('cronograma')">Ver cronograma até a prova</button>
                 ${catalog.examPerArea ? `<button class="trail-exam-btn" onclick="startTrailExam('${trailId}')">Simulado ${catalog.name.replace('Trilha ', '')} · ${catalog.examPerArea * 5} questões, formato real</button>` : ''}
                 ${catalog.examPerArea ? `<div class="trail-area-exams">${window.UEPA_GRANDE_AREAS.map(area => `<button class="trail-area-exam-btn" onclick="startTrailAreaExam('${trailId}','${area.replace(/'/g, "\\'")}')">${area} · ${catalog.examPerArea}</button>`).join('')}</div>` : ''}
 
                 ${hoje.length ? `<h3 class="trail-section-title">Revisar hoje</h3><div class="trail-path">${hoje.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('')}</div>` : ''}
-                <h3 class="trail-section-title">Próximos assuntos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
-                <div class="trail-path">${novos.length ? novos.map(s => trailSubjectCardHtml(s, queue, today, questionsById)).join('') : '<p class="trail-empty-note">Todos os assuntos já foram iniciados.</p>'}</div>
+                <h3 class="trail-section-title">Próximos blocos${finalStretch ? ' · só peso alto (reta final)' : ''}</h3>
+                <div class="trail-path">${blocks.length ? blocks.slice(0, 4).map(b => trailBlockCardHtml(b)).join('') : '<p class="trail-empty-note">Você já viu todas as questões desta trilha — agora é só revisão.</p>'}</div>
                 <button type="button" class="trail-link-btn" onclick="openTrailDashboard('assuntos')">Ver todos os ${subjects.length} assuntos</button>`;
         }
 
@@ -956,7 +1023,7 @@
             for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
             const weeksHtml = weeks.map((week, wi) => {
                 const total = week.reduce((sum, d) => sum + d.load, 0);
-                const opened = week.reduce((sum, d) => sum + d.newSubjects.length, 0);
+                const opened = week.reduce((sum, d) => sum + d.newBlocks.length, 0);
                 const rows = week.map((day, di) => {
                     const prev = di > 0 ? week[di - 1] : (wi > 0 ? weeks[wi - 1][weeks[wi - 1].length - 1] : null);
                     const stretchStart = day.finalStretch && !(prev && prev.finalStretch)
@@ -965,7 +1032,7 @@
                     const chips = [
                         day.reviews ? `<span class="trail-day-chip">${day.reviews} ${day.reviews === 1 ? 'revisão' : 'revisões'}</span>` : '',
                         day.projectedReviews ? `<span class="trail-day-chip is-projected">~${day.projectedReviews} previstas</span>` : '',
-                        ...day.newSubjects.map(s => `<span class="trail-day-chip is-new" title="${s.area} · ${Math.round(s.weight * 1000) / 10}% da prova">${s.assunto} · ${s.questions}</span>`),
+                        ...day.newBlocks.map(b => `<span class="trail-day-chip is-new" title="${b.subjects.map(s => s.assunto.trim()).join(', ')} · ${Math.round(b.weight * 1000) / 10}% da prova">${b.area} · ${b.questions}</span>`),
                     ].join('');
                     const width = Math.min(100, Math.round((day.load / dailyGoal) * 100));
                     return `${stretchStart}<div class="trail-day${day.overload ? ' is-over' : ''}">
@@ -975,7 +1042,7 @@
                     </div>`;
                 }).join('');
                 return `<details class="trail-week"${wi < 2 ? ' open' : ''}>
-                    <summary><span>${trailDateShort(week[0].date)} – ${trailDateShort(week[week.length - 1].date)}</span><span class="trail-week-meta">${trailQuestionsText(total)}${opened ? ` · ${opened} ${opened === 1 ? 'assunto novo' : 'assuntos novos'}` : ''}${week.some(d => d.finalStretch) ? ' · reta final' : ''}</span></summary>
+                    <summary><span>${trailDateShort(week[0].date)} – ${trailDateShort(week[week.length - 1].date)}</span><span class="trail-week-meta">${trailQuestionsText(total)}${opened ? ` · ${opened} ${opened === 1 ? 'bloco novo' : 'blocos novos'}` : ''}${week.some(d => d.finalStretch) ? ' · reta final' : ''}</span></summary>
                     ${rows}
                 </details>`;
             }).join('');
@@ -1111,25 +1178,16 @@
             renderQuestionPlayer();
         }
 
-        // Sessão de hoje (fase 1): todas as questões vencidas de qualquer
-        // assunto (atrasadas primeiro), num toque só — sem escolher
-        // assunto por assunto. Não completa com questões novas: o
-        // objetivo aqui é zerar a dívida, não misturar conteúdo novo.
+        // Sessão de hoje: revisões vencidas primeiro, embaralhadas entre
+        // assuntos (intercalar), depois o bloco novo do dia se couber na
+        // meta. Erro volta no fim da sessão (reaprendizagem).
         async function startTodaySession(trailId) {
-            const subjects = buildTrailSubjects(trailId);
-            const queue = getTrailQueue(trailId);
-            const today = new Date().toISOString().slice(0, 10);
-            const dueEntries = subjects
-                .flatMap(s => s.questionIds.filter(id => queue[id] && queue[id].dueDate <= today).map(id => ({ id, overdue: queue[id].dueDate < today })))
-                .sort((a, b) => Number(b.overdue) - Number(a.overdue));
-            const index = getQuestionIndex();
-            const questions = dueEntries.map(e => index.get(e.id)).filter(Boolean);
-            if (!questions.length) { revealQuestionNotice('Nenhuma questão pronta pra revisão agora.'); return; }
-            await ensureQuestionExplanationsLoaded().catch(() => {});
-            activeQuestionSession = { mode: 'practice', questions, index: 0, answers: [], trailToday: trailId, startedAt: new Date().toISOString() };
-            document.getElementById('questionPlayer').hidden = false;
-            document.body.style.overflow = 'hidden';
-            renderQuestionPlayer();
+            const ctx = buildTrailContext(trailId);
+            const { subjects, queue, today } = ctx;
+            const dueIds = subjects.flatMap(s => s.questionIds.filter(id => queue[id] && queue[id].dueDate <= today));
+            const block = trailTodayBlock(ctx, trailNextBlocks(ctx));
+            const ids = [...randomSample(dueIds, dueIds.length), ...(block ? trailBlockQuestionIds(block, ctx) : [])];
+            await startTrailQuestionSession(trailId, ids, { trailToday: trailId });
         }
 
         // Simulado no formato real da banca (fase 4) — 100 questões, 20
@@ -1141,7 +1199,7 @@
             const catalog = TRAIL_CATALOG[trailId];
             if (!catalog.examPerArea) return;
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
-            const questions = bank.filter(q => q.id.startsWith(catalog.bankPrefix));
+            const questions = bank.filter(catalog.weightFilter); // simulado real: só provas da banca
             const exam = window.buildWeightedExam(questions, catalog.examPerArea);
             const expectedTotal = catalog.examPerArea * 5;
             if (exam.length < expectedTotal) { revealQuestionNotice('Ainda não há questões suficientes pra montar o simulado completo.'); return; }
@@ -1161,7 +1219,7 @@
             if (!catalog.examPerArea) return;
             const bank = Array.isArray(window.TRYCKTRACK_QUESTION_BANK) ? window.TRYCKTRACK_QUESTION_BANK : [];
             const questions = bank
-                .filter(q => q.id.startsWith(catalog.bankPrefix))
+                .filter(catalog.weightFilter)
                 .filter(q => window.grandeAreaForUepaQuestion(q) === areaName);
             const exam = window.buildWeightedExam(questions, catalog.examPerArea);
             if (exam.length < catalog.examPerArea) { revealQuestionNotice(`Ainda não há questões suficientes de ${areaName} pra montar esse simulado.`); return; }
@@ -3291,7 +3349,7 @@ Regras obrigatórias:
             document.getElementById('questionPlayerCount').textContent = `${session.index + 1}/${total}`;
             document.getElementById('questionPlayerProgress').style.width = `${((session.index + 1) / total) * 100}%`;
             document.getElementById('questionSource').textContent = question.source;
-            document.getElementById('questionNumber').textContent = `Questão ${question.number}`;
+            document.getElementById('questionNumber').textContent = `Questão ${question.number}${session.retryOf?.[session.index] ? " · revendo o erro" : ""}`;
             document.getElementById('questionStem').textContent = question.stem;
             renderQuestionStemMedia(question);
             document.getElementById('questionFeedback').hidden = true;
@@ -3397,6 +3455,16 @@ Regras obrigatórias:
                 document.getElementById('questionFeedbackTitle').textContent = question.annulled ? 'Questão anulada' : (correct ? 'Resposta correta' : `Resposta incorreta · alternativa ${question.answer}`);
                 renderExplanation(question.explanation || `Gabarito oficial: alternativa ${question.answer}. O PDF fornecido não contém a explicação comentada.`);
                 document.getElementById('questionFeedback').hidden = false;
+                // Reaprendizagem (trilha): errou → a questão volta no fim da
+                // sessão (até 2x). A repetição não conta de novo: estatística
+                // e fila de revisão ficam com o erro da 1ª tentativa.
+                const isRetry = !!session.retryOf?.[session.index];
+                if (session.relearn && correct === false && (session.retryCount[question.id] || 0) < 2) {
+                    session.retryCount[question.id] = (session.retryCount[question.id] || 0) + 1;
+                    session.retryOf[session.questions.length] = true;
+                    session.questions.push(question);
+                }
+                if (isRetry) { document.getElementById('questionNext').disabled = false; return; }
                 recordQuestionResult(question, correct, letter);
                 // R-1: errar já é o próprio sinal (Errei, sem precisar
                 // perguntar nada) — só quando acerta é que faz sentido
@@ -3534,6 +3602,16 @@ Regras obrigatórias:
         // prova real.
         function finishExamSession(session) {
             flushQuestionTime(session);
+            if (session.retryOf) {
+                // Tira as repetições de reaprendizagem: nota e histórico
+                // contam só a 1ª tentativa de cada questão.
+                const keep = session.questions.map((_, i) => i).filter(i => !session.retryOf[i]);
+                const times = session.questionTimesMs || {};
+                session.questions = keep.map(i => session.questions[i]);
+                session.answers = keep.map(i => session.answers[i]);
+                session.questionTimesMs = Object.fromEntries(keep.map((i, j) => [j, times[i]]).filter(([, t]) => t != null));
+                session.retryOf = null;
+            }
             if (session.mode === 'exam') {
                 session.questions.forEach((question, index) => {
                     const correctAnswer = window.isQuestionAnswerCorrect(question, session.answers[index]);
