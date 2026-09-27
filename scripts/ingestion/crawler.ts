@@ -175,44 +175,97 @@ export async function crawlInepRevalida(year: number = 2024, requestedEdition?: 
  */
 export async function crawlGenericOpenRepository(pageUrl: string, prefixName: string): Promise<ExamDownloadResult> {
   ensurePdfDirectory();
-  console.log(`[Crawler] Varrendo repositório genérico: ${pageUrl}`);
-
-  const response = await httpClient.get(pageUrl);
-  const $ = cheerio.load(response.data);
+  console.log(`[Crawler] Processando fonte de dados: ${pageUrl}`);
 
   let cadernoUrl = '';
   let gabaritoUrl = '';
 
-  $('a').each((_, element) => {
-    const href = $(element).attr('href') || '';
-    const text = $(element).text().toLowerCase();
-
-    if (href.toLowerCase().endsWith('.pdf')) {
-      const fullUrl = href.startsWith('http') ? href : new URL(href, pageUrl).toString();
-
-      if ((text.includes('prova') || text.includes('caderno') || text.includes('questões')) && !cadernoUrl) {
-        cadernoUrl = fullUrl;
-      } else if (text.includes('gabarito') && !gabaritoUrl) {
-        gabaritoUrl = fullUrl;
-      }
+  // Caso 1: URLs diretas separadas por pipe (caderno|gabarito)
+  if (pageUrl.includes('|')) {
+    const parts = pageUrl.split('|').map(s => s.trim());
+    cadernoUrl = parts[0];
+    if (parts[1]) {
+      gabaritoUrl = parts[1];
     }
-  });
+  } else if (pageUrl.toLowerCase().endsWith('.pdf') || pageUrl.toLowerCase().includes('.pdf?')) {
+    // Caso 2: URL direta para o PDF do caderno
+    cadernoUrl = pageUrl;
+  } else {
+    // Caso 3: URL de página pública HTML contendo links
+    const response = await httpClient.get(pageUrl);
+    const $ = cheerio.load(response.data);
+
+    const cadernos: Array<{ url: string; score: number; text: string }> = [];
+    const gabaritos: Array<{ url: string; score: number; text: string }> = [];
+
+    $('a').each((_, element) => {
+      const href = $(element).attr('href') || '';
+      const text = $(element).text().trim();
+      const title = $(element).attr('title') || '';
+      const combined = `${text} ${href} ${title}`.toLowerCase();
+
+      if (href.toLowerCase().includes('.pdf')) {
+        const fullUrl = href.startsWith('http') ? href : new URL(href, pageUrl).toString();
+
+        const isDisallowed = combined.includes('edital') || combined.includes('matricula') ||
+                             combined.includes('matrícula') || combined.includes('recurso') ||
+                             combined.includes('convocado') || combined.includes('resultado') ||
+                             combined.includes('inscricao') || combined.includes('inscrição') ||
+                             combined.includes('retificacao') || combined.includes('retificação') ||
+                             combined.includes('errata');
+
+        if (combined.includes('gabarito')) {
+          const score = (combined.includes('definitivo') ? 10 : 0) +
+                        (combined.includes('acesso direto') || combined.includes('acesso-direto') || combined.includes('grupo-a') || combined.includes('grupo a') || combined.includes('areasbasicas') ? 5 : 0) -
+                        (combined.includes('preliminar') ? 8 : 0);
+          gabaritos.push({ url: fullUrl, score, text });
+        } else if (!isDisallowed) {
+          if (combined.includes('prova') || combined.includes('caderno') || combined.includes('quest') ||
+              combined.includes('acesso direto') || combined.includes('acesso-direto') ||
+              combined.includes('grupo a1') || combined.includes('grupo-a1') || combined.includes('tipo 1') ||
+              combined.includes('tipo-1') || combined.includes('tipo 01')) {
+            const score = (combined.includes('acesso direto') || combined.includes('acesso-direto') ? 15 : 0) +
+                          (combined.includes('grupo a1') || combined.includes('grupo-a1') ? 10 : 0) +
+                          (combined.includes('tipo 1') || combined.includes('tipo-1') || combined.includes('tipo 01') ? 8 : 0) +
+                          (combined.includes('prova a') || combined.includes('prova_a') ? 5 : 1);
+            cadernos.push({ url: fullUrl, score, text });
+          }
+        }
+      }
+    });
+
+    cadernos.sort((a, b) => b.score - a.score);
+    gabaritos.sort((a, b) => b.score - a.score);
+
+    if (cadernos.length > 0) cadernoUrl = cadernos[0].url;
+    if (gabaritos.length > 0) gabaritoUrl = gabaritos[0].url;
+  }
 
   if (!cadernoUrl) {
     throw new Error(`[Crawler] Não foi possível localizar o PDF do caderno na página ${pageUrl}`);
   }
 
-  const cadernoPath = await downloadPdfFile(cadernoUrl, `${prefixName}-caderno.pdf`);
+  console.log(`[Crawler] Caderno selecionado: ${cadernoUrl}`);
+  if (gabaritoUrl) {
+    console.log(`[Crawler] Gabarito definitivo selecionado: ${gabaritoUrl}`);
+  }
+
+  const cleanCadernoName = `${prefixName}-caderno.pdf`;
+  const cadernoPath = await downloadPdfFile(cadernoUrl, cleanCadernoName);
   let gabaritoPath: string | undefined;
   if (gabaritoUrl) {
-    gabaritoPath = await downloadPdfFile(gabaritoUrl, `${prefixName}-gabarito.pdf`);
+    const cleanGabaritoName = `${prefixName}-gabarito.pdf`;
+    gabaritoPath = await downloadPdfFile(gabaritoUrl, cleanGabaritoName);
   }
+
+  const yearMatch = prefixName.match(/\d{4}/);
+  const examYear = yearMatch ? parseInt(yearMatch[0], 10) : new Date().getFullYear();
 
   return {
     examId: prefixName,
     examName: prefixName.toUpperCase(),
     source: prefixName,
-    year: new Date().getFullYear(),
+    year: examYear,
     edition: '1',
     cadernoPdfPath: cadernoPath,
     gabaritoPdfPath: gabaritoPath,

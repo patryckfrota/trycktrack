@@ -1,0 +1,295 @@
+{
+  "data": "2026-09-27T15:09:54.089Z",
+  "totalDivergencias": 32,
+  "descricao": "Questões do Revalida identificadas como duplicatas de questões já existentes no banco com gabarito divergente. Preservado o gabarito original da questão canônica e mantido o texto da explicação correspondente conforme Lição L5.",
+  "pares": [
+    {
+      "revalidaId": "revalida-2024-1-005",
+      "canonicalId": "prev-inep-034",
+      "revalidaAns": "C",
+      "canonicalAns": "A",
+      "stem": "Ao assumir a coordenação de uma equipe de saúde da família, um médico de família e comunidade percebe que sua equipe não utiliza critérios para estabe",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-1-093",
+      "canonicalId": "psi-inep-032",
+      "revalidaAns": "B",
+      "canonicalAns": "A",
+      "stem": "Um menino com 6 anos é encaminhado à unidade de estratégia de saúde da família pela escola em que estuda, por estar apresentando dificuldades de apren",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2023-1-010",
+      "canonicalId": "obstetricia-inep-057",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Uma mulher com 26 anos, foi atendida pela equipe de triagem de uma unidade de saúde da família localizada na área rural de um município de pequeno por",
+      "revalidaExam": "Revalida INEP 2023.1",
+      "canonicalExam": "Revalida INEP 2023.1"
+    },
+    {
+      "revalidaId": "revalida-2023-2-059",
+      "canonicalId": "obstetricia-inep-049",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Uma gestante primigesta de 18 anos, com idade gestacional de 35 semanas, comparece ao pronto-socorro do hospital após ser encaminhada pelo médico da u",
+      "revalidaExam": "Revalida 인EP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2024-2-006",
+      "canonicalId": "cm-neurologia-012",
+      "revalidaAns": null,
+      "canonicalAns": "A",
+      "stem": "Uma mulher de 55 anos, professora há 30 anos, procura atendimento devido a dor em região glútea direita, com irradiação para coxa e perna direita — ti",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-004",
+      "canonicalId": "obstetricia-inep-028",
+      "revalidaAns": "B",
+      "canonicalAns": "D",
+      "stem": "Um médico de uma unidade básica de saúde realiza consulta pré-natal em gestante com idade gestacional de 30 semanas. Ao realizar o terceiro tempo da m",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-067",
+      "canonicalId": "cg-inep-047",
+      "revalidaAns": "B",
+      "canonicalAns": "A",
+      "stem": "Uma paciente de 30 anos, vítima de ferimento em hipogástrio por projétil de arma de fogo, é submetida a procedimento de vesicorrafia e de histerectomi",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-073",
+      "canonicalId": "pediatria-inep-051",
+      "revalidaAns": "B",
+      "canonicalAns": "C",
+      "stem": "Na maternidade, um recém-nascido (RN) de 30 horas de vida, evolui com icterícia zona 3 de Kramer. Nasceu com 36 semanas de idade gestacional (IG), de ",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-082",
+      "canonicalId": "cm-gastroenterologia-013",
+      "revalidaAns": "B",
+      "canonicalAns": "D",
+      "stem": "Um paciente de 70 anos é levado a um hospital por apresentar hematêmese em grande quantidade. Internado em unidade de terapia intensiva, foi submetido",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-089",
+      "canonicalId": "ginecologia-inep-042",
+      "revalidaAns": "C",
+      "canonicalAns": "A",
+      "stem": "Uma mulher de 65 anos, doadora de sangue frequente, vai à consulta ginecológica de rotina referindo ter apresentado lesão endurecida em vulva, sem sec",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-098",
+      "canonicalId": "cg-inep-050",
+      "revalidaAns": "D",
+      "canonicalAns": "A",
+      "stem": "Um adolescente de 16 anos procura atendimento hospitalar com quadro de epigastralgia, náuseas e vômitos importantes há 4 dias, sendo internado para in",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-2-028",
+      "canonicalId": "cm-hematologia-007",
+      "revalidaAns": "D",
+      "canonicalAns": "C",
+      "stem": "Um escolar de 9 anos, portador de anemia falciforme, politransfundido, encontra-se internado há 3 dias devido a uma crise álgica. Evoluiu com melhora ",
+      "revalidaExam": "Revalida INEP 2024.2",
+      "canonicalExam": "INEP"
+    },
+    {
+      "revalidaId": "revalida-2024-1-013",
+      "canonicalId": "cg-inep-053",
+      "revalidaAns": "B",
+      "canonicalAns": "A",
+      "stem": "Um lactente com 3 meses apresenta constipação intestinal desde o seu nascimento, com registro de retardo de eliminação de mecônio de 48h. O paciente f",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2024-1-030",
+      "canonicalId": "psi-inep-029",
+      "revalidaAns": "C",
+      "canonicalAns": "B",
+      "stem": "Um gestor municipal de saúde, ao perceber um significativo aumento de tabagismo entre os adolescentes em seu município no último ano, resolveu adotar ",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2024-1-046",
+      "canonicalId": "cm-infectologia-042",
+      "revalidaAns": "D",
+      "canonicalAns": "C",
+      "stem": "Um homem com 37 anos, em situação de rua de longa data, com condições precárias de higiene pessoal, história de uso abusivo de álcool e de crack, proc",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2024-1-085",
+      "canonicalId": "cm-infectologia-044",
+      "revalidaAns": "D",
+      "canonicalAns": "A",
+      "stem": "Um homem com 36 anos, em situação de rua, procura a unidade básica de saúde com queixas de tosse persistente, perda de peso, sudorese noturna e febre ",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2024-1-065",
+      "canonicalId": "prev-inep-045",
+      "revalidaAns": null,
+      "canonicalAns": "A",
+      "stem": "Em um distrito sanitário especial indígena, um médico atende a uma criança com 4 anos, com 23 kg, que apresenta taquipneia, tosse, letargia, choro sem",
+      "revalidaExam": "Revalida INEP 2024.1",
+      "canonicalExam": "Revalida INEP 2024.1"
+    },
+    {
+      "revalidaId": "revalida-2023-2-010",
+      "canonicalId": "cm-infectologia-046",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Uma criança de 1 ano e 3 meses é trazida pela mãe à unidade básica de saúde. A mãe refere que a criança vem apresentando febre há 48 horas, que varia ",
+      "revalidaExam": "Revalida-2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-015",
+      "canonicalId": "ginecologia-inep-056",
+      "revalidaAns": null,
+      "canonicalAns": "A",
+      "stem": "Uma paciente de 34 anos, solteira, G2P2A0C0, com ligadura tubária há 4 anos, sem parceria sexual, e sem uso de outros métodos contraceptivos, apresent",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-024",
+      "canonicalId": "ginecologia-inep-058",
+      "revalidaAns": "A",
+      "canonicalAns": "D",
+      "stem": "Uma paciente de 28 anos, G3P2A1 (partos normais), procura a unidade básica de saúde para informar-se acerca de métodos contraceptivos para o seu caso.",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-025",
+      "canonicalId": "prev-inep-031",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Durante uma visita domiciliar a um casal de idosos, o médico de família e comunidade aplica o Mini Exame do Estado Mental (MEEM) ao paciente de 82 ano",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-033",
+      "canonicalId": "pediatria-inep-070",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Um menino de 15 meses, previamente hígido e com peso de 11,0 kg, aferido há 1 semana, apresenta-se em uma unidade de pronto-atendimento com quadro de ",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-062",
+      "canonicalId": "cg-inep-073",
+      "revalidaAns": "B",
+      "canonicalAns": "C",
+      "stem": "Um paciente de 20 anos, vítima de colisão frontal de automóvel contra parede de alvenaria, em alta velocidade, sem cinto de segurança e sem airbag, é ",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-2-100",
+      "canonicalId": "cm-infectologia-055",
+      "revalidaAns": "A",
+      "canonicalAns": "C",
+      "stem": "Uma mulher de 28 anos de idade, profissional do sexo, vai a uma consulta com o médico de família e comunidade buscando orientações para prevenção de i",
+      "revalidaExam": "Revalida INEP 2023.2",
+      "canonicalExam": "Revalida INEP 2023.2"
+    },
+    {
+      "revalidaId": "revalida-2023-1-064",
+      "canonicalId": "obstetricia-inep-063",
+      "revalidaAns": "B",
+      "canonicalAns": "C",
+      "stem": "Uma paciente com 39 semanas e 2 dias de idade gestacional chega à unidade de pronto atendimento para avaliação obstétrica e, após anamnese e exame fís",
+      "revalidaExam": "Revalida INEP 2023.1",
+      "canonicalExam": "Revalida INEP 2023.1"
+    },
+    {
+      "revalidaId": "revalida-2023-1-085",
+      "canonicalId": "prev-inep-017",
+      "revalidaAns": "A",
+      "canonicalAns": "D",
+      "stem": "A febre amarela apresentou, no Brasil, dois picos epidêmicos em 2016/2017 e em 2017/2018, afetando estados das regiões Sudeste, Centro-Oeste e Nordest",
+      "revalidaExam": "Revalida INEP 2023.1",
+      "canonicalExam": "Revalida INEP 2023.1"
+    },
+    {
+      "revalidaId": "revalida-2023-1-093",
+      "canonicalId": "pediatria-inep-082",
+      "revalidaAns": "D",
+      "canonicalAns": "A",
+      "stem": "Um pré-escolar aguardando um atendimento eletivo foi vítima de colapso súbito em ambiente intra-hospitalar; parece inconsciente e está cianótico.\n\nDe ",
+      "revalidaExam": "Revalida Infância 2023.1",
+      "canonicalExam": "Revalida INEP 2023.1"
+    },
+    {
+      "revalidaId": "revalida-2023-1-097",
+      "canonicalId": "cg-inep-091",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Um paciente com 65 anos procura a unidade de pronto atendimento com queixa de ter acordado com dor abdominal, súbita, difusa, de intensidade crescente",
+      "revalidaExam": "Revalida INEP 2023.1",
+      "canonicalExam": "Revalida INEP 2023.1"
+    },
+    {
+      "revalidaId": "revalida-2022-2-049",
+      "canonicalId": "prev-inep-079",
+      "revalidaAns": "B",
+      "canonicalAns": "A",
+      "stem": "Mulher de 35 anos fez contato com seu ginecologista habitual, via aplicativo de mensagens, solicitando orientações sobre como usar a “pílula do dia se",
+      "revalidaExam": "Revalida INEP 2022.2",
+      "canonicalExam": "Revalida INEP 2022.2"
+    },
+    {
+      "revalidaId": "revalida-2022-2-058",
+      "canonicalId": "pediatria-inep-092",
+      "revalidaAns": "A",
+      "canonicalAns": "B",
+      "stem": "Recém-nascido com 36 h de vida é avaliado por médico assistente em maternidade pública municipal. No momento, mostra-se ativo, rosado e mamando ativam",
+      "revalidaExam": "Revalida INEP 2022.2",
+      "canonicalExam": "Revalida INEP 2022.2"
+    },
+    {
+      "revalidaId": "revalida-2022-2-097",
+      "canonicalId": "cg-inep-105",
+      "revalidaAns": "D",
+      "canonicalAns": "B",
+      "stem": "Paciente de 30 anos, sexo feminino, foi submetida a punção de veia jugular interna direita para início de nutrição parenteral hospitalar, em primeira ",
+      "revalidaExam": "Revalida INEP 2022.2",
+      "canonicalExam": "Revalida INEP 2022.2"
+    },
+    {
+      "revalidaId": "revalida-2022-2-079",
+      "canonicalId": "obstetricia-inep-074",
+      "revalidaAns": "C",
+      "canonicalAns": "D",
+      "stem": "Gestante de 39 anos de idade, com histórico de três cesarianas prévias, irá realizar uma cesariana eletiva por iteratividade, com 39 semanas de gestaç",
+      "revalidaExam": "Revalida INEP 2022.2",
+      "canonicalExam": "Revalida INEP 2022.2"
+    }
+  ]
+}

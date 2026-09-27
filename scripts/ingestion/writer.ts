@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// @ts-ignore
 import { updatePrincipalExplanation, updatePrincipalAnnulled } from '../../backend/src/staticPrincipalWriter.js';
 import { ExtractedBatchSchema, formatFullExplanation, ExtractedItem } from './types.js';
 

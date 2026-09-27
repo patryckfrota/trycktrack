@@ -1,0 +1,23 @@
+{
+  "name": "trycktrack-ingestion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ingest": "tsx scripts/ingestion/index.ts",
+    "harvest": "tsx scripts/ingestion/harvester.ts",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

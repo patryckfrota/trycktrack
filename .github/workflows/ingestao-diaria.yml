@@ -1,0 +1,64 @@
+# Ingestão automática de provas: todo dia pega a próxima banca/ano da fila
+# (pipeline/fontes.json, por número de inscritos), roda o motor do Gemini,
+# passa pelo portão de validação e publica só o que for aprovado.
+# Roteiro completo em pipeline/rodar-dia.sh.
+#
+# Segredos necessários (Settings → Secrets and variables → Actions):
+#   GEMINI_API_KEY  — chave da camada gratuita do Google AI Studio
+#   DATABASE_URL    — Postgres (Neon), pra sincronizar o painel
+# Variável opcional: QUESTOES_POR_DIA (padrão 25; ajuste ao limite gratuito).
+name: Ingestão diária de provas
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 06:00 em Brasília
+  workflow_dispatch:
+    inputs:
+      questoes_por_dia:
+        description: Quantas questões processar nesta rodada
+        default: '25'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: ingestao
+  cancel-in-progress: false
+
+jobs:
+  ingerir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Motor de ingestão no repositório?
+        id: motor
+        run: |
+          if [ -f scripts/ingestion/index.ts ] && [ -f package-lock.json ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::scripts/ingestion/ e o package.json da raiz ainda não estão no repositório — nada a fazer hoje."
+          fi
+
+      - if: steps.motor.outputs.ok == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - if: steps.motor.outputs.ok == 'true'
+        run: npm ci --no-audit --no-fund
+
+      - name: Rodada do dia
+        if: steps.motor.outputs.ok == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GH_TOKEN: ${{ github.token }}
+          QUESTOES_POR_DIA: ${{ inputs.questoes_por_dia || vars.QUESTOES_POR_DIA || '25' }}
+        run: |
+          git config user.name "trycktrack-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash pipeline/rodar-dia.sh

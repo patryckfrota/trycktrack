@@ -1,0 +1,51 @@
+{
+  "data": "2026-09-27T15:30:00.000Z",
+  "auditoria": "Verificação oficial de anulações contra os PDFs de gabaritos definitivos do INEP",
+  "questoesAuditadas": [
+    {
+      "id": "revalida-2024-2-006",
+      "edicao": "Revalida INEP 2024/2",
+      "questaoCaderno": 6,
+      "pdfFonte": "tmp/pdfs/revalida-2024-2-gabarito.pdf (GABARITO DEFINITIVO - EDIÇÃO 2024/2)",
+      "urlFonte": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos",
+      "resultadoOficial": "Gabarito A (Não anulada)",
+      "decisao": "Gabarito A confirmado. Removido de annulledQuestionOverrides. Apontado para canônica cm-neurologia-012."
+    },
+    {
+      "id": "revalida-2024-2-072",
+      "edicao": "Revalida INEP 2024/2",
+      "questaoCaderno": 72,
+      "pdfFonte": "tmp/pdfs/revalida-2024-2-gabarito.pdf (GABARITO DEFINITIVO - EDIÇÃO 2024/2)",
+      "urlFonte": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos",
+      "resultadoOficial": "Gabarito C (Não anulada)",
+      "decisao": "Gabarito C confirmado (alterado de D/anulada para C). Removido de annulledQuestionOverrides. annulled: false. Explicação completa de 4 seções reescrita com foco na alternativa C."
+    },
+    {
+      "id": "revalida-2024-1-065",
+      "edicao": "Revalida INEP 2024/1",
+      "questaoCaderno": 65,
+      "pdfFonte": "tmp/pdfs/revalida-2024-1-gabarito.pdf (GABARITO DEFINITIVO - EDIÇÃO 2024/1)",
+      "urlFonte": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos",
+      "resultadoOficial": "Gabarito A (Não anulada)",
+      "decisao": "Gabarito A confirmado. Removido de annulledQuestionOverrides. Apontado para canônica prev-inep-045, com explicação no padrão de 4 seções atualizada."
+    },
+    {
+      "id": "revalida-2023-2-015",
+      "edicao": "Revalida INEP 2023/2",
+      "questaoCaderno": 15,
+      "pdfFonte": "tmp/pdfs/revalida-2023-2-gabarito.pdf (GABARITO DEFINITIVO - EDIÇÃO 2023/2)",
+      "urlFonte": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos",
+      "resultadoOficial": "Gabarito A (Não anulada)",
+      "decisao": "Gabarito A confirmado. Removido de annulledQuestionOverrides. Apontado para canônica ginecologia-inep-056."
+    },
+    {
+      "id": "revalida-2023-1-049",
+      "edicao": "Revalida INEP 2023/1",
+      "questaoCaderno": 49,
+      "pdfFonte": "tmp/pdfs/revalida-2023-1-gabarito.pdf (GABARITO DEFINITIVO - EDIÇÃO 2023/1)",
+      "urlFonte": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos",
+      "resultadoOficial": "Anulada (-) no gabarito oficial",
+      "decisao": "Confirmada como Anulação Real da Banca INEP. Mantido único ID presente em annulledQuestionOverrides."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# Uma rodada da ingestão automática (chamada todo dia pelo GitHub Actions,
+# .github/workflows/ingestao-diaria.yml). Fluxo:
+#   fila (proxima.cjs) → motor do Gemini → portão (validar.cjs)
+#   → aprovado: registra no app, commita, publica e sincroniza o Postgres
+#   → reprovado: descarta o que o motor gravou, guarda o lote em
+#     pipeline/pendencias/ e segue pra frente no dia seguinte.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+CONTEUDO=(question-explanations.js index.html sw.js)
+
+# Esta rodada descarta gravações do motor quando o lote é reprovado; fora do
+# CI isso apagaria trabalho local não commitado, então só roda em árvore limpa.
+if [ "${CI:-}" != "true" ] && [ -n "$(git status --porcelain -- 'questions-*.js' "${CONTEUDO[@]}")" ]; then
+  echo "Há mudanças não commitadas em arquivos de conteúdo — rode só com a árvore limpa (ou no CI)." >&2
+  exit 1
+fi
+
+publicar() { git push; gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null 2>&1 || true; }
+
+trabalho=$(node pipeline/proxima.cjs)
+if [ "$trabalho" = "null" ]; then
+  semFonte=$(node -p 'require("./pipeline/estado.json").semFonte.length')
+  echo "Nenhuma banca/ano com página cadastrada na fila. Aguardando fonte: $semFonte (ver pipeline/estado.json)."
+  git add pipeline/estado.json
+  git diff --cached --quiet || { git commit -m "fila: atualiza bancas sem fonte cadastrada"; publicar; }
+  exit 0
+fi
+
+campo() { node -p "JSON.parse(process.argv[1]).$1" "$trabalho"; }
+url=$(campo url); prefixo=$(campo prefixo); inicio=$(campo inicio); limite=$(campo limite)
+echo "Hoje: $prefixo — questões a partir da $inicio (até $limite)"
+
+descartar_gravacoes() {
+  git checkout -- $(git ls-files 'questions-*.js') "${CONTEUDO[@]}"
+  git clean -fq -- 'questions-*.js'
+}
+
+rm -f tmp/extracted-*.json
+if ! npx tsx scripts/ingestion/index.ts --url "$url" --prefix "$prefixo" --start "$inicio" --limit "$limite"; then
+  echo "::warning::O motor falhou nesta rodada; amanhã tenta de novo do mesmo ponto."
+  descartar_gravacoes
+  git add pipeline/estado.json
+  git diff --cached --quiet || { git commit -m "fila: começa $prefixo"; publicar; }
+  exit 0
+fi
+
+dump=$(ls -t tmp/extracted-*.json | head -1)
+n=$(node -p "require('./$dump').items.length")
+fim=$((inicio + n - 1))
+mkdir -p pipeline/entrada
+entrada="pipeline/entrada/extracted-${prefixo}-q${inicio}.json"
+cp "$dump" "$entrada"
+
+if node pipeline/validar.cjs "$entrada"; then
+  node pipeline/registrar-bancos.cjs
+  node pipeline/proxima.cjs avancar "$n"
+  git add -- 'questions-*.js' "${CONTEUDO[@]}" pipeline/entrada pipeline/estado.json pipeline/revisoes
+  git commit -m "conteúdo: $prefixo, questões $inicio–$fim (aprovadas no portão)"
+  publicar
+  if [ -n "${DATABASE_URL:-}" ]; then
+    (cd backend && npm ci --no-audit --no-fund && npx prisma generate && node scripts/import-questions.js)
+  else
+    echo "::warning::DATABASE_URL não configurada — o Postgres não foi sincronizado."
+  fi
+else
+  echo "::warning::Lote reprovado no portão; guardado em pipeline/pendencias/."
+  descartar_gravacoes
+  mkdir -p pipeline/pendencias
+  git mv -f "$entrada" "pipeline/pendencias/" 2>/dev/null || mv "$entrada" pipeline/pendencias/
+  node pipeline/proxima.cjs avancar "$n"
+  git add pipeline/pendencias pipeline/estado.json pipeline/revisoes
+  git commit -m "pendência: $prefixo, questões $inicio–$fim reprovadas no portão"
+  publicar
+fi

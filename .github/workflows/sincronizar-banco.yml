@@ -1,0 +1,45 @@
+# Mantém o Postgres (lido pelo painel de gestão) igual aos arquivos de
+# questões sempre que alguém faz push de conteúdo no main — antes isso
+# dependia de lembrar de rodar o import na mão.
+#
+# Os commits da ingestão diária sincronizam por conta própria: push feito
+# pelo token do Actions não dispara outro workflow, então este aqui cobre
+# os pushes feitos por pessoas (ou agentes com credencial própria).
+#
+# Segredo necessário: DATABASE_URL.
+name: Sincronizar banco
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'questions-*.js'
+      - 'question-explanations*.js'
+  workflow_dispatch:
+
+concurrency:
+  group: sincronizar-banco
+  cancel-in-progress: true
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npx prisma generate
+      - name: Importar pro Postgres
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "::warning::DATABASE_URL não configurada"; exit 0; fi
+          node scripts/import-questions.js

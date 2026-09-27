@@ -1,0 +1,126 @@
+{
+  "_sobre": "Fila de prioridade das bancas de residência médica que o motor de ingestão (scripts/ingestion/) deve buscar. Ordem = número de inscritos (mais relevante primeiro). Onde o número de inscritos não foi confirmado, a ordem usa o número de vagas como estimativa e o campo 'inscritos' fica null com 'confianca': 'estimada'. Anos-alvo: 2022 a 2026. Revisar 1x por ano.",
+  "atualizado_em": "2026-09-27",
+  "anos_alvo": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "bancas": [
+    {
+      "id": "enare",
+      "nome": "ENARE (Exame Nacional de Residência — HU Brasil/Ebserh, aplicação FGV)",
+      "inscritos": 89933,
+      "ano_referencia": 2026,
+      "vagas": 6034,
+      "confianca": "confirmada",
+      "fonte": "https://med.estrategia.com/portal/noticias/enare-2026-2027-inscritos-recorde/",
+      "observacao": "Maior seleção do país (>95 mil inscrições no total, 89.933 no acesso direto). Checar sobreposição com o ENAMED antes de importar, para não duplicar questões.",
+      "paginas": {
+        "2024": "https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/acesso-direto/ACESSO%20DIRETO%20(ADACEDIRT01)%20-%20Tipo%201.pdf|https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/ENARE%202024%20Gabarito%20Definitivo%20-%20Medica.pdf"
+      }
+    },
+    {
+      "id": "sus-sp",
+      "nome": "SUS-SP",
+      "inscritos": 26441,
+      "ano_referencia": 2026,
+      "vagas": 1423,
+      "confianca": "confirmada",
+      "fonte": "https://www.medway.com.br/conteudos/residencia-medica-sus-sp/",
+      "paginas": {}
+    },
+    {
+      "id": "amrigs",
+      "nome": "AMRIGS (prova unificada RS, com ACM/AMMS)",
+      "inscritos": 25000,
+      "ano_referencia": 2024,
+      "vagas": 1700,
+      "confianca": "aproximada",
+      "fonte": "https://www.eumedicoresidente.com.br/post/concorrencia-principais-provas-residencia-medica-2024",
+      "observacao": "Fonte diz 'mais de 25 mil inscritos' em 2024; atualizar com o número de 2026.",
+      "paginas": {}
+    },
+    {
+      "id": "usp-sp",
+      "nome": "USP-SP (FMUSP — aplicação Fuvest)",
+      "inscritos": 11082,
+      "ano_referencia": 2026,
+      "vagas": 834,
+      "confianca": "confirmada",
+      "fonte": "https://med.estrategia.com/portal/noticias/inscricoes-usp-sp-2026-residencia-medica/",
+      "paginas": {
+        "2025": "https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_prova-areasbasicasedeacessodireto_grupo-a1.pdf|https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_gabarito-areasbasicasedeacessodireto.pdf",
+        "2024": "https://www.fuvest.br/wp-content/uploads/rm_2024_a1.pdf|https://www.fuvest.br/wp-content/uploads/rm2024_gabarito_areas_basicas_acesso-direto_2023-12-18.pdf",
+        "2023": "https://www.fuvest.br/wp-content/uploads/rm2023_prova_residencia_A.pdf|https://www.fuvest.br/wp-content/uploads/rm2023_prova_gabaritos_retificados_05-01-2023.pdf"
+      }
+    },
+    {
+      "id": "psu-mg",
+      "nome": "PSU-MG",
+      "inscritos": null,
+      "vagas": 1300,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    },
+    {
+      "id": "cerem-ba",
+      "nome": "CEREM-BA",
+      "inscritos": null,
+      "vagas": 1060,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    },
+    {
+      "id": "ses-pe",
+      "nome": "SES-PE",
+      "inscritos": null,
+      "vagas": 950,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    },
+    {
+      "id": "psu-ce",
+      "nome": "PSU-CE",
+      "inscritos": null,
+      "vagas": 650,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    },
+    {
+      "id": "unifesp",
+      "nome": "UNIFESP",
+      "inscritos": null,
+      "vagas": 580,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    },
+    {
+      "id": "ses-df",
+      "nome": "SES-DF",
+      "inscritos": null,
+      "vagas": 530,
+      "confianca": "estimada",
+      "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
+      "paginas": {}
+    }
+  ],
+  "ja_no_banco": [
+    {
+      "id": "revalida",
+      "observacao": "Revalida INEP — não é residência, mas já está no banco. O motor já importou edições sem deduplicar contra as especialidades (ver pipeline/README ou relatório de 2026-09-27)."
+    },
+    {
+      "id": "uepa",
+      "observacao": "UEPA 2022–2026, 500 questões, importadas manualmente em 2026-09-25."
+    }
+  ],
+  "_paginas": "Em cada banca, \"paginas\" liga o ano à página pública onde a banca (ou um repositório aberto de provas) lista o PDF do caderno e o gabarito. É o que o crawler genérico do motor recebe. Banca/ano sem página fica em pipeline/estado.json › semFonte até alguém (o Gemini, com busca) preencher."
+}

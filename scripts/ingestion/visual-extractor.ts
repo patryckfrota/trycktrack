@@ -131,7 +131,7 @@ Se a página contiver apenas texto puro das questões sem nenhuma figura ou tabe
             ]
           }
         ],
-        generationConfig: {
+        config: {
           responseMimeType: 'application/json'
         }
       });

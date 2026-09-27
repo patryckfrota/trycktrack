@@ -1,0 +1,13 @@
+{
+  "data": "2026-09-27T14:59:58.108Z",
+  "autor": "gemini",
+  "revisor": "validador",
+  "lote": "extracted-revalida-2023-2.json",
+  "examId": "revalida-2023-2",
+  "itens": 5,
+  "reprovados": 5,
+  "porCategoria": {
+    "duplicata": 4,
+    "taxonomia": 5
+  }
+}
