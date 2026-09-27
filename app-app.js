@@ -296,6 +296,58 @@
             pushTrailSettingsToCloud(trailId); // best-effort, não trava a UI
         }
 
+        // Histórico visto pela trilha: a fila de revisão do app inteiro, só
+        // com as questões respondidas a partir do início da trilha
+        // (track.startDate). Reiniciar a trilha NÃO apaga a fila — ela é a
+        // revisão espaçada do app todo (QuestHub, outros modos) e sincroniza
+        // com o servidor, que devolveria o que fosse apagado no próximo
+        // login. Sem startDate, conta todo o histórico.
+        function getTrailQueue(trailId) {
+            const queue = getReviewQueue();
+            const start = getTrailTrack(getTrailState(), trailId).startDate;
+            if (!start) return queue;
+            const filtered = {};
+            for (const [id, entry] of Object.entries(queue)) {
+                if ((entry.lastReviewedAt || '') >= start) filtered[id] = entry;
+            }
+            return filtered;
+        }
+
+        // Dia de início do estudo da trilha — no máximo hoje. O histórico do
+        // gráfico de evolução anterior à data sai junto (seria de antes do
+        // recomeço).
+        function setTrailStartDate(trailId, dateIso) {
+            const today = new Date().toISOString().slice(0, 10);
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.startDate = dateIso ? (dateIso > today ? today : dateIso) : null;
+            if (track.startDate && Array.isArray(track.history)) {
+                track.history = track.history.filter(point => point.date >= track.startDate);
+            }
+            track.updatedAt = new Date().toISOString();
+            saveTrailState(state);
+            refreshTrailViews();
+            pushTrailSettingsToCloud(trailId);
+        }
+
+        // "Reiniciar trilha do zero": começa hoje, zera assuntos vistos,
+        // questões feitas e evolução DA TRILHA. Data da prova e metas ficam
+        // (são o plano, não o progresso).
+        function resetTrail(trailId) {
+            const name = TRAIL_CATALOG[trailId]?.name || 'a trilha';
+            const ok = window.confirm(`Reiniciar ${name} do zero?\n\nA trilha passa a contar só as questões que você responder a partir de hoje: assuntos vistos, questões feitas, nota e evolução voltam ao início.\n\nSeu histórico no resto do app (revisões do QuestHub) continua. Data da prova e metas são mantidas.`);
+            if (!ok) return;
+            const state = getTrailState();
+            const track = getTrailTrack(state, trailId);
+            track.startDate = new Date().toISOString().slice(0, 10);
+            track.history = [];
+            track.updatedAt = new Date().toISOString();
+            expandedTrailSubjectKey = null;
+            saveTrailState(state);
+            refreshTrailViews();
+            pushTrailSettingsToCloud(trailId);
+        }
+
         // Meta diária de questões (R-9) — é a capacidade que o cronograma
         // distribui; sincroniza com as outras preferências da trilha.
         function setTrailDailyGoal(trailId, value) {
@@ -432,7 +484,7 @@
             const questions = catalog.bankFilter ? bank.filter(catalog.bankFilter) : bank.filter(q => q.id.startsWith(catalog.bankPrefix));
             const weights = window.computeSubjectWeights(questions);
             const catalogSubjects = window.buildSubjectCatalog(questions, weights);
-            const queue = getReviewQueue();
+            const queue = getTrailQueue(trailId);
             const today = new Date().toISOString().slice(0, 10);
             return catalogSubjects.map(subject => ({ ...subject, status: window.subjectStatus(subject, queue, today) }));
         }
@@ -588,7 +640,7 @@
             const catalog = TRAIL_CATALOG[trailId];
             const goal = getTrailGoal(track);
             const subjects = buildTrailSubjects(trailId);
-            const queue = getReviewQueue();
+            const queue = getTrailQueue(trailId);
             const today = new Date().toISOString().slice(0, 10);
             const daysLeft = window.daysUntilExam(track.examDate, today);
             const required = window.requiredPacePerDay(window.remainingWeight(subjects), daysLeft);
@@ -830,6 +882,7 @@
                         <span class="trail-score-value trail-score-value-lg">${Math.round(projected.score * 100)}</span>
                         <span class="trail-score-suffix">/100 se a prova fosse hoje</span>
                     </div>
+                    ${track.startDate ? `<p class="trail-dash-since">Trilha contando desde ${trailDateShort(track.startDate)}${track.startDate === today ? ' (hoje)' : ''}</p>` : ''}
                     <p class="trail-dash-delta">${delta === null ? 'A comparação semanal aparece depois de 7 dias de uso.' : `${delta >= 0 ? '+' : ''}${delta} ${Math.abs(delta) === 1 ? 'ponto' : 'pontos'} nos últimos 7 dias`}</p>
                     ${trailHistoryChartSvg(history)}
                     <p class="trail-dash-footnote">Nota estimada: peso real de cada assunto na prova × seu acerto nele. Assunto ainda não estudado vale o acerto no chute (${trailPct(ctx.guessRate)}) — a nota sobe conforme você pratica.</p>
@@ -851,11 +904,18 @@
                 ${trailPaceHtml(trailId, track.examDate, ctx.daysLeft, ctx.pace, ctx.finalStretch)}
 
                 <h3 class="trail-section-title">Ajustes do plano</h3>
-                ${trailSettingsHtml(trailId, track, goal, dailyGoal)}`;
+                ${trailSettingsHtml(trailId, track, goal, dailyGoal, ctx.today)}`;
         }
 
-        function trailSettingsHtml(trailId, track, goal, dailyGoal) {
+        function trailSettingsHtml(trailId, track, goal, dailyGoal, today) {
             return `<div class="trail-settings">
+                <label class="trail-setting">
+                    <span class="trail-setting-label">Início do estudo da trilha</span>
+                    <input type="date" class="trail-pace-date" max="${today}" value="${track.startDate || ''}" onchange="setTrailStartDate('${trailId}', this.value)">
+                    <span class="trail-setting-hint">${track.startDate
+                        ? `Contando só as questões respondidas desde ${trailDateShort(track.startDate)}. Apague a data pra voltar a contar todo o histórico.`
+                        : 'Contando todo o seu histórico de questões. Escolha uma data pra considerar só o que veio depois dela.'}</span>
+                </label>
                 <label class="trail-setting">
                     <span class="trail-setting-label">Data da prova</span>
                     <input type="date" class="trail-pace-date" value="${track.examDate || ''}" onchange="setTrailExamDate('${trailId}', this.value)">
@@ -868,6 +928,10 @@
                     <span class="trail-setting-label">Meta de acerto <strong>${Math.round(goal * 100)}%</strong></span>
                     <input type="range" min="50" max="95" step="5" value="${Math.round(goal * 100)}" oninput="this.previousElementSibling.querySelector('strong').textContent = this.value + '%'" onchange="setTrailGoal('${trailId}', this.value / 100)">
                 </label>
+                <div class="trail-setting trail-setting-danger">
+                    <button type="button" class="trail-reset-btn" onclick="resetTrail('${trailId}')">Reiniciar trilha do zero</button>
+                    <span class="trail-setting-hint">Zera assuntos vistos, questões feitas, nota e evolução da trilha e recomeça hoje. Data da prova, metas e seu histórico no resto do app continuam.</span>
+                </div>
             </div>`;
         }
 
@@ -1034,7 +1098,7 @@
             const subject = subjects.find(s => s.key === subjectKey);
             if (!subject) return;
             const index = getQuestionIndex();
-            const queue = getReviewQueue();
+            const queue = getTrailQueue(trailId);
             const today = new Date().toISOString().slice(0, 10);
             const dueIds = subject.questionIds.filter(id => queue[id] && queue[id].dueDate <= today);
             const ids = dueIds.length ? dueIds : randomSample(subject.questionIds.filter(id => !queue[id]), Math.min(10, subject.questionIds.length));
@@ -1053,7 +1117,7 @@
         // objetivo aqui é zerar a dívida, não misturar conteúdo novo.
         async function startTodaySession(trailId) {
             const subjects = buildTrailSubjects(trailId);
-            const queue = getReviewQueue();
+            const queue = getTrailQueue(trailId);
             const today = new Date().toISOString().slice(0, 10);
             const dueEntries = subjects
                 .flatMap(s => s.questionIds.filter(id => queue[id] && queue[id].dueDate <= today).map(id => ({ id, overdue: queue[id].dueDate < today })))
@@ -4064,6 +4128,7 @@ Regras obrigatórias:
                 goal: track.goal ?? null,
                 examDate: track.examDate ?? null,
                 dailyGoal: Number.isInteger(track.dailyGoal) ? track.dailyGoal : null,
+                startDate: track.startDate ?? null,
                 history: track.history ?? [],
                 updatedAt: track.updatedAt || new Date().toISOString()
             };
@@ -4116,6 +4181,7 @@ Regras obrigatórias:
             track.goal = merged.goal ?? track.goal;
             track.examDate = merged.examDate ?? null;
             if (Number.isInteger(merged.dailyGoal)) track.dailyGoal = merged.dailyGoal;
+            track.startDate = merged.startDate ?? null;
             track.history = Array.isArray(merged.history) ? merged.history : track.history;
             track.updatedAt = merged.updatedAt;
             saveTrailState(state);

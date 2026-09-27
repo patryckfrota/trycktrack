@@ -5072,6 +5072,12 @@
         .trail-setting-label strong { color: var(--text-main); }
         .trail-setting input[type="range"] { width: 100%; accent-color: var(--lavender-active); }
         .trail-setting .trail-pace-date { align-self: flex-start; }
+        .trail-setting-hint { font-size: 10.5px; line-height: 1.45; color: var(--text-secondary); }
+        .trail-setting-danger { padding-top: 14px; border-top: 1px solid var(--border-color); }
+        .trail-reset-btn { align-self: flex-start; padding: 10px 14px; border-radius: 12px; border: 1.5px solid var(--danger); background: transparent; color: var(--danger); font: 700 12.5px var(--font-family-base); cursor: pointer; }
+        .trail-reset-btn:active { transform: scale(.98); }
+        .trail-reset-btn:focus-visible { outline: 2px solid var(--danger); outline-offset: 2px; }
+        .trail-dash-since { margin: 0; font-size: 11px; font-weight: 700; color: var(--lavender-active); }
 
         /* Cronograma */
         .trail-plan-banner { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-secondary); }

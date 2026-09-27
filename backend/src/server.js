@@ -364,6 +364,7 @@ const trailSettingsSchema = z.object({
   goal: z.number().min(0).max(1).nullable().optional(),
   examDate: z.string().nullable().optional(),
   dailyGoal: z.number().int().min(5).max(300).nullable().optional(),
+  startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
   history: z.array(z.object({ date: z.string(), score: z.number(), coverage: z.number() })).nullable().optional(),
   updatedAt: z.string()
 });

@@ -11,6 +11,7 @@ function hydrateTrailSettings(row) {
         goal: row.goal ?? null,
         examDate: row.examDate instanceof Date ? row.examDate.toISOString().slice(0, 10) : row.examDate,
         dailyGoal: row.dailyGoal ?? null,
+        startDate: row.startDate instanceof Date ? row.startDate.toISOString().slice(0, 10) : (row.startDate ?? null),
         history: row.history ?? null,
         updatedAt: row.updatedAt instanceof Date ? row.updatedAt.toISOString() : row.updatedAt,
     };
@@ -140,6 +141,7 @@ export class PrismaSyncRepository {
             goal: winner.goal ?? null,
             examDate: winner.examDate ? new Date(winner.examDate) : null,
             dailyGoal: Number.isInteger(winner.dailyGoal) ? winner.dailyGoal : null,
+            startDate: winner.startDate ? new Date(winner.startDate) : null,
             history: winner.history ?? null,
         };
         await this.client.userTrailSettings.upsert({
