@@ -289,7 +289,7 @@ Responda ESTRITAMENTE em formato JSON com o schema abaixo:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: { responseMimeType: 'application/json' }
     });
@@ -375,8 +375,8 @@ async function executeTwoStageExtraction(
 
   console.log(`[Extractor] 📄 [Estágio 1/2] Concluído: ${rawQuestions.length} questões estruturadas com sucesso.`);
 
-  // --- ESTÁGIO 2: Flash 3.7 gera resoluções médicas UEPA e taxonomia ---
-  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.7-flash...`);
+  // --- ESTÁGIO 2: Flash-Lite gera resoluções médicas UEPA e taxonomia ---
+  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.5-flash-lite...`);
   const stage2Prompt = buildClinicalAnalysisPrompt(
     examMetadata.examId,
     examMetadata.examName,
@@ -390,7 +390,7 @@ async function executeTwoStageExtraction(
   for (let retry = 0; retry < 3; retry++) {
     try {
       stage2Response = await ai.models.generateContent({
-        model: 'gemini-3.7-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: [
           {
             role: 'user',
@@ -499,7 +499,7 @@ export async function extractQuestionsFromPdf(
     startQuestion = 1,
     limitQuestions = 3,
     maxAttempts = 5,
-    modelName = 'gemini-3.7-flash'
+    modelName = 'gemini-3.5-flash-lite'
   } = options;
 
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
@@ -580,8 +580,7 @@ export async function extractQuestionsFromPdf(
   );
 
   const candidateModels = [
-    'gemini-3.5-flash-lite',
-    'gemini-3.7-flash'
+    'gemini-3.5-flash-lite'
   ];
 
   let lastZodErrors: string | null = null;

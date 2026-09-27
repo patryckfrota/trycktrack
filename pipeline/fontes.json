@@ -2,6 +2,7 @@
   "_sobre": "Fila de prioridade das bancas de residência médica que o motor de ingestão (scripts/ingestion/) deve buscar. Ordem = número de inscritos (mais relevante primeiro). Onde o número de inscritos não foi confirmado, a ordem usa o número de vagas como estimativa e o campo 'inscritos' fica null com 'confianca': 'estimada'. Anos-alvo: 2022 a 2026. Revisar 1x por ano.",
   "atualizado_em": "2026-09-27",
   "anos_alvo": [
+    2021,
     2022,
     2023,
     2024,
@@ -52,6 +53,7 @@
       "confianca": "confirmada",
       "fonte": "https://med.estrategia.com/portal/noticias/inscricoes-usp-sp-2026-residencia-medica/",
       "paginas": {
+        "2026": "https://www.fuvest.br/wp-content/uploads/rm2026-prova-AD2-areasbasicas-acessodireto.pdf|https://www.fuvest.br/wp-content/uploads/rm2026-gabarito-AD-areasbasicas-acessodireto.pdf",
         "2025": "https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_prova-areasbasicasedeacessodireto_grupo-a1.pdf|https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_gabarito-areasbasicasedeacessodireto.pdf",
         "2024": "https://www.fuvest.br/wp-content/uploads/rm_2024_a1.pdf|https://www.fuvest.br/wp-content/uploads/rm2024_gabarito_areas_basicas_acesso-direto_2023-12-18.pdf",
         "2023": "https://www.fuvest.br/wp-content/uploads/rm2023_prova_residencia_A.pdf|https://www.fuvest.br/wp-content/uploads/rm2023_prova_gabaritos_retificados_05-01-2023.pdf"
