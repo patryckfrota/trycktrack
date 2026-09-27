@@ -56,6 +56,8 @@ fi
 
 dump=$(ls -t tmp/extracted-*.json | head -1)
 n=$(node -p "require('./$dump').items.length")
+concluida=$(node -p "Boolean(require('./$dump').concluida)")
+sublotesFalhos=$(node -p "(require('./$dump').failedChunks || []).length")
 fim=$((inicio + n - 1))
 mkdir -p pipeline/entrada
 entrada="pipeline/entrada/extracted-${prefixo}-q${inicio}.json"
@@ -63,7 +65,7 @@ cp "$dump" "$entrada"
 
 if node pipeline/validar.cjs "$entrada"; then
   node pipeline/registrar-bancos.cjs
-  node pipeline/proxima.cjs avancar "$n"
+  node pipeline/proxima.cjs avancar "$n" "$concluida"
   git add -- 'questions-*.js' "${CONTEUDO[@]}" pipeline/entrada pipeline/estado.json pipeline/revisoes
   git commit -m "conteúdo: $prefixo, questões $inicio–$fim (aprovadas no portão)"
   publicar
@@ -72,13 +74,19 @@ if node pipeline/validar.cjs "$entrada"; then
     (cd backend && npm ci --no-audit --no-fund && npx prisma generate && node scripts/import-questions.js)
     dbMsg="Postgres sincronizado."
   fi
+  statusMsg=""
+  if [ "$concluida" = "true" ]; then
+    statusMsg="🎉 Prova $prefixo 100% concluída!"
+  elif [ "$sublotesFalhos" -gt 0 ]; then
+    statusMsg="⚠️ $sublotesFalhos sub-lote(s) com pendência isolados (prova continua em andamento para retry)."
+  fi
   resumo "## Ingestão diária — $(date -u +%F)
-✅ **$prefixo, questões $inicio–$fim** ($n questões): aprovadas no portão e publicadas. $dbMsg"
+✅ **$prefixo, questões $inicio–$fim** ($n questões): aprovadas no portão e publicadas. $statusMsg $dbMsg"
 else
   descartar_gravacoes
   mkdir -p pipeline/pendencias
   git mv -f "$entrada" "pipeline/pendencias/" 2>/dev/null || mv "$entrada" pipeline/pendencias/
-  node pipeline/proxima.cjs avancar "$n"
+  node pipeline/proxima.cjs avancar "$n" "false"
   git add pipeline/pendencias pipeline/estado.json pipeline/revisoes
   git commit -m "pendência: $prefixo, questões $inicio–$fim reprovadas no portão"
   publicar

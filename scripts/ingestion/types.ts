@@ -48,7 +48,10 @@ export type ExtractedItem = z.infer<typeof ExtractedItemSchema>;
 
 export const ExtractedBatchSchema = z.object({
   examId: z.string(),
-  items: z.array(ExtractedItemSchema).min(1, 'O lote deve conter pelo menos uma questão extraída')
+  items: z.array(ExtractedItemSchema).min(1, 'O lote deve conter pelo menos uma questão extraída'),
+  failedChunks: z.array(z.any()).optional(),
+  sublotesFalhos: z.number().optional(),
+  concluida: z.boolean().optional()
 });
 export type ExtractedBatch = z.infer<typeof ExtractedBatchSchema>;
 

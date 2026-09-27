@@ -53,12 +53,22 @@ function proximo() {
     return { trabalho: null, estado };
 }
 
-function avancar(processadas) {
+function avancar(processadas, concluida) {
     const estado = ler(ESTADO, estadoInicial());
     const atual = estado.emAndamento;
     if (!atual) return estado;
-    if (processadas < LIMITE) {
-        estado.concluidas.push({ banca: atual.banca, ano: atual.ano, questoes: atual.inicio - 1 + processadas, data: new Date().toISOString().slice(0, 10) });
+
+    // Só marca como concluída se o motor tiver confirmado que alcançou o fim real do caderno
+    // E que nenhum sub-lote falhou. Nunca mais conclui apenas por processadas < LIMITE.
+    const isConcluida = (concluida === true || concluida === 'true');
+
+    if (isConcluida) {
+        estado.concluidas.push({
+            banca: atual.banca,
+            ano: atual.ano,
+            questoes: atual.inicio - 1 + processadas,
+            data: new Date().toISOString().slice(0, 10)
+        });
         estado.emAndamento = null;
     } else {
         atual.inicio += processadas;
@@ -67,9 +77,9 @@ function avancar(processadas) {
 }
 
 if (require.main === module) {
-    const [cmd, n] = process.argv.slice(2);
+    const [cmd, n, concluida] = process.argv.slice(2);
     if (cmd === 'avancar') {
-        gravar(ESTADO, avancar(Number(n) || 0));
+        gravar(ESTADO, avancar(Number(n) || 0, concluida));
     } else {
         const { trabalho, estado } = proximo();
         gravar(ESTADO, estado);

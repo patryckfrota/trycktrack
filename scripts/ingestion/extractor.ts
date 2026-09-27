@@ -517,6 +517,7 @@ export async function extractQuestionsFromPdf(
     const failedChunks: { start: number; limit: number; error: string }[] = [];
     let currentStart = startQuestion;
     const endQuestion = startQuestion + limitQuestions - 1;
+    let reachedEndOfExam = false;
 
     while (currentStart <= endQuestion) {
       const currentChunkLimit = Math.min(CHUNK_SIZE, endQuestion - currentStart + 1);
@@ -528,9 +529,24 @@ export async function extractQuestionsFromPdf(
           limitQuestions: currentChunkLimit
         });
 
-        if (chunkBatch && Array.isArray(chunkBatch.items) && chunkBatch.items.length > 0) {
-          allItems.push(...chunkBatch.items);
-          console.log(`[Extractor] ✅ Sub-lote Q${currentStart}-Q${currentStart + currentChunkLimit - 1} aprovado com sucesso (${chunkBatch.items.length} questões acumuladas).`);
+        if (chunkBatch && Array.isArray(chunkBatch.items)) {
+          if (chunkBatch.items.length === 0) {
+            // Se já tínhamos itens extraídos e o próximo sub-lote veio vazio, chegamos ao fim real do caderno!
+            if (allItems.length > 0) {
+              console.log(`[Extractor] 🏁 Fim do caderno detectado (Q${currentStart} não existe no PDF). Encerrando varredura.`);
+              reachedEndOfExam = true;
+              break;
+            }
+          } else {
+            allItems.push(...chunkBatch.items);
+            console.log(`[Extractor] ✅ Sub-lote Q${currentStart}-Q${currentStart + chunkBatch.items.length - 1} aprovado com sucesso (${chunkBatch.items.length} questões acumuladas).`);
+            // Se o sub-lote retornou menos questões do que o limite pedido, também chegamos ao fim da prova
+            if (chunkBatch.items.length < currentChunkLimit) {
+              console.log(`[Extractor] 🏁 Fim do caderno detectado na última questão (Q${currentStart + chunkBatch.items.length - 1}).`);
+              reachedEndOfExam = true;
+              break;
+            }
+          }
         }
       } catch (chunkErr: any) {
         console.warn(`[Extractor] ⚠️ Sub-lote Q${currentStart}-Q${currentStart + currentChunkLimit - 1} não convergiu após tentativas (${chunkErr?.message}).`);
@@ -566,9 +582,17 @@ export async function extractQuestionsFromPdf(
       throw new Error(`Nenhum sub-lote conseguiu convergir no intervalo Q${startQuestion}-Q${endQuestion}.`);
     }
 
+    // A prova SÓ é considerada concluída se:
+    // 1. Chegou ao fim real do caderno (reachedEndOfExam)
+    // 2. ZERO sub-lotes falharam (failedChunks.length === 0)
+    const concluida = reachedEndOfExam && failedChunks.length === 0;
+
     return {
       examId: examMetadata.examId,
-      items: allItems
+      items: allItems,
+      failedChunks: failedChunks,
+      sublotesFalhos: failedChunks.length,
+      concluida: concluida
     };
   }
 
