@@ -38,7 +38,70 @@ function problemaTaxonomia(q) {
     if (q.subtopico && !topicos.some(t => t.children.some(s => s.name === q.subtopico))) return `subtópico inválido "${q.subtopico}"`;
     return null;
 }
-module.exports = { problemaTaxonomia };
+
+function ajudaTaxonomia(q) {
+    const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    const r = ROOTS[q.area];
+
+    if (!r) {
+        const areaNorm = norm(q.area);
+        const areaMatch = Object.keys(ROOTS).find(k => norm(k) === areaNorm);
+        if (areaMatch) {
+            return `A área correta é "${areaMatch}". Use este nome exato.`;
+        }
+        return `Área "${q.area}" é inválida. As 20 especialidades válidas são: ${Object.keys(ROOTS).join(', ')}`;
+    }
+
+    const targetAssunto = norm(q.assunto);
+    const targetTopico = norm(q.topico);
+
+    // 1. Checa se o "assunto" fornecido é na verdade um tópico de algum assunto na área
+    for (const a of r.children) {
+        for (const t of a.children) {
+            const tNorm = norm(t.name);
+            if (tNorm === targetAssunto || (targetAssunto.length > 4 && (tNorm.includes(targetAssunto) || targetAssunto.includes(tNorm)))) {
+                return `O termo "${q.assunto}" é um TÓPICO, não um assunto. Use o caminho exato:\n  area: "${q.area}"\n  assunto: "${a.name}"\n  topico: "${t.name}"`;
+            }
+        }
+    }
+
+    // 2. Se o assunto for válido, orienta sobre tópicos
+    const assuntos = r.children.filter(c => c.name === q.assunto);
+    if (assuntos.length > 0) {
+        const topicos = assuntos.flatMap(a => a.children).map(c => c.name);
+        if (topicos.length > 0) {
+            return `O assunto "${q.assunto}" é válido. Escolha um destes tópicos exatos:\n  ${topicos.slice(0, 15).join(', ')}`;
+        }
+        return `O assunto "${q.assunto}" é válido e não possui tópicos filhos. Deixe 'topico' como null.`;
+    }
+
+    // 3. Checa se o assunto foi escrito com variação de caixa/espaço/acentuação
+    const assuntoFlex = r.children.find(a => norm(a.name) === targetAssunto);
+    if (assuntoFlex) {
+        return `O assunto correto é "${assuntoFlex.name}". Use a grafia exata com maiúsculas/minúsculas.`;
+    }
+
+    // 4. Se não achou na área, busca se existe em outra especialidade
+    for (const [outraArea, rootNode] of Object.entries(ROOTS)) {
+        if (outraArea === q.area) continue;
+        for (const a of rootNode.children) {
+            if (norm(a.name) === targetAssunto) {
+                return `O assunto "${a.name}" pertence à área "${outraArea}", não a "${q.area}". Use area: "${outraArea}", assunto: "${a.name}".`;
+            }
+            for (const t of a.children) {
+                if (norm(t.name) === targetAssunto) {
+                    return `O termo "${q.assunto}" é um tópico de "${outraArea}". Use area: "${outraArea}", assunto: "${a.name}", topico: "${t.name}".`;
+                }
+            }
+        }
+    }
+
+    // 5. Lista assuntos válidos da área informada
+    const listaAssuntos = r.children.map(c => c.name);
+    return `Assunto "${q.assunto}" não existe na árvore de ${q.area}.\nAssuntos válidos em ${q.area}:\n  - ${listaAssuntos.join('\n  - ')}`;
+}
+
+module.exports = { problemaTaxonomia, ajudaTaxonomia, ROOTS };
 
 if (require.main === module) {
     global.window = {};

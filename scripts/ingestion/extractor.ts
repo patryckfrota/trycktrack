@@ -12,7 +12,7 @@ import {
 
 const require = createRequire(import.meta.url);
 // @ts-ignore
-const { problemaTaxonomia } = require('../../taxonomia/validar.cjs');
+const { problemaTaxonomia, ajudaTaxonomia } = require('../../taxonomia/validar.cjs');
 
 export interface ExtractionOptions {
   startQuestion?: number;
@@ -153,7 +153,7 @@ export async function extractQuestionsFromPdf(
   const {
     startQuestion = 1,
     limitQuestions = 3,
-    maxAttempts = 3,
+    maxAttempts = 5,
     modelName = 'gemini-3.7-flash'
   } = options;
 
@@ -319,7 +319,8 @@ export async function extractQuestionsFromPdf(
         for (const item of batchData.items) {
           const prob = problemaTaxonomia(item.question);
           if (prob) {
-            taxErrors.push(`- Questão ${item.question.id} (Q${item.question.number}): erro taxonômico '${prob}' (Área informada: "${item.question.area}", Assunto: "${item.question.assunto}"). Lembre-se: 'area' DEVE ser uma das 20 especialidades oficiais (Cardiologia, Cirurgia Geral, Dermatologia, Endocrinologia, Gastroenterologia, Ginecologia, Hematologia, Hepatologia, Infectologia, Medicina Preventiva, Nefrologia, Neurologia, Obstetrícia, Oftalmologia, Ortopedia, Otorrinolaringologia, Pediatria, Pneumologia, Psiquiatria, Reumatologia). Assunto e tópico devem pertencer à árvore da especialidade.`);
+            const orientacao = ajudaTaxonomia(item.question);
+            taxErrors.push(`- Questão ${item.question.id} (Q${item.question.number}): erro taxonômico '${prob}' (Área informada: "${item.question.area}", Assunto: "${item.question.assunto}", Tópico: "${item.question.topico || 'nenhum'}").\n  ORIENTAÇÃO DA ÁRVORE OFICIAL:\n  ${orientacao}\n  ATENÇÃO: Escolha um assunto e tópico EXATAMENTE como listado acima.`);
           }
         }
 
