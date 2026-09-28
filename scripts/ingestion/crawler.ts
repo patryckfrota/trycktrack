@@ -13,21 +13,42 @@ const PDF_DIR = path.join(ROOT_DIR, 'tmp', 'pdfs');
 // Lista de hosts com certificados SSL legados ou cadeias incompletas conhecidas no servidor
 const INSECURE_SSL_HOSTS = new Set([
   'resmedceara.ufc.br',
-  'www.resmedceara.ufc.br'
+  'www.resmedceara.ufc.br',
+  'conhecimento.fgv.br',
+  'mapa-vagas-enare-ebserh.conhecimento.fgv.br',
+  'strixeducacao.com.br',
+  'www.strixeducacao.com.br'
 ]);
 
 // Agente padrão com validação estrita de SSL
-const standardHttpsAgent = new https.Agent({
+export const standardHttpsAgent = new https.Agent({
   rejectUnauthorized: true,
   keepAlive: true
 });
 
 // Agente permissivo exclusivo para hosts que possuem cadeias de certificado incompletas no servidor
-const insecureHttpsAgent = new https.Agent({
+export const insecureHttpsAgent = new https.Agent({
   rejectUnauthorized: false,
   ciphers: 'DEFAULT@SECLEVEL=1',
   keepAlive: true
 });
+
+/**
+ * Retorna se o erro capturado decorre de cadeia ou validação TLS/SSL do servidor
+ */
+export function isSslCertificateError(err: any): boolean {
+  const code = err?.code || '';
+  const msg = err?.message || '';
+  return [
+    'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+    'CERT_HAS_EXPIRED',
+    'DEPTH_ZERO_SELF_SIGNED_CERT',
+    'SELF_SIGNED_CERT_IN_CHAIN',
+    'UNABLE_TO_GET_ISSUER_CERT',
+    'UNABLE_TO_GET_ISSUER_CERT_LOCALLY',
+    'ERR_TLS_CERT_ALTNAME_INVALID'
+  ].includes(code) || msg.includes('unable to verify the first certificate') || msg.includes('certificate');
+}
 
 /**
  * Retorna o agente HTTPS apropriado com base no host da URL
@@ -35,7 +56,12 @@ const insecureHttpsAgent = new https.Agent({
 export function getHttpsAgentForUrl(targetUrl: string): https.Agent {
   try {
     const parsed = new URL(targetUrl);
-    if (INSECURE_SSL_HOSTS.has(parsed.hostname) || parsed.hostname.endsWith('.resmedceara.ufc.br')) {
+    if (
+      INSECURE_SSL_HOSTS.has(parsed.hostname) ||
+      parsed.hostname.endsWith('.resmedceara.ufc.br') ||
+      parsed.hostname.endsWith('.fgv.br') ||
+      parsed.hostname.endsWith('.strixeducacao.com.br')
+    ) {
       return insecureHttpsAgent;
     }
   } catch {}
@@ -184,6 +210,22 @@ export async function downloadPdfFile(url: string, destinationFilename: string):
 
     return filePath;
   } catch (err: any) {
+    if (isSslCertificateError(err)) {
+      console.warn(`[Crawler] ⚠️ Erro de validação SSL detectado (${err?.code || err?.message}). Tentando novamente com agente permissivo...`);
+      try {
+        const retryRes = await httpClient.get(url, {
+          responseType: 'arraybuffer',
+          httpsAgent: insecureHttpsAgent
+        });
+        fs.writeFileSync(filePath, Buffer.from(retryRes.data));
+        const fileSizeMb = (fs.statSync(filePath).size / (1024 * 1024)).toFixed(2);
+        console.log(`[Crawler] Download concluído com fallback SSL: ${destinationFilename} (${fileSizeMb} MB)`);
+        return filePath;
+      } catch (retryErr: any) {
+        // Se ainda falhar, prossegue para outros fallbacks ou relança
+      }
+    }
+
     const status = err.response?.status;
     if (status === 403 || status === 401 || status === 503) {
       console.warn(`[Crawler] ⚠️ Erro HTTP ${status} ao baixar com axios. Ativando fallback headless browser...`);
@@ -305,19 +347,33 @@ export async function crawlGenericOpenRepository(pageUrl: string, prefixName: st
     cadernoUrl = pageUrl;
   } else {
     // Caso 3: URL de página pública HTML contendo links
-    let html: string;
+    let html = '';
     try {
       const response = await httpClient.get(pageUrl, {
         httpsAgent: getHttpsAgentForUrl(pageUrl)
       });
       html = response.data;
     } catch (err: any) {
-      const status = err.response?.status;
-      if (status === 403 || status === 401 || status === 503) {
-        console.warn(`[Crawler] ⚠️ Página ${pageUrl} retornou HTTP ${status} com axios. Ativando fallback headless browser...`);
-        html = await fetchHtmlWithHeadlessBrowser(pageUrl);
-      } else {
-        throw err;
+      if (isSslCertificateError(err)) {
+        console.warn(`[Crawler] ⚠️ Erro SSL ao acessar ${pageUrl}. Tentando novamente com agente permissivo...`);
+        try {
+          const retryRes = await httpClient.get(pageUrl, {
+            httpsAgent: insecureHttpsAgent
+          });
+          html = retryRes.data;
+        } catch (retryErr: any) {
+          err = retryErr;
+        }
+      }
+
+      if (!html) {
+        const status = err.response?.status;
+        if (status === 403 || status === 401 || status === 503) {
+          console.warn(`[Crawler] ⚠️ Página ${pageUrl} retornou HTTP ${status} com axios. Ativando fallback headless browser...`);
+          html = await fetchHtmlWithHeadlessBrowser(pageUrl);
+        } else {
+          throw err;
+        }
       }
     }
     const $ = cheerio.load(html);
