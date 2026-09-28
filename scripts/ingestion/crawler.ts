@@ -56,6 +56,82 @@ export function ensurePdfDirectory(): string {
 }
 
 /**
+ * Baixa arquivo PDF utilizando navegador headless (Puppeteer) para contornar proteções anti-bot (Cloudflare, AWS WAF, etc.)
+ */
+export async function downloadPdfWithHeadlessBrowser(url: string, destinationFilename: string): Promise<string> {
+  ensurePdfDirectory();
+  const filePath = path.join(PDF_DIR, destinationFilename);
+
+  console.log(`[Crawler] 🛡️ Fallback Headless: Iniciando navegador para contornar proteção em ${url}`);
+  const { default: puppeteer } = await import('puppeteer');
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  try {
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    );
+
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    // Aguarda breve intervalo para resolução de desafio JS de WAF/Cloudflare
+    await new Promise(r => setTimeout(r, 2000));
+
+    const base64Data = await page.evaluate(async (pdfUrl) => {
+      const res = await fetch(pdfUrl);
+      if (!res.ok) throw new Error(`Falha no fetch interno do browser com HTTP ${res.status}`);
+      const blob = await res.blob();
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          resolve(result.split(',')[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }, url);
+
+    const buffer = Buffer.from(base64Data, 'base64');
+    if (buffer.length < 1000) {
+      throw new Error(`Buffer retornado muito pequeno (${buffer.length} bytes), provável bloqueio persistente.`);
+    }
+
+    fs.writeFileSync(filePath, buffer);
+    const fileSizeMb = (fs.statSync(filePath).size / (1024 * 1024)).toFixed(2);
+    console.log(`[Crawler] 🎉 Download concluído via headless browser: ${destinationFilename} (${fileSizeMb} MB)`);
+    return filePath;
+  } finally {
+    await browser.close();
+  }
+}
+
+/**
+ * Obtém o HTML de uma página utilizando navegador headless quando bloqueada por WAF/403
+ */
+export async function fetchHtmlWithHeadlessBrowser(url: string): Promise<string> {
+  console.log(`[Crawler] 🛡️ Fallback Headless: Obtendo HTML com navegador em ${url}`);
+  const { default: puppeteer } = await import('puppeteer');
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  try {
+    const page = await browser.newPage();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    );
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 45000 });
+    return await page.content();
+  } finally {
+    await browser.close();
+  }
+}
+
+/**
  * Faz download de uma URL de PDF e grava no disco de forma limpa
  */
 export async function downloadPdfFile(url: string, destinationFilename: string): Promise<string> {
@@ -71,15 +147,24 @@ export async function downloadPdfFile(url: string, destinationFilename: string):
   console.log(`[Crawler] Baixando: ${url}`);
   console.log(`[Crawler] Destino: ${filePath}`);
 
-  const response = await httpClient.get(url, {
-    responseType: 'arraybuffer'
-  });
+  try {
+    const response = await httpClient.get(url, {
+      responseType: 'arraybuffer'
+    });
 
-  fs.writeFileSync(filePath, Buffer.from(response.data));
-  const fileSizeMb = (fs.statSync(filePath).size / (1024 * 1024)).toFixed(2);
-  console.log(`[Crawler] Download concluído: ${destinationFilename} (${fileSizeMb} MB)`);
+    fs.writeFileSync(filePath, Buffer.from(response.data));
+    const fileSizeMb = (fs.statSync(filePath).size / (1024 * 1024)).toFixed(2);
+    console.log(`[Crawler] Download concluído: ${destinationFilename} (${fileSizeMb} MB)`);
 
-  return filePath;
+    return filePath;
+  } catch (err: any) {
+    const status = err.response?.status;
+    if (status === 403 || status === 401 || status === 503) {
+      console.warn(`[Crawler] ⚠️ Erro HTTP ${status} ao baixar com axios. Ativando fallback headless browser...`);
+      return await downloadPdfWithHeadlessBrowser(url, destinationFilename);
+    }
+    throw err;
+  }
 }
 
 /**
@@ -192,8 +277,20 @@ export async function crawlGenericOpenRepository(pageUrl: string, prefixName: st
     cadernoUrl = pageUrl;
   } else {
     // Caso 3: URL de página pública HTML contendo links
-    const response = await httpClient.get(pageUrl);
-    const $ = cheerio.load(response.data);
+    let html: string;
+    try {
+      const response = await httpClient.get(pageUrl);
+      html = response.data;
+    } catch (err: any) {
+      const status = err.response?.status;
+      if (status === 403 || status === 401 || status === 503) {
+        console.warn(`[Crawler] ⚠️ Página ${pageUrl} retornou HTTP ${status} com axios. Ativando fallback headless browser...`);
+        html = await fetchHtmlWithHeadlessBrowser(pageUrl);
+      } else {
+        throw err;
+      }
+    }
+    const $ = cheerio.load(html);
 
     const cadernos: Array<{ url: string; score: number; text: string }> = [];
     const gabaritos: Array<{ url: string; score: number; text: string }> = [];
