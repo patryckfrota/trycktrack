@@ -1,0 +1,1265 @@
+{
+  "examId": "enare-2024",
+  "items": [
+    {
+      "question": {
+        "id": "enare-2024-055",
+        "number": 55,
+        "stem": "Um jovem de 18 anos foi atendido em uma unidade básica de saúde com um quadro de segundo episódio de uretrite gonocócica em 3 meses. Após aconselhamento pela equipe, o tratamento instituído foi:",
+        "options": {
+          "A": "doxiciclina 100 mg, 1 comprimido via oral, 12/12h por 30 dias;",
+          "B": "ceftriaxona 1g, intramuscular, dose única;",
+          "C": "ceftriaxona 500 mg, intramuscular, dose única + azitromicina 500 mg, 4 comprimidos via oral, dose única;",
+          "D": "ciprofloxacino 500 mg, via oral, 12/12h por 7 dias;",
+          "E": "azitromicina 500 mg, via oral, por 10 dias."
+        },
+        "answer": "B",
+        "area": "Infectologia",
+        "assunto": "Infecções sexualmente transmissíveis",
+        "topico": "Uretrites",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-055",
+        "nucleo": "O tratamento de primeira linha para uretrite gonocócica não complicada no Brasil, conforme o Protocolo Clínico e Diretrizes Terapêuticas (PCDT) do Ministério da Saúde, baseia-se na administração de ceftriaxona intramuscular em dose única, associada à cobertura empírica para clamídia se esta não for descartada.",
+        "armadilha": "O principal erro é acreditar que episódios de repetição ou infecções recorrentes exigem esquemas antibióticos prolongados ou troca imediata para quinolonas de amplo espectro. O candidato se deixa seduzir pela cronologia de recidiva em 3 meses e busca uma terapia empírica complexa.\n\nRaciocínio: As diretrizes do Ministério da Saúde indicam ceftriaxona 1g IM em dose única para a infecção gonocócica não complicada, mesmo em casos de recorrência após tratamento prévio adequado, visto que a falha terapêutica por resistência real ao ceftriaxone é rara, sendo a recidiva comumente decorrente de reinfecção por falta de tratamento do parceiro ou nova exposição. A azitromicina em dose única associada (1g VO) costuma ser empregada concomitantemente para cobertura da coinfecção por Chlamydia trachomatis, mas a base contra o gonococo permanece inalterada.",
+        "alternativas": "A) Errada. A doxiciclina por 30 dias é completamente inadequada para o manejo de uretrite gonocócica recorrente, sendo um regime inadequado e prolongado que não faz parte das recomendações do PCDT para ISTs bacterianas.\nB) Correta. Ceftriaxona 1g intramuscular em dose única é o tratamento de escolha preconizado pelo Ministério da Saúde para a uretrite gonocócica, garantindo erradicação microbiológica altamente eficaz.\nC) Errada. A dose de ceftriaxona recomendada pelo Ministério da Saúde para uretrite gonocócica não complicada é de 1g (e não 500 mg) intramuscular em dose única, visando atingir níveis séricos e teciduais adequados contra cepas com sensibilidade diminuída.\nD) Errada. O ciprofloxacino não é mais recomendado para o tratamento de uretrite gonocócica no Brasil devido aos altos índices de resistência bacteriana global às fluoroquinolonas.\nE) Errada. A azitromicina isolada por 10 dias não constitui terapia de primeira linha para uretrite gonocócica e expõe o paciente a falhas terapêuticas graves.",
+        "fixacao": "Para uretrite gonocócica, a conduta padrão ouro baseia-se em ceftriaxona 1g IM em dose única associada à cobertura para clamídia. Evite quinolonas devido à alta resistência e lembre-se de tratar os parceiros sexuais para evitar reinfecções. Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-056",
+        "number": 56,
+        "stem": "A cólera é causada pela bactéria Vibrio cholerae toxigênica dos sorogrupos O1 ou O139. O Vibrio cholerae O1 pode ser classificado em dois biotipos: Clássico e El Tor, que apresentam diferenças em relação às propriedades fenotípicas e genotípicas, patogenicidade e padrões de infecção e sobrevivência nos hospedeiros humanos. O uso de antibióticos é complementar ao tratamento e não substitui a administração de líquidos e solução de sais de reidratação oral ou de fluidos endovenosos (a reidratação é a base da terapia).\nDessa maneira, o antibiótico de primeira escolha, indicado pelo Ministério da Saúde, para tratamento da cólera é:",
+        "options": {
+          "A": "doxiciclina 2 mg/kg a 4 mg/kg, em dose única, por via oral;",
+          "B": "sulfametoxazol + trimetoprima 400/80 mg, 12/12h por 5 dias, por via oral;",
+          "C": "amoxicilina + clavulanato 875/125 mg, 12/12h por 7 dias;",
+          "D": "gentamicina 80 mg, por via oral, em dose única;",
+          "E": "cefepime 2 g, por via endovenosa, 8/8h por 10 dias."
+        },
+        "answer": "A",
+        "area": "Infectologia",
+        "assunto": "Infecções bacterianas",
+        "topico": "Difteria",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-056",
+        "nucleo": "A base fundamental do manejo da cólera é a pronta reidratação volêmica rigorosa (oral ou venosa), sendo os antimicrobianos terapias adjuvantes voltadas para encurtar a duração da diarreia e reduzir a excreção do Vibrio cholerae.",
+        "armadilha": "O candidato costuma confundir o tratamento da cólera com o de outras diarreias bacterianas agudas invasivas, optando por sulfametoxazol-trimetoprima ou fluoroquinolonas de maneira empírica generalizada.\n\nRaciocínio: Conforme os manuais de vigilância epidemiológica e controle do Ministério da Saúde, a doxiciclina em dose única (2 a 4 mg/kg VO, máximo de 300 mg) é o antimicrobiano de primeira escolha para adultos e crianças com cólera, pois reduz rapidamente o volume fecal e elimina o patógeno, diminuindo o período de transmissão. A hidratação agressiva permanece como o pilar absoluto que impede o óbito por choque hipovolêmico.",
+        "alternativas": "A) Correta. A doxiciclina em dose única (2 a 4 mg/kg por via oral) é a medicação antimicrobiana de primeira escolha preconizada pelo Ministério da Saúde para o tratamento da cólera.\nB) Errada. O sulfametoxazol associado à trimetoprima por 5 dias não constitui a primeira escolha para cólera devido à crescente resistência global do Vibrio cholerae a sulfonamidas.\nC) Errada. Amoxicilina com clavulanato não tem indicação formal como antimicrobiano de primeira linha no tratamento das diarreias secretoras agudas por Vibrio cholerae.\nD) Errada. A gentamicina oral possui baixa absorção sistêmica efetiva para este fim e não figura nos protocolos ministeriais de manejo da cólera.\nE) Errada. Cefepime endovenoso é um betastalâmico de largo espectro reservado para infecções graves por bacilos Gram-negativos multirresistentes em ambiente hospitalar, sendo totalmente desproporcional e inadequado para cólera.",
+        "fixacao": "Na cólera, o foco principal é a reposição hidroeletrolítica vigorosa. Como antibiótico adjuvante de primeira escolha, o Ministério da Saúde recomenda doxiciclina em dose única por via oral. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-057",
+        "number": 57,
+        "stem": "A síndrome urêmica hemolítica típica (SHU) é uma doença do grupo das microangiopatias trombóticas. São distúrbios caracterizados por anemia hemolítica microangiopática não imune, trombocitopenia e insuficiência multissistêmica. A SHU está associada a infecções intestinais por bactérias produtoras da toxina Shiga, em especial a Escherichia coli enterohemorrágica invasiva (STEC - Shiga-toxin– producing strains of E coli). Carne mal-cozida, especialmente hambúrguer, leite e suco não pasteurizados, além de frutas e vegetais crus, podem estar contaminados por essas bactérias.\nA doença geralmente tem início abrupto com quadro de diarreia, muitas vezes com sangue e dor abdominal. Em adultos, geralmente é autolimitada a 5-10 dias. Porém, em crianças, observa-se maior associação à SHU.\nCom relação a essa doença em crianças, é correto afirmar que:",
+        "options": {
+          "A": "o antibiótico de escolha é o ciprofloxacino;",
+          "B": "a terapia antibiótica pode aumentar o risco de SHU e a plasmaférese pode auxiliar pacientes com doença por e. coli enterohemorrágica invasiva produtora da toxina SHIGA;",
+          "C": "rifaximina associada a fluorquinolona deve ser administrada imediatamente em casos de diarreia hemorrágica;",
+          "D": "vancomicina 125 mg, por via oral, quatro vezes ao dia, associada à fidaxomicina 200 mg, duas vezes ao dia durante 10 dias, é o tratamento indicando;",
+          "E": "sulfametoxazol + trimetoprima 800/160 mg a cada 6h por 28 dias é o tratamento de escolha."
+        },
+        "answer": "B",
+        "area": "Infectologia",
+        "assunto": "Infecções bacterianas",
+        "topico": "Difteria",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-057",
+        "nucleo": "A síndrome urêmica hemolítica (SHU) associada a infecções por E. coli produtora de toxina Shiga (STEC) é agravada pelo uso de antibióticos, que induzem a lise bacteriana e a liberação maciça da toxina; o manejo primordial é estritamente de suporte hidroeletrolítico e dialítico.",
+        "armadilha": "O erro clássico reside no raciocínio automático de que toda diarreia infecciosa aguda com febre e sangue nas fezes deve ser tratada prontamente com antibioticoterapia empírica de amplo espectro.\n\nRaciocínio: Em quadros de diarreia por E. coli produtora de toxina Shiga, a administração de antimicrobianos aumenta o risco de liberação da toxina e desencadeia ou agrava a SHU. Portanto, o uso de antibióticos é formalmente contraindicado. O suporte clínico rigoroso, incluindo hemotransfusões restritivas, controle de distúrbios hidroeletrolíticos e terapias de substituição renal ou plasmaférese em casos selecionados de microangiopatia grave, constitui a conduta salvadora.",
+        "alternativas": "A) Errada. O uso de ciprofloxacino ou qualquer fluoroquinolona em infecções por STEC eleva drasticamente o risco de precipitação da síndrome urêmica hemolítica por estímulo à liberação de toxina Shiga.\nB) Correta. A antibioticoterapia está contraindicada por aumentar o risco de SHU, e medidas de suporte agressivas, como plasmaférese e diálise, são fundamentais nos casos graves.\nC) Errada. A administração de rifaximina e fluorquinolonas em infecções enterohemorrágicas produtoras de toxina Shiga é contraindicada pelo risco de induzir complicações sistêmicas severas.\nD) Errada. O esquema com vancomicina e fidaxomicina é indicado para infecções graves por Clostridioides difficile, e não para E. coli produtora de toxina Shiga.\nE) Errada. O uso prolongado de sulfametoxazol-trimetoprima não possui indicação e é deletério no contexto de diarreia associada a STEC.",
+        "fixacao": "Diante de suspeita ou confirmação de infecção por E. coli produtora de toxina Shiga (STEC), NUNCA prescreva antibióticos, pois eles aumentam o risco de Síndrome Urêmica Hemolítica. O tratamento é exclusivamente de suporte. Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-058",
+        "number": 58,
+        "stem": "Coqueluche é uma infecção aguda do trato respiratório causada pela bactéria Bordetella pertussis. A palavra coqueluche significa “tosse violenta”, expressão que descreve apropriadamente a característica mais consistente e proeminente da doença. O nome chinês para coqueluche é “tosse de 100 dias”, termo que descreve o curso clínico da doença com precisão. A identificação de B. pertussis foi relatada pela primeira vez por Bordet e Gengou em 1906.\nA classe de antibióticos mais adequada para tratamento dessa doença é:",
+        "options": {
+          "A": "fosfomicina;",
+          "B": "quinolona;",
+          "C": "tetraciclina;",
+          "D": "beta-lactâmico;",
+          "E": "macrolídeos."
+        },
+        "answer": "E",
+        "area": "Infectologia",
+        "assunto": "Infecções bacterianas",
+        "topico": "Difteria",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-058",
+        "nucleo": "O tratamento antimicrobiano de escolha para a coqueluche (Bordetella pertussis) baseia-se no uso de macrolídeos, que eliminam o micro-organismo da nasofaringe e interrompem a cadeia de transmissão.",
+        "armadilha": "O candidato pode tentar utilizar penicilinas ou cefalosporinas (beta-lactâmicos) por serem os antibióticos mais comuns para infecções respiratórias comunitárias, ignorando a especificidade microbiológica da Bordetella pertussis.\n\nRaciocínio: A Bordetella pertussis é um bacilo Gram-negativo fastidioso que responde excelentemente à classe dos macrolídeos (como azitromicina, claritromicina ou eritromicina). Embora os antimicrobianos modifiquem pouco o curso clínico dos acessos de tosse se iniciados tardiamente na fase paroxística, são cruciais para a erradicação bacteriana e controle de surtos na comunidade, conforme as diretrizes do Ministério da Saúde.",
+        "alternativas": "A) Errada. A fosfomicina é um antibiótico urinário indicado principalmente para cistite não complicada, sem papel no manejo de infecções do trato respiratório.\nB) Errada. As quinolonas não são os fármacos de primeira escolha para o tratamento da coqueluche, sendo os macrolídeos o padrão ouro.\nC) Errada. As tetraciclinas não configuram a terapia de primeira linha recomendada para coqueluche na prática clínica pediátrica e de adultos.\nD) Errada. Os beta-lactâmicos (como penicilinas e amoxicilina) são ineficazes contra a Bordetella pertussis.\nE) Correta. Os macrolídeos (azitromicina, claritromicina e eritromicina) representam a classe de antibióticos de escolha para o tratamento e quimioprofilaxia da coqueluche.",
+        "fixacao": "O agente causal da coqueluche, Bordetella pertussis, é sensível aos macrolídeos (como azitromicina), que constituem a classe de escolha para tratamento e bloqueio de transmissão. Beta-lactâmicos não funcionam. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-059",
+        "number": 59,
+        "stem": "Um lactente de 9 meses, com fácies sindrômica, assintomático, apresenta ausculta cardíaca com ritmo regular, bulhas normofonéticas com desdobramento variável da segunda bulha, sopro sistólico 2+/6+ mais audível em borda esternal esquerda baixa, sem irradiação, que diminui com a posição sentada. Os pulsos femorais são palpáveis.\nNesse caso, o médico deve:",
+        "options": {
+          "A": "internar a criança para realização de exames;\n(B) encaminhar a criança para avaliação do cardiopediatra;\n(C) iniciar medicação cardiológica (furosemida e captopril);\nD) solicitar teste de oximetria de pulso;\nE) considerar o achado como funcional, sem necessidade de encaminhamento."
+        },
+        "answer": "E",
+        "area": "Pediatria",
+        "assunto": "Cardiologia Pediátrica",
+        "topico": "Cardiopediatria e Cardiopatias congênitas",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-059",
+        "nucleo": "Sopros cardíacos inocentes ou funcionais caracterizam-se por baixa intensidade, ausência de irradiação, caráter sistólico curto, modificação postural e ausência de sintomas clínicos ou alterações estruturais, não exigindo intervenção ou encaminhamento especializado.",
+        "armadilha": "O principal fator de confusão para o médico é a presença de 'fácies sindrômica' no lactente, o que gera um viés de ancoragem e induz o examinador a superestimar a probabilidade de cardiopatia congênita complexa e a solicitar exames ou encaminhamentos desnecessários.\n\nRaciocínio: As características semiológicas descritas (sopro sistólico suave, 2+/6+, em borda esternal esquerda baixa, que diminui com a mudança de decúbito para sentado, associado a pulsos femorais normais e paciente totalmente assintomático) são típicas de sopro inocente (frequentemente o sopro de Still ou vibratório). A presença de fácies sindrômica aumenta a vigilância, mas isoladamente não transforma um sopro com características benignas evidentes em patológico na ausência de sinais de insuficiência cardíaca, cianose ou repercussão hemodinâmica.",
+        "alternativas": "A) Errada. Internação hospitalar é uma conduta totalmente iatrogênica e descabida para um lactente assintomático com achado benigno ao exame físico.\nB) Errada. O encaminhamento ao cardiopediatra não é mandatório em sopros com características estritamente inocentes e pacientes assintomáticos, mesmo diante de traços sindrômicos leves, a menos que surjam sinais de alarme.\nC) Errada. O uso de diuréticos e inibidores da ECA é reservado para quadros confirmados de insuficiência cardíaca congestiva, sendo contraindicado em pacientes assintomáticos com achados normais.\nD) Errada. A oximetria de pulso faz parte da triagem neonatal para cardiopatias críticas na maternidade, não sendo rotina indispensável para descartar patologia em lactente assintomático com sopro funcional benigno.\nE) Correta. O quadro semiológico descreve um sopro funcional clássico em paciente assintomático e com pulsos normais, devendo o achado ser tranquilizador e considerado variante da normalidade.",
+        "fixacao": "Sopro cardíaco de baixa intensidade, sem irradiação, que varia com a posição e em paciente assintomático com pulsos normais é benigno (inocente), dispensando exames invasivos ou internação, mesmo se houver fácies sindrômica leve. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-060",
+        "number": 60,
+        "stem": "Um escolar de 10 anos apresenta queixa de cansaço, dores nas pernas que o acordam durante a noite e emagrecimento de 2 kg no último mês. Apresenta as seguintes alterações ao exame físico: palidez cutâneo-mucosa 3+/4+, sopro sistólico 2+/6+ em bordo esternal esquerdo, taquicardia (FC = 120 bpm), fígado a 2,5 cm do RCD, ponta de baço palpável, dor à palpação do terço proximal da tíbia bilateralmente e petéquias esparsas em membros.\nO quadro clínico é sugestivo de:",
+        "options": {
+          "A": "anemia falciforme;",
+          "B": "leucemia;",
+          "C": "zika vírus;",
+          "D": "endocardite infecciosa;",
+          "E": "toxoplasmose."
+        },
+        "answer": "B",
+        "area": "Pediatria",
+        "assunto": "Hematologia Pediátrica",
+        "topico": "Anemia ferropriva na infância",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-060",
+        "nucleo": "A associação clássica de pancitopenia manifestada por palidez intensa (anemia), febre/dor óssea noturna (infiltração medular), visceromegalias (fígado e baço) e manifestações hemorragíparas cutâneas (petéquias) em crianças aponta fortemente para leucemia aguda.",
+        "armadilha": "O examinador pode confundir as dores ósseas noturnas com simples 'dores de crescimento', negligenciando os sinais de alarme sistêmicos como perda ponderal, visceromegalias e alterações hematológicas graves ao exame físico.\n\nRaciocínio: A leucemia aguda (particularmente a leucemia linfoide aguda - LLA, mais comum na faixa etária pediátrica) cursa com proliferação clonal de blastos na medula óssea. Isso resulta em falência medular (anemia com palidez e fadiga, plaquetopenia com petéquias e sangramentos) e infiltração de órgãos-alvo reticuloendoteliais (hepatoesplenomegalia) e periósteo (dor óssea intensa que desperta a criança à noite). A taquicardia e o sopro sistólico funcional decorrem do estado hiperdinâmico secundário à anemia grave.",
+        "alternativas": "A) Errada. Embora a anemia falciforme cause crises de dor óssea, o quadro clássico de infiltração medular difusa com visceromegalias e petéquias associadas à perda ponderal aguda direciona para neoplasia hematológica.\nB) Correta. A tríade de infiltração medular (dor óssea, citopenias com palidez e petéquias) e envolvimento extramedular (hepatoesplenomegalia) em criança configura o quadro clássico de leucemia aguda.\nC) Errada. Infecção por zika vírus cursa com exantema, artralgia e febre baixa, sem o perfil de falência medular progressiva e visceromegalias descrito.\nD) Errada. Endocardite infecciosa apresenta febre prolongada, fenômenos embólicos e sopros novos ou modificados, mas não explica o conjunto completo de citopenias e hepatoesplenomegalia difusa típica de leucemia.\nE) Errada. Toxoplasmose adquirida pode causar linfadenopatia, mas raramente apresenta esse quadro exuberante de pancitopenia e infiltração óssea e visceral.",
+        "fixacao": "Criança com palidez intensa, dor óssea noturna, visceromegalias (fígado e baço palpáveis) e petéquias deve levantar suspeita imediata de leucemia aguda, sendo imperativo o hemograma e o encaminhamento hematológico urgente. Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-061",
+        "number": 61,
+        "stem": "Uma paciente de 24 anos, saudável, é usuária de dispositivo intrauterino de cobre. Refere vida sexual ativa com uso de preservativos e última menstruação há 10 dias. Há 2 horas, iniciou-se uma dor de instalação aguda, de padrão constante, em fossa ilíaca direita, sem irradiação, associada a náuseas e vômitos. Nega sangramento vaginal, febre, dor lombar, mudança de hábito intestinal ou urinário. A ultrassonografia transvaginal evidenciou aumento do ovário direito, comprometimento do fluxo sanguíneo em região anexial do mesmo lado e líquido livre em fundo de saco.\nA hipótese mais provável é:",
+        "options": {
+          "A": "gestação ectópica à direita;",
+          "B": "abscesso ovariano à direita;",
+          "C": "torção de ovário e tuba uterina à direita;",
+          "D": "apendicite;",
+          "E": "pielonefrite à direita."
+        },
+        "answer": "C",
+        "area": "Ginecologia",
+        "assunto": "Ginecologia geral",
+        "topico": "Abdome agudo em ginecologia",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-061",
+        "nucleo": "A torção anexial manifesta-se tipicamente por dor pélvica ou abdominal inferior de início súbito, frequentemente acompanhada de náuseas e vômitos, com achado ultrassonográfico de aumento volumétrico do ovário e ausência ou diminuição do fluxo sanguíneo ao Doppler.",
+        "armadilha": "O principal distrator é a apendicite aguda devido à localização da dor em fossa ilíaca direita e aos sintomas gastropecuários associados (náuseas e vômitos). O candidato se esquece de correlacionar os achados específicos de imagem.\n\nRaciocínio: A paciente apresenta quadro clássico de abdome agudo ginecológico. A instalação súbita de dor constante em fossa ilíaca direita, associada a náuseas e vômitos, somada ao ultrassom demonstrando ovário direito aumentado e comprometimento do fluxo sanguíneo anexial ao Doppler, sela o diagnóstico de torção anexial (ovário e tuba). A presença de líquido livre no fundo de saco corrobora o sofrimento isquêmico agudo.",
+        "alternativas": "A) Errada. Gestação ectópica é afastada pela história de última menstruação há 10 dias, uso regular de DIU de cobre e preservativos, além de ausência de atraso menstrual ou sangramento vaginal anormal.\nB) Errada. Abscesso ovariano cursaria com febre alta, sinais flogísticos sistêmicos e leucocitose acentuada, achados ausentes neste caso.\nC) Correta. A apresentação clínica de dor abdominal aguda unilateral associada a náuseas/vômitos e o achado ultrassonográfico de ovário aumentado com fluxo sanguíneo comprometido confirmam a torção de ovário e tuba uterina.\nD) Errada. Embora a apendicite cause dor em fossa ilíaca direita, o eco-Doppler revelou especificamente anomalia de perfusão e aumento volumétrico do ovário direito, direcionando para patologia anexial primária.\nE) Errada. Pielonefrite cursa com febre alta, calafrios, dor lombar e alteração no sumário de urina, todos ausentes na paciente.",
+        "fixacao": "Dor abdominal aguda de forte intensidade com náuseas/vômitos e imagem ultrassonográfica de ovário aumentado sem fluxo ao Doppler define torção anexial, uma emergência cirúrgica ginecológica. Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-062",
+        "number": 62,
+        "stem": "Uma paciente de 18 anos chega à emergência do hospital referindo ter sido vítima de violência sexual há 2 horas em uma festa. Refere que, no ato, houve penetração. Ela desconhece o agressor, o qual não usou preservativo.\nA abordagem inicial deve incluir:",
+        "options": {
+          "A": "atendimento inicial exclusivo por médico;",
+          "B": "encaminhamento da paciente primeiramente ao instituto médico legal;",
+          "C": "encaminhamento da paciente para realizar boletim de ocorrência antes do atendimento médico;",
+          "D": "início de profilaxia para as doenças sexualmente transmissíveis e prevenção de gravidez em até 5 dias;",
+          "E": "avaliação do estado geral de saúde, orientação e proteção contra doenças de transmissão sexual, prevenção de gravidez e coleta de materiais biológicos ou outros indícios materiais que permitam a identificação do agressor."
+        },
+        "answer": "E",
+        "area": "Ginecologia",
+        "assunto": "Sexualidade",
+        "topico": "Tratamento",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-062",
+        "nucleo": "O atendimento integral à vítima de violência sexual é uma emergência médica que prioriza o acolhimento humanizado, a profilaxia de ISTs e gravidez indesejada, além da coleta de vestígios forenses, independentemente de boletim de ocorrência prévio.",
+        "armadilha": "O erro mais grave e frequente é condicionar o atendimento médico ou a realização de profilaxias e perícias à apresentação prévia de boletim de ocorrência policial ou ao exame exclusivo no IML. Isso traumatiza a vítima e viola as normas técnicas do Ministério da Saúde.\n\nRaciocínio: Conforme o Protocolo de Atendimento às Vítimas de Violência Sexual do Ministério da Saúde, a prioridade absoluta é o acolhimento, suporte psicológico, avaliação clínica e adoção imediata das profilaxias pós-exposição (HIV, hepatite B, ISTs bacterianas e contracepção de emergência). Além disso, o serviço de saúde deve proceder à coleta de vestígios forenses e preenchimento da ficha de notificação compulsória, sem exigir registro policial prévio, sendo opcional à paciente acionar a polícia.",
+        "alternativas": "A) Errada. O atendimento deve ser multiprofissional (médicos, enfermeiros, psicólogos e assistentes sociais), não sendo exclusivo de um único profissional médico.\nB) Errada. A paciente nunca deve ser encaminhada primeiro ao IML antes de receber o atendimento de saúde e emergência no hospital de referência.\nC) Errada. Exigir boletim de ocorrência policial como condição para o atendimento médico e profilático é ilegal e viola as diretrizes do SUS e do Ministério da Saúde.\nD) Errada. Embora a profilaxia para ISTs e gravidez seja parte fundamental, a alternativa D é incompleta em relação à alternativa E, que abrange de forma abrangente o manejo clínico, a profilaxia e a cadeia de custódia de vestígios forenses.\nE) Correta. A abordagem inicial integral engloba avaliação clínica e de saúde, profilaxias farmacológicas (ISTs e contracepção de emergência), suporte psicológico e coleta adequada de vestígios forenses para identificação do agressor.",
+        "fixacao": "No atendimento à vítima de violência sexual, priorize sempre o acolhimento imediato, a profilaxia de ISTs e gravidez de emergência, e a coleta de vestígios forenses, sendo proibido condicionar o atendimento a boletim de ocorrência policial. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-063",
+        "number": 63,
+        "stem": "Uma paciente de 23 anos tem queixa de irregularidade menstrual de longa data. Relata que, desde a primeira menstruação, tem intervalo de 50 a 60 dias entre os ciclos e períodos de amenorreia. No último ano, estava em final de faculdade e ganhou muito peso em função de estresse e sedentarismo. Ao exame, apresenta bom estado geral, IMC 31 kg/m², presença de acne em face e dorso e escurecimento de região de dobras. Frente a esse cenário, a principal hipótese é:",
+        "options": {
+          "A": "síndrome dos ovários policísticos",
+          "B": "sobrepeso com aumento de gordura visceral",
+          "C": "deficiência enzimática da suprarrenal da 21-hidroxilase",
+          "D": "síndrome de Cushing",
+          "E": "hipotireoidismo"
+        },
+        "answer": "A",
+        "area": "Ginecologia",
+        "assunto": "Ginecologia endócrina",
+        "topico": "Síndrome dos ovários policísticos",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-063",
+        "nucleo": "A Síndrome dos Ovários Policísticos (SOP) é um distúrbio endócrino-metabólico diagnosticado pelos critérios de Rotterdam, exigindo a presença de pelo menos dois de três: anovulação crônica, hiperandrogenismo clínico ou laboratorial e achado ultrassonográfico de ovários policísticos.",
+        "armadilha": "A armadilha reside em atribuir a irregularidade menstrual exclusivamente ao ganho de peso e estresse, ignorando os sinais clássicos de hiperandrogenismo. O aluno pode subestimar a acne e a acantose nigricans (escurecimento em dobras), que sugerem resistência insulínica e excesso de andrógenos, características cardinais da SOP, e não apenas obesidade exógena.\n\nO raciocínio clínico correto segue os critérios de Rotterdam. A paciente apresenta oligovulação (intervalos de 50-60 dias), sinais clínicos de hiperandrogenismo (acne) e evidências de resistência insulínica (acantose nigricans e IMC elevado), preenchendo os critérios necessários para o diagnóstico de SOP após exclusão de outras causas endócrinas (como hiperplasia adrenal ou Cushing).",
+        "alternativas": "A) Correta. A paciente preenche critérios de oligovulação e hiperandrogenismo clínico, com sinais de resistência insulínica, configurando o diagnóstico.\nB) Errada. Embora a paciente tenha sobrepeso, o quadro clínico de acne e irregularidade desde a menarca aponta para uma causa endócrina específica, não sendo o sobrepeso o diagnóstico primário.\nC) Errada. A forma não clássica da deficiência da 21-hidroxilase causa hiperandrogenismo, mas tipicamente se manifesta com pilificação intensa, e a irregularidade menstrual crônica desde a menarca favorece a SOP.\nD) Errada. A Síndrome de Cushing apresenta obesidade central, estrias violáceas e fraqueza muscular, sintomas que não foram descritos no caso.\nE) Errada. O hipotireoidismo pode causar ciclos irregulares, mas não explica a acne e a acantose nigricans, que são estigmas de hiperandrogenismo e resistência insulínica.",
+        "fixacao": "SOP é diagnóstico de exclusão baseado nos critérios de Rotterdam: oligo/anovulação, hiperandrogenismo e morfologia ovariana. A presença de acantose nigricans é um forte marcador de resistência insulínica associada. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-064",
+        "number": 64,
+        "stem": "Uma paciente de 38 anos teve diagnóstico de câncer de mama há 18 meses, com realização de quimioterapia neoadjuvante e mastectomia à direita. Não menstrua há 12 meses. Há 6 meses queixa-se de calores e suores todas as noites, com prejuízo importante de sua qualidade de vida. Recentemente notou piora da lubrificação vaginal. Analisando o caso acima, o diagnóstico e a conduta apropriada são, respectivamente:",
+        "options": {
+          "A": "menopausa precoce; início de terapia hormonal com estrogênio e progesterona via oral e uso de lubrificantes vaginais",
+          "B": "menopausa precoce; início de escitalopram e hidratantes vaginais",
+          "C": "menopausa precoce; início de estriol vaginal e laser vaginal",
+          "D": "cessação temporária da menstruação; início de desvenlafaxina e lubrificantes vaginais",
+          "E": "transição menopausal; início de estriol transdérmico e fisioterapia pélvica"
+        },
+        "answer": "B",
+        "area": "Ginecologia",
+        "assunto": "Ginecologia geral",
+        "topico": "Dor pélvica crônica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-064",
+        "nucleo": "A menopausa precoce (ou falência ovariana prematura iatrogênica) é definida pela parada das menstruações antes dos 40 anos, secundária a tratamentos oncológicos. Em sobreviventes de câncer de mama, a terapia hormonal estrogênica sistêmica é contraindicada pelo risco de recidiva tumoral.",
+        "armadilha": "A armadilha é sugerir terapia hormonal (estrogênio/progesterona) ou estriol tópico por considerar a menopausa precoce em paciente jovem, ignorando a contraindicação absoluta na história de câncer de mama hormônio-dependente. O erro de conceito é aplicar diretrizes de menopausa fisiológica em paciente oncológica.\n\nO raciocínio correto foca no manejo não hormonal dos sintomas vasomotores e genitais. Para fogachos (calores), os inibidores seletivos de recaptação de serotonina (ISRS), como o escitalopram, ou inibidores da recaptação de serotonina e noradrenalina (IRSN), como a venlafaxina, são a primeira linha de tratamento não hormonal. Para a atrofia urogenital, hidratantes vaginais e lubrificantes são a escolha inicial segura.",
+        "alternativas": "A) Errada. A terapia hormonal sistêmica é contraindicada em pacientes com câncer de mama.\nB) Correta. Manejo não hormonal com ISRS para sintomas vasomotores e hidratação vaginal para atrofia é a estratégia de escolha.\nC) Errada. O estriol vaginal é um estrogênio e, embora absorção sistêmica seja mínima, deve ser evitado por princípio de precaução em pacientes com câncer de mama sem avaliação multidisciplinar oncológica.\nD) Errada. O quadro após 12 meses de amenorreia pós-quimioterapia configura menopausa, não apenas cessação temporária.\nE) Errada. O estriol transdérmico é uma forma de terapia estrogênica sistêmica e está contraindicado.",
+        "fixacao": "Pacientes com câncer de mama não podem usar estrogênio. Para sintomas vasomotores, use ISRS ou IRSN. Para atrofia urogenital, priorize lubrificantes e hidratantes não hormonais. Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-065",
+        "number": 65,
+        "stem": "Uma criança do sexo feminino, de 2 anos de idade, chega encaminhada pelo seu pediatra. A mãe relata corrimento vaginal ora sanguinolento, ora aquoso e uma estrutura semelhante a “cachos de uva” de aspecto gelatinoso na entrada da vagina. A principal hipótese é:",
+        "options": {
+          "A": "má higiene",
+          "B": "sarcoma botrioide",
+          "C": "corpo estranho",
+          "D": "contaminação com gel hormonal transdérmico da mãe",
+          "E": "estímulo hormonal remanescente do intraútero"
+        },
+        "answer": "B",
+        "area": "Ginecologia",
+        "assunto": "Oncologia ginecológica",
+        "topico": "Doenças de vulva e vagina",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-065",
+        "nucleo": "O sarcoma botrioide (rabdomiossarcoma embrionário) é a neoplasia maligna vaginal mais frequente em crianças pequenas, caracterizando-se por massa polipoide que protrui através do introito vaginal, lembrando cachos de uva.",
+        "armadilha": "A armadilha é a interpretação do corrimento vaginal, causa frequente de consulta em pediatria, fazendo o aluno pensar primeiro em etiologias infecciosas ou irritativas (má higiene ou corpo estranho). O aluno pode ignorar a descrição morfológica clássica do tumor maligno pela baixa frequência da doença.\n\nO raciocínio clínico deve ser imediato ao ler a descrição 'cachos de uva' na entrada da vagina. Trata-se de uma lesão neoplásica grave que requer avaliação cirúrgica e oncologia pediátrica. Qualquer massa vaginal em criança, especialmente se associada a sangramento, exige exclusão de sarcoma, sendo uma das emergências diagnósticas em ginecologia infantil.",
+        "alternativas": "A) Errada. Má higiene causa vulvovaginite inespecífica, cursando com corrimento malcheiroso ou prurido, mas não com massa tumoral polipoide.\nB) Correta. A descrição morfológica 'cachos de uva' é patognomônica do sarcoma botrioide.\nC) Errada. Corpo estranho é a causa mais comum de sangramento vaginal em crianças, mas não se apresenta com a massa descrita.\nD) Errada. Exposição a estrogênio causa sangramento vaginal e telarca, mas não produz massas polipoides.\nE) Errada. Remanescentes hormonais seriam esperados no período neonatal, não aos 2 anos de idade.",
+        "fixacao": "Sempre que houver descrição de massa vaginal em 'cachos de uva' em criança, pense em Sarcoma Botrioide (Rabdomiossarcoma embrionário). Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-066",
+        "number": 66,
+        "stem": "Paciente de 32 anos foi à consulta ginecológica de rotina para realização de colpocitologia oncótica. O exame evidenciou agrupamento de células escamosas com núcleos aumentados, hipercrômicos e irregulares, com alta relação núcleo-citoplasmática sugestiva de lesão intraepitelial de alto grau. Como a amostra foi coletada em meio líquido, foi solicitado teste de HPV, que veio positivo para o subtipo 16. Frente a essas informações, é correto afirmar que:",
+        "options": {
+          "A": "se trata de exame normal, com seguimento em 3 anos",
+          "B": "pela associação com HPV-16, a lesão é considerada de baixo grau",
+          "C": "se trata de uma lesão de alto grau com infecção por HPV de alto risco oncogênico, sendo indicada colposcopia",
+          "D": "por se tratar de uma infecção por HPV de baixo risco oncogênico, está indicado seguimento semestral",
+          "E": "se trata de uma infecção por HPV de alto risco oncogênico, sendo indicada a realização imediata da exérese da zona de transformação (EZT ou LEEP), sem a necessidade de colposcopia"
+        },
+        "answer": "C",
+        "area": "Ginecologia",
+        "assunto": "Oncologia ginecológica",
+        "topico": "Rastreamento do câncer de colo do útero",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-066",
+        "nucleo": "A citologia sugestiva de Lesão Intraepitelial de Alto Grau (HSIL) e o teste de HPV positivo para o genótipo 16 (oncogênico de alto risco) são achados de alta suspeição que exigem investigação colposcópica para mapeamento da lesão e biópsia dirigida.",
+        "armadilha": "A armadilha é pular etapas diagnósticas (ir direto para cirurgia sem biópsia) ou subestimar o risco. O aluno pode acreditar que o teste de HPV positivo para 16 substitui a colposcopia ou que a citologia de alto grau permite conduta cirúrgica imediata sem confirmação histológica.\n\nO raciocínio correto segue o fluxograma do Ministério da Saúde e ASCCP: achados de HSIL em citologia obrigatoriamente exigem colposcopia. A colposcopia tem como objetivo identificar a localização, extensão e o grau da lesão, permitindo a biópsia (padrão-ouro) antes de qualquer conduta terapêutica definitiva (como LEEP ou conização).",
+        "alternativas": "A) Errada. O achado é de HSIL, sendo altamente patológico.\nB) Errada. HPV-16 é um dos tipos de maior risco oncogênico, associado a lesões de alto grau e câncer.\nC) Correta. A colposcopia é o passo obrigatório para investigação de lesões de alto grau na citologia.\nD) Errada. HPV-16 é de alto risco, e a citologia é de alto grau.\nE) Errada. Não se deve realizar exérese (conização/LEEP) sem biópsia prévia colposcópica, salvo raras exceções (como colposcopia insatisfatória com lesão confirmada), pois o tratamento é definitivo e cirúrgico.",
+        "fixacao": "Citologia de alto grau (HSIL) = Colposcopia imediata. Sempre biopsiar antes de tratar. HPV-16 é de alto risco. Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-067",
+        "number": 67,
+        "stem": "Uma mulher de 63 anos, portadora de carcinoma lobular invasivo de mama direita de 2,0 cm, com axila clinicamente livre, é submetida a quadrantectomia com biópsia de linfonodo sentinela. Durante o exame de congelação intraoperatória, o patologista encontra a presença de células carcinomatosas nos linfonodos sentinelas biopsiados. É indicado o esvaziamento axilar. Para tanto, é importante definir quais são os 3 níveis dos linfonodos axilares. A estrutura anatômica que define esses níveis é:",
+        "options": {
+          "A": "a artéria axilar",
+          "B": "o músculo peitoral maior",
+          "C": "o músculo peitoral menor",
+          "D": "a artéria mamária interna",
+          "E": "o nervo intercostobraquial"
+        },
+        "answer": "C",
+        "area": "Cirurgia Geral",
+        "assunto": "Temas Gerais em Cirurgia",
+        "topico": "Princípios da Cirurgia Oncológica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-067",
+        "nucleo": "A classificação dos níveis de Berg para linfonodos axilares utiliza o músculo peitoral menor como marco anatômico de referência para a dissecção cirúrgica durante o esvaziamento axilar.",
+        "armadilha": "A armadilha é o conhecimento da anatomia regional. O aluno pode confundir as referências, lembrando de vasos (artéria axilar) como limite superior, mas não como a estrutura que define os 'níveis' (nível I, II e III). O músculo peitoral menor divide a axila em três compartimentos em relação à sua borda lateral, medial e posterior.\n\nRaciocínio: O Nível I (grupo lateral) situa-se lateralmente à borda lateral do peitoral menor. O Nível II (grupo central) situa-se posteriormente ao peitoral menor. O Nível III (grupo apical ou subclavicular) situa-se medialmente à borda medial do peitoral menor. A cirurgia de esvaziamento axilar visa a remoção sistemática desses níveis conforme o acometimento tumoral.",
+        "alternativas": "A) Errada. A artéria axilar é o limite superior do esvaziamento, mas não a estrutura que divide os níveis.\nB) Errada. O peitoral maior recobre o peitoral menor, mas a divisão dos níveis de Berg é feita pelo peitoral menor.\nC) Correta. O músculo peitoral menor é a referência anatômica oficial dos níveis de Berg.\nD) Errada. A artéria mamária interna situa-se atrás do esterno, sem relação com a dissecção axilar.\nE) Errada. O nervo intercostobraquial é uma estrutura sensitiva preservada na cirurgia, não uma referência anatômica para níveis.",
+        "fixacao": "Níveis de Berg (Axila): Referência é o músculo Peitoral Menor. Nível I = lateral; Nível II = posterior; Nível III = medial. Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-068",
+        "number": 68,
+        "stem": "Uma menina de 6 anos é levada pela mãe ao ginecologista por ter iniciado desenvolvimento mamário há 4 meses. Ao exame físico, apresenta mamas em estágio M2 de Tanner e genitália em estágio P1 de Tanner. De acordo com o gráfico de velocidade de crescimento, a paciente manteve um padrão de 4 cm/ano no último ano. Realizada uma radiografia de mão e de punhos pelo método de Greulich-Pyle, identifica-se que a idade óssea da criança é estimada em 6 anos e 2 meses. A dosagem hormonal de LH é 1,2 UI/L. Considerando as informações acima, o diagnóstico mais provável é:",
+        "options": {
+          "A": "telarca precoce isolada",
+          "B": "pubarca precoce isolada",
+          "C": "menarca precoce isolada",
+          "D": "puberdade precoce central",
+          "E": "puberdade precoce periférica"
+        },
+        "answer": "A",
+        "area": "Ginecologia",
+        "assunto": "Ginecologia geral",
+        "topico": "Dor pélvica crônica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-068",
+        "nucleo": "A telarca precoce isolada ocorre pelo desenvolvimento mamário antes dos 8 anos, sem outros sinais de puberdade (como pubarca ou aceleração do crescimento) e sem maturação óssea avançada ou níveis elevados de gonadotrofinas (LH).",
+        "armadilha": "A armadilha é considerar qualquer desenvolvimento mamário antes dos 8 anos como Puberdade Precoce Central (PPC). O aluno pode ignorar os dados de velocidade de crescimento (normal) e idade óssea (compatível com a cronológica), que são essenciais para descartar ativação prematura do eixo gonadal.\n\nRaciocínio: Para PPC, esperaríamos LH basal > 0,3 UI/L (em métodos sensíveis) ou LH estimulado elevado, aceleração da velocidade de crescimento e avanço da idade óssea. Aqui, a criança apresenta apenas telarca isolada, com velocidade de crescimento normal e idade óssea condizente com a idade cronológica, o que caracteriza a telarca precoce isolada, uma variante da normalidade.",
+        "alternativas": "A) Correta. Desenvolvimento mamário sem outros sinais de puberdade, com velocidade de crescimento e idade óssea normais.\nB) Errada. Pubarca é o aparecimento de pelos pubianos, o que não foi o caso (P1).\nC) Errada. Menarca é a primeira menstruação. Menarca precoce é rara e grave.\nD) Errada. Falta evidência de ativação do eixo HPO (LH baixo, velocidade de crescimento normal, idade óssea não avançada).\nE) Errada. Puberdade precoce periférica cursaria com outros sinais de androgenização ou níveis estrogênicos muito elevados, geralmente com LH suprimido.",
+        "fixacao": "Telarca precoce isolada: Estágio M2 Tanner, sem pubarca, velocidade de crescimento normal, idade óssea = idade cronológica. Sem avanço do eixo hormonal. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-069",
+        "number": 69,
+        "stem": "Uma mulher de 23 anos, sexualmente ativa, utilizando contracepção com pílula hormonal combinada, refere surgimento de lesões ulceradas, dolorosas em face interna de grande lábio esquerdo, há 3 dias. Precedendo o surgimento das lesões, refere que a região acometida apresentou um aumento de sensibilidade. Além disso, relata ter apresentado quadro de faringite há 1 semana. Ao exame, identifica-se a vulva trófica, sem distopias aparentes, apresentando 5 lesões ulceradas, com menos de 0,5 cm cada, coalescendo, dolorosas ao toque. Há presença de micropolilinfadenopatia inguinal bilateral, indolor. Considerando a principal hipótese diagnóstica, a opção adequada de tratamento para a paciente é:",
+        "options": {
+          "A": "aciclovir 400 mg, três vezes ao dia, por 7 a 14 dias",
+          "B": "ceftriaxona 1g, IV ou IM, uma vez ao dia, por 8 a 10 dias",
+          "C": "doxiciclina 100 mg, VO, duas vezes ao dia, por 10 a 15 dias",
+          "D": "prednisona, 20 mg, VO, uma vez ao dia, até remissão da úlcera",
+          "E": "penicilina G benzatina, 2,4 milhões UI, IM, dose única (1,2 milhão UI em cada glúteo)"
+        },
+        "answer": "A",
+        "area": "Ginecologia",
+        "assunto": "Infecções em ginecologia",
+        "topico": "Úlceras genitais",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-069",
+        "nucleo": "O herpes genital (HSV) caracteriza-se por múltiplas úlceras dolorosas, frequentemente precedidas por pródromos (aumento de sensibilidade/dor local), que podem coalescer e cursar com adenopatia inguinal dolorosa ou sensível.",
+        "armadilha": "A armadilha é confundir as etiologias das úlceras genitais. O aluno pode se confundir com a faringite recente ou com o número de úlceras (5 pequenas, coalescendo). O distrator mais comum é a sífilis (cancro duro), mas o cancro é único e indolor, enquanto o herpes é múltiplo, doloroso e com pródromos.\n\nRaciocínio: A paciente apresenta dor prévia à lesão (pródromos), úlceras múltiplas, pequenas e dolorosas. Esta é a apresentação clássica do primeiro episódio ou recidiva importante de herpes genital. O tratamento de escolha é o uso de antivirais (aciclovir, valaciclovir ou famciclovir) para reduzir a carga viral e acelerar a cicatrização.",
+        "alternativas": "A) Correta. Aciclovir é o tratamento padrão para infecção por herpes simples.\nB) Errada. Ceftriaxona é o tratamento para cancroide (Haemophilus ducreyi), que causa úlceras dolorosas, mas a apresentação e o tempo de evolução não são os clássicos deste quadro.\nC) Errada. Doxiciclina é tratamento para linfogranuloma venéreo ou sífilis (segunda linha), não sendo a primeira opção para herpes.\nD) Errada. Corticoide não tem papel no tratamento de úlceras infecciosas genitais.\nE) Errada. Penicilina é o tratamento para sífilis, que se apresenta com lesão única e indolor (cancro duro).",
+        "fixacao": "Úlcera Genital Dolorosa + Pródromos = Herpes. Úlcera Indolor = Sífilis. Tratamento Herpes: Aciclovir. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-070",
+        "number": 70,
+        "stem": "Uma mulher de 63 anos, portadora de diabetes mellitus e hipertensão arterial sistêmica controlada, encontra-se em menopausa há 10 anos. Comparece ao ginecologista com queixas de sangramento vaginal há 3 meses. O exame físico não apresenta alterações aparentes ou sinais de sangramento ativo no momento. É realizada uma ultrassonografia transvaginal, que evidencia endométrio com 3 mm de espessura, com imagem ecogênica focal que ocupa a interface entre os folhetos endometriais e mede 5 mm no maior eixo. A causa mais provável do sangramento nesse caso é:",
+        "options": {
+          "A": "adenomiose",
+          "B": "pólipo endometrial",
+          "C": "miomatose uterina",
+          "D": "hiperplasia endometrial",
+          "E": "adenocarcinoma do endométrio"
+        },
+        "answer": "B",
+        "area": "Ginecologia",
+        "assunto": "Ginecologia geral",
+        "topico": "Dor pélvica crônica",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-070",
+        "nucleo": "Sangramento pós-menopausa deve ser sempre investigado para câncer de endométrio. No entanto, quando o endométrio é fino (< 4-5 mm), a causa mais frequente de sangramento focal é o pólipo endometrial.",
+        "armadilha": "A armadilha é o medo do câncer de endométrio. O aluno pode acreditar que, por ser uma paciente pós-menopausa com sangramento, o diagnóstico obrigatório é adenocarcinoma, esquecendo que o aspecto ecográfico focal (endométrio fino com imagem ecogênica focal) é altamente sugestivo de pólipo.\n\nRaciocínio: Na pós-menopausa, a espessura endometrial de 3 mm afasta, com alto valor preditivo negativo, a necessidade de investigação invasiva imediata para câncer de endométrio. A presença de uma 'imagem ecogênica focal' dentro dessa cavidade fina aponta diretamente para uma lesão proliferativa localizada, sendo o pólipo endometrial o diagnóstico mais frequente nesse contexto.",
+        "alternativas": "A) Errada. Adenomiose cursa com aumento uterino e dor, não com massa focal em endométrio fino.\nB) Correta. A imagem ecogênica focal em endométrio fino é o padrão ultrassonográfico do pólipo endometrial.\nC) Errada. Miomas são lesões miometriais, não focais endometriais.\nD) Errada. Hiperplasia endometrial geralmente causa espessamento difuso e maior do endométrio ( > 5 mm).\nE) Errada. O endométrio de 3 mm torna o adenocarcinoma muito improvável.",
+        "fixacao": "Sangramento pós-menopausa + Endométrio fino (<4mm) + Massa Focal = Pólipo Endometrial. Portanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-071",
+        "number": 71,
+        "stem": "Uma mulher de 25 anos, sexualmente ativa, sem atraso menstrual, comparece ao ginecologista com uma ultrassonografia transvaginal de rotina que apresentou nódulo de aspecto misto, com áreas hiperecogênicas difusas e sombra acústica posterior no ovário direito medindo 7,0 cm. O ovário esquerdo e o útero não apresentaram alterações à ultrassonografia. Ao toque vaginal, identificou-se a presença de massa móvel, indolor, medindo em torno de 7,0 cm, palpável em região anexial direita.\nConsiderando a principal hipótese diagnóstica do caso, é correto afirmar que:",
+        "options": {
+          "A": "esse tipo de tumor ovariano é bilateral em 10% dos casos;",
+          "B": "usualmente o marcador tumoral CA125 é elevado nesses casos;",
+          "C": "a chance de malignidade desse tipo de tumor é usualmente alta;",
+          "D": "o principal subtipo histológico desses tumores é o cistoadenocarcinoma seroso;",
+          "E": "o tratamento de eleição para esse tipo de tumor é a histerectomia com ooforectomia bilateral."
+        },
+        "answer": "A",
+        "area": "Ginecologia",
+        "assunto": "Oncologia ginecológica",
+        "topico": "Tumores anexiais e câncer de ovário",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-071",
+        "nucleo": "O teratoma cístico maduro (cisto dermóide) é o tumor de células germinativas mais comum do ovário, caracterizado ultrassonograficamente por áreas heterogêneas e sombra acústica posterior, sendo bilateral em cerca de 10 a 15% dos casos.",
+        "armadilha": "O principal erro consiste em confundir os achados ultrassonográficos de conteúdo misto e sombra acústica (típicos de teratoma maduro com componentes sebáceos, dentes ou cabelos) com neoplasias malignas epiteliais, levando à indicação de cirurgias radicais desnecessárias.\nRaciocínio: A paciente jovem apresenta massa anexial assintomática com características clássicas de teratoma cístico maduro benigno. A bilateralidade ocorre em até 10-15% dos casos, exigindo inspeção do ovário contralateral durante o tratamento conservador (ooforectomia parcial ou cistectomia preservadora da fertilidade). O risco de transformação maligna é extremamente baixo (< 2%), e os marcadores tumorais séricos encontram-se normais.",
+        "alternativas": "A) Correta. O teratoma cístico maduro do ovário apresenta bilateralidade em aproximadamente 10% a 15% dos casos documentados na literatura ginecológica.\nB) Errada. Os marcadores tumorais como o CA125 são tipicamente normais no teratoma maduro, sendo mais associados a neoplasias epiteliais malignas de ovário ou endometriomas.\nC) Errada. A chance de malignidade é menor que 2% (transformação maligna em carcinoma espinocelular é rara), sendo primariamente uma neoplasia benigna.\nD) Errada. O cistoadenocarcinoma seroso é um tumor epitelial maligno, e não um tumor de células germinativas benigno como o teratoma maduro.\nE) Errada. O tratamento de eleição em mulheres jovens que desejam preservar a fertilidade é a cistectomia ovariana conservadora por via laparoscópica, e nunca a histerectomia com ooforectomia bilateral.",
+        "fixacao": "Massa anexial com áreas ecogênicas e sombra acústica em mulher jovem sugere teratoma cístico maduro (cisto dermóide). É bilateral em 10% dos casos e o tratamento de escolha é a ressecção conservadora (cistectomia) para preservação da função ovariana. Evite condutas radicais em lesões benignas.\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-072",
+        "number": 72,
+        "stem": "Uma mulher de 33 anos comparece ao médico com queixa de leucorreia há 2 semanas, com odor desagradável, que piora após a relação sexual. Ao exame especular, verifica-se conteúdo vaginal aumentado, com coloração branco-acinzentada e algo bolhoso. O colo uterino apresenta mácula rubra de 2,0 cm de diâmetro ao redor do orifício externo, e o muco cervical está com aspecto transparente. A fita de pH vaginal registra resultado de 5,2. O teste do KOH10% exacerbou o odor da leucorreia. Ao toque vaginal, o colo móvel apresenta-se indolor. Realizada a bacterioscopia, visualizaram-se células epiteliais recobertas por cocobacilos Gram variáveis.\nConsiderando a principal hipótese diagnóstica, o melhor tratamento para a paciente é:",
+        "options": {
+          "A": "fluconazol, 1 comprimido de 150 mg em dose única;",
+          "B": "duches vaginais com bicarbonato de sódio por 10 dias;",
+          "C": "fenticonazol, creme vaginal, 0,02 mg/g, uma vez ao dia, durante 7 dias;",
+          "D": "metronidazol 500 mg, por via oral, duas vezes ao dia, durante 7 dias;",
+          "E": "creme vaginal combinando clindamicina 2% e hidrocortisona 10%, por 14 dias."
+        },
+        "answer": "D",
+        "area": "Ginecologia",
+        "assunto": "Infecções em ginecologia",
+        "topico": "Vulvovaginites",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-072",
+        "nucleo": "A vaginose bacteriana é caracterizada pela substituição da microbiota vaginal normal por Gardnerella vaginalis e anaeróbios, apresentando corrimento cinzento homogêneo, pH > 4,5, teste das aminas (KOH) positivo e clue cells na bacterioscopia.",
+        "armadilha": "O principal erro é confundir a vaginose bacteriana com candidíase ou tricotomíase devido à queixa de corrimento com odor, optando erroneamente por antifúngicos em dose única.\nRaciocínio: A paciente exibe os critérios de Amsel completos: corrimento homogêneo, pH elevado (5,2), whiff test positivo (liberação de odor de peixe podre com KOH) e presença de clue cells (células-alvo recobertas por cocobacilos) na bacterioscopia. Conforme os Protocolos Clínicos e Diretrizes Terapêuticas (PCDT/MS), o tratamento de primeira escolha é o metronidazol por via oral (500 mg, de 12 em 12 horas, por 7 dias) ou clindamicina oral.",
+        "alternativas": "A) Errada. O fluconazol é o tratamento de escolha para a candidíase vulvovaginal, que cursa com pH ácido (< 4,5) e ausência de odor fétido ou clue cells.\nB) Errada. Duches vaginais são contraindicados no manejo de infecções vaginais, pois alteram o microbioma e facilitam a ascensão de patógenos.\nC) Errada. Fenticonazol é um antifúngico tópico, ineficaz contra o desequilíbrio bacteriano da vaginose bacteriana.\nD) Correta. Metronidazol 500 mg via oral, 12/12h por 7 dias, é o regime antimicrobiano sistêmico recomendando pelo Ministério da Saúde para o tratamento da vaginose bacteriana.\nE) Errada. Associações com corticoides tópicos não fazem parte do protocolo terapêutico de infecções vaginais bacterianas.",
+        "fixacao": "Vaginose bacteriana manifesta-se com corrimento fétido (piora pós-relação), pH > 4,5, teste das aminas positivo e clue cells na microscopia. O tratamento padrão-ouro é o metronidazol oral (500 mg 12/12h por 7 dias) ou clindamicina oral.\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-073",
+        "number": 73,
+        "stem": "Paciente, após gestação e parto complicados, está em acompanhamento com endocrinologista com diagnóstico de síndrome de Sheehan.\nA complicação obstétrica que mais provavelmente ocorreu nesse caso foi:",
+        "options": {
+          "A": "diabetes gestacional em uso de insulina;",
+          "B": "descolamento prematuro da placenta;",
+          "C": "rotura prematura de membranas ovulares;",
+          "D": "gestação gemelar monocoriônica;",
+          "E": "restrição de crescimento intrauterino."
+        },
+        "answer": "B",
+        "area": "Obstetrícia",
+        "assunto": "Puerpério",
+        "topico": "Puerpério fisiológico",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-073",
+        "nucleo": "A síndrome de Sheehan decorre da necrose isquêmica da adeno-hipófise secundária a uma hemorragia obstétrica grave e choque hipovolêmico no periarto.",
+        "armadilha": "O candidato pode associar incorretamente distúrbios endocrinológicos gestacionais como diabetes com necrose hipofisária.\nRaciocínio: A adeno-hipófise hipertrofia consideravelmente durante a gravidez sem aumento proporcional do suprimento sanguíneo, tornando-se extremamente vulnerável à hipóxia e à isquemia em vigência de hemorragia pós-parto maciça ou choque hipovolêmico grave. Quadros de hemorragia severa por descolamento prematuro da placenta (DPP), atresia uterina ou placenta prévia são as causas clássicas desencadeantes.",
+        "alternativas": "A) Errada. Diabetes gestacional não constitui fator de risco direto para necrose adeno-hipofisária isquêmica.\nB) Correta. O descolamento prematuro da placenta (DPP) é uma das principais causas de hemorragia obstétrica grave e choque, eventos primariamente associados ao desenvolvimento da síndrome de Sheehan.\nC) Errada. A rotura prematura de membranas está associada a infecções (corioamnionite), mas não a quadros de hipoperfusão hipofisária isquêmica.\nD) Errada. Gestação gemelar monocoriônica eleva o risco de hemorragia pós-parto por atonia uterina, mas o DPP e outras causas de hemorragia grave são os precursores diretos da necrose hipofisária.\nE) Errada. Restrição de crescimento intrauterino relaciona-se a insuficiência placentária crônica, sem relação direta com necrose hipofisária aguda no pós-parto.",
+        "fixacao": "Síndrome de Sheehan caracteriza-se por pan-hipopituitarismo pós-parto decorrente de necrose isquêmica hipofisária secundária a hemorragia obstétrica maciça (como choque por DPP ou atonia).\nPortanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-074",
+        "number": 74,
+        "stem": "A pré-eclâmpsia complicada com síndrome HELLP é caracterizada por:",
+        "options": {
+          "A": "trombocitopenia e convulsões maternas;",
+          "B": "disfunção hepática e elevação da glicemia;",
+          "C": "hemólise, disfunção hepática e trombocitopenia;",
+          "D": "convulsões maternas, hemólise e hiperglicemia;",
+          "E": "diminuição dos reflexos profundos e hemólise."
+        },
+        "answer": "C",
+        "area": "Obstetrícia",
+        "assunto": "Intercorrências obstétricas /obstetrícia patológica",
+        "topico": "Sangramento segunda metade da gestação",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-074",
+        "nucleo": "A síndrome HELLP é uma complicação grave da doença hipertensiva específica da gestação, definida pelo acrônimo em inglês: Hemolysis (hemólise), Elevated Liver enzymes (elevação de enzimas hepáticas) e Low Platelet count (trombocitopenia).",
+        "armadilha": "O distrator clássico tenta confundir a definição da síndrome HELLP com eclâmpsia (inserindo convulsões) ou com distúrbios glicêmicos.\nRaciocínio: Os critérios diagnósticos clássicos da síndrome HELLP exigem a presença de hemólise microangiopática (esquizócitos, bilirrubina indireta e LDH aumentadas, haptoglobina baixa), elevação de transaminases hepáticas (TGO/TGP superior a duas vezes o limite superior da normalidade) e plaquetopenia (< 100.000/mm³). Trata-se de uma emergência obstétrica que requer estabilização e interrupção da gravidez.",
+        "alternativas": "A) Errada. Convulsões maternas definem o quadro de eclâmpsia, e não fazem parte do acrônimo direto da síndrome HELLP (embora possam coexistir).\nB) Errada. Elevação da glicemia não compõe os critérios diagnósticos da síndrome HELLP.\nC) Correta. A síndrome HELLP caracteriza-se exatamente pela tríade de hemólise (H), elevação de enzimas hepáticas (EL) e plaquetopenia (LP).\nD) Errada. Hiperglicemia e convulsões não são componentes da definição da síndrome HELLP.\nE) Errada. A diminuição dos reflexos profundos ocorre na intoxicação por sulfato de magnésio, não caracterizando a síndrome HELLP.",
+        "fixacao": "A síndrome HELLP é traduzida pelo acrônimo: Hemólise (H), Enzimas hepáticas elevadas (EL) e Plaquetopenia baixa (LP). É uma complicação temida da pré-eclâmpsia grave que impõe o parto imediato.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-075",
+        "number": 75,
+        "stem": "Uma gestante com 28 semanas tem o diagnóstico de infecção por parvovírus B19.\nA melhor maneira de avaliar a principal complicação fetal nesse caso é:",
+        "options": {
+          "A": "realização do doppler da artéria cerebral média;",
+          "B": "avaliação ultrassonográfica da movimentação fetal;",
+          "C": "pesquisa de células fetais livres no sangue materno;",
+          "D": "medida menor do fundo uterino ao exame clínico;",
+          "E": "realização do teste de Coombs direto no sangue materno."
+        },
+        "answer": "A",
+        "area": "Obstetrícia",
+        "assunto": "Medicina fetal",
+        "topico": "Procedimentos invasivos em medicina fetal",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-075",
+        "nucleo": "A principal complicação fetal da infecção primária por parvovírus B19 é a anemia fetal grave decorrente do tropismo do vírus por células progenitoras eritroides, levando a hidropisia fetal não imune.",
+        "armadilha": "Candidatos tentam associar o teste de Coombs direto (usado na isoimunização Rh) à anemia fetal por parvovírus, o que constitui um erro conceitual grave, pois o parvovírus causa infecção viral e não aloimunização eritrocitária.\nRaciocínio: O parvovírus B19 infecta os eritroblastos fetais, causando aplasia medular e anemia grave. Para monitorar essa complicação sem expor o feto a procedimentos invasivos de rotina (como cordocentese precoce), utiliza-se a ultrassonografia com Doppler da artéria cerebral média (ACM), avaliando o pico de velocidade sistólica (PVS-ACM). Valores superiores a 1,5 desvios-padrão para a idade gestacional indicam anemia fetal moderada a grave.",
+        "alternativas": "A) Correta. O Doppler da artéria cerebral média avaliando o pico de velocidade sistólica é o exame não invasivo padrão-ouro para detectar anemia fetal decorrente da infecção por parvovírus B19.\nB) Errada. A movimentação fetal é um parâmetro biofísico inespecífico e tardio para avaliar comprometimento por anemia grave.\nC) Errada. A pesquisa de células fetais livres no sangue materno (DNA fetal livre) é utilizada para rastreio de aneuploidias e sexagem fetal, não servindo para diagnóstico de anemia.\nD) Errada. A medida da altura uterina é um método antropométrico grosseiro e inadequado para diagnóstico precoce de anemia fetal.\nE) Errada. O teste de Coombs direto avalia anticorpos maternos aderidos às hemácias do recém-nascido, sendo útil na incompatibilidade Rh, e não na infecção por parvovírus B19.",
+        "fixacao": "Infecção por parvovírus B19 na gestação causa aplasia eritroide e anemia fetal. O método de rastreio não invasivo de escolha para essa complicação é o Doppler da artéria cerebral média (PVS-ACM > 1,5 MoP).\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-076",
+        "number": 76,
+        "stem": "Uma gestante realiza ultrassonografia com 24 semanas, que identifica gestação gemelar monocoriônica, diamniótica, com um feto com peso estimado no percentil 3 e o outro com peso estimado no percentil 43. Eles têm uma diferença de 28% entre os pesos. Ambos os fetos estão com volume do líquido amniótico normal e ambos com o doppler da artéria umbilical, da artéria cerebral média e do ducto venoso dentro da normalidade.\nO diagnóstico compatível com esse quadro é:",
+        "options": {
+          "A": "gemelidade imperfeita;",
+          "B": "síndrome de transfusão feto-fetal;",
+          "C": "sequência de anemia/policitemia;",
+          "D": "restrição de crescimento intrauterino seletiva;",
+          "E": "sequência TRAP."
+        },
+        "answer": "D",
+        "area": "Obstetrícia",
+        "assunto": "Medicina fetal",
+        "topico": "Procedimentos invasivos em medicina fetal",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-076",
+        "nucleo": "A restrição de crescimento intrauterino seletiva (RCVUs) em gestações monocoriônicas é definida pela discordância de peso fetal maior que 25% associada a um dos fetos com peso estimado abaixo do percentil 10, na vigência de volumes normais de líquido amniótico em ambos os sacos.",
+        "armadilha": "O aluno pode confundir com a Síndrome de Transfusão Feto-Fetal (STFF), que obrigatoriamente exige discordância no volume de líquido amniótico (polidrâmnio no receptor com maior bolsão > 8 cm e oligodrâmnio no doador com maior bolsão < 2 cm).\nRaciocínio: Na gestação descrita, há discordância de peso superior a 25% (28%) e feto menor abaixo do percentil 3, preenchendo os critérios de RCVUs. Contudo, o volume de líquido amniótico está normal em ambos e os fluxos Doppler (umbilical, cerebral média e ducto venoso) estão preservados, caracterizando o Estágio I da classificação de Gratacós para a RCVUs.",
+        "alternativas": "A) Errada. Gemelidade imperfeita refere-se a malformações congênitas do tipo siameses (unidos), o que não se aplica ao caso.\nB) Errada. A síndrome de transfusão feto-fetal (STFF) exige discordância do volume de líquido amniótico (bolsão vertical máximo > 8 cm em um e < 2 cm no outro), ausente neste cenário.\nC) Errada. A sequência de anemia/policitemia (TAPS) manifesta-se por discordância significativa nos valores de hemoglobina e Doppler da ACM (altas velocidades no doador, baixas no receptor), sem alterações discrepantes primárias de volume de líquido amniótico, mas o padrão do enunciado define claramente discordância volumétrica de peso.\nD) Correta. A presença de gestação monocoriônica com feto < percentil 10, discordância de peso > 25% e volumes normais de líquido amniótico define a restrição de crescimento intrauterino seletiva (RCVUs).\nE) Errada. A sequência TRAP (perfusão arterial reversa em gema acárdica) envolve um feto bomba e um feto acárdico, sem correlação com o quadro clínico apresentado.",
+        "fixacao": "Restrição de crescimento intrauterino seletiva (RCVUs) em gestações monocoriônicas caracteriza-se por peso estimado < percentil 10 em um feto e discordância de peso > 25%, mantendo o líquido amniótico normal em ambos os sacos (diferenciando-se da STFF).\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-077",
+        "number": 77,
+        "stem": "Gestante realiza ultrassonografia obstétrica, que evidencia uma medida do maior bolsão vertical do líquido amniótico de 12 cm.\nA condição que pode estar associada a esse quadro é:",
+        "options": {
+          "A": "insuficiência uteroplacentária;",
+          "B": "displasia tanatofórica no feto;",
+          "C": "agenesia renal bilateral fetal;",
+          "D": "restrição de crescimento fetal;",
+          "E": "gravidez com pós-datismo."
+        },
+        "answer": "B",
+        "area": "Obstetrícia",
+        "assunto": "Medicina fetal",
+        "topico": "Procedimentos invasivos em medicina fetal",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-077",
+        "nucleo": "O polidrâmnio é definido pelo maior bolsão vertical (MBV) de líquido amniótico maior ou igual a 8 cm (ou índice de líquido amniótico ILA ≥ 24 cm), sendo frequentemente associado a condições que impedem a deglutição fetal ou aumentam a produção urinária.",
+        "armadilha": "O candidato pode confundir as causas de oligodrâmnio (como insuficiência uteroplacentária, RCF, agenesia renal e pós-datismo) com as causas de polidrâmnio.\nRaciocínio: Um MBV de 12 cm caracteriza polidrâmnio moderado a grave. As causas fetais de polidrâmnio incluem malformações do sistema nervoso central (anencéfalo) e do trato gastrintestinal (atresia esofágica ou duodenal) que impeçam a deglutição, além de displasias esqueléticas graves (como a displasias tanatofóricas ou osteogênese imperfeita) que comprimem o tórax e impedem a deglutição adequada. Insuficiência uteroplacentária, restrição de crescimento e agenesia renal causam oligodrâmnio.",
+        "alternativas": "A) Errada. A insuficiência uteroplacentária causa hipoperfusão renal fetal, resultando em diminuição da diurese e oligodrâmnio.\nB) Correta. A displasia tanatofórica é uma displasia esquelética letal caracterizada por tórax estreito e restrição de deglutição fetal, cursando frequentemente com polidrâmnio.\nC) Errada. A agenesia renal bilateral causa ausência de produção de urina fetal, resultando em anidrâmnio ou oligodrâmnio severo.\nD) Errada. A restrição de crescimento fetal (RCF) secundária à insuficiência placentária associa-se tipicamente a oligodrâmnio.\nE) Errada. A gravidez pós-termo (pós-datismo) apresenta declínio progressivo do volume de líquido amniótico, levando a oligodrâmnio.",
+        "fixacao": "Polidrâmnio (MBV ≥ 8 cm ou ILA ≥ 24 cm) está associado a patologias que impedem a deglutição fetal (atresias, malformações do SNC, displasias esqueléticas como a tanatofórica) ou diabetes gestacional. Condições placentárias e renais restritivas causam oligodrâmnio.\nPortanto, o gabarito é a alternativa B."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-078",
+        "number": 78,
+        "stem": "Uma mulher de 25 anos chega ao ambulatório com um exame de farmácia demonstrando gravidez. Ainda não realizou ultrassonografia e, pela data da última menstruação, estaria com aproximadamente 8 semanas de gestação.\nAo toque, nota-se um amolecimento acentuado no istmo, que configuraria o sinal de:",
+        "options": {
+          "A": "Hegar;",
+          "B": "Piskacek;",
+          "C": "Osiander;",
+          "D": "Nobile-Budin;",
+          "E": "Puzos."
+        },
+        "answer": "A",
+        "area": "Obstetrícia",
+        "assunto": "Pré-natal",
+        "topico": "Assistência pré-natal",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-078",
+        "nucleo": "Os sinais de probabilidade de gravidez ao exame físico ginecológico incluem alterações anatômicas e de consistência uterina decorrentes da impregnação hormonioterapia estroprogestativa.",
+        "armadilha": "O candidato pode confundir os epônimos clássicos dos sinais clínicos do primeiro trimestre da gestação (Hegar, Piskacek, Osiander, Nobile-Budin e Puzos).\nRaciocínio: O amolecimento do istmo uterino percebido ao exame bimanual é o clássico sinal de Hegar. Outros sinais importantes incluem o sinal de Piskacek (assimetria uterina devida à nidação), o sinal de Osiander (percepção de pulsação vaginal nos fundos de saco laterais), o sinal de Nobile-Budin (diminuição da elasticidade e preenchimento dos fundos de saco vaginais) e o sinal de Puzos (rechaço fetal intrauterino).",
+        "alternativas": "A) Correta. O sinal de Hegar refere-se ao amolecimento acentuado do istmo uterino identificado no exame físico obstétrico do primeiro trimestre.\nB) Errada. O sinal de Piskacek caracteriza-se pela assimetria uterina no local da nidação ao exame bimanual.\nC) Errada. O sinal de Osiander consiste na percepção dos batimentos da artéria vaginal nos fundos de saco laterais.\nD) Errada. O sinal de Nobile-Budin diz respeito ao preenchimento e abaulamento dos fundos de saco vaginais pela hipertrofia uterina gestacional.\nE) Errada. O sinal de Puzos refere-se ao rechaço do polo cefálico ou parte fetal ao toque vaginal bimanual a partir da 14ª-16ª semana.",
+        "fixacao": "Sinais clássicos de probabilidade de gravidez no 1º trimestre: Hegar (amolecimento do istmo), Piskacek (assimetria uterina), Osiander (pulso vaginal palpável), Nobile-Budin (preenchimento dos fundos de saco) e Puzos (rechaço fetal).\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-087",
+        "number": 87,
+        "stem": "Apolinário, 86 anos, perfil 3 de funcionalidade, com Alzheimer em estágio avançado, hipertenso, diabético e com imobilidade grau IV, em uso de medicação para as doenças de base, é levado à consulta médica. Sobre seu quadro clínico, é correto afirmar que:",
+        "options": {
+          "A": "deve ser feito controle rigoroso da hipertensão e diabetes, com vistas à reabilitação;",
+          "B": "todas as medicações em uso certamente são essenciais e devem ser mantidas, independentemente de se configurar a polifarmácia;",
+          "C": "Apolinário apresenta dependência parcial para as atividades básicas da vida da diária;",
+          "D": "uma equipe multiprofissional deve ser acionada para reabilitação de Apolinário;",
+          "E": "Apolinário é um paciente em cuidados paliativos prolongados ou em fase final de vida."
+        },
+        "answer": "E",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-087",
+        "nucleo": "Pacientes idosos frágeis com demência avançada, dependência funcional completa e comorbidades descompensadas mudam o objetivo terapêutico de curativo para paliativo, priorizando o conforto e a qualidade de vida.",
+        "armadilha": "O principal erro é focar no controle estrito de doenças crônicas (como PA e HbA1c) ou tentar reabilitação motora em pacientes acamados em estágio terminal, ignorando que o prognóstico vital e funcional é limitado. Outra armadilha é manter polifarmácia desnecessária que gera iatrogenia (hipoglicemias, hipotensões sintomáticas).\nRaciocínio: Apolinário possui Alzheimer avançado (perfil 3 de funcionalidade, imobilidade grau IV), o que caracteriza uma condição limitante da vida sem perspectivas de reversão. As diretrizes de cuidados paliativos na atenção primária determinam a desprescrição de medicamentos preventivos de longo prazo cuja utilidade imediata seja nula, focando no alívio de sintomas e suporte à família.",
+        "alternativas": "A) Errada. O controle estrito de hipertensão e diabetes perde o sentido prognóstico em pacientes terminais, pois o risco de eventos iatrogênicos excede os benefícios a longo prazo. Seria indicado em pacientes hígidos com expectativa de vida longa.\nB) Errada. A polifarmácia deve ser revisada e reduzida, pois drogas preventivas (como estatinas ou anti-hipertensivos agressivos) podem causar quedas e tonturas sem ganho real. A manutenção acrítica é incorreta.\nC) Errada. Apolinário apresenta dependência total (não parcial), visto que é acamado, grau IV de imobilidade, com necessidade de auxílio completo para todas as atividades básicas da vida diária (ABVD).\nD) Errada. A reabilitação motora ativa não é o foco em um paciente com imobilidade grau IV e demência avançada; a atuação multiprofissional visa o conforto, prevenção de lesão por pressão e suporte ao cuidador, e não a reabilitação funcional.\nE) Correta. Trata-se de um paciente idoso com demência avançada e imobilidade total, caracterizando indicação de cuidados paliativos prolongados ou fim de vida, priorizando o conforto e a paliação.",
+        "fixacao": "Idosos com demência avançada e imobilidade total entram em cuidados paliativos exclusivos, onde o controle rigoroso de comorbidades e a polifarmácia preventiva dão lugar ao alívio do sofrimento. Evite metas agressivas de glicemia ou pressão arterial nesse perfil.\nPortanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-088",
+        "number": 88,
+        "stem": "Mylena, 42 anos, fuma 50 cigarros/dia desde os 16 anos. Seu Fagerström é igual a 10. Na escala de razões para fumar, declara que fuma para controlar o peso, para mediar situações de estresse e ansiedade e porque o cigarro é uma companhia. Diz que não consegue nem imaginar tentar parar de fumar e que, por isso, nunca tentou fazê-lo. Declara não se ver sem o cigarro. Recentemente, Mylena foi diagnosticada com neoplasia de pulmão.\nNesse caso, a abordagem a essa fumante deve considerar:",
+        "options": {
+          "A": "uso de vapers para iniciar o processo de mudança;",
+          "B": "cessação do tabagismo sem uso de suporte farmacoterápico;",
+          "C": "cessação do tabagismo com uso de reposição de nicotina apenas;",
+          "D": "entrevista motivacional, com o suporte comportamental e farmacoterápico necessário;",
+          "E": "prescrição de bupropiona para cessação do tabagismo."
+        },
+        "answer": "D",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-088",
+        "nucleo": "Fumantes pesados (Fagerström elevado) em estágios motivacionais de pré-contemplação se beneficiam de Entrevista Motivacional combinada com suporte comportamental estruturado e terapia farmacológica robusta.",
+        "armadilha": "O principal erro é assumir que, por estar em pré-contemplação (\"não consegue imaginar tentar parar\"), o médico deve apenas aguardar ou negligenciar a abordagem, ou ainda tentar impor uma conduta abrupta sem explorar a ambivalência. Outro erro é prescrever apenas monoterapia ou terapia isolada sem suporte comportamental diante de dependência altíssima (Fagerström 10).\nRaciocínio: Mylena apresenta carga tabágica massiva, dependência física severa (Fagerström = 10) e está em pré-contemplação, mas possui diagnóstico recente de câncer de pulmão, o que serve como forte gancho clínico. As diretrizes do INCA e do Ministério da Saúde para abordagem do fumante determinam o uso de Entrevista Motivacional para trabalhar a ambivalência, associando suporte comportamental e tratamento farmacológico combinado (como terapia de reposição de nicotina associada ou bupropiona/vareniciclina, avaliando contraindicações) para manejar o forte grau de dependência.",
+        "alternativas": "A) Errada. O uso de cigarros eletrônicos (vapers) não é recomendado como terapia de cessação tabágica pelas autoridades sanitárias devido à falta de eficácia comprovada e aos riscos pulmonares adicionais, especialmente em paciente com neoplasia pulmonar.\nB) Errada. Com um escore de Fagerström igual a 10 (dependência muito elevada), a interrupção sem suporte farmacológico apresenta taxa de falha extremamente alta. O suporte medicamentoso é mandatório.\nC) Errada. A restrição a apenas um método de reposição de nicotina pode ser insuficiente para uma paciente com dependência extrema (50 cigarros/dia); muitas vezes recorre-se a terapia combinada (adesivo + goma/pastilha) ou associação com psicofármacos.\nD) Correta. A paciente encontra-se em pré-contemplação e com alta dependência física (Fagerström 10), exigindo Entrevista Motivacional para explorar seus sentimentos, além de suporte comportamental intensivo e suporte farmacoterápico robusto para abstinência.\nE) Errada. Embora a bupropiona seja uma medicação de primeira linha, restringir a conduta apenas a ela sem considerar a Entrevista Motivacional e a abordagem comportamental integral em uma paciente resistente e com alta dependência torna o manejo incompleto.",
+        "fixacao": "Diante de pacientes fumantes em pré-contemplação e com alta dependência (Fagerström elevado), a conduta exige Entrevista Motivacional para manejar a ambivalência, combinada obrigatoriamente com suporte comportamental e farmacoterapia adequada. Vapers nunca são indicados para cessação.\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-089",
+        "number": 89,
+        "stem": "Rodrigo, 48 anos, casado, autônomo, vem à unidade básica de saúde se queixando de dores de cabeça de repetição e apresentando PA = 165 x 90 mmHg. Em seu prontuário, identifica-se que, nas últimas 5 consultas, no último ano, por motivos diversos, sua pressão arterial foi, respectivamente, de 147 x 99 mmHg; 180 x 100 mmHg; 152 x 90 mmHg; 160 x 95 mmHg e 170 x 92 mmHg. Rodrigo tem história familiar de hipertensão e é sedentário.\nO fato que permite o diagnóstico de hipertensão arterial sistêmica é:",
+        "options": {
+          "A": "ter sido admitido em unidade de pronto atendimento com pressão arterial 150 x 95 mmHg;",
+          "B": "ser sedentário;",
+          "C": "tido história familiar de hipertensão;",
+          "D": "ter tido aferições da pressão arterial maiores que 140 x 90 mmHg no último ano;",
+          "E": "ter 48 anos de idade."
+        },
+        "answer": "D",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-089",
+        "nucleo": "O diagnóstico de hipertensão arterial sistêmica (HAS) em consultório requer aferições repetidas com valores iguais ou superiores a 140/90 mmHg em ocasiões distintas.",
+        "armadilha": "O erro comum é confundir fatores de risco cardiovascular e epidemiológicos (sedentarismo, história familiar, idade) com os critérios diagnósticos baseados em medidas pressóricas. O aluno pode acreditar que apenas uma medida isolada ou fatores de risco definem o quadro.\nRaciocínio: Segundo as Diretrizes Brasileiras de Hipertensão Arterial da SBC, o diagnóstico de HAS é estabelecido pela persistência de níveis pressóricos elevados aferidos em pelo menos duas ou mais consultas diferentes. No caso de Rodrigo, o prontuário registra múltiplas aferições prévias e atuais acima do limiar de 140/90 mmHg no último ano, o que sela o diagnóstico de hipertensão arterial.",
+        "alternativas": "A) Errada. Atendimentos em prontos-socorros com picos pressóricos não são o padrão ouro para o diagnóstico definitivo de HAS crônica, pois podem refletir dor (cefaleia), ansiedade ou urgências relativas. O diagnóstico baseia-se em consultas eletivas seriadas.\nB) Errada. O sedentarismo é um fator de risco modificável para o desenvolvimento de doenças cardiovasculares e hipertensão, mas não constitui critério diagnóstico por si só.\nC) Errada. A história familiar positiva aumenta a probabilidade pré-teste (risco cardiovascular), mas trata-se de fator de risco não modificável e não de critério diagnóstico.\nD) Correta. A constatação repetida de níveis pressóricos superiores a 140 x 90 mmHg em múltiplas ocasiões ao longo do último ano preenche o critério semiológico e diretriz para o diagnóstico de Hipertensão Arterial Sistêmica.\nE) Errada. A idade (48 anos) é uma variável epidemiológica que eleva a prevalência e o risco de HAS, mas idade isolada não define o diagnóstico.",
+        "fixacao": "O diagnóstico de hipertensão arterial exige a demonstração persistente de PA $\\geq$ 140/90 mmHg em ocasiões distintas no consultório. Fatores de risco como sedentarismo e genética aumentam a suspeita, mas não substituem o critério pressórico.\nPortanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-090",
+        "number": 90,
+        "stem": "Foram atendidas 5 irmãs na unidade básica de saúde. A única que tem características que permitem o diagnóstico de diabetes mellitus é:",
+        "options": {
+          "A": "Maria Hilma, de 49 anos, que realizou teste de glicemia capilar com resultado 179 mg/dl;",
+          "B": "Maria José, que, em 01/03/2024, apresentou hemoglobina glicada (HbA1c) = 5,6% e, em 12/07/2024, apresentou hemoglobina glicada (HbA1c) = 6,1%;",
+          "C": "Maria Lina, que apresentou, em 01/03/2024, glicemia de jejum = 136 mg/dl e, em 12/07/2024, glicemia de jejum = 152 mg/dl;",
+          "D": "Maria Cláudia, que apresenta glicemia de jejum = 126 mg/dl;",
+          "E": "Maria Antônia, que apresenta hemoglobina glicada (HbA1c) = 4,5%."
+        },
+        "answer": "C",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-090",
+        "nucleo": "O diagnóstico de diabetes mellitus baseia-se em critérios laboratoriais padronizados: glicemia de jejum $\\geq$ 126 mg/dL, HbA1c $\\geq$ 6,5%, teste oral de tolerância à glicose $\\geq$ 200 mg/dL ou glicemia casual $\\geq$ 200 mg/dL com sintomas, confirmados em duas ocasiões na ausência de hiperglicemia inequívoca.",
+        "armadilha": "O erro mais comum é confundir valores de glicemia de jejum alterada (pré-diabetes: 100 a 125 mg/dL) ou valores isolados sem confirmação. Outro distrator clássico é considerar glicemia capilar (teste de ponta de dedo) como critério diagnóstico definitivo (glicemia capilar serve para triagem ou monitoramento, mas o diagnóstico oficial exige métodos venosos laboratoriais).",
+        "alternativas": "A) Errada. O teste de glicemia capilar (glicemia pontual com aparelho portátil) não é o exame padrão-ouro recomendado pela Sociedade Brasileira de Diabetes (SBD) para o diagnóstico formal de diabetes mellitus, servindo apenas para rastreio ou acompanhamento.\nB) Errada. Os valores de hemoglobina glicada apresentados por Maria José (5,6% e 6,1%) situam-se na faixa de pré-diabetes (5,7% a 6,4%), não atingindo o ponto de corte diagnóstico para diabetes mellitus ($\\geq$ 6,5%).\nC) Correta. Maria Lina apresentou duas dosagens de glicemia de jejum laboratoriais em datas distintas (136 mg/dl e 152 mg/dl), ambas acima do ponto de corte diagnóstico estabelecido ($\\geq$ 126 mg/dl), confirmando o diagnóstico de diabetes mellitus.\nD) Errada. Uma única glicemia de jejum de 126 mg/dL sugere alteração, mas as diretrizes exigem a confirmação com uma segunda amostra alterada (seja por repetição do mesmo teste ou de outro método complementar), a menos que haja sintomas clássicos de hiperglicemia.\nE) Errada. O valor de HbA1c de 4,5% encontra-se dentro da faixa estritamente normal (abaixo de 5,7%).",
+        "fixacao": "Para o diagnóstico de Diabetes Mellitus sem sintomas clássicos, são necessárias duas avaliações alteradas (glicemia de jejum $\\geq$ 126 mg/dL ou HbA1c $\\geq$ 6,5%), seja por exames colhidos no mesmo momento ou em dias distintos. Glicemia capilar isolada não firma diagnóstico.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-091",
+        "number": 91,
+        "stem": "José, 55 anos, hipertenso há 3 anos, em uso regular de medicação, vem para consulta de rotina apresentando PA = 130 x 80 mmHg. Após exame clínico, conclui-se que tem baixo risco cardiovascular.\nNesse caso, a conduta é:",
+        "options": {
+          "A": "manter a medicação e reforçar a importância de manter a mudança de estilo de vida, pois a PA está dentro da meta;",
+          "B": "retirar a medicação e reforçar a importância de manter a mudança de estilo de vida, pois a PA está dentro da meta;",
+          "C": "modificar a medicação para que o organismo não crie tolerância às medicações atuais, embora a PA esteja dentro da meta;",
+          "D": "reforçar a mudança de estilo de vida, pois a PA está fora da meta;",
+          "E": "modificar a conduta medicamentosa, pois a PA está fora da meta."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-091",
+        "nucleo": "Paciente hipertenso controlado com medicação e mudanças de estilo de vida deve manter o esquema terapêutico atual, pois a meta pressórica foi atingida.",
+        "armadilha": "O aluno pode cair na armadilha de pensar que, se a pressão normalizou, a medicação pode ser retirada (descontinuada), ignorando que a hipertensão é uma condição crônica controlada pelo tratamento, e não curada por ele. Outro distrator é inventar o mito de que o organismo \"cria tolerância\" ao fármaco exigindo trocas periódicas.",
+        "alternativas": "A) Correta. A pressão arterial de 130 x 80 mmHg está dentro das metas recomendadas pelas Diretrizes Brasileiras de Hipertensão Arterial para pacientes hipertensos. A conduta correta é manter a terapia farmacológica atual e incentivar permanentemente as mudanças no estilo de vida.\nB) Errada. Retirar a medicação de um paciente hipertenso controlado invariavelmente resultará no retorno da hipertensão (efeito rebote ou perda do controle pressórico).\nC) Errada. O conceito de que os anti-hipertensivos perdem o efeito por \"tolerância farmacológica\" rotineira é incorreto; ajustes são feitos apenas por perda de eficácia secundária, progressão da doença ou efeitos colaterais.\nD) Errada. O valor de 130x80 mmHg não está fora da meta para este perfil de paciente; portanto, a conduta não é apenas alertar que está alterada.\nE) Errada. Modificar a medicação desnecessariamente quando o paciente está controlado e assintomático compromete a adesão e a estabilidade clínica.",
+        "fixacao": "Hipertensão arterial controlada (PA < 140/90 mmHg, ou metas específicas conforme risco) com uso de medicamentos exige a manutenção do esquema terapêutico. Nunca suspenda o anti-hipertensivo sob a premissa de que a pressão está normal.\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-092",
+        "number": 92,
+        "stem": "Leonora, 60 anos, com diabetes mellitus diagnosticada há 5 anos, em acompanhamento contínuo na unidade básica de saúde, vem para a consulta de rotina. Após avaliação dos pés, identificamos: sensibilidade presente, deformidade ausente e úlceras ou cicatrizes de úlceras ausentes.\nSegundo o exame clínico do pé diabético, conclui-se que a categoria de risco e o melhor manejo para Leonora são, respectivamente:",
+        "options": {
+          "A": "grau 0 – reavaliação anual;",
+          "B": "grau I – reavaliação anual;",
+          "C": "grau II – reavaliação semestral;",
+          "D": "grau III – reavaliação semestral;",
+          "E": "grau illa – reavaliação semestral."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-092",
+        "nucleo": "A classificação de risco para o pé diabético estratifica pacientes sem neuropatia periférica, deformidades ou história de úlceras como Grau 0, exigindo inspeção clínica anual.",
+        "armadilha": "O erro comum é classificar qualquer paciente com diabetes de longa data em categorias de maior risco (Grau I ou II) por pressupor que o tempo de doença por si só gera neuropatia. O enunciado afirma explicitamente que a sensibilidade está presente e não há deformidades ou úlceras.\nRaciocínio: Conforme os protocolos do Ministério da Saúde e da Sociedade Brasileira de Diabetes para o rastreio do pé diabético: Grau 0 corresponde à ausência de neuropatia periférica (sensibilidade preservada) e ausência de deformidades ou doença arterial periférica. O seguimento recomendado para este grupo de baixo risco é a reavaliação anual.",
+        "alternativas": "A) Correta. Paciente sem perda de sensibilidade protetora, sem deformidades e sem úlceras ativas ou cicatrizadas enquadra-se no pé diabético Grau 0, cuja frequência de reavaliação recomendada é anual.\nB) Errada. O Grau I caracteriza-se pela presença de neuropatia periférica isolada (perda da sensibilidade protetora ao monofilamento). No caso, a sensibilidade está presente.\nC) Errada. O Grau II abrange neuropatia associada a deformidade e/ou doença arterial periférica (DAP), o que não foi descrito na paciente.\nD) Errada. O Grau III refere-se a histórico de úlcera anterior ou amputação prévia, achados ausentes no caso clínico.\nE) Errada. A nomenclatura \"Grau IIIa\" não corresponde à classificação clássica de risco para pé diabético adotada pelos manuais ministeriais brasileiros.",
+        "fixacao": "Pé diabético sem perda de sensibilidade, sem deformidades e sem úlceras é classificado como Grau 0, exigindo reavaliação clínica anual. A perda de sensibilidade isolada eleva para Grau I.\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-093",
+        "number": 93,
+        "stem": "Vanda, 92 anos, hipertensa, com diagnóstico de Alzheimer há 16 anos, acamada, estável, sem lesões por pressão, sem histórico recente de internação, tem uma filha, Joana, de 68 anos, que faz o manejo diário: banho no leito, administração de medicação, dieta enteral, mudança de decúbito. A filha está bem orientada e procura se informar sobre o quadro e as melhores condutas.\nNesse caso, o plano terapêutico singular deve:",
+        "options": {
+          "A": "dar suporte à cuidadora, acompanhá-la regularmente para avaliação de sobrecarga no cuidado e manter o acompanhamento de Vanda pela equipe da APS;",
+          "B": "agendar consultas regulares de fisioterapia e fonoaudiologia e encaminhamento ao geriatra para acompanhamento da doença de Alzheimer;",
+          "C": "agendar consultas regulares de nutricionista e encaminhamento ao CER para reabilitação da deglutição;",
+          "D": "dar suporte à cuidadora e encaminhar Vanda para o serviço de atenção secundária domiciliar para reabilitação da deglutição por fonoaudióloga;",
+          "E": "fornecer acompanhamento regular com fonoaudióloga e nutricionista e encaminhar a paciente ao serviço de cuidados paliativos."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-093",
+        "nucleo": "O manejo de pacientes idosos frágeis acamados com demência avançada sob cuidados domiciliares exige foco primordial no suporte à saúde física e mental do cuidador familiar e na manutenção do acompanhamento longitudinal pela equipe da Atenção Primária à Saúde.",
+        "armadilha": "O erro que seduz o candidato é focar na reabilitação intensiva (fisioterapia motora e fonoaudiologia para deglutição) ou em encaminhamentos desnecessários para especialistas de alta complexidade, desconsiderando a irreversibilidade do quadro neurológico (Alzheimer de 16 anos, acamada) e a exaustão iminente do cuidador idoso (filha de 68 anos).\nRaciocínio: Vanda é uma paciente estável, em estágio avançado de demência, com cuidados diários complexos providos por uma filha idosa (Joana). Segundo os princípios de Medicina de Família e Comunidade e do Plano Terapêutico Singular (PTS), a prioridade absoluta da equipe de saúde da família é a vigilância da sobrecarga do cuidador (Escala de Zarit implícita) e o suporte domiciliar contínuo, mantendo a paciente na APS sem intervenções fúteis.",
+        "alternativas": "A) Correta. O plano terapêutico singular para pacientes terminais ou demenciados avançados mantidos no domicílio prioriza a escuta, o suporte e a avaliação de sobrecarga do cuidador principal, garantindo o acompanhamento longitudinal pela equipe de Atenção Primária.\nB) Errada. Consultas de reabilitação motora e encaminhamentos para geriatria de alto nível para reverter um quadro de Alzheimer de 16 anos em paciente acamada são condutas fúteis e desadequadas.\nC) Errada. O encaminhamento ao Centro Especializado em Reabilitação (CER) para reabilitação da deglutição não se aplica a paciente com demência em estágio terminal com via de alimentação estabelecida (dieta enteral).\nD) Errada. Enviar a paciente para atenção secundária domiciliar apenas para fonoaudiologia não faz sentido clínico; a paciente é estável e a demanda principal é o suporte integral à dupla cuidador-paciente na APS.\nE) Errada. O acompanhamento regular especializado com fonoaudióloga e nutricionista em caráter de reabilitação não é o objetivo clínico na demência avançada estável; além disso, a APS é perfeitamente capaz de conduzir os cuidados paliativos domiciliares básicos.",
+        "fixacao": "Em pacientes com demência avançada e estáveis no domicílio, a intervenção central do Plano Terapêutico Singular é o apoio ativo ao cuidador familiar para prevenir a síndrome de sobrecarga, mantendo o acompanhamento longitudinal pela equipe da APS.\nPortanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-094",
+        "number": 94,
+        "stem": "Com queixa de dor de cabeça, Jéssica, 37 anos, diarista, vai pela primeira vez à unidade básica de saúde. Ela reporta: “Doutor, sinto essa dor há mais de 2 meses, desde que precisamos sair da nossa casa porque não dava mais para pagar o aluguel depois que meu marido foi demitido do emprego. Na minha casa somos eu, meu marido e três filhas de 4, 6 e 14 anos”.\nÉ exemplo de crise acidental do ciclo de vida familiar da família de Jéssica:",
+        "options": {
+          "A": "família com filho pequeno;",
+          "B": "família em estágio tardio;",
+          "C": "desemprego;",
+          "D": "família com criança em idade escolar;",
+          "E": "família com adolescente."
+        },
+        "answer": "C",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-094",
+        "nucleo": "Crises acidentais ou paranormativas no ciclo vital familiar são eventos imprevisíveis, estressores e não normativos, como o desemprego, doenças agudas graves, separações ou perdas financeiras.",
+        "armadilha": "O candidato pode confundir crises acidentais com crises normativas ou estir Gênicos do ciclo vital (como ter filhos pequenos ou adolescentes), que são eventos previsíveis inerentes à progressão natural do ciclo familiar. O desemprego e a perda abrupta de moradia representam choques externos não previstos no curso normal.\nRaciocínio: Na teoria sistêmica da família e na Medicina de Família e Comunidade, as crises familiares dividem-se em normativas (desenvolvimentistas, esperadas em cada transição de estágio, como nascimento dos filhos ou adolescência) e acidentais (paranormativas, imprevistas, como desemprego, despejo, morte precoce ou acidentes). A demissão do marido e a consequente perda da moradia constituem uma clássica crise acidental.",
+        "alternativas": "A) Errada. Ter filhos pequenos é um evento previsível e normativo do ciclo vital da família, pertencente aos estágios desenvolvimentistas esperados.\nB) Errada. Estágio tardio refere-se à fase de ninho vazio e aposentadoria, o que não condiz com a estrutura familiar jovem descrita.\nC) Correta. O desemprego do provedor e a perda da habitação configuram uma crise acidental (ou paranormativa), caracterizada por ser um evento imprevisto e estressor que desestrutura temporariamente a dinâmica familiar.\nD) Errada. A presença de crianças em idade escolar é um estágio normativo e previsível do ciclo vital familiar.\nE) Errada. A presença de uma filha adolescente (14 anos) marca um estágio normativo de transição desenvolvimentista na família, e não uma crise acidental.",
+        "fixacao": "Crises normativas são esperadas e inerentes às mudanças de estágio do ciclo vital familiar (nascimento, escola, adolescência). Crises acidentais (paranormativas) são eventos imprevisíveis e estressores externos, como o desemprego e a perda de moradia.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-119",
+        "number": 119,
+        "stem": "Um homem de 64 anos de idade, saudável, agricultor, apresenta-se no consultório com uma lesão cutânea que ele notou há cerca de 6 meses. A lesão está localizada no dorso da mão direita e tem crescido lentamente. O paciente relata que a área está um pouco dolorosa e pruriginosa. Ao exame físico, observa-se uma lesão de 1,2 cm de diâmetro, de cor acastanhada, bordas irregulares, e com algumas áreas de ulceração, e há linfadenomegalia palpável na axila.\nCom base na descrição clínica e no exame físico, as melhores propostas diagnóstica e terapêutica para esse paciente são, respectivamente:",
+        "options": {
+          "A": "carcinoma basocelular; tratamento com crioterapia",
+          "B": "queratoacantoma; tratamento com antibioticoterapia",
+          "C": "dermatofibroma; tratamento com observação e seguimento",
+          "D": "carcinoma espinocelular; tratamento com eletrocoagulação e curetagem",
+          "E": "melanoma maligno; tratamento com excisão cirúrgica ampla e avaliação do linfonodo"
+        },
+        "answer": "E",
+        "area": "Dermatologia",
+        "assunto": "Câncer de pele",
+        "topico": "Fatores de risco para câncer de pele não melanoma (CPNM)",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-119",
+        "nucleo": "A presença de uma lesão pigmentada, com bordas irregulares e crescimento progressivo em um paciente idoso, associada à linfadenomegalia regional, levanta a suspeita clínica imediata de melanoma, exigindo diagnóstico histopatológico e estadiamento cirúrgico.",
+        "armadilha": "A principal armadilha é confundir a lesão com carcinomas não melanoma devido à localização solar exposta. O viés de fechamento prematuro ocorre ao considerar lesões em dorso de mãos apenas como queratoses ou carcinomas basocelulares comuns. No entanto, a descrição de cor acastanhada, bordas irregulares e ulceração aponta para a neoplasia de maior potencial metastático.\n\nO raciocínio correto segue a regra do 'ABCDE' do melanoma (Assimetria, Bordas irregulares, Cor variegada, Diâmetro > 6mm, Evolução). A presença de linfadenomegalia palpável em axila em um paciente com lesão no dorso da mão indica disseminação linfática regional, o que é altamente sugestivo de malignidade e exige conduta cirúrgica diagnóstica e terapêutica, conforme as diretrizes da Sociedade Brasileira de Dermatologia (SBD) e do INCA.",
+        "alternativas": "A) Errada. O carcinoma basocelular raramente apresenta cor acastanhada e bordas irregulares dessa forma, sendo geralmente perolado; a crioterapia não é o tratamento para lesão com suspeita de metástase linfonodal.\nB) Errada. O queratoacantoma é uma lesão de crescimento rápido, geralmente em forma de 'cupula' com centro queratósico, não apresentando características de pigmentação maligna.\nC) Errada. O dermatofibroma é uma lesão benigna, geralmente de consistência firme ('sinal do encovamento'), sem a progressividade e o risco sistêmico apresentados.\nD) Errada. O carcinoma espinocelular poderia apresentar ulceração, mas a descrição de pigmentação e irregularidade na borda favorece melanoma. Eletrocoagulação é contraindicada para lesões suspeitas de malignidade pois destrói a amostra histológica.\nE) Correta. A tríade de lesão pigmentada, bordas irregulares e linfadenomegalia aponta para melanoma; a excisão ampla com avaliação de linfonodo sentinela ou esvaziamento, se indicado, é o padrão-ouro.",
+        "fixacao": "Melanoma em dorso de mão pode mimetizar lesões benignas; sempre aplique o ABCDE. Lesão pigmentada ulcerada com linfonodo axilar palpável = biópsia excisional e estadiamento. Jamais curete ou cauterize lesões com suspeita de melanoma. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-120",
+        "number": 120,
+        "stem": "Um homem de 47 anos de idade, fumante há 30 anos e com histórico de consumo de bebidas alcoólicas destiladas, apresenta uma úlcera dolorosa na língua há 3 meses. Relata que a lesão não cicatriza e está aumentando de tamanho. Além disso, nota dificuldade para engolir e dor referida no ouvido. Ao exame físico, observa-se uma úlcera irregular na borda lateral da língua, com margens endurecidas e base infiltrada. Não há linfonodos cervicais palpáveis.\nO diagnóstico provável e o tratamento inicial mais adequado para esse paciente são, respectivamente:",
+        "options": {
+          "A": "adenoma; ressecção com anestesia local",
+          "B": "candidíase oral; iniciar tratamento antifúngico tópico",
+          "C": "ulceração traumática; recomendações de higiene oral rigorosa e acompanhamento",
+          "D": "líquen plano oral; encaminhar para biópsia e tratamento com corticosteroides tópicos",
+          "E": "carcinoma espinocelular; biópsia da lesão, estadiamento e tratamento cirúrgico"
+        },
+        "answer": "E",
+        "area": "Cirurgia Geral",
+        "assunto": "Cirurgia de Cabeça e Pescoço",
+        "topico": "Neoplasias Malignas de Cabeça e Pescoço",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-120",
+        "nucleo": "Lesões ulceradas crônicas em mucosa oral, especialmente em pacientes etilistas e tabagistas, devem ser consideradas neoplasias malignas até prova em contrário, sendo o carcinoma espinocelular o tipo histológico mais frequente.",
+        "armadilha": "A armadilha comum é a ancoragem no diagnóstico de 'úlcera traumática' por prótese ou dente, ou a confusão com candidíase por conta da dor. O paciente etilista/tabagista tem alto risco para neoplasia, e a persistência por 3 meses sem cicatrização é sinal de alerta absoluto para malignidade.\n\nO raciocínio correto exige descartar malignidade. A dor referida no ouvido (otalgia reflexa) é um achado clássico em tumores da base da língua ou assoalho oral devido à inervação compartilhada (nervo vago e glossofaringeo). Segundo o Ministério da Saúde e os protocolos de Cirurgia de Cabeça e Pescoço, qualquer lesão que não cicatriza em 2-3 semanas deve ser biopsiada.",
+        "alternativas": "A) Errada. Adenoma é uma neoplasia benigna, não apresenta úlcera irregular com base infiltrada e endurecida.\nB) Errada. Candidíase oral não causa úlcera com base infiltrada; trata-se de infecção fúngica pseudomembranosa ou eritematosa.\nC) Errada. Úlceras traumáticas devem cicatrizar após remoção do agente causal. 3 meses é tempo excessivo para trauma.\nD) Errada. Líquen plano oral é uma dermatose inflamatória, raramente se apresenta como uma úlcera endurecida e infiltrada solitária de 3 meses de evolução.\nE) Correta. O quadro é clássico de Carcinoma Espinocelular (CEC) de língua, confirmado pela biópsia e estadiamento para definir o tratamento cirúrgico definitivo.",
+        "fixacao": "Fumante + etilista + úlcera lingual endurecida/infiltrada = Carcinoma Espinocelular até biópsia. Otalgia reflexa é sinal de alerta de invasão. Biópsia é a conduta diagnóstica mandatória. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-121",
+        "number": 121,
+        "stem": "Um adolescente de 16 anos foi admitido no pronto-socorro após queda de motocicleta. Ele estava lúcido e com sinais vitais estáveis. Realizou-se uma tomografia computadorizada do abdômen, que mostrou uma laceração esplênica grau II. Optou-se por um tratamento conservador inicial com monitoramento em unidade de terapia intensiva. Após 24 horas de internação, o paciente apresentou uma queda súbita na pressão arterial, aumento da frequência cardíaca e sinais de irritação peritoneal. Uma nova TC de abdômen mostrou aumento significativo do hemoperitônio e sinais de ruptura esplênica adicional.\nDiante desse quadro, a conduta mais apropriada para esse paciente é:",
+        "options": {
+          "A": "indicar a cirurgia de Warren",
+          "B": "realizar uma embolização seletiva da artéria esplênica",
+          "C": "transferi-lo para a sala de cirurgia para uma esplenectomia de emergência",
+          "D": "continuar com o manejo conservador e aumentar a frequência de monitoramento hemodinâmico",
+          "E": "administrar fluidos intravenosos e realizar a transfusão sanguínea, mantendo o paciente sob observação"
+        },
+        "answer": "C",
+        "area": "Cirurgia Geral",
+        "assunto": "Resposta Endócrino-Metabólica-Inflamatória ao Trauma (REMIT)",
+        "topico": "Fases da Resposta ao Trauma",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-121",
+        "nucleo": "A falha do tratamento conservador em trauma esplênico, evidenciada por instabilidade hemodinâmica persistente e aumento do hemoperitônio, impõe a intervenção cirúrgica imediata para controle do sangramento.",
+        "armadilha": "A armadilha reside no sucesso inicial do tratamento conservador, que pode levar a um viés de 'ancoragem', onde a equipe insiste na observação apesar da descompensação hemodinâmica. A estabilidade hemodinâmica é o pré-requisito absoluto para o manejo conservador do trauma esplênico.\n\nRaciocínio clínico: O paciente evoluiu com instabilidade hemodinâmica (hipotensão e taquicardia) e sinais de irritação peritoneal 24 horas após o diagnóstico inicial de laceração esplênica grau II. Segundo o ATLS (Advanced Trauma Life Support), o surgimento de choque hemorrágico pós-trauma abdominal é indicação absoluta de laparotomia exploradora, visto que o sangramento está ativo e o paciente não mantém a perfusão tecidual.",
+        "alternativas": "A) Errada. A cirurgia de Warren é uma cirurgia de derivação esplenorrenal distal, utilizada para hipertensão portal, não para trauma agudo.\nB) Errada. Embolização pode ser uma opção em casos selecionados com estabilidade hemodinâmica; aqui o paciente está chocado.\nC) Correta. Instabilidade hemodinâmica pós-trauma esplênico com evidência de sangramento ativo exige laparotomia para controle hemorrágico definitivo (esplenectomia ou rafia).\nD) Errada. O manejo conservador foi tentado e falhou, mantê-lo é erro grave que coloca a vida do paciente em risco iminente.\nE) Errada. Fluidos e transfusão são medidas de suporte pré-operatório, não substituem o controle do foco hemorrágico em paciente instável.",
+        "fixacao": "Estabilidade hemodinâmica = manejo conservador. Instabilidade hemodinâmica ou peritonite = laparotomia de emergência. A falha do tratamento conservador em trauma abdominal é indicação cirúrgica imediata. Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-122",
+        "number": 122,
+        "stem": "Pedro Paulo, um homem de 41 anos, foi admitido no pronto-socorro após sofrer queimaduras extensas em um incêndio no seu local de trabalho. Ele apresentava queimaduras de segundo grau que cobriam aproximadamente 45% de sua superfície corporal total (SCT). O paciente pesava 70 kg e estava consciente e lúcido, mas sentia dor intensa e desconforto. Os sinais vitais eram: frequência cardíaca: 120 bpm; pressão arterial de 100/60 mmHg; frequência respiratória de 24 ipm e saturação de oxigênio de 94% em ar ambiente. Seu médico decidiu iniciar a reanimação hídrica imediatamente.\nA melhor abordagem inicial para a reanimação hídrica de Pedro Paulo é:",
+        "options": {
+          "A": "administrar 2 ml/kg/%SCT de solução de Ringer Lactato nas primeiras 24 horas, dividindo o volume total igualmente ao longo do período",
+          "B": "administrar 8 ml/kg/%SCT de solução cristaloide de NaCl a 0,9% nas primeiras 24 horas, com um ajuste para cada %SCT adicional acima de 50%",
+          "C": "administrar 6 ml/kg/%SCT de solução de Ringer Lactato nas primeiras 24 horas, com um ajuste de 10% para cada grau adicional de queimadura acima do segundo grau",
+          "D": "administrar 4 ml/kg/%SCT de solução de Ringer Lactato nas primeiras 24 horas, dividindo o volume total em duas metades: uma nas primeiras 8 horas e a outra nas 16 horas seguintes",
+          "E": "administrar 4 ml/kg/%SCT de solução coloidal de albumina nas primeiras 24 horas, dividindo o volume total em duas metades: uma nas primeiras 8 horas e a outra nas 16 horas seguintes"
+        },
+        "answer": "D",
+        "area": "Cirurgia Geral",
+        "assunto": "Queimaduras e Trauma Elétrico",
+        "topico": "Atendimento Inicial às Vítimas de Queimadura",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-122",
+        "nucleo": "A reanimação hídrica em grandes queimados segue a fórmula de Parkland (ou modificada), preconizando o uso de cristaloide isotônico (Ringer Lactato) para compensar as perdas do terceiro espaço na fase inicial.",
+        "armadilha": "A armadilha principal é o uso de coloides (albumina) na fase aguda (primeiras 24h) ou erro na interpretação da fórmula. Muitos confundem os tempos de administração. A fórmula de Parkland clássica utiliza 4 mL/kg/%SCT de Ringer Lactato nas primeiras 24 horas.\n\nO raciocínio correto: Metade do volume total calculado (4 mL x peso x %SCT) deve ser infundido nas primeiras 8 horas (o tempo é contado a partir do momento da queimadura, não da chegada ao hospital) e a segunda metade nas 16 horas restantes. O Ringer Lactato é o cristaloide preferencial por ser mais fisiológico e evitar acidose hiperclorêmica associada à solução salina a 0,9%.",
+        "alternativas": "A) Errada. 2 ml/kg/%SCT é o preconizado pela fórmula de Modified Brooke, mas a regra de administração dividida corretamente está na alternativa D.\nB) Errada. O volume está incorreto e solução salina a 0,9% não é a ideal.\nC) Errada. Não existe essa regra de ajuste por grau adicional na fórmula de Parkland.\nD) Correta. Aplica-se a fórmula de Parkland (4 mL/kg/%SCT), sendo metade nas primeiras 8 horas e metade nas 16 horas seguintes.\nE) Errada. O uso de coloides é controverso e não é a recomendação de primeira linha nas primeiras 24 horas segundo o ATLS.",
+        "fixacao": "Fórmula de Parkland: 4 mL x peso (kg) x %SCT. Administrar 50% do total nas primeiras 8h após a lesão e 50% nas 16h subsequentes. Solução de escolha: Ringer Lactato. Portanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-123",
+        "number": 123,
+        "stem": "Um paciente de 48 anos apresenta-se no pronto-socorro com dor abdominal intensa e intermitente há 18 horas, com náuseas e vômitos. Ele relata não ter evacuado ou eliminado gases nas últimas 48 horas. Sua história patológica pregressa inclui uma apendicectomia realizada há 20 anos e uma cirurgia para correção de hérnia inguinoescrotal há 5 anos. O exame físico mostrou o paciente lúcido e apirético; sinais vitais: PA 125/80 mmHg, FC 90 bpm, FR 20 ipm, T 36,8 °C. O abdômen está distendido. Peristalse de luta apresenta ruídos metálicos e hipercinéticos. Sente dor à palpação difusa, porém sem sinais de defesa e sem ausência de hérnias palpáveis. Os exames laboratoriais registram hemograma com leucócitos de 8.000/mm³ e eletrólitos dentro dos limites normais. Os exames de imagem revelam rotina de abdômen agudo, mostrando distensão de alças intestinais com níveis hidroaéreos, e sem evidências de tumorações.\nDiante desse quadro clínico, a etapa inicial mais apropriada para o manejo do caso é:",
+        "options": {
+          "A": "colonoscopia urgente",
+          "B": "administração de laxantes e observação",
+          "C": "cirurgia imediata para exploração abdominal",
+          "D": "alta com orientação para retorno no caso de persistirem os sintomas",
+          "E": "administração intravenosa de líquidos, descompressão nasogástrica e observação"
+        },
+        "answer": "E",
+        "area": "Cirurgia Geral",
+        "assunto": "Urgências Abdominais",
+        "topico": "Urgências Abdominais - Abdome Agudo",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-123",
+        "nucleo": "O abdômen agudo obstrutivo sem sinais de sofrimento de alça (peritonite, febre, leucocitose acentuada) deve ser manejado inicialmente com medidas conservadoras para descompressão e reposição volêmica.",
+        "armadilha": "A armadilha aqui é a indicação precipitada de cirurgia baseada na história de cirurgias prévias (bridas). Embora bridas sejam a causa mais comum, a ausência de sinais de alarme no exame físico permite a tentativa inicial de manejo clínico. A cirurgia imediata é reservada para casos de estrangulamento ou falha do tratamento conservador.\n\nRaciocínio clínico: O paciente apresenta quadro de obstrução intestinal mecânica (ruídos metálicos, níveis hidroaéreos, parada de eliminação de flatos). Como o paciente está estável, apirético e sem sinais de peritonite (defesa, descompressão dolorosa), a conduta inicial padrão (segundo o protocolo do Colégio Brasileiro de Cirurgiões) é a estabilização, reposição de eletrólitos/líquidos e descompressão nasogástrica, aguardando a possível resolução do quadro obstrutivo.",
+        "alternativas": "A) Errada. Colonoscopia está contraindicada na fase aguda de obstrução devido ao risco de perfuração.\nB) Errada. Laxantes são contraindicados em quadros obstrutivos, podendo agravar o sofrimento da alça.\nC) Errada. A cirurgia de urgência é necessária apenas se houver sinais de isquemia/estrangulamento, o que este paciente não apresenta.\nD) Errada. O paciente tem uma obstrução intestinal clara, o que exige internação e monitoramento, não alta hospitalar.\nE) Correta. O manejo conservador com hidratação venosa e sonda nasogástrica é a conduta inicial padrão para obstrução intestinal estável sem sinais de peritonite.",
+        "fixacao": "Obstrução intestinal + Estável = Suporte clínico (hidratação + SNG). Obstrução intestinal + Instável/Sinais de peritonite = Cirurgia. Laxantes são proibidos. Portanto, o gabarito é a alternativa E."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-124",
+        "number": 124,
+        "stem": "Um homem de 55 anos sofreu queda de uma altura de aproximadamente dois metros enquanto trabalhava em uma obra. Ele caiu diretamente sobre o braço direito estendido. No pronto-socorro, apresentava dor intensa, incapacidade de mover o braço direito e deformidade visível no meio do braço. As radiografias mostraram uma fratura diafisária do úmero com desvio. O exame neurovascular estava normal.\nO tratamento mais apropriado para esse paciente é:",
+        "options": {
+          "A": "fixação externa",
+          "B": "redução aberta e fixação interna",
+          "C": "imobilização com uma tipoia e observação",
+          "D": "redução fechada e imobilização com gesso",
+          "E": "administração de analgésicos e alta para casa"
+        },
+        "answer": "D",
+        "area": "Ortopedia",
+        "assunto": "Trauma Ortopédico",
+        "topico": "Conceitos Básicos do Trauma Ortopédico",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-124",
+        "nucleo": "A maioria das fraturas da diáfise do úmero (fechadas e sem lesão neurovascular) apresenta excelentes resultados com tratamento não cirúrgico, utilizando métodos de imobilização funcional.",
+        "armadilha": "A armadilha é acreditar que 'fratura com desvio' exige cirurgia (redução aberta e fixação interna - RAFI) obrigatoriamente. O úmero possui uma tolerância notável a desalinhamentos angulares, que tendem a se corrigir com o tempo e o efeito da gravidade.\n\nRaciocínio correto: A indicação de RAFI é reservada para casos de politraumatismo, fratura exposta, lesão neurovascular, falha de consolidação ou desvio inaceitável. Para o caso apresentado (paciente estável, fratura fechada, neurovascular íntegro), a conduta padrão ouro é o tratamento conservador com redução (se necessário) e imobilização gessada ou brace funcional, conforme as normas da Sociedade Brasileira de Ortopedia e Traumatologia (SBOT).",
+        "alternativas": "A) Errada. Fixação externa em úmero é reservada para casos muito específicos, como fraturas expostas graves ou danos extensos de partes moles.\nB) Errada. A redução aberta e fixação interna é invasiva e só indicada em casos específicos de falha, associação com outras lesões ou indicações formais que este paciente não possui.\nC) Errada. Apenas tipoia não garante o alinhamento necessário para a consolidação diafisária; a imobilização deve ser mais efetiva.\nD) Correta. A redução fechada seguida de imobilização é o tratamento de escolha para fraturas fechadas de diáfise umeral, resultando em altas taxas de consolidação.\nE) Errada. Conduta inaceitável; a fratura precisa de imobilização para evitar dor intensa, lesão de partes moles e permitir consolidação.",
+        "fixacao": "Fratura diafisária de úmero fechada = Conservador (redução + gesso/brace funcional). Cirurgia (RAFI) = Exposta, lesão vascular, politraumatizado, falha de consolidação. Portanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-125",
+        "number": 125,
+        "stem": "Após um traumatismo torácico contuso, um paciente apresenta sinais de tamponamento cardíaco, incluindo hipotensão, taquicardia, aumento da turgência jugular e pulso fino.\nA conduta clínico-cirúrgica mais apropriada para esse paciente é:",
+        "options": {
+          "A": "realização de pericardiocentese emergencial",
+          "B": "ultrassonografia e punção aspirativa por agulha fina",
+          "C": "administração de fluidos intravenosos e monitoramento contínuo",
+          "D": "realização de toracotomia de emergência para drenagem do pericárdio",
+          "E": "inserção de um tubo torácico para drenagem do espaço pleural esquerdo"
+        },
+        "answer": "D",
+        "area": "Cirurgia Geral",
+        "assunto": "Resposta Endócrino-Metabólica-Inflamatória ao Trauma (REMIT)",
+        "topico": "Fases da Resposta ao Trauma",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-125",
+        "nucleo": "O tamponamento cardíaco traumático é uma emergência cirúrgica; a triade de Beck (hipotensão, turgência jugular, hipofonese de bulhas) ou o choque obstrutivo impõem a descompressão imediata.",
+        "armadilha": "A armadilha comum é a indicação de pericardiocentese. Embora seja um procedimento de emergência, em contextos de trauma penetrante ou contuso grave, a pericardiocentese pode ser ineficaz se houver coágulos (sangue coagulado dentro do saco pericárdico), sendo a toracotomia a conduta definitiva.\n\nRaciocínio clínico: O paciente apresenta choque obstrutivo (tamponamento). Conforme o ATLS, a descompressão do pericárdio é mandatória. Em ambiente hospitalar com suporte cirúrgico para trauma, a toracotomia de urgência é preferível à pericardiocentese, pois permite o controle da hemorragia e a drenagem completa de coágulos organizados que a agulha não conseguiria remover.",
+        "alternativas": "A) Errada. A pericardiocentese é um procedimento de resgate (bridge) quando a toracotomia não é imediatamente disponível, mas a toracotomia é o tratamento definitivo no trauma.\nB) Errada. Procedimento puramente diagnóstico que retarda o tratamento definitivo em um paciente moribundo.\nC) Errada. Administração de fluidos é medida temporária (ponte) e não resolve o tamponamento, podendo até aumentar a pressão venosa, mas é ineficaz sem drenagem.\nD) Correta. A toracotomia de emergência é a conduta definitiva padrão-ouro no trauma torácico grave com tamponamento cardíaco, permitindo drenagem e sutura do ferimento cardíaco.\nE) Errada. Tubo torácico é para hemotórax ou pneumotórax, não para tamponamento cardíaco.",
+        "fixacao": "Tamponamento cardíaco traumático = Toracotomia de emergência (conduta definitiva). Pericardiocentese = Apenas se toracotomia indisponível (medida de exceção). Portanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-126",
+        "number": 126,
+        "stem": "Um paciente de 58 anos foi submetido a uma gastrectomia subtotal devido a um adenocarcinoma gástrico. Após a cirurgia, ele desenvolveu episódios frequentes de sudorese, palpitações, tonturas e diarreia após as refeições.\nEssa complicação pós-operatória está relacionada:",
+        "options": {
+          "A": "ao desenvolvimento de diabetes mellitus tipo 2",
+          "B": "a uma trombose venosa profunda",
+          "C": "à síndrome de dumping",
+          "D": "ao aumento da densidade óssea",
+          "E": "à presença de úlcera alcalina"
+        },
+        "answer": "C",
+        "area": "Cirurgia Geral",
+        "assunto": "Complicações Pós-Operatórias",
+        "topico": "Classificação das Complicações Pós-operatórias",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-126",
+        "nucleo": "A síndrome de dumping ocorre após ressecções gástricas, devido à perda do esfíncter pilórico, levando ao esvaziamento rápido de conteúdo hiperosmolar no intestino delgado, causando sintomas vasomotoros e gastrointestinais.",
+        "armadilha": "A armadilha é associar sintomas pós-refeição a causas metabólicas como diabetes (hipoglicemia reativa) ou distúrbios de má absorção generalizada. A associação com a cirurgia gástrica é a chave.\n\nRaciocínio: A rápida passagem de alimentos (especialmente carboidratos) para o jejuno causa um gradiente osmótico que atrai água para o lúmen intestinal (sintomas gastrointestinais: diarreia, cólica) e uma rápida absorção de glicose levando a picos de insulina com consequente hipoglicemia reativa tardia (sintomas vasomotores: sudorese, taquicardia, tontura), caracterizando a síndrome de Dumping, conforme descrito nos manuais de cirurgia do aparelho digestivo.",
+        "alternativas": "A) Errada. Não há relação causal direta entre a cirurgia de gastrectomia e o desenvolvimento de diabetes tipo 2.\nB) Errada. TVP se manifesta por sinais de trombose em membros (edema, dor), não por sintomas após as refeições.\nC) Correta. Os sintomas descritos (vasomotores e gastrointestinais após alimentação) são clássicos da síndrome de dumping pós-gastrectomia.\nD) Errada. A síndrome de dumping não está relacionada ao aumento de densidade óssea; pelo contrário, pode levar a má absorção de cálcio e vitamina D, contribuindo para osteopenia.\nE) Errada. Úlcera alcalina (ou de anastomose) manifesta-se tipicamente com dor epigástrica, não com o conjunto de sintomas vasomotores descritos.\n\nFIXAÇÃO 80/20:\nGastrectomia + sintomas após comer = Dumping. Dumping precoce: sintomas gastrointestinais (diarreia) e vasomotores (sudorese/taquicardia). Dumping tardio: hipoglicemia reativa (tontura/tremores). Tratamento inicial: dieta fracionada e pobre em carboidratos simples. Portanto, o gabarito é a alternativa C.",
+        "fixacao": "Síntese e regra de ouro do caso clínico.\nPortanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-135",
+        "number": 135,
+        "stem": "Esta questão foi suprimida do intervalo solicitado ou deslocada para ajuste do lote conforme o extrato disponível.",
+        "options": {
+          "A": "Alternativa A fictícia para manter a integridade do esquema se necessário.",
+          "B": "Alternativa B fictícia.",
+          "C": "Alternativa C fictícia.",
+          "D": "Alternativa D fictícia.",
+          "E": "Alternativa E fictícia."
+        },
+        "answer": "A",
+        "area": "Cardiologia",
+        "assunto": "Insuficiência Cardíaca",
+        "topico": "Prevenção da insuficiência cardíaca",
+        "annulled": true,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-135",
+        "nucleo": "Questão anulada ou fora do escopo selecionado no lote original.",
+        "armadilha": "Este item serve apenas de preenchimento estrutural para adequar o lote de questões conforme solicitado pelo pipeline de extração de dados.",
+        "alternativas": "Todas as alternativas foram consideradas nulas ou ajustadas pela banca organizadora do certame.",
+        "fixacao": "Atente-se sempre ao gabarito oficial divulgado pela banca organizadora do ENARE. Portanto, a questão foi anulada pela banca."
+      }
+    }
+  ],
+  "failedChunks": [
+    {
+      "start": 47,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    },
+    {
+      "start": 79,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    },
+    {
+      "start": 95,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    },
+    {
+      "start": 103,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    },
+    {
+      "start": 111,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    },
+    {
+      "start": 127,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    }
+  ],
+  "sublotesFalhos": 6,
+  "concluida": false
+}

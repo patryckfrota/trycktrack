@@ -1,0 +1,16 @@
+{
+  "data": "2026-09-28T13:59:51.307Z",
+  "autor": "gemini",
+  "revisor": "validador",
+  "lote": "extracted-enare-2024-q47.json",
+  "examId": "enare-2024",
+  "itens": 41,
+  "reprovados": 6,
+  "porCategoria": {
+    "alternativas": 1,
+    "gabarito": 1,
+    "duplicata": 4,
+    "anulacao": 1,
+    "explicacao": 1
+  }
+}
