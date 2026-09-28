@@ -41,8 +41,10 @@
       "vagas": 1700,
       "confianca": "aproximada",
       "fonte": "https://www.eumedicoresidente.com.br/post/concorrencia-principais-provas-residencia-medica-2024",
-      "observacao": "Fonte diz 'mais de 25 mil inscritos' em 2024; atualizar com o número de 2026.",
-      "paginas": {}
+      "observacao": "Fonte diz 'mais de 25 mil inscritos' em 2024; atualizar com o número de 2026. Site tem proteção anti-bot (AWS WAF) que bloqueia requisição HTTP simples (curl/axios) — o crawler.ts vai falhar tentando baixar direto. Precisa de navegador real (headless) pra passar o desafio.",
+      "paginas": {
+        "2025": "https://www.amrigs.org.br/wp-content/uploads/2026/06/Prova-AMB-AMRIGS-2025.pdf|https://www.amrigs.org.br/wp-content/uploads/2026/06/Gabarito-Definitivo-AD-e-Resp.-Recursos-2025.pdf"
+      }
     },
     {
       "id": "usp-sp",
@@ -53,10 +55,10 @@
       "confianca": "confirmada",
       "fonte": "https://med.estrategia.com/portal/noticias/inscricoes-usp-sp-2026-residencia-medica/",
       "paginas": {
-        "2026": "https://www.fuvest.br/wp-content/uploads/rm2026-prova-AD2-areasbasicas-acessodireto.pdf|https://www.fuvest.br/wp-content/uploads/rm2026-gabarito-AD-areasbasicas-acessodireto.pdf",
-        "2025": "https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_prova-areasbasicasedeacessodireto_grupo-a1.pdf|https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_gabarito-areasbasicasedeacessodireto.pdf",
+        "2023": "https://www.fuvest.br/wp-content/uploads/rm2023_prova_residencia_A.pdf|https://www.fuvest.br/wp-content/uploads/rm2023_prova_gabaritos_retificados_05-01-2023.pdf",
         "2024": "https://www.fuvest.br/wp-content/uploads/rm_2024_a1.pdf|https://www.fuvest.br/wp-content/uploads/rm2024_gabarito_areas_basicas_acesso-direto_2023-12-18.pdf",
-        "2023": "https://www.fuvest.br/wp-content/uploads/rm2023_prova_residencia_A.pdf|https://www.fuvest.br/wp-content/uploads/rm2023_prova_gabaritos_retificados_05-01-2023.pdf"
+        "2025": "https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_prova-areasbasicasedeacessodireto_grupo-a1.pdf|https://www.fuvest.br/wp-content/uploads/2024-12-01_rm2025_gabarito-areasbasicasedeacessodireto.pdf",
+        "2026": "https://www.fuvest.br/wp-content/uploads/rm2026-prova-AD2-areasbasicas-acessodireto.pdf|https://www.fuvest.br/wp-content/uploads/rm2026-gabarito-AD-areasbasicas-acessodireto.pdf"
       }
     },
     {
@@ -75,7 +77,9 @@
       "vagas": 1060,
       "confianca": "estimada",
       "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
-      "paginas": {}
+      "paginas": {
+        "2025": "https://strixeducacao.com.br/wp-content/uploads/2024/11/CEREMBA_2025_ACESSO-DIRETO.pdf|https://strixeducacao.com.br/wp-content/uploads/2024/11/AD_GAB_PR_DEFINITIVO_2025.1.pdf"
+      }
     },
     {
       "id": "ses-pe",
@@ -84,7 +88,9 @@
       "vagas": 950,
       "confianca": "estimada",
       "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
-      "paginas": {}
+      "paginas": {
+        "2026": "https://www.upenet.com.br/concursos/2026/26_RED_MED/provas-e-gab/PROVAS/GR%2001%20ACESSO.pdf|https://www.upenet.com.br/concursos/2026/26_RED_MED/provas-e-gab/GABARITOS%20DEFITIVOS/GABARITO%20DEFINITIVO%20ACESSO%20DIRETO%202026.pdf"
+      }
     },
     {
       "id": "psu-ce",
