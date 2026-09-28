@@ -53,7 +53,7 @@ descartar_gravacoes() {
 rm -f tmp/extracted-*.json
 if ! npx tsx scripts/ingestion/index.ts --url "$url" --prefix "$prefixo" --start "$inicio" --limit "$limite"; then
   resumo "## Ingestão diária — $(date -u +%F)
-❌ **$prefixo, questões $inicio–$((inicio + limite - 1))**: motor falhou (erro técnico ou API do Gemini fora do ar). Sem alteração no banco. Tenta de novo amanhã do mesmo ponto."
+❌ **$prefixo, questões ${inicio}-$((inicio + limite - 1))**: motor falhou (erro técnico ou API do Gemini fora do ar). Sem alteração no banco. Tenta de novo amanhã do mesmo ponto."
   descartar_gravacoes
   git add pipeline/estado.json
   git diff --cached --quiet || { git commit -m "fila: começa $prefixo"; publicar; }
@@ -87,15 +87,15 @@ if node pipeline/validar.cjs "$entrada"; then
     statusMsg="⚠️ $sublotesFalhos sub-lote(s) com pendência isolados (prova continua em andamento para retry)."
   fi
   resumo "## Ingestão diária — $(date -u +%F)
-✅ **$prefixo, questões $inicio–$fim** ($n questões): aprovadas no portão e publicadas. $statusMsg $dbMsg"
+✅ **$prefixo, questões ${inicio}-${fim}** ($n questões): aprovadas no portão e publicadas. $statusMsg $dbMsg"
 else
   descartar_gravacoes
   mkdir -p pipeline/pendencias
   git mv -f "$entrada" "pipeline/pendencias/" 2>/dev/null || mv "$entrada" pipeline/pendencias/
   node pipeline/proxima.cjs avancar "$n" "false"
   git add pipeline/pendencias pipeline/estado.json pipeline/revisoes
-  git commit -m "pendência: $prefixo, questões $inicio–$fim reprovadas no portão"
+  git commit -m "pendência: $prefixo, questões ${inicio}-${fim} reprovadas no portão"
   publicar
   resumo "## Ingestão diária — $(date -u +%F)
-🚫 **$prefixo, questões $inicio–$fim** ($n questões): reprovadas no portão, nada publicado. Lote guardado em \`pipeline/pendencias/\` para revisão. Detalhe por categoria: ver o relatório em \`pipeline/relatorios/\` deste run."
+🚫 **$prefixo, questões ${inicio}-${fim}** ($n questões): reprovadas no portão, nada publicado. Lote guardado em \`pipeline/pendencias/\` para revisão. Detalhe por categoria: ver o relatório em \`pipeline/relatorios/\` deste run."
 fi
