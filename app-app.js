@@ -389,15 +389,8 @@
         function renderTrails() {
             const hub = document.getElementById('trailHub');
             if (!hub) return;
-            // Trilhas hoje só existem pro lado Residência (ENAMED/UEPA) —
-            // não há trilha de rodízio pro Internato ainda (fica pra sessão
-            // dedicada de redesign de Trilhas). Estado vazio simples em vez
-            // de esconder a aba inteira.
-            if (activeTrackCapsule === 'curso') {
-                hub.className = 'dashboard-empty';
-                hub.innerHTML = '<div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><span>Trilha de Internato ainda não existe — pratique pelo QuestHub, na cápsula Curso, por enquanto.</span>';
-                return;
-            }
+            // Trilhas é independente da cápsula Curso/Residência do QuestHub
+            // — sempre mostra ENAMED/UEPA, não muda com o que está selecionado lá.
             hub.className = 'trail-hub';
             const state = getTrailState();
             const trailId = state.active || 'enamed';
