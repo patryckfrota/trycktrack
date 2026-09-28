@@ -107,6 +107,9 @@ export function updatePrincipalExplanations(updates) {
     for (const [questionId, body] of Object.entries(updates)) {
         const canonicalId = aliases[questionId] || questionId;
         explanations[canonicalId] = body;
+        if (canonicalId !== questionId && questionId in explanations) {
+            explanations[questionId] = body;
+        }
     }
 
     fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations, null, 2) + after);
