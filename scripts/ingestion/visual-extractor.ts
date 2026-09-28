@@ -215,8 +215,8 @@ cropped.save('${outputPath}', optimize=True)
   }
 
   // 1. Atualiza o arquivo de questões correspondente à banca (ex: questions-enare.js, questions-revalida.js)
-  const prefix = examId.split('-')[0];
-  const targetFile = path.join(ROOT_DIR, `questions-${prefix}.js`);
+  const bankPrefix = examId.split('-')[0];
+  const targetFile = path.join(ROOT_DIR, `questions-${bankPrefix}.js`);
   if (fs.existsSync(targetFile)) {
     console.log(`\n[VisualExtractor] Atualizando ${targetFile}...`);
     let fileContent = fs.readFileSync(targetFile, 'utf8');
