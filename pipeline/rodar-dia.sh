@@ -17,7 +17,13 @@ if [ "${CI:-}" != "true" ] && [ -n "$(git status --porcelain -- 'questions-*.js'
   exit 1
 fi
 
-publicar() { git push; gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null 2>&1 || true; }
+publicar() {
+  if [ "${NO_PUSH:-}" = "true" ]; then
+    echo "[RodarDia] 🛑 Push desativado (NO_PUSH=true). Commit gravado apenas localmente."
+    return 0
+  fi
+  git push; gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null 2>&1 || true;
+}
 
 # Escreve o resultado do dia no resumo do próprio run do Actions — é o que
 # aparece na aba Actions e no corpo do e-mail de notificação do GitHub

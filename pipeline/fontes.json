@@ -99,7 +99,10 @@
       "vagas": 650,
       "confianca": "estimada",
       "fonte": "https://www.resmedica.com.br/noticias/residencia-medica/os-10-maiores-processos-seletivos-de-residencia-medica-do-brasil",
-      "paginas": {}
+      "observacao": "resmedceara.ufc.br tem certificado SSL com cadeia incompleta (curl: 'unable to get local issuer certificate') — não é bloqueio de bot, é config errada do servidor. crawler.ts precisa de um httpsAgent com rejectUnauthorized:false para esse domínio especificamente.",
+      "paginas": {
+        "2022": "https://www.resmedceara.ufc.br/ares/wp-content/uploads/2021/11/PROVA-ACESSO-DIRETO.pdf|https://www.resmedceara.ufc.br/ares/wp-content/uploads/2021/11/GABARITO-ACESSO-DIRETO-2022.pdf"
+      }
     },
     {
       "id": "unifesp",

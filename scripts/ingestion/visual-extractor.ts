@@ -104,14 +104,19 @@ export async function extractVisualAssetsFromExam(options: VisualExtractionOptio
     let scanResult: PageScanResult = { visualElements: [] };
 
     try {
-      const response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash-lite',
-        contents: [
-          {
-            role: 'user',
-            parts: [
+      let response: any;
+      const candidateModels = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite'];
+      let lastErr: any;
+      for (const model of candidateModels) {
+        try {
+          response = await ai.models.generateContent({
+            model,
+            contents: [
               {
-                text: `Analise a página da prova de residência médica em anexo.
+                role: 'user',
+                parts: [
+                  {
+                    text: `Analise a página da prova de residência médica em anexo.
 Identifique TODAS as figuras, fotografias de pacientes/lesões, exames médicos de imagem (raio-x, tomografia, ressonância, ultrassonografia, ecocardiograma), traçados de ECG, tabelas, quadros, fluxogramas, partogramas ou curvas de crescimento que pertençam às questões desta página.
 Para cada elemento visual pertencente a uma questão, retorne um objeto no array visualElements contendo:
 - questionNumber: número inteiro da questão à qual o elemento pertence (ex: 13, 38). Se estiver incerto, deduza pelo cabeçalho "QUESTÃO XX" mais próximo acima do elemento.
@@ -121,20 +126,32 @@ Para cada elemento visual pertencente a uma questão, retorne um objeto no array
 
 Ignore cabeçalhos gerais da página (como "Revalida", número de página, logotipos do ministério) e rodapés gerais.
 Se a página contiver apenas texto puro das questões sem nenhuma figura ou tabela, retorne apenas {"visualElements": []}.`
-              },
-              {
-                inlineData: {
-                  mimeType: 'image/png',
-                  data: base64
-                }
+                  },
+                  {
+                    inlineData: {
+                      mimeType: 'image/png',
+                      data: base64
+                    }
+                  }
+                ]
               }
-            ]
+            ],
+            config: {
+              responseMimeType: 'application/json'
+            }
+          });
+          break;
+        } catch (err: any) {
+          lastErr = err;
+          const errMsg = err?.message || '';
+          if (errMsg.includes('429') || errMsg.includes('RESOURCE_EXHAUSTED') || err?.status === 429) {
+            console.warn(`[VisualExtractor] ⏳ Modelo ${model} atingiu cota. Tentando modelo alternativo...`);
+            continue;
           }
-        ],
-        config: {
-          responseMimeType: 'application/json'
+          throw err;
         }
-      });
+      }
+      if (!response) throw lastErr;
 
       let rawText = response.text?.trim() || '{}';
       const fenceMatch = rawText.match(/```(?:json)?\s*([\s\S]*?)```/i);

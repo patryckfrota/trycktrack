@@ -10,15 +10,40 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..', '..');
 const PDF_DIR = path.join(ROOT_DIR, 'tmp', 'pdfs');
 
-// Agente HTTPS permissivo para contornar problemas de TLS/certificados em portais governamentais legados
-const httpsAgent = new https.Agent({
+// Lista de hosts com certificados SSL legados ou cadeias incompletas conhecidas no servidor
+const INSECURE_SSL_HOSTS = new Set([
+  'resmedceara.ufc.br',
+  'www.resmedceara.ufc.br'
+]);
+
+// Agente padrão com validação estrita de SSL
+const standardHttpsAgent = new https.Agent({
+  rejectUnauthorized: true,
+  keepAlive: true
+});
+
+// Agente permissivo exclusivo para hosts que possuem cadeias de certificado incompletas no servidor
+const insecureHttpsAgent = new https.Agent({
   rejectUnauthorized: false,
   ciphers: 'DEFAULT@SECLEVEL=1',
   keepAlive: true
 });
 
+/**
+ * Retorna o agente HTTPS apropriado com base no host da URL
+ */
+export function getHttpsAgentForUrl(targetUrl: string): https.Agent {
+  try {
+    const parsed = new URL(targetUrl);
+    if (INSECURE_SSL_HOSTS.has(parsed.hostname) || parsed.hostname.endsWith('.resmedceara.ufc.br')) {
+      return insecureHttpsAgent;
+    }
+  } catch {}
+  return standardHttpsAgent;
+}
+
 const httpClient = axios.create({
-  httpsAgent,
+  httpsAgent: standardHttpsAgent,
   headers: {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   },
@@ -149,7 +174,8 @@ export async function downloadPdfFile(url: string, destinationFilename: string):
 
   try {
     const response = await httpClient.get(url, {
-      responseType: 'arraybuffer'
+      responseType: 'arraybuffer',
+      httpsAgent: getHttpsAgentForUrl(url)
     });
 
     fs.writeFileSync(filePath, Buffer.from(response.data));
@@ -176,7 +202,9 @@ export async function crawlInepRevalida(year: number = 2024, requestedEdition?: 
   const baseUrl = `https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos/${year}`;
   console.log(`[Crawler] Varrendo repositório público do INEP: ${baseUrl}`);
 
-  const response = await httpClient.get(baseUrl);
+  const response = await httpClient.get(baseUrl, {
+    httpsAgent: getHttpsAgentForUrl(baseUrl)
+  });
   const $ = cheerio.load(response.data);
 
   const pdfLinks: DiscoveredExamPdf[] = [];
@@ -279,7 +307,9 @@ export async function crawlGenericOpenRepository(pageUrl: string, prefixName: st
     // Caso 3: URL de página pública HTML contendo links
     let html: string;
     try {
-      const response = await httpClient.get(pageUrl);
+      const response = await httpClient.get(pageUrl, {
+        httpsAgent: getHttpsAgentForUrl(pageUrl)
+      });
       html = response.data;
     } catch (err: any) {
       const status = err.response?.status;

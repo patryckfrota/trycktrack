@@ -32,6 +32,36 @@ function cleanJsonOutput(rawText: string): string {
 }
 
 /**
+ * Executa generateContent com fallback transparente entre modelos Gemini caso um deles esgote cota (429)
+ */
+async function generateContentWithFallback(ai: GoogleGenAI, config: any): Promise<any> {
+  const models = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite'];
+  let lastError: any;
+  for (const model of models) {
+    try {
+      const response = await ai.models.generateContent({
+        ...config,
+        model
+      });
+      return response;
+    } catch (err: any) {
+      lastError = err;
+      const errMsg = err?.message || '';
+      const isQuotaOrTransient = errMsg.includes('429') || errMsg.includes('503') ||
+                                 errMsg.includes('RESOURCE_EXHAUSTED') || errMsg.includes('ResourceExhausted') ||
+                                 errMsg.includes('quota') || errMsg.includes('UNAVAILABLE') ||
+                                 err?.status === 429;
+      if (isQuotaOrTransient) {
+        console.warn(`[Extractor] ⏳ Modelo ${model} encontrou limite ou erro transitório (${errMsg.slice(0, 80)}...). Tentando modelo alternativo...`);
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw lastError;
+}
+
+/**
  * Extrai texto completo do PDF usando pdftotext se disponível no sistema
  */
 export function extractTextFromPdf(pdfPath: string, lastPage?: number): string {
@@ -289,8 +319,7 @@ Responda ESTRITAMENTE em formato JSON com o schema abaixo:
 }`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash-lite',
+    const response = await generateContentWithFallback(ai, {
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: { responseMimeType: 'application/json' }
     });
@@ -345,8 +374,7 @@ async function executeTwoStageExtraction(
 
   for (let retry = 0; retry < 3; retry++) {
     try {
-      stage1Response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash-lite',
+      stage1Response = await generateContentWithFallback(ai, {
         contents: [
           {
             role: 'user',
@@ -377,7 +405,7 @@ async function executeTwoStageExtraction(
   console.log(`[Extractor] 📄 [Estágio 1/2] Concluído: ${rawQuestions.length} questões estruturadas com sucesso.`);
 
   // --- ESTÁGIO 2: Flash-Lite gera resoluções médicas UEPA (4 seções) e taxonomia ---
-  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com gemini-3.5-flash-lite...`);
+  console.log(`[Extractor] 🩺 [Estágio 2/2] Gerando explicações UEPA (4 seções) e taxonomia com Gemini...`);
   const stage2Prompt = buildClinicalAnalysisPrompt(
     examMetadata.examId,
     examMetadata.examName,
@@ -390,8 +418,7 @@ async function executeTwoStageExtraction(
 
   for (let retry = 0; retry < 3; retry++) {
     try {
-      stage2Response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash-lite',
+      stage2Response = await generateContentWithFallback(ai, {
         contents: [
           {
             role: 'user',
@@ -636,7 +663,8 @@ export async function extractQuestionsFromPdf(
   );
 
   const candidateModels = [
-    'gemini-3.5-flash-lite'
+    'gemini-3.5-flash-lite',
+    'gemini-3.1-flash-lite'
   ];
 
   let lastZodErrors: string | null = null;
@@ -674,6 +702,12 @@ export async function extractQuestionsFromPdf(
           break;
         } catch (apiErr: any) {
           const errMsg = apiErr?.message || '';
+          const isHardQuota = errMsg.includes('QuotaFailure') || errMsg.includes('exceeded your current quota') || errMsg.includes('GenerateRequestsPerDay');
+          if (isHardQuota) {
+            console.warn(`[Extractor] 🚫 Cota diária esgotada no modelo ${currentModel}. Alternando imediatamente para próximo modelo...`);
+            throw apiErr;
+          }
+
           const isTransient = errMsg.includes('503') || errMsg.includes('429') ||
                               errMsg.includes('high demand') || errMsg.includes('ResourceExhausted') ||
                               errMsg.includes('UNAVAILABLE') || errMsg.includes('overloaded');
