@@ -71,6 +71,25 @@ passo separado, sempre depois de o usuário revisar e liberar.
   `bd32a0c` (46 questões do ENARE, conteúdo correto mas pushado sem esperar
   autorização, fora do fluxo supervisionado de `pipeline/rodar-dia.sh`)
 
+### L8 — Enunciado e alternativas têm que ser os da prova `[automatizada]`
+Copie o texto do caderno oficial; nunca reescreva, complete ou "reconstrua"
+enunciado, exames ou alternativas. Na USP-SP 2025/2026 o motor gravou questões
+inventadas (dados clínicos e alternativas que não existem na prova) com a
+letra do gabarito certa — por isso o portão de duplicata/gabarito/taxonomia
+não percebeu. O `pipeline/fidelidade.cjs` agora exige que o enunciado e cada
+alternativa existam no PDF (`tmp/pdfs/<examId>-caderno*.pdf`, precisa do
+`pdftotext`). Quando o texto está numa imagem, anexe a imagem em vez de
+transcrever de memória.
+· origem: auditoria de 2026-09-28 · ocorrências: ~50 das 240 questões da
+  USP-SP 2025/2026 (alternativas diferentes das da prova)
+
+### L9 — Gabarito oficial manda, inclusive para anulada e resposta dupla `[parcial]`
+Conferir cada `answer` contra o PDF do gabarito definitivo: "—" ou "*" é
+anulada (`annulled: true`, `answer: null`); duas letras (ex.: "AB") = a banca
+aceitou as duas. A explicação tem que defender a letra oficial.
+· origem: auditoria de 2026-09-28 · ocorrências: 6 questões do ENARE 2024
+  com letra diferente da oficial e 6 do Revalida 2024.2 que o INEP anulou
+
 ---
 
 ## Para o Claude (encontradas na revisão do Gemini)

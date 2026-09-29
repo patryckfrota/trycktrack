@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { problemaTaxonomia } = require('../taxonomia/validar.cjs');
+const { problemaFidelidade } = require('./fidelidade.cjs');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -55,6 +56,7 @@ const CATEGORIAS = {
     texto: 'texto',
     imagem: 'imagem',
     anulacao: 'anulação sem fonte',
+    fidelidade: 'texto diferente do caderno oficial',
 };
 
 function validarItem(item, banco, vistosNoLote) {
@@ -87,6 +89,10 @@ function validarItem(item, banco, vistosNoLote) {
 
     const tax = problemaTaxonomia(q);
     if (tax) erro('taxonomia', tax);
+
+    // Enunciado/alternativas precisam existir no PDF da prova (ver fidelidade.cjs).
+    const fid = problemaFidelidade(q);
+    if (fid) erro('fidelidade', fid);
 
     if (textos(item).some(t => CONTROLE.test(t))) erro('texto', 'caractere de controle invisível no texto (quebra o import)');
 
