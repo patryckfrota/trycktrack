@@ -496,7 +496,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-025",
     "number": 25,
-    "stem": "Homem, 30 anos de idade, queixa-se de abaulamento anal associado a dor intensa, contínua e sangramento vivo. A sintomatologia piora em todas as suas evacuações e ficou ainda mais intensa há duas semanas. Nega febre, perda ponderal ou alterações do hábito intestinal. Ao exame proctológico, na posição genupeitoral, observa-se lesão vegetante, ulcerada, endurecida e sangrante ao toque, com cerca de 3 cm de extensão, ocupando o quadrante posterior do canal anal e ultrapassando a linha pectínea. Ausência de linfonodomegalias inguinais palpáveis. Com base no caso apresentado, assinale a alternativa que apresenta o diagnóstico mais provável para a lesão descrita.",
+    "stem": "Homem, 30 anos de idade, queixa-se de abaulamento anal associado a dor intensa, contínua e sangramento vivo. A sintomatologia piora em todas as suas evacuações e ficou ainda mais intensa há duas semanas. O hábito evacuatório era de uma evacuação ao dia, fezes endurecidas, e passou a ser de uma vez por semana devido a piora da dor. Relata ter uma \"hemorroida/verruga\" (sic), na borda anal, que parece ter aumentado com o tempo. Informa relações sexuais com parceiros do mesmo sexo, sem maiores detalhes. Ao exame físico, observou-se a lesão da imagem a seguir. Com base no relato do paciente e no exame físico apresentado, assinale a alternativa que indica o diagnóstico mais provável.",
     "options": {
       "A": "Adenocarcinoma.",
       "B": "Carcinoma espinocelular.",
@@ -509,7 +509,9 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Doenças Orificiais",
     "subtopico": "Câncer do Canal Anal",
     "annulled": false,
-    "images": [],
+    "images": [
+      "assets/usp-sp/img/usp-sp-2026-025-1.png"
+    ],
     "source": "usp-sp-2026",
     "examId": "usp-sp-2026",
     "examName": "USP-SP 2026"
@@ -517,7 +519,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-026",
     "number": 26,
-    "stem": "Mulher, 72 anos de idade, encontra-se no sexto pós-operatório de troca de valva mitral. Desde a operação não evacuou, e há dois dias não elimina gases. Nas últimas 24 horas, evoluiu com distensão e dor abdominal em cólica progressivas. Ao exame físico: abdome muito distendido, doloroso difusamente, timpânico, sem sinais de irritação peritoneal e com ruídos hidroaéreos diminuídos. Foi realizada tomografia, conforme imagens a seguir:\n\nCom base no quadro clínico e nas imagens tomográficas, assinale a alternativa que apresenta o diagnóstico correto.",
+    "stem": "Mulher, 72 anos de idade, encontra-se no sexto pós-operatório de troca de valva mitral. Desde a operação não evacuou, e há dois dias não elimina gases. Nas últimas 24 horas, evoluiu com distensão e dor abdominal. Tem diabetes melito controlado e antecedente de apendicectomia por incisão de McBurney. Ao exame físico, encontra-se em regular estado geral, descorada, eupneica em ar ambiente; exame torácico com incisão de esternotomia sem sinais de complicação e dreno de mediastino com baixo débito; abdome: distendido, com ruídos diminuídos, timpânico, pouco doloroso à palpação difusa sem sinais de irritação peritoneal. Exames laboratoriais: Hb 8,9 g/dL; leucócitos 10.461/mm3; Cr 2,5 mg/dL; Ur 72 mg/dL; PCR 79 mg/L (anterior de dois dias atrás: 101 mg/L); K+ 3,1 mEq/L; Na+ 134 mEq/L. Foi realizada tomografia, conforme imagens a seguir:\n\nAssinale a alternativa que apresenta o diagnóstico mais provável.",
     "options": {
       "A": "Gastroparesia.",
       "B": "Pseudo-obstrução cólica.",
@@ -540,7 +542,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-027",
     "number": 27,
-    "stem": "Homem, 23 anos de idade, foi vítima de queda da motocicleta há 1 hora. No atendimento pré-hospitalar estava inconsciente, com PA de 110×80 mmHg e FC de 90 bpm. Foi realizada intubação orotraqueal e encaminhado ao centro de trauma. Na admissão: PA de 118×76 mmHg, FC de 88 bpm. Abdome plano, flácido, sem equimoses ou sinais de peritonite. Pelve estável. Realizou tomografia de corpo inteiro (pan-TC). A imagem da tomografia de abdome pode ser observada na imagem a seguir:\n\nDiante da condição clínica do paciente e dos achados no exame tomográfico, assinale a alternativa que apresenta a estrutura acometida e a conduta indicada.",
+    "stem": "Homem, 23 anos de idade, foi vítima de queda da motocicleta há 1 hora. No atendimento pré-hospitalar estava inconsciente, com PA de 110×80 mmHg e FC de 90 bpm. Foi realizada intubação orotraqueal e encaminhamento para centro de trauma. Na admissão, encontrava-se:\nA: SpO2 de 97%;\nB: Expansibilidade preservada e ausculta sem alterações;\nC: PA de 120×80 mmHg; FC de 94 bpm; FAST positivo no espaço hepatorrenal e esplenorrenal;\nD: Escala de Coma de Glasgow: 3T (sedado);\nE: Deformidade na perna direita, sem sangramento.\nRealizada sondagem vesical com diurese clara. Após o atendimento inicial, foi realizada tomografia de corpo inteiro. Na imagem a seguir, é possível observar a região do abdome com os achados relevantes.\n\nDiante da condição clínica do paciente e dos achados no exame de imagem, assinale a alternativa com a provável lesão e a melhor conduta.",
     "options": {
       "A": "Mesentério e laparotomia.",
       "B": "Mesentério e tratamento não operatório.",
@@ -562,7 +564,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-028",
     "number": 28,
-    "stem": "Mulher, 49 anos de idade, está no primeiro pós-operatório de cirurgia de bypass gástrico para obesidade por videolaparoscopia. Ao exame físico: consciente, orientada, FC de 118 bpm, PA de 104×66 mmHg, FR de 20 irpm, afebril. Abdome flácido, doloroso à palpação profunda em andar superior, sem sinais de peritonite. Nas últimas 3 horas, apresentou dois episódios de melena volumosa acompanhados de exteriorização de sangue vivo em moderada quantidade pelo dreno abdominal. O controle laboratorial revelou queda da hemoglobina de 13,5 g/dL para 9,8 g/dL. Qual é a complicação cirúrgica pós-operatória precoce mais provável neste caso?",
+    "stem": "Mulher, 49 anos de idade, está no primeiro pós-operatório de cirurgia de bypass gástrico para obesidade por videolaparoscopia. Ao exame físico, encontra-se descorada, com FC de 130 bpm, PA de 100×80 mmHg e FR de 23 irpm, SpO2 de 94%; abdome flácido e indolor à palpação, exceto nos locais das punções. Assinale a alternativa que apresenta a principal hipótese diagnóstica.",
     "options": {
       "A": "Hérnia interna.",
       "B": "Atelectasia pulmonar.",
@@ -583,7 +585,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-029",
     "number": 29,
-    "stem": "Lactente, 1 ano de idade, foi submetido à esofagocoloplastia devido a atresia de esôfago. Após 24 horas de cirurgia, apresenta-se gemente, com piora do padrão respiratório, taquipneico, febril, taquicárdico e hipoperfundido. Ao exame torácico: murmúrios vesiculares diminuídos à esquerda e dreno torácico com débito turvo, fétido e com coloração escurecida. Foi realizada toracotomia exploradora de urgência. Qual é a principal complicação intraoperatória esperada que justifica este quadro?",
+    "stem": "Lactente, 1 ano de idade, foi submetido à esofagocoloplastia devido a atresia de esôfago. Após 24 horas de cirurgia, apresenta-se gemente, com má perfusão periférica, oligúria e débito vinhoso fétido pela gastrostomia. Ao exame físico, apresenta FC de 190 bpm e PA de 70×40 mmHg. Saturação de oxigênio não aferível. Murmúrios vesiculares reduzidos em bases. Assinale a alternativa que apresenta a complicação mais provável.",
     "options": {
       "A": "Deiscência da anastomose.",
       "B": "Pneumotórax hipertensivo.",
@@ -603,7 +605,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2026-030",
     "number": 30,
-    "stem": "Homem, 73 anos de idade, refere alteração do hábito intestinal há 4 meses, com constipação e necessidade progressiva de laxativos. Realizou tomografia, com o resultado apresentado na imagem a seguir:\n\nDiante da condição clínica do paciente e dos achados no exame tomográfico, assinale a alternativa que apresenta a conduta cirúrgica mais adequada neste momento.",
+    "stem": "Homem, 73 anos de idade, refere alteração do hábito intestinal há 4 meses, com constipação e necessidade progressiva de laxativos. Realizou colonoscopia que evidenciou lesão ulcerada no sigmoide intransponível ao aparelho. Procura o serviço de emergência devido a dor abdominal em cólica, distensão e parada de evacuação há 5 dias. Ao exame físico, encontra-se em regular estado geral, desidratado, abdome pouco distendido, fígado palpável até 4 cm abaixo do rebordo costal direito, doloroso à palpação profunda, sem irritação peritoneal. • Exames laboratoriais: Hb: 10,8 g/dL Ht: 30% Ur: 43 mg/dL Cr: 1,4 mgdL Albumina: 3,3 mg/dL Foi realizada a tomografia, com o resultado apresentado na imagem a seguir: Diante da condição clínica do paciente e dos achados no exame de imagem, assinale a alternativa que apresenta a melhor conduta neste momento.",
     "options": {
       "A": "Retossigmoidectomia com linfadenectomia com anastomose.",
       "B": "Retossigmoidectomia com linfadenectomia sem anastomose.",
