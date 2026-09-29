@@ -52,7 +52,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": "a dor lombar em pessoa acima de 50 anos deve ser sempre investigada, independentemente dos sintomas e sinais associados. O principal exame é a ressonância nuclear magnética (RNM) de coluna lombar com contraste venoso;",
       "E": "os sinais de alarme associados a dor lombar subaguda ou crônica (respectivamente, 4 a 12 semanas e mais de 12 semanas) em indivíduos com mais de 50 anos são desnecessários para indicação de exame específico, pois todos esses pacientes devem ter exame de imagem."
     },
-    "answer": "B",
+    "answer": "C",
     "area": "Ortopedia",
     "assunto": "Ortopedia Geral",
     "topico": "Doenças da coluna vertebral",
@@ -168,6 +168,174 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "examName": "ENARE-2024"
   },
   {
+    "id": "enare-2024-009",
+    "number": 9,
+    "stem": "Uma mulher de 42 anos, com história de “reumatismo” na infância, procura ambulatório com um quadro de cansaço aos esforços. Tem história de “isquemia cerebral” há 2 anos, sem sequelas motoras. Ao exame físico, a pressão arterial é de 110 x 68 mmHg e a frequência cardíaca é de 60 batimentos por minuto. Apresenta ritmo cardíaco regular, bulhas normofonéticas e B1 acentuada. Na ausculta cardíaca, há um sopro diastólico em foco mitral. Nos exames laboratoriais, há um clearance de creatinina estimado em 46 mL/min/1,73 m². No ecocardiograma, foram observados estenose mitral moderada e episódios de fibrilação atrial no Holter de 24 horas. Em relação à prevenção de embolização sistêmica, está mais indicado o uso de:",
+    "options": {
+      "A": "rivaroxabana de 15 mg, uma vez ao dia;",
+      "B": "aspirina na dosagem de 200 mg ao dia;",
+      "C": "apixabana de 2,5 mg, duas vezes ao dia;",
+      "D": "varfarina, com a dose de acordo com o INR;",
+      "E": "metoprolol para manutenção do ritmo sinusal."
+    },
+    "answer": "D",
+    "area": "Cardiologia",
+    "assunto": "Valvopatias",
+    "topico": "Valvopatias",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-010",
+    "number": 10,
+    "stem": "Uma paciente de 47 anos, que vinha em uso de medicações para controle de transtorno bipolar, é levada para atendimento com alteração do nível de consciência, confusão mental, sudorese e desorientação. Ao exame, foi observada rigidez muscular generalizada, especialmente em membros superiores e inferiores. Apresentou pressão arterial de 172 por 104 mmHg, frequência cardíaca de 109 batimentos por minuto, frequência respiratória de 24 incursões respiratórias por minuto e temperatura axilar de 39,2 °C. O exame laboratorial revelou aumento significativo de creatinofosfoquinase sérica, sem alterações nas transaminases. Como a equipe médica suspeitou de síndrome neuroléptica maligna, suspendeu as medicações em uso e iniciou terapia de suporte clínico. Fazem parte do arsenal terapêutico da síndrome neuroléptica maligna as seguintes medicações:",
+    "options": {
+      "A": "haloperidol e fenitoína;",
+      "B": "quetiapina e olanzapina;",
+      "C": "dantrolene e bromocriptina;",
+      "D": "risperidona e carbamazepina;",
+      "E": "oxcarbazepina e prometazina."
+    },
+    "answer": "C",
+    "area": "Psiquiatria",
+    "assunto": "Psicofarmacologia",
+    "topico": "Síndrome Neuroléptica Maligna (SNM)",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-011",
+    "number": 11,
+    "stem": "Um homem de 48 anos foi admitido no hospital com erupção cutânea generalizada, mal-estar geral e febre. Ele relatou ter iniciado recentemente alopurinol para controle de hiperuricemia. Nos últimos dias, ele notou o surgimento de uma erupção cutânea que começou no tronco e se espalhou para membros, região cervical e face. Além disso, queixava-se de náuseas e dor abdominal. No exame físico, foram observados erupção cutânea maculopapular generalizada, adenomegalia generalizada e edema em face, mãos e pés bilateralmente. Nos exames laboratoriais, foram encontradas leucocitose, eosinofilia e elevação das transaminases. A principal hipótese diagnóstica nesse caso é:",
+    "options": {
+      "A": "eritema multiforme;",
+      "B": "urticária medicamentosa;",
+      "C": "síndrome de Stevens-Johnson (SSJ);",
+      "D": "púrpura trombocitopênica idiopática (PTI);",
+      "E": "síndrome de hipersensibilidade induzida por drogas (DRESS)."
+    },
+    "answer": "E",
+    "area": "Dermatologia",
+    "assunto": "Farmacodermias",
+    "topico": "Farmacodermias graves",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-012",
+    "number": 12,
+    "stem": "Um jovem de 20 anos foi admitido com um quadro de hepatite, esplenomegalia com hiperesplenismo, anemia hemolítica com Coombs negativo, hipertensão portal e confusão mental. O exame neurológico mostrou síndrome rígida-acinética semelhante ao parkinsonismo, tremores e ataxia. Foram também observadas disartria, disfagia e incoordenação motora. Tais achados neurológicos se associam a disfunção dos gânglios da base. O tratamento instituído foi D-penicilamina oral (0,75 - 2 g/dia em doses divididas, tomadas 1 hora antes ou 2 horas após a refeição) associada a piridoxina oral, 50 mg por semana. Foi também prescrito zinco elementar na dose de 50 mg três vezes ao dia. Houve melhora clínica e indicação para que o tratamento fosse continuado indefinidamente, além de uma dieta específica. A doença em questão é:",
+    "options": {
+      "A": "hemocromatose;",
+      "B": "hepatite autoimune;",
+      "C": "colangite esclerosante primária;",
+      "D": "doença de Wilson;",
+      "E": "síndrome de Budd-Chiari. Residência Médica FGV Conhecimento Acesso Direto  Tipo 1 – ADAceDirT01 – Página 6"
+    },
+    "answer": "D",
+    "area": "Hepatologia",
+    "assunto": "Outras Hepatopatias",
+    "topico": "Doença de Wilson (DW)",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-013",
+    "number": 13,
+    "stem": "Um jovem de 24 anos refere lombalgia e dor sacroilíaca crônicas há aproximadamente 6 meses. Apresenta também dor progressiva em membro inferior esquerdo. No último mês, vem apresentando rigidez matinal que melhora com exercícios físicos. A dor lombossacra chega a acordá-lo no meio da noite. Afirma também ter certa dificuldade em expandir a parede torácica. O diagnóstico mais provável é:",
+    "options": {
+      "A": "artrite reumatoide;",
+      "B": "esclerose sistêmica;",
+      "C": "doença de Crohn atípica;",
+      "D": "artrite reativa do HIV;",
+      "E": "espondilite anquilosante."
+    },
+    "answer": "E",
+    "area": "Reumatologia",
+    "assunto": "Artropatias inflamatórias",
+    "topico": "Espondiloartrites",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-014",
+    "number": 14,
+    "stem": "Um paciente de 45 anos, tabagista, apresentava diabetes mellitus e dislipidemia, porém não era hipertenso. Foi atendido no pronto-socorro com quadro de edema agudo do pulmão hipertensivo. Apresentou melhora clínica e foi liberado com prescrição de losartana e hidroclorotiazida. A hipertensão ficou refratária ao tratamento e o paciente desenvolveu insuficiência renal aguda, que foi associada ao uso da losartana. No exame físico, foi detectado um sopro em linha mamilar esquerda na altura da cicatriz umbilical. O doppler de carótidas mostrou obstrução de 50% à direita e 40% à esquerda. A doença em questão é:",
+    "options": {
+      "A": "doença de Kawasaki;",
+      "B": "arterite de Takayasu;",
+      "C": "hiperaldosteronismo primário;",
+      "D": "estenose de artéria renal;",
+      "E": "feocromocitoma."
+    },
+    "answer": "D",
+    "area": "Cardiologia",
+    "assunto": "Hipertensão Arterial Sistêmica (HAS)",
+    "topico": "Avaliação clínica e exames complementares",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-015",
+    "number": 15,
+    "stem": "Uma paciente de 44 anos e com diagnóstico de hepatite C, não tratada, desenvolveu quadro de porfiria. O tratamento instituído consistiu em antivirais de ação direta contra o HCV, hidroxicloroquina e flebotomias regulares. O tipo de porfiria em questão é:",
+    "options": {
+      "A": "porfiria aguda intermitente;",
+      "B": "protoporfiria eritropoiética;",
+      "C": "porfiria cutânea tardia;",
+      "D": "porfiria variegata;",
+      "E": "protoporfiria ligada ao X."
+    },
+    "answer": "C",
+    "area": "Hematologia",
+    "assunto": "Porfirias",
+    "topico": "Classificação das porfirias",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-016",
+    "number": 16,
+    "stem": "Durante a tragédia das enchentes no estado do Rio Grande do Sul em 2024, ocorreram vários casos de leptospirose que acometeram principalmente voluntários que atuaram no resgate da população atingida. A insuficiência renal causada pela doença tem como lesão histopatológica:",
+    "options": {
+      "A": "nefrite tubulointersticial;",
+      "B": "necrose tubular aguda;",
+      "C": "glomerulonefrite membranosa;",
+      "D": "glomerulonefrite rapidamente progressiva;",
+      "E": "glomeruloesclerose focal e segmentar."
+    },
+    "answer": "A",
+    "area": "Infectologia",
+    "assunto": "Síndromes febris",
+    "topico": "Leptospirose",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
     "id": "enare-2024-017",
     "number": 17,
     "stem": "Um paciente de 45 anos, sem doenças prévias, desenvolveu enfermidade de instalação súbita e progressiva com quadro de náuseas, vômitos, diarreia e dor abdominal. Logo após, queixou-se de cefaleia, vertigem e tontura. Foi internado na emergência, onde foi iniciada hidratação venosa e administração de sintomáticos. Entretanto, 3 horas depois começou a apresentar visão turva, ptose palpebral, diplopia, disfagia, disartria, boca seca e fraqueza muscular simétrica, acometendo com maior intensidade os membros superiores, sem perda da sensibilidade. Notaram-se hipotensão sem taquicardia e retenção urinária. Cerca de 6 horas após a internação, evoluiu para paralisia flácida motora descendente, associada a comprometimento autonômico disseminado. Durante todo esse período, o paciente se manteve consciente. A fraqueza muscular descendente afetou os músculos do tronco e dos membros, levando a dispneia, insuficiência respiratória e tetraplegia flácida. Foi necessária a transferência do paciente para o CTI, com instalação de tubo orotraqueal e ventilação mecânica, além de rotinas terapêuticas para pacientes graves.\nO diagnóstico mais provável é:",
@@ -220,7 +388,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": "sofosbuvir/velpastavir por 12 semanas;",
       "E": "sofosbuvir/ribavirina por 24 semanas."
     },
-    "answer": "A",
+    "answer": "C",
     "area": "Infectologia",
     "assunto": "Outras doenças infecciosas",
     "topico": "Doença de Chagas",
@@ -336,6 +504,221 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "examName": "ENARE-2024"
   },
   {
+    "id": "enare-2024-025",
+    "number": 25,
+    "stem": "Um paciente de 48 anos apresenta-se no pronto-socorro com dor abdominal intensa e intermitente há 18 horas, com náuseas e vômitos. Ele relata não ter evacuado ou eliminado gases nas últimas 48 horas. Sua história patológica pregressa inclui uma apendicectomia realizada há 20 anos e uma cirurgia para correção de hérnia inguinoescrotal há 5 anos. O exame físico mostrou o paciente lúcido e apirético; sinais vitais: PA 125/80 mmHg, FC 90 bpm, FR 20 ipm, T 36,8 °C. O abdômen está distendido. Peristalse de luta apresenta ruídos metálicos e hipercinéticos. Sente dor à palpação difusa, porém sem sinais de defesa e com ausência de hérnias palpáveis. Os exames laboratoriais registram hemograma com leucócitos de 8.000/mm³ e eletrólitos dentro dos limites normais. Os exames de imagem revelam rotina de abdômen agudo, mostrando distensão de alças intestinais com níveis hidroaéreos, e sem evidências de tumorações. Diante desse quadro clínico, a etapa inicial mais apropriada para o manejo do caso é:",
+    "options": {
+      "A": "colonoscopia urgente;",
+      "B": "administração de laxantes e observação;",
+      "C": "cirurgia imediata para exploração abdominal;",
+      "D": "alta com orientação para retorno no caso de persistirem os sintomas;",
+      "E": "administração intravenosa de líquidos, descompressão nasogástrica e observação."
+    },
+    "answer": "E",
+    "area": "Cirurgia Geral",
+    "assunto": "Urgências Abdominais",
+    "topico": "Abdome Agudo Obstrutivo",
+    "subtopico": "Obstrução Intestinal Mecânica",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-026",
+    "number": 26,
+    "stem": "Um homem de 55 anos sofreu queda de uma altura de aproximadamente dois metros enquanto trabalhava em uma obra. Ele caiu diretamente sobre o braço direito estendido. No pronto-socorro, apresentava dor intensa, incapacidade de mover o braço direito e deformidade visível no meio do braço. As radiografias mostraram uma fratura diafisária do úmero com desvio. O exame neurovascular estava normal. O tratamento mais apropriado para esse paciente é:",
+    "options": {
+      "A": "fixação externa;",
+      "B": "redução aberta e fixação interna;",
+      "C": "imobilização com uma tipoia e observação;",
+      "D": "redução fechada e imobilização com gesso;",
+      "E": "administração de analgésicos e alta para casa."
+    },
+    "answer": "B",
+    "area": "Ortopedia",
+    "assunto": "Trauma Ortopédico",
+    "topico": "Fraturas e Luxações",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-027",
+    "number": 27,
+    "stem": "Após um traumatismo torácico contuso, um paciente apresenta sinais de tamponamento cardíaco, incluindo hipotensão, taquicardia, aumento da turgência jugular e pulso fino. Aconduta clínico-cirúrgica mais apropriada para esse pacienteé:",
+    "options": {
+      "A": "realização de pericardiocentese emergencial;",
+      "B": "ultrassonografia e punção aspirativa por agulha fina;",
+      "C": "administração de fluidos intravenosos e monitoramento contínuo;",
+      "D": "realização de toracotomia de emergência para drenagem do pericárdio;",
+      "E": "inserção de um tubo torácico para drenagem do espaço pleural esquerdo."
+    },
+    "answer": "D",
+    "area": "Cirurgia Geral",
+    "assunto": "Trauma",
+    "topico": " Avaliação Inicial: Vias aéreas, Ventilação e Choque",
+    "subtopico": "Trauma Torácico",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-028",
+    "number": 28,
+    "stem": "Um paciente de 58 anos foi submetido a uma gastrectomia subtotal devido a um adenocarcinoma gástrico. Após a cirurgia, ele desenvolveu episódios frequentes de sudorese, palpitações, tonturas e diarreia após as refeições. Essa complicação pós-operatória está relacionada:",
+    "options": {
+      "A": "ao desenvolvimento de diabetes mellitus tipo 2;",
+      "B": "a uma trombose venosa profunda;",
+      "C": "à síndrome de dumping;",
+      "D": "ao aumento da densidade óssea;",
+      "E": "à presença de úlcera alcalina."
+    },
+    "answer": "C",
+    "area": "Gastroenterologia",
+    "assunto": "Neoplasias do Sistema Digestivo",
+    "topico": "Neoplasias do Estômago",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-029",
+    "number": 29,
+    "stem": "Uma paciente jovem, sem histórico familiar de câncer colorretal, apresenta sintomas como alterações no hábito intestinal, pequeno sangramento retal, dor abdominal, perda de peso inexplicada e palpação abdominal dolorosa no quadrante inferior direito. A hipótese diagnóstica mais provável é:",
+    "options": {
+      "A": "síndrome do intestino irritável;",
+      "B": "doença de Crohn;",
+      "C": "retocolite ulcerativa;",
+      "D": "polipose adenomatosa familiar;",
+      "E": "síndrome de Gardner. Residência Médica FGV Conhecimento Acesso Direto  Tipo 1 – ADAceDirT01 – Página 9"
+    },
+    "answer": "B",
+    "area": "Gastroenterologia",
+    "assunto": "Intestinos",
+    "topico": "Doença Inflamatória Intestinal",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-030",
+    "number": 30,
+    "stem": "Um homem de 26 anos, atlético, em boas condições físicas, se apresenta ao pronto-socorro com dor abdominal intensa no quadrante inferior direito, que começou há 3 dias e piorou progressivamente. Ele relata náuseas, vômitos e febre. Ao exame físico, está taquicárdico, febril (38,5 °C), com defesa muscular e dor à descompressão brusca no quadrante inferior direito. A palpação abdominal revela sinais de irritação peritoneal. Os exames laboratoriais mostram leucocitose com desvio à esquerda. Uma tomografia computadorizada de abdômen revela apêndice distendido com parede espessada, líquido livre na cavidade abdominal e sinais de abscesso periapendicular. O diagnóstico mais provável e a abordagem mais adequada para esse paciente são, respectivamente:",
+    "options": {
+      "A": "apendicite não complicada; apendicectomia laparoscópica com recomposição hidroeletrolítica e antibioticoterapia;",
+      "B": "apendicite perfurada com peritonite; apendicectomia aberta, drenagem do abscesso e antibioticoterapia;",
+      "C": "apendicite retrocecal; observação e antibioticoterapia;",
+      "D": "gastroenterite viral; hidratação oral e observação;",
+      "E": "doença inflamatória intestinal; corticosteroides e observação."
+    },
+    "answer": "B",
+    "area": "Cirurgia Geral",
+    "assunto": "Urgências Abdominais",
+    "topico": "Abdome Agudo Inflamatório",
+    "subtopico": "Apendicite Aguda",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-031",
+    "number": 31,
+    "stem": "Uma paciente de 22 anos apresentou quadro de dor pélvica súbita há cerca de 2 horas. Ao exame, constata-se que está hipocorada ++/4, com PA = 90 x 40 mmHg e FC = 118 bpm. Seu abdômen está atípico com dor à palpação difusa, mais acentuada em fossa ilíaca direita, com descompressão dolorosa. O diagnóstico mais provável é:",
+    "options": {
+      "A": "apendicite aguda;",
+      "B": "cisto ovariano direito roto;",
+      "C": "gravidez tubária rota;",
+      "D": "mittelschmerz;",
+      "E": "torção de ovário direito."
+    },
+    "answer": "C",
+    "area": "Obstetrícia",
+    "assunto": "Intercorrências obstétricas /obstetrícia patológica",
+    "topico": "Sangramento primeira metade ",
+    "subtopico": "Gestação ectópica",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-032",
+    "number": 32,
+    "stem": "Uma paciente de 23 anos realizou ultrassonografia abdominal de rotina, na qual foi observado nódulo sólido de 4 cm de diâmetro no fígado. Foi realizada tomografia abdominal com contraste venoso trifásico, que mostrou lesão hipercaptante, bem circunscrita, com cicatriz central localizada em segmento VII do fígado. Dentre os diagnósticos abaixo, o mais provável é:",
+    "options": {
+      "A": "adenoma hepático;",
+      "B": "hepatocarcinoma;",
+      "C": "hemangioma hepático;",
+      "D": "hiperplasia nodular focal;",
+      "E": "colangiocarcinoma periférico."
+    },
+    "answer": "D",
+    "area": "Hepatologia",
+    "assunto": "Tumores Hepáticos",
+    "topico": "Tumores Hepáticos Benignos",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-033",
+    "number": 33,
+    "stem": "Uma paciente de 24 anos chega ao consultório relatando dor anal intensa há 4 dias. Ao exame, constata-se nódulo violáceo perianal de 1 cm, localizado posterior à direita, distal à linha denteada e muito doloroso ao toque. Dentre as condutas abaixo, a mais apropriada é:",
+    "options": {
+      "A": "analgésicos tópico e oral, e banho de assento;",
+      "B": "excisão do trombo com anestesia local;",
+      "C": "ligadura elástica;",
+      "D": "escleroterapia com fenol;",
+      "E": "hemorroidectomia de urgência."
+    },
+    "answer": "A",
+    "area": "Cirurgia Geral",
+    "assunto": "Proctologia",
+    "topico": "Doenças Orificiais",
+    "subtopico": "Doença Hemorroidária",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
+    "id": "enare-2024-034",
+    "number": 34,
+    "stem": "O escore BISAP tem sido amplamente utilizado na avaliação prognóstica da pancreatite aguda. Dentre os critérios abaixo, o único que NÃO faz parte desse escore é:",
+    "options": {
+      "A": "presença de derrame pleural;",
+      "B": "glicemia maior que 200 mg/dL;",
+      "C": "ureia nitrogenada sérica maior que 25 mg/dL;",
+      "D": "idade maior que 60 anos;",
+      "E": "alteração do estado mental."
+    },
+    "answer": "B",
+    "area": "Gastroenterologia",
+    "assunto": "Pâncreas",
+    "topico": "Pancreatites",
+    "annulled": false,
+    "images": [],
+    "source": "ENARE 2024",
+    "examId": "enare-2024",
+    "examName": "ENARE-2024"
+  },
+  {
     "id": "enare-2024-041",
     "number": 41,
     "stem": "Uma adolescente de 12 anos apresenta pelos espessos e esparsos em genitália e mamas/mamilos aumentados, sem contorno definido.\nÉ correto afirmar que:\n(A) a adolescente tem o desenvolvimento puberal adequado para a sua idade;\n(B) a adolescente tem o desenvolvimento puberal atrasado para a sua idade;\n(C) o diagnóstico de pubarca precoce deve ser investigado;\n(D) o diagnóstico de telarca precoce deve ser investigado;\n(E) os dados apresentados não permitem avaliação do desenvolvimento puberal.",
@@ -346,7 +729,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": "o diagnóstico de telarca precoce deve ser investigado",
       "E": "os dados apresentados não permitem avaliação do desenvolvimento puberal."
     },
-    "answer": "A",
+    "answer": "E",
     "area": "Pediatria",
     "assunto": "Endocrinologia pediátrica",
     "topico": "Desordens do Desenvolvimento Sexual (DDS)",
@@ -367,11 +750,11 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": "ser realizada após a alta hospitalar",
       "E": "ser realizada durante a internação, sem vacinas com vírus vivos."
     },
-    "answer": "D",
+    "answer": null,
     "area": "Pediatria",
     "assunto": "Puericultura",
     "topico": "Imunizações/Vacinação",
-    "annulled": false,
+    "annulled": true,
     "images": [],
     "source": "ENARE 2024",
     "examId": "enare-2024",
@@ -404,7 +787,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "stem": "Os pais de um escolar em tratamento de rinite alérgica com corticoide nasal procuraram o posto de saúde para aplicação da vacina HPV (papilomavírus humano).\nEm vista do quadro apresentado, o agente do posto de saúde deverá:\n(A) orientar os pais a vacinarem a criança após o término do tratamento;\n(B) suspender a medicação por 7 dias após a vacinação;\n(C) vacinar a criança com as orientações habituais;\n(D) vacinar a criança com a dose dobrada da vacina;\n(E) vacinar a criança, advertindo quanto à possibilidade de reações vacinais mais intensas.",
     "options": {
       "A": "orientar os pais a vacinarem a criança após o término do tratamento",
-      "B": "suspender a medicação por 7 dias a partir da vacinação",
+      "B": "suspender a medicação por 7 dias após a vacinação",
       "C": "vacinar a criança com as orientações habituais",
       "D": "vacinar a criança com a dose dobrada da vacina",
       "E": "vacinar a criança, advertindo quanto à possibilidade de reações vacinais mais intensas."
@@ -422,11 +805,11 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "enare-2024-045",
     "number": 45,
-    "stem": "Dentre as situações a seguir, aquela em que o recém-nascido tem dois critérios para icterícia patológica é:\n(A) RN a termo, icterícia desde 37 horas de vida, bilirrubina total = 4 mg/dl, bilirrubina indireta = 3,1 mg/dl;\n(B) RN prematuro, 6º dia de vida, bilirrubina total = 3 mg/dl, bilirrubina indireta = 2,2 mg/dl;\n(C) RN a termo, icterícia nas primeiras 12 horas de vida, bilirrubina total = 2 mg/dl, bilirrubina indireta = 0,8 mg/dl;\n(D) RN prematuro, 39 horas de vida, bilirrubina total = 8 mg/dl, aumento de bilirrubina em seis horas = 0,1 mg/dl/hora;\n(E) RN prematuro, grupo sanguíneo/RH: RN = O+ e mãe =A+, ictérico no 12º dia de vida.",
+    "stem": "Dentre as situações a seguir, aquela em que o recém-nascido tem dois critérios para icterícia patológica é:\n(A) RN a termo, icterícia desde 37 horas de vida, bilirrubina total = 4 mg/dl, bilirrubina indireta = 3,1 mg/dl;\n(B) RN prematuro, 6º dia de vida, bilirrubina total = 3 mg/dl, bilirrubina indireta = 2,2 mg/dl;\n(C) RN a termo, icterícia desde 12 horas de vida, bilirrubina total = 2 mg/dl, bilirrubina indireta = 0,8 mg/dl;\n(D) RN prematuro, 39 horas de vida, bilirrubina total = 8 mg/dl, aumento de bilirrubina em seis horas = 0,1 mg/dl/hora;\n(E) RN prematuro, grupo sanguíneo/RH: RN = O+ e mãe =A+, ictérico no 12º dia de vida.",
     "options": {
       "A": "RN a termo, icterícia desde 37 horas de vida, bilirrubina total = 4 mg/dl, bilirrubina indireta = 3,1 mg/dl",
       "B": "RN prematuro, 6º dia de vida, bilirrubina total = 3 mg/dl, bilirrubina indireta = 2,2 mg/dl",
-      "C": "RN a termo, icterícia nas primeiras 12 horas de vida, bilirrubina total = 2 mg/dl, bilirrubina indireta = 0,8 mg/dl",
+      "C": "RN a termo, icterícia desde 12 horas de vida, bilirrubina total = 2 mg/dl, bilirrubina indireta = 0,8 mg/dl",
       "D": "RN prematuro, 39 horas de vida, bilirrubina total = 8 mg/dl, aumento de bilirrubina em seis horas = 0,1 mg/dl/hora",
       "E": "RN prematuro, grupo sanguíneo/RH: RN = O+ e mãe =A+, ictérico no 12º dia de vida."
     },
@@ -532,7 +915,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "B": "quinolona;",
       "C": "tetraciclina;",
       "D": "beta-lactâmico;",
-      "E": "macrolídeos."
+      "E": "macrolídeo."
     },
     "answer": "E",
     "area": "Infectologia",
@@ -555,7 +938,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": " solicitar teste de oximetria de pulso;",
       "E": "considerar o achado como funcional, sem necessidade de encaminhamento."
     },
-    "answer": "E",
+    "answer": "B",
     "area": "Pediatria",
     "assunto": "Cardiologia Pediátrica",
     "topico": "Cardiopediatria e Cardiopatias congênitas",
@@ -610,7 +993,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "enare-2024-062",
     "number": 62,
-    "stem": "Uma paciente de 18 anos chega à emergência do hospital referindo ter sido vítima de violência sexual há 2 horas em uma festa. Refere que, no ato, houve penetração. Ela desconhece o agressor, o qual não usou preservativo.\nA abordagem inicial deve incluir:",
+    "stem": "Uma paciente de 18 anos chega à emergência do hospital referindo ter sido vítima de violência sexual há 2 horas em uma festa. Relata que, no ato, houve penetração. Ela desconhece o agressor, o qual não usou preservativo.\nA abordagem inicial deve incluir:",
     "options": {
       "A": "atendimento inicial exclusivo por médico;",
       "B": "encaminhamento da paciente primeiramente ao instituto médico legal;",
@@ -744,7 +1127,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "D": "puberdade precoce central;",
       "E": "puberdade precoce periférica."
     },
-    "answer": "A",
+    "answer": "D",
     "area": "Ginecologia",
     "assunto": "Ginecologia endócrina",
     "topico": "Sangramento uterino anormal",
@@ -757,13 +1140,13 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "enare-2024-069",
     "number": 69,
-    "stem": "Uma mulher de 23 anos, sexualmente ativa, utilizando contracepção com pílula hormonal combinada, refere surgimento de lesões ulceradas, dolorosas em face interna de grande lábio esquerdo, há 3 dias. Precedendo o surgimento das lesões, refere que a região acometida apresentou um aumento de sensibilidade. Além disso, relata ter apresentado quadro de faringite há 1 semana. Ao exame físico, identifica-se a vulva trófica, sem distopias aparentes, apresentando 5 lesões ulceradas, com menos de 0,5 cm cada, coalescendo, dolorosas ao toque. Há presença de micropolilinfadenopatia inguinal bilateral, indolor.\nConsiderando a principal hipótese diagnóstica, a opção adequada de tratamento para a paciente é:\n(A) aciclovir 400 mg, três vezes ao dia, por 7 a 14 dias;\n(B) ceftriaxona 1g, IV ou IM, uma vez ao dia, por 8 a 10 dias;\n(C) doxiciclina 100 mg, VO, duas vezes ao dia, por 10 a 15 dias;\n(D) prednisona, 20 mg, VO, uma vez ao dia, até remissão da úlcera;\n(E) penicilina G benzatina, 2,4 milhões UI, IM, dose única (1,2 milhão UI em cada glúteo).",
+    "stem": "Uma mulher de 23 anos, sexualmente ativa, utilizando contracepção com pílula hormonal combinada, refere surgimento de lesões ulceradas, dolorosas em face interna de grande lábio esquerdo, há 3 dias. Precedendo o surgimento das lesões, refere que a região acometida apresentou um aumento de sensibilidade. Além disso, relata ter apresentado quadro de faringite há 1 semana. Ao exame, identifica-se a vulva trófica, sem distopias aparentes, apresentando 5 lesões ulceradas, com menos de 0,5 cm cada, coalescendo, dolorosas ao toque. Há presença de micropolilinfadenopatia inguinal bilateral, indolor.\nConsiderando a principal hipótese diagnóstica, a opção adequada de tratamento para a paciente é:\n(A) aciclovir 400 mg, três vezes ao dia, por 7 a 14 dias;\n(B) ceftriaxona 1g, IV ou IM, uma vez ao dia, por 8 a 10 dias;\n(C) doxiciclina 100 mg, VO, duas vezes ao dia, por 10 a 15 dias;\n(D) prednisona, 20 mg, VO, uma vez ao dia, até remissão da úlcera;\n(E) penicilina G benzatina, 2,4 milhões UI, IM, dose única (1,2 milhão UI em cada glúteo).",
     "options": {
       "A": "aciclovir 400 mg, três vezes ao dia, por 7 a 14 dias;",
       "B": "ceftriaxona 1g, IV ou IM, uma vez ao dia, por 8 a 10 dias;",
       "C": "doxiciclina 100 mg, VO, duas vezes ao dia, por 10 a 15 dias;",
       "D": "prednisona, 20 mg, VO, uma vez ao dia, até remissão da úlcera;",
-      "E": "penicilina G benzária, 2,4 milhões UI, IM, dose única (1,2 milhão UI em cada glúteo)."
+      "E": "penicilina G benzatina, 2,4 milhões UI, IM, dose única (1,2 milhão UI em cada glúteo)."
     },
     "answer": "A",
     "area": "Ginecologia",
