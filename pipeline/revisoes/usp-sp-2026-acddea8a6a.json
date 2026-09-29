@@ -1,0 +1,12 @@
+{
+  "data": "2026-09-29T00:29:02.370Z",
+  "autor": "gemini",
+  "revisor": "validador",
+  "lote": "usp_batch3.json",
+  "examId": "usp-sp-2026",
+  "itens": 24,
+  "reprovados": 2,
+  "porCategoria": {
+    "duplicata": 2
+  }
+}
