@@ -193,41 +193,54 @@ async function run() {
     }
 
     console.log('\nImportando...');
-    const CHUNK = 25;
+    const CHUNK = 25; // usado só na remoção de órfãs, mais abaixo
     const validIds = new Set(questions.map(q => q.id));
-    for (let i = 0; i < questions.length; i += CHUNK) {
-        const chunk = questions.slice(i, i + CHUNK);
-        await runChunk(p => chunk.map(q => p.question.upsert({
-            where: { id: q.id },
-            create: q,
-            update: q
-        })), 'questões');
-        process.stdout.write(`\r  questões: ${Math.min(i + CHUNK, questions.length)}/${questions.length}`);
+
+    // Upsert em lote: cada lote vai como UM parâmetro JSON e o Postgres
+    // expande com jsonb_to_recordset — uma ida e volta por lote em vez de
+    // uma por linha. Com upsert linha a linha o import levava >1h a partir
+    // do runner do GitHub (latência até o banco); em lote leva segundos.
+    // Ids únicos por lote são garantidos (buildImportPlan aborta em colisão;
+    // alternativa é única por questão+letra; explicação é 1 por questão).
+    async function bulk(rows, size, label, buildOp) {
+        for (let i = 0; i < rows.length; i += size) {
+            const json = JSON.stringify(rows.slice(i, i + size));
+            await runChunk(p => [buildOp(p, json)], label);
+            process.stdout.write(`\r  ${label}: ${Math.min(i + size, rows.length)}/${rows.length}`);
+        }
+        console.log();
     }
-    console.log();
+
+    await bulk(questions, 500, 'questões', (p, json) => p.$executeRaw`
+        INSERT INTO "Question" ("id","bank","area","subarea","stem","answer","annulled","needsVisualReview",
+            "questionType","examId","examName","source","sourceCode","number","images","rodizio","topico","tema","semestre","updatedAt")
+        SELECT x.id, x.bank::"QuestionBank", x.area, x.subarea, x.stem, x.answer, x.annulled, x."needsVisualReview",
+            x."questionType", x."examId", x."examName", x.source, x."sourceCode", x.number,
+            ARRAY(SELECT jsonb_array_elements_text(x.images)), x.rodizio, x.topico, x.tema, x.semestre, now()
+        FROM jsonb_to_recordset(${json}::jsonb) AS x(id text, bank text, area text, subarea text, stem text, answer text,
+            annulled boolean, "needsVisualReview" boolean, "questionType" text, "examId" text, "examName" text,
+            source text, "sourceCode" text, number int, images jsonb, rodizio text, topico text, tema text, semestre text)
+        ON CONFLICT ("id") DO UPDATE SET
+            "bank"=EXCLUDED."bank", "area"=EXCLUDED."area", "subarea"=EXCLUDED."subarea", "stem"=EXCLUDED."stem",
+            "answer"=EXCLUDED."answer", "annulled"=EXCLUDED."annulled", "needsVisualReview"=EXCLUDED."needsVisualReview",
+            "questionType"=EXCLUDED."questionType", "examId"=EXCLUDED."examId", "examName"=EXCLUDED."examName",
+            "source"=EXCLUDED."source", "sourceCode"=EXCLUDED."sourceCode", "number"=EXCLUDED."number",
+            "images"=EXCLUDED."images", "rodizio"=EXCLUDED."rodizio", "topico"=EXCLUDED."topico",
+            "tema"=EXCLUDED."tema", "semestre"=EXCLUDED."semestre", "updatedAt"=now()`);
 
     const allOptions = questions.flatMap(q => optionsByQuestionId.get(q.id).map(opt => ({ questionId: q.id, ...opt })));
-    for (let i = 0; i < allOptions.length; i += CHUNK) {
-        const chunk = allOptions.slice(i, i + CHUNK);
-        await runChunk(p => chunk.map(opt => p.questionOption.upsert({
-            where: { questionId_letter: { questionId: opt.questionId, letter: opt.letter } },
-            create: opt,
-            update: { text: opt.text }
-        })), 'alternativas');
-        process.stdout.write(`\r  alternativas: ${Math.min(i + CHUNK, allOptions.length)}/${allOptions.length}`);
-    }
-    console.log();
+    await bulk(allOptions, 2000, 'alternativas', (p, json) => p.$executeRaw`
+        INSERT INTO "QuestionOption" ("id","questionId","letter","text")
+        SELECT gen_random_uuid()::text, x."questionId", x.letter, x.text
+        FROM jsonb_to_recordset(${json}::jsonb) AS x("questionId" text, letter text, text text)
+        ON CONFLICT ("questionId","letter") DO UPDATE SET "text"=EXCLUDED."text"`);
 
     const safeExplanations = explanations.filter(ex => validIds.has(ex.questionId));
-    for (let i = 0; i < safeExplanations.length; i += CHUNK) {
-        const chunk = safeExplanations.slice(i, i + CHUNK);
-        await runChunk(p => chunk.map(ex => p.questionExplanation.upsert({
-            where: { questionId: ex.questionId },
-            create: ex,
-            update: { body: ex.body }
-        })), 'explicações');
-        process.stdout.write(`\r  explicações: ${Math.min(i + CHUNK, safeExplanations.length)}/${safeExplanations.length}`);
-    }
+    await bulk(safeExplanations, 500, 'explicações', (p, json) => p.$executeRaw`
+        INSERT INTO "QuestionExplanation" ("questionId","body","updatedAt")
+        SELECT x."questionId", x.body, now()
+        FROM jsonb_to_recordset(${json}::jsonb) AS x("questionId" text, body text)
+        ON CONFLICT ("questionId") DO UPDATE SET "body"=EXCLUDED."body", "updatedAt"=now()`);
     console.log('\nImportação concluída.');
 
     // Questões que existiam numa importação anterior mas saíram dos
