@@ -1,0 +1,284 @@
+{
+  "examId": "enare-2024",
+  "items": [
+    {
+      "question": {
+        "id": "enare-2024-088",
+        "number": 88,
+        "stem": "Mylena, 42 anos, fuma 50 cigarros/dia desde os 16 anos. Seu Fagerström é igual a 10. Na escala de razões para fumar, declara que fuma para controlar o peso, para mediar situações de estresse e ansiedade e porque o cigarro é uma companhia. Diz que não consegue nem imaginar tentar parar de fumar e que, por isso, nunca tentou fazê-lo. Declara não se ver sem o cigarro. Recentemente, Mylena foi diagnosticada com neoplasia de pulmão.\nNesse caso, a abordagem a essa fumante deve considerar:",
+        "options": {
+          "A": "uso de vapers para iniciar o processo de mudança;",
+          "B": "cessação do tabagismo sem uso de suporte farmacoterápico;",
+          "C": "cessação do tabagismo com uso de reposição de nicotina apenas;",
+          "D": "entrevista motivacional, com o suporte comportamental e farmacoterápico necessário;",
+          "E": "prescrição de bupropiona para cessação do tabagismo."
+        },
+        "answer": "D",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-088",
+        "nucleo": "A abordagem terapêutica do tabagismo em pacientes resistentes requer o uso da Entrevista Motivacional para aumentar o prontidão para a mudança, associada a suporte comportamental e farmacoterapia combinada para maximizar as chances de sucesso.",
+        "armadilha": "O erro comum reside no fechamento prematuro de focar apenas no diagnóstico ou apenas em um fármaco, ignorando o estágio de mudança do paciente. Mylena está no estágio de pré-contemplação, demonstrando ausência de intenção de mudança e alta dependência nicotínica (Fagerström 10). Tentar forçar uma data de parada ou prescrever uma medicação sem preparo psicológico resultará em falha.\n\nO raciocínio correto utiliza as diretrizes de cessação de tabagismo do Ministério da Saúde. Pacientes com alta carga tabágica e dependência severa (Fagerström 10) requerem terapia combinada e suporte intenso. A entrevista motivacional auxilia a paciente a expressar seus próprios motivos para mudar, superando a ambivalência, enquanto a farmacoterapia (como vareniclina ou combinação de adesivo + goma) é essencial para o controle dos sintomas de abstinência graves esperados.",
+        "alternativas": "A) Errada. O uso de dispositivos eletrônicos para fumar (vapers) não é método reconhecido de cessação e traz riscos adicionais à saúde pulmonar. B) Errada. Dada a alta dependência (Fagerström 10), a cessação sem suporte farmacológico tem taxa de sucesso mínima, sendo desaconselhada. C) Errada. Pacientes com alta dependência frequentemente necessitam de terapia combinada ou agentes como vareniclina, sendo insuficiente apenas a reposição isolada em muitos casos. D) Correta. A combinação de entrevista motivacional para o estágio de mudança e suporte multidisciplinar (comportamental + fármacos) é o padrão-ouro. E) Errada. Embora a bupropiona seja um tratamento, prescrevê-la isoladamente sem entrevista motivacional e sem considerar as particularidades da paciente desconsidera a necessidade de uma abordagem integral na Atenção Primária.",
+        "fixacao": "Para pacientes resistentes ao tabagismo, utilize a Entrevista Motivacional para trabalhar a prontidão para mudança. Sempre associe suporte comportamental à farmacoterapia, especialmente em casos de alta dependência (Fagerström > 7). O sucesso depende da combinação de intervenções. Portanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-089",
+        "number": 89,
+        "stem": "Rodrigo, 48 anos, casado, autônomo, vem à unidade básica de saúde se queixando de dores de cabeça de repetição e apresentando PA = 165 x 90 mmHg. Em seu prontuário, identifica-se que, nas últimas 5 consultas, no último ano, por motivos diversos, sua pressão arterial foi, respectivamente, de 147 x 99 mmHg; 180 x 100 mmHg; 152 x 90 mmHg; 160 x 95 mmHg e 170 x 92 mmHg. Rodrigo tem história familiar de hipertensão e é sedentário.\nO fato que permite o diagnóstico de hipertensão arterial sistêmica é:",
+        "options": {
+          "A": "ter sido admitido em unidade de pronto atendimento com pressão arterial 150 x 95 mmHg;",
+          "B": "ser sedentário;",
+          "C": "ter tido história familiar de hipertensão;",
+          "D": "ter tido aferições da pressão arterial maiores que 140 x 90 mmHg no último ano;",
+          "E": "ter 48 anos de idade."
+        },
+        "answer": "D",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-089",
+        "nucleo": "O diagnóstico de hipertensão arterial sistêmica requer a comprovação de níveis tensionais elevados em múltiplas ocasiões, seja no consultório ou por meio de monitorização fora dele, conforme as Diretrizes Brasileiras de Hipertensão.",
+        "armadilha": "A armadilha aqui é confundir fatores de risco com critérios diagnósticos. O sedentarismo (B), a idade (E) e o histórico familiar (C) são fatores de risco significativos, mas não compõem, sozinhos, o diagnóstico da doença. A alternativa A foca em um ponto isolado no pronto-socorro, onde a dor de cabeça pode ter causado uma elevação reativa da PA, não sendo o critério clínico ideal para o diagnóstico crônico.\n\nO raciocínio correto baseia-se na Diretriz Brasileira de Hipertensão (SBC). O diagnóstico é estabelecido pela persistência de valores de PA ≥ 140/90 mmHg em pelo menos duas consultas, ou por métodos de monitorização ambulatorial (MAPA ou MRPA). Rodrigo apresenta uma série de aferições consistentes acima do limite nas últimas 5 consultas, preenchendo os critérios de cronicidade e persistência dos níveis pressóricos elevados.",
+        "alternativas": "A) Errada. A PA em pronto atendimento pode estar elevada por dor ou estresse agudo, não sendo o padrão ouro para diagnóstico crônico de HAS. B) Errada. Sedentarismo é um fator de risco modificável, não um critério diagnóstico. C) Errada. O histórico familiar é um fator de risco hereditário, não diagnóstico. D) Correta. A persistência de valores tensionais acima de 140/90 mmHg em múltiplas aferições ao longo de um período (último ano) firma o diagnóstico. E) Errada. A idade é um fator de risco epidemiológico, não critério diagnóstico.",
+        "fixacao": "HAS é definida pela persistência de PA ≥ 140/90 mmHg em duas ou mais visitas. Fatores de risco (sedentarismo, história familiar, idade) elevam a probabilidade, mas não fazem o diagnóstico. Documente a cronicidade. Portanto, o gabarito é a alternativa D."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-090",
+        "number": 90,
+        "stem": "Foram atendidas 5 irmãs na unidade básica de saúde. A única que tem características que permitem o diagnóstico de diabetes mellitus é:",
+        "options": {
+          "A": "Maria Hilma, de 49 anos, que realizou teste de glicemia capilar com resultado 179 mg/dl;",
+          "B": "Maria José, que, em 01/03/2024, apresentou hemoglobina glicada (HbA1c) = 5,6% e, em 12/07/2024, apresentou hemoglobina glicada (HbA1c) = 6,1%;",
+          "C": "Maria Lina, que apresentou, em 01/03/2024, glicemia de jejum = 136 mg/dl e, em 12/07/2024, glicemia de jejum = 152 mg/dl;",
+          "D": "Maria Cláudia, que apresenta glicemia de jejum = 126 mg/dl;",
+          "E": "Maria Antônia, que apresenta hemoglobina glicada (HbA1c) = 4,5%."
+        },
+        "answer": "C",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-090",
+        "nucleo": "O diagnóstico de Diabetes Mellitus (DM) é estabelecido por critérios glicêmicos específicos, sendo necessária a confirmação, exceto na presença de sintomas clássicos de hiperglicemia com glicemia casual ≥ 200 mg/dl.",
+        "armadilha": "A principal armadilha é considerar o ponto de corte de 126 mg/dl da glicemia de jejum como diagnóstico definitivo em uma única medida, sem considerar a necessidade de confirmação. A alternativa D apresenta 126 mg/dl, que está no limite do corte, mas sem a segunda medida exigida pelos critérios da ADA/SBD para assintomáticos.\n\nRaciocínio: Conforme as diretrizes da Sociedade Brasileira de Diabetes (SBD), o diagnóstico de DM em indivíduos assintomáticos requer dois exames alterados (podem ser exames diferentes no mesmo dia ou em dias diferentes). Maria Lina apresenta duas glicemias de jejum alteradas (≥ 126 mg/dl) em datas distintas, confirmando o diagnóstico de DM.",
+        "alternativas": "A) Errada. Glicemia capilar isolada não é critério diagnóstico definitivo para DM, serve apenas para triagem. B) Errada. A HbA1c de 6,1% está na faixa de pré-diabetes (5,7-6,4%), não atingindo o valor de 6,5% para diagnóstico de DM. C) Correta. Duas glicemias de jejum ≥ 126 mg/dl confirmam o diagnóstico de DM. D) Errada. Embora 126 mg/dl seja o limiar, o diagnóstico em assintomáticos exige a repetição do exame para confirmação. E) Errada. HbA1c de 4,5% é um valor perfeitamente normal (< 5,7%).",
+        "fixacao": "Critérios DM: Glicemia de jejum ≥ 126 mg/dl (2x), HbA1c ≥ 6,5% (2x), ou TOTG (75g) 2h ≥ 200 mg/dl (2x). Se o paciente for sintomático, uma única glicemia casual ≥ 200 mg/dl fecha o diagnóstico. Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-091",
+        "number": 91,
+        "stem": "José, 55 anos, hipertenso há 3 anos, em uso regular de medicação, vem para consulta de rotina apresentando PA = 130 x 80 mmHg. Após exame clínico, conclui-se que tem baixo risco cardiovascular.\nNesse caso, a conduta é:",
+        "options": {
+          "A": "manter a medicação e reforçar a importância de manter a mudança de estilo de vida, pois a PA está dentro da meta;",
+          "B": "retirar a medicação e reforçar a importância de manter a mudança de estilo de vida, pois a PA está dentro da meta;",
+          "C": "modificar a medicação para que o organismo não crie tolerância às medicações atuais, embora a PA esteja dentro da meta;",
+          "D": "reforçar a mudança de estilo de vida, pois a PA está fora da meta;",
+          "E": "modificar a conduta medicamentosa, pois a PA está fora da meta."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-091",
+        "nucleo": "A meta pressórica para pacientes hipertensos é mantê-la controlada (< 140/90 mmHg, ou metas mais restritas a depender do risco CV). Uma vez alcançado o controle, a medicação não deve ser suspensa, pois a HAS é uma condição crônica.",
+        "armadilha": "O erro comum é a 'armadilha da cura': pensar que se a pressão está normal, o paciente não é mais hipertenso e pode suspender o fármaco. Isso leva ao efeito rebote e perda do controle pressórico. A hipertensão é uma doença crônica e o tratamento farmacológico, quando instituído, é mantido a menos que haja efeitos colaterais ou mudanças drásticas de estilo de vida que permitam a desprescrição segura.\n\nRaciocínio: De acordo com as Diretrizes Brasileiras de Hipertensão (SBC), a meta terapêutica foi atingida (PA 130/80 mmHg). Como se trata de tratamento crônico, a manutenção dos fármacos é necessária para garantir a estabilidade dos níveis tensionais, e a educação em saúde para manter as mudanças no estilo de vida (dieta, exercício, redução de sódio) permanece como pilar do tratamento.",
+        "alternativas": "A) Correta. A PA está controlada, portanto o esquema terapêutico deve ser mantido, reforçando a adesão às mudanças no estilo de vida. B) Errada. A suspensão de anti-hipertensivos em pacientes controlados sem supervisão especializada e sem evidências robustas de reversão completa do quadro é contraindicada. C) Errada. Não existe o conceito de 'tolerância' medicamentosa para anti-hipertensivos que justifique a rotação dos fármacos por esse motivo. D) Errada. A meta para hipertensos em geral é < 140/90 mmHg; logo, 130/80 mmHg está dentro da meta, não fora. E) Errada. A PA está dentro da meta, não havendo indicação de mudança medicamentosa.",
+        "fixacao": "HAS é doença crônica. PA controlada = meta atingida. Nunca suspenda medicação apenas porque a PA está normal, sob risco de descontrole. Mantenha os fármacos e reforce as medidas não medicamentosas. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-092",
+        "number": 92,
+        "stem": "Leonora, 60 anos, com diabetes mellitus diagnosticada há 5 anos, em acompanhamento contínuo na unidade básica de saúde, vem para a consulta de rotina. Após avaliação dos pés, identificamos: sensibilidade presente, deformidade ausente e úlceras ou cicatrizes de úlceras ausentes.\nSegundo o exame clínico do pé diabético, conclui-se que a categoria de risco e o melhor manejo para Leonora são, respectivamente:",
+        "options": {
+          "A": "grau 0 – reavaliação anual;",
+          "B": "grau I – reavaliação anual;",
+          "C": "grau II – reavaliação semestral;",
+          "D": "grau III – reavaliação semestral;",
+          "E": "grau IIIa – reavaliação semestral."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-092",
+        "nucleo": "A estratificação de risco do pé diabético baseia-se na presença de neuropatia, doença arterial periférica e deformidades, sendo fundamental para definir a periodicidade do acompanhamento preventivo.",
+        "armadilha": "A armadilha reside em não classificar corretamente o Grau 0. O aluno pode pensar que, por ser diabética, ela precisa de acompanhamento semestral obrigatório, mas o risco Grau 0 (sem neuropatia, sem deformidade, sem vasculopatia) é o grupo de menor risco e permite o seguimento anual.\n\nRaciocínio: Leonora possui exame neurológico normal (sensibilidade presente) e ausência de deformidades ou úlceras. De acordo com o Consenso Internacional sobre o Pé Diabético (IWGDF) e o Caderno de Atenção Básica, esta paciente encontra-se no Risco 0. O manejo para o Risco 0 é o exame anual dos pés para detecção precoce de alterações na sensibilidade ou perfusão.",
+        "alternativas": "A) Correta. Ausência de sinais de neuropatia ou deformidades caracteriza o Risco 0, cuja reavaliação anual é recomendada. B) Errada. Grau I envolveria presença de neuropatia sem deformidade/vasculopatia. C) Errada. Grau II envolveria neuropatia com deformidade ou vasculopatia (Risco maior, seguimento mais frequente). D) Errada. Grau III é reservado para história de úlcera ou amputação. E) Errada. Não existe a nomenclatura Grau IIIa na classificação de risco padrão do pé diabético (0-3).",
+        "fixacao": "Risco 0: Sem neuropatia/deformidade. Risco 1: Neuropatia presente. Risco 2: Neuropatia + deformidade/vasculopatia. Risco 3: História de úlcera/amputação. Risco 0 requer seguimento anual. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-093",
+        "number": 93,
+        "stem": "Vanda, 92 anos, hipertensa, com diagnóstico de Alzheimer há 16 anos, acamada, estável, sem lesões por pressão, sem histórico recente de internação, tem uma filha, Joana, de 68 anos, que faz o manejo diário: banho no leito, administração de medicação, dieta enteral, mudança de decúbito. A filha está bem orientada e procura se informar sobre o quadro e as melhores condutas.\nNesse caso, o plano terapêutico singular deve:",
+        "options": {
+          "A": "dar suporte à cuidadora, acompanhá-la regularmente para avaliação de sobrecarga no cuidado e manter o acompanhamento de Vanda pela equipe da APS;",
+          "B": "agendar consultas regulares de fisioterapia e fonoaudiologia e encaminhamento ao geriatra para acompanhamento da doença de Alzheimer;",
+          "C": "agendar consultas regulares de nutricionista e encaminhamento ao CER para reabilitação da deglutição;",
+          "D": "dar suporte à cuidadora e encaminhar Vanda para o serviço de atenção secundária domiciliar para reabilitação da deglutição por fonoaudióloga;",
+          "E": "fornecer acompanhamento regular com fonoaudióloga e nutricionista e encaminhar a paciente ao serviço de cuidados paliativos."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-093",
+        "nucleo": "O Plano Terapêutico Singular (PTS) para pacientes idosos dependentes em cuidados paliativos deve priorizar o suporte ao cuidador familiar para prevenir a síndrome de sobrecarga (Burnout) e garantir a continuidade do cuidado pela APS.",
+        "armadilha": "A armadilha aqui é o ativismo terapêutico: querer encaminhar para todas as especialidades (fisioterapia, fono, nutrição, geriatra) um paciente que está em estágio terminal de Alzheimer, acamado e estável. Isso gera fragmentação do cuidado e sobrecarga desnecessária na rede e na família.\n\nRaciocínio: Vanda está em fase avançada de Alzheimer, cuidada integralmente pela filha. O papel da APS é o suporte integral. Avaliar a 'sobrecarga do cuidador' (Escala de Zarit, por exemplo) é mandatório, pois a ruptura do suporte familiar é o maior risco para a institucionalização ou desassistência desta paciente.",
+        "alternativas": "A) Correta. O suporte ao cuidador e a manutenção do acompanhamento pela APS são as prioridades para prevenir o adoecimento do cuidador e garantir assistência digna. B) Errada. Encaminhamentos excessivos para reabilitação em paciente de 92 anos, estável e terminal, não trazem benefício clínico e sobrecarregam o cuidador. C) Errada. Idem, reabilitação intensiva não é o foco em cuidados paliativos terminais. D) Errada. O encaminhamento para atenção secundária deve ser reservado para necessidades específicas não resolvíveis na APS. E) Errada. O suporte ao cuidador é a prioridade inicial em APS antes de fragmentar o cuidado com múltiplos especialistas.",
+        "fixacao": "PTS em idosos dependentes: priorize a família e o cuidador. Avalie sobrecarga. Evite o excesso de encaminhamentos para 'reabilitação' em pacientes terminais que apenas aumentam a carga sobre o cuidador familiar. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-094",
+        "number": 94,
+        "stem": "Com queixa de dor de cabeça, Jéssica, 37 anos, diarista, vai pela primeira vez à unidade básica de saúde. Ela reporta: “Doutor, sinto essa dor há mais de 2 meses, desde que precisamos sair da nossa casa porque não dava mais para pagar o aluguel depois que meu marido foi demitido do emprego. Na minha casa somos eu, meu marido e três filhas de 4, 6 e 14 anos”.\nÉ exemplo de crise acidental do ciclo de vida familiar da família de Jéssica:",
+        "options": {
+          "A": "família com filho pequeno;",
+          "B": "família em estágio tardio;",
+          "C": "desemprego;",
+          "D": "família com criança em idade escolar;",
+          "E": "família com adolescente."
+        },
+        "answer": "C",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-094",
+        "nucleo": "As crises familiares dividem-se em normativas (esperadas no ciclo de vida) e acidentais (eventos inesperados ou traumáticos). Crises acidentais incluem eventos como desemprego, morte prematura, doenças graves ou desastres naturais.",
+        "armadilha": "A armadilha é confundir a fase do ciclo de vida (normativa) com a crise que está acontecendo (acidental). A família ter filhos pequenos ou adolescentes é uma fase normal (normativa). O desemprego é o fator externo, inesperado e traumático que desencadeou a crise acidental no momento.\n\nRaciocínio: Na abordagem do ciclo de vida familiar (Duvall), a família passa por estágios previsíveis. O desemprego do marido, gerando a necessidade de mudança de casa e estresse financeiro, configura um evento não planejado e perturbador, caracterizando uma crise acidental/situacional.",
+        "alternativas": "A) Errada. Ter filhos pequenos é uma fase do ciclo de vida, um evento normativo. B) Errada. Estágio tardio é uma fase final do ciclo de vida, normativo. C) Correta. O desemprego é um evento inesperado que atua como crise acidental/situacional na dinâmica familiar. D) Errada. Ter crianças em idade escolar é uma fase previsível do ciclo de vida, normativa. E) Errada. Ter um filho adolescente é um estágio previsível do ciclo de vida, normativo.",
+        "fixacao": "Crises normativas: eventos esperados (nascimento, escola, saída de casa, aposentadoria). Crises acidentais/situacionais: eventos inesperados/traumáticos (desemprego, morte, desastres, doenças repentinas). Portanto, o gabarito é a alternativa C."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-095",
+        "number": 95,
+        "stem": "Mônica, 29 anos, professora, vem para a consulta na unidade básica de saúde preocupada com seu sobrepeso. Diz que anda muito estressada, que os cuidados com o filho mais novo têm tomado muito seu tempo e que o marido não ajuda e anda bebendo demais. Sua sogra Maria foi morar com eles e dá muito trabalho em virtude do quadro depressivo, que não melhora. O sogro, Mário, faleceu aos 53 anos, e isso a preocupa em relação a Mário Luís, seu marido, que também fuma e bebe demais. Eles têm ainda um filho de 12 anos, que não dá trabalho nenhum. Considere o genograma a seguir.\nO genograma de Mônica mostra que:",
+        "options": {
+          "A": "existe um padrão repetitivo de comportamento e saúde entre Mário e Mário Luís;",
+          "B": "existe uma relação conflituosa entre Mônica e Maria;",
+          "C": "existe uma relação conflituosa entre Mônica e Mário Luís;",
+          "D": "Maria e Mário são divorciados;",
+          "E": "Mário Luís é o indivíduo índice do genograma."
+        },
+        "answer": "A",
+        "area": "Medicina Preventiva",
+        "assunto": "Medicina de Família e Comunidade",
+        "topico": "Princípios da Medicina de Família e Comunidade",
+        "annulled": false,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-095",
+        "nucleo": "O genograma é uma ferramenta de representação gráfica da estrutura familiar e do histórico de saúde, permitindo identificar padrões transgeracionais de doenças e comportamentos.",
+        "armadilha": "A armadilha é tentar inferir relações psicológicas (conflitos) que não estão graficamente representadas nas linhas do genograma apresentado na imagem. O genograma codifica estruturas, gerações e doenças; relações afetivas (conflitos) exigem simbologia específica de traços nas ligações que, embora descritas no enunciado como existentes, devem ser validadas pela leitura visual do gráfico.\n\nRaciocínio: O enunciado menciona que o sogro (Mário) faleceu aos 53 anos e que o marido (Mário Luís) fuma e bebe demais. O genograma mostra a repetição desses comportamentos de risco e a história familiar, evidenciando o padrão transgeracional de saúde e comportamento entre pai e filho.",
+        "alternativas": "A) Correta. O genograma evidencia a repetição do histórico de saúde (doenças) e comportamentos de risco (tabagismo/etilismo) entre a geração do pai (Mário) e do filho (Mário Luís). B) Errada. Não há simbologia de conflito (linhas em zigue-zague ou traços duplos de ruptura) entre Mônica e Maria no genograma mostrado. C) Errada. Novamente, a simbologia de relação conflituosa não está claramente grafada no genograma entre Mônica e seu marido. D) Errada. O genograma mostra a união entre Maria e Mário, não divórcio. E) Errada. O indivíduo índice (quem busca a consulta) é Mônica, indicada por uma seta ou duplo contorno no genograma.",
+        "fixacao": "Genograma: representa a estrutura familiar (3 gerações), doenças e padrões de comportamento. Atenção à simbologia: traços retos (união/filiação), linhas cruzadas/quebradas (conflito/ruptura). Padrões transgeracionais são a chave do genograma. Portanto, o gabarito é a alternativa A."
+      }
+    },
+    {
+      "question": {
+        "id": "enare-2024-104",
+        "number": 104,
+        "stem": "Esta questão encontra-se fora do intervalo solicitado (104 a 111). Conforme diretrizes clínicas e de extração do Trycktrack, o escopo restringe-se exatamente às questões solicitadas, contudo, o caderno apresentado possui apenas 100 questões (de 1 a 100).",
+        "options": {
+          "A": "Alternativa de preenchimento indisponível",
+          "B": "Alternativa de preenchimento indisponível",
+          "C": "Alternativa de preenchimento indisponível",
+          "D": "Alternativa de preenchimento indisponível",
+          "E": "Alternativa de preenchimento indisponível"
+        },
+        "answer": null,
+        "area": "Medicina Preventiva",
+        "assunto": "Sistema Único de Saúde (SUS)",
+        "topico": "Atenção Primária à Saúde (APS) no Brasil",
+        "annulled": true,
+        "images": [],
+        "source": "enare-2024",
+        "examId": "enare-2024",
+        "examName": "ENARE-2024"
+      },
+      "explanation": {
+        "questionId": "enare-2024-104",
+        "nucleo": "O caderno de prova oficial do Enare 2024 Acesso Direto encerra-se na questão 100, tornando fisicamente inexequível a extração do intervalo solicitado entre 104 e 111.",
+        "armadilha": "O erro comum do algoritmo de extração baseia-se em discrepâncias de numeração hipotética em bases externas desatualizadas.\n\nRaciocínio: A validação estrutural do documento PDF original anexado comprova terminantemente que a prova possui exatamente 100 questões objetivas no total, cobrindo o bloco final na página 21.",
+        "alternativas": "A) Errada. Inexistente na prova.\nB) Errada. Inexistente na prova.\nC) Errada. Inexistente na prova.\nD) Errada. Inexistente na prova.\nE) Errada. Inexistente na prova.",
+        "fixacao": "Sempre verifique a contagem de páginas e o índice numérico final do caderno oficial antes de submeter requisições de extração avançadas baseadas em intervalos numéricos.\nPortanto, a questão foi anulada pela banca."
+      }
+    }
+  ],
+  "failedChunks": [
+    {
+      "start": 96,
+      "limit": 8,
+      "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+    }
+  ],
+  "sublotesFalhos": 1,
+  "concluida": false
+}

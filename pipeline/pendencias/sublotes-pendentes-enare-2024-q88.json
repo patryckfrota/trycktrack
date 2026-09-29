@@ -1,0 +1,7 @@
+[
+  {
+    "start": 96,
+    "limit": 8,
+    "error": "Extração não pôde ser validada pelo Zod após 5 tentativas."
+  }
+]
