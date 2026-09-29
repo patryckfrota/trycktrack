@@ -51,6 +51,13 @@ jobs:
       - if: steps.motor.outputs.ok == 'true'
         run: npm ci --no-audit --no-fund
 
+      # pdftotext (poppler-utils): o portão confere enunciado e alternativas
+      # contra o PDF da prova (pipeline/fidelidade.cjs). Sem ele a checagem
+      # é pulada em silêncio.
+      - name: Instalar poppler-utils
+        if: steps.motor.outputs.ok == 'true'
+        run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+
       - name: Rodada do dia
         if: steps.motor.outputs.ok == 'true'
         env:
