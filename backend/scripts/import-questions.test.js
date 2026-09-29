@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { toQuestionRecord, toOptionRecords, buildImportPlan } from './import-questions.js';
+import { toQuestionRecord, toOptionRecords, buildImportPlan, separarOrfas } from './import-questions.js';
 
 test('toQuestionRecord: campos ausentes viram null, não undefined (Prisma exige um ou outro)', () => {
     const record = toQuestionRecord({ id: 'q1', stem: 'x', options: { A: 'a' } }, 'PRINCIPAL');
@@ -38,4 +38,10 @@ test('buildImportPlan: usa os bancos estáticos reais e não gera IDs duplicados
     assert.equal(ids.size, questions.length);
     assert.ok(explanations.length > 0);
     assert.ok(optionsByQuestionId.size === questions.length);
+});
+
+test('separarOrfas: órfã com progresso de usuário é retida, sem progresso é removível', () => {
+    const { removiveis, retidas } = separarOrfas(['a', 'b', 'c'], new Set(['b']));
+    assert.deepEqual(removiveis, ['a', 'c']);
+    assert.deepEqual(retidas, ['b']);
 });

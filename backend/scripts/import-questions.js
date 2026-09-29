@@ -93,6 +93,13 @@ function toOptionRecords(q) {
     return Object.entries(q.options || {}).map(([letter, text]) => ({ letter, text: String(text) }));
 }
 
+function separarOrfas(candidatos, comProgresso) {
+    return {
+        removiveis: candidatos.filter(id => !comProgresso.has(id)),
+        retidas: candidatos.filter(id => comProgresso.has(id))
+    };
+}
+
 function buildImportPlan() {
     const questions = [
         ...principalBank.map(q => toQuestionRecord(q, 'PRINCIPAL')),
@@ -257,7 +264,18 @@ async function run() {
     // Remoção de órfãs apenas quando for sincronismo global total (sem filtros)
     if (!targetIds && !targetExam) {
         const idsNoBanco = (await prisma.question.findMany({ select: { id: true } })).map(r => r.id);
-        const orfaos = idsNoBanco.filter(id => !validIds.has(id));
+        const candidatos = idsNoBanco.filter(id => !validIds.has(id));
+        // Apagar a questão apaga por cascata as respostas e revisões dos
+        // usuários. Órfã com progresso fica no banco e é avisada; quem
+        // fundiu duplicatas precisa remapear o progresso antes de remover.
+        const comProgresso = new Set([
+            ...(await prisma.questionResponse.findMany({ where: { questionId: { in: candidatos } }, select: { questionId: true }, distinct: ['questionId'] })).map(r => r.questionId),
+            ...(await prisma.userQuestionReview.findMany({ where: { questionId: { in: candidatos } }, select: { questionId: true }, distinct: ['questionId'] })).map(r => r.questionId)
+        ]);
+        const { removiveis: orfaos, retidas } = separarOrfas(candidatos, comProgresso);
+        if (retidas.length) {
+            console.log(`\nATENÇÃO: ${retidas.length} questões órfãs mantidas porque têm progresso de usuário (remapeie antes de remover): ${retidas.join(', ')}`);
+        }
         if (orfaos.length) {
             console.log(`\nRemovendo ${orfaos.length} questões órfãs (não existem mais nos arquivos estáticos)...`);
             for (let i = 0; i < orfaos.length; i += CHUNK) {
@@ -287,4 +305,4 @@ if (isDirectRun) {
     });
 }
 
-export { buildImportPlan, toQuestionRecord, toOptionRecords };
+export { buildImportPlan, toQuestionRecord, toOptionRecords, separarOrfas };
