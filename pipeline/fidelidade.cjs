@@ -21,9 +21,14 @@ function textoDoPdf(examId) {
     let texto = null;
     try {
         const dir = path.join(ROOT, 'tmp', 'pdfs');
-        const arqs = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.startsWith(`${examId}-caderno`) && f.endsWith('.pdf')) : [];
-        if (arqs.length) {
-            texto = norm(arqs.map(f => ['-raw', '-layout'].map(m => cp.execFileSync('pdftotext', [m, path.join(dir, f), '-'], { maxBuffer: 1 << 28 }).toString()).join(' ')).join(' '));
+        const txtFile = path.join(dir, `${examId}-caderno.txt`);
+        if (fs.existsSync(txtFile)) {
+            texto = norm(fs.readFileSync(txtFile, 'utf-8'));
+        } else {
+            const arqs = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.startsWith(`${examId}-caderno`) && f.endsWith('.pdf')) : [];
+            if (arqs.length) {
+                texto = norm(arqs.map(f => ['-raw', '-layout'].map(m => cp.execFileSync('pdftotext', [m, path.join(dir, f), '-'], { maxBuffer: 1 << 28 }).toString()).join(' ')).join(' '));
+            }
         }
     } catch { texto = null; }
     cache.set(examId, texto);

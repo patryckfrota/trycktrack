@@ -4968,5 +4968,2483 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "source": "usp-sp-2025",
     "examId": "usp-sp-2025",
     "examName": "USP-SP 2025"
+  },
+  {
+    "id": "usp-sp-2024-001",
+    "number": 1,
+    "stem": "TEXTO PARA AS QUESTÕES 01 E 02\nPaciente de 2 meses, sexo masculino, em uso de fórmula láctea de partida, foi internado em leito de enfermaria há 24 horas. Na admissão, apresentava história de tosse e coriza há dois dias e desconforto respiratório há um dia. Ao exame clínico, neste momento, paciente segue com desconforto respiratório, apresenta ausculta respiratória com sibilos e estertores em bases bilateralmente, tiragem subdiafragmática leve/moderada, FR: 71 ipm, FC: 168 bpm, SpO2 94% em cateter nasal de oxigênio 2 L/min. Peso: 4 kg\nAs anotações nos controles de enfermagem, o exame de imagem realizado e a prescrição atual são demonstrados a seguir:\nTabela - Anotações dos controles de enfermagem.\nPrescrição atual:\n1. Dieta geral para a idade.\n2. Inalação com soro fisiológico 5 mL ACM.\n3. Cateter nasal 2 L/min.\n01\nAssinale a alternativa que apresenta a conduta indicada para esse paciente, neste momento.",
+    "options": {
+      "A": "Prescrever penicilina cristalina.",
+      "B": "Introduzir soro de manutenção.",
+      "C": "Iniciar salbutamol spray.",
+      "D": "Manter a prescrição atual."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Pneumologia Pediátrica",
+    "topico": "Bronquiolite",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q001-rx.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-002",
+    "number": 2,
+    "stem": "O lactente evoluiu algumas horas depois com piora do cansaço, apresentando tiragens importantes e batimento de asa nasal, com SpO2 de 90% em cateter nasal 2 L/min. Foi optado por escalonar suporte respiratório. Assinale a alternativa que contém o dispositivo mais adequado neste momento e o respectivo fluxo a ser utilizado inicialmente.",
+    "options": {
+      "A": "5 litros/minuto",
+      "B": "6 litros/minuto",
+      "C": "8 litros/minuto",
+      "D": "15 litros/minuto"
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Pneumologia Pediátrica",
+    "topico": "Bronquiolite",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q002-opcoes.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-003",
+    "number": 3,
+    "stem": "TEXTO PARA AS QUESTÕES 03 E 04\nPaciente do sexo feminino, 3 anos, é admitida no pronto-socorro com quadro de tosse e dificuldade para respirar há um dia, sem febre ou coriza associados. Apresenta histórico de ter apresentado três crises semelhantes nos últimos 06 meses, com necessidade de internação. Na triagem, apresentava-se taquidispneica, sendo levada à sala de emergência. Na avaliação sistematizada em sala de emergência, a paciente apresentava os seguintes dados de exame físico e monitorização:\nA: Via aérea pérvia.\nB: Murmúrio vesicular com sibilos difusos, tempo expiratório prolongado, FR: 45 ipm, tiragens subdiafragmática, intercostal e de fúrcula, SpO2 93% em máscara não reinalante.\nC: 2BRNF sem sopros, FC: 140 bpm, tempo de enchimento capilar de 2 segundos, pulsos cheios.\nD: Alerta e orientada.\nE: Lesões eritemato-crostosas em superfícies flexoras de pernas e braços.\n\nAlém de corticoide sistêmico, assinale o que a paciente deverá receber como medida inicial em sala de emergência.",
+    "options": {
+      "A": "Cateter nasal de alto fluxo e beta-2 agonista endovenoso.",
+      "B": "Beta-2 agonista e brometo de ipatrópio inalatórios.",
+      "C": "Beta-2 agonista endovenoso, seguido de intubação orotraqueal.",
+      "D": "Ventilação em BIPAP (Bilevel Positive Airway Pressure), seguida de beta-2 agonista inalatório."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Pneumologia Pediátrica",
+    "topico": "Asma",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-004",
+    "number": 4,
+    "stem": "Quanto ao uso profilático de corticoide inalatório no momento da alta hospitalar, é correto afirmar:",
+    "options": {
+      "A": "Não está indicado para essa paciente.",
+      "B": "Deve estar associado ao beta agonista de longa duração.",
+      "C": "Deve ser prescrito em dose baixa.",
+      "D": "Deve ser associado ao antileucotrieno."
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Pneumologia Pediátrica",
+    "topico": "Asma",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-005",
+    "number": 5,
+    "stem": "Paciente de 10 meses, sexo masculino, engasgou com amendoim ofertado pelo irmão mais velho. Foi prontamente levado ao hospital e apresenta muita tosse, estridor e pletora facial. Qual a prioridade neste momento?",
+    "options": {
+      "A": "Broncoscopia.",
+      "B": "Golpes nas costas alternados com compressão torácica.",
+      "C": "Manobra de Heimlich.",
+      "D": "Ventilações assistidas com bolsa-válvula-máscara."
+    },
+    "answer": "A",
+    "area": "Pediatria",
+    "assunto": "Emergências Pediátricas",
+    "topico": "Corpo Estranho/Engasgo",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-006",
+    "number": 6,
+    "stem": "Criança de 3 anos, sexo feminino, com encefalopatia crônica não progressiva por anoxia neonatal, está internada em leito de enfermaria, recebendo antibiótico parenteral para tratamento de pneumonia, evoluindo com melhora clínica, já em ar ambiente. Alimenta-se por gastrostomia, tem sialorreia, dor por espasticidade e luxação de quadril. Apresenta história pregressa de cinco internações por pneumonia, com duas passagens em terapia intensiva. Em visita multidisciplinar, foi considerado acionar a equipe de cuidados paliativos para dar seguimento aos cuidados da paciente. Com relação a essa proposta, é correto afirmar:",
+    "options": {
+      "A": "O acionamento deve ocorrer somente se os pais concordarem em abreviar a vida.",
+      "B": "A paciente é elegível ao seguimento conjunto com equipe de cuidados paliativos.",
+      "C": "Não é pertinente para esta doença de caráter não terminal, cuja sobrevida pode ser longa.",
+      "D": "O acionamento deve ocorrer se a equipe titular concordar em transferir os cuidados para a assistência paliativa."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Pneumologia Pediátrica",
+    "topico": "Pneumonias/Broncopneumonias (BCP) na Infância",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-007",
+    "number": 7,
+    "stem": "Lactente masculino com 2 meses e 10 dias de vida é levado para consulta na Unidade Básica de Saúde (UBS). Nasceu a termo, de parto vaginal, sem intercorrências no período perinatal, pesando 3.210 g e medindo 50 cm. Teste de triagem neonatal com padrão FA. A mãe realizou adequadamente as consultas pré-natais sem intercorrências. A mãe relata ter levado a criança a um serviço de pronto atendimento há sete dias, devido a um quadro de choro frequente, sempre no final da tarde, com duração de cerca de 2 horas desde o primeiro mês de vida. Na ocasião, indicou-se a coleta de hemograma, cujo resultado está apresentado a seguir:\n• Eritrócitos: 3.770.000/mm3\n• Hemoglobina: 9,8 g/dL\n• VCM: 77 fL\n• HCM: 27 pg\n• CHCM: 34 g/dL\n• RDW: 13,6%\n• Leucócitos: 9.230/mm3\n• Neutrófilos: 47%\n• Linfócitos: 38%\n• Monócitos: 12,5%\n• Eosinófilos: 2%\n• Basófilos: 0,5%\n• Plaquetas: 283.000/mm3\n\nApós avaliação adequada, refere que a criança teve alta do pronto atendimento com diagnóstico de cólica do lactente e orientação para seguimento com pediatra devido à identificação de um quadro de anemia. No momento da consulta na UBS, a criança está em aleitamento materno exclusivo, pesando 4.900 g e apresenta melhora das cólicas. Faz uso exclusivo de vitamina D 400 UI diariamente. Ao exame físico apresenta fígado palpável a 1 cm do rebordo costal direito e ponta de baço palpável, sem outros achados clínicos.\n\nQuanto às alterações identificadas no hemograma supracitado, nesta consulta o médico deverá",
+    "options": {
+      "A": "iniciar tratamento com ferro 4 mg/kg/dia.",
+      "B": "realizar eletroforese de hemoglobina.",
+      "C": "acompanhar clinicamente sem intervenções.",
+      "D": "solicitar ultrassonografia abdominal e pesquisa de sangue oculto."
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Hematologia Pediátrica",
+    "topico": "Anemia ferropriva na infância",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-008",
+    "number": 8,
+    "stem": "Paciente de 8 anos, portador de leucemia linfoide aguda (LLA) diagnosticado há 4 semanas, em fase de indução, realizou último ciclo de quimioterapia há 4 dias. É trazido ao pronto atendimento por apresentar febre de até 39 °C há um dia e odinofagia. Ao exame clínico apresenta bom estado geral, sinais vitais dentro da normalidade, cateter de longa permanência sem sinais flogísticos, apresenta hiperemia de orofaringe, sem placas de pus. Restante do exame clínico sem alterações. Assinale a conduta indicada para este paciente.",
+    "options": {
+      "A": "Alta com oseltamivir, sem necessidade de coletar exames.",
+      "B": "Alta com quinolona, após coleta de cultura de orofaringe.",
+      "C": "Internação com cefalosporina de 4ª geração, após coleta de culturas, hemograma e provas inflamatórias.",
+      "D": "Internação com cefalosporina de 3ª geração, se hemograma e/ou provas inflamatórias estiverem alteradas."
+    },
+    "answer": "C",
+    "area": "Infectologia",
+    "assunto": "Síndromes febris",
+    "topico": "Neutropenia febril",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-009",
+    "number": 9,
+    "stem": "Paciente de 5 anos, sexo masculino, sem antecedentes relevantes foi encontrado desacordado em casa pela avó e levado prontamente ao hospital. Ele estava aos cuidados do irmão de 16 anos, que aparentemente havia saído e deixado o menor assistindo à televisão. Até então, ele estava bem e assintomático. Ao exame em sala de emergência, o paciente apresentava via aérea pérvia, FR: 22 ipm, SpO2 96%, ausculta e expansibilidade pulmonar preservadas, FC: 140 bpm, PA: 130x80 mmHg, pulso e perfusão preservados, apresentando mucosas secas. Na avaliação neurológica alternava períodos de sonolência com agitação e pupilas midriáticas. Bexiga palpável próxima à região umbilical, temperatura de 37,9 °C. Exposição sem hematomas, face conforme imagem a seguir:\n\nAssinale qual é o mecanismo responsável pelo quadro clínico apresentado.",
+    "options": {
+      "A": "Estímulo agonista sobre os receptores opioides Delta, Kappa e Mu.",
+      "B": "Hipertensão intracraniana.",
+      "C": "Hemorragia cerebral frontal, interhemisférica e retiniana.",
+      "D": "Bloqueio dos receptores muscarínicos de acetilcolina."
+    },
+    "answer": "D",
+    "area": "Psiquiatria",
+    "assunto": "Intoxicações Exógenas",
+    "topico": "Síndrome Anticolinérgica",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q009-face.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-010",
+    "number": 10,
+    "stem": "Paciente feminina de 7 meses, com antecedente de hidrocefalia diagnosticada após o nascimento e portadora de derivação ventrículo peritoneal (DVP), foi trazida ao pronto atendimento por apresentar irritabilidade há uma semana, sonolência há 3 dias e piora dos escapes convulsivos há um dia. Faz uso contínuo de anticonvulsivantes e das vitaminas indicadas para a idade. Ao exame: FC: 85 bpm, FR: 20 ipm; PA: 116x70 mmHg. A seguir, imagens da paciente e dos exames realizados.\n\nAssinale a alternativa que descreve corretamente a interpretação clínica e dos exames de imagem apresentados pela paciente.",
+    "options": {
+      "A": "Trajeto adequado; tomografia e clínica compatível com mau funcionamento de DVP.",
+      "B": "Trajeto adequado; tomografia compatível com a doença de base; clínica sugestiva de intoxicação.",
+      "C": "Extremidade proximal da DVP mal posicionada na radiografia e na tomografia; clínica sugestiva de estado de mal convulsivo focal.",
+      "D": "Extremidade distal da DVP mal posicionada; tomografia compatível com a doença de base; clínica sugestiva de crises convulsivas deflagradas por dor."
+    },
+    "answer": "A",
+    "area": "Neurologia",
+    "assunto": "Traumatismo Craniencefálico",
+    "topico": "Hidrocefalia",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q010-dvp.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-011",
+    "number": 11,
+    "stem": "Paciente de 4 anos previamente hígido está passando em consulta de rotina pediátrica. Mãe refere que, há cerca de 2 semanas, ele apresentou um quadro de dor nos punhos e tornozelos, dor abdominal e \"caroços elevados\" pelo corpo. Ela o medicou com amoxicilina por conta própria e refere que, após cerca de uma semana, as lesões começaram a melhorar. Ao exame, está em BEG, corado, hidratado, FC: 92 bpm, FR: 20 ipm, PA: 82x50 mmHg. Restante do exame clínico sem alterações, exceto por lesões residuais em membros inferiores, conforme imagem a seguir.\n\nConsiderando a principal hipótese diagnóstica, assinale os exames que deverão ser realizados de forma seriada nos meses subsequentes.",
+    "options": {
+      "A": "Hemograma com contagem de plaquetas e coagulograma.",
+      "B": "Anticorpo antiestreptolisina O e ecocardiograma.",
+      "C": "Função renal e sedimento urinário.",
+      "D": "Frações C3 e C4 do complemento."
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Reumatologia Pediátrica",
+    "topico": "Púrpura de Henoch-Schöinlein/Vasculite por IgA",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q011-purpura.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-012",
+    "number": 12,
+    "stem": "TEXTO PARA AS QUESTÕES DE 12 E 13\nGestante, com 30 anos, primigesta, previamente hígida, realizou 06 consultas de pré-natal. No 3º trimestre foi observado polidrâmnio (ILA de 26 cm) em exame de ultrassonografia. Com 41 semanas de idade gestacional foi submetida a parto cesáreo, devido a falha de indução. Bolsa rota no ato, com líquido claro com grumos. Recém-nascido (RN) do sexo masculino, hipotônico e sem choro, imediatamente após a extração. Realizado o clampeamento imediato do cordão umbilical, foi levado ao berço aquecido, secado e estimulado, posicionado e foram aspiradas vias aéreas superiores. Apresentava-se, em seguida, com frequência cardíaca de 50 bpm e em apneia.\n\nCom base nas informações fornecidas, assinale o próximo procedimento a ser realizado.",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "answer": "A",
+    "area": "Pediatria",
+    "assunto": "Neonatologia",
+    "topico": "Reanimação neonatal",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q012-opcoes.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-013",
+    "number": 13,
+    "stem": "Após as medidas de reanimação neonatal e a estabilização em sala de parto, o RN foi encaminhado para o alojamento conjunto. Com 1 hora de vida, apresentou episódio de cianose central durante amamentação. RN foi reavaliado e, ao exame físico, foi observada taquipneia, com tiragem diafragmática, associada a importante sialorreia. Assinale quais procedimentos deverão ser realizados para confirmar a principal hipótese diagnóstica.",
+    "options": {
+      "A": "Intubação orotraqueal, seguida de raio X de tórax.",
+      "B": "Oximetria de pulso e ecocardiograma.",
+      "C": "Glicemia capilar e triagem neonatal para doenças metabólicas.",
+      "D": "Passagem de sonda orogástrica, seguida de raio-X de tórax e abdome."
+    },
+    "answer": "D",
+    "area": "Pediatria",
+    "assunto": "Neonatologia",
+    "topico": "Distúrbios respiratórios do período neonatal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-014",
+    "number": 14,
+    "stem": "Recém-nascido pré-termo, com idade gestacional de 25+2/7 semanas, nasceu de parto vaginal. Gestante apresentou diabetes melito gestacional manejada com orientações dietéticas, além de doença hipertensiva específica da gestação tratada com metildopa. Evoluiu com trabalho de parto prematuro. Feita administração de sulfato de magnésio e uma dose de corticoide antes do parto. RN nasceu hipotônico e sem choro, realizado clampeamento imediato do cordão umbilical e levado para o berço aquecido, realizada reanimação neonatal com necessidade de intubação orotraqueal, sendo encaminhado para Unidade de Terapia Intensiva (UTI) neonatal, após estabilização. Peso ao nascimento: 800 g. Apgar 3, 5 e 8, no primeiro, quinto e décimo minutos de vida, respectivamente. Na UTI foi mantido em ventilação mecânica, em jejum com sonda orogástrica aberta. Iniciada administração de soro glicosado a 10%, 56 mL e solução de aminoácidos 10%, 16 mL, intravenoso (IV), em 24 horas. Glicemia capilar (\"Dextro\") controle, uma hora após o início do soro, de 50 mg/dL. Com 15 horas de vida paciente apresentou tremores de membros. Realizado eletroencefalograma de amplitude integrada que confirmou tratar-se de convulsão. A investigação laboratorial revelou causa metabólica. Assinale o tratamento adequado para a provável causa metabólica do episódio citado.",
+    "options": {
+      "A": "Ringer lactato 16 mL via IV.",
+      "B": "Gluconato de cálcio 10%, 0,8 mL via IV.",
+      "C": "Aumento do soro glicosado 10% para 65 mL via IV nas 24 horas.",
+      "D": "Sulfato de magnésio 50% 0,1 mL via IM."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Neonatologia",
+    "topico": "Distúrbios metabólicos do período neonatal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-015",
+    "number": 15,
+    "stem": "Gestante com 20 anos, primigesta, realizou pré-natal com 8 consultas, sem comorbidades. No 1º trimestre apresentou teste rápido para sífilis reagente. Na Unidade Básica de Saúde (UBS) foi solicitado Venereal Disease Research Laboratory (VDRL) com título de 1/128, sendo prescrito tratamento com penicilina G benzatina 2.400.000 UI intramuscular, 3 doses, com intervalo de 1 semana, iniciadas em 22/04/23. Foram realizados controles de VDRL:\n• 20/05/23: VDRL 1/64\n• 29/07/23: VDRL 1/16\n• 05/10/23: VDRL 1/8\n\nRN nasceu em 10/12/23 com idade gestacional de 39 semanas. Na maternidade foi realizada investigação:\n• VDRL materno: 1/32\n• VDRL RN: 1/8\n\nForam solicitados exames complementares do RN, conforme imagens e informações a seguir:\n• RX de ossos longos: lesões osteocondrais inflamatórias (periostite/osteocondrite).\n• Hemograma completo: Hemoglobina 15 g/dL; hematócrito 40%; leucócitos 12.000/mm3; bastonetes 1%; segmentados 17%; linfócitos 65%; monócitos 15%; eosinófilos 2%; plaquetas 200.000/mm3.\n• Líquor: ligeiramente turvo e xantocrômico; células: 17/mm3; hemácias: 100/mm3; proteínas: 125 mg/dL; glicose: 45 mg/dL.\n• VDRL no líquor: não reagente.\n\nAssinale a conduta correta a ser proposta para o RN, com base nos resultados de exames.",
+    "options": {
+      "A": "Penicilina cristalina 50.000 Ul/kg/dose, intravenoso, durante 10 dias.",
+      "B": "Penicilina G benzatina 50.000 Ul/kg, intramuscular, dose única.",
+      "C": "Sem necessidade de antibioticoterapia, com controle de VDRL em 1 mês.",
+      "D": "Sem necessidade de antibioticoterapia, com controle de teste treponêmico (TPHA) em 1 mês."
+    },
+    "answer": "A",
+    "area": "Pediatria",
+    "assunto": "Neonatologia",
+    "topico": "Infecções congênitas",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q015-rx.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-016",
+    "number": 16,
+    "stem": "TEXTO PARA AS QUESTÕES 16 E 17\nPaciente de 05 anos com antecedente de encefalopatia crônica não progressiva, portador de traqueostomia e gastrostomia, apresenta quadro de diarreia há cinco dias, cerca de 10 episódios por dia. Nesse período, recebeu soro de reidratação caseiro, cerca de 200 mL, após episódios diarreicos. Foi trazido hoje ao departamento de emergência, devido sonolência e diminuição da diurese. Na admissão, paciente apresentava choque hipotensivo, sendo iniciada expansão com soro fisiológico. Após primeira expansão, a equipe que prestava o atendimento recebeu o resultado da gasometria, descrito a seguir:\npH: 7,25 | HCO3: 12 mmol/L | Base Excess: -5,0 mmol/L | Sódio: 160 mEq/L | Potássio: 3,3 mEq/L\n\n16\nNa reavaliação pós-primeira expansão, paciente segue em REG, pálido, frequência cardíaca 150 bpm, FR 40 ipm e PA 76x42 mmHg, TEC 6 s. Assinale a alternativa correta com relação à estratégia para hidratação do paciente.",
+    "options": {
+      "A": "Iniciar soro de reidratação oral por gastrostomia.",
+      "B": "Prosseguir expansão endovenosa com fluido isotônico.",
+      "C": "Prosseguir expansão endovenosa com soro glicosado 5%.",
+      "D": "Iniciar soro de manutenção + reposição com sódio 3 mEq/100 kcal."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Gastrologia Pediátrica",
+    "topico": "Diarreia Aguda",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-017",
+    "number": 17,
+    "stem": "Assinale a conduta a ser realizada para adequação do sódio, após estabilização hemodinâmica.",
+    "options": {
+      "A": "Recoleta do sódio sérico após 6 horas e verificar se houve queda de, no mínimo, 1 mEq/hora. Sem reposição até resultados.",
+      "B": "Recoleta do sódio sérico após 6 horas e verificar se houve queda de, no máximo, 1 mEq/hora. Sem reposição até resultados.",
+      "C": "Recoleta imediata do sódio sérico, cálculo do déficit de água livre e reposição preferencialmente parenteral em até 24 horas.",
+      "D": "Recoleta imediata do sódio sérico, cálculo do déficit de água livre e reposição preferencialmente enteral em 48-72 horas."
+    },
+    "answer": "D",
+    "area": "Nefrologia",
+    "assunto": "Hipernatremia",
+    "topico": "Tratamento da Hipernatremia",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-018",
+    "number": 18,
+    "stem": "TEXTO PARA AS QUESTÕES 18 A 20\nPaciente de 2 anos, sexo feminino, sem antecedentes relevantes, apresenta quadro de febre de até 39,8°C, vômitos e prostração, há dois dias. Hoje estava sonolenta e apresentou episódio de crise convulsiva tônico-clônica generalizada com duração de cerca de 10 minutos, sendo levada ao pronto-socorro. Na triagem, paciente apresentou nova crise convulsiva, sendo levada à sala de emergência. Foi solicitado acesso venoso, cuja obtenção foi malsucedida.\n\nAssinale a droga e a via mais apropriada para controle da crise convulsiva neste momento.",
+    "options": {
+      "A": "Midazolam intramuscular.",
+      "B": "Diazepam intramuscular.",
+      "C": "Midazolam via intraóssea.",
+      "D": "Diazepam via intraóssea."
+    },
+    "answer": "A",
+    "area": "Pediatria",
+    "assunto": "Emergências Pediátricas",
+    "topico": "Convulsão febril",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-019",
+    "number": 19,
+    "stem": "Após administração de duas doses da medicação obteve-se controle da crise convulsiva e foi possível obter um acesso venoso periférico. Na avaliação sistematizada em sala de emergência, a paciente apresentava os seguintes dados de exame físico e monitorização:\n• Monitor: ECG bpm: 158 | SpO2: 97% | BP: 70/40 mmHg\n• A: Via aérea pérvia.\n• B: Murmúrio vesicular presente sem ruídos adventícios, boa expansibilidade, FR 43 ipm.\n• C: 2BRNF sem sopros, tempo de enchimento capilar 5 segundos, pulsos finos.\n• D: Sem resposta verbal e ocular, retira o membro ao estímulo doloroso. Pupilas isofotorreagentes. Glicemia capilar normal.\n• E: Nada digno de nota.\n\nAssinale a alternativa que apresenta a conduta correta nesse momento.",
+    "options": {
+      "A": "Reverter os efeitos centrais do benzodiazepínico com flumazenil.",
+      "B": "Proteger a via aérea com intubação orotraqueal, sem sedação prévia.",
+      "C": "Expandir com ringer lactato 20 mL/kg e prescrever antimicrobianos.",
+      "D": "Expandir com soro fisiológico 40-60 mL/kg, sem prescrever antimicrobianos."
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Emergências Pediátricas",
+    "topico": "Choque em Pediatria",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q019-monitor.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-020",
+    "number": 20,
+    "stem": "Com relação ao quadro neurológico apresentado pela paciente, pode-se afirmar:",
+    "options": {
+      "A": "Não requer investigação específica nessa idade, por ser decorrente de quadro febril.",
+      "B": "Requer investigação adicional com coleta de líquido cefalorraquidiano.",
+      "C": "Deve ser investigado ambulatoriamente com eletroencefalograma.",
+      "D": "Deve ser investigado apenas se recorrer em quadros infecciosos posteriores."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Emergências Pediátricas",
+    "topico": "Convulsão febril",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-021",
+    "number": 21,
+    "stem": "Lactente de 45 dias de vida, previamente hígida, está em consulta de rotina na UBS. Não apresenta queixas e está em aleitamento materno exclusivo. Recebeu BCG e Hepatite B ao nascimento. A mãe solicita ao médico prescrição de ibuprofeno, para que seja administrado horas antes da filha receber as vacinas dos 2 meses, com o objetivo de evitar febre. Quanto à solicitação de medicação para profilaxia de febre pré-administração das vacinas dos 2 meses, o médico deverá",
+    "options": {
+      "A": "prescrever dipirona profilática em substituição ao ibuprofeno.",
+      "B": "prescrever paracetamol profilático em substituição ao ibuprofeno.",
+      "C": "prescrever 1 gota/kg/dose de 6 em 6 horas.",
+      "D": "desencorajar o uso profilático de qualquer antitérmico antes da vacinação."
+    },
+    "answer": "D",
+    "area": "Pediatria",
+    "assunto": "Puericultura",
+    "topico": "Imunizações/Vacinação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-022",
+    "number": 22,
+    "stem": "TEXTO PARA AS QUESTÕES 22 A 24\nVitor e Bia são gemelares de 9 anos e 7 dias e estão em consulta médica de rotina, sem queixas e sem antecedentes mórbidos relevantes. Na consulta de 8 anos e 2 meses, Bia apresentava broto mamário bilateral com elevação da mama e da papila, acompanhado de alargamento da aréola. Na consulta atual, o médico nota maior alargamento bilateral da mama e aréola, sem separação de seu contorno. Sua altura é de 135 cm (Z-score entre 0 e +1). Vitor, semelhante à consulta anterior, apresenta volume testicular inferior a 4 mL, menor que 1 polpa digital (ou 2,5 cm); ausência de pilificação local. Sua altura é de 130 cm (Z-score entre 0 e -1).\n\n22\nAssinale a alternativa correta quanto à Bia.",
+    "options": {
+      "A": "Bia é M2 na Classificação Puberal de Tanner e pode apresentar a menarca a qualquer momento.",
+      "B": "Bia é M2 na Classificação Puberal de Tanner e sua velocidade de crescimento é cerca de 6 a 10,5 cm/ano.",
+      "C": "Bia é M3 na Classificação Puberal de Tanner e está no pico de seu estirão de crescimento.",
+      "D": "Bia é M3 na Classificação Puberal de Tanner e deve apresentar a menarca em cerca de 2 anos e meio."
+    },
+    "answer": "C",
+    "area": "Pediatria",
+    "assunto": "Puericultura",
+    "topico": "Puberdade",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-023",
+    "number": 23,
+    "stem": "Assinale a alternativa correta quanto ao Vitor.",
+    "options": {
+      "A": "Vitor é G0 P0 na Classificação Puberal de Tanner e, portanto, ainda não iniciou o estirão de crescimento.",
+      "B": "Vitor é G1 P1 na Classificação Puberal de Tanner e, portanto, ainda não iniciou a puberdade ou aumento na velocidade de crescimento.",
+      "C": "Vitor está atrasado quanto ao desenvolvimento puberal e, pela idade, já iniciou o estirão de crescimento.",
+      "D": "Vitor terá o início da puberdade marcado pelo aumento do pênis em comprimento, coincidindo com aumento na velocidade de crescimento."
+    },
+    "answer": "B",
+    "area": "Pediatria",
+    "assunto": "Puericultura",
+    "topico": "Puberdade",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-024",
+    "number": 24,
+    "stem": "Quanto à idade para indicação das vacinas meningocócica ACWY e HPV, segundo o Programa Nacional de Imunização do Ministério da Saúde, assinale a alternativa correta.",
+    "options": {
+      "A": "Bia e Vitor recebem aos 11 Meningocócica ACWY anos.",
+      "B": "Bia e Vitor recebem aos 11 Meningocócica ACWY anos.",
+      "C": "Bia e Vitor recebem neste Meningocócica ACWY momento.",
+      "D": "Bia e Vitor recebem neste Meningocócica ACWY momento."
+    },
+    "answer": "A",
+    "area": "Pediatria",
+    "assunto": "Puericultura",
+    "topico": "Imunizações/Vacinação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-025",
+    "number": 25,
+    "stem": "Mulher, 61 anos, refere alteração do hábito intestinal há 6 meses, com diarreia intercalada com constipação. Relata sangue nas fezes nesse período. Nega vômitos e perda de peso. Nega comorbidades. Ao exame físico, está em bom estado geral; IMC: 22 kg/m2; ausculta torácica sem alterações; abdome flácido, indolor à palpação, sem massas palpáveis; toque retal sem alterações. Apresenta Hb de 10,3 g/dL. Foi submetida à colonoscopia, que evidenciou lesão ulcerada no sigmoide, envolvendo 50% da luz do órgão, sem outras lesões até a válvula ileocecal. A biópsia do sigmoide revelou tratar-se de adenocarcinoma. Realizado estadiamento com a tomografia de abdome apresentada a seguir:\n\nAssinale a melhor conduta neste momento.",
+    "options": {
+      "A": "Retossigmoidectomia.",
+      "B": "Quimiorradioterapia.",
+      "C": "Colostomia em alça.",
+      "D": "Quimioterapia."
+    },
+    "answer": "D",
+    "area": "Gastroenterologia",
+    "assunto": "Neoplasias do Sistema Digestivo",
+    "topico": "Neoplasia dos Intestinos",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q025-tc.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-026",
+    "number": 26,
+    "stem": "Mulher, 69 anos, refere estar há 7 dias sem evacuar, dor em cólicas e aumento do volume abdominal. Nega vômitos. Refere ser constipada. O hábito intestinal habitual era de evacuações a cada 4 dias com uso de laxativos. No último ano, passou a necessitar de lavagens intestinais esporádicas. Tem diagnóstico de doença de Chagas com miocardiopatia e arritmia controlada com medicamentos. Ao exame físico encontra-se em bom estado geral, desidratada, FC de 80 bpm, PA de 120x80 mmHg; abdome: distensão importante, doloroso à palpação profunda sem irritação peritoneal; toque retal sem fezes. Exames laboratoriais: Hb: 11,7 g/dL; Ht: 35%; leucócitos: 9.419/mm3 sem desvio; PCR: 17 mg/L; creatinina: 1,1 mg/dL; ureia: 39 mg/dL. Tomografia apresentada a seguir:\n\nConsiderando-se a principal hipótese, assinale a melhor conduta neste momento.",
+    "options": {
+      "A": "Colonoscopia.",
+      "B": "Lavagem intestinal.",
+      "C": "Colectomia total com ileostomia.",
+      "D": "Colectomia esquerda com anastomose."
+    },
+    "answer": "A",
+    "area": "Cirurgia Geral",
+    "assunto": "Urgências Abdominais",
+    "topico": "Abdome Agudo Obstrutivo",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q026-tc.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-027",
+    "number": 27,
+    "stem": "Homem, 66 anos, refere prurido e icterícia há 15 dias. Nega perda de peso, vômitos e alterações do hábito intestinal. Tem diabetes melito em uso de hipoglicemiante oral e é tabagista (20 anos-maço). Ao exame físico encontra-se em bom estado geral, ictérico, FC: 70 bpm e PA: 120x70 mmHg; sem alterações cardiopulmonares, abdome flácido, com massa palpável e indolor no hipocôndrio direito.\n• Exames laboratoriais:\nHb: 12,1 g/dL | Ht: 35% | Bilirrubina total: 12 mg/dL | Bilirrubina direta: 10,9 mg/dL | FA: 327 U/L | GGT: 754 U/L | TGO/AST: 231 U/L | TGP/ALT: 197 U/L\n\nAssinale o local mais provável de neoplasia considerada na hipótese diagnóstica.",
+    "options": {
+      "A": "Junção dos ductos hepáticos.",
+      "B": "Periampular.",
+      "C": "Ducto hepático.",
+      "D": "Vesícula biliar."
+    },
+    "answer": "B",
+    "area": "Gastroenterologia",
+    "assunto": "Neoplasias do Sistema Digestivo",
+    "topico": "Neoplasias do Pâncreas",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-028",
+    "number": 28,
+    "stem": "Mulher, 65 anos, foi submetida a tomografia de abdome para avaliação de coluna. O exame revelou achado incidental de hérnia femoral direita com conteúdo de gordura pré-peritoneal. A paciente apresenta antecedente de hipertensão arterial crônica, diabetes melito e fibrilação atrial, com adequado controle clínico. Em virtude do achado de imagem, foi solicitada avaliação da equipe de cirurgia. Avaliação clínica: bom estado geral, IMC: 28 kg/m2; abdome globoso, flácido e indolor. Discreto abaulamento, indolor, abaixo da prega inguinal direita. Assinale qual é a conduta mais adequada relacionada à hérnia nessa paciente.",
+    "options": {
+      "A": "Seguimento clínico trimestral.",
+      "B": "Seguimento com ultrassom trimestral.",
+      "C": "Tratamento operatório se sintomática.",
+      "D": "Tratamento operatório independente de sintomas."
+    },
+    "answer": "D",
+    "area": "Cirurgia Geral",
+    "assunto": "Hérnias da Parede Abdominal",
+    "topico": "Hérnias Inguinocrurais",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-029",
+    "number": 29,
+    "stem": "Homem, 53 anos, é admitido no serviço de urgência com a lesão demonstrada na figura a seguir.\nFoi realizado desbridamento e antibioticoterapia conforme imagem apresentada a seguir.\nA partir da evolução apresentada, qual é a conduta mais adequada neste momento?",
+    "options": {
+      "A": "Retalho cutâneo.",
+      "B": "Enxerto de pele.",
+      "C": "Colostomia em alça.",
+      "D": "Oxigenoterapia hiperbárica."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Cirurgia Plástica",
+    "topico": "Infecções Necrotizantes",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q029-fournier.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-030",
+    "number": 30,
+    "stem": "Homem, 23 anos, vítima de ferimento por faca de cozinha em hemitórax direito, sétimo espaço intercostal, linha axilar anterior. Na sala de trauma encontra-se agitado, hipotenso (PA 80x45 mmHg) e com FC de 140 bpm. Realizado diagnóstico de hemitórax maciço e indicada toracotomia direita de emergência. O achado intraoperatório foi de lesão de artéria intercostal, resolvido através de ligadura primária, controle do sangramento e melhora dos parâmetros hemodinâmicos. A cavidade torácica foi adequadamente inspecionada e não foram identificadas outras alterações no seu interior. O cirurgião finaliza a abordagem cirúrgica torácica. Considerando a situação desse paciente e seu ferimento na região toracoabdominal, assinale qual a conduta mais adequada neste momento.",
+    "options": {
+      "A": "Realizar laparotomia exploradora.",
+      "B": "Realizar laparoscopia exploradora.",
+      "C": "Lesões abdominais podem ser descartadas.",
+      "D": "Encaminhar o paciente para tomografia de abdome."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Trauma",
+    "topico": "Trauma Abdominal e Pélvico",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-031",
+    "number": 31,
+    "stem": "Homem, 30 anos, foi vítima de ferimento por projétil de arma de fogo no pescoço. Admissão no Centro de Trauma:\nA: Conversando. Hálito etílico. SpO2: 96% com máscara de oxigênio.\nB: MV presente bilateralmente. Ausência de enfisema de subcutâneo torácico.\nC: PA: 140x70 mmHg; FC: 105 bpm; tempo de enchimento capilar de 1 segundo.\nD: Escala de coma de Glasgow de 15 (agitado).\nE: Ferimento na face lateral do pescoço (Zona II). Ausência de enfisema de subcutâneo, hematoma expansivo ou sangramento ativo.\n\nRealizada analgesia com melhora da dor e agitação. Assinale qual é a melhor conduta neste momento do atendimento.",
+    "options": {
+      "A": "Exploração local e sutura.",
+      "B": "Cervicotomia exploradora.",
+      "C": "Endoscopia e broncoscopia.",
+      "D": "Tomografia com contraste."
+    },
+    "answer": "D",
+    "area": "Cirurgia Geral",
+    "assunto": "Trauma",
+    "topico": "Trauma Cervical",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q031-pescoco.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-032",
+    "number": 32,
+    "stem": "Homem, 75 anos, foi admitido no Serviço de Emergência devido à obstrução intestinal. Realizada tomografia de abdome que evidenciou obstrução no nível do sigmoide, distensão do cólon e intestino delgado e múltiplos nódulos hepáticos compatíveis com lesões secundárias. Foi realizada retossigmoidectomia com colostomia terminal e sepultamento do coto retal. O procedimento durou 04 horas com necessidade de droga vasoativa. Assinale qual a justificativa adequada para não se realizar a anastomose primária.",
+    "options": {
+      "A": "Câncer obstrutivo.",
+      "B": "Instabilidade hemodinâmica.",
+      "C": "Ausência de preparo de cólon.",
+      "D": "Presença de metástase."
+    },
+    "answer": "B",
+    "area": "Cirurgia Geral",
+    "assunto": "Urgências Abdominais",
+    "topico": "Abdome Agudo Obstrutivo",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-033",
+    "number": 33,
+    "stem": "TEXTO PARA AS QUESTÕES 33 E 34\nHomem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\n33\nQual é a classificação de Gustilo-Anderson para a fratura exposta e qual a conduta na Sala de Trauma, respectivamente?",
+    "options": {
+      "A": "2 - Alinhamento e imobilização.",
+      "B": "2 - Limpeza da ferida com SF 0,9%, alinhamento e imobilização.",
+      "C": "3a - Alinhamento e imobilização.",
+      "D": "3a - Limpeza da ferida com SF 0,9%, alinhamento e imobilização."
+    },
+    "answer": "C",
+    "area": "Ortopedia",
+    "assunto": "Trauma Ortopédico",
+    "topico": "Fratura exposta",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q033-fratura.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-034",
+    "number": 34,
+    "stem": "Após o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir:\nAssinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
+    "options": {
+      "A": "Craniotomia; Laparotomia; Drenagem torácica.",
+      "B": "Craniotomia; Drenagem torácica; Laparotomia.",
+      "C": "Drenagem torácica; Craniotomia; Laparotomia.",
+      "D": "Drenagem torácica; Laparotomia; Craniotomia."
+    },
+    "answer": "A",
+    "area": "Cirurgia Geral",
+    "assunto": "Trauma",
+    "topico": "Avaliação Inicial: Vias aéreas, Ventilação e Choque",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q034-tc.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-035",
+    "number": 35,
+    "stem": "Mulher, 23 anos, caiu de uma altura de 8 metros. Na admissão no serviço de emergência apresentava instabilidade hemodinâmica. No exame físico apresentou instabilidade da bacia. Foi realizado raio-X de bacia, demonstrando diástase da sínfise púbica (fratura em livro aberto). Foi indicada a colocação de lençol para fechamento temporário do anel pélvico. Qual é o reparo anatômico correto para colocação do lençol, de acordo com a ilustração apresentada?",
+    "options": {
+      "A": "Posição 1.",
+      "B": "Posição 2.",
+      "C": "Posição 3.",
+      "D": "Posição 4."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Trauma",
+    "topico": "Trauma Abdominal e Pélvico",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q035-bacia.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-036",
+    "number": 36,
+    "stem": "Homem, 37 anos, refere aumento do volume da coxa esquerda que associa com trauma local ocorrido há 6 meses. Nega dor local ou limitação de movimentação. Ao exame físico apresenta massa fibroelástica na face posterior da coxa esquerda de 15 x 10 cm. Não apresenta restrição de movimentação e pulsos presentes e normais. Realizada ressonância magnética do membro, que evidenciou lesão profunda em compartimento posterior da coxa, em contato com o nervo ciático. Foi submetido à biópsia que revelou tratar-se de sarcoma de alto grau. Assinale qual deve ser a próxima conduta na condução do caso.",
+    "options": {
+      "A": "Cintilografia óssea.",
+      "B": "Tomografia de tórax e abdome.",
+      "C": "Ressecção com margem tridimensional.",
+      "D": "Quimioterapia e radioterapia."
+    },
+    "answer": "B",
+    "area": "Cirurgia Geral",
+    "assunto": "Cirurgia Plástica",
+    "topico": "Sarcomas de Partes Moles",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q036-coxa.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-037",
+    "number": 37,
+    "stem": "Homem, 43 anos, está internado há 35 dias devido à ressecção intestinal extensa em uso de nutrição parenteral exclusiva. Fez uso pós-operatório de ceftriaxone e metronidazol por 5 dias e, desde então, está sem antibiótico. Há 3 horas apresentou temperatura de 38,5 °C. Ao exame físico, encontra-se em bom estado geral; FC: 80 bpm; PA: 130x80 mmHg; perfusão periférica normal; ausculta pulmonar sem alterações; abdome flácido, indolor e com a ferida operatória sem sinais infecciosos. A inspeção do sítio do cateter revela hiperemia local e saída de secreção purulenta pelo óstio. Exames laboratoriais: Hb: 10,2 g/dL | Leucócitos: 11.330/mm3 | PCR: 20 mg/L. Solicitada coleta de hemocultura. Com base nessas informações, assinale qual é a conduta mais adequada neste momento.",
+    "options": {
+      "A": "Manter cateter e iniciar anfotericina e vancomicina.",
+      "B": "Manter cateter e aguardar resultado da hemocultura.",
+      "C": "Retirar cateter e iniciar anfotericina e vancomicina.",
+      "D": "Retirar cateter e aguardar resultado da hemocultura."
+    },
+    "answer": "D",
+    "area": "Cirurgia Geral",
+    "assunto": "Nutrição em Cirurgia e Recuperação Pós-Operatória",
+    "topico": "Suporte Nutricional Parenteral",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q037-cateter.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-038",
+    "number": 38,
+    "stem": "Mulher, 64 anos, está internada na unidade coronariana há 20 dias após parada cardiorrespiratória secundária a infarto agudo do miocárdio. Evoluiu com disfunção cardíaca e desde então, está tomando dobutamina e noradrenalina. Há 1 dia cursou com distensão abdominal e leve dor difusa. Ao exame físico encontra-se orientada, com SpO2 de 95% em ar ambiente; FC: 80 bpm; PA: 120x70 mmHg; ausculta pulmonar sem alterações; abdome distendido, doloroso à palpação profunda, sem irritação peritoneal, ruídos hidroaéreos diminuídos. Toque retal sem alterações.\n• Exames laboratoriais:\nHb: 9,8 g/dL | Leucócitos: 19.471/mm3 | PCR: 272 mg/L (de 3 dias atrás era de 30 mg/L) | Cr: 1,7 mg/dL | Ureia: 60 mg/dL | Amilase: 232 U/L | Lipase: 190 U/L | K+: 4,1 mEq/L | Na+: 143 mEq/L\n\nRealizada tomografia de abdome apresentada a seguir, mostrando espessamento parietal do cólon e pneumatose intestinal sem oclusão de tronco arterial mesentérico. Assinale qual é a principal hipótese diagnóstica.",
+    "options": {
+      "A": "Síndrome de Ogilvie.",
+      "B": "Pancreatite aguda necrohemorrágica.",
+      "C": "Isquemia mesentérica não oclusiva.",
+      "D": "Abscesso subfrênico à esquerda."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Urgências Abdominais",
+    "topico": "Abdome Agudo Vascular",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q038-tc.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-039",
+    "number": 39,
+    "stem": "Mulher, 31 anos, foi submetida à colecistectomia laparoscópica devido à colecistite aguda litiásica com 01 dia de evolução. O achado intraoperatório evidenciou vesícula biliar inflamada, sem coleções e necrose. O procedimento foi feito sem intercorrências. Qual das prescrições a seguir deve ser realizada imediatamente após a operação?",
+    "options": {
+      "A": "Dieta leve\nSG 5% ----- 1.000 mL\nNaCl 20% ----- 20 mL\nEV de 12/12 h\nKC/ 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nEV de 8/8 h (se náuseas)\nOndansetrona 8 mg",
+      "B": "Jejum\nSG 5% ----- 1.000 mL\nNaCe 20% ----- 20 mL\nEV 12/12 h\nKC/ 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nOndansetrona 8 mg\nEV de 8/8 h (se náuseas)",
+      "C": "Jejum\nEV 12/12 h\nCeftriaxone 1 g\nEV 8/8 h\nMetronidazol 500 mg\nSG 5% ----- 1.000 mL\nNace 20% ----- 20 mL\nEV de 12/12 h\nKC/ 19,1% ----- 10 mLłą\nEV de 6/6 h\nDipirona 1 g\nMetoclopramida 10 mg\nEV de 8/8 h (se náuseas)",
+      "D": "Dieta leve\nEV 12/12 h\nCeftriaxone 1 g\nEV 8/8 h\nMetronidazol 500 mg\nSG 5% ----- 1.000 mL\nNaC/ 20% ----- 20 mL\nEV de 12/12 h\nKC 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nEV de 8/8 h (se náuseas)\nMetoclopramida 10 mg"
+    },
+    "answer": "A",
+    "area": "Cirurgia Geral",
+    "assunto": "Vesícula e Vias Biliares",
+    "topico": "Colecistectomia",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-040",
+    "number": 40,
+    "stem": "Mulher, 33 anos, internada em Unidade de Terapia Intensiva, há 7 dias, após realização de transplante pulmonar, intubada e sedada. Apresenta agudamente distensão abdominal, reação de dor à palpação abdominal em epigástrio e hipocôndrio direito. Realizada tomografia de abdome, corte coronal, que é apresentada a seguir, evidenciando vesícula biliar marcadamente distendida, com espessamento parietal e densificação da gordura perivesicular, sem evidência de cálculos.\n• Exames laboratoriais:\nLeucócitos 17.000/mm3 | PCR: 210 mg/L | TGO/AST: 120 U/L | TGP/ALT: 160 U/L | FA: 74 U/L | GGT: 151 U/L | Amilase: 170 U/L | Lipase: 122 U/L\n\nAssinale a alternativa que apresenta o diagnóstico correto.",
+    "options": {
+      "A": "Úlcera perfurada.",
+      "B": "Íleo metabólico.",
+      "C": "Colecistite aguda alitiásica.",
+      "D": "Colangite."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Vesícula e Vias Biliares",
+    "topico": "Colelitíase",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q040-tc.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-041",
+    "number": 41,
+    "stem": "Mulher, 37 anos, queixa-se de fadiga, fraqueza e queda de cabelo. Refere antecedente de cirurgia bariátrica (bypass gástrico) há 4 anos. Ao exame físico apresenta-se descorada, unhas quebradiças e sem outras alterações. Assinale qual é a principal hipótese diagnóstica e o respectivo tratamento.",
+    "options": {
+      "A": "Anemia ferropriva e reposição endovenosa de ferro.",
+      "B": "Deficiência de vitamina B12 e reposição oral de complexo B.",
+      "C": "Deficiência de ácido fólico e reposição oral de polivitamínico.",
+      "D": "Deficiência proteica e suplemento oral de proteína."
+    },
+    "answer": "A",
+    "area": "Hematologia",
+    "assunto": "Anemias microcíticas",
+    "topico": "Anemia ferropriva",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-042",
+    "number": 42,
+    "stem": "Mulher, 15 anos, procura o serviço de Emergência com queixa de febre (38,7 °C) há 20 dias, dor e hiperemia em região sacrococcígea. Refere dois episódios semelhantes no último ano com melhora espontânea. Ao exame físico, apresenta hiperemia, aumento do volume da pele e dor à palpação na região sacrococcígea com sinal de flutuação, conforme imagem a seguir. Considerando a principal hipótese diagnóstica, assinale a melhor conduta.",
+    "options": {
+      "A": "Ressecção ampla.",
+      "B": "Drenagem aberta.",
+      "C": "Antibioticoterapia.",
+      "D": "Drenagem percutânea."
+    },
+    "answer": "B",
+    "area": "Cirurgia Geral",
+    "assunto": "Proctologia",
+    "topico": "Doenças Orificiais",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q042-pilonidal.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-043",
+    "number": 43,
+    "stem": "Mulher, 26 anos, procura o cirurgião para avaliação de nódulo hepático em exame de rotina solicitado pelo seu ginecologista. Nega comorbidades, história familiar relevante ou etilismo. Usa anticoncepcional oral há 5 anos. Ao exame, apresenta-se em bom estado geral, sem estigmas de hepatopatia crônica, palpação abdominal sem alterações. Traz ressonância com contraste hepatoespecífico que evidenciou nódulo hipervascular bem delimitado em segmento 6 medindo 4,8 x 4,5 cm, com conteúdo gorduroso. Na fase hepatobiliar, não se observou a captação do meio de contraste pela lesão. Assinale qual é o diagnóstico mais provável do nódulo da paciente e a melhor conduta.",
+    "options": {
+      "A": "Adenoma hepático, suspensão do anticoncepcional oral e seguimento clínico.",
+      "B": "Adenoma hepático, suspensão do anticoncepcional oral e nodulectomia.",
+      "C": "Hiperplasia nodular focal, suspensão do anticoncepcional oral e nodulectomia.",
+      "D": "Hiperplasia nodular focal, suspensão do anticoncepcional oral e seguimento clínico."
+    },
+    "answer": "A",
+    "area": "Hepatologia",
+    "assunto": "Tumores Hepáticos",
+    "topico": "Tumores Hepáticos Benignos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-044",
+    "number": 44,
+    "stem": "Homem, 35 anos, procura o Serviço de Emergência com queixa de dor abdominal de forte intensidade, em faixa, no andar superior do abdome. Tem relato de múltiplas passagens no hospital com quadro semelhante. Nega fatores de melhora ou piora. Refere uso contínuo de dipirona e tramadol com controle parcial dos sintomas. Relata perda de peso não quantificada no período e diarreia há 3 meses. Tem antecedente de etilismo de 1 garrafa de \"pinga\" por dia desde os 15 anos, tendo parado há 6 meses. Ao exame físico encontra-se em bom estado geral; IMC: 19 kg/m2, ausculta cardíaca e pulmonar sem alterações, abdome doloroso à palpação profunda sem irritação peritoneal. Considerando a principal hipótese diagnóstica, assinale a alternativa na qual é observada a imagem tomográfica esperada.",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "answer": "A",
+    "area": "Gastroenterologia",
+    "assunto": "Pâncreas",
+    "topico": "Pancreatites",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q044-opcoes.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-045",
+    "number": 45,
+    "stem": "Homem, 80 anos, produtor rural, apresentou lesão de crescimento progressivo em região malar direita, há dois anos, conforme imagem a seguir (lesão vegetante e ulcerada). Biópsia realizada confirmou carcinoma epidermoide. O estadiamento com tomografia não identificou comprometimento ósseo ou de linfonodos parotídeos/cervicais. Com relação à lesão cutânea, assinale a conduta mais adequada.",
+    "options": {
+      "A": "Sessões de crioterapia com uso concomitante de pomada de imunoterápico.",
+      "B": "Ressecção e fechamento com retalho local.",
+      "C": "Ressecção e fechamento com retalho microcirúrgico.",
+      "D": "Ressecção micrográfica de MOHS, com fechamento por segunda intenção."
+    },
+    "answer": "B",
+    "area": "Dermatologia",
+    "assunto": "Câncer de pele",
+    "topico": "Carcinoma espinocelular e lesões pré-malignas",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q045-cec.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-046",
+    "number": 46,
+    "stem": "Mulher, 40 anos, foi submetida à tireoidectomia total por carcinoma papilífero em lobo esquerdo de tireoide há 6 anos, seguida de iodoterapia porque apresentava extravasamento tumoral macroscópico para musculatura pré-tireoidiana. Há 2 meses teve COVID-19 associada a quadro de sinusite, com adequada resolução. Em ultrassonografia anual de rotina foi identificado nódulo cístico de 2 cm, junto à bifurcação da carótida esquerda e linfonodos jugulo-carotídeos, globosos, heterogêneos do mesmo lado. Assinale qual é a principal hipótese diagnóstica.",
+    "options": {
+      "A": "Cisto branquial.",
+      "B": "Cisto epidérmico.",
+      "C": "Granuloma de corpo estranho.",
+      "D": "Metástase do carcinoma papilífero."
+    },
+    "answer": "D",
+    "area": "Endocrinologia",
+    "assunto": "Tireoide",
+    "topico": "Câncer de Tireoide",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-047",
+    "number": 47,
+    "stem": "Homem, 25 anos, deu entrada no Serviço de Emergência com ferimento cortocontuso no 3° quirodáctilo direito (QDD) de 3 cm. Opta-se pela realização de um bloqueio troncular na base do 3° QDD para realizar a sutura do ferimento. Assinale a alternativa que apresenta o anestésico mais indicado.",
+    "options": {
+      "A": "Ropivacaína.",
+      "B": "Benzocaína.",
+      "C": "Lidocaína sem vasoconstritor.",
+      "D": "Bupivacaína com vasoconstritor."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Princípios da Anestesiologia",
+    "topico": "Anestésicos Locais",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-048",
+    "number": 48,
+    "stem": "Mulher, 58 anos, com diabetes melito e insuficiência renal crônica, evolui para necessidade de hemodiálise nos próximos dias, mas ainda não tem nenhum acesso para realizar a terapia. Assinale qual é o acesso mais adequado para ser instalado nessa situação.",
+    "options": {
+      "A": "Cateter semi-implantável de alto fluxo.",
+      "B": "Cateter totalmente implantado.",
+      "C": "Fístula arteriovenosa direta.",
+      "D": "Fístula arteriovenosa com prótese."
+    },
+    "answer": "A",
+    "area": "Nefrologia",
+    "assunto": "Doença Renal Crônica",
+    "topico": "Terapia renal substitutiva",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-049",
+    "number": 49,
+    "stem": "Paciente feminina, 48 anos, hipertensa e pré-diabética em controle com hidroclorotiazida e dieta. Procura o pronto-socorro com dor em joelho esquerdo há 2 dias. Relata que há 10 dias iniciou artralgia de punhos e mãos, de caráter migratório e que evoluiu para tornozelos e joelho esquerdo há 2 dias. Recebeu anti-inflamatório não hormonal há 10 dias por diagnóstico de tenossinovites em ultrassom de mãos. Nega traumas, infecções recentes e viagens. Relata abuso de álcool e cocaína nos últimos meses. Tem vida sexual ativa, sem uso regular de preservativos. Ao exame físico: bom estado geral, febril, estável hemodinamicamente. Joelho esquerdo: calor local, hiperemia da pele, sinal da tecla em recesso suprapatelar e dificuldade importante de flexo-extensão. Em pele de tornozelo, pé esquerdo e mãos há pequenas lesões pustulosas, com 0,7 mm em maior extensão, base eritematosa, que apareceram no dia do atendimento. Foi puncionado joelho com líquido turvo purulento. Assinale qual a hipótese mais provável e a conduta inicial adequada.",
+    "options": {
+      "A": "Artrite séptica por estreptococo, iniciar oxacilina até resultado de Gram e cultura geral do líquido sinovial.",
+      "B": "Artrite gonocócica, iniciar ceftriaxona e oxacilina ou vancomicina até resultado de Gram, cultura geral e em meio Thayer-Martin.",
+      "C": "Artrite gotosa, iniciar colchicina, anti-inflamatório, hidroclorotiazida suspender e prescrever ambulatorialmente alopurinol.",
+      "D": "Artrite psoriásica forma pustulosa, iniciar metotrexato semanal e betametasona tópica."
+    },
+    "answer": "B",
+    "area": "Reumatologia",
+    "assunto": "Artropatias infecciosas",
+    "topico": "Artrite gonocócica",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q049-sinovial.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-050",
+    "number": 50,
+    "stem": "Mulher de 60 anos segue ambulatoriamente por lúpus eritematoso sistêmico há 20 anos, diabetes melito tipo 2 e hipertensão arterial sistêmica há 10 anos. Há 1 ano em uso de hidroxicloroquina 400 mg/dia, prednisona 7,5 mg/dia, carbonato de cálcio 1250 mg/dia, vitamina D3 7000 UI/semana, metformina 850 mg três vezes ao dia, hidroclorotiazida 25 mg/dia, gliclazida 90 mg/dia e sinvastatina 20 mg/dia. Na consulta de rotina está assintomática, com pressão arterial 142x88 mmHg, IMC: 29 kg/m2 e FC: 80 bpm. Traz os seguintes exames:\n• Hemoglobina glicada: 8,3%\n• Albuminúria/creatinina urinária: 120 mg/g\n• Creatinina: 1,2 mg/dL | Urina 1: normal | K+: 4,2 mEq/L\n• HDL: 40 mg/dL | LDL: 114 mg/dL | Triglicérides: 210 mg/dL\n• C3 e C4: normais | Anti-DNA DS: negativo\n• Densitometria com T-score em fêmur total de -2,8 e L1-L4 em -1,8\n• Fundoscopia sem alterações | ECG com ritmo sinusal e sobrecarga de ventrículo esquerdo.\n\nCom base nessas informações, assinale o que deve ser feito para a paciente do ponto de vista medicamentoso.",
+    "options": {
+      "A": "Associar enalapril, trocar sinvastatina por atorvastatina, iniciar insulina NPH bedtime 10 UI e alendronato de sódio.",
+      "B": "Associar anlodipino, trocar por rosuvastatina, aumentar a dose de gliclazida e associar denosumabe.",
+      "C": "Associar losartana, aumentar dose de sinvastatina, trocar metformina pela sua fórmula de liberação prolongada e associar alendronato de sódio.",
+      "D": "Associar losartana, aumentar dose de sinvastatina, iniciar insulina NPH bedtime 10 UI e prescrever ácido zoledrônico anual."
+    },
+    "answer": "A",
+    "area": "Reumatologia",
+    "assunto": "Doenças autoimunes do tecido conjuntivo",
+    "topico": "Lúpus Eritematoso Sistêmico (LES)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-051",
+    "number": 51,
+    "stem": "Mulher de 65 anos, diabética em uso de metformina 1.000 mg de 12/12 horas/dia, procura UBS por dispneia aos médios esforços, há 2 meses. Relata infarto agudo do miocárdio (IAM) há 4 anos e traz ECO com fração de ejeção de 33% e hipocinesia de parede lateral. Está em uso de AAS 100 mg/dia, atorvastatina 40 mg/dia, carvedilol 25 mg duas vezes/dia, enalapril 20 mg duas vezes/dia, espironolactona 25 mg uma vez/dia e furosemida 40 mg/dia. Ao exame físico, apresenta PA: 120x76 mmHg e FC: 68 bpm, ausculta pulmonar normal e sem edema de membros inferiores. Assinale o tratamento medicamentoso indicado para essa paciente.",
+    "options": {
+      "A": "Introduzir ivabradina espironolactona.",
+      "B": "Substituir carvedilol por bisoprolol para melhor betabloquear e aumentar furosemida.",
+      "C": "Associar sacubitril-valsartana e diminuir dose de carvedilol.",
+      "D": "Associar iSGLT2 ou trocar enalapril por sacubitril-valsartana."
+    },
+    "answer": "D",
+    "area": "Cardiologia",
+    "assunto": "Insuficiência Cardíaca",
+    "topico": "Classificação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-052",
+    "number": 52,
+    "stem": "Paciente homem de 48 anos vai à consulta ambulatorial devido a quadro de queimação epigástrica diariamente, que piora após refeições e sem irradiação, vômitos ou sangramentos. Avaliado no pronto-socorro, recebeu prescrição de omeprazol 40 mg uma vez ao dia, em jejum, a qual faz uso há 4 semanas, com melhora parcial. Exames realizados no PS: Hb: 11,2 g/dL; VCM: 70 fL; HCM: 30 g/dL; Leucócitos: 7.000/mm3; Ureia: 40 mg/dL; Creatinina: 0,8 mg/dL; glicemia: 90 mg/dL. Apresenta dieta rica em produtos ultraprocessados. Pratica atividade física regular duas vezes por semana. Assinale a conduta mais adequada neste momento.",
+    "options": {
+      "A": "Aumentar a dose de omeprazol para 80 mg ao dia.",
+      "B": "Manter prescrição de omeprazol 40 mg por mais 04 semanas e explicar que a melhora ocorre após 8 semanas de tratamento.",
+      "C": "Prosseguir a investigação com endoscopia digestiva alta.",
+      "D": "Prescrever amoxicilina e levofloxacino por 10 dias na detecção de Helicobacter pylori."
+    },
+    "answer": "C",
+    "area": "Gastroenterologia",
+    "assunto": "Estômago",
+    "topico": "Síndrome Dispéptica",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-053",
+    "number": 53,
+    "stem": "Paciente, 43 anos, comparece ao ambulatório com queixa de tontura rotatória recorrente com duração de minutos a horas, associada à plenitude auricular e zumbido pior à direita. As crises não são desencadeadas por movimentos da cabeça. Nega náuseas, vômitos, escurecimento visual ou perda de consciência. A paciente conta ainda que, apesar do quadro se arrastar há 10 anos, no último ano notou que a sua audição vem flutuando, com períodos de melhora e piora, e que nota hipoacusia pior no ouvido direito. Nega tontura na consulta atual. Exame físico: BEG, corado, hidratado, acianótico, eupneico. Head-impulse test: sem sacada corretiva. Pesquisa de nistagmo: sem nistagmo espontâneo ou evocado pelo olhar. Pesquisa de desvio skew: sem desvio skew. Assinale a alternativa correta.",
+    "options": {
+      "A": "Vertigem postural paroxística benigna pelos episódios de tontura em crises, com queixa ausente no momento da consulta.",
+      "B": "Tontura de origem central pelo head-impulse test normal.",
+      "C": "Tontura psicogênica inespecífica em decorrência de sua longa duração.",
+      "D": "Síndrome de Ménière com necessidade de realizar audiometria pelas queixas otológicas."
+    },
+    "answer": "B",
+    "area": "Otorrinolaringologia",
+    "assunto": "Vertigens",
+    "topico": "Doença de Menière",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-054",
+    "number": 54,
+    "stem": "Três pacientes foram admitidos no PS com quadro de choque hemodinâmico, sendo submetidos ao protocolo RUSH (Rapid Ultrasound in Shock) para avaliar etiologia do choque. A tabela a seguir apresenta os achados na avaliação cardíaca, do tórax e da veia cava desses três pacientes, identificados pelos números 1, 2 e 3.\nVeia cava inferior | Pulmão | Cardíaco\nExame 1: VE hipocontratil | Perfil B | Distendida\nExame 2: Ápice de VE hipercontrátil e parede lateral hipocontrátil | Perfil A | Distendida\nExame 3: VE hipercontrátil | Colabada | Perfil C\nExame 4: VE hipocontratil | Perfil B | Distendida\nVE = Ventrículo esquerdo.\nAssinale qual é a alternativa que correlaciona o achado do protocolo RUSH com o diagnóstico etiológico mais provável do choque.",
+    "options": {
+      "A": "Exame 1: Sepse de foco pulmonar.",
+      "B": "Exame 2: Paciente com tromboembolismo pulmonar instável.",
+      "C": "Exame 3: Infarto anterior extenso.",
+      "D": "Exame 4: Aneurisma de aorta roto."
+    },
+    "answer": "B",
+    "area": "Pneumologia",
+    "assunto": "Tromboembolismo Pulmonar (TEP)",
+    "topico": "Fisiopatologia",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-055",
+    "number": 55,
+    "stem": "Homem, 55 anos, procura pronto-socorro por quadro de palpitações há 1 hora, após terminar treino habitual de corrida. Relata uso regular de creatina pré-treino e tratamento para HAS com enalapril e anlodipino. Nega dor no peito ou falta de ar. Nega tabagismo, uso de drogas ilícitas ou alcoolismo. Ao exame físico inicial: PA: 120x80 mmHg; FC: 116 bpm; FR: 12 ipm; SpO2: 94%; ritmo cardíaco irregular, murmúrios vesiculares normais, sem outras alterações. ECG da entrada apresentado a seguir evidenciando taquiarritmia com fibrilação atrial / flutter atípico. Com base nessas informações, assinale a conduta mais adequada.",
+    "options": {
+      "A": "Realizar cardioversão elétrica.",
+      "B": "Iniciar anticoagulação.",
+      "C": "Iniciar betabloqueador.",
+      "D": "Indicar cateterismo."
+    },
+    "answer": "A",
+    "area": "Cardiologia",
+    "assunto": "Arritmias Cardíacas",
+    "topico": "Fibrilação Atrial",
+    "annulled": true,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q055-ecg.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-056",
+    "number": 56,
+    "stem": "Paciente masculino, 53 anos, portador de cirrose hepática por hepatite C, em uso de furosemida e aguardando transplante hepático. Há três dias apresentou temperatura de 38,4 °C e aumento do volume abdominal. Posteriormente tornou-se confuso, desorientado, com flapping e sonolência. Os exames na sala de emergência mostraram: Hb: 11,7 g/dL; leucócitos: 5.670/mm3; plaquetas 120.000/mm3; ureia 72 mg/dL; creatinina 1,5 mg/dL; glicose 110 mg/dL; Na+ 128 mEq/L; K+ 2,8 mEq/L, Cl- 101 mEq/L. Assinale qual é a conduta mais adequada na admissão.",
+    "options": {
+      "A": "Aumentar o diurético, repor K+ por via parenteral e prescrever norfloxacino.",
+      "B": "Corrigir a hipocalemia, investigar estado infeccioso e prescrever enema de lactulose.",
+      "C": "Orientar restrição de água livre, manter a furosemida e administrar lactulose.",
+      "D": "Administrar soro fisiológico, repor K+ por via parenteral e iniciar espironolactona."
+    },
+    "answer": "B",
+    "area": "Hepatologia",
+    "assunto": "Complicações da Insuficiência Hepática",
+    "topico": "Ascite",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-057",
+    "number": 57,
+    "stem": "Paciente feminino, 52 anos, portadora de hipertensão arterial sistêmica há 10 anos com acompanhamento em ambulatório geral. Iniciou tratamento com enalapril 40 mg/dia e clortalidona 25 mg/dia (pressão de 162/94 mmHg inicial). Há 02 anos foi acrescentado anlodipino 10 mg/dia. Mesmo assim o controle de PA não está ideal, pressão hoje de 148x88 mmHg e FC: 92 bpm. Ecocardiograma com sobrecarga ventricular esquerda e fundo de olho grau 2. Urina 1 normal; Hb: 12,7 mg/dL; leucócitos 5.670/mm3; plaquetas: 235.000/mm3; ureia: 45 mg/dL; creatinina: 1,0 mg/dL; glicose: 98 mg/dL; Na+: 138 mEq/L, K+: 4,1 mEq/L. Assinale qual é a conduta mais adequada.",
+    "options": {
+      "A": "Associar clonidina 0,1 mg/dia.",
+      "B": "Introduzir espironalactona 25 mg/dia.",
+      "C": "Associar hidralazina 25 mg de 12/12 horas.",
+      "D": "Trocar enalapril por losartana 100 mg/dia."
+    },
+    "answer": "B",
+    "area": "Cardiologia",
+    "assunto": "Hipertensão Arterial Sistêmica (HAS)",
+    "topico": "Tratamento da Hipertensão arterial",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-058",
+    "number": 58,
+    "stem": "Paciente de 48 anos apresenta há 6 meses lesões na face (rash eritemato-violáceo predominantemente em região periorbital e fronte, conforme imagem a seguir) e também em membros superiores. Relacionado ao quadro clínico, assinale qual dos sintomas é mais provável para essa paciente.",
+    "options": {
+      "A": "Fraqueza da musculatura proximal de membros.",
+      "B": "Oligoartrite de grandes articulações.",
+      "C": "Oligúria.",
+      "D": "Edema de membros inferiores."
+    },
+    "answer": "A",
+    "area": "Reumatologia",
+    "assunto": "Doenças autoimunes do tecido conjuntivo",
+    "topico": "Miopatias autoimunes sistêmicas",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q058-face.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-059",
+    "number": 59,
+    "stem": "TEXTO PARA AS QUESTÕES 59 E 60\nMulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, medindo cerca de 5 cm. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas na lesão.\n\n59\nAssinale qual o diagnóstico e qual achado laboratorial é esperado.",
+    "options": {
+      "A": "Eritema nodoso hansênico e baciloscopia negativa.",
+      "B": "Hanseníase tuberculoide e baciloscopia negativa.",
+      "C": "Hanseníase virchowiana e baciloscopia positiva.",
+      "D": "Hanseníase dimorfa virchowiana e baciloscopia positiva."
+    },
+    "answer": "B",
+    "area": "Dermatologia",
+    "assunto": "Hanseníase",
+    "topico": "Classificação",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q059-pele.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-060",
+    "number": 60,
+    "stem": "Considerando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
+    "options": {
+      "A": "Realização de baciloscopia, teste rápido e exame histopatológico nos contactantes.",
+      "B": "Orientação de autoexame dos contactantes, moradores da mesma habitação há 2 anos.",
+      "C": "Contato telefônico anual de contactantes por 3 anos.",
+      "D": "Avaliação clínica dermatológica e neurológica dos contactantes, moradores da mesma habitação há 5 anos."
+    },
+    "answer": "D",
+    "area": "Dermatologia",
+    "assunto": "Hanseníase",
+    "topico": "Avaliação e conduta dos contatos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-061",
+    "number": 61,
+    "stem": "TEXTO PARA AS QUESTÕES 61 E 62\nPaciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir:\n\n61\nAssinale qual é o diagnóstico e o achado do raspado.",
+    "options": {
+      "A": "Candidose; pseudo-hifas e esporos.",
+      "B": "Tínea do corpo; hifas artrosporadas.",
+      "C": "Eritrasma; Corynebacterium minutissimum.",
+      "D": "Pitiríase versicolor; Molossezia globose."
+    },
+    "answer": "A",
+    "area": "Dermatologia",
+    "assunto": "Dermatoses infecciosas",
+    "topico": "Dermatomicoses",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q061-raspado.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-062",
+    "number": 62,
+    "stem": "Assinale quais são os principais diagnósticos diferenciais para a afecção dessa paciente.",
+    "options": {
+      "A": "Dermatite atópica e erupção variceliforme de Kaposi.",
+      "B": "Intertrigo e dermatite seborreica.",
+      "C": "Pênfigo vulgar e foliculite bacteriana.",
+      "D": "Impetigo e erisipela."
+    },
+    "answer": "B",
+    "area": "Dermatologia",
+    "assunto": "Dermatoses infecciosas",
+    "topico": "Dermatomicoses",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-063",
+    "number": 63,
+    "stem": "Paciente do sexo masculino, 59 anos, tabagista ativo (20 anos-maço), HAS e DM tipo II, em uso de hidroclorotiazida 25 mg/dia, losartana 50 mg/dia e metformina 850 mg 3x/dia. Procura pronto-socorro por dispneia progressiva há 7 dias com piora há 1 dia, além de dor torácica dependente da ventilação em hemitórax esquerdo e queda do estado geral. ECG normal. Realizado POCUS pulmonar com as seguintes imagens:\n• Hemitórax direito: Deslizamento pulmonar presente, sem alterações.\n• Hemitórax esquerdo: Deslizamento pulmonar ausente na área de dor, com presença de consolidação subpleural e broncogramas aéreos dinâmicos.\n\nAssinale qual é a melhor opção de tratamento para esse paciente.",
+    "options": {
+      "A": "Antibioticoterapia.",
+      "B": "Diurético parenteral.",
+      "C": "Ventilação não invasiva e vasodilatação com nitroglicerina.",
+      "D": "Drenagem pleural fechada com cateter pigtail."
+    },
+    "answer": "A",
+    "area": "Pneumologia",
+    "assunto": "Derrame Pleural",
+    "topico": "Manejo clínico e diagnóstico",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q063-pocus.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-064",
+    "number": 64,
+    "stem": "Paciente do sexo feminino de 52 anos de idade, hipertensa, admitida na sala de emergências com hipótese diagnóstica de sepse de foco pulmonar. Encontra-se confusa, hipotensa com PA 80x42 mmHg (PAM: 55 mmHg), extremidades frias e tempo de enchimento capilar de 6s. Iniciada antibioticoterapia empírica com ceftriaxone e claritromicina intravenosos. Realizada prova volêmica com 500 mL de Ringer Lactato, sem reversão do quadro.\n• POCUS Pulmonar: Lung sliding preservado + Linhas B bilaterais, sem outras alterações.\n• POCUS Cardíaco: VTI: 18 (VR > 17).\n• Exame de imagem de veia cava inferior (VCI): VCI pletórica, diâmetro > 2,1 cm sem variação com ciclo respiratório (< 10%).\n\nAssinale qual é a melhor conduta terapêutica no momento atual.",
+    "options": {
+      "A": "Realizar nova prova volêmica até completar 30 mL/kg em 3 horas.",
+      "B": "Realizar punção venosa central guiada por USG para iniciar noradrenalina.",
+      "C": "Iniciar noradrenalina em acesso venoso periférico proximal.",
+      "D": "Iniciar dose de estresse de furosemida devido indícios de congestão sistêmica."
+    },
+    "answer": "C",
+    "area": "Infectologia",
+    "assunto": "Sepse",
+    "topico": "Quadro clínico",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q064-cava.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-065",
+    "number": 65,
+    "stem": "Paciente de 30 anos de idade é levado ao pronto-socorro por amigos após apresentar letargia e rebaixamento do nível de consciência. Não há relato de medicações de uso contínuo, comorbidades, uso de drogas ilícitas ou histórico de trauma. Ao exame físico, apresenta frequência respiratória de 29 ipm, SpO2 95% em ar ambiente, respiração ruidosa, escala de coma de Glasgow 10 (AO 3 RM 4 RV 3), pupilas isocóricas e fotorreagentes. PA: 98x68 mmHg, FC: 102 bpm, TEC: < 3s. Realizada TC de crânio que não demonstrou anormalidades.\n• Exames laboratoriais:\nNa+: 141 mEq/L | K+: 3,5 mEq/L | Cl-: 101 mEq/L | Ureia: 35 mg/dL | Creatinina sérica: 0,7 mg/dL | Glicemia: 89 mg/dL\nGasometria arterial: pH: 7,05 | pO2: 62 mmHg | pCO2: 24 mmHg | Bicarbonato: 7 mEq/L\nOsmolaridade sérica mensurada: 340 mOsm/kg.\n\nAssinale qual das alternativas melhor descreve os achados dos exames laboratoriais.",
+    "options": {
+      "A": "Acidose metabólica e acidose respiratória concomitante.",
+      "B": "Acidose metabólica compensada com ânion GAP aumentado e GAP osmolar.",
+      "C": "Acidose metabólica compensada com ânion GAP normal e GAP osmolar.",
+      "D": "Alcalose metabólica com acidose secundária."
+    },
+    "answer": "B",
+    "area": "Nefrologia",
+    "assunto": "Distúrbios do equilíbrio acidobásico (DHE)",
+    "topico": "Distúrbios metabólicos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-066",
+    "number": 66,
+    "stem": "Paciente do sexo masculino de 32 anos, 70 kg, sofreu um acidente de motocicleta há quatro dias, evoluindo com tetraplegia. Na unidade de terapia intensiva, desenvolveu insuficiência respiratória, necessitando de intubação orotraqueal. O intensivista opta por intubação em sequência rápida utilizando fentanil 100 ug, etomidato 20 mg e succinilcolina 70 mg via venosa. Evolui com assistolia imediatamente após a administração das medicações. Assinale qual é a principal hipótese diagnóstica para essa parada.",
+    "options": {
+      "A": "Hipóxia secundária ao uso de fentanil.",
+      "B": "Tromboembolismo pulmonar.",
+      "C": "Hiperpotassemia secundária a succinilcolina.",
+      "D": "Choque distributivo secundário ao etomidato."
+    },
+    "answer": "C",
+    "area": "Cirurgia Geral",
+    "assunto": "Princípios da Anestesiologia",
+    "topico": "Bloqueadores Neuromusculares",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-067",
+    "number": 67,
+    "stem": "Mulher, 77 anos, com antecedente de hipertensão arterial, doença pulmonar obstrutiva crônica e hipotireoidismo, é admitida no PS trazida pelo SAMU com quadro de rebaixamento do nível de consciência nas últimas 48 horas. No momento da admissão: Glasgow 7 (AO 2, RV 1, RM 4), sem proteção de vias aéreas, PA: 132x88 mmHg, FC: 43 bpm, FR: 9 ipm, temperatura 36 °C. Ausculta pulmonar normal, ausculta cardíaca reduzida, abdome sem alterações. Antes de receber qualquer medicação, foi realizada intubação orotraqueal em primeira tentativa, devido ao rebaixamento de nível de consciência. Imediatamente após a intubação, e antes de a paciente receber qualquer medicação, assinale qual imagem dentre as apresentadas a seguir, melhor representa a curva de capnografia obtida dessa paciente.",
+    "options": {
+      "A": "P 50 - E 30",
+      "B": "E 30",
+      "C": "~ 20",
+      "D": "Curva D"
+    },
+    "answer": "C",
+    "area": "Pneumologia",
+    "assunto": "Pneumologia Intensiva",
+    "topico": "Insuficiência respiratória aguda",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q067-capnografia.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-068",
+    "number": 68,
+    "stem": "TEXTO PARA AS QUESTÕES 68 A 70\nPaciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal.\n\n68\nAssinale qual é a topografia lesional atual para o caso conforme o exame neurológico descrito no caso apresentado.",
+    "options": {
+      "A": "Bulbo.",
+      "B": "Ponte.",
+      "C": "Córtex difuso.",
+      "D": "Mesencéfalo."
+    },
+    "answer": "B",
+    "area": "Neurologia",
+    "assunto": "Coma e Alterações da Consciência",
+    "topico": "Conceitos e Fisiopatologia",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-069",
+    "number": 69,
+    "stem": "Realizada a prova calórica com água fria no vestíbulo direito do paciente, assinale qual a resposta esperada.",
+    "options": {
+      "A": "Desvio do olhar conjugado tônico para a esquerda.",
+      "B": "Desvio do olhar conjugado tônico para a direita.",
+      "C": "Desvio do olhar conjugado tônico para cima.",
+      "D": "Ausência de resposta."
+    },
+    "answer": "D",
+    "area": "Neurologia",
+    "assunto": "Coma e Alterações da Consciência",
+    "topico": "Investigação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-070",
+    "number": 70,
+    "stem": "Caso nenhuma intervenção seja realizada, assinale qual padrão de exame neurológico corresponde à evolução natural esperada.",
+    "options": {
+      "A": "Ausência de resposta motora, pupilas médio-fixas, reflexo óculo-cefálico ausente.",
+      "B": "Ausência de resposta motora, pupilas puntiformes, reflexo óculo-cefálico desconjugado.",
+      "C": "Extensão nos quatro membros, pupilas médio-fixas, reflexo óculo-cefálico ausente.",
+      "D": "Extensão nos quatro membros, pupilas puntiformes, reflexo óculo-cefálico desconjugado."
+    },
+    "answer": "A",
+    "area": "Neurologia",
+    "assunto": "Coma e Alterações da Consciência",
+    "topico": "Conceitos e Fisiopatologia",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-071",
+    "number": 71,
+    "stem": "Paciente do sexo masculino, 71 anos, diagnosticado com doença de Parkinson há 11 anos. No início desenvolveu somente tremor de extremidades, mas evolui com a tríade clássica de sintomas: tremor de repouso, rigidez muscular e bradicinesia, fechando o diagnóstico. Inicialmente, o paciente respondeu bem ao tratamento com levodopa e agonistas de dopamina, que ajudaram a controlar os sintomas motores, mas houve progressão da doença nos últimos 2 anos e o paciente começou a apresentar flutuações motoras, com períodos de bom controle motor alternados com períodos de piora dos sintomas. Nas últimas semanas, vem apresentando sintomas psicóticos (por exemplo, acredita que o vizinho o está vigiando, que mexe em sua lata de lixo, etc), mas são ideias pouco estruturadas. Assinale qual é a afirmativa correta relacionada a sintomas psicóticos na doença de Parkinson.",
+    "options": {
+      "A": "Ocorre mais no início dos sintomas da doença, podendo ser exacerbado com o tratamento da levodopa.",
+      "B": "Há relatos de sintomas psicóticos em pacientes com a doença, mas são raros (menos de 1% dos casos).",
+      "C": "Ocorre em uma frequência semelhante à prevalência na população geral, ou seja, por volta de 2%.",
+      "D": "Está associado com os estágios mais avançados da doença, podendo atingir 20% dos casos."
+    },
+    "answer": "D",
+    "area": "Neurologia",
+    "assunto": "Distúrbios do Movimento",
+    "topico": "Doença de Parkinson",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-072",
+    "number": 72,
+    "stem": "Familiares trazem ao médico um paciente de 81 anos, com história de declínio progressivo da memória e cognição há 5 anos, mas que era parcialmente independente para atividades diárias que o médico classificou como ECOG 3 (capaz de autocuidado apenas limitado; confinado à cama ou cadeira mais de 50% das horas de vigília). Segundo a família, há dois dias paciente não vem se alimentando, com aumento da sonolência e diminuição do contato verbal. O médico fez o diagnóstico de delirium e sugeriu internação para investigação do fator desencadeante. Dentre as funções cognitivas listadas a seguir, assinale qual é o distúrbio primário observado no delirium.",
+    "options": {
+      "A": "Atenção.",
+      "B": "Função executiva.",
+      "C": "Memória de curto prazo.",
+      "D": "Função visuoespacial."
+    },
+    "answer": "A",
+    "area": "Neurologia",
+    "assunto": "Coma e Alterações da Consciência",
+    "topico": "Estado Confusional Agudo (Delirium)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-073",
+    "number": 73,
+    "stem": "Assinale qual das alternativas a seguir contém medidas de avaliação do desempenho dos serviços ambulatoriais responsáveis pelo tratamento de pessoas com uma doença infecciosa crônica, em uma dada população de pacientes em dado periodo.",
+    "options": {
+      "A": "Taxa de detecção de hepatite C no município.",
+      "B": "Taxa de letalidade da HIV/aids no município.",
+      "C": "Taxa de perda de seguimento do tratamento da tuberculose.",
+      "D": "Taxa de prevalência de incapacidades físicas no diagnóstico de pessoas com hanseníase."
+    },
+    "answer": "C",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Atenção Primária à Saúde (APS) no Brasil",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-074",
+    "number": 74,
+    "stem": "Usuária do SUS, 23 anos, está grávida e terá uma consulta na Unidade Básica de Saúde (UBS) próxima de sua moradia. Ao chegar no serviço, antes de ser atendida em consulta de pré-natal, é convidada para participar de um grupo de gestantes organizado por uma das técnicas de enfermagem da UBS para conversar sobre a gravidez, o parto e a amamentação. Com base nessas informações, assinale a alternativa correta.",
+    "options": {
+      "A": "Dentre os três assuntos discutidos no grupo, a amamentação deve ser considerada como a principal ação de Promoção da Saúde.",
+      "B": "As atividades educativas que ocorrem durante o pré-natal de baixo risco na Atenção Primária são um exemplo de políticas de Promoção da Saúde.",
+      "C": "As atividades educativas que ocorrem durante o pré-natal de baixo risco na Atenção Primária não são um exemplo de intersetorialidade entre Saúde e Educação.",
+      "D": "As ações de Promoção da Saúde voltadas às gestantes referem-se principalmente à vigilância nutricional para o ganho de peso adequado durante o pré-natal."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Políticas de Saúde do Sistema Único de Saúde",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-075",
+    "number": 75,
+    "stem": "Dois serviços de atenção primária de um município realizam o acompanhamento clínico-laboratorial do tratamento da tuberculose ativa (TB). O número de pacientes é semelhante nos dois serviços. As taxas de perda de seguimento (30 dias sem medicação), no ano de 2022 foram:\n• Serviço A: 12%\n• Serviço B: 18%\nCom base nessas informações, assinale a alternativa correta.",
+    "options": {
+      "A": "A assistência prestada pelo serviço A é de melhor qualidade.",
+      "B": "No serviço A, o processo de atendimento é mais integral.",
+      "C": "É necessário conhecer as taxas de cura para comparação dos serviços.",
+      "D": "É necessário o ajuste por variáveis de características dos pacientes para comparação."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Estudos Epidemiológicos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-076",
+    "number": 76,
+    "stem": "Quanto ao financiamento do sistema de saúde brasileiro, assinale a alternativa correta.",
+    "options": {
+      "A": "Gastos privados com saúde em 2019 representam aproximadamente metade do gasto público.",
+      "B": "No Brasil, medicamentos são majoritariamente financiados pelo SUS, incluindo programas específicos como o Farmácia Popular.",
+      "C": "A atenção ambulatorial especializada no SUS é majoritariamente financiada pelo governo federal com uma participação equivalente dos governos estaduais e municipais.",
+      "D": "Os governos municipais têm a maior participação no financiamento das internações do SUS do que os governos estaduais e federal."
+    },
+    "answer": "C",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Financiamento em Saúde",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-077",
+    "number": 77,
+    "stem": "O gráfico a seguir mostra a evolução das notificações de violência contra a mulher no Brasil.\n\nOs casos de violência contra mulheres fazem parte da lista brasileira de doenças e agravos de notificação compulsória. Sua notificação à vigilância epidemiológica é obrigatória no Brasil. Com base nessas informações, assinale a alternativa correta.",
+    "options": {
+      "A": "A notificação de casos de violência contra mulher é importante instrumento para o conhecimento do perfil epidemiológico para que medidas importantes de promoção, prevenção, proteção e controle do agravo sejam realizadas.",
+      "B": "A notificação de casos de violência é importante instrumento de visibilidade e intervenção intersetorial sobre o caso, pois deflagra a resposta dos serviços da rede intersetorial ao caso individual.",
+      "C": "A notificação deve ser realizada com cuidado, e a mulher deve ser consultada sobre a aceitação da notificação antes de realizá-la para que haja decisão compartilhada.",
+      "D": "A notificação de casos de violência contra a mulher é importante instrumento de visibilidade e trabalho com os casos, mas deve ser ponderada em relação à segurança dos profissionais da unidade."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Vigilância em Saúde",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q077-grafico.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-078",
+    "number": 78,
+    "stem": "A Coluna 1, a seguir, apresenta os indicadores destinados à análise da situação de saúde referentes ao estado de saúde da população e aos fatores determinantes da saúde, que podem ser classificados em 6 dimensões. A Coluna 2, por sua vez, corresponde a possíveis exemplos desses indicadores.\n\nColuna 1: Dimensões\nI. Indicadores demográficos.\nII. Indicadores socioeconômicos.\nIII. Indicadores de mortalidade.\nIV. Indicadores de morbidade.\nV. Indicadores de recursos.\nVI. Indicadores de cobertura.\n\nColuna 2: Exemplos\nA. Taxa de prevalência de excesso de peso.\nB. Taxa de analfabetismo.\nC. Taxa de mortalidade infantil.\nD. Esperança de vida ao nascer.\nE. Número de médicos por habitantes.\nF. Proporção de partos cesáreos.\n\nNa mesma ordem das dimensões apresentadas, assinale a alternativa que relaciona corretamente o exemplo apresentado na Coluna 2 com a dimensão apresentada na Coluna 1.",
+    "options": {
+      "A": "I/A; II/B; III/C; IV/D; V/E; VI/F.",
+      "B": "I/A; II/B; III/C; IV/F; V/E; VI/D.",
+      "C": "I/D; II/B; III/C; IV/A; V/E; VI/F.",
+      "D": "I/C; II/B; III/A; IV/D; V/E; VI/F."
+    },
+    "answer": "C",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Medidas de saúde coletiva",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-079",
+    "number": 79,
+    "stem": "Pai traz sua filha, de 4 anos de idade, à Unidade Básica de Saúde para vacinar. Ele informa que recebeu recentemente a guarda da criança. A mãe é contra as vacinas. Na caderneta de vacinação da criança consta apenas a aplicação das vacinas BCG e hepatite B na data de nascimento dela. Assinale qual é a conduta a ser adotada.",
+    "options": {
+      "A": "Pedir autorização por escrito da mãe da criança para continuar o calendário básico de vacinação a partir do ponto em que foi interrompido.",
+      "B": "Vacinar com vacina pentavalente (3 doses), VIP (3 doses), Pneumo10v (1 dose), Meningo C (1 dose), SCRV (1 dose), hepatite A (1 dose), febre amarela (2 doses) e influenza (2 doses).",
+      "C": "Vacinar com vacina pentavalente (3 doses), VOP (3 doses), Pneumo 10v (2 doses), Meningo C (2 doses), SCRV (1 dose), hepatite A (1 dose), febre amarela (2 doses) e influenza (2 doses).",
+      "D": "Vacinar com vacina pentavalente (3 doses), VIP (3 doses), Pneumo10v (1 dose), Meningo C (1 dose), SCR (2 doses), hepatite A (1 dose), febre amarela (1 dose) e influenza (1 dose)."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Vigilância em Saúde",
+    "annulled": true,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-080",
+    "number": 80,
+    "stem": "Em 2022, as operadoras de planos e seguros de saúde passaram a ser obrigadas por lei (Lei nº 14.454/2022) a oferecer cobertura de tratamentos, mesmo que não estejam incluídos no rol de Procedimentos e Eventos em Saúde, editado pela Agência Nacional de Saúde Suplementar (ANS). Contudo, para que um tratamento fora do rol seja coberto pelo plano de saúde, o mesmo deve cumprir condicionantes. Com base nessas informações, assinale a alternativa correta.",
+    "options": {
+      "A": "A prescrição pelo médico assistente, habilitado com registro em CRM, é suficiente para determinar a cobertura.",
+      "B": "A cobertura é assegurada quando há recomendações favoráveis da Comissão Nacional de Incorporação de Tecnologias (Conitec), ou de um órgão de avaliação de tecnologias em saúde de renome internacional.",
+      "C": "A cobertura se faz obrigatória a partir da data da solicitação de registro do medicamento ou tratamento na Agência Nacional de Vigilância Sanitária.",
+      "D": "A cobertura é assegurada pelo pedido médico, objeto exclusivo para decisão liminar da Justiça."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Principais marcos legais do SUS",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-081",
+    "number": 81,
+    "stem": "TEXTO PARA AS QUESTÕES 81 E 82\nHomem, 32 anos, residente em uma grande cidade brasileira e procedente de outro país latino-americano, procura a UBS com queixa de tosse produtiva há dois meses. Nas últimas semanas, os episódios de tosse se intensificaram e, em um deles, foram vistos \"raios de sangue\" no catarro. Foi solicitada a baciloscopia do escarro, o TRM-TB, a sorologia para HIV e iniciado o tratamento de tuberculose.\n\nEm seu retorno, duas semanas depois, refere discreta melhora da tosse, mas \"continua tossindo muito\". O resultado da baciloscopia foi negativo para BAAR, enquanto resultado do TRM-TB apresentou MTB detectado e resistência à rifampicina. Assinale qual deve ser a conduta adotada para o caso.",
+    "options": {
+      "A": "Solicitar novo TRM-TB, cultura e TS, e mantê-lo em seguimento na UBS até o resultado dos exames.",
+      "B": "Solicitar novo TRM-TB, cultura e TS, e encaminhá-lo ao hospital especializado para isolamento.",
+      "C": "Solicitar cultura e TS e iniciar esquema terapêutico para TB resistente, na própria UBS.",
+      "D": "Solicitar novo TRM-TB, cultura e TS, e encaminhá-lo à referência terciária mantendo o acompanhamento na UBS."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Vigilância em Saúde",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-082",
+    "number": 82,
+    "stem": "A vigilância epidemiológica do município realizou a investigação domiciliar. A família do paciente é formada pela sua esposa, de 27 anos, sogra, de 53 anos, e filha de um mês de idade. Chegaram ao Brasil há seis meses. Nenhuma delas refere sintomatologia respiratória. A criança não recebeu nenhuma vacina. Além da solicitação de sorologia para HIV, assinale qual deve ser a conduta em relação aos contatos domiciliares do caso neste momento.",
+    "options": {
+      "A": "Tratar ILTB em todos os contatos domiciliares.",
+      "B": "Investigar ILTB nas adultas e tratar ILTB na criança.",
+      "C": "Investigar ILTB em todas e vacinar a criança com BCG.",
+      "D": "Investigar ILTB e iniciar tratamento para todas."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Vigilância em Saúde",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-083",
+    "number": 83,
+    "stem": "Depressão pós-parto é um grave problema de saúde pública que impacta negativamente a vida da mulher e da sua prole. Um estudo nacional procurou avaliar a associação entre violência por parceiro íntimo (qualquer tipo de violência incluindo física, psicológica ou sexual) e depressão pós-parto. Questionários foram empregados para avaliar violência e depressão pós-parto ao redor de 12 meses após o parto, segundo tabela a seguir:\n\nDepressão + | Depressão - | TOTAL\nViolência +: a | b | a+b\nViolência -: c | d | c+d\nTOTAL: a+c | b+d | a+b+c+d\n\nAssinale a alternativa que indica como é calculada a razão de prevalência da associação entre violência e depressão pós-parto.",
+    "options": {
+      "A": "(a/a+c)/(b/b+d).",
+      "B": "(b/b+d)/(a/a+c).",
+      "C": "(c/b+d)/(d/a+c).",
+      "D": "(d/a+c)/(b/b+d)."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Medidas de Associação e Medidas de Impacto",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-084",
+    "number": 84,
+    "stem": "A dependência de álcool é altamente prevalente no mundo, mas apenas 10% a 20% dos dependentes buscam ajuda. Um estudo recente investigou se um programa aberto de terapia cognitivo-comportamental baseado na internet (ITCC), adicionado ao tratamento usual (TU), é mais eficaz do que apenas o TU para pacientes dependentes de álcool na atenção primária. Tratou-se de um ensaio controlado randomizado (ECR) com 264 participantes que foram aleatoriamente designados para receber ITCC + TU ou TU apenas, acompanhados por 12 meses. O desfecho primário foi a média de consumo de álcool por semana em gramas avaliado aos 12 meses. Os dados foram analisados por intenção de tratar (ITT), complementado com análises por protocolo (PP). Os resultados são mostrados na tabela a seguir.\n\nTabela - Diferenças no consumo de álcool entre grupos iTCC e TU (em gramas), médias e IC de 95% segundo tipo de análise.\n\nO que significa fazer a análise por intenção de tratar e por protocolo num ECR?",
+    "options": {
+      "A": "ITT: indivíduos randomizados e não randomizados foram incluídos na análise. Já o PP: os indivíduos que não foram",
+      "B": "ITT: os indivíduos que não foram randomizados foram excluídos da análise. PP: indivíduos randomizados e não randomizados",
+      "C": "ITT: os indivíduos que sem adesão ao protocolo foram excluídos da análise. PP: todos os indivíduos randomizados foram analisados de acordo com o grupo de alocação, independentemente da adesão ao protocolo.",
+      "D": "ITT: todos os indivíduos randomizados foram analisados de acordo com o grupo de alocação, independentemente da adesão ao protocolo. Já o PP: os indivíduos sem adesão ao protocolo foram excluídos da análise."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Estudos Epidemiológicos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-085",
+    "number": 85,
+    "stem": "Uma crença frequente é de que a depressão estaria relacionada a um aumento do risco de câncer. No sentido de avaliar essa hipótese, foi realizada uma metanálise incluindo 18 estudos de coorte de incidência de câncer, com mais de 25 mil pacientes. Alguns dos resultados da metanálise foram resumidos na tabela a seguir:\n\nTabela - Associação entre o diagnóstico de depressão e câncer\nIntervalo de 95% de confiança da razão de riscos (Hazard ratio):\nMama: 0,98 (0,88 - 1,10)\nPulmão: 1,58 (1,25 - 2,00)\nCólon/reto: 1,12 (0,99 - 1,28)\nPróstata: 0,97 (0,74 - 1,26)\n\nAssinale a alternativa correta quanto aos resultados da metanálise.",
+    "options": {
+      "A": "A depressão associou-se ao risco de câncer de pulmão.",
+      "B": "A depressão associou-se ao risco de câncer de mama.",
+      "C": "A depressão associou-se ao risco de câncer nas localizações estudadas.",
+      "D": "A depressão associou-se ao risco de câncer do cólon/reto."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Medicina Baseada em Evidências",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-086",
+    "number": 86,
+    "stem": "Considerando os fenômenos epidêmicos em perspectiva histórica, assinale a alternativa correta com relação à recente pandemia da covid-19.",
+    "options": {
+      "A": "A pandemia de covid-19 não pode ser vista como um evento isolado, mas sim articulado ao contexto em que está inserido, à movimentação de homens e mulheres pelo território e às desigualdades socioeconômicas existentes, aprofundadas pelo fenômeno epidêmico.",
+      "B": "Frente à complexidade socioambiental de sua determinação, a pandemia de covid-19 encontra na explicação fisiopatológica da doença o elemento mais importante para seu controle populacional.",
+      "C": "Os expressivos progressos tecnológicos do campo médico-científico induzidos pela resposta à pandemia da covid-19 têm permitido neutralizar os efeitos das desigualdades sociais sobre a saúde, construindo formas de controle epidemiológico capazes de impedir novos surtos da doença.",
+      "D": "Diversamente de experiências anteriores, como a epidemia de influenza do início do século XX, os aspectos socioeconômicos e culturais não representaram desafios relevantes para o enfrentamento da covid-19."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Processos Endêmicos e Epidêmico (Endemias e Epidemias)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-087",
+    "number": 87,
+    "stem": "O fluxo a seguir refere-se à assistência em uma Unidade de Pronto Atendimento (UPA) e considera diretrizes para regulação da urgência e emergência:\n\nNa figura apresentada, o ponto do atendimento considerado \"Setor Estratégico\" da UPA refere-se a",
+    "options": {
+      "A": "acolhimento com classificação de risco.",
+      "B": "unidade interna de regulação pré-hospitalar.",
+      "C": "sistema de fechamento seletivo da porta de emergência.",
+      "D": "setor de triagem do grau de vulnerabilidade do paciente."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Políticas de Saúde do Sistema Único de Saúde",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q087-fluxo.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-088",
+    "number": 88,
+    "stem": "Paciente foi internada em hospital terciário com quadro avançado de aids. Mulher jovem, 24 anos, usuária de drogas injetáveis. Apresentou diagnóstico da infecção pelo HIV por ocasião do parto de sua filha há 2 anos. Teve alta da maternidade sem tratamento, mas com a recomendação de procurar um serviço especializado para realizar seguimento adequado, o qual ela não realizou. Em relação à situação apresentada, assinale a alternativa correta.",
+    "options": {
+      "A": "A paciente é de grupo de risco, com maior probabilidade de desenvolver a doença.",
+      "B": "O comportamento de risco da paciente foi determinante para o desfecho de sua infecção.",
+      "C": "A vulnerabilidade social da paciente foi o único componente determinante de seu adoecimento.",
+      "D": "O componente programático da vulnerabilidade da paciente fica evidente."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Processo saúde-doença",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-089",
+    "number": 89,
+    "stem": "Joana, 24 anos, casada, comparece à consulta de pré-natal na UBS com 35 semanas de gestação. Está na segunda gestação e teve um aborto de primeiro trimestre anterior. Joana quer discutir planejamento reprodutivo e relata não desejar ter outros filhos. Assinale a alternativa correta.",
+    "options": {
+      "A": "A laqueadura tubária pode ser oferecida como opção, mas não poderá ser realizada no pós-parto imediato.",
+      "B": "A laqueadura tubária pode ser oferecida como opção, desde que haja consentimento do parceiro.",
+      "C": "A laqueadura tubária não pode ser oferecida como opção, uma vez que Joana não tem 2 filhos vivos.",
+      "D": "A laqueadura tubária não pode ser oferecida como opção, já que Joana tem 24 anos."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Políticas de Saúde do Sistema Único de Saúde",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-090",
+    "number": 90,
+    "stem": "Luiz tem 27 anos de idade e é muito conhecido na sua UBS, pois comparece ao acolhimento semanalmente com diversas queixas como epigastralgia, palpitações, cefaleia, insônia e fadiga. Todos os exames de sangue e eletrocardiogramas vieram normais. Em reunião de equipe, a médica decide marcar uma consulta para Luiz e entender o que está acontecendo. \"Doutora, sinto muita fadiga o tempo inteiro, falta de energia mesmo, muito sono o dia inteiro, alem disso vira e mexe meu peito dói, parece que estou sufocado, e é só comer qualquer coisa que já dói o estômago\". Ao perguntar sobre a rotina, Luiz conta que está trabalhando como motorista de aplicativo 14 horas por dia. Está com dívidas contraídas durante a pandemia de coronavírus e tem recebido diariamente ligações de cobradores. Os problemas financeiros têm atrapalhado seu relacionamento com a esposa e com seu filho, que tem um problema grave de audição. Para economizar dinheiro, Luiz pula o almoço e se alimenta com \"qualquer besteira\". Toma muito café para \"enganar a fome e o cansaço\". Durante a consulta, Luiz parecia ansioso. Exame físico sem alterações. Não fuma e não tem nenhum antecedente clínico. Ao compreender a história de Luiz, a médica orienta que os sintomas podem estar relacionados à sobrecarga de trabalho e conversa sobre maneiras de reduzir a jornada. Marca uma consulta com a assistente social para verificar a elegibilidade do filho de Luiz para benefícios sociais.\n\nAssinale quais dos seguintes registros SOAP dessa consulta estão mais adequados.",
+    "options": {
+      "A": "Sobrecarga de trabalho e epigastralgia, ansioso, transtorno de ansiedade generalizado, redução da jornada de trabalho.",
+      "B": "Fadiga e dor no peito, exame físico normal, sobrecarga no trabalho e problemas financeiros, escuta, marco consulta com assistente social.",
+      "C": "Fadiga e dor no peito, ansioso, sintomas ansiosos, escuta, marco consulta com assistente social.",
+      "D": "Epigastralgia e cansaço, exame físico normal, sintomas ansiosos, escuta, marco consulta com assistente social."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Medicina de Família e Comunidade",
+    "topico": "Método Clínico Centrado na Pessoa",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-091",
+    "number": 91,
+    "stem": "Tatiana é adolescente de 15 anos de idade que foi trazida pela prima, também de 15 anos, para realizar um teste de gravidez na UBS. Tatiana conta que mantém relações sexuais com um garoto de 19 anos, mas que este não é o seu namorado. Sua primeira relação ocorreu aos 12 anos com um garoto da vizinhança de 14 anos. Ao longo da vida teve 4 parceiros. Usa preservativo de forma inconsistente, mas todas as relações foram consentidas. Ultima relação sexual há 1 semana foi sem preservativo. Não deseja que seus pais, nem sua agente comunitária de saúde, saibam sobre sua vida sexual. Exame físico: PA 110x65 mmHg (percentil 50), 1,60 m de altura, peso 50 kg (IMC: 19, Z-Score entre -1, 0). Teste de gravidez negativo e testes rápidos para IST negativos. Considerando as informações obtidas até o momento e o Estatuto da Criança e do Adolescente, além de acolher Tatiana e orientar sobre uso de preservativo, assinale qual a conduta correta neste momento.",
+    "options": {
+      "A": "Orientar que você precisa revelar a situação a um adulto responsável devido aos riscos para a saúde e porque ela tem menos de 16 anos de idade.",
+      "B": "Notificar ao Conselho Tutelar por se tratar de adolescente com múltiplas parcerias sexuais e que pode estar sendo vítima de violência sem ter crítica sobre a situação.",
+      "C": "Oferecer contraceptivo e profilaxia pré-exposição e acordar um retorno, sem necessidade de revelar a um adulto responsável.",
+      "D": "Realizar profilaxia pós-exposição e oferecer contraceptivo, mas explicar que só pode iniciar com autorização de um adulto responsável."
+    },
+    "answer": "C",
+    "area": "Medicina Preventiva",
+    "assunto": "Ética Médica",
+    "topico": "Código de Ética Médica (CEM)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-092",
+    "number": 92,
+    "stem": "Pedro, 43 anos de idade, pardo, hipertenso, em uso de losartana 50 mg/dia. Apresenta-se com cefaleia nucal há 2 h. Sintomas têm sido recorrentes há 1 ano, em aperto, de moderada intensidade, com duração de 2 horas a 4 dias, sem fatores de piora. Nega outros sintomas ou antecedentes pessoais. Pai faleceu de acidente vascular cerebral há 5 anos. Nega uso de álcool ou outras drogas. Não dormiu bem à noite, ansioso, pois está muito preocupado que esse sintoma seja causado por um derrame ou câncer. Gostaria que o médico solicitasse uma tomografia de crânio. Exame físico: Pressão arterial de 150x92 mmHg, IMC: 28 kg/m2. Exame neurológico sem alterações.\n\nConsiderando o quadro de campos para o relacionamento pessoa-médico apresentado, assinale qual conduta exemplificaria a prevenção quaternária nesse caso.",
+    "options": {
+      "A": "Aumentar a dose do anti-hipertensivo a fim de reduzir o risco cardiovascular.",
+      "B": "Prescrever amitriptilina a fim de prevenir novas crises.",
+      "C": "Não solicitar exames de imagem, pois essa prática poderia sobrecarregar financeiramente o sistema de saúde.",
+      "D": "Não solicitar tomografia, pois achados incidentais poderiam causar mais mal do que bem."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Medicina de Família e Comunidade",
+    "topico": "Princípios da Medicina de Família e Comunidade",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q092-jamoulle.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-093",
+    "number": 93,
+    "stem": "A hipótese de associação entre a infecção pelo vírus varicela zoster (VZV) e demência foi testada, por intermédio de uma metanálise. Foram incluídos 9 estudos, com mais de 3 milhões de participantes. Os principais resultados encontram-se na tabela apresentada.\n\nAssinale a alternativa correta quanto aos resultados da metanálise.",
+    "options": {
+      "A": "O uso de medicação antiviral não influenciou a associação entre infecção pelo VZV e demência.",
+      "B": "A metanálise comprovou a associação entre infecção pelo VZV e demência.",
+      "C": "A associação entre infecção pelo VZV e demência manteve-se independentemente do delineamento do estudo.",
+      "D": "A associação entre infecção pelo VZV e demência foi observada nos dois continentes incluídos no estudo."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Medicina Baseada em Evidências",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-094",
+    "number": 94,
+    "stem": "Ratael, 17 anos, pardo, heterossexual, católico, vem à consulta médica referindo que está precisando de um antidepressivo ou de \"ritalina\" para sua falta de atenção ou que deve ser autista. Há 3 meses refere que tem estado mais triste, com sentimento de que não vai conseguir ser aprovado nas disciplinas da faculdade. Sente-se incompetente por não estar conseguindo estudar e não se concentrar. Não apresenta queixas anteriores durante a infância ou alterações no desenvolvimento. Tinha bom rendimento escolar até o Ensino Médio. Passou em quatro vestibulares e mudou-se de uma cidade pequena do interior de Goiás para iniciar a faculdade de Economia em São Paulo. Atualmente está morando na residência estudantil, dividindo quarto com outro estudante. Sua renda provém principalmente de uma bolsa de iniciação científica de 700 reais. Alimenta-se no Restaurante Universitário e recebe algum auxílio financeiro complementar da família de 500 reais. É o primeiro filho a cursar Ensino Superior. Considera desistir do curso que tanto desejou, acha que não é para ele, pois se percebe muito diferente dos seus colegas de turma, já que \"eles costumam viajar para o exterior nas férias e frequentar determinados lugares em que sinto que não são para mim, na minha cidade não era assim com meus amigos\". Refere que em uma das aulas um professor comentou que \"ele não está conseguindo acompanhar o curso porque deve ser cotista\". Rafael está muito preocupado, pois sua família tem feito todo o esforço financeiro para ele se manter em São Paulo. Considerando a história de vida de Rafael, assinale quais aspectos sociais podem auxiliar na compreensão de sua experiência de doença.",
+    "options": {
+      "A": "Racismo, psicofobia, patologização da neurodiversidade.",
+      "B": "Racismo, desigualdade econômica, medicalização da vida.",
+      "C": "Migração, psicofobia, medicalização da vida.",
+      "D": "Migração, desigualdade econômica, patologização da neurodiversidade."
+    },
+    "answer": "B",
+    "area": "Medicina Preventiva",
+    "assunto": "Epidemiologia",
+    "topico": "Processo saúde-doença",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-095",
+    "number": 95,
+    "stem": "Antônio, 41 anos de idade, queixa-se de dificuldade para manter e iniciar a ereção há 8 meses. Refere que tem sentido menos vontade de ter relações sexuais e que não tem conseguido atingir o orgasmo. Antônio tem estado mais triste, desanimado, cansado com o trabalho, com dificuldade para manter o sono e se divertir. Nega desejo sexual por outras pessoas e também parou de se masturbar. Mantém ereção matinal. É tabagista (50 anos-maço), consome álcool (5 doses aos finais de semana). Vânia tem 47 anos, é esposa de Antônio. Refere que nunca teve interesse sexual por Antônio e nem por outras pessoas, teve poucas parcerias ao longo da vida. Sente-se saudável e satisfeita com sua vida sexual, corpo e relacionamento. Parou de menstruar há 2 anos, apresenta fogachos. Nega comorbidades, nega uso de álcool, tabaco ou situações de violência. Considerando o caso, indique qual a fase do ciclo da resposta sexual está alterada e uma possível explicação para sua escolha.",
+    "options": {
+      "A": "Antônio: fase de excitação, alterações vasculares decorrentes do tabagismo; Vânia: nenhuma, possivel orientação sexual assexual.",
+      "B": "Antônio: fase da excitação, provável quadro de depressão; Vânia: fase do desejo, poucas experiências sexuais.",
+      "C": "Antônio: fase de desejo, fadiga decorrente de sobrecarga no trabalho; Vânia: fase do desejo, sintomas decorrentes de síndrome climatérica.",
+      "D": "Antônio: fase de desejo, provável quadro de depressão; Vânia: nenhuma, possível orientação sexual assexual."
+    },
+    "answer": "D",
+    "area": "Medicina Preventiva",
+    "assunto": "Medicina de Família e Comunidade",
+    "topico": "Método Clínico Centrado na Pessoa",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-096",
+    "number": 96,
+    "stem": "O estudo longitudinal de Wiewel e Col, realizado em Nova lorque, analisou o efeito de características do serviço de saúde na efetividade da terapia antirretroviral da infecção pelo HIV. O estudo mostrou que os serviços e consultórios com maior número de pacientes apresentam maiores taxas de alcance e manutenção de supressão viral. Assinale qual é a afirmação que melhor explica esse achado.",
+    "options": {
+      "A": "Serviços com maior número de pacientes propiciam maior experiência clínica e de convivência com a diversidade dos pacientes para os médicos e toda a equipe de assistência.",
+      "B": "Serviços com maior número de pacientes têm mais chance de ter maior proporção de pacientes com imunidade preservada e, portanto, maior chance de supressão viral mais rápida.",
+      "C": "A variabilidade na proporção de pacientes novos com imunidade comprometida entre os serviços é um dos fatores explicativos.",
+      "D": "Não é possível levantar hipóteses explicativas sem conhecer as taxas de adesão ao tratamento de cada serviço."
+    },
+    "answer": "A",
+    "area": "Medicina Preventiva",
+    "assunto": "Sistema Único de Saúde (SUS)",
+    "topico": "Atenção Primária à Saúde (APS) no Brasil",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-097",
+    "number": 97,
+    "stem": "Paciente, nuligesta, 32 anos, deseja engravidar. Sem comorbidades e exame físico normal, realiza o exame ultrassonográfico pélvico descrito:\nExame realizado no 17º dia do ciclo:\n• Útero antevertido, com contornos regulares.\n• Medidas uterinas: 8,2 x 4,9 x 4,3 cm (L x T × AP). Volume: 86,4 cm (normal até 90 cm'). Presença de imagem compatível com leiomioma com 2,0 cm de diâmetro, intramural em parede uterina anterior (classificação FIGO = 5).\n• Endométrio linear centrado com espessura de 1,3 cm (normal até 1,4 cm).\n• Ovário direito com textura característica e contornos normais. Presença de corpo lúteo medindo 1,9 x 1,7 x 1,4 cm.\n• Medidas do ovário: 3,2 x 2,8 x 2,6 cm. Volume: 11,6 cm3 (normal até 10 cm3).\n• Ovário esquerdo com textura característica e contornos normais. Medidas do ovário: 3,4 x 2,7 x 2,2 cm. Volume: 10,1 cm3 (normal até 10 cm3).\n• Ausência de líquido livre na cavidade peritoneal.\nConsiderando o desejo reprodutivo e o diagnóstico de leiomioma uterino, assinale qual é a conduta mais adequada para essa paciente.",
+    "options": {
+      "A": "Miomectomia.",
+      "B": "Seguimento clínico.",
+      "C": "Embolização mioma.",
+      "D": "Análogo GnRH."
+    },
+    "answer": "B",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia geral",
+    "topico": "Miomatose uterina",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-098",
+    "number": 98,
+    "stem": "Paciente, 40 anos, refere sangramento menstrual intenso em quantidade e com duração aumentada, além de piora progressiva há 6 meses. Apresenta diagnóstico de cirrose hepática Child B decorrente de hepatite C. Especular: sem alterações. Toque vaginal: útero antevertido, móvel, contornos regulares, volume normal. Assinale qual é a alternativa mais adequada para o controle do sangramento por via oral.",
+    "options": {
+      "A": "Estradiol.",
+      "B": "Progesterona.",
+      "C": "Ácido tranexâmico.",
+      "D": "Ácido mefenâmico."
+    },
+    "answer": "C",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia endócrina",
+    "topico": "Sangramento uterino anormal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-099",
+    "number": 99,
+    "stem": "Paciente, 55 anos, com antecedente de câncer de mama tratado há 2 anos por quadrantectomia mamária e radioterapia, sem necessidade de quimioterapia, mas em uso regular de inibidor de aromatase. Considerando que os efeitos colaterais dessa medicação se fizeram presentes, assinale qual é o medicamento adequado.",
+    "options": {
+      "A": "Bifosfonato.",
+      "B": "Enoxaparina.",
+      "C": "Omeprazol.",
+      "D": "Espironolactona."
+    },
+    "answer": "A",
+    "area": "Ginecologia",
+    "assunto": "Mastologia",
+    "topico": "Câncer de mama",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-100",
+    "number": 100,
+    "stem": "Paciente, 20 anos, queixa-se de cólica intensa durante os ciclos menstruais regulares e mensais. Nega outras comorbidades ou uso de medicamentos, com exceção de anti-inflamatórios e analgésicos por ocasião da dor menstrual. Avaliação clínica geral sem alterações. Exame ginecológico especular com conteúdo vaginal habitual, colo epitelizado; toque vaginal colo fibroelástico, fórnices vaginais regulares sem massas identificáveis e dor no fórnice vaginal posterior, útero antevertido e volume regular, não doloroso, regiões anexiais sem achados significativos. Assinale qual é a conduta mais adequada neste momento.",
+    "options": {
+      "A": "Inserir sistema intrauterino de progesterona.",
+      "B": "Iniciar contraceptivo hormonal oral combinado.",
+      "C": "Prosseguir na investigação com ressonância magnética pélvica.",
+      "D": "Prosseguir na investigação com ultrassom e preparo intestinal."
+    },
+    "answer": "B",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia geral",
+    "topico": "Endometriose",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-101",
+    "number": 101,
+    "stem": "Paciente, 24 anos, deseja contracepção. Refere cólica e cefaleia intensa que se inicia cerca de 2 dias antes da menstruação e piora com o início do fluxo. Eventualmente apresenta náusea, mas nega sintomas visuais. Exame clínico e ginecológico sem alterações. Assinale qual é a alternativa mais adequada.",
+    "options": {
+      "A": "Preservativo.",
+      "B": "Dispositivo intrauterino cobre.",
+      "C": "Pílula progestagênica contínua.",
+      "D": "Pílula estrogênica-progestagênica cíclica."
+    },
+    "answer": "C",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia endócrina",
+    "topico": "Planejamento familiar",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-102",
+    "number": 102,
+    "stem": "Paciente, 55 anos, queixa-se de sensação de ardência genital, dor à relação sexual e corrimento continuo, em pequena quantidade, amarelado e com odor desagradável. Refere menopausa aos 50 anos, diabetes controlada com dapaglitozina. Ao exame clínico, apresenta vulva com pouca piliticação, menor elasticidade da pele, pequenas fissuras e petéquias em fúrcula; especular com vagina de menor rugosidade e conteúdo fluido, amarelado em pequena quantidade. Colo epitelizado e apagado. O exame do conteúdo vaginal apresenta pH 5,0, teste de aminas negativo, presença de células para-basais e leucócitos. Assinale qual é o tratamento mais adequado.",
+    "options": {
+      "A": "Clindamicina vaginal.",
+      "B": "Metronidazol vaginal.",
+      "C": "Progesterona vaginal.",
+      "D": "Estradiol vaginal."
+    },
+    "answer": "D",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia endócrina",
+    "topico": "Climatério",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-103",
+    "number": 103,
+    "stem": "Paciente, 28 anos, deseja engravidar. Apresenta ciclos menstruais irregulares com intervalo entre 36 e 46 dias. Faz uso de preservativo até o momento. Apresenta atividade sexual regular com seu companheiro. Assinale qual das seguintes orientações poderá proporcionar um ciclo ovulatório regular.",
+    "options": {
+      "A": "GnRh, 5 dias a partir do 1º dia pós menstruação.",
+      "B": "Clomifeno, 5 dias a partir do 5º dia pós menstruação.",
+      "C": "Estrogênio, 5 dias a partir do 5° dia pós menstruação.",
+      "D": "Progesterona, 10 dias a partir do 14º dia pós menstruação."
+    },
+    "answer": "B",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia endócrina",
+    "topico": "Síndrome dos ovários policísticos",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-104",
+    "number": 104,
+    "stem": "Paciente, 67 anos, apresenta dispneia secundária à ascite volumosa. Após paracentese de 6 litros, realiza-se exame de imagem com identificação de massa heterogênea em ambos os ovários e implantes peritoniais. A citologia do líquido ascítico é compatível com adenocarcinoma. Assinale qual é o parâmetro associado a pior prognóstico para esta paciente.",
+    "options": {
+      "A": "Volume da ascite.",
+      "B": "Tumor ovariano bilateral.",
+      "C": "Presença de implante peritoneal.",
+      "D": "Células neoplásicas no líquido ascítico."
+    },
+    "answer": "C",
+    "area": "Ginecologia",
+    "assunto": "Oncologia ginecológica",
+    "topico": "Tumores anexiais e câncer de ovário",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-105",
+    "number": 105,
+    "stem": "Paciente, 50 anos, com queixa de ondas de calor e sudorese noturna que se iniciaram há 6 meses com a menopausa. Apresenta hipertensão arterial sistêmica tratada com anlodipino 5mg, diabetes controlada com metformina 1000 mg e hipercolesterolemia tratada com rosuvastatina 10 mg. Assinale qual é o benefício para o uso da via transdérmica para a terapia hormonal.",
+    "options": {
+      "A": "Maior eficácia no controle dos sintomas.",
+      "B": "Melhor perfil de risco trombogênico.",
+      "C": "Redução do efeito endometrial.",
+      "D": "Menor risco para o câncer mamário."
+    },
+    "answer": "B",
+    "area": "Ginecologia",
+    "assunto": "Ginecologia endócrina",
+    "topico": "Climatério",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-106",
+    "number": 106,
+    "stem": "Paciente, 23 anos, realiza colpocitologia oncótica com os seguintes resultados:\n• Interpretação diagnóstica: Lesão intraepitelial escamosa de alto grau associada a sinais sugestivos de infecção por HPV.\n• Microbiologia: Bacilos supracitoplasmáticos sugestivos de Gardnerella/Mobiluncus sp.\nO exame especular desta paciente é apresentado a seguir:\nAssinale qual substância foi aplicada ao colo uterino.",
+    "options": {
+      "A": "Solução salina.",
+      "B": "Solução de iodo.",
+      "C": "Ácido bórico.",
+      "D": "Ácido acético."
+    },
+    "answer": "D",
+    "area": "Ginecologia",
+    "assunto": "Oncologia ginecológica",
+    "topico": "Rastreamento do câncer de colo do útero",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q106-colo.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-107",
+    "number": 107,
+    "stem": "Paciente, 45 anos, queixa-se de perda urinária em pequena quantidade há 3 semanas. Refere cirurgia para correção de incontinência urinária há 3 meses, com controle dos sintomas e micção espontânea. Nega dor.\n• Exame clínico: FC: 80 bpm; FR: 12 ipm; PA: 110x60 mmHg; IMC: 23kg/m'.\n• Abdome: plano, flácido, com palpação de tumoração regular, de consistência cístia, dolorosa, 4 cm acima da sínfese púbica.\n• Ginecológico: pilificação adequada para a idade; especular: conteúdo vaginal habitual, colo uterino epitelizado; toque vaginal: vagina prévia de 2 dedos, elástica, colo regular, tumoração cística, dolorosa, ocupando a pelve e limitando a identificação do útero.\nAssinale a conduta adequada neste momento.",
+    "options": {
+      "A": "Sondagem vesical.",
+      "B": "Exame de sedimento e cultura de urina.",
+      "C": "Ultrassonografia pélvica.",
+      "D": "Punção guiada por ultrassom."
+    },
+    "answer": "A",
+    "area": "Ginecologia",
+    "assunto": "Uroginecologia",
+    "topico": "Incontinência urinária",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-108",
+    "number": 108,
+    "stem": "Paciente de 30 anos, 2G1PN, com 32 semanas, com excesso de trabalho atual, com queixa de dor em baixo ventre há cerca de uma semana, com piora nos últimos dois dias. Relata não estar dormindo bem, com dor e aumento da movimentação fetal à noite, principalmente ao mudar de decúbito. Questionada ativamente, relata dor também junto a vagina, na projeção dos grandes lábios. Ao exame físico, BEG, descorada 1+/4+, hidratada, anictérica, acianótica, eupneica, afebril. PA: 120x80 mmHg; AU: 33 cm; DU ausente; Foco: 144 bpm. Abdome flácido, ruídos hidroaéreos presentes e normais. Ligamento inguinal e pube dolorosos à palpação. Toque: colo grosso, posterior, impérvio, indolor ao toque. Assinale qual é a estrutura anatômica que pode ser responsabilizada pela origem desta dor.",
+    "options": {
+      "A": "1.",
+      "B": "II.",
+      "C": "III.",
+      "D": "IV."
+    },
+    "answer": "A",
+    "area": "Obstetrícia",
+    "assunto": "Obstetrícia fisiológica",
+    "topico": "Modificações fisiológicas da gestação",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q108-ligamentos.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-109",
+    "number": 109,
+    "stem": "Gestante de 35 anos, 4G3PN, 37 semanas pela data da última menstruação, com pré-natal irregular, comparece ao pronto-socorro com queixa de dor em baixo ventre e em região lombar, principalmente quando fica muito tempo em pé. Ao exame físico: IMC: 34 kg/m2; PA: 120x80 mmHg. Região lombar com contratura muscular e sensível à palpação. AU: 41 cm. Foco: 148 bpm. DU ausente. Escava completamente ocupada. Manobra de Leopold demonstra mobilidade. Edema Negativo. Toque: colo grosso, posterior, 2 cm de dilatação. Assinale qual é a melhor conduta.",
+    "options": {
+      "A": "Indicar analgesia endovenosa e reavaliação.",
+      "B": "Avaliar peso fetal no ultrassom obstétrico.",
+      "C": "Aguardar trabalho de parto espontâneo.",
+      "D": "Orientar afastamento laborativo."
+    },
+    "answer": "B",
+    "area": "Obstetrícia",
+    "assunto": "Pré-natal",
+    "topico": "Assistência pré-natal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-110",
+    "number": 110,
+    "stem": "TEXTO PARA AS QUESTÕES 110 E 111\nPaciente de 20 anos, primigesta, 40 semanas, admitida em trabalho de parto com contrações dolorosas rítmicas há 4 horas. Ao exame físico: AU: 38 cm. DU: 3 contrações/10 minutos. Foco: 148 bpm, com acelerações transitórias. Dorso à esquerda, escava completamente ocupada, sulco cervical bem nítido no polo inferior do dorso. Toque: colo médio, medianizado, pérvio para 3 cm, bolsa integra.\n\nAssinale qual das alternativas contraindicaria a tentativa de parto vaginal.",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "answer": "D",
+    "area": "Obstetrícia",
+    "assunto": "Parto",
+    "topico": "Bacia obstétrica e pelvimetria",
+    "annulled": true,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q110-pelve.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-111",
+    "number": 111,
+    "stem": "A paciente entra em trabalho de parto alguns dias depois e observa-se, no período expulsivo, após a exteriorização do polo cefálico, a retração do mesmo contra o períneo materno entre as contrações, conforme fotografia a seguir:\nAssinale a alternativa correta que representa a melhor conduta neste momento.",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "answer": "D",
+    "area": "Obstetrícia",
+    "assunto": "Parto",
+    "topico": "Distocia – funcional, de objeto, de trajeto",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q111-distocia.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-112",
+    "number": 112,
+    "stem": "Primigesta de 20 anos de idade, com 25 semanas de gravidez, com queixa de nauseas, vomitos, dor abdominal e mal-estar há cerca de 12 horas. Ao exame físico: REG, corada, desidratada 2+/4+, anictérica, acianótica, afebril. FR: 20 ipm, FC: 108 bpm, PA: 120x70 mmHg. Abdome flácido, descompressão brusca negativa. AU: 28 cm. BCF: 160 bpm. DU ausente. Traz os exames colhidos no início do pré-natal, conforme tabela a seguir:\n\nHemograma | Sorologias | Bioquímicos\nHb: 11,3 g/dL | Toxoplasmose IgG+ IgM- | Glicemia (jejum): 130 mg/dL\nHt: 32,1% | Rubéola IgG+ IgM- | TSH: 1,6 mU/mL\nLeucócitos: 7.600/mm3 | Hepatite B: AgHbs- Anti-Hbs+ Anti-Hbc-\nPlaquetas: 240.000/mm3 | HIV: Negativo, Anti-treponema: Negativo\n\nAssinale qual é a melhor hipótese diagnóstica neste momento.",
+    "options": {
+      "A": "Apendicite.",
+      "B": "Cetoacidose diabética.",
+      "C": "Hiperêmese gravídica.",
+      "D": "Esteatose hepática aguda."
+    },
+    "answer": "B",
+    "area": "Obstetrícia",
+    "assunto": "Doenças associadas à gestação",
+    "topico": "Diabetes na gestação (DMG)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-113",
+    "number": 113,
+    "stem": "Paciente, 26 anos, refere ter palpado tumor na mama direita e está preocupada com a possibilidade de ser câncer. Nuligesta, uso de contraceptivo hormonal oral combinado, sem comorbidades ou uso de medicamentos. Assinale qual é a forma adequada de palpação das mamas.",
+    "options": {
+      "A": "Paciente sentada em frente ao examinador, com elevação dos membros superiores acima da cabeça.",
+      "B": "Paciente sentada em frente ao examinador, com os membros superiores ao longo do tronco e as mãos espalmadas nas cristas ilíacas.",
+      "C": "Paciente em decúbito dorsal, com elevação dos membros superiores acima da cabeça.",
+      "D": "Paciente em decúbito dorsal, com os membros superiores ao longo do corpo."
+    },
+    "answer": "C",
+    "area": "Ginecologia",
+    "assunto": "Mastologia",
+    "topico": "Introdução e doenças benignas da mama",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-114",
+    "number": 114,
+    "stem": "Paciente, 36 anos, queixa-se de corrimento vaginal e sensação de ardência vaginal há 10 dias, com odor desagradável e piora após relação sexual. Nega comorbidades ou uso de medicamentos. Nuligesta, refere uso de DIU de cobre há 3 anos. Parceiro sexual único há 12 meses. Exame ginecológico: especular com conteúdo vaginal branco-acinzentado, em grande quantidade, bolhoso e com odor pronunciado, colo epitelizado, apresentado a seguir.\nToque vaginal: útero em anteversoflexão, volume habitual, móvel, indolor à mobilização, ausência de massas anexiais. Realizou-se o exame bacterioscópico. Assinale qual o achado compativel com a principal hipótese diagnóstica.",
+    "options": {
+      "A": "(A)",
+      "B": "(B)",
+      "C": "(C)",
+      "D": "(D)"
+    },
+    "answer": "A",
+    "area": "Ginecologia",
+    "assunto": "Infecções em ginecologia",
+    "topico": "Vulvovaginites",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q114-vaginite.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-115",
+    "number": 115,
+    "stem": "TEXTO PARA AS QUESTÕES 115 A 120\nPrimigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n115\nA orientação deverá envolver quais vacinas ao longo do pré-\nnatal, além da influenza já tomada durante campanha\nvacinal?",
+    "options": {
+      "A": "Tríplice viral, covid-19 e DTPa.",
+      "B": "Hepatite B, covid-19 e DTPa.",
+      "C": "Hepatite B, tríplice viral e DTPa.",
+      "D": "Hepatite B, tríplice viral e covid-19."
+    },
+    "answer": "B",
+    "area": "Obstetrícia",
+    "assunto": "Pré-natal",
+    "topico": "Assistência pré-natal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-116",
+    "number": 116,
+    "stem": "O alvo de idade gestacional para o parto, caso a gravidez não tenha intercorrência, é de:",
+    "options": {
+      "A": "34 semanas.",
+      "B": "36 semanas.",
+      "C": "37 semanas.",
+      "D": "40 semanas."
+    },
+    "answer": "C",
+    "area": "Obstetrícia",
+    "assunto": "Doenças associadas à gestação",
+    "topico": "Síndromes Hipertensivas da Gestação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-117",
+    "number": 117,
+    "stem": "Considerando os resultados fetais, qual seria a proposta para o controle ideal da pressão arterial ao longo da gravidez?",
+    "options": {
+      "A": "Normalização da PA no 1º trimestre.",
+      "B": "Normalização da PA no 3º trimestre.",
+      "C": "Manutenção da PA ≤ 160x100 mmHg ao longo da gravidez, sem indicação de normalização.",
+      "D": "Redução em 20% da PA média, independentemente da idade gestacional."
+    },
+    "answer": "A",
+    "area": "Obstetrícia",
+    "assunto": "Doenças associadas à gestação",
+    "topico": "Síndromes Hipertensivas da Gestação",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-118",
+    "number": 118,
+    "stem": "Considere que a paciente veio para consulta neste dia (10/12/2023). Toda a rotina pré-natal foi realizada adequadamente com resultados dentro dos parâmetros de normalidade. Assinale qual é o próximo exame para avaliação fetal que deve ser solicitado, de acordo com a idade gestacional.",
+    "options": {
+      "A": "Ecografia com Doppler de artérias uterinas.",
+      "B": "Ecografia morfológica.",
+      "C": "Ecografia de colo uterino.",
+      "D": "Ecocardiograma fetal."
+    },
+    "answer": "D",
+    "area": "Obstetrícia",
+    "assunto": "Pré-natal",
+    "topico": "Assistência pré-natal",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-119",
+    "number": 119,
+    "stem": "A paciente retorna em consulta com 32 semanas de gravidez, com queixa de aumento de conteúdo vaginal há 1 dia. Refere que teve perda urinária espontânea há 4 horas e que, desde então, sente a vagina úmida. Em avaliação obstétrica, tem-se o seguinte achado:\nConsiderando o diagnóstico observado, assinale qual é a conduta profilática imediata em relação ao uso de ampicilina.",
+    "options": {
+      "A": "Aguardar pesquisa de Streptococcus do grupo B para introdução de ampicilina endovenosa.",
+      "B": "Manter ampicilina endovenosa por 48 horas, sem reiniciar se entrar em trabalho de parto.",
+      "C": "Manter ampicilina endovenosa por 48 horas; reiniciar se entrar em trabalho de parto.",
+      "D": "Manter ampicilina endovenosa por 7 dias; reiniciar se entrar em trabalho de parto."
+    },
+    "answer": "C",
+    "area": "Obstetrícia",
+    "assunto": "Intercorrências obstétricas /obstetrícia patológica",
+    "topico": "Rotura prematura de membranas ovulares (RPM)",
+    "annulled": false,
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-q119-bolsa.png"
+    ],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
+  },
+  {
+    "id": "usp-sp-2024-120",
+    "number": 120,
+    "stem": "Uma hora após a admissão, a paciente apresenta queixa de dor em baixo ventre, com contrações irregulares. Os exames aboratoriais demonstram Hb: 11,8 g/dL; Ht: 32,2%; leucócitos: 15.000/mm3; PCR: 20. Considerando boa vitalidade fetal, assinale qual é a conduta obstétrica.",
+    "options": {
+      "A": "Indicar o parto imediato.",
+      "B": "Parto após corticoterapia.",
+      "C": "Inibição de trabalho de parto.",
+      "D": "Controle clínico e laboratorial."
+    },
+    "answer": "A",
+    "area": "Obstetrícia",
+    "assunto": "Intercorrências obstétricas /obstetrícia patológica",
+    "topico": "Rotura prematura de membranas ovulares (RPM)",
+    "annulled": false,
+    "images": [],
+    "source": "usp-sp-2024",
+    "examId": "usp-sp-2024",
+    "examName": "USP-SP 2024"
   }
 ]);
