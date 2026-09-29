@@ -161,6 +161,14 @@ if (require.main === module) {
         const p = problemaTaxonomia(q);
         if (p) erros.push(`${q.id}: ${p}`);
     }
+    // Nome da prova: mesmo examId → mesmo examName/source, sem caractere de
+    // outro alfabeto (o OCR do pipeline já trocou "INEP" por "인EP").
+    const porProva = {};
+    for (const q of window.TRYCKTRACK_QUESTION_BANK || []) {
+        if (/[^\u0000-\u024F\u2010-\u203A]/.test(`${q.examName || ''}${q.source || ''}`)) erros.push(`${q.id}: nome da prova com caractere estranho (${q.examName} | ${q.source})`);
+        if (q.examId) (porProva[q.examId] ??= new Set()).add(`${q.examName} | ${q.source}`);
+    }
+    for (const [examId, nomes] of Object.entries(porProva)) if (nomes.size > 1) erros.push(`${examId}: nomes de prova diferentes entre as questões: ${[...nomes].join(' ; ')}`);
     const total = (window.TRYCKTRACK_QUESTION_BANK || []).length;
     console.log(`${total} questões, ${erros.length} problema(s)`);
     erros.forEach(e => console.log('  - ' + e));
