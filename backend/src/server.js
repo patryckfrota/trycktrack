@@ -8,10 +8,14 @@ import { createOsceRepository, MemoryOsceRepository } from './osceRepository.js'
 import { requireFirebaseAuth } from './firebaseAuth.js';
 import { createSyncRepository } from './syncRepository.js';
 import { adminRouter } from './adminRoutes.js';
+import { requireAdminAuth } from './adminAuth.js';
 import { getPrismaClient } from './prismaClient.js';
 import { autoWrapAsyncRoutes } from './asyncHandler.js';
 
 const app = express();
+// Atrás do proxy do Render o req.ip seria o do proxy, e o limitador de taxa
+// trataria todos os usuários como um só. 1 = confia só no primeiro salto.
+app.set('trust proxy', 1);
 autoWrapAsyncRoutes(app);
 
 // Mesma allowlist do cloudflare-worker/worker.js (ALLOWED_ORIGINS) — GitHub
@@ -153,10 +157,10 @@ app.get('/api/osce/me/history', requireFirebaseAuth(), async (req, res) => {
   res.json({ attempts });
 });
 
-// Import escreve na biblioteca compartilhada de estações — exige
-// alguém autenticado (não precisa de papel de admin, que o schema ainda
-// não modela; barra automação anônima despejando conteúdo na biblioteca).
-app.post('/api/osce/import/preview', requireFirebaseAuth(), async (req, res) => {
+// Import escreve na biblioteca compartilhada de estações — só admin
+// (ADMIN_EMAILS). Qualquer pessoa consegue criar conta, então "logado"
+// não basta para alterar conteúdo compartilhado.
+app.post('/api/osce/import/preview', requireAdminAuth(), async (req, res) => {
   try {
     const preview = previewStationImport(req.body, new Set(await osceRepository.listFingerprints()));
     const { stations, ...safePreview } = preview;
@@ -166,7 +170,7 @@ app.post('/api/osce/import/preview', requireFirebaseAuth(), async (req, res) => 
   }
 });
 
-app.post('/api/osce/import', requireFirebaseAuth(), async (req, res) => {
+app.post('/api/osce/import', requireAdminAuth(), async (req, res) => {
   try {
     const result = await importStations(req.body, osceRepository);
     res.status(201).json(result);
