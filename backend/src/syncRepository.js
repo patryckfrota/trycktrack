@@ -84,8 +84,18 @@ export class PrismaSyncRepository {
         return queue;
     }
 
+    // Questão fundida/removida ainda aparece na fila local de quem a tinha
+    // no navegador. A FK rejeitaria a transação inteira e o app descarta
+    // o que estava pendente, então só gravamos ids que existem no banco.
+    async existingQuestionIds(ids) {
+        if (!ids.length) return new Set();
+        const rows = await this.client.question.findMany({ where: { id: { in: ids } }, select: { id: true } });
+        return new Set(rows.map(row => row.id));
+    }
+
     async pushReviewEntries(userId, entries) {
-        const ids = Object.keys(entries || {});
+        const known = await this.existingQuestionIds(Object.keys(entries || {}));
+        const ids = Object.keys(entries || {}).filter(id => known.has(id));
         if (!ids.length) return this.getReviewQueue(userId);
         const existingRows = await this.client.userQuestionReview.findMany({
             where: { userId, questionId: { in: ids } }
@@ -116,8 +126,11 @@ export class PrismaSyncRepository {
 
     async pushResponses(userId, responses) {
         if (!responses?.length) return;
+        const known = await this.existingQuestionIds([...new Set(responses.map(response => response.questionId))]);
+        const valid = responses.filter(response => known.has(response.questionId));
+        if (!valid.length) return;
         await this.client.questionResponse.createMany({
-            data: responses.map(response => ({
+            data: valid.map(response => ({
                 userId,
                 questionId: response.questionId,
                 chosen: response.chosen ?? null,
