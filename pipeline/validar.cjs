@@ -96,6 +96,10 @@ function validarItem(item, banco, vistosNoLote) {
 
     if (textos(item).some(t => CONTROLE.test(t))) erro('texto', 'caractere de controle invisível no texto (quebra o import)');
 
+    // Alternativas que são figuras ("Imagem A"...) sem nenhuma imagem anexada: a
+    // questão fica impossível de responder (ver PROCESSO-INGESTAO.md, E4b).
+    if (letras.length && letras.every(l => /^imagem\s+[a-e]\.?$/i.test(String(q.options[l]).trim())) && !(q.images || []).length) erro('imagem', 'alternativas são "Imagem A–D", mas a questão não tem imagem anexada');
+
     for (const img of q.images || []) {
         if (!fs.existsSync(path.join(ROOT, img))) erro('imagem', `imagem não encontrada: ${img}`);
     }

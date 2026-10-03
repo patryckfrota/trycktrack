@@ -6,6 +6,8 @@ de conteúdo.** Quando uma lição puder ser checada por máquina, ela vira test
 no `pipeline/validar.cjs` e é marcada como `[automatizada]` aqui — a partir
 daí o erro é barrado sozinho.
 
+**Antes de ingerir qualquer prova, siga `pipeline/PROCESSO-INGESTAO.md`** (etapas com critério de aprovação; nasceu da auditoria de 2026-09-29).
+
 Formato de cada lição: regra · de onde veio · quantas vezes apareceu.
 
 ---
