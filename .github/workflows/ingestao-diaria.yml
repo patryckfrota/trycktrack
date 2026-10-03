@@ -5,7 +5,7 @@
 #
 # Segredos necessários (Settings → Secrets and variables → Actions):
 #   GEMINI_API_KEY  — chave da camada gratuita do Google AI Studio
-#   DATABASE_URL    — Postgres (Neon), pra sincronizar o painel
+#   DATABASE_URL    — Postgres (Supabase), pra sincronizar o painel
 # Variável opcional: QUESTOES_POR_DIA (padrão 25; ajuste ao limite gratuito).
 name: Ingestão diária de provas
 

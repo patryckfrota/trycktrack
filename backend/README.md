@@ -7,28 +7,31 @@ prévia local em `localStorage`; esta API permite sincronizar o plano por conta.
 2. Rode `npm install` e `npx prisma migrate dev --name init`.
 3. Rode `npm run dev`.
 
-## Conexão com o banco: driver HTTP do Neon
+## Banco: Supabase (Postgres)
 
-A porta 5432 (Postgres) fica bloqueada em bastante rede doméstica/corporativa
-(foi o caso aqui — `nc` na porta 5432 dava timeout enquanto a 443 conectava na
-hora). Por isso `src/prismaClient.js` usa `@prisma/adapter-neon` em vez da
-conexão TCP direta: o `PrismaClient` fala com o Neon por HTTPS/WebSocket
-(porta 443), então funciona em qualquer rede que já deixa passar tráfego
-HTTPS normal. `src/osceRepository.js`, `src/syncRepository.js`,
-`scripts/import-questions.js` e `prisma/seed.js` já usam
-`getPrismaClient()` — não crie `new PrismaClient()` direto em código novo.
+Desde 2026-09-29 o banco é o Postgres do Supabase (região São Paulo); antes
+era o Neon, que fica só como backup por algumas semanas. Duas variáveis:
 
-**Isso não cobre `npx prisma migrate deploy`/`migrate dev`** — esses comandos
-rodam no motor do Prisma (não passam pelo driver JS) e sempre tentam conexão
-direta na 5432. Se sua rede bloquear essa porta, aplique o SQL das migrações
-manualmente pelo SQL Editor do [console.neon.tech](https://console.neon.tech)
-(cada arquivo em `prisma/migrations/*/migration.sql`, na ordem das pastas) e
-depois marque como aplicadas sem rodar de novo:
-```bash
-npx prisma migrate resolve --applied <nome_da_pasta_da_migracao>
-```
-Sem isso, a primeira vez que `migrate deploy` rodar numa rede sem bloqueio vai
-tentar recriar as tabelas e falhar com "já existe".
+- `DATABASE_URL`: pooler em modo transação (porta 6543, com `?pgbouncer=true`).
+  É a que o app usa (Render, GitHub Actions e `backend/.env`).
+- `DIRECT_URL`: pooler em modo sessão (porta 5432). Só o `prisma migrate` usa;
+  o Render e o CI não precisam dela.
+
+Se a senha tiver caractere especial, ele precisa ir codificado na URL
+(`*` vira `%2A`, `@` vira `%40`, `?` vira `%3F`).
+
+`src/prismaClient.js` ainda usa `@prisma/adapter-neon`; ele fala com qualquer
+Postgres e foi testado contra o Supabase, então foi mantido. Os repositórios
+e scripts chamam `getPrismaClient()`, não crie `new PrismaClient()` direto.
+
+Migrations: `npx prisma migrate deploy` (usa `DIRECT_URL`). Importar questões:
+`npm run import:questions` (carrega o `.env`; `node scripts/...` direto não
+carrega). O import faz upsert em lote e **mantém** questões órfãs que têm
+progresso de usuário (remapeie o progresso antes de removê-las).
+
+O plano Free do Supabase não faz backup automático: o workflow
+`backup-banco.yml` gera um dump criptografado toda semana (ver o cabeçalho
+dele para restaurar).
 
 `POST /api/trails/:trailId/recalculate` recebe os temas, as respostas de um
 diagnóstico ou simulado e os temas já concluídos. A resposta devolve apenas os
