@@ -5983,10 +5983,16 @@
   "usp-sp-2024-119",
   "usp-sp-2024-120"
 ]);
-    const pendingReviewTexts = new Set([...pendingReviewIds].map(id => explanations[explanationAliases[id] || id]).filter(Boolean));
+    // Pendente = o texto que APARECE para a questão é um rascunho não revisado. Questão com alias
+    // mostra o texto do id canônico (já revisado), então só conta o canônico — nunca o texto do alias.
+    // O mesmo texto pode existir numa entrada já revisada (o writer copia o corpo para o id canônico e para o
+    // alias): nesse caso ele NÃO é pendente. Só é pendente o texto que existe apenas em ids pendentes.
+    const reviewedTexts = new Set(Object.entries(explanations).filter(([id]) => !pendingReviewIds.has(id)).map(([, texto]) => texto));
+    const pendingReviewTexts = new Set([...pendingReviewIds].map(id => explanations[id]).filter(texto => texto && !reviewedTexts.has(texto)));
     bank.forEach(question => {
         if (!question.explanation) return;
-        if (!pendingReviewIds.has(question.id) && !pendingReviewTexts.has(question.explanation)) return;
+        const canonical = explanationAliases[question.id] || question.id;
+        if (!pendingReviewIds.has(canonical) && !pendingReviewTexts.has(question.explanation)) return;
         question.explanationPending = true;
         question.explanationDraft = question.explanation;
         question.explanation = question.annulled
