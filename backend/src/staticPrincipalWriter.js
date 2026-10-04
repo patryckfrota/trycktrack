@@ -17,7 +17,8 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const EXPLANATIONS_FILE = process.env.TRYCKTRACK_EXPLANATIONS_FILE || path.join(ROOT, 'question-explanations.js');
+// lido a cada chamada (e não uma vez só) para os testes poderem apontar para uma cópia temporária
+const explanationsFile = () => process.env.TRYCKTRACK_EXPLANATIONS_FILE || path.join(ROOT, 'question-explanations.js');
 const PREFIX = 'const explanations = ';
 const ALIASES_PREFIX = 'const explanationAliases = ';
 
@@ -90,15 +91,15 @@ function extractArrayLiteral(text, prefix) {
 }
 
 export function updatePrincipalAnnulled(questionId, annulled) {
-    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    const text = fs.readFileSync(explanationsFile(), 'utf-8');
     const { before, literal, after } = extractArrayLiteral(text, ANNULLED_PREFIX);
     const ids = new Set(parseObjectLiteral(literal));
     if (annulled) ids.add(questionId); else ids.delete(questionId);
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids], null, 2) + after);
+    fs.writeFileSync(explanationsFile(), before + JSON.stringify([...ids], null, 2) + after);
 }
 
 export function updatePrincipalExplanations(updates) {
-    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    const text = fs.readFileSync(explanationsFile(), 'utf-8');
     const { before, literal, after } = extractObjectLiteral(text, PREFIX);
     const explanations = parseObjectLiteral(literal);
     const aliasesLiteral = extractObjectLiteral(text, ALIASES_PREFIX).literal;
@@ -112,7 +113,7 @@ export function updatePrincipalExplanations(updates) {
         }
     }
 
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify(explanations, null, 2) + after);
+    fs.writeFileSync(explanationsFile(), before + JSON.stringify(explanations, null, 2) + after);
 }
 
 export function updatePrincipalExplanation(questionId, body) {
@@ -125,16 +126,22 @@ export function updatePrincipalExplanation(questionId, body) {
 const PENDING_PREFIX = 'const pendingReviewIds = new Set(';
 
 function updatePendingIds(mutate) {
-    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    const text = fs.readFileSync(explanationsFile(), 'utf-8');
     const { before, literal, after } = extractArrayLiteral(text, PENDING_PREFIX);
     const ids = new Set(parseObjectLiteral(literal));
     mutate(ids);
-    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids].sort(), null, 2) + after);
+    fs.writeFileSync(explanationsFile(), before + JSON.stringify([...ids].sort(), null, 2) + after);
     return ids;
 }
 
+/** Mapa alias → id canônico (o app mostra a explicação do canônico). */
+export function listExplanationAliases() {
+    const text = fs.readFileSync(explanationsFile(), 'utf-8');
+    return parseObjectLiteral(extractObjectLiteral(text, ALIASES_PREFIX).literal);
+}
+
 export function listPendingExplanations() {
-    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    const text = fs.readFileSync(explanationsFile(), 'utf-8');
     return [...parseObjectLiteral(extractArrayLiteral(text, PENDING_PREFIX).literal)];
 }
 

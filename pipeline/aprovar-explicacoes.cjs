@@ -16,7 +16,9 @@ const path = require('path');
     if (!args.length || args[0] === '--listar') {
         const por = {};
         pendentes.forEach(id => { const k = id.replace(/-\d+$/, ''); por[k] = (por[k] || 0) + 1; });
-        console.log(`${pendentes.length} explicações pendentes de revisão:`);
+        const aliases = w.listExplanationAliases();
+        const atrasDeAlias = pendentes.filter(id => aliases[id]).length;
+        console.log(`${pendentes.length} ids pendentes; ${pendentes.length - atrasDeAlias} aparecem de fato no app (${atrasDeAlias} estão atrás de alias: o app mostra a explicação do id canônico, que já foi revisada):`);
         Object.entries(por).sort((a, b) => b[1] - a[1]).forEach(([k, n]) => console.log(`  ${String(n).padStart(4)}  ${k}`));
         return;
     }

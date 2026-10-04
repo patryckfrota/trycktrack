@@ -27,7 +27,8 @@ function carregar(file, banco) {
 test('pendente mostra só o gabarito, preserva o rascunho; aprovar libera o texto', async () => {
     const file = copiaTemporaria();
     const w = await import('./staticPrincipalWriter.js');
-    const id = w.listPendingExplanations().find(x => x.startsWith('usp-sp-2024-'));
+    const id = 'usp-sp-2024-001';
+    w.markExplanationsPending([id]);   // cenário próprio: não depende do que está pendente hoje
     const banco = () => [{ id, answer: 'C', annulled: false, options: {}, stem: 'x' }];
 
     let q = carregar(file, banco()).TRYCKTRACK_QUESTION_BANK[0];
@@ -45,8 +46,15 @@ test('pendente mostra só o gabarito, preserva o rascunho; aprovar libera o text
 test('anulada pendente não mostra letra; markExplanationsPending volta a esconder', async () => {
     const file = copiaTemporaria();
     const w = await import('./staticPrincipalWriter.js');
-    const id = w.listPendingExplanations().filter(x => x.startsWith('usp-sp-2024-'))[1];
-    const q = carregar(file, [{ id, answer: null, annulled: true, options: {}, stem: 'x' }]).TRYCKTRACK_QUESTION_BANK[0];
+    // procura um id cujo texto seja único (texto igual ao de uma entrada já revisada nunca é pendente, por desenho)
+    let id = null, q = null;
+    for (let n = 2; n < 40 && !id; n++) {
+        const cand = `usp-sp-2024-${String(n).padStart(3, '0')}`;
+        w.markExplanationsPending([cand]);
+        const t = carregar(file, [{ id: cand, answer: null, annulled: true, options: {}, stem: 'x' }]).TRYCKTRACK_QUESTION_BANK[0];
+        if (t.explanationPending) { id = cand; q = t; } else w.approveExplanations([cand]);
+    }
+    assert.ok(id, 'nenhum id de teste com texto único encontrado');
     assert.match(q.explanation, /^Questão anulada pela banca/);
     assert.doesNotMatch(q.explanation, /alternativa [A-E]/);
 
