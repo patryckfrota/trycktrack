@@ -143,8 +143,8 @@ O que ele confere, **por código** (nada disso depende de modelo de linguagem):
 - **Fidelidade** (`pipeline/fidelidade.cjs`): enunciado e cada alternativa existem no
   PDF do caderno. Se o PDF não existe ou **não tem camada de texto legível** (como o da
   USP-SP 2024: só símbolos), o resultado é **"fidelidade NÃO verificada" = reprovado**.
-  Para PDF sem texto, faça OCR com outra ferramenta e salve em
-  `tmp/pdfs/<examId>-caderno.ocr.txt` (o portão usa esse texto), ou confira visualmente.
+  Para PDF sem texto rode `bash pipeline/ocr-caderno.sh <examId>` (tesseract + português;
+  gera `tmp/pdfs/<examId>-caderno.ocr.txt`, que o portão passa a usar), ou confira visualmente.
   A transcrição que o próprio motor gerou **não** vale como fonte independente.
 - **Gabarito oficial** (`pipeline/gabarito-oficial.cjs`): lê o PDF do gabarito
   definitivo (USP, ENARE/FGV, AMRIGS, PSU-CE, Revalida, CEREM-BA, SES-PE, USP 2023).

@@ -36,8 +36,12 @@ function textosPorPagina(examId) {
     let paginas = null;
     try {
         const dir = path.join(ROOT, 'tmp', 'pdfs');
-        const arq = fs.existsSync(dir) ? fs.readdirSync(dir).find(f => f.startsWith(`${examId}-caderno`) && f.endsWith('.pdf')) : null;
-        if (arq) paginas = cp.execFileSync('pdftotext', ['-raw', path.join(dir, arq), '-'], { maxBuffer: 1 << 27 }).toString().split('\f').map(norm);
+        const todos = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+        // OCR (páginas separadas por \f) tem prioridade: serve quando o PDF não tem texto legível.
+        const ocr = todos.find(f => f.startsWith(`${examId}-caderno`) && f.endsWith('.ocr.txt'));
+        const arq = todos.find(f => f.startsWith(`${examId}-caderno`) && f.endsWith('.pdf'));
+        if (ocr) paginas = fs.readFileSync(path.join(dir, ocr), 'utf8').split('\f').map(norm);
+        else if (arq) paginas = cp.execFileSync('pdftotext', ['-raw', path.join(dir, arq), '-'], { maxBuffer: 1 << 27 }).toString().split('\f').map(norm);
     } catch { paginas = null; }
     cachePaginas.set(examId, paginas);
     return paginas;
