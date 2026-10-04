@@ -5591,7 +5591,8 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Infecções Necrotizantes",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q029-fournier.png"
+      "assets/usp-sp/img/usp-sp-2024-029-1.png",
+      "assets/usp-sp/img/usp-sp-2024-029-2.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -5620,7 +5621,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-031",
     "number": 31,
-    "stem": "Homem, 30 anos, foi vítima de ferimento por projétil de arma de fogo no pescoço. Admissão no Centro de Trauma:\nA: Conversando. Hálito etílico. SpO2: 96% com máscara de oxigênio.\nB: MV presente bilateralmente. Ausência de enfisema de subcutâneo torácico.\nC: PA: 140x70 mmHg; FC: 105 bpm; tempo de enchimento capilar de 1 segundo.\nD: Escala de coma de Glasgow de 15 (agitado).\nE: Ferimento na face lateral do pescoço (Zona II). Ausência de enfisema de subcutâneo, hematoma expansivo ou sangramento ativo.\n\nRealizada analgesia com melhora da dor e agitação. Assinale qual é a melhor conduta neste momento do atendimento.",
+    "stem": "Homem, 30 anos, foi vítima de ferimento por projétil de arma de fogo no pescoço. Admissão no Centro de Trauma:\nA: Conversando. Hálito etílico. SpO2: 96% com máscara de oxigênio.\nB: MV presente bilateralmente. Ausência de enfisema de subcutâneo torácico.\nC: PA: 140x70 mmHg; FC: 105 bpm; tempo de enchimento capilar de 1 segundo.\nD: Escala de coma de Glasgow de 15 (agitado).\nE: Ferimento demonstrado na figura a seguir. Ausência de enfisema de subcutâneo.\n\nRealizada analgesia com melhora da dor e agitação. Assinale qual é a melhor conduta neste momento do atendimento.",
     "options": {
       "A": "Exploração local e sutura.",
       "B": "Cervicotomia exploradora.",
@@ -5662,7 +5663,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-033",
     "number": 33,
-    "stem": "TEXTO PARA AS QUESTÕES 33 E 34\nHomem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nQual é a classificação de Gustilo-Anderson para a fratura exposta e qual a conduta na Sala de Trauma, respectivamente?",
+    "stem": "TEXTO PARA AS QUESTÕES 33 E 34\nHomem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, conforme imagem a seguir.\n\nO paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nQual é a classificação de Gustilo-Anderson para a fratura exposta e qual a conduta na Sala de Trauma, respectivamente?",
     "options": {
       "A": "2 - Alinhamento e imobilização.",
       "B": "2 - Limpeza da ferida com SF 0,9%, alinhamento e imobilização.",
@@ -5684,7 +5685,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-034",
     "number": 34,
-    "stem": "Homem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nApós o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir:\nAssinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
+    "stem": "Homem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, conforme imagem a seguir.\nO paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nApós o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir:\nAssinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
     "options": {
       "A": "Craniotomia; Laparotomia; Drenagem torácica.",
       "B": "Craniotomia; Drenagem torácica; Laparotomia.",
@@ -5697,7 +5698,8 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Avaliação Inicial: Vias aéreas, Ventilação e Choque",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q034-tc.png"
+      "assets/usp-sp/img/usp-sp-2024-034-1.png",
+      "assets/usp-sp/img/usp-sp-2024-034-2.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -5728,7 +5730,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-036",
     "number": 36,
-    "stem": "Homem, 37 anos, refere aumento do volume da coxa esquerda que associa com trauma local ocorrido há 6 meses. Nega dor local ou limitação de movimentação. Ao exame físico apresenta massa fibroelástica na face posterior da coxa esquerda de 15 x 10 cm. Não apresenta restrição de movimentação e pulsos presentes e normais. Realizada ressonância magnética do membro, que evidenciou lesão profunda em compartimento posterior da coxa, em contato com o nervo ciático. Foi submetido à biópsia que revelou tratar-se de sarcoma de alto grau. Assinale qual deve ser a próxima conduta na condução do caso.",
+    "stem": "Homem, 37 anos, refere aumento do volume da coxa esquerda que associa com trauma local ocorrido há 6 meses. Nega dor local ou limitação de movimentação. Ao exame físico apresenta massa fibroelástica na face posterior da coxa esquerda, conforme imagem a seguir. Não apresenta restrição de movimentação e pulsos presentes e normais. Realizada ressonância magnética do membro, que evidenciou lesão profunda em compartimento posterior da coxa, em contato com o nervo ciático. Foi submetido à biópsia que revelou tratar-se de sarcoma de alto grau. Assinale qual deve ser a próxima conduta na condução do caso.",
     "options": {
       "A": "Cintilografia óssea.",
       "B": "Tomografia de tórax e abdome.",
@@ -5750,7 +5752,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-037",
     "number": 37,
-    "stem": "Homem, 43 anos, está internado há 35 dias devido à ressecção intestinal extensa em uso de nutrição parenteral exclusiva. Fez uso pós-operatório de ceftriaxone e metronidazol por 5 dias e, desde então, está sem antibiótico. Há 3 horas apresentou temperatura de 38,5 °C. Ao exame físico, encontra-se em bom estado geral; FC: 80 bpm; PA: 130x80 mmHg; perfusão periférica normal; ausculta pulmonar sem alterações; abdome flácido, indolor e com a ferida operatória sem sinais infecciosos. A inspeção do sítio do cateter revela hiperemia local e saída de secreção purulenta pelo óstio. Exames laboratoriais: Hb: 10,2 g/dL | Leucócitos: 11.330/mm3 | PCR: 20 mg/L. Solicitada coleta de hemocultura. Com base nessas informações, assinale qual é a conduta mais adequada neste momento.",
+    "stem": "Homem, 43 anos, está internado há 35 dias devido à ressecção intestinal extensa em uso de nutrição parenteral exclusiva. Fez uso pós-operatório de ceftriaxone e metronidazol por 5 dias e, desde então, está sem antibiótico. Há 3 horas apresentou temperatura de 38,5 °C. Ao exame físico, encontra-se em bom estado geral; FC: 80 bpm; PA: 130x80 mmHg; perfusão periférica normal; ausculta pulmonar sem alterações; abdome flácido, indolor e com a ferida operatória sem sinais infecciosos. A inspeção do sítio do cateter encontra-se na imagem a seguir. Exames laboratoriais: Hb: 10,2 g/dL | Leucócitos: 11.330/mm3 | PCR: 20 mg/L. Solicitada coleta de hemocultura. Com base nessas informações, assinale qual é a conduta mais adequada neste momento.",
     "options": {
       "A": "Manter cateter e iniciar anfotericina e vancomicina.",
       "B": "Manter cateter e aguardar resultado da hemocultura.",
@@ -5763,7 +5765,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Suporte Nutricional Parenteral",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q037-cateter.png"
+      "assets/usp-sp/img/usp-sp-2024-037-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -5772,7 +5774,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-038",
     "number": 38,
-    "stem": "Mulher, 64 anos, está internada na unidade coronariana há 20 dias após parada cardiorrespiratória secundária a infarto agudo do miocárdio. Evoluiu com disfunção cardíaca e desde então, está tomando dobutamina e noradrenalina. Há 1 dia cursou com distensão abdominal e leve dor difusa. Ao exame físico encontra-se orientada, com SpO2 de 95% em ar ambiente; FC: 80 bpm; PA: 120x70 mmHg; ausculta pulmonar sem alterações; abdome distendido, doloroso à palpação profunda, sem irritação peritoneal, ruídos hidroaéreos diminuídos. Toque retal sem alterações.\n• Exames laboratoriais:\nHb: 9,8 g/dL | Leucócitos: 19.471/mm3 | PCR: 272 mg/L (de 3 dias atrás era de 30 mg/L) | Cr: 1,7 mg/dL | Ureia: 60 mg/dL | Amilase: 232 U/L | Lipase: 190 U/L | K+: 4,1 mEq/L | Na+: 143 mEq/L\n\nRealizada tomografia de abdome apresentada a seguir, mostrando espessamento parietal do cólon e pneumatose intestinal sem oclusão de tronco arterial mesentérico. Assinale qual é a principal hipótese diagnóstica.",
+    "stem": "Mulher, 64 anos, está internada na unidade coronariana há 20 dias após parada cardiorrespiratória secundária a infarto agudo do miocárdio. Evoluiu com disfunção cardíaca e desde então, está tomando dobutamina e noradrenalina. Há 1 dia cursou com distensão abdominal e leve dor difusa. Ao exame físico encontra-se orientada, com SpO2 de 95% em ar ambiente; FC: 80 bpm; PA: 120x70 mmHg; ausculta pulmonar sem alterações; abdome distendido, doloroso à palpação profunda, sem irritação peritoneal, ruídos hidroaéreos diminuídos. Toque retal sem alterações.\n• Exames laboratoriais:\nHb: 9,8 g/dL | Leucócitos: 19.471/mm3 | PCR: 272 mg/L (de 3 dias atrás era de 30 mg/L) | Cr: 1,7 mg/dL | Ureia: 60 mg/dL | Amilase: 232 U/L | Lipase: 190 U/L | K+: 4,1 mEq/L | Na+: 143 mEq/L\n\nRealizada tomografia de abdome apresentada a seguir. Assinale qual é a principal hipótese diagnóstica.",
     "options": {
       "A": "Síndrome de Ogilvie.",
       "B": "Pancreatite aguda necrohemorrágica.",
@@ -6221,7 +6223,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Classificação",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q059-pele.png"
+      "assets/usp-sp/img/usp-sp-2024-059-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -6230,7 +6232,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-060",
     "number": 60,
-    "stem": "Mulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, medindo cerca de 5 cm. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas na lesão.\n\nConsiderando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
+    "stem": "TEXTO PARA AS QUESTÕES 59 E 60\nMulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, conforme figura apresentada. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas.\n\nConsiderando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
     "options": {
       "A": "Realização de baciloscopia, teste rápido e exame histopatológico nos contactantes.",
       "B": "Orientação de autoexame dos contactantes, moradores da mesma habitação há 2 anos.",
@@ -6242,7 +6244,9 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "assunto": "Hanseníase",
     "topico": "Avaliação e conduta dos contatos",
     "annulled": false,
-    "images": [],
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-060-1.png"
+    ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
     "examName": "USP-SP 2024"
@@ -6255,7 +6259,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
       "A": "Candidose; pseudo-hifas e esporos.",
       "B": "Tínea do corpo; hifas artrosporadas.",
       "C": "Eritrasma; Corynebacterium minutissimum.",
-      "D": "Pitiríase versicolor; Molossezia globose."
+      "D": "Pitiríase versicolor; Malassezia globose."
     },
     "answer": "A",
     "area": "Dermatologia",
@@ -6263,7 +6267,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Dermatomicoses",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q061-raspado.png"
+      "assets/usp-sp/img/usp-sp-2024-061-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -6284,7 +6288,9 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "assunto": "Dermatoses infecciosas",
     "topico": "Dermatomicoses",
     "annulled": false,
-    "images": [],
+    "images": [
+      "assets/usp-sp/img/usp-sp-2024-062-1.png"
+    ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
     "examName": "USP-SP 2024"
@@ -6722,8 +6728,8 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "number": 84,
     "stem": "A dependência de álcool é altamente prevalente no mundo, mas apenas 10% a 20% dos dependentes buscam ajuda. Um estudo recente investigou se um programa aberto de terapia cognitivo-comportamental baseado na internet (ITCC), adicionado ao tratamento usual (TU), é mais eficaz do que apenas o TU para pacientes dependentes de álcool na atenção primária. Tratou-se de um ensaio controlado randomizado (ECR) com 264 participantes que foram aleatoriamente designados para receber ITCC + TU ou TU apenas, acompanhados por 12 meses. O desfecho primário foi a média de consumo de álcool por semana em gramas avaliado aos 12 meses. Os dados foram analisados por intenção de tratar (ITT), complementado com análises por protocolo (PP). Os resultados são mostrados na tabela a seguir.\n\nTabela - Diferenças no consumo de álcool entre grupos iTCC e TU (em gramas), médias e IC de 95% segundo tipo de análise.\n\nO que significa fazer a análise por intenção de tratar e por protocolo num ECR?",
     "options": {
-      "A": "ITT: indivíduos randomizados e não randomizados foram incluídos na análise. Já o PP: os indivíduos que não foram",
-      "B": "ITT: os indivíduos que não foram randomizados foram excluídos da análise. PP: indivíduos randomizados e não randomizados",
+      "A": "ITT: indivíduos randomizados e não randomizados foram incluídos na análise. Já o PP: os indivíduos que não foram randomizados foram excluídos da análise.",
+      "B": "ITT: os indivíduos que não foram randomizados foram excluídos da análise. PP: indivíduos randomizados e não randomizados foram incluídos na análise.",
       "C": "ITT: os indivíduos que sem adesão ao protocolo foram excluídos da análise. PP: todos os indivíduos randomizados foram analisados de acordo com o grupo de alocação, independentemente da adesão ao protocolo.",
       "D": "ITT: todos os indivíduos randomizados foram analisados de acordo com o grupo de alocação, independentemente da adesão ao protocolo. Já o PP: os indivíduos sem adesão ao protocolo foram excluídos da análise."
     },
@@ -6793,7 +6799,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Políticas de Saúde do Sistema Único de Saúde",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q087-fluxo.png"
+      "assets/usp-sp/img/usp-sp-2024-087-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -6924,7 +6930,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-094",
     "number": 94,
-    "stem": "Ratael, 17 anos, pardo, heterossexual, católico, vem à consulta médica referindo que está precisando de um antidepressivo ou de \"ritalina\" para sua falta de atenção ou que deve ser autista. Há 3 meses refere que tem estado mais triste, com sentimento de que não vai conseguir ser aprovado nas disciplinas da faculdade. Sente-se incompetente por não estar conseguindo estudar e não se concentrar. Não apresenta queixas anteriores durante a infância ou alterações no desenvolvimento. Tinha bom rendimento escolar até o Ensino Médio. Passou em quatro vestibulares e mudou-se de uma cidade pequena do interior de Goiás para iniciar a faculdade de Economia em São Paulo. Atualmente está morando na residência estudantil, dividindo quarto com outro estudante. Sua renda provém principalmente de uma bolsa de iniciação científica de 700 reais. Alimenta-se no Restaurante Universitário e recebe algum auxílio financeiro complementar da família de 500 reais. É o primeiro filho a cursar Ensino Superior. Considera desistir do curso que tanto desejou, acha que não é para ele, pois se percebe muito diferente dos seus colegas de turma, já que \"eles costumam viajar para o exterior nas férias e frequentar determinados lugares em que sinto que não são para mim, na minha cidade não era assim com meus amigos\". Refere que em uma das aulas um professor comentou que \"ele não está conseguindo acompanhar o curso porque deve ser cotista\". Rafael está muito preocupado, pois sua família tem feito todo o esforço financeiro para ele se manter em São Paulo. Considerando a história de vida de Rafael, assinale quais aspectos sociais podem auxiliar na compreensão de sua experiência de doença.",
+    "stem": "Rafael, 17 anos, pardo, heterossexual, católico, vem à consulta médica referindo que está precisando de um antidepressivo ou de \"ritalina\" para sua falta de atenção ou que deve ser autista. Há 3 meses refere que tem estado mais triste, com sentimento de que não vai conseguir ser aprovado nas disciplinas da faculdade. Sente-se incompetente por não estar conseguindo estudar e não se concentrar. Não apresenta queixas anteriores durante a infância ou alterações no desenvolvimento. Tinha bom rendimento escolar até o Ensino Médio. Passou em quatro vestibulares e mudou-se de uma cidade pequena do interior de Goiás para iniciar a faculdade de Economia em São Paulo. Atualmente está morando na residência estudantil, dividindo quarto com outro estudante. Sua renda provém principalmente de uma bolsa de iniciação científica de 700 reais. Alimenta-se no Restaurante Universitário e recebe algum auxílio financeiro complementar da família de 500 reais. É o primeiro filho a cursar Ensino Superior. Considera desistir do curso que tanto desejou, acha que não é para ele, pois se percebe muito diferente dos seus colegas de turma, já que \"eles costumam viajar para o exterior nas férias e frequentar determinados lugares em que sinto que não são para mim, na minha cidade não era assim com meus amigos\". Refere que em uma das aulas um professor comentou que \"ele não está conseguindo acompanhar o curso porque deve ser cotista\". Rafael está muito preocupado, pois sua família tem feito todo o esforço financeiro para ele se manter em São Paulo. Considerando a história de vida de Rafael, assinale quais aspectos sociais podem auxiliar na compreensão de sua experiência de doença.",
     "options": {
       "A": "Racismo, psicofobia, patologização da neurodiversidade.",
       "B": "Racismo, desigualdade econômica, medicalização da vida.",
@@ -7084,7 +7090,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-102",
     "number": 102,
-    "stem": "Paciente, 55 anos, queixa-se de sensação de ardência genital, dor à relação sexual e corrimento continuo, em pequena quantidade, amarelado e com odor desagradável. Refere menopausa aos 50 anos, diabetes controlada com dapaglitozina. Ao exame clínico, apresenta vulva com pouca piliticação, menor elasticidade da pele, pequenas fissuras e petéquias em fúrcula; especular com vagina de menor rugosidade e conteúdo fluido, amarelado em pequena quantidade. Colo epitelizado e apagado. O exame do conteúdo vaginal apresenta pH 5,0, teste de aminas negativo, presença de células para-basais e leucócitos. Assinale qual é o tratamento mais adequado.",
+    "stem": "Paciente, 55 anos, queixa-se de sensação de ardência genital, dor à relação sexual e corrimento continuo, em pequena quantidade, amarelado e com odor desagradável. Refere menopausa aos 50 anos, diabetes controlada com dapagliflozina. Ao exame clínico, apresenta vulva com pouca pilificação, menor elasticidade da pele, pequenas fissuras e petéquias em fúrcula; especular com vagina de menor rugosidade e conteúdo fluido, amarelado em pequena quantidade. Colo epitelizado e apagado. O exame do conteúdo vaginal apresenta pH 5,0, teste de aminas negativo, presença de células para-basais e leucócitos. Assinale qual é o tratamento mais adequado.",
     "options": {
       "A": "Clindamicina vaginal.",
       "B": "Metronidazol vaginal.",
@@ -7177,7 +7183,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Rastreamento do câncer de colo do útero",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q106-colo.png"
+      "assets/usp-sp/img/usp-sp-2024-106-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -7219,7 +7225,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Modificações fisiológicas da gestação",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q108-ligamentos.png"
+      "assets/usp-sp/img/usp-sp-2024-108-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -7261,7 +7267,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Bacia obstétrica e pelvimetria",
     "annulled": true,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q110-pelve.png"
+      "assets/usp-sp/img/usp-sp-2024-110-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -7345,7 +7351,8 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Vulvovaginites",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q114-vaginite.png"
+      "assets/usp-sp/img/usp-sp-2024-114-1.png",
+      "assets/usp-sp/img/usp-sp-2024-114-2.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",

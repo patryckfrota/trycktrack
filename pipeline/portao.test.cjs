@@ -52,6 +52,14 @@ Gabarito   C    B    —    D    D`;
     assert.equal(g.total, 5);
 });
 
+test('gabarito Revalida: tachado (U+0336) e travessão também são anulada', () => {
+    const txt = 'Questão    1    2    3    4    5\nGabarito   C    \u0336    \u2013    D    D';
+    const g = parseGabaritoTexto('revalida', txt);
+    assert.equal(g.respostas[2], 'ANULADA');
+    assert.equal(g.respostas[3], 'ANULADA');
+    assert.equal(g.respostas[5], 'D');
+});
+
 // ---- completude --------------------------------------------------------------
 test('completude: faltantes, repetidas e número fora da prova ("questão 135" de 100)', () => {
     const c = avaliarCompletude(100, [...Array(46).keys()].map(i => i + 1).concat([135, 3]));

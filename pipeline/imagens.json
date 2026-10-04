@@ -1,7 +1,82 @@
 {
+  "assets/usp-sp/img/usp-sp-2024-029-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 29,
+    "pagina": 12
+  },
+  "assets/usp-sp/img/usp-sp-2024-029-2.png": {
+    "examId": "usp-sp-2024",
+    "numero": 29,
+    "pagina": 12
+  },
+  "assets/usp-sp/img/usp-sp-2024-034-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 34,
+    "pagina": 13
+  },
+  "assets/usp-sp/img/usp-sp-2024-034-2.png": {
+    "examId": "usp-sp-2024",
+    "numero": 34,
+    "pagina": 13
+  },
+  "assets/usp-sp/img/usp-sp-2024-037-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 37,
+    "pagina": 14
+  },
+  "assets/usp-sp/img/usp-sp-2024-059-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 59,
+    "pagina": 21
+  },
+  "assets/usp-sp/img/usp-sp-2024-060-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 60,
+    "pagina": 21
+  },
+  "assets/usp-sp/img/usp-sp-2024-061-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 61,
+    "pagina": 21
+  },
+  "assets/usp-sp/img/usp-sp-2024-062-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 62,
+    "pagina": 21
+  },
   "assets/usp-sp/img/usp-sp-2024-067-1.png": {
     "examId": "usp-sp-2024",
     "numero": 67,
     "pagina": 23
+  },
+  "assets/usp-sp/img/usp-sp-2024-087-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 87,
+    "pagina": 28
+  },
+  "assets/usp-sp/img/usp-sp-2024-106-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 106,
+    "pagina": 32
+  },
+  "assets/usp-sp/img/usp-sp-2024-108-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 108,
+    "pagina": 33
+  },
+  "assets/usp-sp/img/usp-sp-2024-110-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 110,
+    "pagina": 33
+  },
+  "assets/usp-sp/img/usp-sp-2024-114-1.png": {
+    "examId": "usp-sp-2024",
+    "numero": 114,
+    "pagina": 35
+  },
+  "assets/usp-sp/img/usp-sp-2024-114-2.png": {
+    "examId": "usp-sp-2024",
+    "numero": 114,
+    "pagina": 35
   }
 }

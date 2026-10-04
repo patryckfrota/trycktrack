@@ -19,7 +19,8 @@ const ANULADA = new Set(['*', '—', '-', 'ANULADA', 'ANULADO', 'NULA', 'NULO'])
 
 const norm = v => {
     const x = String(v).replace(/\s+/g, '').toUpperCase();
-    return ANULADA.has(x) ? 'ANULADA' : x;
+    // marca sem letra nem número (—, –, -, *, e o tachado U+0336 do Revalida 2024.1) = anulada
+    return ANULADA.has(x) || (x && /^[^A-Z0-9]+$/.test(x)) ? 'ANULADA' : x;
 };
 
 function familia(examId) {
