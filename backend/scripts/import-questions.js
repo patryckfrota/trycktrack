@@ -108,8 +108,10 @@ function buildImportPlan() {
     const optionsByQuestionId = new Map();
     [...principalBank, ...internatoBank].forEach(q => optionsByQuestionId.set(q.id, toOptionRecords(q)));
     const explanations = [...principalBank, ...internatoBank]
-        .filter(q => typeof q.explanation === 'string' && q.explanation.trim())
-        .map(q => ({ questionId: q.id, body: q.explanation }));
+        // explanationDraft: texto real de explicações ainda em revisão (o app mostra só
+        // o aviso; o painel precisa do rascunho para o revisor poder aprová-lo).
+        .map(q => ({ questionId: q.id, body: q.explanationDraft ?? q.explanation }))
+        .filter(e => typeof e.body === 'string' && e.body.trim());
 
     const ids = new Set(questions.map(q => q.id));
     if (ids.size !== questions.length) {

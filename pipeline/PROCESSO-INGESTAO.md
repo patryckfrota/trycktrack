@@ -134,26 +134,41 @@ achados de imagem **inventados**. Regras:
    está sem `images` gera alerta e exige justificativa em `revisao` (ex.:
    imagem removida do caderno público).
 
-### E5 — Portão de fidelidade (automático, obrigatório)
+### E5 — Portão automático (obrigatório; falha fechada)
 ```bash
 node pipeline/validar.cjs tmp/extracted-<examId>.json
+node --test pipeline/*.test.cjs        # testes do próprio portão
 ```
-Confere, por código: enunciado e cada alternativa existem no PDF
-(`pipeline/fidelidade.cjs`), duplicata, taxonomia, nome da prova consistente.
-- Além do que ele faz, **compare o gabarito**: monte `answer` a partir do
-  inventário (E1), nunca a partir do modelo. Falha se `answer` ≠ gabarito
-  oficial, se anulada sem `annulled: true`, ou se `annulled: true` sem estar
-  anulada no PDF (L6).
-- Falso positivo esperado: alternativas em imagem ("Imagem A–D"), que não existem como texto no PDF (ver E4b).
-  Trate caso a caso; **não relaxe o limiar** para passar.
-- **Aprova se**: 0 reprovados por `fidelidade`, `gabarito`, `duplicata`.
+O que ele confere, **por código** (nada disso depende de modelo de linguagem):
+- **Fidelidade** (`pipeline/fidelidade.cjs`): enunciado e cada alternativa existem no
+  PDF do caderno. Se o PDF não existe ou **não tem camada de texto legível** (como o da
+  USP-SP 2024: só símbolos), o resultado é **"fidelidade NÃO verificada" = reprovado**.
+  Para PDF sem texto rode `bash pipeline/ocr-caderno.sh <examId>` (tesseract + português;
+  gera `tmp/pdfs/<examId>-caderno.ocr.txt`, que o portão passa a usar), ou confira visualmente.
+  A transcrição que o próprio motor gerou **não** vale como fonte independente.
+- **Gabarito oficial** (`pipeline/gabarito-oficial.cjs`): lê o PDF do gabarito
+  definitivo (USP, ENARE/FGV, AMRIGS, PSU-CE, Revalida, CEREM-BA, SES-PE, USP 2023).
+  `answer` tem de ser a letra oficial (duas letras = a banca aceitou ambas);
+  anulada (`*`, `—`, NULA) exige `annulled: true`, e `annulled` sem estar anulada
+  reprova (L6). Gabarito ilegível ou número fora da prova = reprovado.
+- **Imagens** (`pipeline/imagens-pagina.cjs`): o arquivo existe, não é vazio, está
+  **registrado em `pipeline/imagens.json`** (o extrator registra de que página saiu) e a
+  página bate com a da questão no caderno (±1). Sem registro = reprovado.
+- Duplicata, taxonomia, nome da prova, alternativas "Imagem A–D" sem imagem.
+- Falso positivo esperado: alternativas em imagem ("Imagem A–D"), que não existem como
+  texto no PDF (ver E4b). Trate caso a caso; **não relaxe o limiar** para passar.
+- **Aprova se**: 0 reprovados em `fidelidade`, `gabarito`, `anulacao`, `imagem`, `duplicata`.
+- Limite honesto: duas questões na mesma página não são distinguidas pelo teste de
+  imagem; conferir o recorte olhando continua sendo parte do processo (E4b).
 
-### E6 — Completude
-Antes de marcar a prova como concluída:
-`quantidade de questões == N`, números 1..N presentes, anuladas == inventário,
-duplas == inventário.
-**Nunca** marque `concluida` porque "acabou o limite do dia" ou "a
-extração retornou menos". Registre o que falta em `pipeline/pendencias/`.
+### E6 — Completude (automática)
+```bash
+node pipeline/completude.cjs <examId>     # N vem do gabarito oficial
+```
+O banco precisa ter **todas** as questões 1..N (ou tê-las declaradas como duplicata em
+`pipeline/inventario/<examId>.json`, o que o portão registra sozinho). `proxima.cjs avancar`
+**recusa** marcar a prova como concluída se faltar alguma, e recomeça da primeira que falta.
+**Nunca** marque `concluida` porque "acabou o limite do dia" ou "a extração retornou menos".
 
 ### E7 — Classificação
 Área/assunto/tópico/subtópico copiados **exatamente** de `taxonomia/*.json`
@@ -176,8 +191,10 @@ Regras que evitam os erros mais comuns:
 - Se você discordar do gabarito oficial: explique conforme o oficial e
   acrescente a seção `OBSERVAÇÃO — GABARITO EM DISCUSSÃO` (modelo, item 4.5.1).
   **Nunca** mude a letra.
-- Guarde como **rascunho** em `pipeline/rascunhos/<examId>.json`, **não** em
-  `question-explanations.js`.
+- O `writer` marca toda explicação nova como **pendente** (`pendingReviewIds` em
+  `question-explanations.js`): enquanto estiver pendente o app mostra só o gabarito
+  oficial e o aviso "explicação em revisão". O texto real continua disponível para o
+  revisor (painel/Postgres).
 
 ### E9 — Revisão clínica independente (portão humano ou de outro modelo)
 Quem revisa recebe: questão fiel, gabarito oficial e o rascunho. Resolve
@@ -185,14 +202,17 @@ sozinho **antes** de ler a explicação, e devolve por questão:
 `ok | corrigida | gabarito_em_discussao`, com os erros encontrados.
 - Amostre primeiro 15 questões e meça a taxa de erro do rascunho. Se passar de
   10%, revise **todas**; não publique.
-- **Aprova se**: 100% das explicações revisadas.
+- Depois de revisada, libere: `node pipeline/aprovar-explicacoes.cjs <id|prefixo->`
+  (ex.: `usp-sp-2024-`). `--listar` mostra o que ainda está pendente. Editar a explicação
+  pelo painel de gestão também a libera.
+- **Aprova se**: 100% das explicações revisadas e liberadas.
 
 ### E10 — Gravação e validação final
 Só agora grave em `questions-*.js` e `question-explanations.js`, pelo
 `writer` (nunca à mão). Rode:
 ```bash
-node taxonomia/validar.cjs && node --test shared/*.test.js
-node pipeline/validar.cjs        # fidelidade + gabarito
+node taxonomia/validar.cjs && node --test shared/*.test.js pipeline/*.test.cjs
+node pipeline/validar.cjs        # fidelidade, gabarito oficial, imagens, completude
 cd backend && npm run import:questions -- --dry-run
 ```
 - Suba `CACHE_NAME` em `sw.js`.

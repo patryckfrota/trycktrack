@@ -30,7 +30,7 @@ Qualquer tarefa que importe, corrija ou audite prova/questão/explicação:
 ## Validar antes de commitar
 ```bash
 node taxonomia/validar.cjs          # 0 problemas
-node --test shared/*.test.js
+node --test shared/*.test.js pipeline/*.test.cjs
 cd backend && npm run import:questions -- --dry-run
 ```
 Suba `CACHE_NAME` em `sw.js` a cada mudança visível.

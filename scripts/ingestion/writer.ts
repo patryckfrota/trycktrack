@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 // @ts-ignore
-import { updatePrincipalExplanation, updatePrincipalAnnulled } from '../../backend/src/staticPrincipalWriter.js';
+import { updatePrincipalExplanation, updatePrincipalAnnulled, markExplanationsPending } from '../../backend/src/staticPrincipalWriter.js';
 import { ExtractedBatchSchema, formatFullExplanation, ExtractedItem } from './types.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -99,6 +99,10 @@ export function writeExtractedData(dumpFilePath: string) {
         expAdded++;
     }
     console.log(`=> ${expAdded} explicações atualizadas no question-explanations.js!`);
+    // Explicação gerada por agente nunca vai direto ao aluno: entra como pendente
+    // até a revisão clínica independente (PROCESSO-INGESTAO.md, E9).
+    markExplanationsPending(batch.items.map(item => item.question.id));
+    console.log(`=> ${expAdded} explicações marcadas como PENDENTES de revisão (o app mostra só o gabarito).`);
 
     console.log('\n========================================');
     console.log('Executando verificação taxonômica local...');

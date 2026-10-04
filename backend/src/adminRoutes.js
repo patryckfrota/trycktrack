@@ -10,7 +10,7 @@ import { requireAdminAuth } from './adminAuth.js';
 import { getPrismaClient } from './prismaClient.js';
 import { buildImportPlan } from '../scripts/import-questions.js';
 import { updateInternatoExplanation, updateInternatoQuestionFields } from './staticInternatoWriter.js';
-import { updatePrincipalAnnulled, updatePrincipalExplanation } from './staticPrincipalWriter.js';
+import { updatePrincipalAnnulled, updatePrincipalExplanation, approveExplanations } from './staticPrincipalWriter.js';
 import { getQuestionYears } from '../../shared/question-filters.js';
 import { getOsceCurriculumMatrix } from './osceMatrixReader.js';
 import { autoWrapAsyncRoutes } from './asyncHandler.js';
@@ -294,7 +294,11 @@ adminRouter.patch('/questions/:id', async (req, res) => {
                 // usa essa taxonomia) — ignora silenciosamente se vier,
                 // em vez de dar erro por um campo que não se aplica.
                 if (annulled !== undefined) updatePrincipalAnnulled(req.params.id, !!annulled);
-                if (explanationBody !== undefined) updatePrincipalExplanation(req.params.id, explanationBody);
+                if (explanationBody !== undefined) {
+                    updatePrincipalExplanation(req.params.id, explanationBody);
+                    // edição humana pelo painel = revisada: libera o texto no app
+                    approveExplanations([req.params.id]);
+                }
             }
         } catch (error) {
             return res.status(500).json({ error: `Falha ao gravar no arquivo-fonte: ${error.message}` });

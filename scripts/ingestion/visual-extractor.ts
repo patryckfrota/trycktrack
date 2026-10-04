@@ -4,6 +4,10 @@ import { execSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+const requireCjs = createRequire(import.meta.url);
+// Registro de onde cada recorte saiu (página + questão): o portão confere (pipeline/imagens-pagina.cjs).
+const { registrarImagem } = requireCjs('../../pipeline/imagens-pagina.cjs');
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -213,6 +217,7 @@ cropped.save('${outputPath}', optimize=True)
 
         console.log(`   ✅ [Q${qNum}] Recortado ${elem.type} (${elem.description || ''}) -> ${relativeAssetPath}`);
         extractedMap[qNum].push(relativeAssetPath);
+        registrarImagem(relativeAssetPath, { examId, numero: Number(qNum), pagina: Number(pageNum) });
       } catch (err: any) {
         console.error(`   ❌ Erro ao recortar elemento da Q${qNum}:`, err.message);
       }
