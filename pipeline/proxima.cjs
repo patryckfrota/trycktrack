@@ -53,14 +53,29 @@ function proximo() {
     return { trabalho: null, estado };
 }
 
-function avancar(processadas, concluida) {
-    const estado = ler(ESTADO, estadoInicial());
+// deps: só para testes (estado e completude injetados).
+function avancar(processadas, concluida, deps = {}) {
+    const estado = deps.estado || ler(ESTADO, estadoInicial());
     const atual = estado.emAndamento;
     if (!atual) return estado;
 
     // Só marca como concluída se o motor tiver confirmado que alcançou o fim real do caderno
     // E que nenhum sub-lote falhou. Nunca mais conclui apenas por processadas < LIMITE.
-    const isConcluida = (concluida === true || concluida === 'true');
+    let isConcluida = (concluida === true || concluida === 'true');
+
+    // Fecha a conta contra o gabarito oficial: o banco precisa ter TODAS as questões
+    // 1..N (ou tê-las declaradas como duplicata). Sem isso a prova continua em andamento,
+    // recomeçando da primeira que falta. (O ENARE 2024 já foi dado como concluído com 46/100.)
+    if (isConcluida) {
+        const c = (deps.completude || require('./completude.cjs').completude)(atual.prefixo);
+        if (!c || !c.completa) {
+            console.error(c
+                ? `[fila] ${atual.prefixo} NÃO concluída: ${c.presentes}/${c.total} questões; faltam ${c.faltam.length}${c.primeiraFaltante ? ` (a partir da ${c.primeiraFaltante})` : ''}${c.foraDoIntervalo.length ? `; fora do intervalo: ${c.foraDoIntervalo.join(',')}` : ''}`
+                : `[fila] ${atual.prefixo} NÃO concluída: gabarito oficial ilegível — não dá para provar que a prova está completa`);
+            if (c && c.primeiraFaltante) atual.inicio = c.primeiraFaltante; else atual.inicio += processadas;
+            return estado;
+        }
+    }
 
     if (isConcluida) {
         estado.concluidas.push({
