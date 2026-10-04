@@ -14,6 +14,9 @@ const path = require('path');
 const crypto = require('crypto');
 const { problemaTaxonomia } = require('../taxonomia/validar.cjs');
 const { problemaFidelidade } = require('./fidelidade.cjs');
+const { lerGabarito } = require('./gabarito-oficial.cjs');
+const { problemasDeImagem } = require('./imagens-pagina.cjs');
+const { completude, registrarDuplicata } = require('./completude.cjs');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -59,7 +62,8 @@ const CATEGORIAS = {
     fidelidade: 'texto diferente do caderno oficial',
 };
 
-function validarItem(item, banco, vistosNoLote) {
+// deps: só para testes (gabarito/registro de imagens/páginas injetados, sem PDF).
+function validarItem(item, banco, vistosNoLote, deps = {}) {
     const q = item.question, e = item.explanation || {};
     const erros = [], alertas = [];
     const erro = (cat, msg) => erros.push({ cat, msg });
@@ -68,7 +72,8 @@ function validarItem(item, banco, vistosNoLote) {
     const k = impressao(q);
     const existente = banco.get(k);
     // Mesmo id = a própria questão já gravada antes; só é duplicata se o id for outro.
-    if (existente && existente !== q.id) erro('duplicata', `duplicata de ${existente} já no banco`);
+    const duplicataDe = existente && existente !== q.id ? existente : null;
+    if (duplicataDe) erro('duplicata', `duplicata de ${existente} já no banco`);
     if (vistosNoLote.has(k) && vistosNoLote.get(k) !== q.id) erro('duplicata', `duplicata de ${vistosNoLote.get(k)} no mesmo lote`);
     vistosNoLote.set(k, q.id);
 
@@ -80,6 +85,18 @@ function validarItem(item, banco, vistosNoLote) {
     // pra dúvida sobre gabarito — exige a fonte que confirma (PDF oficial,
     // edição e questão), nunca aceita sem verificação.
     if (q.annulled && !String(q.annulledSource || '').trim()) erro('anulacao', 'marcada como anulada sem annulledSource (PDF/edição/questão que confirma)');
+
+    // Gabarito OFICIAL lido do PDF por código (gabarito-oficial.cjs). Se não puder
+    // ser lido, o lote é reprovado: falha fechada (PROCESSO-INGESTAO.md, regra 3).
+    const oficial = deps.gabarito !== undefined ? deps.gabarito : lerGabarito(q.examId);
+    if (!oficial) erro('gabarito', 'gabarito oficial não pôde ser lido do PDF (tmp/pdfs/<examId>-gabarito*.pdf + pdftotext): lote reprovado');
+    else {
+        const off = oficial.respostas[q.number];
+        if (off === undefined) erro('gabarito', `questão ${q.number} não existe no gabarito oficial (a prova tem ${oficial.total} questões)`);
+        else if (off === 'ANULADA') { if (!q.annulled) erro('gabarito', 'anulada no gabarito oficial, mas não marcada como annulled'); }
+        else if (q.annulled) erro('anulacao', `marcada como anulada, mas o gabarito oficial traz ${off} (L6)`);
+        else if (q.answer && !off.includes(q.answer)) erro('gabarito', `gabarito ${q.answer} difere do oficial (${off})`);
+    }
 
     const fecho = /Portanto, o gabarito é a alternativa ([A-E])/.exec(e.fixacao || '');
     if (fecho && q.answer && fecho[1] !== q.answer) erro('gabarito', `explicação conclui ${fecho[1]}, mas o gabarito é ${q.answer}`);
@@ -96,16 +113,20 @@ function validarItem(item, banco, vistosNoLote) {
 
     if (textos(item).some(t => CONTROLE.test(t))) erro('texto', 'caractere de controle invisível no texto (quebra o import)');
 
-    for (const img of q.images || []) {
-        if (!fs.existsSync(path.join(ROOT, img))) erro('imagem', `imagem não encontrada: ${img}`);
-    }
+    // Alternativas que são figuras ("Imagem A"...) sem nenhuma imagem anexada: a
+    // questão fica impossível de responder (ver PROCESSO-INGESTAO.md, E4b).
+    if (letras.length && letras.every(l => /^imagem\s+[a-e]\.?$/i.test(String(q.options[l]).trim())) && !(q.images || []).length) erro('imagem', 'alternativas são "Imagem A–D", mas a questão não tem imagem anexada');
+
+    // Imagem: existe, não é vazia, está registrada (de que página saiu) e a página bate
+    // com a da questão no caderno (imagens-pagina.cjs).
+    for (const msg of problemasDeImagem(q, deps.imagens || {})) erro('imagem', msg);
     if (!(q.images || []).length && CITA_IMAGEM.test(q.stem)) alerta('imagem', 'enunciado parece citar imagem, mas nenhuma foi anexada');
 
     const sujo = [q.stem, ...Object.values(q.options || {})].find(t => OCR_SUJO.test(t));
     if (sujo) alerta('texto', `possível lixo de OCR: "${OCR_SUJO.exec(sujo)[0]}"`);
     if ([q.stem, ...Object.values(q.options || {})].some(t => QUEBRA_HIFEN.test(t))) alerta('texto', 'possível palavra quebrada por hífen de fim de linha');
 
-    return { id: q.id, erros, alertas };
+    return { id: q.id, erros, alertas, duplicataDe, numero: q.number };
 }
 
 // Um registro por versão de lote (o nome leva o hash do conteúdo): validar o
@@ -155,6 +176,8 @@ function main() {
     for (const arq of lotes) {
         const lote = JSON.parse(fs.readFileSync(path.resolve(ROOT, arq), 'utf8'));
         const itens = (lote.items || []).map(it => validarItem(it, banco, vistosNoLote));
+        // questão que já existe no banco com outro id conta como COBERTA na completude da prova
+        itens.filter(i => i.duplicataDe && lote.examId).forEach(i => registrarDuplicata(lote.examId, i.numero, i.duplicataDe));
         const rep = itens.filter(i => i.erros.length);
         reprovados += rep.length; total += itens.length;
 
@@ -162,6 +185,9 @@ function main() {
         rep.forEach(i => new Set(i.erros.map(e => e.cat)).forEach(c => { motivos[c] = (motivos[c] || 0) + 1; }));
         console.log(`\n${arq} — ${itens.length} questões: ${itens.length - rep.length} aprovadas, ${rep.length} reprovadas`);
         Object.entries(motivos).sort((a, b) => b[1] - a[1]).forEach(([c, n]) => console.log(`   ${n}× ${CATEGORIAS[c] || c}`));
+        const comp = lote.examId ? completude(lote.examId) : null;
+        if (comp) console.log(`   prova ${lote.examId}: ${comp.presentes}/${comp.total} questões cobertas${comp.completa ? ' — COMPLETA' : ` (faltam ${comp.faltam.length})`}`);
+        else if (lote.examId) console.log(`   prova ${lote.examId}: completude não verificável (sem gabarito oficial legível)`);
         relatorio.lotes.push({ arquivo: arq, examId: lote.examId, itens });
         registrarRevisao(lote, arq, itens);
     }

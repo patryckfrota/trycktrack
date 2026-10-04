@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const EXPLANATIONS_FILE = path.join(ROOT, 'question-explanations.js');
+const EXPLANATIONS_FILE = process.env.TRYCKTRACK_EXPLANATIONS_FILE || path.join(ROOT, 'question-explanations.js');
 const PREFIX = 'const explanations = ';
 const ALIASES_PREFIX = 'const explanationAliases = ';
 
@@ -117,4 +117,33 @@ export function updatePrincipalExplanations(updates) {
 
 export function updatePrincipalExplanation(questionId, body) {
     updatePrincipalExplanations({ [questionId]: body });
+}
+
+// ---- Explicações pendentes de revisão clínica ------------------------------
+// Lista `pendingReviewIds` em question-explanations.js: enquanto o id estiver
+// nela o app mostra só o gabarito (ver PROCESSO-INGESTAO.md, etapa E9).
+const PENDING_PREFIX = 'const pendingReviewIds = new Set(';
+
+function updatePendingIds(mutate) {
+    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    const { before, literal, after } = extractArrayLiteral(text, PENDING_PREFIX);
+    const ids = new Set(parseObjectLiteral(literal));
+    mutate(ids);
+    fs.writeFileSync(EXPLANATIONS_FILE, before + JSON.stringify([...ids].sort(), null, 2) + after);
+    return ids;
+}
+
+export function listPendingExplanations() {
+    const text = fs.readFileSync(EXPLANATIONS_FILE, 'utf-8');
+    return [...parseObjectLiteral(extractArrayLiteral(text, PENDING_PREFIX).literal)];
+}
+
+/** Toda explicação nova que um agente grava entra como pendente. */
+export function markExplanationsPending(ids) {
+    return updatePendingIds(set => ids.forEach(id => set.add(id))).size;
+}
+
+/** Só depois da revisão clínica: o id sai da lista e o texto passa a aparecer. */
+export function approveExplanations(ids) {
+    return updatePendingIds(set => ids.forEach(id => set.delete(id))).size;
 }
