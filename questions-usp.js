@@ -4998,7 +4998,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-001",
     "number": 1,
-    "stem": "TEXTO PARA AS QUESTÕES 01 E 02\nPaciente de 2 meses, sexo masculino, em uso de fórmula láctea de partida, foi internado em leito de enfermaria há 24 horas. Na admissão, apresentava história de tosse e coriza há dois dias e desconforto respiratório há um dia. Ao exame clínico, neste momento, paciente segue com desconforto respiratório, apresenta ausculta respiratória com sibilos e estertores em bases bilateralmente, tiragem subdiafragmática leve/moderada, FR: 71 ipm, FC: 168 bpm, SpO2 94% em cateter nasal de oxigênio 2 L/min. Peso: 4 kg\nAs anotações nos controles de enfermagem, o exame de imagem realizado e a prescrição atual são demonstrados a seguir:\nTabela - Anotações dos controles de enfermagem.\nPrescrição atual:\n1. Dieta geral para a idade.\n2. Inalação com soro fisiológico 5 mL ACM.\n3. Cateter nasal 2 L/min.\n01\nAssinale a alternativa que apresenta a conduta indicada para esse paciente, neste momento.",
+    "stem": "TEXTO PARA AS QUESTÕES 01 E 02\nPaciente de 2 meses, sexo masculino, em uso de fórmula láctea de partida, foi internado em leito de enfermaria há 24 horas. Na admissão, apresentava história de tosse e coriza há dois dias e desconforto respiratório há um dia. Ao exame clínico, neste momento, paciente segue com desconforto respiratório, apresenta ausculta respiratória com sibilos e estertores em bases bilateralmente, tiragem subdiafragmática leve/moderada, FR: 71 ipm, FC: 168 bpm, SpO2 94% em cateter nasal de oxigênio 2 L/min. Peso: 4 kg\nAs anotações nos controles de enfermagem, o exame de imagem realizado e a prescrição atual são demonstrados a seguir:\nTabela - Anotações dos controles de enfermagem.\nPrescrição atual:\n1. Dieta geral para a idade.\n2. Inalação com soro fisiológico 5 mL ACM.\n3. Cateter nasal 2 L/min.\n\nAssinale a alternativa que apresenta a conduta indicada para esse paciente, neste momento.",
     "options": {
       "A": "Prescrever penicilina cristalina.",
       "B": "Introduzir soro de manutenção.",
@@ -5020,7 +5020,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-002",
     "number": 2,
-    "stem": "O lactente evoluiu algumas horas depois com piora do cansaço, apresentando tiragens importantes e batimento de asa nasal, com SpO2 de 90% em cateter nasal 2 L/min. Foi optado por escalonar suporte respiratório. Assinale a alternativa que contém o dispositivo mais adequado neste momento e o respectivo fluxo a ser utilizado inicialmente.",
+    "stem": "Paciente de 2 meses, sexo masculino, em uso de fórmula láctea de partida, foi internado em leito de enfermaria há 24 horas. Na admissão, apresentava história de tosse e coriza há dois dias e desconforto respiratório há um dia. Ao exame clínico, neste momento, paciente segue com desconforto respiratório, apresenta ausculta respiratória com sibilos e estertores em bases bilateralmente, tiragem subdiafragmática leve/moderada, FR: 71 ipm, FC: 168 bpm, SpO2 94% em cateter nasal de oxigênio 2 L/min. Peso: 4 kg\nAs anotações nos controles de enfermagem, o exame de imagem realizado e a prescrição atual são demonstrados a seguir:\nTabela - Anotações dos controles de enfermagem.\nPrescrição atual:\n1. Dieta geral para a idade.\n2. Inalação com soro fisiológico 5 mL ACM.\n3. Cateter nasal 2 L/min.\n\nO lactente evoluiu algumas horas depois com piora do cansaço, apresentando tiragens importantes e batimento de asa nasal, com SpO2 de 90% em cateter nasal 2 L/min. Foi optado por escalonar suporte respiratório. Assinale a alternativa que contém o dispositivo mais adequado neste momento e o respectivo fluxo a ser utilizado inicialmente.",
     "options": {
       "A": "5 litros/minuto",
       "B": "6 litros/minuto",
@@ -5062,7 +5062,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-004",
     "number": 4,
-    "stem": "Quanto ao uso profilático de corticoide inalatório no momento da alta hospitalar, é correto afirmar:",
+    "stem": "Paciente do sexo feminino, 3 anos, é admitida no pronto-socorro com quadro de tosse e dificuldade para respirar há um dia, sem febre ou coriza associados. Apresenta histórico de ter apresentado três crises semelhantes nos últimos 06 meses, com necessidade de internação. Na triagem, apresentava-se taquidispneica, sendo levada à sala de emergência. Na avaliação sistematizada em sala de emergência, a paciente apresentava os seguintes dados de exame físico e monitorização:\nA: Via aérea pérvia.\nB: Murmúrio vesicular com sibilos difusos, tempo expiratório prolongado, FR: 45 ipm, tiragens subdiafragmática, intercostal e de fúrcula, SpO2 93% em máscara não reinalante.\nC: 2BRNF sem sopros, FC: 140 bpm, tempo de enchimento capilar de 2 segundos, pulsos cheios.\nD: Alerta e orientada.\nE: Lesões eritemato-crostosas em superfícies flexoras de pernas e braços.\n\nQuanto ao uso profilático de corticoide inalatório no momento da alta hospitalar, é correto afirmar:",
     "options": {
       "A": "Não está indicado para essa paciente.",
       "B": "Deve estar associado ao beta agonista de longa duração.",
@@ -5250,7 +5250,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-013",
     "number": 13,
-    "stem": "Após as medidas de reanimação neonatal e a estabilização em sala de parto, o RN foi encaminhado para o alojamento conjunto. Com 1 hora de vida, apresentou episódio de cianose central durante amamentação. RN foi reavaliado e, ao exame físico, foi observada taquipneia, com tiragem diafragmática, associada a importante sialorreia. Assinale quais procedimentos deverão ser realizados para confirmar a principal hipótese diagnóstica.",
+    "stem": "Gestante, com 30 anos, primigesta, previamente hígida, realizou 06 consultas de pré-natal. No 3º trimestre foi observado polidrâmnio (ILA de 26 cm) em exame de ultrassonografia. Com 41 semanas de idade gestacional foi submetida a parto cesáreo, devido a falha de indução. Bolsa rota no ato, com líquido claro com grumos. Recém-nascido (RN) do sexo masculino, hipotônico e sem choro, imediatamente após a extração. Realizado o clampeamento imediato do cordão umbilical, foi levado ao berço aquecido, secado e estimulado, posicionado e foram aspiradas vias aéreas superiores. Apresentava-se, em seguida, com frequência cardíaca de 50 bpm e em apneia.\n\nApós as medidas de reanimação neonatal e a estabilização em sala de parto, o RN foi encaminhado para o alojamento conjunto. Com 1 hora de vida, apresentou episódio de cianose central durante amamentação. RN foi reavaliado e, ao exame físico, foi observada taquipneia, com tiragem diafragmática, associada a importante sialorreia. Assinale quais procedimentos deverão ser realizados para confirmar a principal hipótese diagnóstica.",
     "options": {
       "A": "Intubação orotraqueal, seguida de raio X de tórax.",
       "B": "Oximetria de pulso e ecocardiograma.",
@@ -5312,7 +5312,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-016",
     "number": 16,
-    "stem": "TEXTO PARA AS QUESTÕES 16 E 17\nPaciente de 05 anos com antecedente de encefalopatia crônica não progressiva, portador de traqueostomia e gastrostomia, apresenta quadro de diarreia há cinco dias, cerca de 10 episódios por dia. Nesse período, recebeu soro de reidratação caseiro, cerca de 200 mL, após episódios diarreicos. Foi trazido hoje ao departamento de emergência, devido sonolência e diminuição da diurese. Na admissão, paciente apresentava choque hipotensivo, sendo iniciada expansão com soro fisiológico. Após primeira expansão, a equipe que prestava o atendimento recebeu o resultado da gasometria, descrito a seguir:\npH: 7,25 | HCO3: 12 mmol/L | Base Excess: -5,0 mmol/L | Sódio: 160 mEq/L | Potássio: 3,3 mEq/L\n\n16\nNa reavaliação pós-primeira expansão, paciente segue em REG, pálido, frequência cardíaca 150 bpm, FR 40 ipm e PA 76x42 mmHg, TEC 6 s. Assinale a alternativa correta com relação à estratégia para hidratação do paciente.",
+    "stem": "TEXTO PARA AS QUESTÕES 16 E 17\nPaciente de 05 anos com antecedente de encefalopatia crônica não progressiva, portador de traqueostomia e gastrostomia, apresenta quadro de diarreia há cinco dias, cerca de 10 episódios por dia. Nesse período, recebeu soro de reidratação caseiro, cerca de 200 mL, após episódios diarreicos. Foi trazido hoje ao departamento de emergência, devido sonolência e diminuição da diurese. Na admissão, paciente apresentava choque hipotensivo, sendo iniciada expansão com soro fisiológico. Após primeira expansão, a equipe que prestava o atendimento recebeu o resultado da gasometria, descrito a seguir:\npH: 7,25 | HCO3: 12 mmol/L | Base Excess: -5,0 mmol/L | Sódio: 160 mEq/L | Potássio: 3,3 mEq/L\n\nNa reavaliação pós-primeira expansão, paciente segue em REG, pálido, frequência cardíaca 150 bpm, FR 40 ipm e PA 76x42 mmHg, TEC 6 s. Assinale a alternativa correta com relação à estratégia para hidratação do paciente.",
     "options": {
       "A": "Iniciar soro de reidratação oral por gastrostomia.",
       "B": "Prosseguir expansão endovenosa com fluido isotônico.",
@@ -5332,7 +5332,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-017",
     "number": 17,
-    "stem": "Assinale a conduta a ser realizada para adequação do sódio, após estabilização hemodinâmica.",
+    "stem": "Paciente de 05 anos com antecedente de encefalopatia crônica não progressiva, portador de traqueostomia e gastrostomia, apresenta quadro de diarreia há cinco dias, cerca de 10 episódios por dia. Nesse período, recebeu soro de reidratação caseiro, cerca de 200 mL, após episódios diarreicos. Foi trazido hoje ao departamento de emergência, devido sonolência e diminuição da diurese. Na admissão, paciente apresentava choque hipotensivo, sendo iniciada expansão com soro fisiológico. Após primeira expansão, a equipe que prestava o atendimento recebeu o resultado da gasometria, descrito a seguir:\npH: 7,25 | HCO3: 12 mmol/L | Base Excess: -5,0 mmol/L | Sódio: 160 mEq/L | Potássio: 3,3 mEq/L\n\nAssinale a conduta a ser realizada para adequação do sódio, após estabilização hemodinâmica.",
     "options": {
       "A": "Recoleta do sódio sérico após 6 horas e verificar se houve queda de, no mínimo, 1 mEq/hora. Sem reposição até resultados.",
       "B": "Recoleta do sódio sérico após 6 horas e verificar se houve queda de, no máximo, 1 mEq/hora. Sem reposição até resultados.",
@@ -5372,7 +5372,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-019",
     "number": 19,
-    "stem": "Após administração de duas doses da medicação obteve-se controle da crise convulsiva e foi possível obter um acesso venoso periférico. Na avaliação sistematizada em sala de emergência, a paciente apresentava os seguintes dados de exame físico e monitorização:\n• Monitor: ECG bpm: 158 | SpO2: 97% | BP: 70/40 mmHg\n• A: Via aérea pérvia.\n• B: Murmúrio vesicular presente sem ruídos adventícios, boa expansibilidade, FR 43 ipm.\n• C: 2BRNF sem sopros, tempo de enchimento capilar 5 segundos, pulsos finos.\n• D: Sem resposta verbal e ocular, retira o membro ao estímulo doloroso. Pupilas isofotorreagentes. Glicemia capilar normal.\n• E: Nada digno de nota.\n\nAssinale a alternativa que apresenta a conduta correta nesse momento.",
+    "stem": "Paciente de 2 anos, sexo feminino, sem antecedentes relevantes, apresenta quadro de febre de até 39,8°C, vômitos e prostração, há dois dias. Hoje estava sonolenta e apresentou episódio de crise convulsiva tônico-clônica generalizada com duração de cerca de 10 minutos, sendo levada ao pronto-socorro. Na triagem, paciente apresentou nova crise convulsiva, sendo levada à sala de emergência. Foi solicitado acesso venoso, cuja obtenção foi malsucedida.\n\nApós administração de duas doses da medicação obteve-se controle da crise convulsiva e foi possível obter um acesso venoso periférico. Na avaliação sistematizada em sala de emergência, a paciente apresentava os seguintes dados de exame físico e monitorização:\n• Monitor: ECG bpm: 158 | SpO2: 97% | BP: 70/40 mmHg\n• A: Via aérea pérvia.\n• B: Murmúrio vesicular presente sem ruídos adventícios, boa expansibilidade, FR 43 ipm.\n• C: 2BRNF sem sopros, tempo de enchimento capilar 5 segundos, pulsos finos.\n• D: Sem resposta verbal e ocular, retira o membro ao estímulo doloroso. Pupilas isofotorreagentes. Glicemia capilar normal.\n• E: Nada digno de nota.\n\nAssinale a alternativa que apresenta a conduta correta nesse momento.",
     "options": {
       "A": "Reverter os efeitos centrais do benzodiazepínico com flumazenil.",
       "B": "Proteger a via aérea com intubação orotraqueal, sem sedação prévia.",
@@ -5394,7 +5394,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-020",
     "number": 20,
-    "stem": "Com relação ao quadro neurológico apresentado pela paciente, pode-se afirmar:",
+    "stem": "Paciente de 2 anos, sexo feminino, sem antecedentes relevantes, apresenta quadro de febre de até 39,8°C, vômitos e prostração, há dois dias. Hoje estava sonolenta e apresentou episódio de crise convulsiva tônico-clônica generalizada com duração de cerca de 10 minutos, sendo levada ao pronto-socorro. Na triagem, paciente apresentou nova crise convulsiva, sendo levada à sala de emergência. Foi solicitado acesso venoso, cuja obtenção foi malsucedida.\n\nCom relação ao quadro neurológico apresentado pela paciente, pode-se afirmar:",
     "options": {
       "A": "Não requer investigação específica nessa idade, por ser decorrente de quadro febril.",
       "B": "Requer investigação adicional com coleta de líquido cefalorraquidiano.",
@@ -5418,7 +5418,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "options": {
       "A": "prescrever dipirona profilática em substituição ao ibuprofeno.",
       "B": "prescrever paracetamol profilático em substituição ao ibuprofeno.",
-      "C": "prescrever 1 gota/kg/dose de 6 em 6 horas.",
+      "C": "prescrever ibuprofeno profilático na dose de 1 gota/kg/dose de 6 em 6 horas.",
       "D": "desencorajar o uso profilático de qualquer antitérmico antes da vacinação."
     },
     "answer": "D",
@@ -5434,7 +5434,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-022",
     "number": 22,
-    "stem": "TEXTO PARA AS QUESTÕES 22 A 24\nVitor e Bia são gemelares de 9 anos e 7 dias e estão em consulta médica de rotina, sem queixas e sem antecedentes mórbidos relevantes. Na consulta de 8 anos e 2 meses, Bia apresentava broto mamário bilateral com elevação da mama e da papila, acompanhado de alargamento da aréola. Na consulta atual, o médico nota maior alargamento bilateral da mama e aréola, sem separação de seu contorno. Sua altura é de 135 cm (Z-score entre 0 e +1). Vitor, semelhante à consulta anterior, apresenta volume testicular inferior a 4 mL, menor que 1 polpa digital (ou 2,5 cm); ausência de pilificação local. Sua altura é de 130 cm (Z-score entre 0 e -1).\n\n22\nAssinale a alternativa correta quanto à Bia.",
+    "stem": "TEXTO PARA AS QUESTÕES 22 A 24\nVitor e Bia são gemelares de 9 anos e 7 dias e estão em consulta médica de rotina, sem queixas e sem antecedentes mórbidos relevantes. Na consulta de 8 anos e 2 meses, Bia apresentava broto mamário bilateral com elevação da mama e da papila, acompanhado de alargamento da aréola. Na consulta atual, o médico nota maior alargamento bilateral da mama e aréola, sem separação de seu contorno. Sua altura é de 135 cm (Z-score entre 0 e +1). Vitor, semelhante à consulta anterior, apresenta volume testicular inferior a 4 mL, menor que 1 polpa digital (ou 2,5 cm); ausência de pilificação local. Sua altura é de 130 cm (Z-score entre 0 e -1).\n\nAssinale a alternativa correta quanto à Bia.",
     "options": {
       "A": "Bia é M2 na Classificação Puberal de Tanner e pode apresentar a menarca a qualquer momento.",
       "B": "Bia é M2 na Classificação Puberal de Tanner e sua velocidade de crescimento é cerca de 6 a 10,5 cm/ano.",
@@ -5454,7 +5454,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-023",
     "number": 23,
-    "stem": "Assinale a alternativa correta quanto ao Vitor.",
+    "stem": "Vitor e Bia são gemelares de 9 anos e 7 dias e estão em consulta médica de rotina, sem queixas e sem antecedentes mórbidos relevantes. Na consulta de 8 anos e 2 meses, Bia apresentava broto mamário bilateral com elevação da mama e da papila, acompanhado de alargamento da aréola. Na consulta atual, o médico nota maior alargamento bilateral da mama e aréola, sem separação de seu contorno. Sua altura é de 135 cm (Z-score entre 0 e +1). Vitor, semelhante à consulta anterior, apresenta volume testicular inferior a 4 mL, menor que 1 polpa digital (ou 2,5 cm); ausência de pilificação local. Sua altura é de 130 cm (Z-score entre 0 e -1).\n\nAssinale a alternativa correta quanto ao Vitor.",
     "options": {
       "A": "Vitor é G0 P0 na Classificação Puberal de Tanner e, portanto, ainda não iniciou o estirão de crescimento.",
       "B": "Vitor é G1 P1 na Classificação Puberal de Tanner e, portanto, ainda não iniciou a puberdade ou aumento na velocidade de crescimento.",
@@ -5474,12 +5474,12 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-024",
     "number": 24,
-    "stem": "Quanto à idade para indicação das vacinas meningocócica ACWY e HPV, segundo o Programa Nacional de Imunização do Ministério da Saúde, assinale a alternativa correta.",
+    "stem": "Vitor e Bia são gemelares de 9 anos e 7 dias e estão em consulta médica de rotina, sem queixas e sem antecedentes mórbidos relevantes. Na consulta de 8 anos e 2 meses, Bia apresentava broto mamário bilateral com elevação da mama e da papila, acompanhado de alargamento da aréola. Na consulta atual, o médico nota maior alargamento bilateral da mama e aréola, sem separação de seu contorno. Sua altura é de 135 cm (Z-score entre 0 e +1). Vitor, semelhante à consulta anterior, apresenta volume testicular inferior a 4 mL, menor que 1 polpa digital (ou 2,5 cm); ausência de pilificação local. Sua altura é de 130 cm (Z-score entre 0 e -1).\n\nQuanto à idade para indicação das vacinas meningocócica ACWY e HPV, segundo o Programa Nacional de Imunização do Ministério da Saúde, assinale a alternativa correta.",
     "options": {
-      "A": "Bia e Vitor recebem aos 11 Meningocócica ACWY anos.",
-      "B": "Bia e Vitor recebem aos 11 Meningocócica ACWY anos.",
-      "C": "Bia e Vitor recebem neste Meningocócica ACWY momento.",
-      "D": "Bia e Vitor recebem neste Meningocócica ACWY momento."
+      "A": "HPV: Bia e Vitor recebem neste momento. Meningocócica ACWY: Bia e Vitor recebem aos 11 anos.",
+      "B": "HPV: Bia recebe neste momento e Vitor recebe aos 11 anos. Meningocócica ACWY: Bia e Vitor recebem aos 11 anos.",
+      "C": "HPV: Bia e Vitor recebem neste momento. Meningocócica ACWY: Bia e Vitor recebem neste momento.",
+      "D": "HPV: Bia recebe neste momento e Vitor recebe aos 11 anos. Meningocócica ACWY: Bia e Vitor recebem neste momento."
     },
     "answer": "A",
     "area": "Pediatria",
@@ -5662,7 +5662,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-033",
     "number": 33,
-    "stem": "TEXTO PARA AS QUESTÕES 33 E 34\nHomem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\n33\nQual é a classificação de Gustilo-Anderson para a fratura exposta e qual a conduta na Sala de Trauma, respectivamente?",
+    "stem": "TEXTO PARA AS QUESTÕES 33 E 34\nHomem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nQual é a classificação de Gustilo-Anderson para a fratura exposta e qual a conduta na Sala de Trauma, respectivamente?",
     "options": {
       "A": "2 - Alinhamento e imobilização.",
       "B": "2 - Limpeza da ferida com SF 0,9%, alinhamento e imobilização.",
@@ -5684,7 +5684,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-034",
     "number": 34,
-    "stem": "Após o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir:\nAssinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
+    "stem": "Homem, 23 anos, vítima de queda de motocicleta em alta velocidade.\nAvaliação na admissão no Serviço de Emergência:\nA: Intubado; SpO2: 93%.\nB: MV e ausculta diminuídos à esquerda.\nC: PA: 140x70 mmHg; FC: 90 bpm; FAST negativo.\nD: Escala de Coma de Glasgow de 3. Sedação. Pupilas anisocóricas, com midríase à esquerda.\nE: Fratura exposta de perna esquerda, com lesão de partes moles extensa > 10 cm, com boa cobertura muscular e sem perda óssea maciça. O paciente será submetido à analgesia, imunização antitetânica e antibiótico.\n\nApós o atendimento inicial, foi encaminhado para exame de tomografia de corpo inteiro com as imagens apresentadas a seguir:\nAssinale qual é a sequência de tratamento adequada para esse paciente, respectivamente.",
     "options": {
       "A": "Craniotomia; Laparotomia; Drenagem torácica.",
       "B": "Craniotomia; Drenagem torácica; Laparotomia.",
@@ -5796,10 +5796,10 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "number": 39,
     "stem": "Mulher, 31 anos, foi submetida à colecistectomia laparoscópica devido à colecistite aguda litiásica com 01 dia de evolução. O achado intraoperatório evidenciou vesícula biliar inflamada, sem coleções e necrose. O procedimento foi feito sem intercorrências. Qual das prescrições a seguir deve ser realizada imediatamente após a operação?",
     "options": {
-      "A": "Dieta leve\nSG 5% ----- 1.000 mL\nNaCl 20% ----- 20 mL\nEV de 12/12 h\nKC/ 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nEV de 8/8 h (se náuseas)\nOndansetrona 8 mg",
-      "B": "Jejum\nSG 5% ----- 1.000 mL\nNaCe 20% ----- 20 mL\nEV 12/12 h\nKC/ 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nOndansetrona 8 mg\nEV de 8/8 h (se náuseas)",
-      "C": "Jejum\nEV 12/12 h\nCeftriaxone 1 g\nEV 8/8 h\nMetronidazol 500 mg\nSG 5% ----- 1.000 mL\nNace 20% ----- 20 mL\nEV de 12/12 h\nKC/ 19,1% ----- 10 mLłą\nEV de 6/6 h\nDipirona 1 g\nMetoclopramida 10 mg\nEV de 8/8 h (se náuseas)",
-      "D": "Dieta leve\nEV 12/12 h\nCeftriaxone 1 g\nEV 8/8 h\nMetronidazol 500 mg\nSG 5% ----- 1.000 mL\nNaC/ 20% ----- 20 mL\nEV de 12/12 h\nKC 19,1% ----- 10 mL\nEV de 6/6 h\nDipirona 1 g\nEV de 8/8 h (se náuseas)\nMetoclopramida 10 mg"
+      "A": "Dieta leve\nSG 5% ---- 1.000 mL + NaCl 20% ---- 20 mL + KCl 19,1% ---- 10 mL: EV de 12/12 h\nDipirona 1 g: EV de 6/6 h\nOndansetrona 8 mg: EV de 8/8 h (se náuseas)",
+      "B": "Jejum\nSG 5% ---- 1.000 mL + NaCl 20% ---- 20 mL + KCl 19,1% ---- 10 mL: EV de 12/12 h\nDipirona 1 g: EV de 6/6 h\nOndansetrona 8 mg: EV de 8/8 h (se náuseas)",
+      "C": "Jejum\nCeftriaxona 1 g: EV 12/12 h\nMetronidazol 500 mg: EV 8/8 h\nSG 5% ---- 1.000 mL + NaCl 20% ---- 20 mL + KCl 19,1% ---- 10 mL: EV de 12/12 h\nDipirona 1 g: EV de 6/6 h\nMetoclopramida 10 mg: EV de 8/8 h (se náuseas)",
+      "D": "Dieta leve\nCeftriaxona 1 g: EV 12/12 h\nMetronidazol 500 mg: EV 8/8 h\nSG 5% ---- 1.000 mL + NaCl 20% ---- 20 mL + KCl 19,1% ---- 10 mL: EV de 12/12 h\nDipirona 1 g: EV de 6/6 h\nMetoclopramida 10 mg: EV de 8/8 h (se náuseas)"
     },
     "answer": "A",
     "area": "Cirurgia Geral",
@@ -5814,7 +5814,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-040",
     "number": 40,
-    "stem": "Mulher, 33 anos, internada em Unidade de Terapia Intensiva, há 7 dias, após realização de transplante pulmonar, intubada e sedada. Apresenta agudamente distensão abdominal, reação de dor à palpação abdominal em epigástrio e hipocôndrio direito. Realizada tomografia de abdome, corte coronal, que é apresentada a seguir, evidenciando vesícula biliar marcadamente distendida, com espessamento parietal e densificação da gordura perivesicular, sem evidência de cálculos.\n• Exames laboratoriais:\nLeucócitos 17.000/mm3 | PCR: 210 mg/L | TGO/AST: 120 U/L | TGP/ALT: 160 U/L | FA: 74 U/L | GGT: 151 U/L | Amilase: 170 U/L | Lipase: 122 U/L\n\nAssinale a alternativa que apresenta o diagnóstico correto.",
+    "stem": "Mulher, 33 anos, internada em Unidade de Terapia Intensiva, há 7 dias, após realização de transplante pulmonar, intubada e sedada. Apresenta agudamente distensão abdominal, reação de dor à palpação abdominal em epigástrio, hipocôndrio direito. Realizada tomografia de abdome, corte coronal, que é apresentada a seguir:\n• Exames laboratoriais:\nLeucócitos 17.000/mm3 | PCR: 210 mg/L | TGO/AST: 120 U/L | TGP/ALT: 160 U/L | FA: 74 U/L | GGT: 151 U/L | Amilase: 170 U/L | Lipase: 122 U/L\n\nAssinale a alternativa que apresenta o diagnóstico correto.",
     "options": {
       "A": "Úlcera perfurada.",
       "B": "Íleo metabólico.",
@@ -6006,7 +6006,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "options": {
       "A": "Artrite séptica por estreptococo, iniciar oxacilina até resultado de Gram e cultura geral do líquido sinovial.",
       "B": "Artrite gonocócica, iniciar ceftriaxona e oxacilina ou vancomicina até resultado de Gram, cultura geral e em meio Thayer-Martin.",
-      "C": "Artrite gotosa, iniciar colchicina, anti-inflamatório, hidroclorotiazida suspender e prescrever ambulatorialmente alopurinol.",
+      "C": "Artrite gotosa, iniciar colchicina, anti-inflamatório, suspender hidroclorotiazida e prescrever ambulatorialmente alopurinol.",
       "D": "Artrite psoriásica forma pustulosa, iniciar metotrexato semanal e betametasona tópica."
     },
     "answer": "B",
@@ -6046,7 +6046,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "number": 51,
     "stem": "Mulher de 65 anos, diabética em uso de metformina 1.000 mg de 12/12 horas/dia, procura UBS por dispneia aos médios esforços, há 2 meses. Relata infarto agudo do miocárdio (IAM) há 4 anos e traz ECO com fração de ejeção de 33% e hipocinesia de parede lateral. Está em uso de AAS 100 mg/dia, atorvastatina 40 mg/dia, carvedilol 25 mg duas vezes/dia, enalapril 20 mg duas vezes/dia, espironolactona 25 mg uma vez/dia e furosemida 40 mg/dia. Ao exame físico, apresenta PA: 120x76 mmHg e FC: 68 bpm, ausculta pulmonar normal e sem edema de membros inferiores. Assinale o tratamento medicamentoso indicado para essa paciente.",
     "options": {
-      "A": "Introduzir ivabradina espironolactona.",
+      "A": "Introduzir ivabradina ou aumentar dose de espironolactona.",
       "B": "Substituir carvedilol por bisoprolol para melhor betabloquear e aumentar furosemida.",
       "C": "Associar sacubitril-valsartana e diminuir dose de carvedilol.",
       "D": "Associar iSGLT2 ou trocar enalapril por sacubitril-valsartana."
@@ -6208,7 +6208,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-059",
     "number": 59,
-    "stem": "TEXTO PARA AS QUESTÕES 59 E 60\nMulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, medindo cerca de 5 cm. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas na lesão.\n\n59\nAssinale qual o diagnóstico e qual achado laboratorial é esperado.",
+    "stem": "TEXTO PARA AS QUESTÕES 59 E 60\nMulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, medindo cerca de 5 cm. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas na lesão.\n\nAssinale qual o diagnóstico e qual achado laboratorial é esperado.",
     "options": {
       "A": "Eritema nodoso hansênico e baciloscopia negativa.",
       "B": "Hanseníase tuberculoide e baciloscopia negativa.",
@@ -6230,7 +6230,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-060",
     "number": 60,
-    "stem": "Considerando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
+    "stem": "Mulher, 45 anos, apresenta há 2 anos lesão eritematosa, infiltrada, bem delimitada no antebraço esquerdo, medindo cerca de 5 cm. Peso de 67 kg. Testes realizados demonstraram sensibilidades térmica, dolorosa e tátil diminuídas na lesão.\n\nConsiderando o achado mais provável, assinale qual a orientação em relação aos contactantes da paciente.",
     "options": {
       "A": "Realização de baciloscopia, teste rápido e exame histopatológico nos contactantes.",
       "B": "Orientação de autoexame dos contactantes, moradores da mesma habitação há 2 anos.",
@@ -6250,7 +6250,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-061",
     "number": 61,
-    "stem": "TEXTO PARA AS QUESTÕES 61 E 62\nPaciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir:\n\n61\nAssinale qual é o diagnóstico e o achado do raspado.",
+    "stem": "TEXTO PARA AS QUESTÕES 61 E 62\nPaciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir:\n\nAssinale qual é o diagnóstico e o achado do raspado.",
     "options": {
       "A": "Candidose; pseudo-hifas e esporos.",
       "B": "Tínea do corpo; hifas artrosporadas.",
@@ -6272,7 +6272,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-062",
     "number": 62,
-    "stem": "Assinale quais são os principais diagnósticos diferenciais para a afecção dessa paciente.",
+    "stem": "Paciente de 78 anos refere lesões localizadas na região suprapúbica há 3 meses. Fotos da lesão e da microscopia ótica do raspado da lesão são apresentadas a seguir:\n\nAssinale quais são os principais diagnósticos diferenciais para a afecção dessa paciente.",
     "options": {
       "A": "Dermatite atópica e erupção variceliforme de Kaposi.",
       "B": "Intertrigo e dermatite seborreica.",
@@ -6378,10 +6378,10 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "number": 67,
     "stem": "Mulher, 77 anos, com antecedente de hipertensão arterial, doença pulmonar obstrutiva crônica e hipotireoidismo, é admitida no PS trazida pelo SAMU com quadro de rebaixamento do nível de consciência nas últimas 48 horas. No momento da admissão: Glasgow 7 (AO 2, RV 1, RM 4), sem proteção de vias aéreas, PA: 132x88 mmHg, FC: 43 bpm, FR: 9 ipm, temperatura 36 °C. Ausculta pulmonar normal, ausculta cardíaca reduzida, abdome sem alterações. Antes de receber qualquer medicação, foi realizada intubação orotraqueal em primeira tentativa, devido ao rebaixamento de nível de consciência. Imediatamente após a intubação, e antes de a paciente receber qualquer medicação, assinale qual imagem dentre as apresentadas a seguir, melhor representa a curva de capnografia obtida dessa paciente.",
     "options": {
-      "A": "P 50 - E 30",
-      "B": "E 30",
-      "C": "~ 20",
-      "D": "Curva D"
+      "A": "Imagem A",
+      "B": "Imagem B",
+      "C": "Imagem C",
+      "D": "Imagem D"
     },
     "answer": "C",
     "area": "Pneumologia",
@@ -6389,7 +6389,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "topico": "Insuficiência respiratória aguda",
     "annulled": false,
     "images": [
-      "assets/usp-sp/img/usp-sp-2024-q067-capnografia.png"
+      "assets/usp-sp/img/usp-sp-2024-067-1.png"
     ],
     "source": "usp-sp-2024",
     "examId": "usp-sp-2024",
@@ -6398,7 +6398,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-068",
     "number": 68,
-    "stem": "TEXTO PARA AS QUESTÕES 68 A 70\nPaciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal.\n\n68\nAssinale qual é a topografia lesional atual para o caso conforme o exame neurológico descrito no caso apresentado.",
+    "stem": "TEXTO PARA AS QUESTÕES 68 A 70\nPaciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal.\n\nAssinale qual é a topografia lesional atual para o caso conforme o exame neurológico descrito no caso apresentado.",
     "options": {
       "A": "Bulbo.",
       "B": "Ponte.",
@@ -6418,7 +6418,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-069",
     "number": 69,
-    "stem": "Realizada a prova calórica com água fria no vestíbulo direito do paciente, assinale qual a resposta esperada.",
+    "stem": "Paciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal.\n\nRealizada a prova calórica com água fria no vestíbulo direito do paciente, assinale qual a resposta esperada.",
     "options": {
       "A": "Desvio do olhar conjugado tônico para a esquerda.",
       "B": "Desvio do olhar conjugado tônico para a direita.",
@@ -6438,7 +6438,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-070",
     "number": 70,
-    "stem": "Caso nenhuma intervenção seja realizada, assinale qual padrão de exame neurológico corresponde à evolução natural esperada.",
+    "stem": "Paciente do sexo masculino, desconhecido, foi encontrado em coma em via pública e trazido por ambulância à sala de emergência. Foi submetido à intubação orotraqueal na cena do resgate. Na avaliação inicial, há a descrição do seguinte exame neurológico: resposta motora com extensão em membros inferiores e flexão em membros superiores aos estímulos dolorosos, pupilas médio-fixas. Encontra-se em ventilação mecânica através de tubo orotraqueal.\n\nCaso nenhuma intervenção seja realizada, assinale qual padrão de exame neurológico corresponde à evolução natural esperada.",
     "options": {
       "A": "Ausência de resposta motora, pupilas médio-fixas, reflexo óculo-cefálico ausente.",
       "B": "Ausência de resposta motora, pupilas puntiformes, reflexo óculo-cefálico desconjugado.",
@@ -6680,7 +6680,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-082",
     "number": 82,
-    "stem": "A vigilância epidemiológica do município realizou a investigação domiciliar. A família do paciente é formada pela sua esposa, de 27 anos, sogra, de 53 anos, e filha de um mês de idade. Chegaram ao Brasil há seis meses. Nenhuma delas refere sintomatologia respiratória. A criança não recebeu nenhuma vacina. Além da solicitação de sorologia para HIV, assinale qual deve ser a conduta em relação aos contatos domiciliares do caso neste momento.",
+    "stem": "Homem, 32 anos, residente em uma grande cidade brasileira e procedente de outro país latino-americano, procura a UBS com queixa de tosse produtiva há dois meses. Nas últimas semanas, os episódios de tosse se intensificaram e, em um deles, foram vistos \"raios de sangue\" no catarro. Foi solicitada a baciloscopia do escarro, o TRM-TB, a sorologia para HIV e iniciado o tratamento de tuberculose.\n\nA vigilância epidemiológica do município realizou a investigação domiciliar. A família do paciente é formada pela sua esposa, de 27 anos, sogra, de 53 anos, e filha de um mês de idade. Chegaram ao Brasil há seis meses. Nenhuma delas refere sintomatologia respiratória. A criança não recebeu nenhuma vacina. Além da solicitação de sorologia para HIV, assinale qual deve ser a conduta em relação aos contatos domiciliares do caso neste momento.",
     "options": {
       "A": "Tratar ILTB em todos os contatos domiciliares.",
       "B": "Investigar ILTB nas adultas e tratar ILTB na criança.",
@@ -7208,7 +7208,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
     "number": 108,
     "stem": "Paciente de 30 anos, 2G1PN, com 32 semanas, com excesso de trabalho atual, com queixa de dor em baixo ventre há cerca de uma semana, com piora nos últimos dois dias. Relata não estar dormindo bem, com dor e aumento da movimentação fetal à noite, principalmente ao mudar de decúbito. Questionada ativamente, relata dor também junto a vagina, na projeção dos grandes lábios. Ao exame físico, BEG, descorada 1+/4+, hidratada, anictérica, acianótica, eupneica, afebril. PA: 120x80 mmHg; AU: 33 cm; DU ausente; Foco: 144 bpm. Abdome flácido, ruídos hidroaéreos presentes e normais. Ligamento inguinal e pube dolorosos à palpação. Toque: colo grosso, posterior, impérvio, indolor ao toque. Assinale qual é a estrutura anatômica que pode ser responsabilizada pela origem desta dor.",
     "options": {
-      "A": "1.",
+      "A": "I.",
       "B": "II.",
       "C": "III.",
       "D": "IV."
@@ -7270,7 +7270,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-111",
     "number": 111,
-    "stem": "A paciente entra em trabalho de parto alguns dias depois e observa-se, no período expulsivo, após a exteriorização do polo cefálico, a retração do mesmo contra o períneo materno entre as contrações, conforme fotografia a seguir:\nAssinale a alternativa correta que representa a melhor conduta neste momento.",
+    "stem": "Paciente de 20 anos, primigesta, 40 semanas, admitida em trabalho de parto com contrações dolorosas rítmicas há 4 horas. Ao exame físico: AU: 38 cm. DU: 3 contrações/10 minutos. Foco: 148 bpm, com acelerações transitórias. Dorso à esquerda, escava completamente ocupada, sulco cervical bem nítido no polo inferior do dorso. Toque: colo médio, medianizado, pérvio para 3 cm, bolsa integra.\n\nA paciente entra em trabalho de parto alguns dias depois e observa-se, no período expulsivo, após a exteriorização do polo cefálico, a retração do mesmo contra o períneo materno entre as contrações, conforme fotografia a seguir:\nAssinale a alternativa correta que representa a melhor conduta neste momento.",
     "options": {
       "A": "(A)",
       "B": "(B)",
@@ -7354,7 +7354,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-115",
     "number": 115,
-    "stem": "TEXTO PARA AS QUESTÕES 115 A 120\nPrimigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n115\nA orientação deverá envolver quais vacinas ao longo do pré-\nnatal, além da influenza já tomada durante campanha\nvacinal?",
+    "stem": "TEXTO PARA AS QUESTÕES 115 A 120\nPrimigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nA orientação deverá envolver quais vacinas ao longo do pré-\nnatal, além da influenza já tomada durante campanha\nvacinal?",
     "options": {
       "A": "Tríplice viral, covid-19 e DTPa.",
       "B": "Hepatite B, covid-19 e DTPa.",
@@ -7374,7 +7374,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-116",
     "number": 116,
-    "stem": "O alvo de idade gestacional para o parto, caso a gravidez não tenha intercorrência, é de:",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nO alvo de idade gestacional para o parto, caso a gravidez não tenha intercorrência, é de:",
     "options": {
       "A": "34 semanas.",
       "B": "36 semanas.",
@@ -7394,7 +7394,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-117",
     "number": 117,
-    "stem": "Considerando os resultados fetais, qual seria a proposta para o controle ideal da pressão arterial ao longo da gravidez?",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nConsiderando os resultados fetais, qual seria a proposta para o controle ideal da pressão arterial ao longo da gravidez?",
     "options": {
       "A": "Normalização da PA no 1º trimestre.",
       "B": "Normalização da PA no 3º trimestre.",
@@ -7414,7 +7414,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-118",
     "number": 118,
-    "stem": "Considere que a paciente veio para consulta neste dia (10/12/2023). Toda a rotina pré-natal foi realizada adequadamente com resultados dentro dos parâmetros de normalidade. Assinale qual é o próximo exame para avaliação fetal que deve ser solicitado, de acordo com a idade gestacional.",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nConsidere que a paciente veio para consulta neste dia (10/12/2023). Toda a rotina pré-natal foi realizada adequadamente com resultados dentro dos parâmetros de normalidade. Assinale qual é o próximo exame para avaliação fetal que deve ser solicitado, de acordo com a idade gestacional.",
     "options": {
       "A": "Ecografia com Doppler de artérias uterinas.",
       "B": "Ecografia morfológica.",
@@ -7434,7 +7434,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-119",
     "number": 119,
-    "stem": "A paciente retorna em consulta com 32 semanas de gravidez, com queixa de aumento de conteúdo vaginal há 1 dia. Refere que teve perda urinária espontânea há 4 horas e que, desde então, sente a vagina úmida. Em avaliação obstétrica, tem-se o seguinte achado:\nConsiderando o diagnóstico observado, assinale qual é a conduta profilática imediata em relação ao uso de ampicilina.",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nA paciente retorna em consulta com 32 semanas de gravidez, com queixa de aumento de conteúdo vaginal há 1 dia. Refere que teve perda urinária espontânea há 4 horas e que, desde então, sente a vagina úmida. Em avaliação obstétrica, tem-se o seguinte achado:\nConsiderando o diagnóstico observado, assinale qual é a conduta profilática imediata em relação ao uso de ampicilina.",
     "options": {
       "A": "Aguardar pesquisa de Streptococcus do grupo B para introdução de ampicilina endovenosa.",
       "B": "Manter ampicilina endovenosa por 48 horas, sem reiniciar se entrar em trabalho de parto.",
@@ -7456,7 +7456,7 @@ window.TRYCKTRACK_QUESTION_BANK = (window.TRYCKTRACK_QUESTION_BANK || []).concat
   {
     "id": "usp-sp-2024-120",
     "number": 120,
-    "stem": "Uma hora após a admissão, a paciente apresenta queixa de dor em baixo ventre, com contrações irregulares. Os exames aboratoriais demonstram Hb: 11,8 g/dL; Ht: 32,2%; leucócitos: 15.000/mm3; PCR: 20. Considerando boa vitalidade fetal, assinale qual é a conduta obstétrica.",
+    "stem": "Primigesta, 41 anos de idade, gestação após ciclo natural induzido. É hipertensa crônica em uso de metildopa 750 mg por dia. Teve\ndata da última menstruação em 18/06/2023. Comparece em primeira consulta de pré-natal com os seguintes exames:\nData\nExames laboratoriais\nA+\nABO - RH\n30/07/202ął\n30/07/2023\n13,1 / 34%\nHemoglobina/ hematócrito\n83\nGlicemia de Jejum\n30/07/202ął\nTSH\n30/07/2023\n1,6\nVDRL\n30/07/2023\nNegativo\nHIV\nNegativo\n30/07/202ąśł\nToxoplasmose\nIgG negativo / IgM negativo\n30/07/2023\nIgG negativo / IgM negativo\nRubéola\n30/07/2023\nHepatite B\nAg HBs negativo, Anti HBS negativo, Anti HBC negativo\n30/07/202ął\n30/07/2023\nHepatite C\nNegativo\nUrina tipo 1 - EAS\n30/07/2023\n6.000 leucócitos/campo\nUrocultura\nEstreptococo B\n30/07/2023\nExame de imagem: Ultrassonografia inicial.\n\nUma hora após a admissão, a paciente apresenta queixa de dor em baixo ventre, com contrações irregulares. Os exames aboratoriais demonstram Hb: 11,8 g/dL; Ht: 32,2%; leucócitos: 15.000/mm3; PCR: 20. Considerando boa vitalidade fetal, assinale qual é a conduta obstétrica.",
     "options": {
       "A": "Indicar o parto imediato.",
       "B": "Parto após corticoterapia.",
