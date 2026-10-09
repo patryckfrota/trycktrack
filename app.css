@@ -5678,8 +5678,9 @@
                painéis nasce colado na borda física do iPad e o botão de
                voltar fica embaixo da câmera/borda, sem como tocar. */
             .question-player-header,
-            .reader-header {
-                padding-top: max(48px, calc(env(safe-area-inset-top) + 24px)) !important;
+            .reader-header,
+            .sidebar-header {
+                padding-top: max(76px, calc(env(safe-area-inset-top) + 52px)) !important;
             }
         }
 
