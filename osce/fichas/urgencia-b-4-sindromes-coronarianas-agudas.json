@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "urgencia-e-emergencia-saude-mental/B/b-4",
+  "status": "PUBLICADA",
+  "tema": {
+    "nome": "Síndromes coronárianas agudas",
+    "rodizio": "urgencia-e-emergencia-saude-mental",
+    "topico": "B",
+    "temaSlug": "b-4",
+    "areasRevalida": [
+      "clinica-medica"
+    ]
+  },
+  "uso": "Única fonte permitida de conduta, dose e limiar numérico para estações deste tema. A geração por IA e a auditoria só podem afirmar o que está nesta ficha; o que não está aqui não pode ser cobrado.",
+  "definicoes": [
+    "SCA com supradesnivelamento do ST (SCACSST/IAMCSST) e SCA sem supradesnivelamento do ST (SCASSST).",
+    "SCASSST se divide em angina instável (sem marcadores de necrose elevados) e IAM sem supra (marcadores elevados).",
+    "Diagnóstico de infarto: troponina de alta sensibilidade alterada mais pelo menos um de cinco critérios: sintomas de isquemia; alteração de ST/T ou BRE novo; ondas Q patológicas; perda de miocárdio viável/alteração de motilidade por imagem; trombo intracoronário.",
+    "O diagnóstico de SCA é clínico e não deve aguardar enzimas."
+  ],
+  "diagnostico": {
+    "ecg": [
+      "ECG de 12 derivações interpretado em até 10 minutos da chegada do paciente com dor torácica.",
+      "Supradesnivelamento de ST de pelo menos 1 mm em duas ou mais derivações contíguas, exceto V2 e V3.",
+      "Em V2 e V3: pelo menos 2,5 mm em homens com menos de 40 anos e pelo menos 2 mm em homens com 40 anos ou mais.",
+      "Pelo menos 1,5 mm em mulheres de qualquer idade (V2 e V3).",
+      "BRE novo ou presumivelmente novo (critérios de Sgarbossa modificados).",
+      "Registrar V7 a V9 quando houver infradesnivelamento isolado de ST de pelo menos 0,05 mm em V1 a V3 (suspeita de infarto de parede posterior).",
+      "Sem supra de ST: repetir o ECG a cada 2 horas, principalmente se os sintomas persistirem. O ECG pode ser normal em mais de 1/3 das SCASSST."
+    ],
+    "marcadores": [
+      "Dosar a primeira troponina assim que o ECG for interpretado; fazer pelo menos duas dosagens, com intervalo de 3 a 6 horas (troponina I comum) ou de 1 a 2 horas (ultrassensível).",
+      "Preferir troponina ultrassensível; IAMSSST = aumento acima do percentil 99 em pelo menos uma ocasião nas primeiras 24 horas. Ensaios apenas qualitativos não são indicados.",
+      "Antes de transferir ou estratificar, descartar elevação de troponina sem relação com SCA."
+    ],
+    "sinaisDeGravidade": [
+      "Crepitações pulmonares",
+      "Hipotensão (PAS abaixo de 85 mmHg)",
+      "Taquicardia (FC acima de 100 bpm)"
+    ]
+  },
+  "reperfusaoIAMCSST": {
+    "prioridade": "No IAMCSST a reperfusão tem prioridade absoluta; não aguardar troponina.",
+    "angioplastiaPrimaria": [
+      "Escolha preferencial: menor mortalidade, menor reinfarto e menor AVC hemorrágico.",
+      "Critério de tempo: porta-balão (do primeiro ECG interpretado à abertura da artéria) de até 90 minutos se o ECG foi feito em serviço com hemodinâmica ou ambulância avançada do SAMU.",
+      "Até 120 minutos se o paciente não está em serviço com hemodinâmica e precisa ser transferido.",
+      "Se esses tempos não forem cumpridos, a trombólise passa a ser a terapia de escolha."
+    ],
+    "fibrinolise": [
+      "Indicada quando não há centro com hemodinâmica que cumpra o tempo porta-balão previsto.",
+      "Meta: porta-agulha (do ECG à infusão) de até 30 minutos.",
+      "Tenecteplase é a escolha (bolus, pode ser feita em UPA e SAMU); alteplase é a alternativa se não houver tenecteplase.",
+      "Avaliar contraindicações antes de infundir. Contraindicações relativas citadas: gestação, hipertensão não controlada (PAS a partir de 180 ou PAD a partir de 110) e ressuscitação cardiopulmonar prolongada.",
+      "Anticoagulante oral em uso é contraindicação relativa à fibrinólise: preferir angioplastia primária."
+    ],
+    "aposFibrinolise": [
+      "Avaliar critérios de reperfusão em 60 a 90 minutos: queda do supradesnivelamento de ST maior que 50% (principal critério), alívio da dor (falho se houve morfina) e arritmias de reperfusão (ritmo idioventricular acelerado ou taquicardia ventricular não sustentada).",
+      "Sem esses critérios a fibrinólise é considerada ineficaz: transferir imediatamente para angioplastia de resgate, independentemente do tempo porta-balão.",
+      "Mesmo com sucesso, o paciente segue para unidade com hemodinâmica para estratificação invasiva."
+    ]
+  },
+  "medicamentosFaseAguda": [
+    {
+      "item": "AAS",
+      "dose": "Ataque de 160 a 320 mg mastigado por via oral; manutenção de 81 a 100 mg/dia.",
+      "obs": "Independe da terapia de reperfusão. O texto da diretriz traz 160 a 320 mg na unidade de entrada e 162 a 300 mg na seção hospitalar: tratar as duas faixas como equivalentes e não cobrar o limite exato."
+    },
+    {
+      "item": "Clopidogrel",
+      "dose": "Menos de 75 anos: ataque de 300 mg (600 mg preferível se encaminhado para angioplastia). Mais de 75 anos: 75 mg, sem dose de ataque. Manutenção 75 mg/dia por 12 meses.",
+      "obs": "Com ICP primária: 600 mg. Após fibrinólise e seguindo para ICP: 300 mg se a fibrinólise foi há menos de 24 h, 600 mg se há mais de 24 h."
+    },
+    {
+      "item": "Enoxaparina",
+      "dose": "Menos de 75 anos: 30 mg EV em bolus e depois 1,0 mg/kg SC a cada 12 h. Mais de 75 anos: sem bolus, 0,75 mg/kg SC a cada 12 h. Se clearance de creatinina abaixo de 30 mL/min: 1,0 mg/kg a cada 24 h.",
+      "obs": "Manter durante a internação ou até 8 dias."
+    },
+    {
+      "item": "Nitrato",
+      "dose": "Dinitrato de isossorbida 5 mg sublingual, a cada 5 minutos, máximo de 3 doses. Alternativa: nitroglicerina EV em bomba, 5 a 10 mcg/min, aumentando 5 a 10 mcg/min a cada 5 minutos até 100 a 200 mcg/min.",
+      "obs": "Indicado em dor persistente, hipertensão, congestão pulmonar ou grande área isquêmica; não altera mortalidade. Contraindicado com PAS abaixo de 90 mmHg, infarto de ventrículo direito, sildenafil nas últimas 24 h ou tadalafila nas últimas 48 h."
+    },
+    {
+      "item": "Morfina",
+      "dose": "2 a 4 mg EV, podendo repetir a cada 5 a 15 minutos.",
+      "obs": "Indicada se a dor persistir após o nitrato, na congestão pulmonar ou na ansiedade/agitação intensa. Pode mascarar o critério de reperfusão (alívio da dor): não dar de imediato. Efeitos: náusea, vômito, hipotensão, bradicardia, depressão respiratória. Antagonista: naloxona."
+    },
+    {
+      "item": "Oxigênio",
+      "dose": "Somente com saturação abaixo de 90%: 2 a 4 L/min por cateter ou máscara.",
+      "obs": "Cautela em DPOC. Sem hipoxemia, não é indicado."
+    },
+    {
+      "item": "Anti-inflamatórios não hormonais",
+      "dose": "Contraindicados (exceto AAS).",
+      "obs": "Formalmente contraindicados."
+    }
+  ],
+  "scasSemSupra": {
+    "regra": "Sem indicação de reperfusão imediata. A conduta depende do risco de complicações.",
+    "estratificacao": [
+      "Pilares: probabilidade de doença coronariana, ECG (excluído o supra), elevação enzimática e escore de risco TIMI.",
+      "Angina instável de alto risco: TIMI a partir de 4 (diagnóstico de angina instável após duas troponinas negativas no intervalo indicado).",
+      "TIMI a partir de 4: encaminhar para estratificação invasiva (cateterismo).",
+      "TIMI abaixo de 4 com sintomas e probabilidade moderada/alta: manter na unidade com ECG seriado e curva enzimática; encaminhar para cateterismo se surgir alteração dinâmica do ST ou elevação enzimática.",
+      "TIMI abaixo de 4, sem sintomas e baixa probabilidade: considerar alta.",
+      "IAMSSST confirmado: encaminhar a hospital de referência em cardiologia em até 24 horas."
+    ]
+  },
+  "internacaoEAlta": [
+    "Permanência em UTI por pelo menos 24 horas, com ECG de 12 derivações monitorado no mesmo período.",
+    "Menor risco (alta no 2º ou 3º dia após angioplastia): menos de 70 anos, FEVE acima de 45%, doença uni ou biarterial, sem arritmia persistente.",
+    "Ecocardiograma após angioplastia primária e antes da alta; reavaliar a função ventricular em 6 a 12 semanas se a FEVE estava reduzida.",
+    "Na alta: AAS 81 a 200 mg/dia por tempo indeterminado; clopidogrel 75 mg/dia por 12 meses; betabloqueador por tempo indeterminado em todo SCACSST (na SCASSST, benefício se a FE cai; razoável em baixo risco)."
+  ],
+  "errosCriticos": [
+    "Aguardar a troponina para reperfundir no IAMCSST.",
+    "Prescrever anti-inflamatório não esteroide.",
+    "Dar alta a paciente com SCA (ou sem estratificação) apenas com analgesia ou antiácido.",
+    "Prescrever nitrato com PAS abaixo de 90 mmHg, infarto de VD ou uso recente de sildenafil/tadalafila.",
+    "Indicar angioplastia primária quando o tempo de transferência excede 120 minutos, sem considerar fibrinólise."
+  ],
+  "condutasDesnecessarias": [
+    "Oxigênio com saturação de 90% ou mais.",
+    "Morfina precoce, antes do nitrato, em dor controlável."
+  ],
+  "cenariosPermitidos": [
+    {
+      "id": "iamcsst-upa-sem-hemodinamica",
+      "resumo": "IAMCSST anterior em UPA, hemodinâmica a mais de 120 min: fibrinólise com tenecteplase e transferência.",
+      "estacao": "cm-dor-toracica-001"
+    },
+    {
+      "id": "iamcsst-com-hemodinamica",
+      "resumo": "IAMCSST em hospital com hemodinâmica e porta-balão previsto de até 90 min: angioplastia primária, sem fibrinólise."
+    },
+    {
+      "id": "iamcsst-contraindicacao-fibrinolise",
+      "resumo": "IAMCSST com anticoagulante oral, PAS acima de 180 ou RCP prolongada: preferir transferência para angioplastia."
+    },
+    {
+      "id": "iamcsst-sem-reperfusao",
+      "resumo": "Após tenecteplase, sem queda de ST maior que 50% em 60 a 90 min: angioplastia de resgate."
+    },
+    {
+      "id": "nitrato-contraindicado",
+      "resumo": "Dor torácica com infarto de VD, PAS baixa ou sildenafil recente: o ponto é não prescrever nitrato."
+    },
+    {
+      "id": "scassst-baixo-risco",
+      "resumo": "Dor típica, ECG sem supra, troponina seriada negativa: observação, ECG seriado e decisão por risco."
+    },
+    {
+      "id": "scassst-alto-risco",
+      "resumo": "ECG com infradesnivelamento, troponina elevada: encaminhamento a referência em até 24 h (depende do item de TIMI pendente abaixo)."
+    }
+  ],
+  "naoCobrirAteComplementar": [
+    "Ticagrelor e prasugrel: a diretriz-fonte não os cita.",
+    "Doses de tenecteplase por peso (o quadro 9 não pôde ser transcrito do PDF).",
+    "Contraindicações absolutas da fibrinólise (o quadro 8 não pôde ser transcrito do PDF).",
+    "Os 7 itens do escore TIMI (o quadro 6 não pôde ser transcrito do PDF); só o ponto de corte de 4 está confirmado.",
+    "Estatina de alta potência e IECA/BRA na SCA: não lidos nesta ficha.",
+    "Fondaparinux e heparina não fracionada: a diretriz-fonte fala de enoxaparina."
+  ],
+  "referencias": [
+    {
+      "fonte": "Secretaria de Estado da Saúde do Espírito Santo. Diretrizes Clínicas: Abordagem ao Paciente com Síndrome Coronariana Aguda (alinhada às diretrizes da SBC)",
+      "ano": 2025,
+      "situacao": "texto lido integralmente nas seções usadas; números transcritos acima"
+    },
+    {
+      "fonte": "Diretriz da Sociedade Brasileira de Cardiologia vigente sobre IAMCSST e SCASSST",
+      "ano": null,
+      "situacao": "PENDENTE de conferência: servirá para resolver os itens de 'naoCobrirAteComplementar'"
+    }
+  ],
+  "revisao": {
+    "rascunhoPor": "Claude",
+    "dataRascunho": "2026-10-03",
+    "conferidoNoTextoDaFonte": true,
+    "aprovadoPor": "Aprovação individual dispensada pelo editor (Patryck Frota, 2026-10-03). Controle: avaliação dos usuários ao fim de cada estação, selo de transparência e regras editoriais do MODELO-ESTACAO.md.",
+    "revisaoProfissional": false
+  }
+}

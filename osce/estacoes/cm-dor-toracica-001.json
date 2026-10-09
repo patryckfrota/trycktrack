@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "2.0.0",
+  "id": "cm-dor-toracica-001",
+  "status": "APROVADA",
+  "titulo": "Dor no peito em homem de 58 anos",
+  "classificacao": {
+    "revalidaArea": "clinica-medica",
+    "internato": { "rodizio": "urgencia-e-emergencia-saude-mental", "topico": "B", "temaSlug": "b-4" }
+  },
+  "tempoMinutos": 10,
+  "dificuldade": "INTERMEDIÁRIA",
+  "cenario": {
+    "nivelAtencao": "Unidade de Pronto Atendimento (UPA 24h)",
+    "descricao": "Sala de emergência de uma UPA do interior. A triagem de enfermagem já foi realizada. O serviço de referência com hemodinâmica fica a cerca de 3 horas de distância, com transferência por SAMU e central de regulação de leitos.",
+    "recursos": [
+      "Eletrocardiógrafo, monitor multiparamétrico e desfibrilador",
+      "Oxímetro de pulso e esfigmomanômetro",
+      "Laboratório básico (troponina com resultado em cerca de 60 minutos)",
+      "Radiografia de tórax",
+      "Medicamentos de emergência: AAS, clopidogrel, enoxaparina, dinitrato de isossorbida, morfina, tenecteplase"
+    ],
+    "indisponivel": ["Hemodinâmica no local", "Ecocardiograma", "Tomografia computadorizada"]
+  },
+  "caso": {
+    "descricao": "Homem de 58 anos chega à UPA trazido por um familiar, queixando-se de dor no peito iniciada há cerca de uma hora e meia. Você é o médico plantonista e a triagem de enfermagem já foi concluída.",
+    "tarefas": [
+      "Realizar a anamnese dirigida ao quadro apresentado.",
+      "Solicitar o exame físico e os exames complementares que julgar necessários, interpretando os resultados.",
+      "Formular a hipótese diagnóstica.",
+      "Definir a conduta imediata, incluindo o tratamento medicamentoso necessário e o destino do paciente.",
+      "Orientar o paciente sobre o diagnóstico e a conduta."
+    ]
+  },
+  "termosProibidosNoTitulo": ["infarto", "coronarian", "supradesnivel", "miocard", "isquemi"],
+  "paciente": {
+    "nome": "José Antônio Lima",
+    "idade": 58,
+    "sexo": "M",
+    "ocupacao": "Motorista de caminhão",
+    "perfil": "Ansioso e assustado, fala com esforço e leva a mão ao peito. Colabora com todas as perguntas, mas responde apenas o que lhe é perguntado.",
+    "abertura": "Doutor, estou com uma dor muito forte no peito e tô suando frio.",
+    "sinaisTriagem": {
+      "PA": "150 x 90 mmHg",
+      "FC": "92 bpm",
+      "FR": "20 irpm",
+      "SpO₂": "96% em ar ambiente",
+      "Temperatura": "36,5 °C",
+      "Dor": "8 em 10"
+    },
+    "perguntasAoCandidato": [
+      { "quando": ["com.explicar-diagnostico", "dx.iamcsst"], "fala": "Doutor, é o coração? Eu vou morrer?" },
+      { "quando": ["cd.fibrinolitico"], "fala": "Esse remédio tem algum perigo?" }
+    ],
+    "padrao": {
+      "anamnese": "Não, nada disso.",
+      "exameFisico": "Sem alterações.",
+      "exame": "Sem alterações relevantes para este caso."
+    },
+    "respostas": [
+      { "id": "r-inicio", "acoes": ["anam.dor-inicio", "anam.evolucao"], "fala": "Começou faz mais ou menos uma hora e meia, eu estava sentado vendo televisão. Desde então não passou, só piorou um pouco." },
+      { "id": "r-carater", "acoes": ["anam.dor-carater"], "fala": "É um aperto forte, parece que tem um peso em cima do peito." },
+      { "id": "r-local", "acoes": ["anam.dor-localizacao"], "fala": "No meio do peito, atrás do osso." },
+      { "id": "r-irrad", "acoes": ["anam.dor-irradiacao"], "fala": "Vai para o braço esquerdo e sobe até o queixo." },
+      { "id": "r-intens", "acoes": ["anam.dor-intensidade"], "fala": "Uns 8, numa escala de 0 a 10." },
+      { "id": "r-piora", "acoes": ["anam.dor-fatores-piora"], "fala": "Não muda quando eu respiro fundo nem quando mexo o corpo." },
+      { "id": "r-melhora", "acoes": ["anam.dor-fatores-melhora"], "fala": "Tomei um antiácido em casa e não adiantou nada. Descansar também não melhora." },
+      { "id": "r-previos", "acoes": ["anam.episodios-previos"], "fala": "Semana passada, quando subi a escada de casa, senti um aperto parecido, mas passou em uns cinco minutos parado." },
+      { "id": "r-sudorese", "acoes": ["anam.sudorese"], "fala": "Estou suando frio, sim." },
+      { "id": "r-nausea", "acoes": ["anam.nausea-vomito"], "fala": "Senti enjoo, mas não cheguei a vomitar." },
+      { "id": "r-dispneia", "acoes": ["anam.dispneia"], "fala": "Um pouco de falta de ar, junto com a dor." },
+      { "id": "r-palpitacao", "acoes": ["anam.palpitacao"], "fala": "Não senti o coração disparar." },
+      { "id": "r-sincope", "acoes": ["anam.sincope"], "fala": "Não desmaiei, mas estou meio tonto." },
+      { "id": "r-has", "acoes": ["anam.has"], "fala": "Tenho pressão alta há uns dez anos, mas só tomo o remédio quando lembro." },
+      { "id": "r-dm", "acoes": ["anam.dm"], "fala": "Diabetes não, fiz exame no ano passado e estava normal." },
+      { "id": "r-lipidios", "acoes": ["anam.dislipidemia"], "fala": "O médico já disse que meu colesterol é alto, mas nunca tratei." },
+      { "id": "r-tabaco", "acoes": ["anam.tabagismo"], "fala": "Fumo desde os 18 anos, um maço por dia." },
+      { "id": "r-familia", "acoes": ["anam.hist-familiar"], "fala": "Meu pai morreu de infarto aos 54 anos." },
+      { "id": "r-dac", "acoes": ["anam.dac-previa"], "fala": "Nunca tive nada no coração, nunca tive derrame." },
+      { "id": "r-sedentarismo", "acoes": ["anam.sedentarismo", "anam.ocupacao"], "fala": "Sou motorista de caminhão, passo o dia sentado e quase não faço exercício." },
+      { "id": "r-meds", "acoes": ["anam.medicamentos"], "fala": "Só losartana de 50 miligramas, quando lembro. Hoje tomei um antiácido." },
+      { "id": "r-alergia", "acoes": ["anam.alergias"], "fala": "Não tenho alergia a nenhum remédio." },
+      { "id": "r-pde5", "acoes": ["anam.pde5"], "fala": "Não uso remédio para impotência." },
+      { "id": "r-anticoag", "acoes": ["anam.anticoagulante"], "fala": "Não tomo nenhum remédio para afinar o sangue." },
+      { "id": "r-contraind", "acoes": ["anam.contraind-trombolise", "anam.cirurgias"], "fala": "Nunca tive sangramento importante, nunca fui operado e não sofri nenhuma pancada ou acidente recente." },
+      { "id": "r-etilismo", "acoes": ["anam.etilismo"], "fala": "Bebo cerveja só nos fins de semana." }
+    ]
+  },
+  "exameFisico": [
+    { "id": "ef-geral", "acoes": ["ef.geral"], "achado": "Paciente pálido, sudoreico e ansioso, consciente e orientado, em regular estado geral." },
+    { "id": "ef-sinais", "acoes": ["ef.sinais-vitais"], "achado": "PA 150 x 90 mmHg (simétrica nos dois braços); FC 92 bpm; FR 20 irpm; temperatura 36,5 °C." },
+    { "id": "ef-spo2", "acoes": ["ef.spo2"], "achado": "SpO₂ de 96% em ar ambiente." },
+    { "id": "ef-cardio", "acoes": ["ef.cardio-ausculta"], "achado": "Ritmo cardíaco regular em 2 tempos, bulhas normofonéticas, sem sopros." },
+    { "id": "ef-resp", "acoes": ["ef.resp-ausculta"], "achado": "Murmúrio vesicular presente bilateralmente, sem ruídos adventícios." },
+    { "id": "ef-jugular", "acoes": ["ef.jugular"], "achado": "Sem turgência jugular a 45 graus." },
+    { "id": "ef-extremidades", "acoes": ["ef.extremidades"], "achado": "Sem edema de membros inferiores; perfusão periférica preservada, com enchimento capilar de 2 segundos." },
+    { "id": "ef-pulsos", "acoes": ["ef.cardio-pulsos"], "achado": "Pulsos periféricos simétricos e cheios nos quatro membros." }
+  ],
+  "impressos": [
+    {
+      "id": "imp-ecg",
+      "titulo": "Eletrocardiograma de 12 derivações",
+      "itens": [
+        { "acao": "ex.ecg", "resultado": "Ritmo sinusal, FC 90 bpm. Supradesnivelamento do segmento ST de 3 mm em V1 a V4, com infradesnivelamento recíproco em DII, DIII e aVF. Sem bloqueios de ramo ou atrioventriculares." }
+      ]
+    },
+    {
+      "id": "imp-lab",
+      "titulo": "Exames laboratoriais",
+      "itens": [
+        { "acao": "ex.troponina", "resultado": "Em processamento. Resultado previsto para cerca de 60 minutos." },
+        { "acao": "ex.hemograma", "resultado": "Hemoglobina 14,5 g/dL; leucócitos 10.200/mm³ sem desvio; plaquetas 240.000/mm³." },
+        { "acao": "ex.ureia-creatinina", "resultado": "Ureia 32 mg/dL; creatinina 1,0 mg/dL." },
+        { "acao": "ex.eletrolitos", "resultado": "Sódio 139 mEq/L; potássio 4,1 mEq/L." },
+        { "acao": "ex.coagulograma", "resultado": "INR 1,0; TTPa com relação de 1,0." },
+        { "acao": "ex.glicemia", "resultado": "Glicemia de 118 mg/dL." },
+        { "acao": "ex.perfil-lipidico", "resultado": "Colesterol total 248 mg/dL; LDL 162 mg/dL; HDL 36 mg/dL; triglicérides 250 mg/dL." }
+      ]
+    },
+    {
+      "id": "imp-imagem",
+      "titulo": "Radiografia de tórax",
+      "itens": [
+        { "acao": "ex.rx-torax", "resultado": "Área cardíaca normal, campos pulmonares sem consolidações ou congestão, mediastino sem alargamento." }
+      ]
+    }
+  ],
+  "pep": {
+    "itens": [
+      {
+        "id": "p01", "secao": "Apresentação", "peso": 0.25,
+        "texto": "Apresentação: (1) identifica-se e cumprimenta o paciente; (2) pergunta algum dado de identificação.",
+        "subelementos": [
+          { "id": "p01a", "texto": "Identifica-se e cumprimenta o paciente", "acoes": ["com.apresentar"] },
+          { "id": "p01b", "texto": "Pergunta dado de identificação (idade, profissão, estado civil ou naturalidade)", "acoes": ["com.identificacao"] }
+        ],
+        "niveis": { "adequado": 2, "parcial": 1 },
+        "ensino": "Apresentar-se e confirmar a identidade do paciente abre o vínculo e faz parte de todas as estações da prova prática; é o item mais fácil de perder por pressa."
+      },
+      {
+        "id": "p02", "secao": "Anamnese", "peso": 0.75,
+        "texto": "Caracteriza a dor torácica: (1) início e duração; (2) caráter; (3) localização; (4) irradiação; (5) intensidade; (6) fatores de piora ou de melhora.",
+        "subelementos": [
+          { "id": "p02a", "texto": "Início e duração", "acoes": ["anam.dor-inicio"] },
+          { "id": "p02b", "texto": "Caráter da dor", "acoes": ["anam.dor-carater"] },
+          { "id": "p02c", "texto": "Localização", "acoes": ["anam.dor-localizacao"] },
+          { "id": "p02d", "texto": "Irradiação", "acoes": ["anam.dor-irradiacao"] },
+          { "id": "p02e", "texto": "Intensidade", "acoes": ["anam.dor-intensidade"] },
+          { "id": "p02f", "texto": "Fatores de piora ou de melhora", "acoes": ["anam.dor-fatores-piora", "anam.dor-fatores-melhora"] }
+        ],
+        "niveis": { "adequado": 4, "parcial": 2 },
+        "ensino": "Na dor torácica, o tempo de início define a janela de reperfusão e o caráter, a irradiação e a ausência de variação com a respiração ou o movimento sustentam a origem isquêmica e afastam pericardite e causas musculoesqueléticas."
+      },
+      {
+        "id": "p03", "secao": "Anamnese", "peso": 0.5,
+        "texto": "Pergunta sobre sintomas associados: (1) sudorese; (2) náuseas ou vômitos; (3) falta de ar; (4) palpitações ou síncope.",
+        "subelementos": [
+          { "id": "p03a", "texto": "Sudorese", "acoes": ["anam.sudorese"] },
+          { "id": "p03b", "texto": "Náuseas ou vômitos", "acoes": ["anam.nausea-vomito"] },
+          { "id": "p03c", "texto": "Falta de ar", "acoes": ["anam.dispneia"] },
+          { "id": "p03d", "texto": "Palpitações ou síncope", "acoes": ["anam.palpitacao", "anam.sincope"] }
+        ],
+        "niveis": { "adequado": 3, "parcial": 2 },
+        "ensino": "Sudorese fria, náuseas e dispneia acompanhando a dor aumentam a probabilidade de síndrome coronariana aguda; palpitações e síncope sinalizam arritmia e instabilidade."
+      },
+      {
+        "id": "p04", "secao": "Anamnese", "peso": 0.5,
+        "texto": "Investiga fatores de risco e antecedentes: (1) hipertensão; (2) diabetes; (3) dislipidemia; (4) tabagismo; (5) história familiar de doença coronariana precoce; (6) doença cardiovascular ou episódio semelhante prévio.",
+        "subelementos": [
+          { "id": "p04a", "texto": "Hipertensão arterial", "acoes": ["anam.has"] },
+          { "id": "p04b", "texto": "Diabetes", "acoes": ["anam.dm"] },
+          { "id": "p04c", "texto": "Dislipidemia", "acoes": ["anam.dislipidemia"] },
+          { "id": "p04d", "texto": "Tabagismo", "acoes": ["anam.tabagismo"] },
+          { "id": "p04e", "texto": "História familiar de doença coronariana precoce", "acoes": ["anam.hist-familiar"] },
+          { "id": "p04f", "texto": "Doença cardiovascular ou episódio semelhante prévio", "acoes": ["anam.dac-previa", "anam.episodios-previos"] }
+        ],
+        "niveis": { "adequado": 4, "parcial": 2 },
+        "ensino": "Os fatores de risco modificáveis (hipertensão, dislipidemia, tabagismo, diabetes) e o pai com infarto precoce elevam a probabilidade pré-teste; o aperto aos esforços na semana anterior sugere angina de início recente."
+      },
+      {
+        "id": "p05", "secao": "Anamnese", "peso": 0.75,
+        "texto": "Investiga medicamentos e contraindicações ao tratamento: (1) medicamentos em uso; (2) alergias; (3) uso de inibidores da fosfodiesterase (sildenafil e similares); (4) uso de anticoagulante ou antecedente de sangramento, AVC, cirurgia ou trauma recentes.",
+        "subelementos": [
+          { "id": "p05a", "texto": "Medicamentos em uso", "acoes": ["anam.medicamentos"] },
+          { "id": "p05b", "texto": "Alergias", "acoes": ["anam.alergias"] },
+          { "id": "p05c", "texto": "Uso de inibidores da fosfodiesterase", "acoes": ["anam.pde5"] },
+          { "id": "p05d", "texto": "Anticoagulante, sangramento, AVC, cirurgia ou trauma recentes", "acoes": ["anam.anticoagulante", "anam.contraind-trombolise"] }
+        ],
+        "niveis": { "adequado": 3, "parcial": 2 },
+        "ensino": "Antes de nitrato é preciso excluir inibidor de fosfodiesterase nas últimas 24 a 48 horas; antes de fibrinólise, excluir AVC, sangramento ativo ou recente, cirurgia e trauma. Perguntar isso é parte da prescrição segura."
+      },
+      {
+        "id": "p06", "secao": "Exame físico", "peso": 0.5,
+        "texto": "Solicita exame físico dirigido: (1) sinais vitais; (2) oximetria de pulso; (3) ausculta cardíaca; (4) ausculta pulmonar; (5) avaliação de perfusão e edema de extremidades.",
+        "subelementos": [
+          { "id": "p06a", "texto": "Sinais vitais (PA, FC, FR e temperatura)", "acoes": ["ef.sinais-vitais"] },
+          { "id": "p06b", "texto": "Oximetria de pulso", "acoes": ["ef.spo2"] },
+          { "id": "p06c", "texto": "Ausculta cardíaca", "acoes": ["ef.cardio-ausculta"] },
+          { "id": "p06d", "texto": "Ausculta pulmonar", "acoes": ["ef.resp-ausculta"] },
+          { "id": "p06e", "texto": "Perfusão e edema de extremidades", "acoes": ["ef.extremidades"] }
+        ],
+        "niveis": { "adequado": 4, "parcial": 2 },
+        "ensino": "O exame físico classifica a gravidade (Killip) e define o que é seguro prescrever: PA e SpO₂ decidem nitrato e oxigênio; a ausculta e a perfusão procuram congestão, sopros e choque."
+      },
+      {
+        "id": "p07", "secao": "Investigação diagnóstica", "peso": 1.5,
+        "texto": "Solicita e interpreta o eletrocardiograma: (1) solicita ECG de 12 derivações; (2) identifica o supradesnivelamento do segmento ST; (3) localiza a alteração na parede anterior.",
+        "subelementos": [
+          { "id": "p07a", "texto": "Solicita ECG de 12 derivações", "acoes": ["ex.ecg"] },
+          { "id": "p07b", "texto": "Identifica o supradesnivelamento do segmento ST", "acoes": ["int.ecg-supra-st"] },
+          { "id": "p07c", "texto": "Localiza a alteração na parede anterior (V1 a V4)", "acoes": ["int.ecg-parede-anterior"] }
+        ],
+        "niveis": { "adequado": 3, "parcial": 2 },
+        "ensino": "Em dor torácica, o ECG de 12 derivações deve ser feito e interpretado em até 10 minutos da chegada: é ele, e não o marcador de necrose, que define a conduta no infarto com supradesnivelamento do ST."
+      },
+      {
+        "id": "p08", "secao": "Investigação diagnóstica", "peso": 0.5,
+        "texto": "Solicita exames laboratoriais: (1) troponina; (2) hemograma; (3) ureia e creatinina; (4) eletrólitos; (5) coagulograma; (6) glicemia.",
+        "subelementos": [
+          { "id": "p08a", "texto": "Troponina", "acoes": ["ex.troponina"] },
+          { "id": "p08b", "texto": "Hemograma", "acoes": ["ex.hemograma"] },
+          { "id": "p08c", "texto": "Ureia e creatinina", "acoes": ["ex.ureia-creatinina"] },
+          { "id": "p08d", "texto": "Eletrólitos", "acoes": ["ex.eletrolitos"] },
+          { "id": "p08e", "texto": "Coagulograma", "acoes": ["ex.coagulograma"] },
+          { "id": "p08f", "texto": "Glicemia", "acoes": ["ex.glicemia"] }
+        ],
+        "niveis": { "adequado": 4, "parcial": 2 },
+        "regras": { "antesDoImpresso": "imp-lab", "primeirosN": 6, "primeirosPrefixo": "ex." },
+        "ensino": "Os exames de base servem para a segurança do tratamento (função renal, coagulação, plaquetas), mas nenhum deles deve atrasar a reperfusão. Na prova, só pontuam os seis primeiros exames citados antes de receber o resultado."
+      },
+      {
+        "id": "p09", "secao": "Hipóteses diagnósticas", "peso": 1.0,
+        "texto": "Formula a hipótese diagnóstica: infarto agudo do miocárdio com supradesnivelamento do segmento ST de parede anterior.",
+        "subelementos": [
+          { "id": "p09a", "texto": "Hipótese de infarto agudo do miocárdio com supradesnivelamento do ST", "acoes": ["dx.iamcsst"] }
+        ],
+        "niveis": { "adequado": 1, "parcial": null },
+        "ensino": "Dor típica, fatores de risco e supradesnivelamento do ST em derivações contíguas fecham o diagnóstico de infarto com supra: pericardite, dissecção de aorta e embolia pulmonar são os diferenciais, e PA simétrica e raio X sem alargamento de mediastino tornam a dissecção improvável."
+      },
+      {
+        "id": "p10", "secao": "Conduta", "peso": 1.25,
+        "texto": "Inicia as medidas imediatas: (1) monitorização e acesso venoso; (2) AAS em dose de ataque; (3) inibidor de P2Y12; (4) anticoagulação parenteral; (5) analgesia com nitrato sublingual ou morfina.",
+        "subelementos": [
+          { "id": "p10a", "texto": "Monitorização cardíaca e acesso venoso", "acoes": ["cd.monitorizacao", "cd.acesso-venoso"] },
+          { "id": "p10b", "texto": "AAS em dose de ataque (160 a 320 mg, mastigado)", "acoes": ["cd.aas"] },
+          { "id": "p10c", "texto": "Inibidor de P2Y12 (clopidogrel 300 mg)", "acoes": ["cd.p2y12"] },
+          { "id": "p10d", "texto": "Anticoagulação parenteral (enoxaparina ou heparina)", "acoes": ["cd.anticoagulacao"] },
+          { "id": "p10e", "texto": "Analgesia com nitrato sublingual ou morfina", "acoes": ["cd.nitrato", "cd.morfina"] }
+        ],
+        "niveis": { "adequado": 4, "parcial": 2 },
+        "ensino": "Dupla antiagregação e anticoagulação acompanham a reperfusão. O nitrato é seguro aqui (PA 150 x 90, sem inibidor de fosfodiesterase, infarto de parede anterior) e é contraindicado com PAS abaixo de 90 mmHg, infarto de ventrículo direito ou uso recente de sildenafil."
+      },
+      {
+        "id": "p11", "secao": "Conduta", "peso": 1.5,
+        "texto": "Indica a reperfusão adequada ao cenário: fibrinólise com tenecteplase, pois a hemodinâmica não está disponível no serviço e a transferência não cumpre o tempo de 120 minutos.",
+        "subelementos": [
+          { "id": "p11a", "texto": "Indica fibrinólise (tenecteplase)", "acoes": ["cd.fibrinolitico"] }
+        ],
+        "niveis": { "adequado": 1, "parcial": null },
+        "ensino": "A angioplastia primária é a primeira escolha quando o tempo do primeiro ECG até a abertura da artéria é de até 90 minutos (hemodinâmica no local) ou 120 minutos (transferência). Fora desse limite, a fibrinólise é a conduta, com meta de até 30 minutos do ECG à infusão."
+      },
+      {
+        "id": "p12", "secao": "Conduta", "peso": 0.25,
+        "texto": "Define o destino: aciona a central de regulação para transferência a serviço com hemodinâmica e unidade coronariana.",
+        "subelementos": [
+          { "id": "p12a", "texto": "Regula a transferência para serviço com hemodinâmica", "acoes": ["cd.transferir-hemodinamica"] }
+        ],
+        "niveis": { "adequado": 1, "parcial": null },
+        "ensino": "Mesmo após a fibrinólise, o paciente deve ser transferido para estratificação invasiva, e a angioplastia de resgate é indicada se não houver sinais de reperfusão em 60 a 90 minutos."
+      },
+      {
+        "id": "p13", "secao": "Orientação final", "peso": 0.5,
+        "texto": "Orienta o paciente: (1) explica o diagnóstico em linguagem acessível; (2) explica a conduta; (3) explica os riscos do tratamento; (4) acolhe o medo ou checa o entendimento.",
+        "subelementos": [
+          { "id": "p13a", "texto": "Explica o diagnóstico em linguagem acessível", "acoes": ["com.explicar-diagnostico"] },
+          { "id": "p13b", "texto": "Explica a conduta e o motivo", "acoes": ["com.explicar-conduta"] },
+          { "id": "p13c", "texto": "Explica os riscos do tratamento", "acoes": ["com.explicar-riscos"] },
+          { "id": "p13d", "texto": "Acolhe o medo do paciente ou checa o entendimento", "acoes": ["com.empatia", "com.checar-entendimento"] }
+        ],
+        "niveis": { "adequado": 3, "parcial": 2 },
+        "ensino": "O paciente pergunta se vai morrer: responder com clareza e acolhimento, sem minimizar a gravidade, e explicar o risco de sangramento da fibrinólise faz parte do consentimento e é cobrado em todas as estações com decisão terapêutica."
+      },
+      {
+        "id": "p14", "secao": "Sequência", "peso": 0.25,
+        "texto": "Realiza a sequência das tarefas conforme solicitado nas orientações ao participante: anamnese, exame físico, exames, hipótese e conduta.",
+        "subelementos": [
+          { "id": "p14a", "texto": "Segue a ordem anamnese, exame físico, exames, hipótese e conduta", "acoes": [] }
+        ],
+        "niveis": { "adequado": 1, "parcial": null },
+        "regras": { "ordemPrefixos": ["anam.", "ef.", "ex.", "dx.", "cd."] },
+        "ensino": "Seguir a ordem das tarefas mostra raciocínio organizado. Na urgência é aceitável adiantar o ECG e as medidas imediatas, mas a prova avalia se o candidato conclui cada tarefa na sequência pedida."
+      }
+    ]
+  },
+  "condutasDanosas": ["cd.aine", "cd.alta", "cd.aguardar-troponina"],
+  "penalidadeDanosa": 1,
+  "condutasDesnecessarias": ["cd.oxigenio", "cd.icp-primaria"],
+  "gabarito": {
+    "diagnosticoPrincipal": "Infarto agudo do miocárdio com supradesnivelamento do segmento ST de parede anterior (Killip I), com cerca de 1h30 de evolução.",
+    "diagnosticoId": "dx.iamcsst",
+    "condutaEsperada": [
+      "ECG de 12 derivações em até 10 minutos, monitorização e acesso venoso",
+      "AAS 160 a 320 mg mastigado e clopidogrel 300 mg (paciente com menos de 75 anos)",
+      "Enoxaparina 30 mg endovenosa em bolus, seguida de 1 mg/kg subcutânea a cada 12 horas (ou heparina não fracionada)",
+      "Nitrato sublingual (dinitrato de isossorbida 5 mg) se dor persistente, e morfina 2 a 4 mg endovenosa se a dor for refratária",
+      "Fibrinólise com tenecteplase, com meta de até 30 minutos do ECG à infusão, após checar contraindicações",
+      "Regular a transferência para serviço com hemodinâmica e reavaliar critérios de reperfusão em 60 a 90 minutos"
+    ],
+    "errosCriticos": [
+      "Aguardar o resultado da troponina antes de reperfundir: o diagnóstico é eletrocardiográfico e o tempo é miocárdio",
+      "Prescrever anti-inflamatório não esteroide, formalmente contraindicado no infarto",
+      "Dar alta com analgesia ou antiácido",
+      "Indicar angioplastia primária sem hemodinâmica no local e sem como transferir em 120 minutos"
+    ],
+    "explicacao": "Homem de 58 anos, tabagista, hipertenso não tratado e dislipidêmico, com pai falecido por infarto precoce, apresenta dor torácica típica em aperto, irradiada para braço esquerdo e mandíbula, com sudorese e náuseas, há 1h30, após aperto aos esforços na semana anterior. O ECG mostra supradesnivelamento do ST em V1 a V4 com alteração recíproca na parede inferior, o que fecha o diagnóstico de infarto com supra de parede anterior. Como a UPA não tem hemodinâmica e a transferência levaria cerca de 3 horas, acima do limite de 120 minutos para angioplastia, a reperfusão é química: tenecteplase em até 30 minutos do ECG, depois de checar as contraindicações (nenhuma presente neste caso). A dupla antiagregação, a anticoagulação e a analgesia acompanham a fibrinólise. O oxigênio não é indicado porque a SpO₂ é de 96%, a troponina não deve ser esperada e os anti-inflamatórios são contraindicados. Após a fibrinólise, o paciente segue para centro com hemodinâmica, onde a angioplastia de resgate é indicada se não houver sinais de reperfusão em 60 a 90 minutos.",
+    "referencias": [
+      { "fonte": "Secretaria de Estado da Saúde do Espírito Santo. Diretrizes Clínicas: Abordagem ao Paciente com Síndrome Coronariana Aguda (alinhada às diretrizes da Sociedade Brasileira de Cardiologia)", "ano": 2025, "conferido": "ECG em até 10 min; AAS 160 a 320 mg; clopidogrel 300 mg; angioplastia se porta-balão até 90 min (120 min com transferência), senão fibrinólise com porta-agulha de até 30 min; tenecteplase; enoxaparina 30 mg EV e 1 mg/kg SC a cada 12 h; critérios de reperfusão avaliados em 60 a 90 min e angioplastia de resgate se ausentes; morfina 2 a 4 mg EV; nitrato com contraindicações (PAS abaixo de 90, infarto de VD, inibidor de fosfodiesterase); oxigênio apenas com SatO₂ abaixo de 90%; AINE contraindicado" }
+    ]
+  },
+  "revisao": {
+    "rascunhoPor": "Claude",
+    "dataRascunho": "2026-10-03",
+    "revisaoClinica": "2026-10-03 (segunda leitura: números conferidos na diretriz)",
+    "revisaoProfissional": false,
+    "aprovadoPor": "Patryck Frota (2026-10-03)"
+  }
+}

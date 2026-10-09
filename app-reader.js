@@ -5625,7 +5625,7 @@
         }
 
         function updateAllCardProgress() {
-            document.querySelectorAll('.rr-card').forEach(card => {
+            document.querySelectorAll('.rr-card[data-topic]').forEach(card => {
                 const topicKey = card.getAttribute('data-topic').replace(/-inicio$/, '');
                 const topic = RAPID_REVIEW_DATA[topicKey];
                 const progress = calculateProgress(topicKey);
@@ -5676,6 +5676,8 @@
             if (group === 'enamed') updateAllCardProgress();
         }
 
+        function openRepoRapid() { document.getElementById('repoRapidView').classList.add('active'); }
+        function closeRepoRapid() { document.getElementById('repoRapidView').classList.remove('active'); }
         function closeReviewGroup() {
             document.getElementById('reviewGroupView').classList.remove('active');
         }

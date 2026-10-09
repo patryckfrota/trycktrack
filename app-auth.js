@@ -785,7 +785,7 @@
         // internos de cada aba foram removidos, pra não duplicar o título.
         const PAGE_TITLES = {
             trilhas: 'Trilhas',
-            review: 'Rapid Review',
+            review: 'Repositório',
             questoes: 'QuestHub',
             metricas: 'Dashboard'
         };

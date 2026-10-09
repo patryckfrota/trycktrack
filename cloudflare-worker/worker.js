@@ -1,5 +1,5 @@
 // ============================================================
-// Trycktrack — proxy da Groq para geração de estações OSCE
+// Trycktrack — geração de estações OSCE por IA (Gemini ou Groq)
 // ------------------------------------------------------------
 // Existe pra resolver o achado C-04 da auditoria: a chave da Groq
 // não pode mais viver no index.html (qualquer visitante do site
@@ -17,103 +17,26 @@
 // Deploy: ver README.md nesta mesma pasta.
 // ============================================================
 
+import { gerarEstacao, ErroGeracao } from '../shared/osce-geracao.js';
+import { criarChamarIA, ErroProvedor, mensagemDoErro, diagnosticoDoErro } from '../shared/osce-provedores.js';
+import catalogo from '../osce/catalogo.json';
+import exemploDeFormato from '../osce/estacoes/cm-dor-toracica-001.json';
+import fichaSindromesCoronarianas from '../osce/fichas/urgencia-b-4-sindromes-coronarianas-agudas.json';
+
 const FIREBASE_PROJECT_ID = 'trycktrack-eebae';
-const GROQ_MODEL = 'openai/gpt-oss-120b';
 const GOOGLE_JWKS_URL = 'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com';
 const GENERATION_RATE_LIMIT_MAX = 20;
 const GENERATION_RATE_LIMIT_WINDOW_SECONDS = 3600;
+
+// Fichas de diretriz disponíveis: só gero estação para tema que tem ficha.
+// Para liberar um tema novo, crie a ficha em osce/fichas/ e adicione aqui.
+const FICHAS = Object.fromEntries([fichaSindromesCoronarianas].map(ficha => [ficha.id, ficha]));
 
 // Origens que podem chamar este Worker. O GitHub Pages é a produção;
 // localhost cobre o teste local do app (python3 -m http.server).
 const ALLOWED_ORIGINS = [
     'https://patryckfrota.github.io',
 ];
-
-// Mesmo schema que existia em OSCE_CONTENT_JSON_SCHEMA no index.html —
-// movido pra cá porque agora é o Worker (não mais o cliente) quem monta
-// a chamada completa pra Groq. O cliente manda só o prompt.
-const OSCE_CONTENT_JSON_SCHEMA = {
-    type: 'object',
-    properties: {
-        title: { type: 'string' },
-        difficulty: { type: 'string', enum: ['BÁSICA', 'INTERMEDIÁRIA', 'AVANÇADA'] },
-        estimatedMinutes: { type: 'integer' },
-        scenario: {
-            type: 'object',
-            properties: { environment: { type: 'string' }, materials: { type: 'array', items: { type: 'string' } } },
-            required: ['environment', 'materials']
-        },
-        doorInstructions: {
-            type: 'object',
-            properties: { patientName: { type: 'string' }, age: { type: 'string' }, chiefComplaint: { type: 'string' }, triageSummary: { type: 'string' } },
-            required: ['patientName', 'age', 'chiefComplaint', 'triageSummary']
-        },
-        patientScript: {
-            type: 'object',
-            properties: {
-                profile: {
-                    type: 'object',
-                    properties: {
-                        behavior: { type: 'string' }, tone: { type: 'string' }, emotionalState: { type: 'string' },
-                        understanding: { type: 'string' }, concerns: { type: 'string' }, baseline: { type: 'string' }
-                    },
-                    required: ['behavior', 'tone', 'emotionalState', 'understanding', 'concerns', 'baseline']
-                },
-                openingStatement: { type: 'string' },
-                responses: {
-                    type: 'array',
-                    items: { type: 'object', properties: { trigger: { type: 'string' }, response: { type: 'string' }, releaseRule: { type: 'string' } }, required: ['trigger', 'response', 'releaseRule'] }
-                },
-                hiddenInformation: { type: 'array', items: { type: 'string' } }
-            },
-            required: ['profile', 'openingStatement', 'responses', 'hiddenInformation']
-        },
-        physicalExam: {
-            type: 'array',
-            items: { type: 'object', properties: { system: { type: 'string' }, request: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } } }, required: ['system', 'request', 'findings'] }
-        },
-        complementaryTests: {
-            type: 'array',
-            items: { type: 'object', properties: { id: { type: 'string' }, name: { type: 'string' }, releaseRule: { type: 'string' }, result: { type: 'string' } }, required: ['id', 'name', 'releaseRule', 'result'] }
-        },
-        evolution: {
-            type: 'array',
-            items: { type: 'object', properties: { trigger: { type: 'string' }, change: { type: 'string' } }, required: ['trigger', 'change'] }
-        },
-        tasks: {
-            type: 'array',
-            items: {
-                type: 'object',
-                properties: {
-                    id: { type: 'string' }, title: { type: 'string' }, candidateInstructions: { type: 'string' },
-                    checklist: {
-                        type: 'array',
-                        items: {
-                            type: 'object',
-                            properties: {
-                                id: { type: 'string' },
-                                axis: { type: 'string', enum: ['COMMUNICATION', 'HISTORY', 'PHYSICAL_EXAM', 'DIAGNOSTIC_REASONING', 'MANAGEMENT'] },
-                                description: { type: 'string' }, points: { type: 'number' }, critical: { type: 'boolean' }
-                            },
-                            required: ['id', 'axis', 'description', 'points', 'critical']
-                        }
-                    },
-                    answerKey: { type: 'string' }
-                },
-                required: ['id', 'title', 'candidateInstructions', 'checklist', 'answerKey']
-            }
-        },
-        finalAnswer: {
-            type: 'object',
-            properties: {
-                expectedDiagnosis: { type: 'string' }, expectedManagement: { type: 'array', items: { type: 'string' } },
-                criticalErrors: { type: 'array', items: { type: 'string' } }, explanation: { type: 'string' }
-            },
-            required: ['expectedDiagnosis', 'expectedManagement', 'criticalErrors', 'explanation']
-        }
-    },
-    required: ['title', 'difficulty', 'estimatedMinutes', 'scenario', 'doorInstructions', 'patientScript', 'physicalExam', 'complementaryTests', 'evolution', 'tasks', 'finalAnswer']
-};
 
 function corsHeaders(origin) {
     const isLocalhost = origin && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
@@ -259,32 +182,39 @@ export default {
             return jsonResponse({ error: 'Corpo da requisição inválido.' }, 400, headers);
         }
 
-        const prompt = typeof body?.prompt === 'string' ? body.prompt.slice(0, 8000) : '';
-        if (!prompt) {
-            return jsonResponse({ error: 'Prompt ausente.' }, 400, headers);
+        const { rodizio, topico, temaSlug, cenarioId } = body || {};
+        if (typeof rodizio !== 'string' || typeof topico !== 'string' || typeof temaSlug !== 'string') {
+            return jsonResponse({ error: 'Informe rodizio, topico e temaSlug do tema desejado.' }, 400, headers);
+        }
+        const ficha = FICHAS[`${rodizio}/${topico}/${temaSlug}`] || null;
+        if (!ficha) {
+            return jsonResponse({ error: 'Este tema ainda não tem ficha de diretriz, então não gero estação para ele.' }, 422, headers);
         }
 
-        if (!env.GROQ_API_KEY) {
-            return jsonResponse({ error: 'Worker sem GROQ_API_KEY configurada (wrangler secret put GROQ_API_KEY).' }, 500, headers);
+        const chamarIA = criarChamarIA(env);
+        if (!chamarIA) {
+            return jsonResponse({ error: 'Servidor sem chave de IA (wrangler secret put GEMINI_API_KEY ou GROQ_API_KEY).' }, 500, headers);
         }
 
-        let groqResponse;
         try {
-            groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.GROQ_API_KEY}` },
-                body: JSON.stringify({
-                    model: GROQ_MODEL,
-                    messages: [{ role: 'user', content: prompt }],
-                    temperature: 0.9,
-                    response_format: { type: 'json_schema', json_schema: { name: 'osce_station_content', strict: false, schema: OSCE_CONTENT_JSON_SCHEMA } }
-                })
+            const { estacao, auditoria } = await gerarEstacao({
+                ficha, catalogo, exemplo: exemploDeFormato, chamarIA,
+                cenarioId: typeof cenarioId === 'string' ? cenarioId : null,
+                modelo: () => `${chamarIA.provedor}:${chamarIA.modelo}`
             });
-        } catch (error) {
-            return jsonResponse({ error: `Falha ao chamar a Groq: ${error.message}` }, 502, headers);
+            return jsonResponse({ estacao, auditoria }, 200, headers);
+        } catch (erro) {
+            if (erro instanceof ErroGeracao) {
+                console.error('Geração reprovada', erro.tipo, JSON.stringify(erro.detalhes));
+                return jsonResponse({ error: erro.message, tipo: erro.tipo, detalhes: erro.detalhes }, 422, headers);
+            }
+            if (erro instanceof ErroProvedor) {
+                console.error('IA respondeu erro', erro.provedor, erro.status, erro.corpo);
+                const limite = erro.status === 429 || erro.status === 413;
+                return jsonResponse({ error: mensagemDoErro(erro), tipo: limite ? 'limite' : 'ia', detalhes: [diagnosticoDoErro(erro)] }, limite ? 429 : 502, headers);
+            }
+            console.error('Falha inesperada ao gerar estação', erro);
+            return jsonResponse({ error: 'Falha inesperada ao gerar a estação.' }, 500, headers);
         }
-
-        const text = await groqResponse.text();
-        return new Response(text, { status: groqResponse.status, headers: { ...headers, 'Content-Type': 'application/json' } });
     }
 };

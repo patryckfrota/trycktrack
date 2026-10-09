@@ -1,0 +1,20 @@
+{
+  "versao": 1,
+  "fichas": [
+    "urgencia-e-emergencia-saude-mental/B/b-4"
+  ],
+  "estacoes": [
+    {
+      "id": "cm-dor-toracica-001",
+      "arquivo": "osce/estacoes/cm-dor-toracica-001.json",
+      "titulo": "Dor no peito em homem de 58 anos",
+      "area": "clinica-medica",
+      "rodizio": "urgencia-e-emergencia-saude-mental",
+      "topico": "B",
+      "temaSlug": "b-4",
+      "nivelAtencao": "Unidade de Pronto Atendimento (UPA 24h)",
+      "tempoMinutos": 10,
+      "dificuldade": "INTERMEDIÁRIA"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+> LEIA PRIMEIRO `.agents/rules.md` e `pipeline/PROCESSO-INGESTAO.md`: têm precedência sobre este arquivo em tudo que envolve conteúdo de prova.
+
+# TRYCKTRACK AUTONOMOUS WORKFLOW
+
+## Missao do Agente (Gemini)
+Voce e o engenheiro responsavel pelo motor de dados do Trycktrack:
+1. Conexao e migracoes no banco Neon (PostgreSQL).
+2. Crawler de monitoramento de bancas de residencia medica (ENARE, USP, etc.).
+3. Worker de ingestao de PDFs de provas com extracao multimodal.
+4. Geracao de resolucoes comentadas no padrao do app e modulo de Rapid Review.
+
+## Regras Tecnicas
+- Todo script deve ser em TypeScript / Node.js.
+- Validacao estrita de entradas com a biblioteca Zod.
+- Use SHA-256 no texto das questoes para evitar duplicatas no Neon DB.
+- Antes de dar uma tarefa por concluida, execute o script no terminal e garanta que nao ha erros.
+- Mantenha sempre o arquivo .agent/tasks.md atualizado com o status de cada etapa.
