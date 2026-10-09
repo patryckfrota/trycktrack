@@ -5680,7 +5680,10 @@
             .question-player-header,
             .reader-header,
             .sidebar-header {
-                padding-top: max(76px, calc(env(safe-area-inset-top) + 52px)) !important;
+                padding-top: max(66px, calc(env(safe-area-inset-top) + 42px)) !important;
+            }
+            .sidebar-detail-panel {
+                padding-top: max(60px, calc(env(safe-area-inset-top) + 36px));
             }
         }
 
