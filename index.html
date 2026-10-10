@@ -1707,8 +1707,12 @@
         window.buildStudyBlocks = buildStudyBlocks;
         window.studyCandidates = studyCandidates;
         // Atalhos da tela inicial (app-quicktools.js).
-        import { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS } from "./shared/quick-tools.js";
-        Object.assign(window, { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS });
+        import { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay } from "./shared/quick-tools.js";
+        Object.assign(window, { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay });
+        // Contracepção: dados da OMS + regras (app-contraception.js usa window.MEC).
+        import * as mecData from "./shared/contraception-data.js";
+        import * as mecEngine from "./shared/contraception-engine.js";
+        window.MEC = { ...mecData, ...mecEngine };
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
@@ -1857,6 +1861,7 @@
     <script src="app-auth.js"></script>
     <script src="app-reader.js"></script>
     <script src="app-quicktools.js"></script>
+    <script src="app-contraception.js"></script>
     <script src="app-bullets.js"></script>
     <script src="app-essentials.js"></script>
     <script src="app-search.js"></script>

@@ -1,8 +1,9 @@
 /* ============================================================
    ACESSO RÁPIDO (tela inicial)
-   Calculadora de idade gestacional e escolha de método
-   contraceptivo. A lógica está em shared/quick-tools.js; aqui só há
-   interface. Cada ferramenta abre numa página cheia (#quickToolView).
+   Hub dos atalhos e calculadora de idade gestacional (lógica em
+   shared/quick-tools.js). A contracepção tem módulo próprio
+   (app-contraception.js). Cada ferramenta abre numa página cheia
+   (#quickToolView).
    ============================================================ */
 const QUICK_TOOLS = [
     {
@@ -14,14 +15,14 @@ const QUICK_TOOLS = [
     {
         id: 'contracepcao',
         title: 'Contracepção',
-        text: 'Métodos adequados ao perfil da mulher.',
+        text: 'Critérios de elegibilidade da OMS por perfil.',
         icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M6 18 18 6"/></svg>'
     }
 ];
 
 const quickToolState = {
-    ig: { method: 'dum', dum: '', usDate: '', usWeeks: '', usDays: '0', ref: '' },
-    contra: { selected: new Set(), noHormone: false, longActing: false }
+    open: null,
+    ig: { method: 'dum', dum: '', usDate: '', usWeeks: '', usDays: '0', ref: '' }
 };
 
 function renderQuickTools() {
@@ -46,8 +47,7 @@ function openQuickTool(id) {
         updateGestationalResult();
     } else {
         document.getElementById('quickToolTitle').textContent = 'Contracepção';
-        body.innerHTML = renderContraceptionPage();
-        updateContraceptionResult();
+        window.ContraceptionUI.mount(body);
     }
     body.scrollTop = 0;
     view.classList.add('active');
@@ -55,6 +55,7 @@ function openQuickTool(id) {
 }
 
 function closeQuickTool() {
+    window.ContraceptionUI?.unmount();
     const view = document.getElementById('quickToolView');
     view?.classList.remove('active');
     view?.setAttribute('aria-hidden', 'true');
@@ -135,84 +136,10 @@ function updateGestationalResult() {
         <section class="qt-panel"><h2 class="qt-panel-title">Marcos do pré-natal</h2><ol class="qt-marks">${marks}</ol></section>`;
 }
 
-/* ---------- Contracepção ---------- */
-
-function renderContraceptionPage() {
-    const s = quickToolState.contra;
-    const groups = [];
-    CONTRACEPTIVE_CONDITIONS.forEach(c => {
-        let g = groups.find(x => x.name === c.group);
-        if (!g) groups.push(g = { name: c.group, items: [] });
-        g.items.push(c);
-    });
-    const chip = (c) => `<button type="button" class="qt-chip${s.selected.has(c.id) ? ' active' : ''}" aria-pressed="${s.selected.has(c.id)}" onclick="toggleContraCondition('${c.id}', this)">${escapeHtml(c.label)}</button>`;
-    const sections = groups.map(g => `<details class="qt-acc" open data-group="${g.name}"><summary><span>${g.name}</span><em data-count></em></summary><div class="qt-chips">${g.items.map(chip).join('')}</div></details>`).join('');
-    const pref = (key, label) => `<button type="button" class="qt-chip${s[key] ? ' active' : ''}" aria-pressed="${s[key]}" onclick="toggleContraPref('${key}', this)">${label}</button>`;
-    return `<div class="qt-layout">
-        <section class="qt-panel" aria-label="Perfil da mulher">
-            <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da mulher</h2><button type="button" class="qt-ghost" onclick="clearContraception()">Limpar</button></div>
-            <div class="qt-block"><h3>Preferências</h3><div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>
-            <div class="qt-block"><h3>Condições clínicas</h3><p class="qt-note">Marque só o que se aplica. Sem nada marcado, nenhum método tem restrição.</p>${sections}</div>
-        </section>
-        <section class="qt-output" id="qtOutput" aria-live="polite"></section>
-    </div>
-    <p class="qt-disclaimer">Apoio ao estudo, baseado nos Critérios Médicos de Elegibilidade da OMS (categorias 1 a 4). Quando a OMS separa início e continuação, usamos a categoria mais restritiva. Não cobre puerpério imediato, HIV nem anemia falciforme. Preservativo continua indicado para prevenir IST.</p>`;
-}
-
-function clearContraception() {
-    const s = quickToolState.contra;
-    s.selected.clear(); s.noHormone = false; s.longActing = false;
-    document.getElementById('quickToolBody').innerHTML = renderContraceptionPage();
-    updateContraceptionResult();
-}
-
-function toggleContraCondition(id, el) {
-    const set = quickToolState.contra.selected;
-    set.has(id) ? set.delete(id) : set.add(id);
-    el.classList.toggle('active', set.has(id));
-    el.setAttribute('aria-pressed', set.has(id));
-    updateContraceptionResult();
-}
-
-function toggleContraPref(key, el) {
-    quickToolState.contra[key] = !quickToolState.contra[key];
-    el.classList.toggle('active', quickToolState.contra[key]);
-    el.setAttribute('aria-pressed', quickToolState.contra[key]);
-    updateContraceptionResult();
-}
-
-function updateContraceptionResult() {
-    const out = document.getElementById('qtOutput');
-    if (!out) return;
-    const s = quickToolState.contra;
-    document.querySelectorAll('.qt-acc').forEach(d => {
-        const n = d.querySelectorAll('.qt-chip.active').length;
-        d.querySelector('[data-count]').textContent = n ? `${n} marcada${n > 1 ? 's' : ''}` : '';
-    });
-    const list = recommendContraception([...s.selected], s);
-    const card = (m, best) => {
-        const why = m.drivers.length ? `<p class="qt-why">Restrição: ${m.drivers.map(escapeHtml).join('; ')}</p>` : '';
-        const miss = m.misses ? '<p class="qt-why qt-why-soft">Não atende à preferência marcada</p>' : '';
-        return `<article class="qt-method qt-cat${m.category}${best ? ' qt-best' : ''}">
-            <div class="qt-method-top"><span class="qt-badge" title="Categoria ${m.category}">${m.category}</span><h4>${m.name}</h4></div>
-            ${best ? '<span class="qt-best-tag">Melhor opção para este perfil</span>' : ''}
-            <p class="qt-method-eff">${m.efficacy}</p>
-            <p class="qt-method-note">${m.note}</p>${why}${miss}</article>`;
-    };
-    const section = (title, hint, items, bestFirst) => items.length ? `<section class="qt-group-out"><header><h3>${title}</h3><span>${hint}</span></header>${items.map((m, i) => card(m, bestFirst && i === 0 && !m.misses)).join('')}</section>` : '';
-    out.innerHTML =
-        section('Indicados', 'Categorias 1 e 2', list.filter(m => m.category <= 2), true) +
-        section('Desaconselhados', 'Categoria 3: risco costuma superar o benefício', list.filter(m => m.category === 3), false) +
-        section('Contraindicados', 'Categoria 4: risco inaceitável', list.filter(m => m.category === 4), false);
-}
-
 window.openQuickTool = openQuickTool;
 window.closeQuickTool = closeQuickTool;
 window.setGestationalMethod = setGestationalMethod;
 window.setGestationalToday = setGestationalToday;
 window.updateGestationalResult = updateGestationalResult;
-window.toggleContraCondition = toggleContraCondition;
-window.toggleContraPref = toggleContraPref;
-window.clearContraception = clearContraception;
 window.quickToolState = quickToolState;
 window.renderQuickTools = renderQuickTools;
