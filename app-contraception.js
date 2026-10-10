@@ -86,8 +86,8 @@
     }
 
     function prefsHtml() {
-        const pref = (key, label, hint) => `<button type="button" class="qt-seg${state.prefs[key] ? ' active' : ''}" aria-pressed="${state.prefs[key]}" data-action="pref" data-v="${key}"><strong>${label}</strong><span>${hint}</span></button>`;
-        return `<div class="ct-prefs"><h3>Preferências</h3><div class="qt-segmented">${pref('noHormone', 'Sem hormônio', 'Evita hormonais')}${pref('longActing', 'Longa duração', 'Implante e DIU')}</div></div>`;
+        const pref = (key, label) => `<button type="button" class="qt-seg${state.prefs[key] ? ' active' : ''}" aria-pressed="${state.prefs[key]}" data-action="pref" data-v="${key}"><strong>${label}</strong></button>`;
+        return `<div class="ct-prefs"><div class="qt-segmented" role="group" aria-label="Preferências">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>`;
     }
 
     function triageHtml(hits) {
