@@ -85,6 +85,11 @@
         return `<div class="qt-segmented ct-phase">${seg('start', 'Vai iniciar', 'Escolha do método')}${seg('continue', 'Já usa', 'Continuação')}</div>`;
     }
 
+    function prefsHtml() {
+        const pref = (key, label) => `<button type="button" class="qt-chip${state.prefs[key] ? ' active' : ''}" aria-pressed="${state.prefs[key]}" data-action="pref" data-v="${key}">${label}</button>`;
+        return `<div class="qt-block ct-prefs"><h3>Preferências</h3><div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>`;
+    }
+
     function triageHtml(hits) {
         const { SCREENING, itemDone, screeningProgress, getQuestion } = M();
         const searching = hits !== null;
@@ -103,7 +108,7 @@
         }).join('');
         if (!rows) return '';
         const pct = Math.round(prog.done / prog.total * 100);
-        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : phaseHtml()}<div class="ct-tris">${rows}</div></section>`;
+        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : phaseHtml() + prefsHtml()}<div class="ct-tris">${rows}</div></section>`;
     }
 
     function profileHtml() {
@@ -209,7 +214,7 @@
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
                 <p><b>Com poucos recursos para julgamento clínico</b> (OMS, tabela 3.2): categorias 1 e 2 = pode usar; 3 e 4 = não usar. Quando aparece uma faixa (por exemplo 3/4), a categoria depende da gravidade da condição: avalie o caso.</p>
                 <p><b>Percepção da fertilidade (A, C, D) e esterilização (A, C, D, S)</b> usam letras em vez de números. D e S não são “piores” entre si: D adia o procedimento; S exige serviço especializado.</p><ul>${letters}</ul>
-                <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
+                <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave “Vai iniciar / Já usa” da triagem para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
             <details class="ct-legend"><summary>${esc(M().PREGNANCY_CHECK.title)}</summary><p>${esc(M().PREGNANCY_CHECK.intro)}</p><ul class="ct-points">${M().PREGNANCY_CHECK.criteria.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().PREGNANCY_CHECK.note)}</p></details>
             <details class="ct-legend"><summary>${esc(M().COUNSELLING.title)}</summary><ul class="ct-points">${M().COUNSELLING.items.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().COUNSELLING.note)}</p></details>
             <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul></details>
@@ -422,7 +427,6 @@
     /* ---------- montagem e atualização ---------- */
 
     function shellHtml() {
-        const pref = (key, label) => `<button type="button" class="qt-chip${state.prefs[key] ? ' active' : ''}" aria-pressed="${state.prefs[key]}" data-action="pref" data-v="${key}">${label}</button>`;
         return `<div class="ct" data-tab="${state.tab}">
             <div class="ct-bar">
                 <div class="ct-tabs" role="tablist">
@@ -435,7 +439,6 @@
                     <div class="qt-panel">
                         <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da paciente</h2><button type="button" class="qt-ghost" data-action="clear">Limpar tudo</button></div>
                         <div id="ctSummary"></div>
-                        <div class="qt-block"><h3>Preferências</h3><div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>
                         <label class="ct-search"><span class="ct-sr">Buscar condição</span><input type="search" id="ctSearch" placeholder="Buscar condição ou medicamento" value="${esc(state.query)}" autocomplete="off" enterkeyhint="search"></label>
                     </div>
                     <div id="ctProfile"></div>
