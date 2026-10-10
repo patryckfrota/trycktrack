@@ -1868,12 +1868,16 @@
                 .map(([key, r]) => ({ name: areaList.find(([slug]) => slug === key)?.[1] || key, acc: Math.round(r.c / r.n * 100), n: r.n })).sort((a, b) => b.acc - a.acc);
             const sunday = new Date(today); sunday.setDate(sunday.getDate() - today.getDay());
             const saturday = new Date(sunday); saturday.setDate(sunday.getDate() + 6);
-            const short = d => d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '');
             const minutes = Number(getQuestionStats().studyMinutes || 0);
             const studyDays = [...activity.days.values()].filter(d => d.n > 0).length;
             const style = getComputedStyle(document.body);
             return {
-                period: `${short(sunday)} a ${short(saturday)}`,
+                period: (() => {
+                    const month = d => d.toLocaleDateString('pt-BR', { month: 'long' });
+                    return sunday.getMonth() === saturday.getMonth()
+                        ? `${sunday.getDate()} a ${saturday.getDate()} de ${month(saturday)}`
+                        : `${sunday.getDate()} de ${month(sunday)} a ${saturday.getDate()} de ${month(saturday)}`;
+                })(),
                 weekTotal: week.total,
                 weekDiff: week.previous ? week.total - week.previous : null,
                 accuracy: hasRecent ? pctOf(windows.current) : null,

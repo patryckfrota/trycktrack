@@ -1,10 +1,10 @@
 /**
  * Cartão de desempenho em formato Stories (1080 × 1920), desenhado em canvas.
  *
- * Direção: papel claro, uma frase em primeira pessoa como protagonista (é o
- * que a pessoa quer contar), um único gráfico — o calendário de 16 semanas em
+ * Direção: papel claro, uma ficha de dados em duas tonalidades como
+ * protagonista (número em tinta, unidade em cinza), um único gráfico — o calendário de 16 semanas em
  * pontos — e três fatos discretos. Um só acento (o violeta da marca), usado
- * apenas nos pontos. Literata para a frase e os números, Inter pequena para
+ * apenas nos pontos. Literata para a ficha e os números, Inter pequena para
  * as legendas; três tamanhos de texto, tudo alinhado à esquerda numa coluna.
  *
  * O conteúdo fica entre y = 200 e y = 1760: o Instagram cobre o topo (perfil)
@@ -36,24 +36,6 @@ function text(ctx, str, x, y, { size, weight = 400, color = C.ink, align = 'left
     ctx.letterSpacing = '0px';
 }
 
-// Quebra a frase em linhas que cabem na largura (por palavra).
-function wrap(ctx, str, maxWidth) {
-    const lines = [];
-    let line = '';
-    for (const word of str.split(' ')) {
-        const next = line ? `${line} ${word}` : word;
-        if (ctx.measureText(next).width > maxWidth && line) { lines.push(line); line = word; } else line = next;
-    }
-    if (line) lines.push(line);
-    return lines;
-}
-
-function statement(d, nf) {
-    if (!d.weekTotal) return 'Uma semana nova começa agora.';
-    const q = `${nf(d.weekTotal)} ${d.weekTotal === 1 ? 'questão' : 'questões'}`;
-    return d.accuracy == null ? `Esta semana respondi ${q}.` : `Esta semana respondi ${q} e acertei ${d.accuracy}%.`;
-}
-
 export function drawStoryCard(canvas, d) {
     const ctx = canvas.getContext('2d');
     canvas.width = STORY_W; canvas.height = STORY_H;
@@ -66,24 +48,29 @@ export function drawStoryCard(canvas, d) {
     // Período.
     text(ctx, d.period, X, 250, { size: 30, weight: 500, color: C.muted, font: F });
 
-    // Protagonista: a frase.
-    const size = 96, lead = 112;
-    ctx.font = `400 ${size}px ${S}`; ctx.letterSpacing = '-1.5px';
-    // Quebra balanceada: a menor largura que mantém o mesmo nº de linhas,
-    // para nenhuma linha (como um "47%." sozinho) ficar órfã.
-    const phrase = statement(d, nf);
-    let lines = wrap(ctx, phrase, W);
-    for (let width = W - 8; width > W * 0.5; width -= 8) {
-        const tryLines = wrap(ctx, phrase, width);
-        if (tryLines.length > lines.length) break;
-        lines = tryLines;
-    }
+    // Protagonista: ficha de dados em duas tonalidades — número em tinta,
+    // unidade em cinza, mesma serifa e tamanho. Linhas sem amostra somem.
+    const rows = [
+        [nf(d.weekTotal), d.weekTotal === 1 ? 'questão' : 'questões'],
+        d.accuracy == null ? null : [`${d.accuracy}%`, 'de acerto'],
+        d.streak > 1 ? [nf(d.streak), 'dias seguidos'] : null
+    ].filter(Boolean);
+    // Encolhe a ficha inteira (não só uma linha) se a mais longa passar da coluna.
+    ctx.font = `400 128px ${S}`; ctx.letterSpacing = '-3px';
+    const longest = Math.max(...rows.map(([v, u]) => ctx.measureText(`${v} ${u}`).width + 128 * 0.24));
     ctx.letterSpacing = '0px';
-    lines.forEach((line, i) => text(ctx, line, X, 470 + i * lead, { size, font: S, spacing: -1.5 }));
+    const size = Math.min(128, Math.floor(128 * W / longest)), lead = Math.round(size * 1.17), heroTop = 500;
+    rows.forEach(([value, unit], i) => {
+        const y = heroTop + i * lead;
+        text(ctx, value, X - 4, y, { size, font: S, spacing: -3 });
+        ctx.font = `400 ${size}px ${S}`; ctx.letterSpacing = '-3px';
+        const w = ctx.measureText(value).width; ctx.letterSpacing = '0px';
+        text(ctx, unit, X - 4 + w + size * 0.24, y, { size, font: S, color: C.muted, spacing: -3 });
+    });
 
     // Gráfico: calendário de 16 semanas em pontos (colunas = semanas).
     const weeks = d.heat[0].length, pitch = W / weeks, dot = pitch * 0.56;
-    const top = Math.max(940, 470 + lines.length * lead + 80);
+    const top = heroTop + (rows.length - 1) * lead + 150;
     for (let r = 0; r < 7; r++) for (let c = 0; c < weeks; c++) {
         const level = d.heat[r][c];
         if (level < 0) continue; // dias que ainda não chegaram ficam em branco
@@ -94,13 +81,23 @@ export function drawStoryCard(canvas, d) {
     }
     const below = top + pitch * 7 + 52;
     text(ctx, 'Últimas 16 semanas', X, below, { size: 28, weight: 500, color: C.muted, font: F });
-    text(ctx, `${nf(d.studyDays)} ${d.studyDays === 1 ? 'dia' : 'dias'} de estudo`, X + W, below, { size: 28, weight: 500, color: C.muted, align: 'right', font: F });
+    // Legenda de intensidade, à direita.
+    ctx.font = `500 28px ${F}`;
+    const lw = ctx.measureText('mais').width, ld = 18, lg = 10;
+    let lx = X + W - lw;
+    text(ctx, 'mais', lx, below, { size: 28, weight: 500, color: C.muted, font: F });
+    for (let level = 4; level >= 0; level--) {
+        lx -= lg + ld;
+        ctx.beginPath(); ctx.arc(lx + ld / 2, below - 9, ld / 2, 0, Math.PI * 2);
+        ctx.fillStyle = level === 0 ? C.empty : `rgba(${C.accent},${[0, 0.3, 0.55, 0.8, 1][level]})`; ctx.fill();
+    }
+    text(ctx, 'menos', lx - lg, below, { size: 28, weight: 500, color: C.muted, align: 'right', font: F });
 
     // Três fatos.
     const fy = below + 140, col = W / 3;
     [
-        [nf(d.streak), d.streak === 1 ? 'dia seguido' : 'dias seguidos'],
         [`${d.hitDays} de 7`, 'dias na meta'],
+        [nf(d.studyDays), d.studyDays === 1 ? 'dia de estudo' : 'dias de estudo'],
         [nf(d.answered), 'questões no total']
     ].forEach(([value, label], i) => {
         text(ctx, value, X + col * i, fy, { size: 64, font: S, spacing: -1 });
