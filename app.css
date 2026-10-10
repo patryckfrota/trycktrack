@@ -2167,6 +2167,22 @@
         .ct-cert-ok { color: var(--success); }
         .ct-card p.ct-cert { padding: 10px 12px; border-radius: 12px; background: var(--bg-tertiary); font-size: 13px; }
 
+        /* Como prescrever */
+        .ct-prods { display: grid; gap: 12px; }
+        .ct-prod { display: grid; gap: 3px; padding: 14px; border-radius: 14px; background: var(--bg-tertiary); }
+        .ct-prod-top { display: flex; align-items: center; gap: 8px; }
+        .ct-prod-top strong { color: var(--text-main); font-size: 15px; }
+        .ct-sus { padding: 1px 8px; border-radius: 999px; background: var(--success-soft); color: var(--success); font-size: 10.5px; font-weight: 800; }
+        .ct-card p.ct-prod-sub { color: var(--text-main); font-size: 13.5px; font-weight: 600; }
+        .ct-rx { display: grid; gap: 8px; }
+        .ct-rx + .ct-rx { margin-top: 6px; }
+        .ct-rx-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .ct-rx-head strong { color: var(--text-main); font-size: 13px; }
+        .ct-rx-body { margin: 0; padding: 14px 16px; border: 1px dashed var(--border-color); border-radius: 14px; background: var(--bg-secondary); color: var(--text-main); font-family: var(--font-family-reading); font-size: 14px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+        .ct-src { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+        .ct-src a { color: var(--lavender-active); font-size: 13px; line-height: 1.5; }
+        .ct-src li { color: var(--text-secondary); }
+
         .ct-gguide { margin: 0; padding: 0 2px; color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
         .ct-verdict { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
         .ct-verdict strong { color: var(--text-main); }

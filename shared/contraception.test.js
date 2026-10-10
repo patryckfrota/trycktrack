@@ -6,6 +6,7 @@ import { RATES, RATES_SOURCE, effectCategory, typicalRate } from './contraceptio
 import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
 import { METHOD_USE, VASECTOMY, PREGNANCY_CHECK } from './contraception-use.js';
+import { PRESCRIBE, SOURCES, VASECTOMY_LAW } from './contraception-prescribe.js';
 import { METHOD_INFO, WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
@@ -458,4 +459,32 @@ test('"maior eficácia" só vale entre métodos confirmados', () => {
     assert.equal(evaluate(answers, { confirmed: [] }).methods.some(m => m.best), false);
     assert.equal(evaluate(answers, { confirmed: ['cu', 'lng'] }).methods.find(m => m.best).id, 'lng');
     assert.equal(evaluate(answers, { confirmed: ['imp', 'cu'] }).methods.find(m => m.best).id, 'imp');
+});
+
+/* ---------- como prescrever ---------- */
+
+test('como prescrever: só métodos reais, fontes existentes, modelos de receita com via e posologia', () => {
+    const ids = new Set([...METHOD_LIST, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
+    for (const [id, p] of Object.entries(PRESCRIBE)) {
+        assert.ok(ids.has(id), id);
+        assert.ok(p.products.length && p.dosing.length && p.sources.length, id);
+        for (const s of p.sources) assert.ok(SOURCES[s] && /^https:\/\//.test(SOURCES[s].url), `${id}: fonte ${s}`);
+        for (const pr of p.products) assert.ok(pr.brand && pr.substance && pr.form && pr.lab, `${id}.${pr.brand}`);
+        for (const r of p.rx) { assert.ok(r.lines[0].startsWith('USO '), `${id}: ${r.title}`); assert.ok(r.lines.length >= 3, `${id}: ${r.title}`); }
+        for (const d of p.dosing) assert.ok(d.k && d.t, id);
+    }
+    for (const id of ['coc', 'patch', 'cvr', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_lng', 'eiud', 'tubal']) assert.ok(PRESCRIBE[id], id);
+    assert.equal(VASECTOMY_LAW.length, 3);
+});
+
+test('como prescrever: doses conferidas nas bulas e protocolos oficiais', () => {
+    const text = (id) => JSON.stringify(PRESCRIBE[id]);
+    assert.ok(text('coc').includes('levonorgestrel 0,15 mg + etinilestradiol 0,03 mg'));
+    assert.ok(text('cvr').includes('11,7 mg') && text('cvr').includes('2,7 mg'));
+    assert.ok(text('cic').includes('50 mg') && text('cic').includes('5 mg'));
+    assert.ok(text('dmpa').includes('150 mg') && text('dmpa').includes('91 dias'));
+    assert.ok(text('imp').includes('68 mg') && text('imp').includes('3 anos'));
+    assert.ok(text('pop').includes('75 mcg') && text('pop').includes('0,35 mg'));
+    assert.ok(text('ecp_lng').includes('1,5 mg') && text('ecp_lng').includes('120 horas'));
+    assert.ok(text('tubal').includes('60 dias') && text('tubal').includes('21 anos'));
 });

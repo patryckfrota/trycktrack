@@ -7,7 +7,7 @@
 // os arquivos antigos do cache indefinidamente (a atualização em
 // segundo plano do fetch handler existe, mas no iOS um PWA em background
 // é suspenso antes dela terminar — já aconteceu, não é hipotético).
-const CACHE_NAME = 'trycktrack-v286';
+const CACHE_NAME = 'trycktrack-v287';
 
 // Arquivos essenciais para abrir o aplicativo mesmo sem conexão,
 // depois da primeira visita online.
@@ -56,6 +56,7 @@ const APP_SHELL = [
   './shared/contraception-use.js',
   './shared/contraception-rates.js',
   './shared/contraception-screening.js',
+  './shared/contraception-prescribe.js',
   './app-bullets.js',
   './app-essentials.js',
   './app-search.js',

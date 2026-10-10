@@ -191,7 +191,8 @@
         const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span>${esc(g.label)} (${g.cat})</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li><b>${g.cat}</b><span>${esc(it)}</span></li>`).join('')}</ul></details>`).join('');
         const r = M().TEXT_RATES.vasectomy;
         const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${num(r.perfect)}</b> com uso perfeito e <b>${num(r.typical)}</b> no uso típico (OMS, SPR 2025).</p>`;
-        return `<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+        const law = M().VASECTOMY_LAW.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
+        return `<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Como pedir (Lei 14.443/2022)</h3></header>${law}</section><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {
@@ -319,6 +320,25 @@
         return `<p class="ct-muted ct-lead">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${cards}`;
     }
 
+    // Aba "Como prescrever": apresentações, modelo de receita (copiável), posologia e protocolos.
+    function prescribeTab(id) {
+        const p = M().PRESCRIBE[id];
+        const { SOURCES, PRESCRIBE_NOTICE } = M();
+        const prods = p.products.map(x => `<div class="ct-prod"><div class="ct-prod-top"><strong>${esc(x.brand)}</strong>${x.sus ? '<span class="ct-sus">SUS</span>' : ''}</div><p class="ct-prod-sub">${esc(x.substance)}</p><p class="ct-fine">${esc(x.form)} · ${esc(x.lab)}</p></div>`).join('');
+        const rx = p.rx.length ? `<section class="ct-card"><h3>Modelo de prescrição</h3>${p.rx.map((r, i) => `<div class="ct-rx"><div class="ct-rx-head"><strong>${esc(r.title)}</strong><button type="button" class="qt-ghost" data-action="copy-rx" data-id="${id}" data-i="${i}">Copiar</button></div><pre class="ct-rx-body">${esc(r.lines.join('\n'))}</pre></div>`).join('')}</section>` : '';
+        const rows = p.dosing.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
+        const src = p.sources.map(k => `<li><a href="${esc(SOURCES[k].url)}" target="_blank" rel="noopener noreferrer">${esc(SOURCES[k].label)}</a></li>`).join('');
+        return `<section class="ct-card"><h3>Apresentações e nomes comerciais</h3><div class="ct-prods">${prods}</div></section>${rx}<section class="ct-card ct-card-flush"><h3>Posologia e orientações</h3><div class="ct-rows">${rows}</div></section><section class="ct-card"><h3>Fontes</h3><ul class="ct-src">${src}</ul><p class="ct-fine">${esc(PRESCRIBE_NOTICE)}</p></section>`;
+    }
+
+    function copyRx(id, i, btn) {
+        const r = M().PRESCRIBE[id]?.rx[Number(i)];
+        if (!r) return;
+        const text = `${r.title}\n${r.lines.join('\n')}`;
+        const old = btn.textContent;
+        navigator.clipboard?.writeText(text).then(() => { btn.textContent = 'Copiado'; }, () => { btn.textContent = 'Não copiou'; }).finally(() => setTimeout(() => { btn.textContent = old; }, 1500));
+    }
+
     function sheetBodyHtml() {
         const id = state.sheet;
         const full = M().methodConditions(id);
@@ -327,6 +347,7 @@
         const use = M().METHOD_USE[id];
         let body;
         if (state.sheetTab === 'use' && use) body = useTab(use);
+        else if (state.sheetTab === 'prescribe' && M().PRESCRIBE[id]) body = prescribeTab(id);
         else if (state.sheetTab === 'limits') body = limitsTab(full);
         else body = summaryTab(id, full, m);
         const info = full.info || {};
@@ -342,7 +363,7 @@
         const nLimits = full.groups.reduce((n, g) => n + g.items.length, 0);
         const tab = (v, label, count) => `<button type="button" role="tab" class="ct-stab${state.sheetTab === v ? ' on' : ''}" aria-selected="${state.sheetTab === v}" data-action="sheet-tab" data-v="${v}">${label}${count ? ` <em>${count}</em>` : ''}</button>`;
         return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
-            <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${use ? tab('use', 'Como usar') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
+            <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${M().PRESCRIBE[id] ? tab('prescribe', 'Como prescrever') : ''}${use ? tab('use', 'Como usar') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
             <div class="ct-sheet-body" id="ctSheetBody">${sheetBodyHtml()}</div>`;
     }
 
@@ -462,7 +483,9 @@
         const el = event.target.closest('[data-action]');
         if (!el || !root.contains(el)) return;
         const { action, v, q, o } = el.dataset;
-        if (action === 'screen') {
+        if (action === 'copy-rx') {
+            copyRx(el.dataset.id, el.dataset.i, el);
+        } else if (action === 'screen') {
             setScreen(el.dataset.item, v);
         } else if (action === 'go-triage') {
             state.tab = 'profile';
