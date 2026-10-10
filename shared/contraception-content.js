@@ -20,6 +20,7 @@ export const GUIDANCE_ACD = {
     A: 'Aceitar: não há razão médica para negar o método.',
     C: 'Cautela: oferecido na rotina, com preparo extra. Em geral exige aconselhamento especial para o uso correto.',
     D: 'Adiar: espere avaliar ou corrigir a condição e ofereça um método temporário.',
+    L: 'Não permitido pela lei: a Lei 9.263/1996 (art. 10, com a Lei 14.443/2022) exige 21 anos ou pelo menos 2 filhos vivos, e capacidade civil plena. Ofereça métodos reversíveis.',
     S: 'Especial: faça em serviço com cirurgião e equipe experientes, equipamento para anestesia geral e suporte clínico. Ofereça método temporário se houver encaminhamento ou atraso.'
 };
 
@@ -353,3 +354,19 @@ export const METHOD_INFO = {
 };
 
 export const STI_NOTE = 'Este método não protege contra IST, inclusive HIV. Se houver risco, recomende o uso correto e consistente de preservativo.';
+
+// Esterilização voluntária: o que a lei exige (Lei 9.263/1996, art. 10, com a Lei 14.443/2022; Nota Técnica 34/2023 do Ministério da Saúde).
+export const STER_LAW = {
+    title: 'O que a lei exige',
+    source: 'Lei 9.263/1996, art. 10, com a Lei 14.443/2022; Nota Técnica 34/2023 do Ministério da Saúde.',
+    items: [
+        { k: 'Quem pode', t: 'Mulheres e homens com capacidade civil plena (18 anos completos ou emancipação) e que tenham 21 anos ou mais, ou pelo menos 2 filhos vivos. Quem tem menos de 21 anos e 2 filhos vivos mantém o direito, se tiver capacidade civil plena.' },
+        { k: 'Menores de 18 anos', t: 'Só com emancipação, mesmo com 2 filhos vivos. Pessoas absolutamente incapazes só com autorização judicial (art. 10, § 6º).' },
+        { k: 'Prazo e aconselhamento', t: 'Mínimo de 60 dias entre a manifestação de vontade, registrada por escrito, e a cirurgia. Nesse período a pessoa tem aconselhamento por equipe multidisciplinar, para desencorajar a esterilização precoce.' },
+        { k: 'Cônjuge', t: 'O consentimento do cônjuge não é mais exigido.' },
+        { k: 'Estado de discernimento', t: 'Não vale a manifestação de vontade dada sob álcool, drogas, estados emocionais alterados ou incapacidade mental, temporária ou permanente (art. 10, § 3º).' },
+        { k: 'No parto', t: 'A laqueadura durante o parto é garantida se os 60 dias foram cumpridos antes do parto e as condições médicas forem adequadas (art. 10, § 2º). Não se exige mais histórico de cesarianas sucessivas.' },
+        { k: 'Risco à vida ou à saúde', t: 'Também é permitida, em qualquer idade, quando há risco à vida ou à saúde da mulher ou do futuro concepto, em relatório escrito e assinado por 2 médicos (art. 10, inciso II).' },
+        { k: 'Documentos', t: 'Registro da manifestação de vontade (Anexo I da Nota Técnica) e Termo de Consentimento Livre e Esclarecido, uma via para a pessoa e outra no prontuário. O termo informa que a esterilização não previne IST.' }
+    ]
+};

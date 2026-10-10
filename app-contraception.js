@@ -76,7 +76,7 @@
     // Seções do perfil: as da OMS mais uma com as condições próprias de outros métodos.
     function profileSections() {
         const base = M().SECTIONS.map(s => ({ id: s.id, title: s.title, questions: s.questions }));
-        const own = M().allQuestions().filter(q => q.family);
+        const own = M().allQuestions().filter(q => q.family && !q.inline);
         return own.length ? [...base, { id: 'outros', title: 'Condições de outros métodos', questions: own }] : base;
     }
 
@@ -149,7 +149,24 @@
         return lines.length ? `<p class="ct-gguide">${lines.map(esc).join(' ')}</p>` : '';
     }
 
+    const LEGAL_OK = ['ge21', 'u21_2kids', 'em_2kids'];
+
+    // Critério legal da esterilização voluntária (laqueadura e vasectomia): idade e filhos vivos.
+    function legalCardHtml() {
+        const { STER_LAW, getQuestion } = M();
+        const q = getQuestion('sterLegal');
+        const sel = (state.answers.sterLegal || [])[0];
+        const verdict = !sel
+            ? '<p class="ct-cert ct-cert-pending"><b>Pendente.</b> Informe a idade e os filhos vivos: sem isso o resultado não vale.</p>'
+            : LEGAL_OK.includes(sel)
+                ? '<p class="ct-cert ct-cert-ok"><b>Atende à lei quanto a idade e filhos.</b> Falta cumprir o prazo de 60 dias, o aconselhamento e o termo de consentimento.</p>'
+                : `<div class="ct-alert" role="alert"><strong>Não atende à lei.</strong> ${esc(q.options.find(o => o.id === sel).note)}</div>`;
+        const rules = STER_LAW.items.map(i => `<li><b>${esc(i.k)}.</b> ${esc(i.t)}</li>`).join('');
+        return `<section class="ct-card ct-legal"><h3>Critério legal</h3>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
+    }
+
     function certChip(m) {
+        if (m.legalPending) return '<p class="ct-cert ct-cert-pending"><b>Provisório</b> · confirme idade e filhos vivos (critério legal)</p>';
         if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec' || m.category >= 4) return '';
         const miss = missingTitles(m.id);
         return miss.length
@@ -204,18 +221,18 @@
         const r = M().TEXT_RATES.vasectomy;
         const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${num(r.perfect)}</b> com uso perfeito e <b>${num(r.typical)}</b> no uso típico (OMS, SPR 2025).</p>`;
         const law = M().VASECTOMY_LAW.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
-        return `<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Como pedir (Lei 14.443/2022)</h3></header>${law}</section><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+        return `${legalCardHtml()}<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Como pedir (Lei 14.443/2022)</h3></header>${law}</section><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {
         const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE, GUIDANCE_ACD } = M();
         const cats = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
-        const letterCls = { A: 1, C: 2, D: 3, S: 3 };
-        const letters = ['A', 'C', 'D', 'S'].map(k => `<li><span class="ct-badge ct-cat${letterCls[k]}">${k}</span><div><span>${esc(GUIDANCE_ACD[k])}</span></div></li>`).join('');
+        const letterCls = { A: 1, C: 2, D: 3, S: 3, L: 4 };
+        const letters = ['A', 'C', 'D', 'S', 'L'].map(k => `<li><span class="ct-badge ct-cat${letterCls[k]}">${k}</span><div><span>${esc(GUIDANCE_ACD[k])}</span></div></li>`).join('');
         const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
                 <p><b>Com poucos recursos para julgamento clínico</b> (OMS, tabela 3.2): categorias 1 e 2 = pode usar; 3 e 4 = não usar. Quando aparece uma faixa (por exemplo 3/4), a categoria depende da gravidade da condição: avalie o caso.</p>
-                <p><b>Percepção da fertilidade (A, C, D) e esterilização (A, C, D, S)</b> usam letras em vez de números. D e S não são “piores” entre si: D adia o procedimento; S exige serviço especializado.</p><ul>${letters}</ul>
+                <p><b>Percepção da fertilidade (A, C, D) e esterilização (A, C, D, S e L)</b> usam letras em vez de números. D e S não são “piores” entre si: D adia o procedimento; S exige serviço especializado.</p><ul>${letters}</ul>
                 <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave “Vai iniciar / Já usa” da triagem para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
             <details class="ct-legend"><summary>${esc(M().PREGNANCY_CHECK.title)}</summary><p>${esc(M().PREGNANCY_CHECK.intro)}</p><ul class="ct-points">${M().PREGNANCY_CHECK.criteria.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().PREGNANCY_CHECK.note)}</p></details>
             <details class="ct-legend"><summary>${esc(M().COUNSELLING.title)}</summary><ul class="ct-points">${M().COUNSELLING.items.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().COUNSELLING.note)}</p></details>
@@ -245,7 +262,8 @@
             const warn = all.core.pregnancy ? '<div class="ct-alert" role="alert"><strong>Gravidez suspeita ou confirmada.</strong> Descarte ou confirme antes de escolher um método.</div>' : '';
             const notices = (all.core.notices || []).map(n => `<div class="ct-notice">${esc(n)}</div>`).join('');
             const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
-            body = `${banner}${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
+            const legal = state.family === 'ster' ? legalCardHtml() : '';
+            body = `${banner}${warn}${legal}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
         return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;

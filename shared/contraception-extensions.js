@@ -142,6 +142,7 @@ export const EXTENSIONS = [
         id: 'ster',
         title: 'Esterilização',
         scale: 'acds',
+        requires: 'sterLegal',
         page: '136–152',
         intro: 'Procedimento cirúrgico pensado para ser permanente: toda mulher deve escolher de forma voluntária e informada, com orientação sobre a permanência e sobre métodos de longa duração muito eficazes. Atenção especial a jovens, nulíparas e mulheres com problemas de saúde mental, inclusive depressão. Considere as leis e normas nacionais. A OMS não restringe de forma absoluta nenhuma condição: usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado). Não protege contra IST nem HIV.',
         methods: [
@@ -204,6 +205,13 @@ export const EXTENSIONS = [
             { q: 'anemia', o: 'iron', cats: ['A'], note: 'Informe também a hemoglobina, em “Esterilização” no perfil: Hb < 7 g/dL pede adiar; de 7 a < 10 g/dL, cautela.' }
         ],
         ownQuestions: [
+            { id: 'sterLegal', type: 'single', inline: true, title: 'Idade e filhos vivos (Lei 9.263/1996, art. 10)', page: 'Lei 14.443/2022', options: [
+                { id: 'ge21', label: '21 anos ou mais', cats: ['A'], note: 'Atende ao critério de idade. Falta cumprir o prazo de 60 dias e o aconselhamento.' },
+                { id: 'u21_2kids', label: '18 a 20 anos, com 2 ou mais filhos vivos', cats: ['A'], note: 'Atende à lei: menor de 21 anos com pelo menos 2 filhos vivos e capacidade civil plena. Falta cumprir o prazo de 60 dias e o aconselhamento.' },
+                { id: 'em_2kids', label: 'Menos de 18 anos, emancipada, com 2 ou mais filhos vivos', cats: ['A'], note: 'Atende à lei somente com a emancipação comprovada (capacidade civil plena). Falta cumprir o prazo de 60 dias e o aconselhamento.' },
+                { id: 'u21_lt2', label: '18 a 20 anos, com menos de 2 filhos vivos', cats: ['L'], note: 'A lei não permite: é preciso ter 21 anos ou pelo menos 2 filhos vivos. A única exceção é o risco à vida ou à saúde, com relatório escrito e assinado por 2 médicos. Ofereça métodos reversíveis de longa duração.' },
+                { id: 'lt18', label: 'Menos de 18 anos, sem emancipação ou com menos de 2 filhos vivos', cats: ['L'], note: 'A lei não permite: antes dos 18 anos só com emancipação, e mesmo assim é preciso ter 2 filhos vivos. A única exceção é o risco à vida ou à saúde, com relatório de 2 médicos. Ofereça métodos reversíveis de longa duração.' }
+            ] },
             { id: 'sterYoung', type: 'multi', title: 'Idade jovem', page: 137, options: [
                 { id: 'yes', label: 'Idade jovem', cats: ['C'], note: 'Como toda mulher, deve ser aconselhada sobre a permanência. Até 20% das mulheres esterilizadas jovens se arrependem depois, e a idade jovem é um dos preditores mais fortes de arrependimento.' }
             ] },

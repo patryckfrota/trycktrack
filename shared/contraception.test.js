@@ -496,3 +496,19 @@ test('implante: manual do Ministério da Saúde está nos blocos (SUS 2025, regi
     for (const s of ['Portarias SECTICS/MS 47 e 48', '14 a 49 anos', '03.01.04.017-6', '03.01.04.018-4', 'Z300', 'espironolactona', 'Termo (Anexo I do manual)', 'radiografia simples', 'Ácido tranexâmico 500 mg', 'braço contralateral', 'Parecer COFEN 277/2017']) assert.ok(text.includes(s), s);
     assert.ok(PRESCRIBE.imp.blocks.length >= 8);
 });
+
+test('esterilização: critério legal (idade e filhos vivos) da Lei 9.263/1996', () => {
+    const ster = (ans) => evaluateAll(ans).ster.methods[0];
+    assert.equal(ster({}).legalPending, true);
+    assert.equal(ster({ sterLegal: ['ge21'] }).legalPending, false);
+    assert.equal(ster({ sterLegal: ['ge21'] }).section, 'indicated');
+    assert.equal(ster({ sterLegal: ['u21_2kids'] }).section, 'indicated');
+    assert.equal(ster({ sterLegal: ['em_2kids'] }).section, 'indicated');
+    for (const o of ['u21_lt2', 'lt18']) {
+        const m = ster({ sterLegal: [o] });
+        assert.equal(m.section, 'legal', o);
+        assert.equal(m.display, 'L', o);
+    }
+    // a lei pesa mais que qualquer categoria médica
+    assert.equal(ster({ sterLegal: ['u21_lt2'], htn: ['sbp160'] }).section, 'legal');
+});

@@ -43,6 +43,7 @@ const ACDS_SECTIONS = [
     { id: 'special', title: 'Serviço especializado', hint: 'S: cirurgião e equipe experientes, anestesia geral e suporte clínico' },
     { id: 'depends', title: 'Depende do caso', hint: 'Cautela ou adiamento, conforme a situação' },
     { id: 'delay', title: 'Adiar', hint: 'D: adie até avaliar ou corrigir e ofereça método temporário' },
+    { id: 'legal', title: 'Não permitido pela lei', hint: 'L: não atende ao art. 10 da Lei 9.263/1996' },
     { id: 'na', title: 'Não se aplicam', hint: 'Não aplicável nesta situação' }
 ];
 
@@ -77,14 +78,14 @@ const SCALES = {
         sections: ACDS_SECTIONS,
         parse(v) {
             if (v === 'NA') return { na: true, min: 0, max: 0 };
-            const rank = { A: 1, C: 2, S: 3, D: 4 };
+            const rank = { A: 1, C: 2, S: 3, D: 4, L: 5 };
             const parts = String(v).split('/');
             if (!parts.length || parts.length > 2 || !parts.every(p => rank[p])) throw new Error(`Célula inválida: ${JSON.stringify(v)}`);
             const ranks = parts.map(p => rank[p]);
             return { min: Math.min(...ranks), max: Math.max(...ranks) };
         },
-        label: (n) => ({ 1: 'A', 2: 'C', 3: 'S', 4: 'D' }[n]),
-        sectionFor: (c) => c.na ? 'na' : c.ranged ? 'depends' : ({ 1: 'indicated', 2: 'caution', 3: 'special', 4: 'delay' })[c.max]
+        label: (n) => ({ 1: 'A', 2: 'C', 3: 'S', 4: 'D', 5: 'L' }[n]),
+        sectionFor: (c) => c.na ? 'na' : c.ranged ? 'depends' : ({ 1: 'indicated', 2: 'caution', 3: 'special', 4: 'delay', 5: 'legal' })[c.max]
     }
 };
 
@@ -268,6 +269,8 @@ export function evaluateAll(answers = {}, opts = {}) {
     const result = { core: evaluate(answers, opts) };
     for (const ext of EXTENSIONS) {
         const { methods, groups } = evaluateSet(extensionSet(ext), selected, phase, prefs);
+        // Pergunta obrigatória da família (ex.: critério legal da esterilização): sem resposta, o resultado é provisório.
+        if (ext.requires) methods.forEach(m => { m.legalPending = !selected.some(s => s.question.id === ext.requires); });
         result[ext.id] = { id: ext.id, title: ext.title, scale: ext.scale, intro: ext.intro, page: ext.page, methods, groups, pregnancy: result.core.pregnancy };
     }
     return result;
