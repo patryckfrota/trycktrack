@@ -350,6 +350,15 @@ app.get('/api/sync/review-queue', requireFirebaseAuth(), async (req, res) => {
   res.json({ reviewQueue: await syncRepository.getReviewQueue(req.uid) });
 });
 
+// Histórico de respostas da conta (o que o dashboard usa pra montar as
+// métricas em qualquer aparelho). Paginado por `after` (ISO, inclusivo):
+// o cliente repete com o `next` devolvido até ele vir null.
+app.get('/api/sync/responses', requireFirebaseAuth(), async (req, res) => {
+  const after = typeof req.query.after === 'string' && !Number.isNaN(Date.parse(req.query.after)) ? req.query.after : null;
+  const limit = Math.min(5000, Math.max(1, Number.parseInt(req.query.limit, 10) || 2000));
+  res.json(await syncRepository.listResponses(req.uid, { after, limit }));
+});
+
 app.post('/api/sync/push', requireFirebaseAuth(), async (req, res) => {
   const parsed = pushSyncSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });

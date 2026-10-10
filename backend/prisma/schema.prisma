@@ -139,6 +139,10 @@ model QuestionResponse {
   @@index([userId, answeredAt])
   @@index([questionId, correct])
   @@index([userId, questionId])
+  // Chave natural de uma resposta: o cliente reenvia o que não teve
+  // confirmação, então o mesmo (usuário, questão, instante) não pode
+  // entrar duas vezes nem em envios concorrentes.
+  @@unique([userId, questionId, answeredAt])
 }
 
 // Estado de revisão espaçada por usuário×questão (R-1 + R-5) — espelha

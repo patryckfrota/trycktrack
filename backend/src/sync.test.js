@@ -48,3 +48,13 @@ test('POST /api/sync/push com token inválido — 401, não 500 (o parser do JWT
     assert.equal(res.status, 401);
   } finally { server.close(); }
 });
+
+test('GET /api/sync/responses exige autenticação — sem token, 401', async () => {
+  setSyncRepositoryForTests(new MemorySyncRepository());
+  const server = app.listen(0);
+  const { port } = server.address();
+  try {
+    const res = await fetch(`http://127.0.0.1:${port}/api/sync/responses`);
+    assert.equal(res.status, 401);
+  } finally { server.close(); }
+});

@@ -346,8 +346,14 @@
                         <h2>Treine a decisão, não a memória.</h2>
                         <p>Escolha seu ritmo e transforme cada resposta em revisão ativa.</p>
                         <div class="question-hero-stats">
-                            <div class="question-hero-stat"><strong id="questionAnsweredStat">0</strong> respondidas</div>
-                            <div class="question-hero-stat"><strong id="questionAccuracyStat">—</strong> acertos</div>
+                            <div class="question-hero-stat">
+                                <div class="question-hero-stat-top"><strong id="questionAccuracyStat">—</strong><span class="dashboard-delta" id="questionAccuracyDelta" hidden></span></div>
+                                <span id="questionAccuracyLabel">de acerto nos últimos 7 dias</span>
+                            </div>
+                            <div class="question-hero-stat" id="questionAccuracyCountBox" hidden>
+                                <strong id="questionAccuracyCount"></strong>
+                                <span>questões certas</span>
+                            </div>
                         </div>
                     </section>
 
@@ -444,27 +450,39 @@
             <!-- MÉTRICAS -->
             <div class="tab-content" id="metricasTab">
                 <div class="dashboard">
-                    <section class="dashboard-hero">
-                        <div class="dashboard-hero-topline">
-                            <small>Desempenho geral</small>
-                            <div class="dashboard-period dashboard-hero-period" id="dashboardHeroPeriod"><button class="active" onclick="setDashboardPeriod(this, 7)">7 dias</button><button onclick="setDashboardPeriod(this, 30)">30 dias</button></div>
+                    <section class="dashboard-today" id="dashboardToday" aria-label="Hoje">
+                        <div class="dashboard-today-row">
+                            <div><small>Hoje</small><strong id="dashboardTodayText">0 de 20 questões</strong></div>
+                            <span class="dashboard-streak-chip" id="dashboardStreakChip" hidden><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.42-2.5-1.02-3.5C9.44 7.5 9 6.2 9 5c0-1.09.32-1.99.8-2.7a.5.5 0 0 1 .74-.1c1.13.98 3.2 3.08 3.86 5.3.28-.34.5-.72.63-1.15a.5.5 0 0 1 .75-.28C17.44 7.6 19 9.9 19 12.5 19 17.7 15.9 21 12 21s-7-2.9-7-6.5c0-1.02.24-1.94.68-2.75a.5.5 0 0 1 .87.03c.4.7 1.1 1.3 1.95 1.72Z"/></svg><b id="dashboardStreak">0 dias</b></span>
                         </div>
-                        <div class="dashboard-hero-grid">
-                            <div class="dashboard-score-panel"><div class="dashboard-score-ring" id="dashboardScoreRing"><span class="dashboard-score-value" id="dashboardScore">0%</span></div></div>
-                            <div class="dashboard-score-copy">
-                                <h2 id="dashboardHeadline">Pronto para começar</h2><p id="dashboardInsight">Responda questões para construir uma análise personalizada.</p>
+                        <div class="dashboard-today-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="dashboardTodayBar"><div id="dashboardTodayFill"></div></div>
+                        <div class="dashboard-now-list" id="dashboardNowList" hidden></div>
+                    </section>
+                    <section class="dashboard-card dashboard-consistency" id="dashboardConsistency" aria-label="Constância">
+                        <div class="dashboard-card-head"><div><strong>Constância</strong><span id="dashboardChartLabel"></span></div><button type="button" class="dashboard-week-share" id="dashboardWeekShare" onclick="shareWeeklySummary(this)">Compartilhar</button></div>
+                        <div class="dashboard-heat" id="dashboardChart"></div>
+                        <div class="dashboard-consistency-foot">
+                            <div class="heat-stats">
+                                <div><strong id="dashboardWeekHits">0 de 7</strong><span>dias com meta nesta semana</span></div>
+                                <div><strong id="dashboardBestStreak">0d</strong><span>melhor sequência</span></div>
                             </div>
+                            <p class="dashboard-week-note" id="dashboardWeekNote"></p>
                         </div>
                     </section>
-                    <div class="dashboard-kpis">
-                        <div class="dashboard-kpi"><div class="dashboard-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8 12 2.5 2.5L16.5 8.5"/></svg></div><strong id="dashboardQuestions">0</strong><span>questões respondidas</span></div>
-                        <div class="dashboard-kpi"><div class="dashboard-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div><strong id="dashboardTime">0h</strong><span>tempo de estudo</span></div>
-                        <div class="dashboard-kpi"><div class="dashboard-kpi-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.42-2.5-1.02-3.5C9.44 7.5 9 6.2 9 5c0-1.09.32-1.99.8-2.7a.5.5 0 0 1 .74-.1c1.13.98 3.2 3.08 3.86 5.3.28-.34.5-.72.63-1.15a.5.5 0 0 1 .75-.28C17.44 7.6 19 9.9 19 12.5 19 17.7 15.9 21 12 21s-7-2.9-7-6.5c0-1.02.24-1.94.68-2.75a.5.5 0 0 1 .87.03c.4.7 1.1 1.3 1.95 1.72Z"/></svg></div><strong id="dashboardStreak">0d</strong><span>ofensiva atual</span></div>
-                    </div>
-                    <div class="dashboard-card">
-                        <div class="dashboard-card-head"><strong>Atividade</strong><span id="dashboardChartLabel">Últimos 7 dias</span></div>
-                        <div class="dashboard-chart" id="dashboardChart"></div>
-                    </div>
+                    <section class="dashboard-card dashboard-evo" id="dashboardEvo" aria-label="Evolução mensal">
+                        <div class="dashboard-card-head"><div><strong>Evolução mensal</strong><span id="dashboardEvoSummary"></span></div></div>
+                        <div class="dashboard-evo-controls">
+                            <div class="dashboard-period" id="dashboardEvoMetric" role="group" aria-label="Métrica do gráfico"><button type="button" data-evo-metric="acerto">Acerto</button><button type="button" class="active" data-evo-metric="questoes">Questões</button></div>
+                            <div class="dashboard-period" id="dashboardEvoRange" role="group" aria-label="Período do gráfico"><button type="button" class="active" data-evo-range="6">6 meses</button><button type="button" data-evo-range="12">12 meses</button></div>
+                        </div>
+                        <div class="dashboard-evo-plot" id="dashboardEvoPlot"></div>
+                        <p class="dashboard-evo-detail" id="dashboardEvoDetail" aria-live="polite"></p>
+                        <p class="dashboard-evo-total" id="dashboardEvoTotals"></p>
+                    </section>
+                    <section class="dashboard-insights" id="dashboardInsights" aria-label="Insights" hidden>
+                        <div class="dashboard-insights-title">Insights</div>
+                        <div id="dashboardInsightsList"></div>
+                    </section>
                     <div class="dashboard-section-title">Desempenho por área</div>
                     <div class="dashboard-areas" id="dashboardAreas"></div>
                     <div class="dashboard-section-title">Atividade recente</div>
@@ -1729,6 +1747,20 @@
         window.mergeReviewQueues = mergeReviewQueues;
         window.reviewEntriesNewerThan = reviewEntriesNewerThan;
         window.mergeTrailSettings = mergeTrailSettings;
+        // Log de respostas (fonte das métricas do Dashboard) — funções
+        // puras em shared/activity-log.js; app-app.js cuida de storage e rede.
+        import { weekSummary, buildInsights, weeklySummaryText, monthlySeries } from "./shared/activity-insights.js";
+        window.activityWeekSummary = weekSummary;
+        window.activityBuildInsights = buildInsights;
+        window.activityWeeklySummaryText = weeklySummaryText;
+        window.activityMonthlySeries = monthlySeries;
+        import { initLogFromLegacy, normalizeLog, mergeEvents, pendingEvents, markSynced, toSyncPayload, fromServerResponse, deriveActivity, compactLog, eventKey, recentWindows, windowAccuracy } from "./shared/activity-log.js";
+        Object.assign(window, {
+            initActivityLogFromLegacy: initLogFromLegacy, normalizeActivityLog: normalizeLog, mergeActivityEvents: mergeEvents,
+            pendingActivityEvents: pendingEvents, markActivitySynced: markSynced, activityToSyncPayload: toSyncPayload,
+            activityFromServerResponse: fromServerResponse, deriveActivity, compactActivityLog: compactLog, activityEventKey: eventKey,
+            activityRecentWindows: recentWindows, activityWindowAccuracy: windowAccuracy
+        });
 
         const firebaseConfig = {
             apiKey: "AIzaSyBJai7AzEKiYj1pVYnyhq8VymGKwxTi8ks",

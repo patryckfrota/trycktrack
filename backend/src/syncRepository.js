@@ -32,6 +32,35 @@ function hydrate(row) {
     };
 }
 
+// Chave natural de uma resposta. answeredAt pode chegar como string
+// ISO (cliente/memória) ou Date (Postgres) — normaliza pros dois casarem.
+// Evento sem answeredAt vale "agora"; com um valor que não é data, é
+// descartado — antes, um só evento assim fazia toISOString lançar e o push
+// inteiro (inclusive a fila de revisão do mesmo envio) responder 500, e o
+// cliente repetia o mesmo lote para sempre.
+function hasValidTime(response) {
+    return !response.answeredAt || !Number.isNaN(Date.parse(response.answeredAt));
+}
+
+function responseKey(response) {
+    return `${response.questionId}|${new Date(response.answeredAt).toISOString()}`;
+}
+
+// Formato de página: `next` é o instante da última linha quando a
+// página veio cheia (o cliente repete a partir dele, com `gte`, e
+// deduplica pela chave natural) e null quando acabou.
+function pageOfResponses(rows, limit) {
+    const responses = rows.map(row => ({
+        questionId: row.questionId,
+        chosen: row.chosen ?? null,
+        correct: typeof row.correct === 'boolean' ? row.correct : null,
+        elapsedMs: Number.isFinite(row.elapsedMs) ? row.elapsedMs : null,
+        answeredAt: new Date(row.answeredAt).toISOString()
+    }));
+    const next = responses.length >= limit ? responses[responses.length - 1].answeredAt : null;
+    return { responses, next };
+}
+
 export class MemorySyncRepository {
     constructor() { this.rows = new Map(); this.responses = []; this.trailSettings = new Map(); } // rows/trailSettings key: `${userId}:${questionId ou trailId}`
 
@@ -58,8 +87,26 @@ export class MemorySyncRepository {
         return this.getReviewQueue(userId);
     }
 
+    // Idempotente: o mesmo (usuário, questão, instante) nunca entra duas
+    // vezes — o cliente reenvia o que não teve confirmação, então um
+    // reenvio depois de uma resposta perdida não pode duplicar.
     async pushResponses(userId, responses) {
-        (responses || []).forEach(response => this.responses.push({ userId, ...response }));
+        const seen = new Set(this.responses.filter(r => r.userId === userId).map(responseKey));
+        (responses || []).filter(hasValidTime).forEach(response => {
+            const stamped = { ...response, answeredAt: response.answeredAt || new Date().toISOString() };
+            const key = responseKey(stamped);
+            if (seen.has(key)) return;
+            seen.add(key);
+            this.responses.push({ userId, ...stamped });
+        });
+    }
+
+    async listResponses(userId, { after = null, limit = 2000 } = {}) {
+        const rows = this.responses
+            .filter(r => r.userId === userId && (!after || String(r.answeredAt) >= after))
+            .sort((a, b) => String(a.answeredAt).localeCompare(String(b.answeredAt)))
+            .slice(0, limit);
+        return pageOfResponses(rows.map(({ userId: _u, ...r }) => r), limit);
     }
 
     async getTrailSettings(userId, trailId) {
@@ -127,18 +174,48 @@ export class PrismaSyncRepository {
     async pushResponses(userId, responses) {
         if (!responses?.length) return;
         const known = await this.existingQuestionIds([...new Set(responses.map(response => response.questionId))]);
-        const valid = responses.filter(response => known.has(response.questionId));
+        const valid = responses.filter(response => known.has(response.questionId) && hasValidTime(response));
         if (!valid.length) return;
-        await this.client.questionResponse.createMany({
-            data: valid.map(response => ({
+        const rows = valid.map(response => ({
+            userId,
+            questionId: response.questionId,
+            chosen: response.chosen ?? null,
+            correct: typeof response.correct === 'boolean' ? response.correct : null,
+            elapsedMs: Number.isFinite(response.elapsedMs) ? response.elapsedMs : null,
+            answeredAt: response.answeredAt ? new Date(response.answeredAt) : new Date()
+        }));
+        // A garantia final é o índice único (usuário, questão, instante) +
+        // skipDuplicates: dois envios concorrentes das mesmas respostas
+        // não duplicam. A pré-checagem abaixo evita o trabalho de inserir o
+        // que já existe e mantém o comportamento correto enquanto a
+        // migração ainda não foi aplicada.
+        const existing = await this.client.questionResponse.findMany({
+            where: {
                 userId,
-                questionId: response.questionId,
-                chosen: response.chosen ?? null,
-                correct: typeof response.correct === 'boolean' ? response.correct : null,
-                elapsedMs: Number.isFinite(response.elapsedMs) ? response.elapsedMs : null,
-                answeredAt: response.answeredAt ? new Date(response.answeredAt) : new Date()
-            }))
+                questionId: { in: [...new Set(rows.map(row => row.questionId))] },
+                answeredAt: { in: rows.map(row => row.answeredAt) }
+            },
+            select: { questionId: true, answeredAt: true }
         });
+        const seen = new Set(existing.map(row => responseKey({ questionId: row.questionId, answeredAt: row.answeredAt })));
+        const fresh = rows.filter(row => {
+            const key = responseKey(row);
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+        if (!fresh.length) return;
+        await this.client.questionResponse.createMany({ data: fresh, skipDuplicates: true });
+    }
+
+    async listResponses(userId, { after = null, limit = 2000 } = {}) {
+        const rows = await this.client.questionResponse.findMany({
+            where: { userId, ...(after ? { answeredAt: { gte: new Date(after) } } : {}) },
+            orderBy: [{ answeredAt: 'asc' }, { id: 'asc' }],
+            take: limit,
+            select: { questionId: true, chosen: true, correct: true, elapsedMs: true, answeredAt: true }
+        });
+        return pageOfResponses(rows, limit);
     }
 
     async getTrailSettings(userId, trailId) {

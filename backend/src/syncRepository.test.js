@@ -91,3 +91,38 @@ test('pushTrailSettings: trilhas diferentes do mesmo usuário não se misturam',
   assert.equal((await repo.getTrailSettings('user-1', 'uepa')).goal, 0.8);
   assert.equal((await repo.getTrailSettings('user-1', 'enamed')).goal, 0.7);
 });
+
+test('pushResponses: reenviar a mesma resposta (mesma questão e instante) não duplica', async () => {
+  const repo = new MemorySyncRepository();
+  const response = { questionId: 'q1', correct: true, answeredAt: '2026-10-10T12:00:00.000Z' };
+  await repo.pushResponses('user-1', [response]);
+  await repo.pushResponses('user-1', [response, { ...response, answeredAt: '2026-10-10T12:01:00.000Z' }]);
+  const { responses } = await repo.listResponses('user-1');
+  assert.equal(responses.length, 2);
+});
+
+test('listResponses: devolve só as do usuário, em ordem, e pagina com next', async () => {
+  const repo = new MemorySyncRepository();
+  await repo.pushResponses('user-1', [
+    { questionId: 'q2', correct: false, answeredAt: '2026-10-10T12:02:00.000Z' },
+    { questionId: 'q1', correct: true, answeredAt: '2026-10-10T12:01:00.000Z' }
+  ]);
+  await repo.pushResponses('user-2', [{ questionId: 'q9', correct: true, answeredAt: '2026-10-10T12:00:00.000Z' }]);
+  const page1 = await repo.listResponses('user-1', { limit: 1 });
+  assert.deepEqual(page1.responses.map(r => r.questionId), ['q1']);
+  assert.equal(page1.next, '2026-10-10T12:01:00.000Z');
+  const page2 = await repo.listResponses('user-1', { after: page1.next, limit: 5 });
+  assert.deepEqual(page2.responses.map(r => r.questionId), ['q1', 'q2']); // `after` é inclusivo; o cliente deduplica
+  assert.equal(page2.next, null);
+});
+
+test('pushResponses: evento com data inválida é descartado e não derruba o resto do lote', async () => {
+  const repo = new MemorySyncRepository();
+  await repo.pushResponses('user-1', [
+    { questionId: 'q1', correct: true, answeredAt: 'isso-nao-e-data' },
+    { questionId: 'q2', correct: false, answeredAt: '2026-10-10T12:00:00.000Z' },
+    { questionId: 'q3', correct: true } // sem data: vale "agora"
+  ]);
+  const { responses } = await repo.listResponses('user-1');
+  assert.deepEqual(responses.map(r => r.questionId).sort(), ['q2', 'q3']);
+});

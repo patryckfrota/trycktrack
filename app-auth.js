@@ -608,6 +608,8 @@
                         // roda, mesmo app-auth.js carregando antes — ver
                         // comentário de pullReviewSyncFromCloud).
                         if (typeof pullReviewSyncFromCloud === 'function') pullReviewSyncFromCloud();
+                        // Histórico de respostas (métricas do Dashboard em qualquer aparelho).
+                        if (typeof pullResponsesFromCloud === 'function') pullResponsesFromCloud();
                         // R-7 — preferências da Trilha (meta de acerto,
                         // data da prova, histórico) — UEPA e ENAMED, as
                         // duas trilhas por assunto (ver

@@ -1249,7 +1249,7 @@
             localStorage.setItem(TRACK_CAPSULE_KEY, activeTrackCapsule);
             syncTrackCapsuleUI();
             if (document.getElementById('trailHub')?.innerHTML) renderTrails();
-            if (document.getElementById('dashboardScore')) renderDashboard();
+            if (document.getElementById('dashboardToday')) renderDashboard();
         }
 
         // Cada Rapid Review de Clínica Médica (Cardiologia, Endocrinologia
@@ -1279,7 +1279,7 @@
         // vez de chance igual pra qualquer área (R-3) — usa a mesma
         // trilha ativa (ENAMED/UEPA) e os mesmos dados de incidência já
         // usados pra ordenar as Trilhas (TRAIL_CATALOG), e o mesmo
-        // trycktrack-question-stats.byArea que já alimenta o Dashboard,
+        // log de respostas (byArea derivado) que já alimenta o Dashboard,
         // sem precisar de histórico novo. Com tema específico ou busca
         // ativa, a ponderação por área não faz sentido (o recorte já foi
         // escolhido a dedo) — cai no sorteio uniforme de sempre.
@@ -1291,7 +1291,7 @@
             }
             const trailState = getTrailState();
             const track = TRAIL_CATALOG[trailState.active] || TRAIL_CATALOG.enamed;
-            const statsByArea = getQuestionStats().byArea?.residencia || {};
+            const statsByArea = getActivityDerived().byArea.residencia || {};
             const sampled = window.weightedSampleByIncidence(groupQuestionsByTrailArea(filtered), track.phases, statsByArea, count);
             // Nenhuma área do recorte bateu com o TRAIL_CATALOG (ex.: só
             // Psiquiatria, que não tem fase própria na trilha) — cai no
@@ -1543,7 +1543,6 @@
             ['pediatria', 'Pediatria'],
             ['urgencia-e-emergencia-saude-mental', 'Urgência e Emergência / Saúde Mental']
         ];
-        let dashboardPeriodDays = 7;
 
         function getQuestionStats() {
             try {
@@ -1553,79 +1552,497 @@
             }
         }
 
-        function setDashboardPeriod(button, days) {
-            dashboardPeriodDays = days;
-            button.parentElement.querySelectorAll('button').forEach(item => item.classList.remove('active'));
-            button.classList.add('active');
-            renderDashboard();
+        // ---------- Log de respostas (fonte das métricas) ----------
+        // Lógica pura em shared/activity-log.js. Aqui: storage, cache e a
+        // classificação questão → área do Dashboard. Os caches evitam
+        // reparsear e reagregar a cada leitura; saveActivityLog invalida.
+        const ACTIVITY_LOG_KEY = 'trycktrack-activity-log-v1';
+        let activityLogCache = null;
+        let activityDerivedCache = null;
+
+        function classifyQuestionForDashboard(questionId) {
+            const question = getQuestionIndex().get(questionId);
+            if (!question) return null;
+            const track = question.rodizio ? 'curso' : 'residencia';
+            const key = track === 'curso' ? RODIZIO_DASHBOARD_SLUG[question.rodizio] : QUESTION_AREA_DASHBOARD_SLUG[question.area];
+            return key ? { track, key } : null;
         }
 
-        function renderDashboard() {
-            const stats = getQuestionStats();
-            const answered = Number(stats.answered || 0);
-            const correct = Number(stats.correct || 0);
-            const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
-            const minutes = Number(stats.studyMinutes || 0);
-            const streak = Number(stats.streak || 0);
+        function persistActivityLog(log) {
+            const write = () => localStorage.setItem(ACTIVITY_LOG_KEY, JSON.stringify(log));
+            try { write(); } catch (_) {
+                // Cota cheia: compacta de forma agressiva e tenta de novo; se
+                // ainda falhar, o log segue só em memória até o próximo ciclo.
+                try { window.compactActivityLog(log, { classify: classifyQuestionForDashboard, maxEvents: 0, keepDays: 30 }); write(); } catch (_) { /* sem espaço */ }
+            }
+        }
 
-            const score = document.getElementById('dashboardScore');
-            const ring = document.getElementById('dashboardScoreRing');
-            if (!score || !ring) return;
-            score.textContent = answered ? `${accuracy}%` : '0%';
-            ring.style.setProperty('--score', accuracy);
-            document.getElementById('dashboardQuestions').textContent = answered.toLocaleString('pt-BR');
-            document.getElementById('dashboardTime').textContent = minutes >= 60 ? `${Math.floor(minutes / 60)}h${minutes % 60 ? ` ${minutes % 60}m` : ''}` : `${minutes}m`;
-            document.getElementById('dashboardStreak').textContent = `${streak}d`;
-            document.getElementById('dashboardHeadline').textContent = answered ? (accuracy >= 80 ? 'Ótimo desempenho' : accuracy >= 60 ? 'Evolução consistente' : 'Vamos fortalecer a base') : 'Pronto para começar';
-            document.getElementById('dashboardInsight').textContent = answered ? `${correct} acertos em ${answered} questões respondidas.` : 'Responda questões para construir uma análise personalizada.';
+        // Primeira leitura num aparelho com contadores antigos: congela-os
+        // como baseline (ver initLogFromLegacy) e passa a contar só eventos.
+        // O instante dessa migração fica numa chave à parte: se o log sumir ou
+        // corromper, ele é recriado com o MESMO corte — com cutover = agora, o
+        // pull do servidor descartaria como "anteriores" as respostas feitas
+        // desde a migração e o aluno as perderia sem aviso.
+        const ACTIVITY_MIGRATED_KEY = 'trycktrack-activity-migrated-at';
 
-            // Casa cada dia por data (não por posição no array) — stats.daily
-            // só ganha uma entrada nos dias em que houve estudo, então
-            // indexar por posição deslocava o gráfico inteiro assim que
-            // havia um intervalo sem responder nada.
-            const dailyByDate = new Map((Array.isArray(stats.daily) ? stats.daily : []).map(item => [item.date, Number(item.count || 0)]));
-            const today = new Date();
-            const countForDaysAgo = (daysAgo) => {
-                const date = new Date(today);
-                date.setDate(date.getDate() - daysAgo);
-                return dailyByDate.get(date.toISOString().slice(0, 10)) || 0;
-            };
-            let chartValues, dayLabels;
-            if (dashboardPeriodDays === 7) {
-                dayLabels = Array.from({ length: 7 }, (_, i) => {
-                    const date = new Date(today); date.setDate(date.getDate() - (6 - i));
-                    return date.toLocaleDateString('pt-BR', { weekday: 'narrow' });
-                });
-                chartValues = Array.from({ length: 7 }, (_, i) => countForDaysAgo(6 - i));
-            } else {
-                // 30 dias em 10 baldes de 3 dias — mantém a mesma densidade
-                // visual de antes (10 barras), agora somando dias reais em
-                // vez de indexar posições que não correspondiam a nada.
-                const BUCKETS = 10, BUCKET_SIZE = 3;
-                dayLabels = []; chartValues = [];
-                for (let bucket = BUCKETS - 1; bucket >= 0; bucket--) {
-                    let sum = 0;
-                    const bucketEndDaysAgo = bucket * BUCKET_SIZE;
-                    for (let offset = 0; offset < BUCKET_SIZE; offset++) sum += countForDaysAgo(bucketEndDaysAgo + offset);
-                    const endDate = new Date(today); endDate.setDate(endDate.getDate() - bucketEndDaysAgo);
-                    dayLabels.push(String(endDate.getDate()));
-                    chartValues.push(sum);
+        function getActivityLog() {
+            if (activityLogCache) return activityLogCache;
+            let log = null;
+            try { log = window.normalizeActivityLog(JSON.parse(localStorage.getItem(ACTIVITY_LOG_KEY) || 'null')); } catch (_) { /* log corrompido: recria abaixo */ }
+            if (!log) {
+                const migratedAt = localStorage.getItem(ACTIVITY_MIGRATED_KEY);
+                log = window.initActivityLogFromLegacy(getQuestionStats(), migratedAt || new Date().toISOString());
+                if (log.cutover && !migratedAt) {
+                    try { localStorage.setItem(ACTIVITY_MIGRATED_KEY, log.cutover); } catch (_) { /* sem espaço */ }
+                }
+                persistActivityLog(log);
+            }
+            activityLogCache = log;
+            return log;
+        }
+
+        function saveActivityLog(log) {
+            window.compactActivityLog(log, { classify: classifyQuestionForDashboard });
+            persistActivityLog(log);
+            activityLogCache = log;
+            activityDerivedCache = null;
+        }
+
+        // { answered, correct, byArea, days: Map(data → {n, ne, c}) }
+        function getActivityDerived() {
+            if (!activityDerivedCache) activityDerivedCache = window.deriveActivity(getActivityLog(), { classify: classifyQuestionForDashboard });
+            return activityDerivedCache;
+        }
+
+        // Data local (não UTC): toISOString() vira o dia às 21h no Brasil,
+        // o que jogava o estudo da noite no quadradinho do dia seguinte.
+        function localIsoDate(date = new Date()) {
+            const pad = n => String(n).padStart(2, '0');
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+        }
+
+        // Ofensiva sai do mesmo mapa de dias que o heatmap — antes era um
+        // contador à parte (stats.streak) que só atualizava ao responder e
+        // ficava defasado depois de dias sem estudar.
+        function computeStreaks(dailyByDate) {
+            const cursor = new Date();
+            if (!dailyByDate.get(localIsoDate(cursor))) cursor.setDate(cursor.getDate() - 1);
+            let current = 0;
+            while (dailyByDate.get(localIsoDate(cursor)) > 0) { current += 1; cursor.setDate(cursor.getDate() - 1); }
+            const dayNumber = iso => { const [y, m, d] = iso.split('-').map(Number); return Date.UTC(y, m - 1, d) / 86400000; };
+            const studied = [...dailyByDate].filter(([, count]) => count > 0).map(([date]) => date).sort();
+            let best = 0, run = 0, previous = null;
+            for (const date of studied) {
+                run = previous !== null && dayNumber(date) - dayNumber(previous) === 1 ? run + 1 : 1;
+                best = Math.max(best, run);
+                previous = date;
+            }
+            return { current, best };
+        }
+
+        // Reaproveita a meta diária que já existe nas Trilhas (editada em
+        // Ajustes da trilha) — não cria uma segunda meta pro mesmo hábito.
+        function getDashboardDailyGoal() {
+            const state = getTrailState();
+            return getTrailDailyGoal(getTrailTrack(state, state.active));
+        }
+
+        const DASHBOARD_HEAT_WEEKS = 16;
+        // Menos respostas que isso numa janela de 7 dias é pouco pra falar em acerto ou tendência.
+        const DASHBOARD_MIN_SAMPLE = 10;
+
+        function buildActivityHeatmap(dailyByDate, goal) {
+            const today = new Date(); today.setHours(12, 0, 0, 0);
+            const first = new Date(today);
+            first.setDate(first.getDate() - today.getDay() - (DASHBOARD_HEAT_WEEKS - 1) * 7);
+            const cells = [];
+            let studiedDays = 0;
+            const monthLabels = new Array(DASHBOARD_HEAT_WEEKS).fill('');
+            for (let i = 0; i < DASHBOARD_HEAT_WEEKS * 7; i++) {
+                const date = new Date(first); date.setDate(first.getDate() + i);
+                const week = Math.floor(i / 7);
+                if (date.getDate() === 1 || (i === 0)) {
+                    monthLabels[week] = date.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '');
+                }
+                if (date > today) { cells.push('<span class="heat-cell is-future"></span>'); continue; }
+                const count = dailyByDate.get(localIsoDate(date)) || 0;
+                if (count > 0) studiedDays += 1;
+                const ratio = count / goal;
+                const level = count === 0 ? 0 : ratio >= 1 ? 4 : ratio >= 0.5 ? 3 : ratio >= 0.25 ? 2 : 1;
+                const label = `${date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '')} · ${count} ${count === 1 ? 'questão' : 'questões'}${count >= goal ? ' · meta batida' : ''}`;
+                cells.push(`<button type="button" class="heat-cell" data-level="${level}" data-label="${label}" aria-label="${label}" onclick="document.getElementById('dashboardHeatDetail').textContent=this.dataset.label"></button>`);
+            }
+            // Rótulo do mês da primeira coluna colidiria com o da seguinte.
+            if (monthLabels[1] || monthLabels[2]) monthLabels[0] = '';
+            const html = `
+                <div class="heat-months">${monthLabels.map(m => `<span>${m}</span>`).join('')}</div>
+                <div class="heat-grid" role="group" aria-label="Calendário de atividade das últimas ${DASHBOARD_HEAT_WEEKS} semanas">${cells.join('')}</div>
+                <div class="heat-detail" id="dashboardHeatDetail">Toque num dia para ver o detalhe</div>
+                <div class="heat-legend" aria-hidden="true"><span>menos</span><i class="heat-cell" data-level="0"></i><i class="heat-cell" data-level="1"></i><i class="heat-cell" data-level="2"></i><i class="heat-cell" data-level="3"></i><i class="heat-cell" data-level="4"></i><span>meta</span></div>`;
+            return { html, studiedDays };
+        }
+
+        // ---------- Dashboard: o que fazer agora + áreas com detalhe ----------
+        // O Dashboard resume e leva à ação; o Painel da trilha detalha. Tudo
+        // aqui reaproveita o que a trilha já calcula (buildTrailContext,
+        // weakSpots, bloco de hoje) e as sessões que já existem.
+        const DASHBOARD_ICONS = {
+            play: '<path d="M8 5.5v13l10-6.5z"/>',
+            repeat: '<path d="M17 3l3 3-3 3"/><path d="M4 11V9a3 3 0 0 1 3-3h13"/><path d="M7 21l-3-3 3-3"/><path d="M20 13v2a3 3 0 0 1-3 3H4"/>',
+            target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/>',
+            start: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'
+        };
+        const dashboardIcon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${DASHBOARD_ICONS[name]}</svg>`;
+        const DASHBOARD_CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+        const dashboardWeightPct = weight => `${(Math.round(weight * 1000) / 10).toLocaleString('pt-BR')}%`;
+
+        let dashboardTrailCtx = null;
+        let dashboardExpandedArea = '';
+
+        // Ações do card "Hoje": a primeira é o botão principal; as outras são
+        // atalhos secundários. Tudo reaproveita as sessões que já existem.
+        function renderDashboardNow(trailCtx, answered) {
+            const rows = [];
+            const due = getDueReviewQuestions().length;
+            if (trailCtx) {
+                const block = trailTodayBlock(trailCtx, trailNextBlocks(trailCtx));
+                if (trailCtx.divida || block) {
+                    const parts = [];
+                    if (trailCtx.divida) parts.push(`${trailCtx.divida} ${trailCtx.divida === 1 ? 'revisão' : 'revisões'}`);
+                    if (block) parts.push(`${block.questions} novas · ${block.area}`);
+                    rows.push({ icon: 'play', title: 'Sessão de hoje', sub: parts.join(' + '), attrs: `data-now-action="today" data-trail-id="${trailCtx.trailId}"` });
                 }
             }
-            const maxValue = Math.max(1, ...chartValues);
-            const chart = document.getElementById('dashboardChart');
-            chart.innerHTML = chartValues.map((value, index) => `<div class="dashboard-day"><div class="dashboard-bar-track"><div class="dashboard-bar" style="height:${Math.max(3, Math.round((value / maxValue) * 100))}%"></div></div><label>${dayLabels[index]}</label></div>`).join('');
-            document.getElementById('dashboardChartLabel').textContent = dashboardPeriodDays === 7 ? 'Últimos 7 dias' : 'Últimos 30 dias';
+            if (due && (!trailCtx || due > trailCtx.divida)) {
+                rows.push({ icon: 'repeat', title: 'Revisar questões prontas', sub: `${due} ${due === 1 ? 'questão vence' : 'questões vencem'} hoje ou já venceram`, attrs: 'data-now-action="review"' });
+            }
+            const weak = trailCtx ? window.weakSpots(trailCtx.subjects, 1)[0] : null;
+            if (weak) {
+                rows.push({ icon: 'target', title: `Ponto fraco: ${weak.assunto.trim()}`, sub: `${weak.area} · ${Math.round(weak.status.accuracy * 100)}% de acerto · vale ${dashboardWeightPct(weak.weight)} da prova`, attrs: `data-now-action="subject" data-subject-key="${escapeHtml(weak.key)}"` });
+            }
+            if (!rows.length && !answered) {
+                rows.push({ icon: 'start', title: 'Comece sua primeira sessão', sub: 'Responda questões para ver recomendações e sua evolução aqui', attrs: 'data-now-action="page" data-page="trilhas"' });
+            }
+            const list = document.getElementById('dashboardNowList');
+            list.hidden = !rows.length;
+            list.innerHTML = rows.map((row, index) =>
+                `<button type="button" class="dashboard-now-row${index === 0 ? ' is-primary' : ''}" ${row.attrs}><span class="dashboard-now-icon">${dashboardIcon(row.icon)}</span><span class="dashboard-now-copy"><b>${escapeHtml(row.title)}</b><em>${escapeHtml(row.sub)}</em></span><span class="dashboard-now-chevron">${DASHBOARD_CHEVRON}</span></button>`
+            ).join('');
+        }
 
-            const byArea = stats.byArea?.[activeTrackCapsule] || {};
+        // Assuntos da trilha que caem numa área do Dashboard (mesmo mapa de
+        // slugs que classifica as respostas): os que mais custam pontos
+        // (peso × erro) e, pra completar, os mais cobrados ainda sem estudo.
+        function dashboardAreaSubjects(ctx, areaKey) {
+            const all = ctx.subjects.filter(s => QUESTION_AREA_DASHBOARD_SLUG[s.area] === areaKey);
+            const studied = all.filter(s => s.status.studied > 0)
+                .map(s => ({ ...s, risk: s.weight * (1 - s.status.accuracy) }))
+                .sort((a, b) => b.risk - a.risk);
+            const fresh = all.filter(s => !(s.status.studied > 0)).sort((a, b) => b.weight - a.weight);
+            return { total: all.length, studied, fresh };
+        }
+
+        function dashboardSubjectRow(subject, detail) {
+            return `<div class="dashboard-subject"><div class="dashboard-subject-copy"><b>${escapeHtml(subject.assunto.trim())}</b><span>${detail}</span></div><button type="button" class="dashboard-subject-train" data-now-action="subject" data-subject-key="${escapeHtml(subject.key)}">Treinar</button></div>`;
+        }
+
+        function dashboardAreaDetailHtml(ctx, areaKey) {
+            const { studied, fresh } = dashboardAreaSubjects(ctx, areaKey);
+            let html = '<div class="dashboard-area-detail">';
+            if (studied.length) {
+                html += '<div class="dashboard-area-detail-title">Onde mais custa pontos</div>';
+                html += studied.slice(0, 4).map(s => dashboardSubjectRow(s, `${Math.round(s.status.accuracy * 100)}% de acerto · ${s.status.studied}/${s.status.total} questões · vale ${dashboardWeightPct(s.weight)} da prova`)).join('');
+            }
+            if (fresh.length) {
+                html += '<div class="dashboard-area-detail-title">Mais cobrados, ainda não estudados</div>';
+                html += fresh.slice(0, studied.length >= 4 ? 2 : 3).map(s => dashboardSubjectRow(s, `${s.status.total} questões · vale ${dashboardWeightPct(s.weight)} da prova`)).join('');
+            }
+            return html + '</div>';
+        }
+
+        function renderDashboardAreas(activity) {
+            const byArea = activity.byArea?.[activeTrackCapsule] || {};
             const dashboardAreaList = activeTrackCapsule === 'curso' ? DASHBOARD_AREAS_CURSO : DASHBOARD_AREAS;
             document.getElementById('dashboardAreas').innerHTML = dashboardAreaList.map(([key, name]) => {
                 const area = byArea[key] || {};
                 const areaAnswered = Number(area.answered || 0);
                 const areaCorrect = Number(area.correct || 0);
                 const value = areaAnswered ? Math.round((areaCorrect / areaAnswered) * 100) : 0;
-                return `<div class="dashboard-area"><div class="dashboard-area-top"><span class="dashboard-area-name">${name}</span><span class="dashboard-area-value">${areaAnswered ? `${value}% · ${areaAnswered} questões` : 'Sem respostas'}</span></div><div class="dashboard-area-track"><div class="dashboard-area-fill" style="width:${value}%"></div></div></div>`;
+                const top = `<div class="dashboard-area-top"><span class="dashboard-area-name">${name}</span><span class="dashboard-area-value">${areaAnswered ? `${value}% · ${areaAnswered} questões` : 'Sem respostas'}${dashboardTrailCtx ? DASHBOARD_CHEVRON.replace('<svg ', '<svg class="dashboard-area-chevron" ') : ''}</span></div><div class="dashboard-area-track"><div class="dashboard-area-fill" style="width:${value}%"></div></div>`;
+                if (!dashboardTrailCtx || !dashboardAreaSubjects(dashboardTrailCtx, key).total) return `<div class="dashboard-area">${top}</div>`;
+                const open = dashboardExpandedArea === key;
+                return `<div class="dashboard-area${open ? ' is-open' : ''}"><button type="button" class="dashboard-area-head" data-area-toggle="${key}" aria-expanded="${open}">${top}</button>${open ? dashboardAreaDetailHtml(dashboardTrailCtx, key) : ''}</div>`;
             }).join('');
+        }
+
+        let dashboardResizeFrame = 0;
+        window.addEventListener('resize', () => {
+            cancelAnimationFrame(dashboardResizeFrame);
+            dashboardResizeFrame = requestAnimationFrame(() => {
+                const plot = document.getElementById('dashboardEvoPlot');
+                if (plot?.clientWidth && Math.abs(plot.clientWidth - Number(plot.dataset.width || 0)) > 8) renderDashboardEvolution();
+            });
+        });
+
+        // Um único listener cobre o card "Fazer agora", o "Treinar" de cada
+        // assunto e o abrir/fechar das áreas (o HTML é reescrito a cada render).
+        document.addEventListener('click', event => {
+            const action = event.target.closest('[data-now-action]');
+            if (action) {
+                const { nowAction, trailId, subjectKey, page } = action.dataset;
+                if (nowAction === 'today') startTodaySession(trailId);
+                else if (nowAction === 'review') startReviewSession();
+                else if (nowAction === 'subject') startTrailSubject(subjectKey);
+                else if (nowAction === 'page') mudarPagina(page);
+                return;
+            }
+            const toggle = event.target.closest('[data-area-toggle]');
+            if (toggle) {
+                dashboardExpandedArea = dashboardExpandedArea === toggle.dataset.areaToggle ? '' : toggle.dataset.areaToggle;
+                renderDashboardAreas(getActivityDerived());
+                return;
+            }
+            const metric = event.target.closest('[data-evo-metric]');
+            if (metric) { dashboardEvoMetric = metric.dataset.evoMetric; dashboardEvoSelected = null; renderDashboardEvolution(); return; }
+            const range = event.target.closest('[data-evo-range]');
+            if (range) { dashboardEvoMonths = Number(range.dataset.evoRange) === 12 ? 12 : 6; dashboardEvoSelected = null; renderDashboardEvolution(); return; }
+            const col = event.target.closest('[data-evo-index]');
+            if (col) {
+                const index = Number(col.dataset.evoIndex);
+                dashboardEvoSelected = index;
+                renderDashboardEvolution();
+                document.querySelector(`[data-evo-index="${index}"]`)?.focus(); // o redesenho recria o botão
+            }
+        });
+
+        // Constância: resumo da semana (domingo a sábado, a última coluna do
+        // heatmap) sob o calendário. A lógica de contas está em
+        // shared/activity-insights.js.
+        let dashboardWeekShare = null;
+
+        function renderDashboardConsistency(activity, todayIso, goal, extras) {
+            const week = window.activityWeekSummary(activity.days, todayIso, goal);
+            dashboardWeekShare = { week, accuracy: extras.accuracy, streak: extras.streak };
+            document.getElementById('dashboardWeekHits').textContent = `${week.hitDays} de 7`;
+            document.getElementById('dashboardBestStreak').textContent = `${extras.bestStreak}d`;
+            const diff = week.total - week.previous;
+            const count = `${week.total.toLocaleString('pt-BR')} ${week.total === 1 ? 'questão' : 'questões'} nesta semana`;
+            document.getElementById('dashboardWeekNote').textContent = !week.total
+                ? 'Nenhuma questão respondida ainda nesta semana.'
+                : !week.previous ? count
+                : `${count} · ${diff === 0 ? 'o mesmo' : `${Math.abs(diff).toLocaleString('pt-BR')} ${diff > 0 ? 'a mais' : 'a menos'}`} que no mesmo ponto da semana passada.`;
+        }
+
+        // Web Share onde existe (celular); no resto copia o texto. Cancelar a
+        // folha de compartilhar não é erro.
+        async function shareWeeklySummary(button) {
+            if (!dashboardWeekShare) return;
+            const text = window.activityWeeklySummaryText(dashboardWeekShare);
+            // O rótulo original fica guardado uma vez só: capturá-lo a cada toque
+            // faria um segundo toque rápido "restaurar" para o texto temporário.
+            if (!button.dataset.label) button.dataset.label = button.textContent;
+            const flash = label => {
+                clearTimeout(button._flashTimer);
+                button.textContent = label;
+                button._flashTimer = setTimeout(() => { button.textContent = button.dataset.label; }, 1800);
+            };
+            try {
+                if (navigator.share) { await navigator.share({ title: 'Minha semana no trycktrack', text }); return; }
+                await navigator.clipboard.writeText(text);
+                flash('Copiado');
+            } catch (error) {
+                if (error?.name === 'AbortError') return;
+                try { await navigator.clipboard.writeText(text); flash('Copiado'); } catch (_) { flash('Não foi possível'); }
+            }
+        }
+
+        // ---------- Evolução mensal ----------
+        // Acerto (linha, escala fixa 0–100% com a meta pontilhada) ou volume
+        // (barras) dos últimos 6/12 meses, em SVG puro. Cada mês tem um botão
+        // por cima (teclado e toque) que mostra o detalhe dele; o mês
+        // corrente é parcial e aparece mais claro.
+        let dashboardEvoMetric = 'questoes';
+        let dashboardEvoMonths = 6;
+        let dashboardEvoSelected = null; // null = o mais recente
+
+        const EVO = { W: 320, H: 150, L: 30, R: 8, T: 10, B: 24 };
+        const evoMonth = (row, style) => new Date(row.year, row.month, 1).toLocaleDateString('pt-BR', { month: style }).replace('.', '');
+        const evoMonthTitle = row => { const name = evoMonth(row, 'long'); return name[0].toUpperCase() + name.slice(1); };
+        const evoPct = value => Math.round(value * 100);
+
+        function evoNiceMax(value) {
+            if (value <= 10) return 10;
+            const magnitude = 10 ** Math.floor(Math.log10(value));
+            const f = value / magnitude;
+            return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * magnitude;
+        }
+
+        function buildEvolutionPlot(series, metric, goalAccuracy, selected, width) {
+            const W = width;
+            const plotW = W - EVO.L - EVO.R, plotH = EVO.H - EVO.T - EVO.B;
+            const slot = plotW / series.length;
+            const cx = i => EVO.L + slot * (i + 0.5);
+            const isAccuracy = metric === 'acerto';
+            const max = isAccuracy ? 1 : evoNiceMax(Math.max(...series.map(r => r.n), 1));
+            const y = v => EVO.T + plotH * (1 - v / max);
+            const gridValues = isAccuracy ? [0, 0.5, 1] : [0, max / 2, max];
+            const fmt = v => (isAccuracy ? `${evoPct(v)}%` : v.toLocaleString('pt-BR'));
+
+            let svg = `<defs><linearGradient id="evoFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--lavender-active);stop-opacity:.3"/><stop offset="1" style="stop-color:var(--lavender-active);stop-opacity:0"/></linearGradient></defs><g class="evo-axis">`;
+            svg += gridValues.map(v => `<line class="evo-grid" x1="${EVO.L}" x2="${W - EVO.R}" y1="${y(v)}" y2="${y(v)}"/><text x="${EVO.L - 5}" y="${y(v) + 3}" text-anchor="end">${fmt(v)}</text>`).join('');
+            svg += series.map((r, i) => `<text x="${cx(i)}" y="${EVO.H - 8}" text-anchor="middle"${i === selected ? ' class="is-selected"' : ''}>${evoMonth(r, 'short')}</text>`).join('') + '</g>';
+
+            if (isAccuracy) {
+                svg += `<line class="evo-goal" x1="${EVO.L}" x2="${W - EVO.R}" y1="${y(goalAccuracy)}" y2="${y(goalAccuracy)}"/><text class="evo-goal-label" x="${EVO.L + 3}" y="${y(goalAccuracy) - 4}">meta ${evoPct(goalAccuracy)}%</text>`;
+                const runs = [];
+                series.forEach((r, i) => {
+                    if (r.accuracy == null) { runs.push(null); return; }
+                    const point = { x: cx(i), y: y(r.accuracy) };
+                    if (runs.length && runs[runs.length - 1]) runs[runs.length - 1].push(point); else runs.push([point]);
+                });
+                for (const run of runs.filter(Boolean)) {
+                    const line = run.map((pt, n) => `${n ? 'L' : 'M'}${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`).join(' ');
+                    if (run.length > 1) svg += `<path class="evo-area" d="${line} L${run[run.length - 1].x.toFixed(1)} ${y(0)} L${run[0].x.toFixed(1)} ${y(0)} Z"/>`;
+                    svg += `<path class="evo-line" d="${line}"/>`;
+                }
+                svg += series.map((r, i) => r.accuracy == null ? '' : `<circle class="evo-dot${r.partial ? ' is-partial' : ''}${i === selected ? ' is-selected' : ''}" cx="${cx(i)}" cy="${y(r.accuracy)}" r="3.6"/>`).join('');
+            } else {
+                const width = Math.min(26, slot * 0.58);
+                svg += series.map((r, i) => r.n ? `<rect class="evo-bar${r.partial ? ' is-partial' : ''}${i === selected ? ' is-selected' : ''}" x="${cx(i) - width / 2}" y="${y(r.n)}" width="${width}" height="${plotH * (r.n / max)}" rx="3"/>` : '').join('');
+            }
+
+            const summary = series.map(r => `${evoMonth(r, 'long')} ${isAccuracy ? (r.accuracy == null ? 'sem dados suficientes' : `${evoPct(r.accuracy)}%`) : r.n}`).join(', ');
+            const aria = `${isAccuracy ? 'Acerto' : 'Questões'} por mês: ${summary}`;
+            const cols = series.map((r, i) => {
+                const label = isAccuracy
+                    ? `${evoMonth(r, 'long')}: ${r.accuracy == null ? 'sem dados suficientes' : `${evoPct(r.accuracy)}% de acerto`}`
+                    : `${evoMonth(r, 'long')}: ${r.n} ${r.n === 1 ? 'questão' : 'questões'}`;
+                return `<button type="button" class="dashboard-evo-col${i === selected ? ' is-selected' : ''}" data-evo-index="${i}" aria-pressed="${i === selected}" aria-label="${label}"></button>`;
+            }).join('');
+            return `<svg viewBox="0 0 ${W} ${EVO.H}" class="evo-svg" role="img" aria-label="${aria}">${svg}</svg><div class="dashboard-evo-cols" style="left:${(EVO.L / W) * 100}%;right:${(EVO.R / W) * 100}%">${cols}</div>`;
+        }
+
+        function formatStudyTime(minutes) {
+            return minutes >= 60 ? `${Math.floor(minutes / 60)}h${minutes % 60 ? ` ${minutes % 60}m` : ''}` : `${minutes}m`;
+        }
+
+        function renderDashboardEvolution() {
+            const activity = getActivityDerived();
+            const todayIso = localIsoDate();
+            const series = window.activityMonthlySeries(activity.days, todayIso, dashboardEvoMonths, DASHBOARD_MIN_SAMPLE);
+            const isAccuracy = dashboardEvoMetric === 'acerto';
+            const state = getTrailState();
+            const goalAccuracy = getTrailGoal(getTrailTrack(state, state.active || 'enamed'));
+
+            document.querySelectorAll('#dashboardEvoMetric button').forEach(b => b.classList.toggle('active', b.dataset.evoMetric === dashboardEvoMetric));
+            document.querySelectorAll('#dashboardEvoRange button').forEach(b => b.classList.toggle('active', Number(b.dataset.evoRange) === dashboardEvoMonths));
+            document.getElementById('dashboardEvoTotals').textContent = activity.answered
+                ? `Total: ${activity.answered.toLocaleString('pt-BR')} questões respondidas · ${formatStudyTime(Number(getQuestionStats().studyMinutes || 0))} de estudo`
+                : '';
+
+            const plot = document.getElementById('dashboardEvoPlot');
+            const summaryEl = document.getElementById('dashboardEvoSummary');
+            const detailEl = document.getElementById('dashboardEvoDetail');
+            if (series.filter(r => r.n > 0).length < 2) {
+                plot.innerHTML = '<p class="dashboard-evo-empty">O gráfico aparece quando houver respostas em pelo menos 2 meses.</p>';
+                summaryEl.textContent = '';
+                detailEl.textContent = '';
+                return;
+            }
+
+            const selected = dashboardEvoSelected == null || dashboardEvoSelected >= series.length ? series.length - 1 : dashboardEvoSelected;
+            // O SVG usa a largura real do contêiner (viewBox em pixels), então as
+            // fontes mantêm o tamanho em qualquer tela em vez de escalar junto.
+            const width = Math.round(Math.min(760, Math.max(280, plot.clientWidth || 320)));
+            plot.dataset.width = String(width);
+            plot.innerHTML = buildEvolutionPlot(series, dashboardEvoMetric, goalAccuracy, selected, width);
+
+            // Resumo do mês mais recente (a história) e detalhe do mês tocado.
+            if (isAccuracy) {
+                const known = series.filter(r => r.accuracy != null);
+                const last = known[known.length - 1], before = known[known.length - 2];
+                if (!last) { summaryEl.textContent = 'Poucas respostas por mês para calcular o acerto.'; }
+                else {
+                    const diff = before ? evoPct(last.accuracy) - evoPct(before.accuracy) : null;
+                    const trend = diff == null ? '' : ` (${diff === 0 ? 'igual a' : `${diff > 0 ? '+' : '−'}${Math.abs(diff)} ${Math.abs(diff) === 1 ? 'ponto' : 'pontos'} vs.`} ${evoMonth(before, 'long')}${last.partial ? ', mês em andamento' : ''})`;
+                    summaryEl.textContent = `${evoMonthTitle(last)}: ${evoPct(last.accuracy)}%${trend}`;
+                }
+            } else {
+                const current = series[series.length - 1];
+                const complete = series.filter(r => !r.partial && r.n > 0);
+                const avg = complete.length ? Math.round(complete.reduce((s, r) => s + r.n, 0) / complete.length) : null;
+                summaryEl.textContent = `${evoMonthTitle(current)}: ${current.n.toLocaleString('pt-BR')} ${current.n === 1 ? 'questão' : 'questões'}${current.partial ? ' (em andamento)' : ''}${avg ? ` · média de ${avg.toLocaleString('pt-BR')} por mês nos meses completos` : ''}`;
+            }
+            const row = series[selected];
+            detailEl.textContent = isAccuracy
+                ? `${evoMonthTitle(row)} de ${row.year}: ${row.accuracy != null ? `${evoPct(row.accuracy)}% de acerto em ${row.ne.toLocaleString('pt-BR')} respostas` : row.n ? `${row.n} questões, mas só ${row.ne} com acerto registrado (mínimo ${DASHBOARD_MIN_SAMPLE})` : 'sem respostas'}`
+                : `${evoMonthTitle(row)} de ${row.year}: ${row.n.toLocaleString('pt-BR')} ${row.n === 1 ? 'questão' : 'questões'}${row.partial ? ' (mês em andamento)' : ''}`;
+        }
+
+        function renderDashboardInsights(activity, todayIso, streaks) {
+            const areaList = activeTrackCapsule === 'curso' ? DASHBOARD_AREAS_CURSO : DASHBOARD_AREAS;
+            const insights = window.activityBuildInsights({
+                events: getActivityLog().events, days: activity.days, now: new Date(), todayIso,
+                streakCurrent: streaks.current, track: activeTrackCapsule, classify: classifyQuestionForDashboard,
+                areaName: (track, key) => areaList.find(([slug]) => slug === key)?.[1] || key
+            });
+            document.getElementById('dashboardInsights').hidden = !insights.length;
+            document.getElementById('dashboardInsightsList').innerHTML = insights.map(item =>
+                `<div class="dashboard-insight is-${item.kind}"><span class="dashboard-insight-mark"></span><p>${escapeHtml(item.text)}</p></div>`
+            ).join('');
+        }
+
+        function renderDashboard() {
+            const activity = getActivityDerived();
+            const answered = activity.answered;
+            const correct = activity.correct;
+            const todayIso = localIsoDate();
+            const windows = window.activityRecentWindows(activity.days, todayIso, 7);
+
+            // O anel mostra a semana (o que a pessoa está fazendo agora),
+            // não o acerto de toda a vida — esse só serve de reserva
+            // enquanto a semana tem poucas respostas pra ser confiável.
+            const hasRecent = windows.current.ne >= DASHBOARD_MIN_SAMPLE;
+            const overallAccuracy = answered ? Math.round((correct / answered) * 100) : 0;
+            const accuracy = hasRecent ? Math.round(window.activityWindowAccuracy(windows.current) * 100) : overallAccuracy;
+
+            if (!document.getElementById('dashboardToday')) return;
+
+            // Casa cada dia por data (não por posição): o mapa só tem os dias
+            // em que houve estudo, então indexar por posição deslocaria o
+            // gráfico inteiro assim que houvesse um intervalo sem responder.
+            const dailyByDate = new Map([...activity.days].map(([date, day]) => [date, day.n]));
+            const streaks = computeStreaks(dailyByDate);
+
+            // Hoje: meta diária (a mesma das Trilhas), ofensiva e as ações.
+            const goal = getDashboardDailyGoal();
+            const answeredToday = activity.days.get(todayIso)?.n || 0;
+            const todayPct = Math.min(100, Math.round((answeredToday / goal) * 100));
+            document.getElementById('dashboardTodayText').textContent = answeredToday >= goal ? `Meta batida · ${answeredToday} questões` : `${answeredToday} de ${goal} questões`;
+            document.getElementById('dashboardTodayFill').style.width = `${todayPct}%`;
+            document.getElementById('dashboardTodayBar').setAttribute('aria-valuenow', String(todayPct));
+            document.getElementById('dashboardToday').classList.toggle('is-done', answeredToday >= goal);
+            const streakLabel = `${streaks.current} ${streaks.current === 1 ? 'dia' : 'dias'}`;
+            const streakChip = document.getElementById('dashboardStreakChip');
+            streakChip.hidden = !streaks.current;
+            streakChip.setAttribute('aria-label', `Ofensiva de ${streakLabel}`);
+            document.getElementById('dashboardStreak').textContent = streakLabel;
+
+            // Contexto da trilha: alimenta as ações do Hoje e o detalhe das áreas.
+            const trailId = getTrailState().active || 'enamed';
+            const trailCatalog = TRAIL_CATALOG[trailId];
+            dashboardTrailCtx = activeTrackCapsule === 'residencia' && trailCatalog?.subjectBased ? buildTrailContext(trailId) : null;
+            renderDashboardNow(dashboardTrailCtx, answered);
+            renderDashboardEvolution();
+            renderDashboardInsights(activity, todayIso, streaks);
+
+            // Constância: calendário de 16 semanas + resumo da semana.
+            const heat = buildActivityHeatmap(dailyByDate, goal);
+            document.getElementById('dashboardChart').innerHTML = heat.html;
+            document.getElementById('dashboardChartLabel').textContent = `${heat.studiedDays} ${heat.studiedDays === 1 ? 'dia estudado' : 'dias estudados'} em ${DASHBOARD_HEAT_WEEKS} semanas`;
+            renderDashboardConsistency(activity, todayIso, goal, { accuracy: hasRecent ? accuracy : null, streak: streaks.current, bestStreak: streaks.best });
+
+            renderDashboardAreas(activity);
 
             const history = getQuestionHistory().filter(entry => entry.track === activeTrackCapsule);
             const recent = document.getElementById('dashboardRecent');
@@ -2742,7 +3159,10 @@
                     session.questions.push(question);
                 }
                 if (isRetry) { document.getElementById('questionNext').disabled = false; return; }
-                recordQuestionResult(question, correct, letter);
+                // Tempo até responder (sem a leitura da explicação): o que já
+                // foi acumulado nesta questão + o trecho em andamento.
+                const answerMs = (session.questionTimesMs?.[session.lastRenderedIndex] || 0) + (session.questionRenderedAt != null ? Date.now() - session.questionRenderedAt : 0);
+                recordQuestionResult(question, correct, letter, answerMs);
                 // R-1: errar já é o próprio sinal (Errei, sem precisar
                 // perguntar nada) — só quando acerta é que faz sentido
                 // diferenciar "acertei com certeza" de "acertei mas quase
@@ -3266,38 +3686,20 @@
             // Discursiva e anulada não têm gabarito válido — não são
             // certas nem erradas, então não entram na contagem.
             if (correct === null) return;
-            queueResponseSyncPush(question, correct, chosen, elapsedMs);
-            const stats = getQuestionStats();
-            stats.answered = Number(stats.answered || 0) + 1;
-            stats.correct = Number(stats.correct || 0) + (correct ? 1 : 0);
-            stats.byArea = stats.byArea || {};
-            // Internato (question.rodizio) e banco principal (question.area)
-            // nunca colidem no mesmo campo — o discriminador natural de
-            // qual trilha (Curso/Residência) essa resposta pertence.
-            const track = question?.rodizio ? 'curso' : 'residencia';
-            const key = track === 'curso' ? RODIZIO_DASHBOARD_SLUG[question?.rodizio] : QUESTION_AREA_DASHBOARD_SLUG[question?.area];
-            if (key) {
-                stats.byArea[track] = stats.byArea[track] || {};
-                stats.byArea[track][key] = stats.byArea[track][key] || { answered: 0, correct: 0 };
-                stats.byArea[track][key].answered += 1;
-                stats.byArea[track][key].correct += correct ? 1 : 0;
-            }
-            const today = new Date().toISOString().slice(0, 10);
-            stats.daily = Array.isArray(stats.daily) ? stats.daily : [];
-            let day = stats.daily.find(item => item.date === today);
-            if (!day) { day = { date: today, count: 0 }; stats.daily.push(day); }
-            day.count += 1;
-            // Ofensiva: só reavalia uma vez por dia (na primeira questão
-            // respondida do dia), não a cada questão — soma 1 se o último
-            // dia com atividade foi ontem, reinicia em 1 se houve um
-            // intervalo, e não mexe se hoje já tinha sido contado.
-            if (stats.lastActivityDate !== today) {
-                const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayIso = yesterday.toISOString().slice(0, 10);
-                stats.streak = stats.lastActivityDate === yesterdayIso ? Number(stats.streak || 0) + 1 : 1;
-                stats.lastActivityDate = today;
-            }
-            localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
+            // Cada resposta é um evento no log (pendente até o servidor
+            // confirmar); totais, áreas, dias e ofensiva saem dele. O tempo
+            // é limitado a 30 min: aba esquecida aberta não pode virar um
+            // "tempo de resposta" de horas.
+            const log = getActivityLog();
+            window.mergeActivityEvents(log, [{
+                q: question.id,
+                c: correct ? 1 : 0,
+                t: new Date().toISOString(),
+                ...(chosen ? { ch: chosen } : {}),
+                ...(Number.isFinite(elapsedMs) ? { ms: Math.min(Math.round(elapsedMs), 1800000) } : {}),
+                p: 1
+            }]);
+            saveActivityLog(log);
             // Não chama mais updateReviewQueue aqui — quem chama esta
             // função decide o rating (1–4, ver window.RATING): o Guiado
             // pede Difícil/Bom/Fácil quando acerta (rateReviewDifficulty)
@@ -3401,54 +3803,91 @@
             dirtyReviewQuestionIds = new Set([...dirtyReviewQuestionIds, ...Object.keys(getReviewQueue())]);
         }
 
-        // Log de respostas individuais (QuestionResponse no backend) —
-        // ao contrário da fila de revisão, é só-acrescenta (cada resposta
-        // é um evento independente, não um estado que precisa de merge
-        // por "mais recente"), então acumula numa lista simples até o
-        // próximo flush. É o que permite (no futuro) responder "quais
-        // questões exatas essa pessoa errou", coisa que o agregado local
-        // (trycktrack-question-stats) nunca guardou.
-        let pendingResponses = [];
-        function queueResponseSyncPush(question, correct, chosen, elapsedMs) {
-            if (!question?.id) return;
-            pendingResponses.push({
-                questionId: question.id,
-                chosen: chosen ?? null,
-                correct: typeof correct === 'boolean' ? correct : null,
-                elapsedMs: Number.isFinite(elapsedMs) ? Math.round(elapsedMs) : undefined,
-                answeredAt: new Date().toISOString()
-            });
-        }
+        // O envio das respostas (QuestionResponse no backend) sai do log
+        // local: eventos com p=1 ainda não confirmados. Persistem entre
+        // recargas e só deixam de ser pendentes quando o servidor responde
+        // ok — falha de rede, backend hibernado ou erro 5xx não perde nada,
+        // e o servidor ignora reenvio (chave natural), então repetir é seguro.
+        const SYNC_BATCH = 500; // o corpo aceito pelo backend tem limite (512 kb)
 
-        async function flushReviewSync() {
-            if (!SYNC_API_BASE || (!dirtyReviewQuestionIds.size && !pendingResponses.length)) return;
+        // Manda um lote; devolve true quando deu certo e ainda restam pendentes.
+        async function sendPendingBatch() {
+            const log = getActivityLog();
+            const pending = window.pendingActivityEvents(log);
+            if (!SYNC_API_BASE || (!dirtyReviewQuestionIds.size && !pending.length)) return false;
             const idToken = await window.__fb?.getIdToken?.().catch(() => null);
-            if (!idToken) return; // sem login -> sem sync, sem barulho
+            if (!idToken) return false; // sem login -> sem sync, sem barulho
             const queue = getReviewQueue();
             const reviewEntries = {};
             dirtyReviewQuestionIds.forEach(id => { if (queue[id]) reviewEntries[id] = queue[id]; });
             dirtyReviewQuestionIds = new Set();
-            const responses = pendingResponses;
-            pendingResponses = [];
-            if (!Object.keys(reviewEntries).length && !responses.length) return;
+            const batch = pending.slice(0, SYNC_BATCH);
+            if (!Object.keys(reviewEntries).length && !batch.length) return false;
             try {
                 const response = await fetch(`${SYNC_API_BASE}/api/sync/push`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${idToken}` },
-                    body: JSON.stringify({ reviewEntries, responses })
+                    body: JSON.stringify({ reviewEntries, responses: batch.map(window.activityToSyncPayload) })
                 });
-                if (!response.ok) return;
+                if (!response.ok) return false; // os eventos continuam pendentes no log
                 const { reviewQueue: serverQueue } = await response.json();
+                window.markActivitySynced(log, batch.map(window.activityEventKey));
+                saveActivityLog(log);
                 // O servidor devolve a fila já mesclada (ele também aplica
                 // "mantém a mais recente" — mergeReviewEntry, mesma função)
                 // — funde de volta no local pra pegar qualquer entrada que
                 // outro dispositivo tenha mandado antes deste.
                 saveReviewQueue(window.mergeReviewQueues(getReviewQueue(), serverQueue));
+                return pending.length > batch.length;
             } catch (_) {
-                // offline ou backend fora do ar — devolve pro próximo
-                // flush em vez de perder o que já foi acumulado.
-                pendingResponses = [...responses, ...pendingResponses];
+                // offline ou backend fora do ar — os eventos seguem pendentes.
             }
+            return false;
+        }
+
+        // Um envio por vez: o lote só vira "sincronizado" quando o servidor
+        // responde, e o fim de sessão chama o flush em dois pontos (concluir e
+        // fechar) — sem a trava, os dois mandam os mesmos eventos em paralelo
+        // (e, com o backend hibernado, a resposta demora dezenas de segundos).
+        // Chamadas durante um envio pedem uma nova rodada ao terminar.
+        let flushInFlight = null;
+        let flushAgain = false;
+
+        function flushReviewSync() {
+            if (flushInFlight) { flushAgain = true; return flushInFlight; }
+            flushInFlight = (async () => {
+                let more;
+                do { flushAgain = false; more = await sendPendingBatch(); } while (more || flushAgain);
+            })().finally(() => { flushInFlight = null; });
+            return flushInFlight;
+        }
+
+        // Traz do servidor as respostas que este aparelho ainda não viu
+        // (outros aparelhos, ou o histórico todo num aparelho novo) e funde
+        // no log. Paginado: `next` é o instante da última linha; repete a
+        // partir dele (inclusivo — mergeEvents deduplica). Backend antigo
+        // (404) ou fora do ar: segue só com o local.
+        async function pullResponsesFromCloud() {
+            if (!SYNC_API_BASE) return;
+            const idToken = await window.__fb?.getIdToken?.().catch(() => null);
+            if (!idToken) return;
+            const log = getActivityLog();
+            let after = log.pullAfter;
+            try {
+                for (let page = 0; page < 50; page++) {
+                    const url = `${SYNC_API_BASE}/api/sync/responses?limit=2000${after ? `&after=${encodeURIComponent(after)}` : ''}`;
+                    const response = await fetch(url, { headers: { 'Authorization': `Bearer ${idToken}` } });
+                    if (!response.ok) break;
+                    const { responses, next } = await response.json();
+                    window.mergeActivityEvents(log, responses.map(window.activityFromServerResponse).filter(Boolean));
+                    if (responses.length) log.pullAfter = responses[responses.length - 1].answeredAt;
+                    if (!next || next === after) break;
+                    after = next;
+                }
+            } catch (_) { /* offline: o que já veio fica salvo abaixo */ }
+            saveActivityLog(log);
+            updateQuestionHubStats();
+            if (document.getElementById('dashboardToday')) renderDashboard();
         }
 
         // Chamada no login (ver app-auth.js) — traz o estado do servidor e
@@ -3617,14 +4056,37 @@
             localStorage.setItem('trycktrack-question-stats', JSON.stringify(stats));
         }
 
+        // Caixa do banco de questões: acerto dos últimos 7 dias (reserva: acerto
+        // geral enquanto a semana tem poucas respostas pra ser confiável).
         function updateQuestionHubStats() {
-            const stats = getQuestionStats();
-            const answered = Number(stats.answered || 0);
-            const correct = Number(stats.correct || 0);
-            const answeredEl = document.getElementById('questionAnsweredStat');
-            const accuracyEl = document.getElementById('questionAccuracyStat');
-            if (answeredEl) answeredEl.textContent = answered;
-            if (accuracyEl) accuracyEl.textContent = answered ? `${Math.round((correct / answered) * 100)}%` : '—';
+            const valueEl = document.getElementById('questionAccuracyStat');
+            if (!valueEl) return;
+            const activity = getActivityDerived();
+            const windows = window.activityRecentWindows(activity.days, localIsoDate(), 7);
+            const hasRecent = windows.current.ne >= DASHBOARD_MIN_SAMPLE;
+            const countBox = document.getElementById('questionAccuracyCountBox');
+            const deltaEl = document.getElementById('questionAccuracyDelta');
+            const labelEl = document.getElementById('questionAccuracyLabel');
+            deltaEl.hidden = true;
+            if (!activity.answered) {
+                valueEl.textContent = '—';
+                labelEl.textContent = 'de acerto nos últimos 7 dias';
+                countBox.hidden = true;
+                return;
+            }
+            const right = hasRecent ? windows.current.c : activity.correct;
+            const total = hasRecent ? windows.current.ne : activity.answered;
+            valueEl.textContent = `${Math.round((right / total) * 100)}%`;
+            labelEl.textContent = hasRecent ? 'de acerto nos últimos 7 dias' : 'de acerto geral';
+            document.getElementById('questionAccuracyCount').textContent = `${right.toLocaleString('pt-BR')} de ${total.toLocaleString('pt-BR')}`;
+            countBox.hidden = false;
+            if (hasRecent && windows.previous.ne >= DASHBOARD_MIN_SAMPLE) {
+                const diff = Math.round(window.activityWindowAccuracy(windows.current) * 100) - Math.round(window.activityWindowAccuracy(windows.previous) * 100);
+                deltaEl.className = `dashboard-delta ${diff > 0 ? 'is-up' : diff < 0 ? 'is-down' : 'is-flat'}`;
+                deltaEl.textContent = diff === 0 ? 'estável' : `${Math.abs(diff)} pts`;
+                deltaEl.title = 'Variação contra os 7 dias anteriores';
+                deltaEl.hidden = false;
+            }
         }
 
         // A entrada dos cards agora é uma @keyframes pura em app.css — o
