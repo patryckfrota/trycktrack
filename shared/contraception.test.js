@@ -51,9 +51,33 @@ test('enxaqueca com aura: combinados 4; progestagênios 2 no início e 3 na cont
     assert.equal(cont.cu.section, 'indicated');
 });
 
-test('tabagismo ≥35 anos e ≥15 cig/dia: combinado 4, injetável mensal 3, demais 1', () => {
-    const r = by(evaluate(pick(['smoking', 'ge35_ge15'])));
+test('tabagismo usa a idade já informada: 35+ e ≥15 cig/dia → combinado 4, injetável mensal 3, demais 1', () => {
+    const r = by(evaluate(pick(['age', '35_39'], ['smoking', 'ge15'])));
     assert.deepEqual([r.coc.category, r.cic.category, r.pop.category, r.dmpa.category], [4, 3, 1, 1]);
+    const novo = by(evaluate(pick(['age', '20_34'], ['smoking', 'ge15'])));
+    assert.deepEqual([novo.coc.category, novo.cic.category], [2, 2]);          // menos de 35 anos: categoria 2
+    const lt15 = by(evaluate(pick(['age', '40_45'], ['smoking', 'lt15'])));
+    assert.deepEqual([lt15.coc.category, lt15.cic.category], [3, 2]);
+});
+
+test('sem idade informada, tabagismo e enxaqueca valem pela pior faixa (conservador)', () => {
+    assert.equal(by(evaluate(pick(['smoking', 'ge15']))).coc.category, 4);
+    // enxaqueca sem aura nos combinados: início 2 (<35) ou 3 (35+); continuação 3 ou 4
+    assert.equal(by(evaluate(pick(['headache', 'mig']))).coc.category, 3);
+    assert.equal(by(evaluate(pick(['headache', 'mig']), { phase: 'continue' })).coc.category, 4);
+    assert.equal(by(evaluate(pick(['age', '20_34'], ['headache', 'mig']))).coc.category, 2);
+    assert.equal(by(evaluate(pick(['age', '20_34'], ['headache', 'mig']), { phase: 'continue' })).coc.category, 3);
+    assert.equal(by(evaluate(pick(['age', '35_39'], ['headache', 'mig']))).coc.category, 3);
+});
+
+test('obesidade em menor de 18 anos: injetável trimestral 2 só com a idade <18', () => {
+    assert.equal(by(evaluate(pick(['age', 'lt18'], ['obesity', 'bmi30']))).dmpa.category, 2);
+    assert.equal(by(evaluate(pick(['age', '20_34'], ['obesity', 'bmi30']))).dmpa.category, 1);
+});
+
+test('ficha mostra a dependência de idade: tabagismo do combinado lista as duas faixas', () => {
+    const item = methodConditions('coc').groups.flatMap(g => g.items).find(i => i.option.includes('15 ou mais'));
+    assert.ok(item.note.includes('Menos de 35 anos: 2') && item.note.includes('35 anos ou mais: 4'), item.note);
 });
 
 test('TVP/TEP aguda: nenhum hormonal é indicado; DIU de cobre 1', () => {
@@ -94,7 +118,7 @@ test('diabetes com nefropatia: combinado 3/4 (depende); injetável trimestral 3'
 });
 
 test('várias condições: vale a pior categoria por método, com a causa nos drivers', () => {
-    const r = by(evaluate(pick(['obesity', 'bmi30'], ['htn', 'sbp140'], ['smoking', 'ge35_lt15'])));
+    const r = by(evaluate(pick(['age', '35_39'], ['obesity', 'bmi30'], ['htn', 'sbp140'], ['smoking', 'lt15'])));
     assert.equal(r.coc.category, 3);
     assert.deepEqual(r.coc.drivers.map(d => d.questionId).sort(), ['htn', 'obesity', 'smoking']);
     assert.equal(r.imp.category, 1);
@@ -135,7 +159,7 @@ test('ordena por seção, depois preferência, categoria e eficácia', () => {
 });
 
 test('preferência "sem hormônio" põe o DIU de cobre à frente e marca os hormonais', () => {
-    const r = evaluate(pick(['age', '20_39']), { prefs: { noHormone: true } });
+    const r = evaluate(pick(['age', '20_34']), { prefs: { noHormone: true } });
     assert.equal(r.methods[0].id, 'cu');
     assert.ok(r.methods.filter(m => m.hormonal).every(m => m.misses));
 });
@@ -365,7 +389,7 @@ test('taxas (OMS SPR 2025, tabela 1.1): valores conferidos e categorias de efic�
 });
 
 test('"maior eficácia entre os indicados": menor uso típico entre os indicados; muda quando o implante não é indicado', () => {
-    const none = evaluate(pick(['age', '20_39']));
+    const none = evaluate(pick(['age', '20_34']));
     assert.equal(none.methods.find(m => m.best).id, 'imp');
     assert.equal(none.methods.filter(m => m.best).length, 1);
     const noImplant = evaluate(pick(['breast', 'current']));   // implante e DIU-LNG categoria 4; sobra o DIU de cobre
@@ -374,7 +398,7 @@ test('"maior eficácia entre os indicados": menor uso típico entre os indicados
 });
 
 test('"maior eficácia" respeita preferência: sem hormônio → DIU de cobre', () => {
-    const r = evaluate(pick(['age', '20_39']), { prefs: { noHormone: true } });
+    const r = evaluate(pick(['age', '20_34']), { prefs: { noHormone: true } });
     assert.equal(r.methods.find(m => m.best).id, 'cu');
 });
 
@@ -392,15 +416,15 @@ test('triagem: membros existem, não se repetem e cobrem toda pergunta decisiva 
         for (const ph of ['start', 'continue']) { const r = resolveCell(c, ph); if (r && (r.na || r.max >= 3)) decisive.add(q.id); }
     });
     for (const q of decisive) assert.ok(itemOfQuestion(q), `${q} decisiva sem item de triagem`);
-    assert.equal(SCREENING.length, 16);
+    assert.equal(SCREENING.length, 17);
 });
 
 test('triagem: itens exigidos por método seguem a tabela (combinado x DIU)', () => {
     const coc = requiredItems('coc');
-    assert.ok(['smoking', 'htn', 'headache', 'thrombosis', 'cardio', 'diabetes', 'breast', 'liver', 'lupus', 'drugs', 'postpartum', 'pregnancy'].every(i => coc.includes(i)));
+    assert.ok(['age', 'smoking', 'htn', 'headache', 'thrombosis', 'cardio', 'diabetes', 'breast', 'liver', 'lupus', 'drugs', 'postpartum', 'pregnancy'].every(i => coc.includes(i)));
     assert.ok(!coc.includes('pelvic') && !coc.includes('uterus') && !coc.includes('hiv'));
     const cu = requiredItems('cu');
-    assert.ok(['pelvic', 'uterus', 'hiv', 'bleeding', 'postpartum', 'pregnancy'].every(i => cu.includes(i)));
+    assert.ok(['age', 'pelvic', 'uterus', 'hiv', 'bleeding', 'postpartum', 'pregnancy'].every(i => cu.includes(i)));
     assert.ok(!cu.includes('smoking') && !cu.includes('htn') && !cu.includes('headache'));
     assert.deepEqual(requiredItems('patch'), requiredItems('coc'));
 });
@@ -411,21 +435,26 @@ test('triagem: "não" responde; "sim" só responde com opção marcada', () => {
     assert.equal(itemDone(item, { headache: 'no' }, {}), true);
     assert.equal(itemDone(item, { headache: 'yes' }, {}), false);
     assert.equal(itemDone(item, { headache: 'yes' }, pick(['headache', 'aura'])), true);
+    // idade é uma pergunta de escolha: respondida quando uma faixa está marcada
+    assert.equal(itemDone(screeningItem('age'), {}, {}), false);
+    assert.equal(itemDone(screeningItem('age'), {}, pick(['age', '20_34'])), true);
     const p = screeningProgress({ headache: 'no', htn: 'no' }, {});
-    assert.deepEqual([p.done, p.total], [2, 16]);
+    assert.deepEqual([p.done, p.total], [2, 17]);
 });
 
 test('triagem: método só é confirmado quando todos os itens exigidos estão respondidos', () => {
     assert.equal(certainty({}, {}).cu.confirmed, false);
     const screen = Object.fromEntries(requiredItems('cu').map(i => [i, 'no']));
-    const c = certainty(screen, {});
+    const ageAnswer = pick(['age', '20_34']);
+    assert.equal(certainty(screen, {}).cu.confirmed, false);   // sem a idade, nada se confirma
+    const c = certainty(screen, ageAnswer);
     assert.equal(c.cu.confirmed, true);
     assert.equal(c.coc.confirmed, false);
     assert.deepEqual(c.coc.missing.sort(), requiredItems('coc').filter(i => !requiredItems('cu').includes(i)).sort());
 });
 
 test('"maior eficácia" só vale entre métodos confirmados', () => {
-    const answers = pick(['age', '20_39']);
+    const answers = pick(['age', '20_34']);
     assert.equal(evaluate(answers, { confirmed: [] }).methods.some(m => m.best), false);
     assert.equal(evaluate(answers, { confirmed: ['cu', 'lng'] }).methods.find(m => m.best).id, 'lng');
     assert.equal(evaluate(answers, { confirmed: ['imp', 'cu'] }).methods.find(m => m.best).id, 'imp');

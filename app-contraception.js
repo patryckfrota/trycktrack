@@ -59,7 +59,7 @@
         return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}</span></button>`;
     }
 
-    function questionHtml(q, hits) {
+    function questionHtml(q, hits, bare = false) {
         const selected = state.answers[q.id] || [];
         const options = q.options.filter(o => !hits || hits.has(o.id));
         if (!options.length) return '';
@@ -67,7 +67,8 @@
         const hint = q.type === 'single' ? 'Escolha uma' : 'Marque o que se aplica';
         const fam = q.family ? `<span class="ct-fam-tag">${esc(FAMILIES.find(f => f.id === q.family)?.title || '')}</span>` : '';
         const why = M().WHY[q.id] ? `<details class="ct-why"><summary>Por que isso importa</summary><p>${esc(M().WHY[q.id])}</p><small>OMS, MEC 2025, p. ${q.page}</small></details>` : '';
-        return `<fieldset class="ct-q"><legend>${esc(q.title)}${fam}<small>${hint}</small></legend>${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map(o => optionHtml(q, o, selected)).join('')}</div>${why}</fieldset>`;
+        const legend = bare ? '' : `<legend>${esc(q.title)}${fam}<small>${hint}</small></legend>`;
+        return `<fieldset class="ct-q">${legend}${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map(o => optionHtml(q, o, selected)).join('')}</div>${why}</fieldset>`;
     }
 
     // Seções do perfil: as da OMS mais uma com as condições próprias de outros métodos.
@@ -86,11 +87,12 @@
             if (searching && !qs.length) return '';
             const v = state.screen[item.id];
             const done = itemDone(item, state.screen, state.answers);
-            const expanded = searching || v === 'yes';
+            const choice = item.kind === 'choice';
+            const expanded = searching || choice || v === 'yes';
             const btn = (val, label) => `<button type="button" class="ct-yn-btn${v === val ? ' on' : ''}" aria-pressed="${v === val}" data-action="screen" data-item="${item.id}" data-v="${val}">${esc(label)}</button>`;
-            const controls = searching ? '' : `<div class="ct-yn" role="group" aria-label="${esc(item.prompt)}">${btn('no', item.noLabel || 'Não')}${btn('yes', item.yesLabel || 'Sim')}</div>`;
+            const controls = (searching || choice) ? '' : `<div class="ct-yn" role="group" aria-label="${esc(item.prompt)}">${btn('no', item.noLabel || 'Não')}${btn('yes', item.yesLabel || 'Sim')}</div>`;
             const hint = (!searching && v === 'yes' && !done) ? '<p class="ct-help">Marque abaixo o que se aplica.</p>' : '';
-            const body = expanded ? `${hint}${qs.map(q => questionHtml(q, hits && hits.get(q.id))).join('')}` : '';
+            const body = expanded ? `${hint}${qs.map(q => questionHtml(q, hits && hits.get(q.id), choice && !searching)).join('')}` : '';
             return `<div class="ct-tri${done ? ' done' : ''}" data-item="${item.id}"><div class="ct-tri-head"><span class="ct-tri-check" aria-hidden="true">${done ? '✓' : ''}</span><strong>${esc(item.prompt)}</strong></div>${controls}${body ? `<div class="ct-tri-body">${body}</div>` : ''}</div>`;
         }).join('');
         if (!rows) return '';

@@ -143,6 +143,35 @@ export function countAnswered(answers, sectionId) {
     return selectedOptions(answers).filter(s => !sectionId || s.question.sectionId === sectionId).length;
 }
 
+/* ---------- idade: opções cuja categoria depende dela ---------- */
+
+const FROM35 = ['35_39', '40_45', 'gt45'];
+
+export function ageContext(selected) {
+    const a = selected.find(s => s.question.id === 'age');
+    if (!a) return { known: false };
+    return { known: true, under18: a.option.id === 'lt18', from35: FROM35.includes(a.option.id) };
+}
+
+function severity(cell) {
+    const r1 = resolveCell(cell, 'start');
+    const r2 = resolveCell(cell, 'continue');
+    if (!r1) return 0;
+    return Math.max(r1.na ? 5 : r1.max, r2.na ? 5 : r2.max) + (r1.ranged || r2.ranged ? 0.5 : 0);
+}
+
+/** Categorias da opção para a idade informada (sem idade: a pior de cada coluna). */
+export function catsOf(option, ctx = { known: false }) {
+    const by = option.byAge;
+    if (!by) return option.cats;
+    if (ctx.known) {
+        if (ctx.under18 && by.under18) return by.under18;
+        if (ctx.from35 && by.from35) return by.from35;
+        return option.cats;
+    }
+    return option.cats.map((cell, i) => [cell, ...Object.values(by).map(v => v[i])].reduce((w, c) => (severity(c) > severity(w) ? c : w)));
+}
+
 /* ---------- avaliação de um conjunto de métodos ---------- */
 
 // Descreve de onde vêm as células de cada conjunto (principal ou extensão).
@@ -150,9 +179,9 @@ function coreSet() {
     return {
         id: 'core', scale: 'mec', methods: METHOD_LIST.map(id => METHODS[id]),
         // pílula, adesivo e anel compartilham a coluna "coc" da tabela da OMS
-        cellsFor(item, idx) {
+        cellsFor(item, idx, ctx) {
             if (item.question.family) return [];
-            return [{ cell: item.option.cats[METHOD_IDS.indexOf(METHOD_LIST.map(id => METHODS[id])[idx].column)], note: null }];
+            return [{ cell: catsOf(item.option, ctx)[METHOD_IDS.indexOf(METHOD_LIST.map(id => METHODS[id])[idx].column)], note: null }];
         }
     };
 }
@@ -163,14 +192,14 @@ function extensionSet(ext) {
     const inherit = ext.inherit || {};
     return {
         id: ext.id, scale: ext.scale, methods: ext.methods,
-        cellsFor(item, col) {
+        cellsFor(item, col, ctx) {
             const { question, option } = item;
             if (question.family) return question.family === ext.id ? [{ cell: option.cats[col], note: option.note || null }] : [];
             const out = [];
             const link = links.get(`${question.id}.${option.id}`);
             if (link) out.push({ cell: link.cats[col], note: (Array.isArray(link.note) ? link.note[col] : link.note) || null });
             const from = inherit[ext.methods[col].id];
-            if (from) out.push({ cell: option.cats[METHOD_IDS.indexOf(from)], note: null, phase: 'start' });
+            if (from) out.push({ cell: catsOf(option, ctx)[METHOD_IDS.indexOf(from)], note: null, phase: 'start' });
             return out;
         }
     };
@@ -178,12 +207,13 @@ function extensionSet(ext) {
 
 function evaluateSet(set, selected, phase, prefs) {
     const sc = SCALES[set.scale];
+    const ctx = ageContext(selected);
     const sectionRank = Object.fromEntries(sc.sections.map((s, i) => [s.id, i]));
     const methods = set.methods.map((method, col) => {
         const drivers = [];
         let decisive = { min: 1, max: 1, ranged: false, na: false, display: sc.label(1) };
         for (const item of selected) {
-            for (const { cell, note, phase: forced } of set.cellsFor(item, col)) {
+            for (const { cell, note, phase: forced } of set.cellsFor(item, col, ctx)) {
                 const r = resolveCell(cell, forced || phase, set.scale);
                 if (!r) continue;
                 if (r.na) { decisive = r; drivers.length = 0; drivers.push({ questionId: item.question.id, questionTitle: item.question.title, optionLabel: item.option.label, note, ...r }); break; }
@@ -262,21 +292,45 @@ export function methodConditions(methodId) {
     const col = set.methods.findIndex(m => m.id === methodId);
     const sectionRank = Object.fromEntries(sc.sections.map((s, i) => [s.id, i]));
     const buckets = new Map();
+    const unknownAge = { known: false };
+    // Resolve uma opção (ou uma variante de idade dela) para a coluna do método.
+    const resolveOption = (q, option, ctx) => set.cellsFor({ question: q, option }, col, ctx).map(({ cell, note, phase: forced }) => {
+        const start = resolveCell(cell, forced || 'start', set.scale);
+        const cont = resolveCell(cell, forced || 'continue', set.scale);
+        return start && cont ? { start, cont, note } : null;
+    }).filter(Boolean);
+    const showDisplay = (start, cont) => start.display === cont.display ? start.display : `início ${start.display} · continuação ${cont.display}`;
     for (const q of QUESTIONS.values()) {
         for (const option of q.options) {
-            const item = { question: q, option };
-            for (const { cell, note, phase: forced } of set.cellsFor(item, col)) {
-                const start = resolveCell(cell, forced || 'start', set.scale);
-                const cont = resolveCell(cell, forced || 'continue', set.scale);
-                if (!start || !cont || (start.na && cont.na && !note)) continue;
-                const worst = (cont.max > start.max || (cont.max === start.max && cont.ranged && !start.ranged)) ? cont : start;
-                if (!worst.na && worst.max <= 1 && !worst.ranged) continue;
-                // categoria 2 da escala MEC não é "indicado": vira grupo próprio de cautela
-                const id = worst.na ? 'na' : (set.scale === 'mec' && sc.sectionFor(worst) === 'indicated') ? 'care' : sc.sectionFor(worst);
-                const display = start.display === cont.display ? start.display : `início ${start.display} · continuação ${cont.display}`;
-                if (!buckets.has(id)) buckets.set(id, []);
-                buckets.get(id).push({ sectionId: q.sectionId, question: q.title, option: option.label, display, note: note || option.note || null, rank: worst.max });
+            // opções que dependem da idade: classifica pela pior faixa e explica cada uma
+            const variants = option.byAge
+                ? [['base', option.cats], ...Object.entries(option.byAge)].map(([key, cats]) => [key, { ...option, cats, byAge: undefined }])
+                : [[null, option]];
+            const perVariant = variants.map(([key, opt]) => ({ key, cells: resolveOption(q, opt, unknownAge) }));
+            const cells = perVariant.flatMap(v => v.cells.map(c => ({ ...c, key: v.key })));
+            let main = null;
+            for (const c of cells) {
+                const worst = (c.cont.max > c.start.max || (c.cont.max === c.start.max && c.cont.ranged && !c.start.ranged)) ? c.cont : c.start;
+                if (!main || worst.max > main.worst.max) main = { ...c, worst };
             }
+            if (!main) continue;
+            const { start, cont, worst } = main;
+            if (start.na && cont.na && !main.note) continue;
+            if (!worst.na && worst.max <= 1 && !worst.ranged) continue;
+            // categoria 2 da escala MEC não é "indicado": vira grupo próprio de cautela
+            const id = worst.na ? 'na' : (set.scale === 'mec' && sc.sectionFor(worst) === 'indicated') ? 'care' : sc.sectionFor(worst);
+            let display = showDisplay(start, cont);
+            let note = main.note || option.note || null;
+            if (option.byAge) {
+                const parts = perVariant.map(v => {
+                    const c = v.cells[0];
+                    return c ? `${option.ageLabels?.[v.key] || v.key}: ${showDisplay(c.start, c.cont)}` : null;
+                }).filter(Boolean);
+                display = showDisplay(start, cont);
+                note = [parts.join(' · '), note].filter(Boolean).join('. ');
+            }
+            if (!buckets.has(id)) buckets.set(id, []);
+            buckets.get(id).push({ sectionId: q.sectionId, question: q.title, option: option.label, display, note, rank: worst.max });
         }
     }
     const careMeta = { id: 'care', title: 'Cautela', hint: 'Categoria 2: em geral pode usar, com acompanhamento cuidadoso' };

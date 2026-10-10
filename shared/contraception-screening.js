@@ -19,11 +19,12 @@ import { SECTIONS, METHOD_IDS, METHOD_LIST, METHODS } from './contraception-data
 import { resolveCell } from './contraception-engine.js';
 
 export const SCREENING = [
+    { id: 'age', title: 'Idade', prompt: 'Qual é a idade da paciente?', kind: 'choice', members: ['age'], why: 'A idade muda a categoria dos combinados (a partir de 40 anos), do injetável trimestral (menores de 18 e maiores de 45) e dos DIUs (menores de 20), e define como ler tabagismo e enxaqueca.' },
     { id: 'pregnancy', title: 'Gravidez', prompt: 'Há gravidez suspeita ou confirmada?', noLabel: 'Descartada', yesLabel: 'Suspeita ou confirmada', members: ['pregnancy'], why: 'Nenhum método deve ser iniciado sem descartar gravidez; o DIU é categoria 4 nela.' },
     { id: 'postpartum', title: 'Pós-parto, amamentação e aborto', prompt: 'Está no pós-parto, amamentando ou teve aborto recente?', members: ['postpartum', 'ppiud', 'abortion'], why: 'Os combinados são desaconselhados ou contraindicados no pós-parto, e o DIU depende do tempo desde o parto ou aborto.' },
-    { id: 'smoking', title: 'Tabagismo', prompt: 'Fuma?', members: ['smoking'], why: 'Com 35 anos ou mais, o tabagismo restringe os combinados (categorias 3 e 4).' },
+    { id: 'smoking', title: 'Tabagismo', prompt: 'Fuma?', members: ['smoking'], why: 'A partir de 35 anos, o tabagismo restringe os combinados (categorias 3 e 4); o aplicativo usa a idade já informada.' },
     { id: 'htn', title: 'Pressão alta', prompt: 'Tem hipertensão ou pressão elevada?', members: ['htn'], why: 'Restringe os combinados e, em níveis mais altos, o injetável trimestral.' },
-    { id: 'headache', title: 'Enxaqueca', prompt: 'Tem enxaqueca ou outra cefaleia?', members: ['headache'], why: 'Enxaqueca com aura contraindica os combinados (categoria 4).' },
+    { id: 'headache', title: 'Enxaqueca', prompt: 'Tem enxaqueca ou outra cefaleia?', members: ['headache'], why: 'Enxaqueca com aura contraindica os combinados (categoria 4); sem aura, a categoria sobe a partir de 35 anos, e o aplicativo usa a idade já informada.' },
     { id: 'thrombosis', title: 'Trombose', prompt: 'Já teve trombose ou tem risco para trombose (mutação, cirurgia recente)?', members: ['vte', 'thrombogenic', 'surgery'], why: 'TVP/TEP e trombofilia contraindicam os combinados e restringem os progestagênios.' },
     { id: 'cardio', title: 'Coração e vasos', prompt: 'Tem doença do coração, AVC, valvopatia ou vários fatores de risco cardiovascular?', members: ['ihd', 'stroke', 'valvular', 'cvRisk'], why: 'Doença isquêmica e AVC restringem quase todos os hormonais.' },
     { id: 'diabetes', title: 'Diabetes', prompt: 'Tem diabetes?', members: ['diabetes'], why: 'Com lesão de órgão-alvo ou doença vascular, restringe os combinados e o injetável trimestral.' },
@@ -46,7 +47,7 @@ export function screeningItem(id) { return SCREENING.find(i => i.id === id); }
 function decisiveByColumn() {
     const out = METHOD_IDS.map(() => new Set());
     for (const s of SECTIONS) for (const q of s.questions) for (const o of q.options) {
-        o.cats.forEach((cell, col) => {
+        for (const cats of [o.cats, ...Object.values(o.byAge || {})]) cats.forEach((cell, col) => {
             for (const phase of ['start', 'continue']) {
                 const r = resolveCell(cell, phase);
                 if (r && (r.na || r.max >= 3)) out[col].add(q.id);
@@ -61,7 +62,8 @@ const DECISIVE = decisiveByColumn();
 export function requiredItems(methodId) {
     const col = METHOD_IDS.indexOf(METHODS[methodId]?.column);
     if (col < 0) return [];
-    return SCREENING.filter(item => item.members.some(q => DECISIVE[col].has(q))).map(i => i.id);
+    // a idade é sempre exigida: muda categorias de vários métodos e a leitura de tabagismo e enxaqueca
+    return SCREENING.filter(item => item.id === 'age' || item.members.some(q => DECISIVE[col].has(q))).map(i => i.id);
 }
 
 /**
@@ -69,6 +71,7 @@ export function requiredItems(methodId) {
  * Item respondido: "no", ou "yes" com ao menos uma opção marcada.
  */
 export function itemDone(item, screen = {}, answers = {}) {
+    if (item.kind === 'choice') return item.members.some(q => (answers[q] || []).length > 0);
     const v = screen[item.id];
     if (v === 'no') return true;
     return v === 'yes' && item.members.some(q => (answers[q] || []).length > 0);

@@ -13,6 +13,10 @@
  *   'NA'         não se aplica (ex.: gestação)
  *   null         a linha não se pronuncia sobre este método (sem restrição)
  *
+ * Opção com "byAge": a categoria depende da idade, lida da resposta à pergunta "Idade"
+ * (variantes: from35 = 35 anos ou mais; under18 = menos de 18). Sem idade respondida,
+ * vale a variante mais restritiva. "ageLabels" nomeia as faixas na ficha do método.
+ *
  * Este arquivo não tem lógica: quem interpreta é contraception-engine.js.
  * Para atualizar para uma nova edição da OMS, só este arquivo muda.
  */
@@ -62,7 +66,8 @@ export const SECTIONS = [
             { id: 'age', type: 'single', title: 'Idade', page: 159, options: [
                 { id: 'lt18', label: 'Menos de 18 anos (desde a menarca)', cats: [1, 1, 1, 2, 1, 2, 2] },
                 { id: '18_19', label: '18 a 19 anos', cats: [1, 1, 1, 1, 1, 2, 2] },
-                { id: '20_39', label: '20 a 39 anos', cats: ALL1 },
+                { id: '20_34', label: '20 a 34 anos', cats: ALL1 },
+                { id: '35_39', label: '35 a 39 anos', cats: ALL1 },
                 { id: '40_45', label: '40 a 45 anos', cats: [2, 2, 1, 1, 1, 1, 1] },
                 { id: 'gt45', label: 'Mais de 45 anos', cats: [2, 2, 1, 2, 1, 1, 1] }
             ] },
@@ -103,14 +108,13 @@ export const SECTIONS = [
             { id: 'pelvicSurgery', type: 'multi', title: 'Cirurgia pélvica prévia', page: 161, options: [
                 { id: 'yes', label: 'História de cirurgia pélvica', cats: ALL1 }
             ] },
+            // byAge: a categoria depende da idade (resolvida pela resposta "Idade"); sem idade, vale a pior.
             { id: 'smoking', type: 'single', title: 'Tabagismo', page: 161, options: [
-                { id: 'lt35', label: 'Fuma, menos de 35 anos', cats: [2, 2, 1, 1, 1, 1, 1] },
-                { id: 'ge35_lt15', label: 'Fuma, 35 anos ou mais, menos de 15 cigarros/dia', cats: [3, 2, 1, 1, 1, 1, 1] },
-                { id: 'ge35_ge15', label: 'Fuma, 35 anos ou mais, 15 ou mais cigarros/dia', cats: [4, 3, 1, 1, 1, 1, 1] }
+                { id: 'lt15', label: 'Fuma menos de 15 cigarros por dia', cats: [2, 2, 1, 1, 1, 1, 1], byAge: { from35: [3, 2, 1, 1, 1, 1, 1] }, ageLabels: { base: 'Menos de 35 anos', from35: '35 anos ou mais' } },
+                { id: 'ge15', label: 'Fuma 15 ou mais cigarros por dia', cats: [2, 2, 1, 1, 1, 1, 1], byAge: { from35: [4, 3, 1, 1, 1, 1, 1] }, ageLabels: { base: 'Menos de 35 anos', from35: '35 anos ou mais' } }
             ] },
             { id: 'obesity', type: 'single', title: 'Obesidade', page: 161, options: [
-                { id: 'bmi30', label: 'IMC ≥ 30 kg/m²', cats: [2, 2, 1, 1, 1, 1, 1] },
-                { id: 'bmi30_lt18', label: 'Menos de 18 anos e IMC ≥ 30 kg/m²', cats: [2, 2, 1, 2, 1, 1, 1], note: 'A categoria 2 do injetável trimestral decorre do possível efeito do NET-EN sobre a massa óssea de adolescentes.' }
+                { id: 'bmi30', label: 'IMC ≥ 30 kg/m²', cats: [2, 2, 1, 1, 1, 1, 1], byAge: { under18: [2, 2, 1, 2, 1, 1, 1] }, ageLabels: { base: 'Demais idades', under18: 'Menos de 18 anos' }, note: 'Em menores de 18 anos, a categoria 2 do injetável trimestral decorre do possível efeito do NET-EN sobre a massa óssea.' }
             ] }
         ]
     },
@@ -170,8 +174,7 @@ export const SECTIONS = [
         id: 'neuro', title: 'Neurológico, reumático e saúde mental', questions: [
             { id: 'headache', type: 'single', title: 'Cefaleia', page: 166, options: [
                 { id: 'nonmig', label: 'Cefaleia não migranosa (leve ou intensa)', cats: [ic(1, 2), ic(1, 2), 1, 1, 1, 1, 1] },
-                { id: 'mig_lt35', label: 'Enxaqueca sem aura, menos de 35 anos', cats: [ic(2, 3), ic(2, 3), ic(1, 2), 2, 2, 1, 2] },
-                { id: 'mig_ge35', label: 'Enxaqueca sem aura, 35 anos ou mais', cats: [ic(3, 4), ic(3, 4), ic(1, 2), 2, 2, 1, 2] },
+                { id: 'mig', label: 'Enxaqueca sem aura', cats: [ic(2, 3), ic(2, 3), ic(1, 2), 2, 2, 1, 2], byAge: { from35: [ic(3, 4), ic(3, 4), ic(1, 2), 2, 2, 1, 2] }, ageLabels: { base: 'Menos de 35 anos', from35: '35 anos ou mais' } },
                 { id: 'aura', label: 'Enxaqueca com aura (qualquer idade)', cats: [4, 4, ic(2, 3), ic(2, 3), ic(2, 3), 1, 2] }
             ] },
             { id: 'epilepsy', type: 'multi', title: 'Epilepsia', page: 166, options: [
