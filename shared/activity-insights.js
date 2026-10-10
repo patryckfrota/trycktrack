@@ -85,7 +85,7 @@ export const INSIGHT_THRESHOLDS = {
 // events: log.events; days: Map de deriveActivity; `track` restringe as
 // áreas ao recorte que o Dashboard está mostrando (curso ou residência).
 // Devolve até 3 insights, do mais urgente ao menos.
-export function buildInsights({ events, days, now, todayIso, streakCurrent, track, classify, areaName }) {
+export function buildInsights({ events, days, now, todayIso, streakCurrent, track, classify, areaName, areaKeys, limit }) {
     const T = INSIGHT_THRESHOLDS;
     const out = [];
 
@@ -148,11 +148,23 @@ export function buildInsights({ events, days, now, todayIso, streakCurrent, trac
     }
 
     out.push(...crossInsights({ events, days, now, todayIso, track, classify, areaName }));
+    out.push(...deepInsights({ events, days, now, todayIso, track, classify, areaName, areaKeys }));
 
     // Alertas primeiro, depois o que melhorou, depois curiosidades.
     const rank = { warn: 0, good: 1, info: 2 };
     return out.map((item, i) => ({ item, i })).sort((a, b) => rank[a.item.kind] - rank[b.item.kind] || a.i - b.i)
-        .map(x => x.item).slice(0, T.maxInsights);
+        .map(x => ({ ...x.item, category: categoryOf(x.item.id) })).slice(0, limit ?? T.maxInsights);
+}
+
+export const INSIGHT_CATEGORIES = [['ritmo', 'Ritmo e constância'], ['desempenho', 'Desempenho'], ['areas', 'Áreas'], ['erros', 'Erros']];
+const CATEGORY_BY_PREFIX = [
+    ['areas', ['area-', 'improved-area', 'concentration', 'coverage']],
+    ['erros', ['retry', 'letter-bias', 'chronic-wrong']],
+    ['ritmo', ['streak', 'rhythm', 'month-pace', 'consistency', 'record-day', 'milestone', 'weekend', 'weekday', 'weeks-streak']]
+];
+function categoryOf(id) {
+    for (const [cat, prefixes] of CATEGORY_BY_PREFIX) if (prefixes.some(p => id.startsWith(p))) return cat;
+    return 'desempenho';
 }
 
 const isoDay = e => localDate(new Date(e.t));
@@ -308,4 +320,113 @@ export function monthlySeries(days, todayIso, months = 6, minSample = 10) {
     }
     for (const r of rows) r.accuracy = r.ne >= minSample ? r.c / r.ne : null;
     return rows;
+}
+
+const fmtDate = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d).toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', ''); };
+const nfmt = n => n.toLocaleString('pt-BR');
+
+// Segunda camada de cruzamentos: sequência de acertos/erros, dia da semana,
+// madrugada, chute, erros crônicos, evolução e cobertura por área, recorde,
+// meta de marco. Mesmos pisos de amostra das outras regras.
+function deepInsights({ events, days, now, todayIso, track, classify, areaName, areaKeys }) {
+    const T = INSIGHT_THRESHOLDS;
+    const nowMs = now.getTime();
+    const out = [];
+    const sorted = [...events].sort((a, b) => Date.parse(a.t) - Date.parse(b.t));
+    const recent90 = sorted.filter(e => within(e, nowMs, 0, 90));
+
+    // Depois de errar: acerto da resposta seguinte (mesmo dia, até 10 min).
+    const afterWrong = [], afterRight = [];
+    for (let i = 1; i < recent90.length; i++) {
+        const a = recent90[i - 1], b = recent90[i];
+        if (Date.parse(b.t) - Date.parse(a.t) > 10 * 60000) continue;
+        (a.c ? afterRight : afterWrong).push(b);
+    }
+    if (afterWrong.length >= 40 && afterRight.length >= 40) {
+        const w = pct(accuracy(afterWrong)), r = pct(accuracy(afterRight));
+        if (r - w >= 8) out.push({ id: 'tilt', kind: 'warn', text: `Depois de errar, seu acerto na questão seguinte cai para ${w}% (contra ${r}% depois de um acerto). Respire e leia o comentário antes de seguir.` });
+        else if (w - r >= 8) out.push({ id: 'resilience', kind: 'good', text: `Você reage bem ao erro: acerta ${w}% da questão seguinte depois de errar, contra ${r}% depois de um acerto.` });
+    }
+
+    // Acerto por dia da semana (90 dias).
+    const byWd = Array.from({ length: 7 }, () => []);
+    for (const e of recent90) byWd[new Date(e.t).getDay()].push(e);
+    const wd = byWd.map((list, i) => ({ i, n: list.length, acc: list.length ? pct(accuracy(list)) : 0 })).filter(x => x.n >= 30).sort((a, b) => b.acc - a.acc);
+    if (wd.length >= 3 && wd[0].acc - wd[wd.length - 1].acc >= 12) {
+        const hi = wd[0], lo = wd[wd.length - 1];
+        out.push({ id: 'weekday-acc', kind: 'info', text: `Seu melhor dia de acerto é ${WEEKDAY_NAMES[hi.i]} (${hi.acc}%) e o pior é ${WEEKDAY_NAMES[lo.i]} (${lo.acc}%). Deixe os assuntos difíceis para o dia forte.` });
+    }
+
+    // Madrugada (23h–5h).
+    const night = recent90.filter(e => { const h = new Date(e.t).getHours(); return h >= 23 || h < 5; });
+    const day_ = recent90.filter(e => { const h = new Date(e.t).getHours(); return h >= 5 && h < 23; });
+    if (night.length >= 30 && day_.length >= 30 && night.length / recent90.length >= 0.15 && pct(accuracy(day_)) - pct(accuracy(night)) >= 8) {
+        out.push({ id: 'late-night', kind: 'warn', text: `${pct(night.length / recent90.length)}% das suas questões saem entre 23h e 5h, com ${pct(accuracy(night))}% de acerto (${pct(accuracy(day_))}% no resto do dia). Dormir cedo rende mais.` });
+    }
+
+    // Chute: respostas muito rápidas (Guiado) com acerto perto do acaso.
+    const quick = recent90.filter(e => e.md === 'g' && Number.isFinite(e.ms) && e.ms > 0 && e.ms < 8000);
+    if (quick.length >= 25 && pct(accuracy(quick)) <= 35) {
+        out.push({ id: 'guess', kind: 'warn', text: `${quick.length} respostas em menos de 8 s tiveram só ${pct(accuracy(quick))}% de acerto, perto do acaso. Isso parece chute: leia o enunciado inteiro.` });
+    }
+
+    // Erros crônicos: questões erradas 3+ vezes.
+    const wrongCount = new Map();
+    for (const e of sorted) if (!e.c && within(e, nowMs, 0, 120)) wrongCount.set(e.q, (wrongCount.get(e.q) || 0) + 1);
+    const chronic = [...wrongCount.values()].filter(n => n >= 3).length;
+    if (chronic >= 3) out.push({ id: 'chronic-wrong', kind: 'warn', text: `${chronic} questões você errou 3 vezes ou mais. São os pontos cegos: vale estudar o assunto, não só refazer.` });
+
+    // Evolução por área: primeiros 30 dias da janela × últimos 30.
+    const perArea = new Map();
+    for (const e of sorted) {
+        const w = classify?.(e.q);
+        if (!w || w.track !== track) continue;
+        const age = (nowMs - Date.parse(e.t)) / DAY_MS;
+        if (age < 0 || age >= 60) continue;
+        const row = perArea.get(w.key) || { cur: [], prev: [], all: 0 };
+        (age < 30 ? row.cur : row.prev).push(e); row.all += 1; perArea.set(w.key, row);
+    }
+    const climbers = [...perArea].filter(([, r]) => r.cur.length >= 15 && r.prev.length >= 15)
+        .map(([key, r]) => ({ key, d: pct(accuracy(r.cur)) - pct(accuracy(r.prev)), now: pct(accuracy(r.cur)) })).filter(x => x.d >= 10).sort((a, b) => b.d - a.d);
+    if (climbers[0]) out.push({ id: `improved-area-${climbers[0].key}`, kind: 'good', text: `${areaName(track, climbers[0].key)} é sua área que mais evoluiu em 60 dias: +${climbers[0].d} pontos, agora em ${climbers[0].now}%.` });
+
+    // Concentração e cobertura.
+    const totalArea = [...perArea.values()].reduce((a, r) => a + r.all, 0);
+    if (totalArea >= 100) {
+        const [topKey, top] = [...perArea].sort((a, b) => b[1].all - a[1].all)[0];
+        if (top.all / totalArea >= 0.4) out.push({ id: 'concentration', kind: 'info', text: `${pct(top.all / totalArea)}% das suas questões dos últimos 60 dias são de ${areaName(track, topKey)}. Distribua mais entre as áreas.` });
+        const missing = (areaKeys || []).filter(k => !perArea.has(k));
+        if (missing.length) out.push({ id: 'coverage', kind: 'warn', text: `Sem nenhuma questão em 60 dias: ${missing.slice(0, 4).map(k => areaName(track, k)).join(', ')}${missing.length > 4 ? ` e mais ${missing.length - 4}` : ''}.` });
+    }
+
+    // Recorde de volume e constância no mês.
+    const entries = [...days].filter(([date]) => date <= todayIso).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+    const last90 = entries.filter(([date]) => (nowMs - new Date(`${date}T12:00:00`).getTime()) / DAY_MS < 90);
+    if (last90.length >= 10) {
+        const [recDate, recDay] = last90.reduce((m, x) => (x[1].n > m[1].n ? x : m));
+        const ageDays = (nowMs - new Date(`${recDate}T12:00:00`).getTime()) / DAY_MS;
+        if (recDay.n >= 20 && ageDays < 7 && recDate === todayIso) out.push({ id: 'record-day', kind: 'good', text: `Hoje é seu recorde dos últimos 90 dias: ${nfmt(recDay.n)} questões.` });
+        else if (recDay.n >= 30 && ageDays < 7) out.push({ id: 'record-day', kind: 'good', text: `Seu recorde dos últimos 90 dias foi em ${fmtDate(recDate)}: ${nfmt(recDay.n)} questões.` });
+    }
+    let studied28 = 0;
+    for (let i = 0; i < 28; i++) if ((days.get(localDate(new Date(nowMs - i * DAY_MS)))?.n || 0) > 0) studied28 += 1;
+    if (studied28 >= 20) out.push({ id: 'consistency', kind: 'good', text: `Você estudou ${studied28} dos últimos 28 dias. Constância assim vale mais que maratonas.` });
+
+    // Próximo marco no ritmo atual.
+    const total = [...days.values()].reduce((a, d) => a + d.n, 0);
+    const per28 = [...Array(28).keys()].reduce((a, i) => a + (days.get(localDate(new Date(nowMs - i * DAY_MS)))?.n || 0), 0) / 28;
+    const milestone = [100, 250, 500, 1000, 2000, 3000, 5000, 10000].find(m => m > total);
+    if (milestone && per28 >= 3 && total >= milestone * 0.5) {
+        const eta = Math.ceil((milestone - total) / per28);
+        if (eta <= 60) out.push({ id: 'milestone', kind: 'good', text: `No ritmo atual (${Math.round(per28)} questões por dia), você chega a ${nfmt(milestone)} questões em cerca de ${eta} ${eta === 1 ? 'dia' : 'dias'} (faltam ${nfmt(milestone - total)}).` });
+    }
+
+    // Semanas seguidas de acerto subindo ou caindo (4 semanas, 50+ por semana).
+    const weeks = [3, 2, 1, 0].map(w => events.filter(e => within(e, nowMs, w * 7, w * 7 + 7)));
+    if (weeks.every(w => w.length >= 50)) {
+        const a = weeks.map(w => pct(accuracy(w)));
+        if (a[0] < a[1] && a[1] < a[2] && a[2] < a[3]) out.push({ id: 'weeks-streak-up', kind: 'good', text: `4 semanas seguidas com acerto subindo: ${a.join('% → ')}%.` });
+        else if (a[0] > a[1] && a[1] > a[2] && a[2] > a[3]) out.push({ id: 'weeks-streak-down', kind: 'warn', text: `4 semanas seguidas com acerto caindo: ${a.join('% → ')}%. Vale revisar o método.` });
+    }
+    return out;
 }

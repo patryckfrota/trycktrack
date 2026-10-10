@@ -66,9 +66,9 @@ test('dia da semana: destaca um dia com média 1,5x a dos dias de estudo (mín. 
         if (n) days.set(localDate(date), day(n));
     }
     const out = buildInsights({ ...base, days });
-    assert.equal(out[0].text, 'Terça é o seu dia mais forte: média de 40 questões (nos dias de estudo: 20).');
+    assert.equal(out.find(i => i.id === 'weekday').text, 'Terça é o seu dia mais forte: média de 40 questões (nos dias de estudo: 20).');
     const fewDays = new Map([...days].slice(0, 10));
-    assert.equal(buildInsights({ ...base, days: fewDays }).length, 0);
+    assert.ok(!ids({ days: fewDays }).includes('weekday'));
 });
 
 test('devolve no máximo 3, com o aviso de ofensiva primeiro', () => {
@@ -178,4 +178,36 @@ test('ordem: alertas antes de melhorias antes de curiosidades, limitado a 6', ()
     assert.ok(out.length <= 6);
     const rank = { warn: 0, good: 1, info: 2 };
     assert.deepEqual(out.map(i => rank[i.kind]), out.map(i => rank[i.kind]).sort());
+});
+
+test('análise profunda: tilt, madrugada, chute, erros crônicos e semanas seguidas', () => {
+    // tilt: depois de errar, a seguinte quase sempre erra (pares a 1 min).
+    const ev2 = [];
+    for (let i = 0; i < 100; i++) {
+        const t0 = new Date(2026, 9, 5 - (i % 20), 10, 0).getTime() + Math.floor(i / 20) * 3 * 3600000;
+        ev2.push({ q: `t${i}a`, c: i % 2, t: new Date(t0).toISOString() });
+        ev2.push({ q: `t${i}b`, c: i % 2 ? 1 : 0, t: new Date(t0 + 60000).toISOString() });
+    }
+    assert.ok(ids({ events: ev2 }).includes('tilt'));
+    const night = Array.from({ length: 40 }, (_, i) => ({ ...mkEv(`n${i}`, i < 12, 2 + (i % 20), {}, 23) }))
+        .concat(Array.from({ length: 40 }, (_, i) => mkEv(`d${i}`, i < 32, 2 + (i % 20), {}, 10)));
+    assert.ok(ids({ events: night }).includes('late-night'));
+    const guess = Array.from({ length: 30 }, (_, i) => mkEv(`g${i}`, i < 6, 3, { ms: 4000, md: 'g' }));
+    assert.ok(ids({ events: guess }).includes('guess'));
+    const chronic = Array.from({ length: 4 }).flatMap((_, i) => [20, 15, 10].map(k => mkEv(`c${i}`, false, k)));
+    assert.ok(ids({ events: chronic }).includes('chronic-wrong'));
+    const wk = [3, 2, 1, 0].flatMap((w, idx) => Array.from({ length: 50 }, (_, i) => mkEv(`w${w}-${i}`, i < 20 + idx * 5, w * 7 + (i % 6))));
+    assert.ok(ids({ events: wk }).includes('weeks-streak-up'));
+});
+
+test('análise profunda: cobertura de áreas, milestone, constância e limit', () => {
+    const events = Array.from({ length: 120 }, (_, i) => mkEv(`pedi-${i}`, i % 2 === 0, 1 + (i % 50)));
+    const got = buildInsights({ ...base, events, areaKeys: ['pedi', 'gineco'], limit: 99 });
+    assert.ok(got.some(i => i.id === 'coverage' && /GINECO/.test(i.text)));
+    assert.ok(got.every(i => ['ritmo', 'desempenho', 'areas', 'erros'].includes(i.category)));
+    const days = new Map(); for (let i = 0; i < 28; i++) days.set(localDate(ago(i)), day(8));
+    const all = buildInsights({ ...base, days, limit: 99 });
+    assert.ok(all.some(i => i.id === 'consistency'));
+    assert.ok(all.some(i => i.id === 'milestone'));
+    assert.ok(buildInsights({ ...base, days }).length <= 6);
 });

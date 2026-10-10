@@ -1984,12 +1984,50 @@
             const insights = window.activityBuildInsights({
                 events: getActivityLog().events, days: activity.days, now: new Date(), todayIso,
                 streakCurrent: streaks.current, track: activeTrackCapsule, classify: classifyQuestionForDashboard,
+                areaKeys: areaList.map(([slug]) => slug),
                 areaName: (track, key) => areaList.find(([slug]) => slug === key)?.[1] || key
             });
             document.getElementById('dashboardInsights').hidden = false;
+            document.getElementById('dashboardInsightsMore').hidden = !getActivityLog().events.length;
             document.getElementById('dashboardInsightsList').innerHTML = insights.length ? insights.map(item =>
                 `<div class="dashboard-insight is-${item.kind}"><span class="dashboard-insight-mark"></span><p>${escapeHtml(item.text)}</p></div>`
             ).join('') : '<p class="dashboard-insights-empty">Continue respondendo questões nos próximos dias: os insights aparecem quando há respostas suficientes para comparar seu desempenho por área, horário e dia da semana.</p>';
+        }
+
+        // Painel "Análise completa": números-chave + todos os insights (sem o
+        // limite de 6 da caixa), agrupados por tema.
+        function openInsightsAnalysis() {
+            const activity = getActivityDerived();
+            const todayIso = localIsoDate();
+            const areaList = activeTrackCapsule === 'curso' ? DASHBOARD_AREAS_CURSO : DASHBOARD_AREAS;
+            const events = getActivityLog().events;
+            const dailyByDate = new Map([...activity.days].map(([date, day]) => [date, day.n]));
+            const streaks = computeStreaks(dailyByDate);
+            const all = window.activityBuildInsights({
+                events, days: activity.days, now: new Date(), todayIso, streakCurrent: streaks.current,
+                track: activeTrackCapsule, classify: classifyQuestionForDashboard, limit: Infinity,
+                areaKeys: areaList.map(([slug]) => slug),
+                areaName: (track, key) => areaList.find(([slug]) => slug === key)?.[1] || key
+            });
+            const fmt = n => n.toLocaleString('pt-BR');
+            const studyDays = [...activity.days.values()].filter(d => d.n > 0).length;
+            const stat = (value, label) => `<div class="insights-stat"><strong>${value}</strong><span>${label}</span></div>`;
+            const stats = [
+                stat(fmt(activity.answered), 'questões respondidas'),
+                stat(activity.answered ? `${Math.round(activity.correct / activity.answered * 100)}%` : '—', 'acerto geral'),
+                stat(fmt(studyDays), 'dias estudados'),
+                stat(studyDays ? fmt(Math.round(activity.answered / studyDays)) : '—', 'questões por dia de estudo'),
+                stat(`${streaks.current}d`, 'ofensiva atual'),
+                stat(`${streaks.best}d`, 'melhor sequência')
+            ].join('');
+            const groups = window.activityInsightCategories.map(([id, label]) => {
+                const items = all.filter(i => i.category === id);
+                if (!items.length) return '';
+                return `<section class="insights-group"><h3>${label}</h3>${items.map(item =>
+                    `<div class="dashboard-insight is-${item.kind}"><span class="dashboard-insight-mark"></span><p>${escapeHtml(item.text)}</p></div>`).join('')}</section>`;
+            }).join('');
+            document.getElementById('insightsDialogBody').innerHTML = `<div class="insights-stats">${stats}</div>${groups || '<p class="dashboard-insights-empty">Ainda não há respostas suficientes para cruzar os dados. Continue estudando e esta tela vai se preencher.</p>'}<p class="insights-foot">${all.length} ${all.length === 1 ? 'insight ativo' : 'insights ativos'}. Cada um só aparece quando há amostra suficiente.</p>`;
+            document.getElementById('insightsDialog').showModal();
         }
 
         function renderDashboard() {

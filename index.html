@@ -482,6 +482,7 @@
                     <section class="dashboard-insights" id="dashboardInsights" aria-label="Insights">
                         <div class="dashboard-insights-title">Insights</div>
                         <div id="dashboardInsightsList"></div>
+                        <button type="button" class="dashboard-insights-more" id="dashboardInsightsMore" onclick="openInsightsAnalysis()">Ver análise completa</button>
                     </section>
                     <div class="dashboard-section-title">Desempenho por área</div>
                     <div class="dashboard-areas" id="dashboardAreas"></div>
@@ -1749,9 +1750,10 @@
         window.mergeTrailSettings = mergeTrailSettings;
         // Log de respostas (fonte das métricas do Dashboard) — funções
         // puras em shared/activity-log.js; app-app.js cuida de storage e rede.
-        import { weekSummary, buildInsights, weeklySummaryText, monthlySeries } from "./shared/activity-insights.js";
+        import { weekSummary, buildInsights, weeklySummaryText, monthlySeries, INSIGHT_CATEGORIES } from "./shared/activity-insights.js";
         window.activityWeekSummary = weekSummary;
         window.activityBuildInsights = buildInsights;
+        window.activityInsightCategories = INSIGHT_CATEGORIES;
         window.activityWeeklySummaryText = weeklySummaryText;
         window.activityMonthlySeries = monthlySeries;
         import { initLogFromLegacy, normalizeLog, mergeEvents, pendingEvents, markSynced, toSyncPayload, fromServerResponse, deriveActivity, compactLog, eventKey, recentWindows, windowAccuracy } from "./shared/activity-log.js";
@@ -2007,5 +2009,9 @@
             }
         };
     </script>
+    <dialog class="insights-dialog" id="insightsDialog" aria-labelledby="insightsDialogTitle">
+        <div class="insights-dialog-head"><strong id="insightsDialogTitle">Análise completa</strong><button type="button" class="insights-dialog-close" onclick="document.getElementById('insightsDialog').close()" aria-label="Fechar">×</button></div>
+        <div class="insights-dialog-body" id="insightsDialogBody"></div>
+    </dialog>
 </body>
 </html>
