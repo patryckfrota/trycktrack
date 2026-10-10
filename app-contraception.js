@@ -17,6 +17,7 @@
         { id: 'fab', title: 'Fertilidade', sub: 'Percepção e calendário' },
         { id: 'ster', title: 'Esterilização', sub: 'Laqueadura tubária' },
         { id: 'lam', title: 'LAM', sub: 'Amenorreia da lactação' },
+        { id: 'vas', title: 'Vasectomia', sub: 'Esterilização masculina' },
         { id: 'ci', title: 'Coito interrompido', sub: 'Retirada' }
     ];
 
@@ -101,10 +102,9 @@
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
             : '';
         const miss = m.misses ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
-        const best = m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : '';
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
-        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
-            <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${best}</div></div>
+        return `<article class="ct-method ${cls}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
+            <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4></div></div>
             <p class="ct-note">${esc(m.note)}</p>${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
     }
 
@@ -133,12 +133,21 @@
         return `<p class="ct-intro">${esc(CI.intro)}</p><section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
     }
 
+    function vasHtml() {
+        const { VASECTOMY: V } = M();
+        const when = V.when.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
+        const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span>${esc(g.label)} (${g.cat})</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li><b>${g.cat}</b><span>${esc(it)}</span></li>`).join('')}</ul></details>`).join('');
+        return `<p class="ct-intro">${esc(V.intro)}</p><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+    }
+
     function legendHtml() {
         const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE } = M();
         const cats = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
         const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
                 <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
+            <details class="ct-legend"><summary>${esc(M().PREGNANCY_CHECK.title)}</summary><p>${esc(M().PREGNANCY_CHECK.intro)}</p><ul class="ct-points">${M().PREGNANCY_CHECK.criteria.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().PREGNANCY_CHECK.note)}</p></details>
+            <details class="ct-legend"><summary>${esc(M().COUNSELLING.title)}</summary><ul class="ct-points">${M().COUNSELLING.items.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().COUNSELLING.note)}</p></details>
             <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul></details>
             <details class="ct-legend"><summary>Fora desta ferramenta</summary><p>${OUT_OF_SCOPE_2.map(esc).join('; ')}.</p></details>
             <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
@@ -151,6 +160,7 @@
         let sums = '';
         if (state.family === 'lam') body = lamHtml();
         else if (state.family === 'ci') body = ciHtml();
+        else if (state.family === 'vas') body = vasHtml();
         else {
             const res = all[state.family];
             sums = res.groups.map(g => `<span class="ct-sum ct-sum-${g.id}">${g.title}: ${g.methods.length}</span>`).join('');
@@ -159,7 +169,7 @@
             const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
             body = `${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
-        const copy = (state.family === 'lam' || state.family === 'ci') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
+        const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
         return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
     }
 
@@ -194,10 +204,12 @@
         const about = info.about.length ? `<section class="ct-sheet-sec"><h3>Sobre o método</h3>${info.about.map(t => `<p>${esc(t)}</p>`).join('')}</section>` : '';
         const points = info.points.length ? `<section class="ct-sheet-sec"><h3>Pontos de atenção da OMS</h3><ul class="ct-points">${info.points.map(t => `<li>${esc(t)}</li>`).join('')}</ul></section>` : '';
         const groups = full.groups.map((g, i) => `<details class="ct-cond"${i === 0 ? ' open' : ''}><summary><span>${esc(g.title)}</span><em>${g.items.length}</em></summary><p class="ct-cond-hint">${esc(g.hint)}</p><ul>${g.items.map(it => `<li><b>${esc(it.display)}</b><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</li>`).join('')}</ul></details>`).join('');
+        const use = M().METHOD_USE[id];
+        const useHtml = use ? `<section class="ct-sheet-sec"><h3>Como usar</h3><p class="ct-info">Orientações práticas da OMS (SPR 2025) para começar e usar o método.</p>${use.sections.map(sec => `<details class="ct-cond"><summary><span>${esc(sec.title)}</span><em>${sec.items.length}</em></summary>${sec.intro ? `<p class="ct-cond-hint">${esc(sec.intro)}</p>` : ''}<ul class="ct-use">${sec.items.map(it => `<li><b>${esc(it.k)}</b><span>${esc(it.t)}</span></li>`).join('')}</ul></details>`).join('')}</section>` : '';
         const conds = `<section class="ct-sheet-sec"><h3>Quando evitar ou ter cautela</h3><p class="ct-info">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${groups || '<p class="ct-info">Nenhuma condição da tabela restringe este método.</p>'}</section>`;
         const sti = (info.protects) ? '' : `<p class="ct-sti">${esc(STI_NOTE)}</p>`;
         return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
-            <div class="ct-sheet-body">${status}${about}${points}${conds}${sti}<p class="ct-source">${esc(info.source)}. Material de apoio ao estudo: não substitui a avaliação clínica nem os protocolos locais.</p></div>`;
+            <div class="ct-sheet-body">${status}${about}${useHtml}${points}${conds}${sti}<p class="ct-source">${esc(info.source)}${use ? `; ${esc(use.source)}` : ''}. Material de apoio ao estudo: não substitui a avaliação clínica nem os protocolos locais.</p></div>`;
     }
 
     function openSheet(id) {

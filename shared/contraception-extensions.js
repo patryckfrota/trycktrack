@@ -289,6 +289,5 @@ export const COITUS_INTERRUPTUS = {
 
 // Métodos que seguem fora do aplicativo.
 export const OUT_OF_SCOPE_2 = [
-    'Vasectomia (a OMS usa critérios próprios do homem: infecção local, hidrocele, hérnia inguinal e outros)',
     'Anel vaginal de progesterona para quem amamenta'
 ];

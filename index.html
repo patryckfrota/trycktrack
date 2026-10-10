@@ -1714,7 +1714,8 @@
         import * as mecEngine from "./shared/contraception-engine.js";
         import * as mecExtensions from "./shared/contraception-extensions.js";
         import * as mecContent from "./shared/contraception-content.js";
-        window.MEC = { ...mecData, ...mecExtensions, ...mecContent, ...mecEngine };
+        import * as mecUse from "./shared/contraception-use.js";
+        window.MEC = { ...mecData, ...mecExtensions, ...mecContent, ...mecUse, ...mecEngine };
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto

@@ -29,12 +29,12 @@ export const METHOD_IDS = ['coc', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng'];
 // efficacyRank: desempate por eficácia em uso típico (menor = mais eficaz).
 export const METHODS = {
     coc: { id: 'coc', name: 'Combinado oral, adesivo ou anel vaginal', short: 'Combinado', hormonal: true, larc: false, efficacyRank: 5, note: 'Depende de uso regular. Contém estrogênio.' },
-    cic: { id: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, efficacyRank: 4, note: 'Aplicação mensal. Contém estrogênio.' },
-    pop: { id: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, efficacyRank: 6, note: 'Horário rígido (a de desogestrel tem janela de 12 h).' },
-    dmpa: { id: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, efficacyRank: 3, note: 'Aplicação a cada 3 meses. O retorno da fertilidade pode demorar.' },
-    imp: { id: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, efficacyRank: 0, note: 'Dura 3 anos. Pode causar sangramento irregular.' },
+    cic: { id: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, efficacyRank: 4, note: 'Aplicação a cada 4 semanas. Contém estrogênio.' },
+    pop: { id: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, efficacyRank: 6, note: 'Janela de 3 horas para tomar (12 horas na de desogestrel 75 µg).' },
+    dmpa: { id: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, efficacyRank: 3, note: 'A cada 3 meses (NET-EN, a cada 2). A ovulação pode demorar até 1 ano para voltar depois de parar.' },
+    imp: { id: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, efficacyRank: 0, note: 'Dura de 3 a 5 anos conforme o implante. Pode causar sangramento irregular.' },
     cu: { id: 'cu', name: 'DIU de cobre', short: 'DIU de cobre', hormonal: false, larc: true, efficacyRank: 2, note: 'Sem hormônio. Pode aumentar o fluxo e a cólica.' },
-    lng: { id: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, efficacyRank: 1, note: 'Dura 5 anos ou mais. Reduz o fluxo menstrual.' }
+    lng: { id: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, efficacyRank: 1, note: 'Amenorreia e sangramento irregular são comuns. Costuma reduzir a dismenorreia.' }
 };
 
 // Significado das categorias (Box 1 da OMS).

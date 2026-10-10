@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { METHOD_IDS, SECTIONS } from './contraception-data.js';
 import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
+import { METHOD_USE, VASECTOMY, PREGNANCY_CHECK } from './contraception-use.js';
 import { METHOD_INFO, WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
@@ -124,10 +125,9 @@ test('idade <18 anos: injetável trimestral e DIUs categoria 2', () => {
 
 /* ---------- ordenação, preferências e respostas ---------- */
 
-test('ordena por seção, depois preferência, categoria e eficácia; "melhor opção" é o 1º indicado', () => {
+test('ordena por seção, depois preferência, categoria e eficácia', () => {
     const r = evaluate(pick(['headache', 'aura']));
     assert.equal(r.methods[0].id, 'cu');   // categoria 1
-    assert.equal(r.methods[0].best, true);
     assert.equal(r.methods.at(-1).section, 'contraindicated');
     assert.equal(r.groups[0].id, 'indicated');
 });
@@ -326,4 +326,19 @@ test('ficha do DIU de emergência herda a lista do DIU de cobre; a de esteriliza
     assert.ok(e.groups.flatMap(x => x.items).some(i => i.option.includes('DIP atual')));
     const t = methodConditions('tubal');
     assert.deepEqual(t.groups.map(g => g.id).slice(0, 2), ['delay', 'special']);
+});
+
+test('como usar (SPR): só métodos reais, seções com itens, e vasectomia com as 4 classes', () => {
+    const ids = new Set([...METHOD_IDS, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
+    for (const [id, use] of Object.entries(METHOD_USE)) {
+        assert.ok(ids.has(id), id);
+        assert.ok(use.source && use.sections.length, id);
+        for (const sec of use.sections) {
+            assert.ok(sec.title && sec.items.length, `${id}.${sec.title}`);
+            for (const it of sec.items) assert.ok(it.k && it.t, `${id}.${sec.title}`);
+        }
+    }
+    for (const id of ['coc', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_upa', 'ecp_lng', 'ecp_coc', 'eiud', 'fab_cal']) assert.ok(METHOD_USE[id], id);
+    assert.deepEqual(VASECTOMY.conditions.map(c => c.cat), ['D', 'S', 'C', 'A']);
+    assert.equal(PREGNANCY_CHECK.criteria.length, 6);
 });

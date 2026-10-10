@@ -212,9 +212,6 @@ function noticesFor(selected) {
 export function evaluate(answers = {}, { phase = 'start', prefs = {} } = {}) {
     const selected = selectedOptions(answers);
     const { methods, groups } = evaluateSet(coreSet(), selected, phase, prefs);
-    // "Maior eficácia entre os indicados": só desempate de eficácia, a OMS não define método "melhor".
-    const firstOk = methods.find(m => m.section === 'indicated' && !m.misses);
-    methods.forEach(m => { m.best = m === firstOk && selected.some(s => !s.question.family); });
     return {
         id: 'core', phase, selected, methods, groups,
         notices: noticesFor(selected),
