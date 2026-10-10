@@ -3,7 +3,7 @@
  *
  * Direção: papel claro, uma ficha de dados em duas tonalidades como
  * protagonista (número em tinta, unidade em cinza), um único gráfico — o calendário de 16 semanas em
- * pontos — e três fatos discretos. Um só acento (o violeta da marca), usado
+ * pontos — e três fatos discretos; a marca abre o cartão como cabeçalho. Um só acento (o violeta da marca), usado
  * apenas nos pontos. Literata para a ficha e os números, Inter pequena para
  * as legendas; três tamanhos de texto, tudo alinhado à esquerda numa coluna.
  *
@@ -45,8 +45,12 @@ export function drawStoryCard(canvas, d) {
 
     ctx.fillStyle = C.paper; ctx.fillRect(0, 0, STORY_W, STORY_H);
 
-    // Período.
-    text(ctx, d.period, X, 250, { size: 30, weight: 500, color: C.muted, font: F });
+    // Cabeçalho: a marca em tamanho de assinatura à esquerda, o período à direita
+    // na mesma linha de base. Abaixo da faixa que o Instagram cobre com o perfil.
+    const BY = 300, icon = 80;
+    if (d.logo) ctx.drawImage(d.logo, X, BY - 62, icon, icon);
+    text(ctx, 'trycktrack', X + (d.logo ? icon + 20 : 0), BY, { size: 60, weight: 700, font: S, spacing: -1 });
+    text(ctx, d.period, X + W, BY, { size: 30, weight: 500, color: C.muted, align: 'right', font: F });
 
     // Protagonista: ficha de dados em duas tonalidades — número em tinta,
     // unidade em cinza, mesma serifa e tamanho. Linhas sem amostra somem.
@@ -59,7 +63,7 @@ export function drawStoryCard(canvas, d) {
     ctx.font = `400 128px ${S}`; ctx.letterSpacing = '-3px';
     const longest = Math.max(...rows.map(([v, u]) => ctx.measureText(`${v} ${u}`).width + 128 * 0.24));
     ctx.letterSpacing = '0px';
-    const size = Math.min(128, Math.floor(128 * W / longest)), lead = Math.round(size * 1.17), heroTop = 500;
+    const size = Math.min(128, Math.floor(128 * W / longest)), lead = Math.round(size * 1.17), heroTop = 560;
     rows.forEach(([value, unit], i) => {
         const y = heroTop + i * lead;
         text(ctx, value, X - 4, y, { size, font: S, spacing: -3 });
@@ -104,9 +108,5 @@ export function drawStoryCard(canvas, d) {
         text(ctx, label, X + col * i, fy + 48, { size: 28, weight: 500, color: C.muted, font: F });
     });
 
-    // Assinatura.
-    const sy = 1720;
-    if (d.logo) ctx.drawImage(d.logo, X, sy - 40, 48, 48);
-    text(ctx, 'trycktrack', X + (d.logo ? 64 : 0), sy, { size: 36, weight: 700, font: S, spacing: -0.5 });
     return canvas;
 }
