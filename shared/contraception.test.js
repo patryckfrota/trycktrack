@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { METHOD_IDS, SECTIONS } from './contraception-data.js';
 import { evaluate, evaluateAll, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
+import { RATES, typicalRate, effectTier } from './contraception-rates.js';
 import { WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
@@ -293,4 +294,21 @@ test('esterilização: nuliparidade é A com aviso de aconselhamento; jovem é C
     assert.equal(nul.section, 'indicated');
     assert.ok(nul.drivers[0].note.includes('permanência'));
     assert.equal(by(evaluateAll(pick(['sterYoung', 'yes'])).ster).tubal.section, 'caution');
+});
+
+test('taxas da OMS: cada chave é um método real e o uso habitual nunca é menor que o correto', () => {
+    const ids = new Set([...METHOD_IDS, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
+    for (const [id, rows] of Object.entries(RATES)) {
+        assert.ok(ids.has(id), id);
+        for (const r of rows) if (typeof r.perfect === 'number' && typeof r.typical === 'number') assert.ok(r.typical >= r.perfect, `${id}: ${r.label}`);
+    }
+    for (const id of ids) if (!RATES[id]) assert.ok(['ecp_upa', 'ecp_lng', 'ecp_coc', 'eiud'].includes(id), `${id} sem taxa`);
+});
+
+test('taxas: faixas da OMS e ordem do núcleo pelo uso habitual (implante, DIU-LNG, DIU de cobre, mensal, trimestral)', () => {
+    assert.deepEqual([0.1, 0.8, 3, 13, 21].map(effectTier), ['Muito eficaz', 'Muito eficaz', 'Eficaz', 'Moderadamente eficaz', 'Menos eficaz']);
+    assert.equal(typicalRate('dmpa'), 4);
+    assert.equal(typicalRate('ecp_lng'), null);
+    const order = evaluate({}).methods.map(m => m.id);
+    assert.deepEqual(order.slice(0, 5), ['imp', 'lng', 'cu', 'cic', 'dmpa']);
 });

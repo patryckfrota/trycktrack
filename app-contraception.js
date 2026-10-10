@@ -95,6 +95,16 @@
         return lines.length ? `<p class="ct-gguide">${lines.map(esc).join(' ')}</p>` : '';
     }
 
+    const fmt = (v) => (typeof v === 'number' ? String(v).replace('.', ',') : v);
+
+    // Taxa de gravidez no 1º ano (OMS, Apêndice A): uso correto x uso habitual.
+    function ratesHtml(m) {
+        if (!m.rates) return m.efficacy ? `<p class="ct-eff">${esc(m.efficacy)}</p>` : '';
+        const rows = m.rates.map(r => `<div class="ct-rate-row">${r.label ? `<span class="ct-rate-label">${esc(r.label)}</span>` : ''}<span class="ct-rate"><b>${r.perfect == null ? '—' : fmt(r.perfect)}</b><small>uso correto</small></span><span class="ct-rate"><b>${fmt(r.typical)}</b><small>uso habitual</small></span></div>`).join('');
+        const tier = m.rates.length === 1 && m.tier ? `<span class="ct-tier">${esc(m.tier)}</span>` : '';
+        return `<div class="ct-rates"><div class="ct-rates-head"><span>Gravidezes por 100 mulheres no 1º ano</span>${tier}</div>${rows}</div>`;
+    }
+
     function methodHtml(m) {
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
@@ -104,7 +114,7 @@
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
         return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${best}</div></div>
-            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${reasons}${miss}</article>`;
+            ${ratesHtml(m)}<p class="ct-note">${esc(m.note)}</p>${reasons}${miss}</article>`;
     }
 
     function groupsHtml(res) {
@@ -122,23 +132,28 @@
         const verdict = st.met
             ? '<div class="ct-verdict ok"><strong>Os 3 critérios estão presentes.</strong> O LAM pode oferecer proteção enquanto os 3 se mantiverem. Quando um deles deixar de valer, inicie outro método.</div>'
             : `<div class="ct-verdict"><strong>O LAM não se aplica.</strong> Falta: ${st.missing.map(esc).join('; ')}. Ofereça outro método.</div>`;
-        return `<p class="ct-intro">${esc(LAM.intro)}</p><div class="qt-panel"><h3 class="qt-panel-title">Critérios (todos são necessários)</h3><div class="ct-opts">${checks}</div>${verdict}</div>
+        const r = M().TEXT_RATES.lam;
+        const rate = `<p class="ct-info">Gravidezes por 100 mulheres em ${r.note}: <b>${fmt(r.perfect)}</b> com uso correto e <b>${fmt(r.typical)}</b> no uso habitual.</p>`;
+        return `<p class="ct-intro">${esc(LAM.intro)}</p>${rate}<div class="qt-panel"><h3 class="qt-panel-title">Critérios (todos são necessários)</h3><div class="ct-opts">${checks}</div>${verdict}</div>
             <section class="ct-group"><header><h3>Pontos de atenção</h3></header>${LAM.notes.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section>
             <p class="ct-source">OMS, MEC 2025, p. ${LAM.page}.</p>`;
     }
 
     function ciHtml() {
         const { COITUS_INTERRUPTUS: CI } = M();
-        return `<p class="ct-intro">${esc(CI.intro)}</p><section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
+        const r = M().TEXT_RATES.withdrawal;
+        const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${fmt(r.perfect)}</b> com uso correto e <b>${fmt(r.typical)}</b> no uso habitual.</p>`;
+        return `<p class="ct-intro">${esc(CI.intro)}</p>${rate}<section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
     }
 
     function legendHtml() {
-        const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE } = M();
+        const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE, RATES_SOURCE } = M();
         const cats = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
         const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
                 <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
             <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul></details>
+            <details class="ct-legend"><summary>Sobre as taxas de eficácia</summary><p>${esc(RATES_SOURCE.title)} Valores em ${esc(RATES_SOURCE.unit)}, com uso correto e consistente e no uso habitual; sem método, ${RATES_SOURCE.noMethod}. Faixas da OMS pelo uso habitual: muito eficaz (menos de 1), eficaz (1 a 9), moderadamente eficaz (10 a 19) e menos eficaz (20 ou mais). É a taxa de falha do 1º ano, afim ao Índice de Pearl (gravidezes por 100 mulheres-ano), mas não idêntica: o Índice de Pearl de cada produto varia conforme o estudo e a bula. As pílulas de emergência não têm taxa nesta tabela.</p></details>
             <details class="ct-legend"><summary>Fora desta ferramenta</summary><p>${OUT_OF_SCOPE_2.map(esc).join('; ')}.</p></details>
             <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
     }
