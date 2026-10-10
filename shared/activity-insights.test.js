@@ -116,12 +116,13 @@ const mkEv = (q, c, k, extra = {}, hour = 9) => ({ ...ev(q, c, ago(k, hour)), ..
 
 test('tempo × acerto: rápido acerta mais, e o inverso vira alerta; amostra pequena não gera nada', () => {
     const mk = (fastRight, slowRight) => [
-        ...Array.from({ length: 40 }, (_, i) => mkEv(`a-${i}`, i < fastRight, 3, { ms: 10000 })),
-        ...Array.from({ length: 40 }, (_, i) => mkEv(`b-${i}`, i < slowRight, 4, { ms: 90000 }))
+        ...Array.from({ length: 40 }, (_, i) => mkEv(`a-${i}`, i < fastRight, 3, { ms: 10000, md: 'g' })),
+        ...Array.from({ length: 40 }, (_, i) => mkEv(`b-${i}`, i < slowRight, 4, { ms: 90000, md: 'g' }))
     ];
     assert.ok(ids({ events: mk(34, 20) }).includes('speed-fast'));
     assert.ok(ids({ events: mk(20, 34) }).includes('speed-slow'));
     assert.ok(!ids({ events: mk(30, 30) }).some(id => id.startsWith('speed')));
+    assert.ok(!ids({ events: mk(34, 20).map(e => ({ ...e, md: 'e' })) }).some(id => id.startsWith('speed')), 'ignora tempo que não é do Guiado');
     assert.ok(!ids({ events: mk(34, 20).slice(0, 20) }).some(id => id.startsWith('speed')));
 });
 

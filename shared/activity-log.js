@@ -8,7 +8,7 @@
  * eventos (QuestionResponse), então qualquer aparelho reconstrói igual.
  *
  * Evento: { q: questionId, c: 1|0, t: ISO UTC, ch?: letra, ms?: tempo,
- *           p?: 1 }   (p = ainda não confirmado pelo servidor)
+ *           md?: 'g' (Guiado; só local), p?: 1 }   (p = ainda não confirmado pelo servidor)
  *
  * Legado: os contadores antigos viram uma `baseline` congelada, e só
  * eventos a partir de `cutover` entram por cima — sem isso, as respostas

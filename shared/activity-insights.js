@@ -167,8 +167,9 @@ function crossInsights({ events, days, now, todayIso, track, classify, areaName 
     const mine = events.filter(e => { const w = classify?.(e.q); return w && w.track === track; });
     const recent60 = mine.filter(e => within(e, nowMs, 0, 60));
 
-    // Tempo por questão × acerto.
-    const timed = events.filter(e => Number.isFinite(e.ms) && e.ms > 0 && within(e, nowMs, 0, 90));
+    // Tempo por questão × acerto. Só Guiado (md = 'g'): no Simulado o tempo
+    // soma navegação e revisitas, então não é comparável com o do Guiado.
+    const timed = events.filter(e => e.md === 'g' && Number.isFinite(e.ms) && e.ms > 0 && within(e, nowMs, 0, 90));
     const fast = timed.filter(e => e.ms < T.speedFastMs), slow = timed.filter(e => e.ms >= T.speedSlowMs);
     if (fast.length >= T.speedMinPerBucket && slow.length >= T.speedMinPerBucket) {
         const f = pct(accuracy(fast)), sl = pct(accuracy(slow));

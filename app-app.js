@@ -3162,7 +3162,7 @@
                 // Tempo até responder (sem a leitura da explicação): o que já
                 // foi acumulado nesta questão + o trecho em andamento.
                 const answerMs = (session.questionTimesMs?.[session.lastRenderedIndex] || 0) + (session.questionRenderedAt != null ? Date.now() - session.questionRenderedAt : 0);
-                recordQuestionResult(question, correct, letter, answerMs);
+                recordQuestionResult(question, correct, letter, answerMs, 'g');
                 // R-1: errar já é o próprio sinal (Errei, sem precisar
                 // perguntar nada) — só quando acerta é que faz sentido
                 // diferenciar "acertei com certeza" de "acertei mas quase
@@ -3682,7 +3682,7 @@
                 + (note === undefined ? '' : `<span class="explanation-note"><span class="explanation-note-title">${EXPLANATION_NOTE_HEADING}</span>${escapeHtml(note.trim())}</span>`);
         }
 
-        function recordQuestionResult(question, correct, chosen, elapsedMs) {
+        function recordQuestionResult(question, correct, chosen, elapsedMs, mode) {
             // Discursiva e anulada não têm gabarito válido — não são
             // certas nem erradas, então não entram na contagem.
             if (correct === null) return;
@@ -3697,6 +3697,9 @@
                 t: new Date().toISOString(),
                 ...(chosen ? { ch: chosen } : {}),
                 ...(Number.isFinite(elapsedMs) ? { ms: Math.min(Math.round(elapsedMs), 1800000) } : {}),
+                // Modo só local (o servidor não guarda): 'g' = Guiado, onde o tempo é
+                // até responder. O do Simulado inclui navegar e revisitar.
+                ...(mode ? { md: mode } : {}),
                 p: 1
             }]);
             saveActivityLog(log);
