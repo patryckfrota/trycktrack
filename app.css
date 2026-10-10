@@ -6902,3 +6902,23 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
 @media (min-width: 768px) {
     .dashboard-card + .dashboard-section-title, .dashboard-areas { grid-row: auto; }
 }
+
+/* Dashboard em grade (palavra final): cada bloco ocupa um lugar explícito, sem
+   depender das regras de adjacência antigas. 768–1199: 2 colunas; ≥1200: 3. */
+@media (min-width: 768px) {
+    #metricasTab .dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: row; align-items: stretch; gap: 18px; }
+    #metricasTab .dashboard > * { grid-column: auto; grid-row: auto; min-width: 0; align-self: stretch; }
+    #metricasTab .dashboard > .dashboard-section-title,
+    #metricasTab .dashboard > .dashboard-empty,
+    #metricasTab .dashboard > .dashboard-areas,
+    #metricasTab .dashboard > #dashboardRecent { grid-column: 1 / -1; }
+    #metricasTab .dashboard > .dashboard-section-title { align-self: end; }
+    #metricasTab .dashboard > .dashboard-areas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; }
+    #metricasTab .dashboard-consistency .dashboard-heat { max-width: none; }
+}
+@media (min-width: 1200px) {
+    #metricasTab .dashboard { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    #metricasTab .dashboard > #dashboardInsights { grid-column: 3; grid-row: 1; }
+    #metricasTab .dashboard > #dashboardEvo { grid-column: 1 / -1; grid-row: 2; }
+    #metricasTab .dashboard > .dashboard-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
