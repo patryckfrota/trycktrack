@@ -467,11 +467,11 @@ test('como prescrever: só métodos reais, fontes existentes, modelos de receita
     const ids = new Set([...METHOD_LIST, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
     for (const [id, p] of Object.entries(PRESCRIBE)) {
         assert.ok(ids.has(id), id);
-        assert.ok(p.products.length && p.dosing.length && p.sources.length, id);
-        for (const s of p.sources) assert.ok(SOURCES[s] && /^https:\/\//.test(SOURCES[s].url), `${id}: fonte ${s}`);
+        assert.ok(p.products.length && (p.dosing || p.blocks).length && p.sources.length, id);
+        for (const s of p.sources) assert.ok(SOURCES[s] && (SOURCES[s].url === null || /^https:\/\//.test(SOURCES[s].url)), `${id}: fonte ${s}`);
         for (const pr of p.products) assert.ok(pr.brand && pr.substance && pr.form && pr.lab, `${id}.${pr.brand}`);
         for (const r of p.rx) { assert.ok(r.lines[0].startsWith('USO '), `${id}: ${r.title}`); assert.ok(r.lines.length >= 3, `${id}: ${r.title}`); }
-        for (const d of p.dosing) assert.ok(d.k && d.t, id);
+        for (const d of p.dosing || p.blocks.flatMap(b => b.items)) assert.ok(d.k && d.t, id);
     }
     for (const id of ['coc', 'patch', 'cvr', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_lng', 'eiud', 'tubal']) assert.ok(PRESCRIBE[id], id);
     assert.equal(VASECTOMY_LAW.length, 3);
@@ -487,4 +487,10 @@ test('como prescrever: doses conferidas nas bulas e protocolos oficiais', () => 
     assert.ok(text('pop').includes('75 mcg') && text('pop').includes('0,35 mg'));
     assert.ok(text('ecp_lng').includes('1,5 mg') && text('ecp_lng').includes('120 horas'));
     assert.ok(text('tubal').includes('60 dias') && text('tubal').includes('21 anos'));
+});
+
+test('implante: manual do Ministério da Saúde está nos blocos (SUS 2025, registro, retorno, retirada, TCLE)', () => {
+    const text = JSON.stringify(PRESCRIBE.imp);
+    for (const s of ['Portarias SECTICS/MS 47 e 48', '14 a 49 anos', '03.01.04.017-6', '03.01.04.018-4', 'Z300', 'espironolactona', 'Termo (Anexo I do manual)', 'radiografia simples', 'Ácido tranexâmico 500 mg', 'braço contralateral', 'Parecer COFEN 277/2017']) assert.ok(text.includes(s), s);
+    assert.ok(PRESCRIBE.imp.blocks.length >= 8);
 });

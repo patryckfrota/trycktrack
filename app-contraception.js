@@ -326,9 +326,10 @@
         const { SOURCES, PRESCRIBE_NOTICE } = M();
         const prods = p.products.map(x => `<div class="ct-prod"><div class="ct-prod-top"><strong>${esc(x.brand)}</strong>${x.sus ? '<span class="ct-sus">SUS</span>' : ''}</div><p class="ct-prod-sub">${esc(x.substance)}</p><p class="ct-fine">${esc(x.form)} · ${esc(x.lab)}</p></div>`).join('');
         const rx = p.rx.length ? `<section class="ct-card"><h3>Modelo de prescrição</h3>${p.rx.map((r, i) => `<div class="ct-rx"><div class="ct-rx-head"><strong>${esc(r.title)}</strong><button type="button" class="qt-ghost" data-action="copy-rx" data-id="${id}" data-i="${i}">Copiar</button></div><pre class="ct-rx-body">${esc(r.lines.join('\n'))}</pre></div>`).join('')}</section>` : '';
-        const rows = p.dosing.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
-        const src = p.sources.map(k => `<li><a href="${esc(SOURCES[k].url)}" target="_blank" rel="noopener noreferrer">${esc(SOURCES[k].label)}</a></li>`).join('');
-        return `<section class="ct-card"><h3>Apresentações e nomes comerciais</h3><div class="ct-prods">${prods}</div></section>${rx}<section class="ct-card ct-card-flush"><h3>Posologia e orientações</h3><div class="ct-rows">${rows}</div></section><section class="ct-card"><h3>Fontes</h3><ul class="ct-src">${src}</ul><p class="ct-fine">${esc(PRESCRIBE_NOTICE)}</p></section>`;
+        const rowsOf = (items) => items.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
+        const blocks = (p.blocks || [{ title: 'Posologia e orientações', items: p.dosing }]).map(b => `<section class="ct-card ct-card-flush"><h3>${esc(b.title)}</h3><div class="ct-rows">${rowsOf(b.items)}</div></section>`).join('');
+        const src = p.sources.map(k => `<li>${SOURCES[k].url ? `<a href="${esc(SOURCES[k].url)}" target="_blank" rel="noopener noreferrer">${esc(SOURCES[k].label)}</a>` : esc(SOURCES[k].label)}</li>`).join('');
+        return `<section class="ct-card"><h3>Apresentações e nomes comerciais</h3><div class="ct-prods">${prods}</div></section>${rx}${blocks}<section class="ct-card"><h3>Fontes</h3><ul class="ct-src">${src}</ul><p class="ct-fine">${esc(PRESCRIBE_NOTICE)}</p></section>`;
     }
 
     function copyRx(id, i, btn) {
