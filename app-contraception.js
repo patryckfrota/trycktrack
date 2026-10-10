@@ -32,9 +32,7 @@
         lam: { amenorrhea: false, fullBf: false, lt6m: false },
         legendOpen: false,
         sheet: null,
-        sheetTab: 'summary',
-        useIdx: 0,
-        limitIdx: 0
+        sheetTab: 'summary'
     };
     let root = null;
 
@@ -239,25 +237,26 @@
         return status + ratesCard(id, m) + about + points + sti;
     }
 
+    // Todas as seções em sequência, em texto corrido: sem menu interno para rolar.
     function useTab(use) {
-        const i = Math.min(state.useIdx, use.sections.length - 1);
-        const pills = use.sections.map((s, k) => `<button type="button" class="ct-pill-btn${k === i ? ' on' : ''}" data-action="use-section" data-v="${k}">${esc(s.title)}</button>`).join('');
-        const sec = use.sections[i];
-        const rows = sec.items.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
-        return `<div class="ct-pills" role="tablist">${pills}</div><section class="ct-card ct-card-flush"><h3>${esc(sec.title)}</h3>${sec.intro ? `<p class="ct-callout">${rich(sec.intro)}</p>` : ''}<div class="ct-rows">${rows}</div></section><p class="ct-fine">${esc(use.source)}. Orientações para mulheres saudáveis; condições específicas podem pedir mais acompanhamento.</p>`;
+        const cards = use.sections.map(sec => {
+            const rows = sec.items.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
+            return `<section class="ct-card ct-card-flush"><h3>${esc(sec.title)}</h3>${sec.intro ? `<p class="ct-callout">${rich(sec.intro)}</p>` : ''}<div class="ct-rows">${rows}</div></section>`;
+        }).join('');
+        return `${cards}<p class="ct-fine">${esc(use.source)}. Orientações para mulheres saudáveis; condições específicas podem pedir mais acompanhamento.</p>`;
     }
 
     function limitsTab(full) {
         const groups = full.groups;
         if (!groups.length) return '<section class="ct-card"><p class="ct-muted">Nenhuma condição da tabela restringe este método.</p></section>';
-        const i = Math.min(state.limitIdx, groups.length - 1);
-        const pills = groups.map((g, k) => `<button type="button" class="ct-pill-btn${k === i ? ' on' : ''}" data-action="limit-group" data-v="${k}">${esc(g.title)} <em>${g.items.length}</em></button>`).join('');
-        const g = groups[i];
         const { SECTIONS } = M();
-        const byDomain = new Map();
-        g.items.forEach(it => { const d = it.sectionId === 'outros' ? 'Outras condições' : (SECTIONS.find(s => s.id === it.sectionId)?.title || 'Outras'); if (!byDomain.has(d)) byDomain.set(d, []); byDomain.get(d).push(it); });
-        const list = [...byDomain.entries()].map(([d, items]) => `<div class="ct-dom"><h4>${esc(d)}</h4>${items.map(it => `<div class="ct-lim"><b>${esc(it.display)}</b><div><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</div></div>`).join('')}</div>`).join('');
-        return `<p class="ct-muted ct-lead">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p><div class="ct-pills" role="tablist">${pills}</div><section class="ct-card ct-card-flush"><p class="ct-callout">${esc(g.hint)}</p>${list}</section>`;
+        const cards = groups.map(g => {
+            const byDomain = new Map();
+            g.items.forEach(it => { const d = it.sectionId === 'outros' ? 'Outras condições' : (SECTIONS.find(s => s.id === it.sectionId)?.title || 'Outras'); if (!byDomain.has(d)) byDomain.set(d, []); byDomain.get(d).push(it); });
+            const list = [...byDomain.entries()].map(([d, items]) => `<div class="ct-dom"><h4>${esc(d)}</h4>${items.map(it => `<div class="ct-lim"><b>${esc(it.display)}</b><div><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</div></div>`).join('')}</div>`).join('');
+            return `<section class="ct-card ct-card-flush"><h3>${esc(g.title)} <em class="ct-h-count">${g.items.length}</em></h3><p class="ct-callout">${esc(g.hint)}</p>${list}</section>`;
+        }).join('');
+        return `<p class="ct-muted ct-lead">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${cards}`;
     }
 
     function sheetBodyHtml() {
@@ -292,8 +291,6 @@
         if (!el) return;
         state.sheet = id;
         state.sheetTab = 'summary';
-        state.useIdx = 0;
-        state.limitIdx = 0;
         el.innerHTML = sheetHtml(id);
         el.hidden = false;
         el.querySelector('#ctSheetBody').scrollTop = 0;
@@ -396,12 +393,6 @@
             closeSheet();
         } else if (action === 'sheet-tab') {
             state.sheetTab = v;
-            refreshSheetBody();
-        } else if (action === 'use-section') {
-            state.useIdx = Number(v);
-            refreshSheetBody();
-        } else if (action === 'limit-group') {
-            state.limitIdx = Number(v);
             refreshSheetBody();
         } else if (action === 'toggle') {
             state.answers = M().toggleAnswer(state.answers, q, o);

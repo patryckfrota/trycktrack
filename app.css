@@ -2088,7 +2088,7 @@
         .ct-stab { flex: 0 0 auto; padding: 11px 14px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--text-secondary); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
         .ct-stab em { margin-left: 4px; padding: 1px 7px; border-radius: 999px; background: var(--bg-tertiary); font-style: normal; font-size: 11px; }
         .ct-stab.on { border-bottom-color: var(--lavender-active); color: var(--lavender-active); }
-        .ct-stab:focus-visible, .ct-pill-btn:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: -2px; }
+        .ct-stab:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: -2px; }
         .ct-sheet-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; width: min(720px, 100%); margin: 0 auto; box-sizing: border-box; padding: 18px 16px max(40px, env(safe-area-inset-bottom)); display: grid; gap: 16px; align-content: start; grid-auto-rows: max-content; }
         .ct-card { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--glass-card-border); border-radius: 20px; background: var(--glass-card-bg); box-shadow: var(--glass-card-shadow); }
         .ct-card h3 { margin: 0; color: var(--text-main); font-size: 16px; font-weight: 700; line-height: 1.3; }
@@ -2120,11 +2120,7 @@
         .ct-points { display: grid; gap: 12px; margin: 0; padding-left: 18px; }
         .ct-card b { color: var(--text-main); }
         .ct-sti { margin: 0; padding: 14px 16px; border-radius: 16px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; }
-        .ct-pills { display: flex; gap: 8px; overflow-x: auto; padding: 2px; scrollbar-width: none; }
-        .ct-pills::-webkit-scrollbar { display: none; }
-        .ct-pill-btn { flex: 0 0 auto; padding: 9px 14px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; font-size: 13px; font-weight: 650; cursor: pointer; }
-        .ct-pill-btn em { margin-left: 4px; font-style: normal; font-size: 11px; opacity: .8; }
-        .ct-pill-btn.on { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
+        .ct-h-count { margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font-style: normal; font-size: 12px; font-weight: 700; vertical-align: 2px; }
         .ct-rows { display: grid; }
         .ct-row { display: grid; gap: 6px; padding: 14px 0; border-top: 1px solid var(--border-color); }
         .ct-row-k { color: var(--text-main); font-size: 14px; font-weight: 700; line-height: 1.45; }
