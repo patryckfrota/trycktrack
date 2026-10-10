@@ -28,13 +28,13 @@ export const METHOD_IDS = ['coc', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng'];
 
 // efficacyRank: desempate por eficácia em uso típico (menor = mais eficaz).
 export const METHODS = {
-    coc: { id: 'coc', name: 'Combinado oral, adesivo ou anel vaginal', short: 'Combinado', hormonal: true, larc: false, note: 'Depende de uso regular. Contém estrogênio.' },
-    cic: { id: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, note: 'Aplicação mensal. Contém estrogênio.' },
-    pop: { id: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, note: 'Horário rígido (a de desogestrel tem janela de 12 h).' },
-    dmpa: { id: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, note: 'Aplicação a cada 3 meses. O retorno da fertilidade pode demorar.' },
-    imp: { id: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, note: 'Dura 3 anos. Pode causar sangramento irregular.' },
-    cu: { id: 'cu', name: 'DIU de cobre', short: 'DIU de cobre', hormonal: false, larc: true, note: 'Sem hormônio. Pode aumentar o fluxo e a cólica.' },
-    lng: { id: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, note: 'Dura 5 anos ou mais. Reduz o fluxo menstrual.' }
+    coc: { id: 'coc', name: 'Combinado oral, adesivo ou anel vaginal', short: 'Combinado', hormonal: true, larc: false, efficacyRank: 5, efficacy: 'Moderada (≈7 gravidezes/100 mulheres no 1º ano, uso típico)', note: 'Depende de uso regular. Contém estrogênio.' },
+    cic: { id: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, efficacyRank: 4, efficacy: 'Moderada-alta (≈3–4/100 no 1º ano, uso típico)', note: 'Aplicação mensal. Contém estrogênio.' },
+    pop: { id: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, efficacyRank: 6, efficacy: 'Moderada (≈7/100 no 1º ano, uso típico)', note: 'Horário rígido (a de desogestrel tem janela de 12 h).' },
+    dmpa: { id: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, efficacyRank: 3, efficacy: 'Moderada-alta (≈4/100 no 1º ano, uso típico)', note: 'Aplicação a cada 3 meses. O retorno da fertilidade pode demorar.' },
+    imp: { id: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, efficacyRank: 0, efficacy: 'Muito alta (<1/100 no 1º ano)', note: 'Dura 3 anos. Pode causar sangramento irregular.' },
+    cu: { id: 'cu', name: 'DIU de cobre', short: 'DIU de cobre', hormonal: false, larc: true, efficacyRank: 2, efficacy: 'Muito alta (<1/100 no 1º ano)', note: 'Sem hormônio. Pode aumentar o fluxo e a cólica.' },
+    lng: { id: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, efficacyRank: 1, efficacy: 'Muito alta (<1/100 no 1º ano)', note: 'Dura 5 anos ou mais. Reduz o fluxo menstrual.' }
 };
 
 // Significado das categorias (Box 1 da OMS).

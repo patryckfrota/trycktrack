@@ -16,7 +16,6 @@
 import { METHOD_IDS, METHODS, SECTIONS } from './contraception-data.js';
 import { EXTENSIONS, LAM } from './contraception-extensions.js';
 import { NO_RECOMMENDATION } from './contraception-content.js';
-import { RATES, typicalRate, effectTier } from './contraception-rates.js';
 import { normalizeSearchText } from './text-normalize.js';
 
 /* ---------- escalas de resultado ---------- */
@@ -196,9 +195,7 @@ function evaluateSet(set, selected, phase, prefs) {
         }
         drivers.sort((a, b) => b.max - a.max);
         const misses = !!((prefs.noHormone && method.hormonal) || (prefs.longActing && !method.larc));
-        const rates = RATES[method.id] || null;
-        const typical = typicalRate(method.id);
-        return { ...method, rates, tier: effectTier(typical), efficacyRank: typical ?? method.efficacyRank ?? 99, scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
+        return { ...method, scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
     }).sort((a, b) => sectionRank[a.section] - sectionRank[b.section]
         || a.misses - b.misses
         || a.category - b.category
