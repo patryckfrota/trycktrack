@@ -57,7 +57,29 @@ export const INSIGHT_THRESHOLDS = {
     weekdayMinSamples: 2,
     weekdayRatio: 1.5,
     streakMin: 3,
-    streakWarnHour: 17       // antes disso o aviso de ofensiva só incomoda
+    streakWarnHour: 17,      // antes disso o aviso de ofensiva só incomoda
+    maxInsights: 6,
+    speedFastMs: 30000,
+    speedSlowMs: 60000,
+    speedMinPerBucket: 30,
+    speedMinDeltaPts: 10,
+    areaRankMinAnswers: 20,  // janela de 60 dias
+    areaRankMinGapPts: 15,
+    neglectedMinAnswers: 20, // na janela de 60 dias, e nenhuma nos últimos 14
+    fatigueMinDays: 5,       // dias com 25+ respostas
+    fatigueDayAnswers: 25,
+    fatigueMinPerBucket: 40,
+    fatigueMinDeltaPts: 8,
+    retryMinSamples: 15,
+    trendMinPerWindow: 40,   // janelas de 30 dias
+    trendMinDeltaPts: 5,
+    paceMinPrevious: 50,
+    paceMinDeltaRatio: 0.25,
+    rhythmMinDaysDelta: 3,
+    weekendMinStudyDays: 14,
+    weekendRatio: 1.4,
+    letterMinWrong: 30,
+    letterMinShare: 0.4
 };
 
 // events: log.events; days: Map de deriveActivity; `track` restringe as
@@ -125,7 +147,131 @@ export function buildInsights({ events, days, now, todayIso, streakCurrent, trac
         }
     }
 
-    return out.slice(0, 3);
+    out.push(...crossInsights({ events, days, now, todayIso, track, classify, areaName }));
+
+    // Alertas primeiro, depois o que melhorou, depois curiosidades.
+    const rank = { warn: 0, good: 1, info: 2 };
+    return out.map((item, i) => ({ item, i })).sort((a, b) => rank[a.item.kind] - rank[b.item.kind] || a.i - b.i)
+        .map(x => x.item).slice(0, T.maxInsights);
+}
+
+const isoDay = e => localDate(new Date(e.t));
+const within = (e, nowMs, from, to) => { const age = (nowMs - Date.parse(e.t)) / DAY_MS; return age >= from && age < to; };
+
+// Cruzamentos entre os dados do log: tempo × acerto, área × período,
+// reincidência, fadiga, ritmo, tendência. Cada regra tem piso de amostra.
+function crossInsights({ events, days, now, todayIso, track, classify, areaName }) {
+    const T = INSIGHT_THRESHOLDS;
+    const nowMs = now.getTime();
+    const out = [];
+    const mine = events.filter(e => { const w = classify?.(e.q); return w && w.track === track; });
+    const recent60 = mine.filter(e => within(e, nowMs, 0, 60));
+
+    // Tempo por questão × acerto.
+    const timed = events.filter(e => Number.isFinite(e.ms) && e.ms > 0 && within(e, nowMs, 0, 90));
+    const fast = timed.filter(e => e.ms < T.speedFastMs), slow = timed.filter(e => e.ms >= T.speedSlowMs);
+    if (fast.length >= T.speedMinPerBucket && slow.length >= T.speedMinPerBucket) {
+        const f = pct(accuracy(fast)), sl = pct(accuracy(slow));
+        if (f - sl >= T.speedMinDeltaPts) out.push({ id: 'speed-fast', kind: 'info', text: `Você acerta mais quando responde rápido: ${f}% abaixo de 30 s contra ${sl}% acima de 1 min. Dúvida longa costuma indicar lacuna, não falta de cuidado.` });
+        else if (sl - f >= T.speedMinDeltaPts) out.push({ id: 'speed-slow', kind: 'warn', text: `Respostas em menos de 30 s têm ${f}% de acerto, contra ${sl}% quando você pensa mais de 1 min. Vale desacelerar.` });
+    }
+
+    // Melhor e pior área (60 dias) e área abandonada.
+    const perArea = new Map();
+    for (const e of recent60) {
+        const key = classify(e.q).key;
+        const row = perArea.get(key) || { all: [], last14: 0 };
+        row.all.push(e);
+        if (within(e, nowMs, 0, 14)) row.last14 += 1;
+        perArea.set(key, row);
+    }
+    const ranked = [...perArea].filter(([, r]) => r.all.length >= T.areaRankMinAnswers)
+        .map(([key, r]) => ({ key, acc: pct(accuracy(r.all)), n: r.all.length, last14: r.last14 })).sort((a, b) => a.acc - b.acc);
+    if (ranked.length >= 2 && ranked[ranked.length - 1].acc - ranked[0].acc >= T.areaRankMinGapPts) {
+        const lo = ranked[0], hi = ranked[ranked.length - 1];
+        out.push({ id: `area-weakest-${lo.key}`, kind: 'warn', text: `${areaName(track, lo.key)} é sua área mais fraca em 60 dias (${lo.acc}% em ${lo.n} questões), ${hi.acc - lo.acc} pontos abaixo de ${areaName(track, hi.key)} (${hi.acc}%).` });
+    }
+    const neglected = ranked.filter(r => r.last14 === 0 && r.n >= T.neglectedMinAnswers).sort((a, b) => b.n - a.n)[0];
+    if (neglected) out.push({ id: `area-neglected-${neglected.key}`, kind: 'warn', text: `Você não toca em ${areaName(track, neglected.key)} há mais de 2 semanas, e ela vinha com ${neglected.acc}% de acerto. Retome antes de esquecer.` });
+
+    // Fadiga: início do dia × depois da 20ª resposta, em dias longos.
+    const byDay = new Map();
+    for (const e of events.filter(x => within(x, nowMs, 0, 60)).sort((a, b) => Date.parse(a.t) - Date.parse(b.t))) {
+        const k = isoDay(e); (byDay.get(k) || byDay.set(k, []).get(k)).push(e);
+    }
+    const longDays = [...byDay.values()].filter(list => list.length >= T.fatigueDayAnswers);
+    if (longDays.length >= T.fatigueMinDays) {
+        const early = longDays.flatMap(l => l.slice(0, 10)), late = longDays.flatMap(l => l.slice(20));
+        if (early.length >= T.fatigueMinPerBucket && late.length >= T.fatigueMinPerBucket) {
+            const a = pct(accuracy(early)), b = pct(accuracy(late));
+            if (a - b >= T.fatigueMinDeltaPts) out.push({ id: 'fatigue', kind: 'warn', text: `Seu acerto cai de ${a}% nas primeiras 10 questões do dia para ${b}% depois da 20ª. Sessões mais curtas podem render mais.` });
+        }
+    }
+
+    // Reincidência: questões que já errou, quando volta a responder.
+    const seen = new Map(); let retried = 0, retriedRight = 0;
+    for (const e of [...events].sort((a, b) => Date.parse(a.t) - Date.parse(b.t))) {
+        const before = seen.get(e.q);
+        if (before === 0) { retried += 1; retriedRight += e.c; }
+        seen.set(e.q, e.c);
+    }
+    if (retried >= T.retryMinSamples) {
+        const r = pct(retriedRight / retried);
+        out.push({ id: 'retry', kind: r >= 60 ? 'good' : 'warn', text: r >= 60
+            ? `Das questões que você já errou, refez ${retried} e acertou ${r}%: seu caderno de erros está funcionando.`
+            : `Das ${retried} questões que você refez depois de errar, só acertou ${r}%. Revise o comentário antes de tentar de novo.` });
+    }
+
+    // Tendência de acerto (30 dias × 30 anteriores) e de ritmo (quinzenas).
+    const cur30 = events.filter(e => within(e, nowMs, 0, 30)), prev30 = events.filter(e => within(e, nowMs, 30, 60));
+    if (cur30.length >= T.trendMinPerWindow && prev30.length >= T.trendMinPerWindow) {
+        const d = pct(accuracy(cur30)) - pct(accuracy(prev30));
+        if (Math.abs(d) >= T.trendMinDeltaPts) out.push({ id: 'trend', kind: d > 0 ? 'good' : 'warn', text: `Seu acerto geral ${d > 0 ? 'subiu' : 'caiu'} ${Math.abs(d)} pontos nos últimos 30 dias (${pct(accuracy(prev30))}% → ${pct(accuracy(cur30))}%).` });
+    }
+    const studyDaysIn = (from, to) => { let n = 0; for (let i = from; i < to; i++) if ((days.get(localDate(new Date(nowMs - i * DAY_MS)))?.n || 0) > 0) n += 1; return n; };
+    const d14 = studyDaysIn(0, 14), p14 = studyDaysIn(14, 28);
+    if (Math.abs(d14 - p14) >= T.rhythmMinDaysDelta && Math.max(d14, p14) >= 5) {
+        out.push({ id: 'rhythm', kind: d14 > p14 ? 'good' : 'warn', text: d14 > p14
+            ? `Você estudou ${d14} dos últimos 14 dias, contra ${p14} nos 14 anteriores. O ritmo está subindo.`
+            : `Você estudou ${d14} dos últimos 14 dias, contra ${p14} nos 14 anteriores. O ritmo caiu.` });
+    }
+
+    // Volume do mês até hoje × mês passado até o mesmo dia.
+    const [y, m, d] = todayIso.split('-').map(Number);
+    let thisMonth = 0, lastMonth = 0;
+    for (let k = 1; k <= d; k++) {
+        thisMonth += days.get(localDate(new Date(y, m - 1, k, 12)))?.n || 0;
+        lastMonth += days.get(localDate(new Date(y, m - 2, k, 12)))?.n || 0;
+    }
+    if (lastMonth >= T.paceMinPrevious && Math.abs(thisMonth - lastMonth) / lastMonth >= T.paceMinDeltaRatio) {
+        const up = thisMonth > lastMonth, ratio = Math.round(Math.abs(thisMonth - lastMonth) / lastMonth * 100);
+        out.push({ id: 'month-pace', kind: up ? 'good' : 'info', text: `Neste mês você já fez ${thisMonth.toLocaleString('pt-BR')} questões, ${ratio}% ${up ? 'a mais' : 'a menos'} que no mesmo ponto do mês passado (${lastMonth.toLocaleString('pt-BR')}).` });
+    }
+
+    // Fim de semana × dias úteis (volume por dia de estudo, 8 semanas).
+    const wk = { end: [], mid: [] };
+    for (let i = 0; i < 56; i++) {
+        const date = new Date(nowMs - i * DAY_MS);
+        const n = days.get(localDate(date))?.n || 0;
+        if (n > 0) wk[date.getDay() === 0 || date.getDay() === 6 ? 'end' : 'mid'].push(n);
+    }
+    if (wk.end.length + wk.mid.length >= T.weekendMinStudyDays && wk.end.length >= 3 && wk.mid.length >= 3) {
+        const avg = l => l.reduce((a, b) => a + b, 0) / l.length;
+        const e = avg(wk.end), w = avg(wk.mid);
+        if (e >= w * T.weekendRatio) out.push({ id: 'weekend-strong', kind: 'info', text: `Nos fins de semana você faz em média ${Math.round(e)} questões por dia de estudo, contra ${Math.round(w)} nos dias úteis.` });
+        else if (w >= e * T.weekendRatio) out.push({ id: 'weekend-weak', kind: 'info', text: `Nos dias úteis você faz ${Math.round(w)} questões por dia de estudo; no fim de semana, só ${Math.round(e)}. Há espaço para render mais sábado e domingo.` });
+    }
+
+    // Viés de alternativa nos erros.
+    const wrongLetters = events.filter(e => e.c === 0 && e.ch && within(e, nowMs, 0, 90));
+    if (wrongLetters.length >= T.letterMinWrong) {
+        const count = {};
+        for (const e of wrongLetters) count[e.ch] = (count[e.ch] || 0) + 1;
+        const [letter, n] = Object.entries(count).sort((a, b) => b[1] - a[1])[0];
+        if (n / wrongLetters.length >= T.letterMinShare) out.push({ id: 'letter-bias', kind: 'info', text: `${pct(n / wrongLetters.length)}% dos seus erros recentes foram na alternativa ${letter}. Desconfie dela quando estiver em dúvida.` });
+    }
+
+    return out;
 }
 
 // Texto do resumo compartilhável da semana — só agregados, sem nada que

@@ -110,3 +110,71 @@ test('monthlySeries: agrega por mês, marca o corrente como parcial e deixa acer
     const few = monthlySeries(new Map([['2026-07-04', { n: 4, ne: 4, c: 4 }]]), '2026-10-07', 6);
     assert.equal(few[2].n, 4); assert.equal(few[2].accuracy, null, 'menos de 10 respostas: acerto em branco');
 });
+
+const ids = opts => buildInsights({ ...base, ...opts }).map(i => i.id);
+const mkEv = (q, c, k, extra = {}, hour = 9) => ({ ...ev(q, c, ago(k, hour)), ...extra });
+
+test('tempo × acerto: rápido acerta mais, e o inverso vira alerta; amostra pequena não gera nada', () => {
+    const mk = (fastRight, slowRight) => [
+        ...Array.from({ length: 40 }, (_, i) => mkEv(`a-${i}`, i < fastRight, 3, { ms: 10000 })),
+        ...Array.from({ length: 40 }, (_, i) => mkEv(`b-${i}`, i < slowRight, 4, { ms: 90000 }))
+    ];
+    assert.ok(ids({ events: mk(34, 20) }).includes('speed-fast'));
+    assert.ok(ids({ events: mk(20, 34) }).includes('speed-slow'));
+    assert.ok(!ids({ events: mk(30, 30) }).some(id => id.startsWith('speed')));
+    assert.ok(!ids({ events: mk(34, 20).slice(0, 20) }).some(id => id.startsWith('speed')));
+});
+
+test('áreas: mais fraca em 60 dias e área abandonada há 14+ dias', () => {
+    const area = (name, n, right, k) => Array.from({ length: n }, (_, i) => mkEv(`${name}-${i}`, i < right, k + (i % 3)));
+    const events = [...area('pedi', 30, 27, 1), ...area('gineco', 30, 12, 2), ...area('cirurgia', 25, 20, 30)];
+    const got = ids({ events });
+    assert.ok(got.includes('area-weakest-gineco'));
+    assert.ok(got.includes('area-neglected-cirurgia'));
+    assert.ok(!ids({ events: area('pedi', 30, 27, 1) }).some(id => id.startsWith('area-weakest')));
+});
+
+test('reincidência: acerto nas questões que já errou, só com 15+ refeitas', () => {
+    const mk = n => Array.from({ length: n }).flatMap((_, i) => [mkEv(`q-${i}`, false, 20), mkEv(`q-${i}`, i % 4 !== 0, 5)]);
+    const got = buildInsights({ ...base, events: mk(20) }).find(i => i.id === 'retry');
+    assert.equal(got.kind, 'good');
+    assert.match(got.text, /20 e acertou 75%/);
+    assert.ok(!ids({ events: mk(10) }).includes('retry'));
+});
+
+test('tendência de acerto 30d × 30d e ritmo por quinzena', () => {
+    const win = (from, n, right, tag) => Array.from({ length: n }, (_, i) => mkEv(`${tag}-${i}`, i < right, from + (i % 20)));
+    const events = [...win(1, 50, 40, 'n'), ...win(31, 50, 30, 'o')];
+    const t = buildInsights({ ...base, events }).find(i => i.id === 'trend');
+    assert.equal(t.kind, 'good');
+    assert.match(t.text, /subiu 20 pontos/);
+    const days = new Map();
+    for (let i = 0; i < 10; i++) days.set(localDate(ago(i)), day(5));
+    for (let i = 14; i < 17; i++) days.set(localDate(ago(i)), day(5));
+    const r = buildInsights({ ...base, days }).find(i => i.id === 'rhythm');
+    assert.equal(r.kind, 'good');
+});
+
+test('fadiga: acerto despenca depois da 20ª questão do dia', () => {
+    const events = [];
+    for (let d = 1; d <= 6; d++) for (let i = 0; i < 30; i++) events.push({ ...ev(`f${d}-${i}`, i < 10 ? i < 9 : i < 20 ? true : i % 3 === 0, ago(d, 8)), t: new Date(2026, 9, 7 - d, 8, i).toISOString() });
+    assert.ok(ids({ events }).includes('fatigue'));
+});
+
+test('alternativa viciada nos erros e fim de semana × dias úteis', () => {
+    const events = Array.from({ length: 40 }, (_, i) => mkEv(`l-${i}`, false, 2 + (i % 20), { ch: i < 24 ? 'C' : 'A' }));
+    assert.ok(ids({ events }).includes('letter-bias'));
+    const days = new Map();
+    for (let i = 0; i < 56; i++) { const dt = new Date(2026, 9, 7 - i, 12); days.set(localDate(dt), day(dt.getDay() === 0 || dt.getDay() === 6 ? 30 : 10)); }
+    assert.ok(ids({ days }).includes('weekend-strong'));
+});
+
+test('ordem: alertas antes de melhorias antes de curiosidades, limitado a 6', () => {
+    const days = new Map(); for (let i = 0; i < 56; i++) { const dt = new Date(2026, 9, 7 - i, 12); days.set(localDate(dt), day(dt.getDay() === 0 || dt.getDay() === 6 ? 30 : 10)); }
+    days.delete(TODAY);
+    const out = buildInsights({ ...base, days, streakCurrent: 6, events: Array.from({ length: 40 }, (_, i) => mkEv(`l-${i}`, false, 2 + (i % 20), { ch: 'C' })) });
+    assert.equal(out[0].id, 'streak-risk');
+    assert.ok(out.length <= 6);
+    const rank = { warn: 0, good: 1, info: 2 };
+    assert.deepEqual(out.map(i => rank[i.kind]), out.map(i => rank[i.kind]).sort());
+});
