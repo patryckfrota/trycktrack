@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { METHOD_IDS, SECTIONS } from './contraception-data.js';
-import { evaluate, evaluateAll, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
+import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
-import { WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
+import { METHOD_INFO, WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
 const pick = (...pairs) => pairs.reduce((a, [q, o]) => toggleAnswer(a, q, o), {});
@@ -293,4 +293,37 @@ test('esterilização: nuliparidade é A com aviso de aconselhamento; jovem é C
     assert.equal(nul.section, 'indicated');
     assert.ok(nul.drivers[0].note.includes('permanência'));
     assert.equal(by(evaluateAll(pick(['sterYoung', 'yes'])).ster).tubal.section, 'caution');
+});
+
+/* ---------- ficha do método ---------- */
+
+test('ficha: toda opção de método tem texto, ou seja, METHOD_INFO cobre todos os métodos', () => {
+    const ids = [...METHOD_IDS, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))];
+    for (const id of ids) {
+        const info = METHOD_INFO[id];
+        assert.ok(info && info.subtitle && info.about.length && info.source, id);
+        assert.ok(methodConditions(id), id);
+    }
+});
+
+test('ficha do combinado: enxaqueca com aura em "contraindicado"; categoria 2 vira grupo "Cautela"; categoria 1 não aparece', () => {
+    const f = methodConditions('coc');
+    const g = Object.fromEntries(f.groups.map(x => [x.id, x]));
+    assert.ok(g.contraindicated.items.some(i => i.option.includes('Enxaqueca com aura')));
+    assert.ok(g.care.items.some(i => i.option.includes('Obesidade') || i.option.includes('IMC')));
+    assert.ok(!f.groups.flatMap(x => x.items).some(i => i.option === 'Menos de 18 anos (desde a menarca)'));
+    assert.equal(f.groups[0].id, 'contraindicated');
+});
+
+test('ficha: início e continuação diferentes aparecem juntos (minipílula, enxaqueca com aura: 2 e 3)', () => {
+    const pop = methodConditions('pop');
+    const item = pop.groups.flatMap(x => x.items).find(i => i.option.includes('Enxaqueca com aura'));
+    assert.equal(item.display, 'início 2 · continuação 3');
+});
+
+test('ficha do DIU de emergência herda a lista do DIU de cobre; a de esterilização usa D/S/C', () => {
+    const e = methodConditions('eiud');
+    assert.ok(e.groups.flatMap(x => x.items).some(i => i.option.includes('DIP atual')));
+    const t = methodConditions('tubal');
+    assert.deepEqual(t.groups.map(g => g.id).slice(0, 2), ['delay', 'special']);
 });

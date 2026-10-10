@@ -15,7 +15,7 @@
  */
 import { METHOD_IDS, METHODS, SECTIONS } from './contraception-data.js';
 import { EXTENSIONS, LAM } from './contraception-extensions.js';
-import { NO_RECOMMENDATION } from './contraception-content.js';
+import { NO_RECOMMENDATION, METHOD_INFO } from './contraception-content.js';
 import { normalizeSearchText } from './text-normalize.js';
 
 /* ---------- escalas de resultado ---------- */
@@ -232,6 +232,54 @@ export function evaluateAll(answers = {}, opts = {}) {
         result[ext.id] = { id: ext.id, title: ext.title, scale: ext.scale, intro: ext.intro, page: ext.page, methods, groups, pregnancy: result.core.pregnancy };
     }
     return result;
+}
+
+/* ---------- ficha do método ---------- */
+
+function setOf(methodId) {
+    if (METHOD_IDS.includes(methodId)) return coreSet();
+    const ext = EXTENSIONS.find(x => x.methods.some(m => m.id === methodId));
+    return ext ? extensionSet(ext) : null;
+}
+
+/**
+ * Tudo o que a tabela da OMS diz sobre UM método, sem depender do perfil:
+ * todas as condições com categoria acima da mínima, agrupadas pela seção do
+ * resultado. Início e continuação diferentes viram "início X · continuação Y".
+ */
+export function methodConditions(methodId) {
+    const set = setOf(methodId);
+    if (!set) return null;
+    const sc = SCALES[set.scale];
+    const col = set.methods.findIndex(m => m.id === methodId);
+    const sectionRank = Object.fromEntries(sc.sections.map((s, i) => [s.id, i]));
+    const buckets = new Map();
+    for (const q of QUESTIONS.values()) {
+        for (const option of q.options) {
+            const item = { question: q, option };
+            for (const { cell, note, phase: forced } of set.cellsFor(item, col)) {
+                const start = resolveCell(cell, forced || 'start', set.scale);
+                const cont = resolveCell(cell, forced || 'continue', set.scale);
+                if (!start || !cont || (start.na && cont.na && !note)) continue;
+                const worst = (cont.max > start.max || (cont.max === start.max && cont.ranged && !start.ranged)) ? cont : start;
+                if (!worst.na && worst.max <= 1 && !worst.ranged) continue;
+                // categoria 2 da escala MEC não é "indicado": vira grupo próprio de cautela
+                const id = worst.na ? 'na' : (set.scale === 'mec' && sc.sectionFor(worst) === 'indicated') ? 'care' : sc.sectionFor(worst);
+                const display = start.display === cont.display ? start.display : `início ${start.display} · continuação ${cont.display}`;
+                if (!buckets.has(id)) buckets.set(id, []);
+                buckets.get(id).push({ sectionId: q.sectionId, question: q.title, option: option.label, display, note: note || option.note || null, rank: worst.max });
+            }
+        }
+    }
+    const careMeta = { id: 'care', title: 'Cautela', hint: 'Categoria 2: em geral pode usar, com acompanhamento cuidadoso' };
+    const order = [...sc.sections.filter(s => s.id !== 'indicated' && s.id !== 'na'), careMeta, ...sc.sections.filter(s => s.id === 'na')];
+    // do mais grave ao menos grave: contraindicado, desaconselhado, depende, cautela
+    const sev = (id) => ({ contraindicated: 0, delay: 0, special: 1, discouraged: 1, depends: 2, caution: 3, care: 3, na: 4 }[id] ?? 5);
+    const groups = order
+        .map(g => ({ ...g, items: (buckets.get(g.id) || []).sort((a, b) => b.rank - a.rank) }))
+        .filter(g => g.items.length)
+        .sort((a, b) => sev(a.id) - sev(b.id));
+    return { method: set.methods[col], scale: set.scale, groups, info: METHOD_INFO[methodId] || null };
 }
 
 /** LAM: os 3 critérios precisam estar presentes ao mesmo tempo. */

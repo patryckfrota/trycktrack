@@ -26,8 +26,8 @@ export const EXTENSIONS = [
         // textos de apoio não deixam claro qual valor é de qual. Por isso o 2º método
         // usa a categoria mais restritiva entre as duas colunas.
         methods: [
-            { id: 'condom', name: 'Preservativo masculino (látex ou poliuretano) ou feminino', short: 'Preservativo', hormonal: false, larc: false, efficacyRank: 0, efficacy: 'Eficácia depende do uso correto e em todas as relações', note: 'Protege também contra IST e HIV.' },
-            { id: 'diaphragm', name: 'Diafragma, capuz cervical ou espermicida', short: 'Diafragma/espermicida', hormonal: false, larc: false, efficacyRank: 1, efficacy: 'Falha relativamente maior no uso típico', note: 'A categoria mostrada é a mais restritiva entre diafragma e espermicida.' }
+            { id: 'condom', name: 'Preservativo masculino (látex ou poliuretano) ou feminino', short: 'Preservativo', hormonal: false, larc: false, efficacyRank: 0, note: 'Protege também contra IST e HIV.' },
+            { id: 'diaphragm', name: 'Diafragma, capuz cervical ou espermicida', short: 'Diafragma/espermicida', hormonal: false, larc: false, efficacyRank: 1, note: 'A categoria mostrada é a mais restritiva entre diafragma e espermicida.' }
         ],
         links: [
             { q: 'pregnancy', o: 'yes', cats: ['NA', 'NA'], note: 'Nenhum método de barreira é relevante para contracepção na gravidez. Para quem segue em risco de IST/HIV, o preservativo continua recomendado.' },
@@ -63,10 +63,10 @@ export const EXTENSIONS = [
         page: '81–83 e 109',
         intro: 'Use o mais cedo possível, em até 5 dias após a relação desprotegida. Não protege contra IST e HIV. A pílula de emergência não age se a mulher já estiver grávida.',
         methods: [
-            { id: 'ecp_upa', name: 'Pílula de ulipristal (30 mg)', short: 'Ulipristal', hormonal: true, larc: false, efficacyRank: 1, efficacy: 'Tomar o mais cedo possível, até 5 dias', note: 'Evite amamentar por 1 semana: extraia e descarte o leite nesse período.' },
-            { id: 'ecp_lng', name: 'Pílula de levonorgestrel (1,5 mg ou 0,75 mg)', short: 'Levonorgestrel', hormonal: true, larc: false, efficacyRank: 2, efficacy: 'Tomar o mais cedo possível, até 5 dias', note: 'Pode ser menos eficaz com IMC ≥ 30 kg/m².' },
-            { id: 'ecp_coc', name: 'Pílula combinada (método de Yuzpe)', short: 'Combinada (Yuzpe)', hormonal: true, larc: false, efficacyRank: 3, efficacy: 'Tomar o mais cedo possível, até 5 dias', note: 'Uso curto, com menos risco que o uso contínuo de combinados.' },
-            { id: 'eiud', name: 'DIU de cobre de emergência', short: 'DIU de cobre (EC)', hormonal: false, larc: true, efficacyRank: 0, efficacy: 'Muito alta. Inserir em até 5 dias da relação (ou até 5 dias após a ovulação estimada)', note: 'Vale também como contraceptivo de longa duração. Os critérios do DIU de cobre se aplicam.' }
+            { id: 'ecp_upa', name: 'Pílula de ulipristal (30 mg)', short: 'Ulipristal', hormonal: true, larc: false, efficacyRank: 1, note: 'Evite amamentar por 1 semana: extraia e descarte o leite nesse período.' },
+            { id: 'ecp_lng', name: 'Pílula de levonorgestrel (1,5 mg ou 0,75 mg)', short: 'Levonorgestrel', hormonal: true, larc: false, efficacyRank: 2, note: 'Pode ser menos eficaz com IMC ≥ 30 kg/m².' },
+            { id: 'ecp_coc', name: 'Pílula combinada (método de Yuzpe)', short: 'Combinada (Yuzpe)', hormonal: true, larc: false, efficacyRank: 3, note: 'Uso curto, com menos risco que o uso contínuo de combinados.' },
+            { id: 'eiud', name: 'DIU de cobre de emergência', short: 'DIU de cobre (EC)', hormonal: false, larc: true, efficacyRank: 0, note: 'Vale também como contraceptivo de longa duração. Os critérios do DIU de cobre se aplicam.' }
         ],
         inherit: { eiud: 'cu' },
         links: [
@@ -104,8 +104,8 @@ export const EXTENSIONS = [
         page: '129–132',
         intro: 'Nenhuma condição piora pelo uso desses métodos, por isso a escala de 1 a 4 não se aplica. A OMS usa A (aceitar), C (cautela: aconselhamento especial para o uso correto) e D (adiar até avaliar ou corrigir, oferecendo método temporário). Não protegem contra IST nem HIV, e têm falha maior no uso típico.',
         methods: [
-            { id: 'fab_sym', name: 'Métodos baseados em sintomas (muco cervical, Dois Dias, sintotérmico)', short: 'Sintomas', hormonal: false, larc: false, efficacyRank: 0, efficacy: 'Falha relativamente maior no uso típico', note: 'Exige treinamento do casal e observação diária.' },
-            { id: 'fab_cal', name: 'Métodos baseados em calendário (Ritmo, Dias Fixos)', short: 'Calendário', hormonal: false, larc: false, efficacyRank: 1, efficacy: 'Falha relativamente maior no uso típico', note: 'O método dos Dias Fixos evita relações nos dias 8 a 19 do ciclo e pede ciclos de 26 a 32 dias.' }
+            { id: 'fab_sym', name: 'Métodos baseados em sintomas (muco cervical, Dois Dias, sintotérmico)', short: 'Sintomas', hormonal: false, larc: false, efficacyRank: 0, note: 'Exige treinamento do casal e observação diária.' },
+            { id: 'fab_cal', name: 'Métodos baseados em calendário (Ritmo, Dias Fixos)', short: 'Calendário', hormonal: false, larc: false, efficacyRank: 1, note: 'O método dos Dias Fixos evita relações nos dias 8 a 19 do ciclo e pede ciclos de 26 a 32 dias.' }
         ],
         links: [
             { q: 'pregnancy', o: 'yes', cats: ['NA', 'NA'], note: 'Os métodos de percepção da fertilidade não se aplicam na gravidez.' },
@@ -145,7 +145,7 @@ export const EXTENSIONS = [
         page: '136–152',
         intro: 'Procedimento cirúrgico pensado para ser permanente: toda mulher deve escolher de forma voluntária e informada, com orientação sobre a permanência e sobre métodos de longa duração muito eficazes. Atenção especial a jovens, nulíparas e mulheres com problemas de saúde mental, inclusive depressão. Considere as leis e normas nacionais. A OMS não restringe de forma absoluta nenhuma condição: usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado). Não protege contra IST nem HIV.',
         methods: [
-            { id: 'tubal', name: 'Esterilização cirúrgica feminina (laqueadura tubária)', short: 'Laqueadura', hormonal: false, larc: true, efficacyRank: 0, efficacy: 'Permanente e muito eficaz', note: 'Deve ser feita por equipe treinada, em serviço adequado, com protocolos de prevenção de infecção.' }
+            { id: 'tubal', name: 'Esterilização cirúrgica feminina (laqueadura tubária)', short: 'Laqueadura', hormonal: false, larc: true, efficacyRank: 0, note: 'Deve ser feita por equipe treinada, em serviço adequado, com protocolos de prevenção de infecção.' }
         ],
         links: [
             { q: 'pregnancy', o: 'yes', cats: ['D'], note: 'Gravidez: adie o procedimento.' },

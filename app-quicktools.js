@@ -63,7 +63,9 @@ function closeQuickTool() {
 }
 
 document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && quickToolState.open) closeQuickTool();
+    if (event.key !== 'Escape' || !quickToolState.open) return;
+    if (window.ContraceptionUI?.closeSheet()) return;
+    closeQuickTool();
 });
 
 /* ---------- Idade gestacional ---------- */

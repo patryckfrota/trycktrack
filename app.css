@@ -2067,6 +2067,43 @@
         .ct-why summary { color: var(--lavender-active); font-size: 12px; font-weight: 650; cursor: pointer; }
         .ct-why p { margin: 8px 0 4px; color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
         .ct-why small { color: var(--color-caption); font-size: 10.5px; }
+        /* Ficha do método (abre ao tocar no cartão) */
+        .ct-method[data-action="method"] { cursor: pointer; transition: transform .15s ease, border-color .15s ease; }
+        .ct-method[data-action="method"]:active { transform: scale(.985); }
+        .ct-method[data-action="method"]:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
+        .ct-more { justify-self: end; color: var(--lavender-active); font-size: 12px; font-weight: 700; }
+        .ct-more i { font-style: normal; margin-left: 2px; }
+        .ct-sheet { position: fixed; inset: 0; z-index: 10010; display: flex; flex-direction: column; background: var(--bg-main); }
+        .ct-sheet[hidden] { display: none; }
+        .ct-sheet-head { flex: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: max(20px, env(safe-area-inset-top)) 16px 12px; border-bottom: 1px solid var(--border-color); background: var(--header-bg); }
+        .ct-sheet-title { display: grid; gap: 1px; min-width: 0; }
+        .ct-sheet-title strong { color: var(--text-main); font-size: 15px; font-weight: 700; }
+        .ct-sheet-title span { color: var(--text-secondary); font-size: 12px; line-height: 1.3; }
+        .ct-sheet-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; width: min(760px, 100%); margin: 0 auto; box-sizing: border-box; padding: 16px 16px max(32px, env(safe-area-inset-bottom)); display: grid; gap: 14px; align-content: start; }
+        .ct-sheet-sec { display: grid; gap: 10px; padding: 16px; border: 1px solid var(--glass-card-border); border-radius: 18px; background: var(--glass-card-bg); box-shadow: var(--glass-card-shadow); }
+        .ct-sheet-sec h3 { margin: 0; color: var(--text-main); font-size: 14.5px; font-weight: 700; }
+        .ct-sheet-sec p { margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 1.6; }
+        .ct-sheet-status { display: flex; align-items: center; gap: 12px; }
+        .ct-sheet-status div { display: grid; gap: 1px; }
+        .ct-sheet-status strong { color: var(--text-main); font-size: 15px; }
+        .ct-sheet-status span:not(.ct-badge) { color: var(--text-secondary); font-size: 12px; }
+        .ct-sheet-sec .ct-reasons { margin: 0; padding: 0; border: 0; }
+        .ct-points { display: grid; gap: 9px; margin: 0; padding-left: 18px; }
+        .ct-points li { color: var(--text-secondary); font-size: 13px; line-height: 1.55; }
+        .ct-cond { border-top: 1px solid var(--border-color); padding-top: 4px; }
+        .ct-cond summary { display: flex; align-items: center; gap: 8px; padding: 10px 0; color: var(--text-main); font-size: 13px; font-weight: 700; cursor: pointer; list-style: none; }
+        .ct-cond summary::-webkit-details-marker { display: none; }
+        .ct-cond summary::after { content: ""; margin-left: auto; width: 7px; height: 7px; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: rotate(45deg); transition: transform .2s ease; }
+        .ct-cond[open] summary::after { transform: rotate(-135deg); }
+        .ct-cond summary em { padding: 1px 8px; border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font-style: normal; font-size: 11px; }
+        .ct-cond-hint { margin-bottom: 8px !important; color: var(--color-caption) !important; font-size: 11.5px !important; }
+        .ct-cond ul { display: grid; gap: 10px; margin: 0 0 8px; padding: 0; list-style: none; }
+        .ct-cond li { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: baseline; }
+        .ct-cond li b { padding: 1px 8px; border-radius: 6px; background: var(--bg-tertiary); color: var(--text-main); font-size: 11px; white-space: nowrap; }
+        .ct-cond li span { color: var(--text-main); font-size: 12.5px; line-height: 1.45; }
+        .ct-cond li small { grid-column: 2; color: var(--color-caption); font-size: 11.5px; line-height: 1.45; }
+        .ct-sti { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12.5px; line-height: 1.55; }
+
         .ct-gguide { margin: 0; padding: 0 2px; color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
         .ct-verdict { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
         .ct-verdict strong { color: var(--text-main); }
@@ -5995,7 +6032,8 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
                voltar fica embaixo da câmera/borda, sem como tocar. */
             .question-player-header,
             .reader-header,
-            .sidebar-header {
+            .sidebar-header,
+            .ct-sheet-head {
                 padding-top: max(66px, calc(env(safe-area-inset-top) + 42px)) !important;
             }
             .sidebar-detail-panel {

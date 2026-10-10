@@ -29,7 +29,8 @@
         family: 'core',
         open: new Set(['perfil']),
         lam: { amenorrhea: false, fullBf: false, lt6m: false },
-        legendOpen: false
+        legendOpen: false,
+        sheet: null
     };
     let root = null;
 
@@ -102,9 +103,9 @@
         const miss = m.misses ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
         const best = m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : '';
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
-        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}">
+        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${best}</div></div>
-            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${reasons}${miss}</article>`;
+            <p class="ct-note">${esc(m.note)}</p>${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
     }
 
     function groupsHtml(res) {
@@ -167,6 +168,60 @@
         return core.methods.filter(m => m.section === 'indicated').length;
     }
 
+    /* ---------- ficha do método (abre ao tocar no cartão) ---------- */
+
+    function findEvaluated(id) {
+        const all = M().evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs });
+        for (const f of Object.values(all)) {
+            const m = f.methods && f.methods.find(x => x.id === id);
+            if (m) return m;
+        }
+        return null;
+    }
+
+    function sheetHtml(id) {
+        const { methodConditions, STI_NOTE } = M();
+        const full = methodConditions(id);
+        const m = findEvaluated(id);
+        if (!full || !m) return '';
+        const info = full.info || { about: [], points: [], source: '' };
+        const hasProfile = M().selectedOptions(state.answers).length > 0;
+        const secTitle = (m.section === 'na') ? 'Não se aplica' : ({ indicated: 'Indicado', depends: 'Depende do caso', discouraged: 'Desaconselhado', contraindicated: 'Contraindicado', caution: 'Com cautela', special: 'Serviço especializado', delay: 'Adiar' })[m.section];
+        const reasons = m.drivers.length
+            ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
+            : `<p class="ct-info">${hasProfile ? 'Nenhuma condição marcada restringe este método.' : 'Marque condições no perfil para ver o que se aplica a esta paciente.'}</p>`;
+        const status = `<section class="ct-sheet-sec"><div class="ct-sheet-status ct-cat${m.category}"><span class="ct-badge">${m.section === 'na' ? '—' : esc(m.display)}</span><div><strong>${esc(secTitle)}</strong><span>${state.phase === 'start' ? 'Para iniciar o método' : 'Para quem já usa (continuação)'}</span></div></div><h3>No perfil atual</h3>${reasons}</section>`;
+        const about = info.about.length ? `<section class="ct-sheet-sec"><h3>Sobre o método</h3>${info.about.map(t => `<p>${esc(t)}</p>`).join('')}</section>` : '';
+        const points = info.points.length ? `<section class="ct-sheet-sec"><h3>Pontos de atenção da OMS</h3><ul class="ct-points">${info.points.map(t => `<li>${esc(t)}</li>`).join('')}</ul></section>` : '';
+        const groups = full.groups.map((g, i) => `<details class="ct-cond"${i === 0 ? ' open' : ''}><summary><span>${esc(g.title)}</span><em>${g.items.length}</em></summary><p class="ct-cond-hint">${esc(g.hint)}</p><ul>${g.items.map(it => `<li><b>${esc(it.display)}</b><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</li>`).join('')}</ul></details>`).join('');
+        const conds = `<section class="ct-sheet-sec"><h3>Quando evitar ou ter cautela</h3><p class="ct-info">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${groups || '<p class="ct-info">Nenhuma condição da tabela restringe este método.</p>'}</section>`;
+        const sti = (info.protects) ? '' : `<p class="ct-sti">${esc(STI_NOTE)}</p>`;
+        return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
+            <div class="ct-sheet-body">${status}${about}${points}${conds}${sti}<p class="ct-source">${esc(info.source)}. Material de apoio ao estudo: não substitui a avaliação clínica nem os protocolos locais.</p></div>`;
+    }
+
+    function openSheet(id) {
+        const el = root && root.querySelector('#ctSheet');
+        if (!el) return;
+        state.sheet = id;
+        el.innerHTML = sheetHtml(id);
+        el.hidden = false;
+        el.querySelector('.ct-sheet-body').scrollTop = 0;
+        el.querySelector('[data-action="sheet-close"]')?.focus({ preventScroll: true });
+    }
+
+    // Retorna true se havia ficha aberta (o Esc do app deixa a página aberta).
+    function closeSheet() {
+        const el = root && root.querySelector('#ctSheet');
+        if (!el || el.hidden) return false;
+        el.hidden = true;
+        el.innerHTML = '';
+        const id = state.sheet;
+        state.sheet = null;
+        root.querySelector(`[data-action="method"][data-id="${id}"]`)?.focus({ preventScroll: true });
+        return true;
+    }
+
     /* ---------- montagem e atualização ---------- */
 
     function shellHtml() {
@@ -192,6 +247,7 @@
                 </section>
                 <section class="ct-result" id="ctResult" aria-label="Resultado" aria-live="polite"></section>
             </div>
+            <div class="ct-sheet" id="ctSheet" hidden role="dialog" aria-modal="true" aria-label="Detalhes do método"></div>
         </div>`;
     }
 
@@ -233,7 +289,11 @@
         const el = event.target.closest('[data-action]');
         if (!el || !root.contains(el)) return;
         const { action, v, q, o } = el.dataset;
-        if (action === 'toggle') {
+        if (action === 'method') {
+            openSheet(el.dataset.id);
+        } else if (action === 'sheet-close') {
+            closeSheet();
+        } else if (action === 'toggle') {
             state.answers = M().toggleAnswer(state.answers, q, o);
             refresh();
         } else if (action === 'phase') {
@@ -266,6 +326,14 @@
         }
     }
 
+    function onKey(event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        const el = event.target.closest?.('[data-action="method"]');
+        if (!el || event.target !== el) return;
+        event.preventDefault();
+        openSheet(el.dataset.id);
+    }
+
     function onInput(event) {
         if (event.target.id !== 'ctSearch') return;
         state.query = event.target.value;
@@ -286,14 +354,18 @@
             root.innerHTML = shellHtml();
             root.addEventListener('click', onClick);
             root.addEventListener('input', onInput);
+            root.addEventListener('keydown', onKey);
             root.addEventListener('toggle', onToggle, true);
             refresh();
         },
+        closeSheet,
         unmount() {
             if (!root) return;
             root.removeEventListener('click', onClick);
             root.removeEventListener('input', onInput);
+            root.removeEventListener('keydown', onKey);
             root.removeEventListener('toggle', onToggle, true);
+            state.sheet = null;
             root = null;
         }
     };
