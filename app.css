@@ -6922,3 +6922,8 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
     #metricasTab .dashboard > #dashboardEvo { grid-column: 1 / -1; grid-row: 2; }
     #metricasTab .dashboard > .dashboard-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* Sem insights (nenhuma regra com amostra suficiente), a Evolução ocupa a linha toda. */
+@media (min-width: 768px) {
+    #metricasTab .dashboard:has(#dashboardInsights[hidden]) > #dashboardEvo { grid-column: 1 / -1; }
+}
