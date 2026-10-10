@@ -1,12 +1,19 @@
 /**
  * Cartão de desempenho em formato Stories (1080 × 1920), desenhado em canvas.
- * O conteúdo importante fica entre y = 210 e y = 1700: o Instagram cobre o
- * topo (perfil) e a base (campo de resposta) com a própria interface.
+ *
+ * Direção: um único protagonista — o número de questões da semana, em
+ * serifa grande (Literata, a mesma da leitura do app) — e tudo o mais em
+ * silêncio: sem caixas, sem rótulos em caixa-alta, hierarquia só por
+ * tamanho e espaço; fios finos apenas onde separam blocos de leitura.
+ * Alinhado à esquerda numa única coluna de margem 96.
+ *
+ * O conteúdo fica entre y = 200 e y = 1780: o Instagram cobre o topo
+ * (perfil) e a base (campo de resposta) com a própria interface.
  *
  * data: {
  *   period, weekTotal, weekDiff (null | número), accuracy (null | %), accuracyDelta (null | pts),
  *   streak, bestStreak, hitDays, goal, weekDays: [{ label, n, state }],
- *   heat: number[7][16] (nível 0–4, -1 = futuro), months: [{ label, n, partial }],
+ *   heat: number[7][16] (nível 0–4, -1 = futuro),
  *   answered, overall (%|null), studyDays, studyTime ('12h 30m'|''),
  *   bestArea: { name, acc, n } | null, weakArea: { name, acc, n } | null,
  *   fonts: { base, display }, logo: HTMLImageElement | null
@@ -16,13 +23,14 @@ export const STORY_W = 1080;
 export const STORY_H = 1920;
 
 const C = {
-    bg0: '#100e18', bg1: '#1b1630', glow: '#7c5cff',
-    panel: 'rgba(255,255,255,0.055)', stroke: 'rgba(255,255,255,0.10)',
-    text: '#F3F0FB', muted: '#A9A2C0', accent: '#B9A6FF', good: '#5FD39A', warn: '#F2B25F',
-    heat: ['rgba(255,255,255,0.07)', 'rgba(185,166,255,0.28)', 'rgba(185,166,255,0.52)', 'rgba(185,166,255,0.78)', '#CDBFFF']
+    bg: '#0E0C15', bgTop: '#17122A',
+    text: '#F4F1FA', muted: '#8F88A8', faint: 'rgba(244,241,250,0.12)',
+    accent: '#B9A6FF', good: '#6FD6A3', warn: '#F0B766',
+    heat: ['rgba(244,241,250,0.07)', 'rgba(185,166,255,0.30)', 'rgba(185,166,255,0.55)', 'rgba(185,166,255,0.80)', '#D6CBFF']
 };
 
 function roundRect(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
     ctx.beginPath();
     ctx.moveTo(x + r, y);
     ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -32,13 +40,7 @@ function roundRect(ctx, x, y, w, h, r) {
     ctx.closePath();
 }
 
-function panel(ctx, x, y, w, h) {
-    roundRect(ctx, x, y, w, h, 36);
-    ctx.fillStyle = C.panel; ctx.fill();
-    ctx.lineWidth = 2; ctx.strokeStyle = C.stroke; ctx.stroke();
-}
-
-function text(ctx, str, x, y, { size, weight = 600, color = C.text, align = 'left', font, spacing = 0 }) {
+function text(ctx, str, x, y, { size, weight = 500, color = C.text, align = 'left', font, spacing = 0 }) {
     ctx.font = `${weight} ${size}px ${font}`;
     ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = 'alphabetic';
     ctx.letterSpacing = `${spacing}px`;
@@ -46,117 +48,96 @@ function text(ctx, str, x, y, { size, weight = 600, color = C.text, align = 'lef
     ctx.letterSpacing = '0px';
 }
 
-const label = (ctx, str, x, y, font, align = 'left') => text(ctx, str.toUpperCase(), x, y, { size: 24, weight: 700, color: C.muted, spacing: 3, font, align });
+const hairline = (ctx, x, y, w) => { ctx.fillStyle = C.faint; ctx.fillRect(x, y, w, 2); };
 
-function delta(value, unit) {
+function trend(value, word) {
     if (value == null) return null;
-    if (value === 0) return { str: `igual ${unit.same}`, color: C.muted };
-    return { str: `${value > 0 ? '+' : '−'}${Math.abs(value)} ${unit.word ? `${unit.word} ` : ''}${unit.vs}`, color: value > 0 ? C.good : C.warn };
+    if (value === 0) return { str: 'igual ao anterior', color: C.muted };
+    return { str: `${value > 0 ? '+' : '−'}${Math.abs(value)}${word} vs. anterior`, color: value > 0 ? C.good : C.warn };
 }
 
 export function drawStoryCard(canvas, d) {
     const ctx = canvas.getContext('2d');
     canvas.width = STORY_W; canvas.height = STORY_H;
-    const F = d.fonts.base, D = d.fonts.display;
+    const F = d.fonts.base, S = d.fonts.display;
     const nf = n => n.toLocaleString('pt-BR');
+    const X = 96, W = STORY_W - 2 * X, R = X + W;
 
-    // Fundo: degradê + brilho lavanda no alto e outro, menor, embaixo.
+    // Fundo: um degradê quase imperceptível e um único brilho no canto superior.
     const bg = ctx.createLinearGradient(0, 0, 0, STORY_H);
-    bg.addColorStop(0, C.bg1); bg.addColorStop(1, C.bg0);
+    bg.addColorStop(0, C.bgTop); bg.addColorStop(0.55, C.bg); bg.addColorStop(1, C.bg);
     ctx.fillStyle = bg; ctx.fillRect(0, 0, STORY_W, STORY_H);
-    for (const [cx, cy, r, a] of [[880, 160, 760, 0.34], [120, 1780, 620, 0.2]]) {
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        g.addColorStop(0, `rgba(124,92,255,${a})`); g.addColorStop(1, 'rgba(124,92,255,0)');
-        ctx.fillStyle = g; ctx.fillRect(0, 0, STORY_W, STORY_H);
+    const glow = ctx.createRadialGradient(STORY_W, 0, 0, STORY_W, 0, 900);
+    glow.addColorStop(0, 'rgba(124,92,255,0.22)'); glow.addColorStop(1, 'rgba(124,92,255,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0, 0, STORY_W, STORY_H);
+
+    // Marca e período.
+    if (d.logo) ctx.drawImage(d.logo, X, 196, 56, 56);
+    text(ctx, 'trycktrack', X + (d.logo ? 76 : 0), 237, { size: 38, weight: 700, font: S, spacing: -0.4 });
+    text(ctx, d.period, R, 237, { size: 28, weight: 500, color: C.muted, align: 'right', font: F });
+
+    // Protagonista: questões da semana.
+    text(ctx, nf(d.weekTotal), X - 8, 590, { size: 300, weight: 400, font: S, spacing: -10 });
+    text(ctx, d.weekTotal === 1 ? 'questão respondida nesta semana' : 'questões respondidas nesta semana', X, 656, { size: 36, weight: 500, font: F });
+    if (d.weekDiff != null) {
+        const up = d.weekDiff > 0, same = d.weekDiff === 0;
+        text(ctx, same ? 'o mesmo da semana passada' : `${up ? '+' : '−'}${nf(Math.abs(d.weekDiff))} vs. semana passada`, X, 704, { size: 30, weight: 500, color: same ? C.muted : up ? C.good : C.warn, font: F });
     }
 
-    const X = 72, W = STORY_W - 144;
-
-    // Cabeçalho: marca + período.
-    if (d.logo) ctx.drawImage(d.logo, X, 196, 68, 68);
-    text(ctx, 'trycktrack', X + (d.logo ? 88 : 0), 246, { size: 48, weight: 700, font: D });
-    text(ctx, d.period, STORY_W - X, 246, { size: 28, weight: 600, color: C.muted, align: 'right', font: F });
-
-    // Destaque: questões da semana.
-    let y = 300;
-    panel(ctx, X, y, W, 300);
-    label(ctx, 'Questões nesta semana', X + 48, y + 60, F);
-    text(ctx, nf(d.weekTotal), X + 48, y + 200, { size: 150, weight: 800, font: F, color: C.text });
-    const wd = delta(d.weekDiff, { word: '', vs: 'vs. semana passada', same: 'à semana passada' });
-    if (wd) text(ctx, wd.str, X + 48, y + 258, { size: 30, weight: 600, color: wd.color, font: F });
-    // Barras por dia da semana (domingo a sábado) à direita.
+    // Dias da semana: sete barras finas ocupando a largura da coluna.
     const maxN = Math.max(d.goal, ...d.weekDays.map(x => x.n), 1);
-    const bx = X + W - 48 - 7 * 52, by = y + 222, bh = 124;
+    const slot = W / 7, bw = 44, base = 880, bh = 96;
     d.weekDays.forEach((day, i) => {
-        const x = bx + i * 52, h = day.state === 'future' ? 0 : Math.max(day.n ? 10 : 0, bh * (day.n / maxN));
-        roundRect(ctx, x, by - bh, 32, bh, 10); ctx.fillStyle = 'rgba(255,255,255,0.07)'; ctx.fill();
-        if (h) { roundRect(ctx, x, by - h, 32, h, 10); ctx.fillStyle = day.n >= d.goal ? C.good : C.accent; ctx.fill(); }
-        text(ctx, day.label, x + 16, by + 34, { size: 22, weight: 700, color: C.muted, align: 'center', font: F });
+        const x = X + slot * i + (slot - bw) / 2;
+        roundRect(ctx, x, base - bh, bw, bh, 12); ctx.fillStyle = 'rgba(244,241,250,0.06)'; ctx.fill();
+        if (day.state !== 'future' && day.n) {
+            const h = Math.max(12, bh * Math.min(1, day.n / maxN));
+            roundRect(ctx, x, base - h, bw, h, 12); ctx.fillStyle = day.n >= d.goal ? C.good : C.accent; ctx.fill();
+        }
+        text(ctx, day.label, x + bw / 2, base + 42, { size: 24, weight: day.isToday ? 700 : 500, color: day.isToday ? C.text : C.muted, align: 'center', font: F });
     });
 
-    // Quatro números: acerto, ofensiva, meta, total.
-    y += 300 + 20;
-    const cw = (W - 20) / 2, ch = 170;
-    const accD = d.accuracy == null ? null : delta(d.accuracyDelta, { word: d.accuracyDelta === 1 || d.accuracyDelta === -1 ? 'ponto' : 'pontos', vs: 'vs. semana anterior', same: 'à semana anterior' });
-    const tiles = [
-        ['Acerto em 7 dias', d.accuracy == null ? '—' : `${d.accuracy}%`, accD?.str || (d.accuracy == null ? 'poucas respostas ainda' : ''), accD?.color || C.muted],
-        ['Ofensiva', `${d.streak}`, `${d.streak === 1 ? 'dia' : 'dias'} seguidos · recorde ${d.bestStreak}`, C.muted],
-        ['Meta diária batida', `${d.hitDays}/7`, `meta de ${nf(d.goal)} por dia`, C.muted],
-        ['Total respondido', nf(d.answered), d.overall == null ? '' : `${d.overall}% de acerto geral`, C.muted]
-    ];
-    tiles.forEach(([lab, value, sub, color], i) => {
-        const x = X + (i % 2) * (cw + 20), ty = y + Math.floor(i / 2) * (ch + 20);
-        panel(ctx, x, ty, cw, ch);
-        label(ctx, lab, x + 36, ty + 52, F);
-        text(ctx, value, x + 36, ty + 116, { size: 70, weight: 800, font: F });
-        if (sub) text(ctx, sub, x + 36, ty + 152, { size: 24, weight: 600, color, font: F });
+    // Três números de apoio, em colunas iguais.
+    hairline(ctx, X, 976, W);
+    const col = W / 3;
+    const accT = d.accuracy == null ? null : trend(d.accuracyDelta, d.accuracyDelta === 1 || d.accuracyDelta === -1 ? ' ponto' : ' pontos');
+    [
+        [d.accuracy == null ? '—' : `${d.accuracy}%`, 'acerto em 7 dias', accT?.str ?? (d.accuracy == null ? 'poucas respostas' : ''), accT?.color],
+        [`${d.streak}`, d.streak === 1 ? 'dia de ofensiva' : 'dias de ofensiva', `recorde de ${d.bestStreak}`, C.muted],
+        [`${d.hitDays}/7`, 'dias com meta batida', `meta de ${nf(d.goal)} por dia`, C.muted]
+    ].forEach(([value, label, sub, color], i) => {
+        const x = X + col * i;
+        text(ctx, value, x, 1096, { size: 104, weight: 400, font: S, spacing: -2 });
+        text(ctx, label, x, 1146, { size: 28, weight: 500, font: F });
+        if (sub) text(ctx, sub, x, 1186, { size: 23, weight: 500, color: color || C.muted, font: F });
     });
 
-    // Calendário de constância (16 semanas).
-    y += 2 * ch + 20 + 20;
-    const heatH = 372;
-    panel(ctx, X, y, W, heatH);
-    label(ctx, 'Constância · 16 semanas', X + 40, y + 60, F);
-    text(ctx, `${d.studyDays} dias estudados${d.studyTime ? ` · ${d.studyTime}` : ''}`, X + W - 40, y + 60, { size: 24, weight: 600, color: C.muted, align: 'right', font: F });
-    const weeks = d.heat[0].length, gap = 8, cell = Math.floor((W - 80 - gap * (weeks - 1)) / weeks), cellH = 30;
-    const hx = X + 40 + Math.floor((W - 80 - (cell * weeks + gap * (weeks - 1))) / 2), hy = y + 92;
+    // Constância: calendário de 16 semanas.
+    hairline(ctx, X, 1250, W);
+    text(ctx, 'Constância', X, 1316, { size: 34, weight: 600, font: F });
+    text(ctx, `${d.studyDays} dias estudados${d.studyTime ? ` · ${d.studyTime}` : ''}`, R, 1316, { size: 26, weight: 500, color: C.muted, align: 'right', font: F });
+    const weeks = d.heat[0].length, gap = 8, cell = (W - gap * (weeks - 1)) / weeks, cellH = 26, hy = 1352;
     for (let r = 0; r < 7; r++) for (let c = 0; c < weeks; c++) {
         const level = d.heat[r][c];
-        roundRect(ctx, hx + c * (cell + gap), hy + r * (cellH + gap), cell, cellH, 9);
-        ctx.fillStyle = level < 0 ? 'rgba(255,255,255,0.025)' : C.heat[level]; ctx.fill();
+        roundRect(ctx, X + c * (cell + gap), hy + r * (cellH + gap), cell, cellH, 8);
+        ctx.fillStyle = level < 0 ? 'rgba(244,241,250,0.03)' : C.heat[level]; ctx.fill();
     }
 
-    // Evolução mensal (barras de questões).
-    y += heatH + 20;
-    const evoH = 262;
-    panel(ctx, X, y, W, evoH);
-    label(ctx, 'Questões por mês', X + 40, y + 60, F);
-    const mx = Math.max(...d.months.map(m => m.n), 1);
-    const slot = (W - 80) / d.months.length, base = y + evoH - 56, maxH = 100;
-    d.months.forEach((m, i) => {
-        const cx = X + 40 + slot * (i + 0.5), h = m.n ? Math.max(10, maxH * (m.n / mx)) : 0, bw = Math.min(68, slot * 0.6);
-        roundRect(ctx, cx - bw / 2, base - maxH, bw, maxH, 14); ctx.fillStyle = 'rgba(255,255,255,0.05)'; ctx.fill();
-        if (h) { roundRect(ctx, cx - bw / 2, base - h, bw, h, 14); ctx.fillStyle = m.partial ? 'rgba(185,166,255,0.6)' : C.accent; ctx.fill(); }
-        if (m.n) text(ctx, nf(m.n), cx, base - h - 12, { size: 24, weight: 700, align: 'center', font: F });
-        text(ctx, m.label, cx, base + 36, { size: 24, weight: 600, color: C.muted, align: 'center', font: F });
-    });
-
-    // Áreas: mais forte e a que pede atenção (só quando há amostra).
-    y += evoH + 20;
-    if (d.bestArea || d.weakArea) {
-        const aw = (W - 20) / 2, ah = 124;
-        [[d.bestArea, 'Área mais forte', C.good], [d.weakArea, 'Pede atenção', C.warn]].forEach(([area, lab, color], i) => {
-            const x = X + i * (aw + 20);
-            panel(ctx, x, y, aw, ah);
-            label(ctx, lab, x + 32, y + 44, F);
-            if (!area) { text(ctx, '—', x + 32, y + 96, { size: 36, weight: 700, color: C.muted, font: F }); return; }
-            let name = area.name; ctx.font = `700 34px ${F}`;
-            while (ctx.measureText(name).width > aw - 150 && name.length > 4) name = name.slice(0, -2);
-            if (name !== area.name) name = `${name.trim()}…`;
-            text(ctx, name, x + 32, y + 96, { size: 32, weight: 700, font: F });
-            text(ctx, `${area.acc}%`, x + aw - 32, y + 96, { size: 44, weight: 800, color, align: 'right', font: F });
-        });
+    // Áreas: duas linhas de leitura, só quando há amostra.
+    const rows = [[d.bestArea, 'Mais forte', C.good], [d.weakArea, 'Pede atenção', C.warn]].filter(([a]) => a);
+    let y = 1650;
+    if (rows.length) hairline(ctx, X, 1590, W);
+    for (const [area, label, color] of rows) {
+        text(ctx, label, X, y, { size: 26, weight: 500, color: C.muted, font: F });
+        let name = area.name; ctx.font = `600 32px ${F}`;
+        while (ctx.measureText(name).width > 440 && name.length > 4) name = name.slice(0, -2);
+        if (name !== area.name) name = `${name.trim()}…`;
+        text(ctx, name, X + 250, y, { size: 32, weight: 600, font: F });
+        text(ctx, `${area.acc}%`, R, y, { size: 36, weight: 600, color, align: 'right', font: F });
+        y += 64;
     }
 
+    // Rodapé: total acumulado.
+    text(ctx, `${nf(d.answered)} questões no total${d.overall == null ? '' : ` · ${d.overall}% de acerto`}`, X, 1792, { size: 26, weight: 500, color: C.muted, font: F });
     return canvas;
 }

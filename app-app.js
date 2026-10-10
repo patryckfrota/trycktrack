@@ -1897,7 +1897,8 @@
             if (button) button.textContent = 'Gerando…';
             try {
                 const data = buildStoryData();
-                await document.fonts.ready;
+                // Canvas não dispara o carregamento de fontes: pede cada peso usado.
+                await Promise.all([`400 100px ${data.fonts.display}`, `700 40px ${data.fonts.display}`, `500 30px ${data.fonts.base}`, `600 30px ${data.fonts.base}`, `700 30px ${data.fonts.base}`].map(f => document.fonts.load(f).catch(() => [])));
                 data.logo = await new Promise(resolve => { const img = new Image(); img.onload = () => resolve(img); img.onerror = () => resolve(null); img.src = 'logo-clean-v2.png'; });
                 const canvas = window.drawStoryCard(document.createElement('canvas'), data);
                 storyBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
