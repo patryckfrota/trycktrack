@@ -459,7 +459,7 @@
                         <div class="dashboard-now-list" id="dashboardNowList" hidden></div>
                     </section>
                     <section class="dashboard-card dashboard-consistency" id="dashboardConsistency" aria-label="Constância">
-                        <div class="dashboard-card-head"><div><strong>Constância</strong><span id="dashboardChartLabel"></span></div><button type="button" class="dashboard-week-share" id="dashboardWeekShare" onclick="shareWeeklySummary(this)">Compartilhar</button></div>
+                        <div class="dashboard-card-head"><div><strong>Constância</strong><span id="dashboardChartLabel"></span></div><button type="button" class="dashboard-week-share" id="dashboardWeekShare" onclick="openStoryShare(this)">Compartilhar</button></div>
                         <div class="dashboard-heat" id="dashboardChart"></div>
                         <div class="dashboard-consistency-foot">
                             <div class="heat-stats">
@@ -1750,6 +1750,8 @@
         window.mergeTrailSettings = mergeTrailSettings;
         // Log de respostas (fonte das métricas do Dashboard) — funções
         // puras em shared/activity-log.js; app-app.js cuida de storage e rede.
+        import { drawStoryCard } from "./shared/story-card.js";
+        window.drawStoryCard = drawStoryCard;
         import { weekSummary, buildInsights, weeklySummaryText, monthlySeries, INSIGHT_CATEGORIES } from "./shared/activity-insights.js";
         window.activityWeekSummary = weekSummary;
         window.activityBuildInsights = buildInsights;
@@ -2012,6 +2014,13 @@
     <dialog class="insights-dialog" id="insightsDialog" aria-labelledby="insightsDialogTitle">
         <div class="insights-dialog-head"><strong id="insightsDialogTitle">Análise completa</strong><button type="button" class="insights-dialog-close" onclick="document.getElementById('insightsDialog').close()" aria-label="Fechar">×</button></div>
         <div class="insights-dialog-body" id="insightsDialogBody"></div>
+    </dialog>
+    <dialog class="insights-dialog story-dialog" id="storyDialog" aria-labelledby="storyDialogTitle">
+        <div class="insights-dialog-head"><strong id="storyDialogTitle">Seu desempenho</strong><button type="button" class="insights-dialog-close" onclick="document.getElementById('storyDialog').close()" aria-label="Fechar">×</button></div>
+        <div class="insights-dialog-body story-dialog-body">
+            <img id="storyPreview" alt="Prévia do cartão de desempenho em formato Stories">
+            <div class="story-actions"><button type="button" class="story-btn is-primary" onclick="shareStoryImage()">Compartilhar</button><button type="button" class="story-btn" onclick="downloadStoryImage()">Baixar imagem</button></div>
+        </div>
     </dialog>
 </body>
 </html>

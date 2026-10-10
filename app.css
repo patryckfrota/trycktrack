@@ -6940,3 +6940,11 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
 .insights-stat span { color: var(--text-secondary); font-size: 10px; line-height: 1.3; }
 .insights-group h3 { margin: 16px 0 2px; color: var(--lavender-active); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
 .insights-foot { margin: 16px 0 0; color: var(--text-secondary); font-size: 10.5px; }
+
+.story-dialog { width: min(440px, calc(100% - 24px)); }
+.story-dialog-body { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.story-dialog-body img { width: auto; max-width: 100%; max-height: 60vh; aspect-ratio: 9 / 16; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-main); }
+.story-actions { display: flex; gap: 10px; width: 100%; }
+.story-btn { flex: 1; padding: 13px 14px; border: 1px solid var(--border-color); border-radius: 14px; background: transparent; color: var(--text-main); font: 700 13px/1 var(--font-family-base); cursor: pointer; }
+.story-btn.is-primary { border-color: transparent; background: var(--lavender-active); color: var(--bg-main); }
+.story-btn:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }

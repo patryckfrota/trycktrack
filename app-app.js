@@ -1835,25 +1835,98 @@
 
         // Web Share onde existe (celular); no resto copia o texto. Cancelar a
         // folha de compartilhar não é erro.
-        async function shareWeeklySummary(button) {
-            if (!dashboardWeekShare) return;
-            const text = window.activityWeeklySummaryText(dashboardWeekShare);
-            // O rótulo original fica guardado uma vez só: capturá-lo a cada toque
-            // faria um segundo toque rápido "restaurar" para o texto temporário.
-            if (!button.dataset.label) button.dataset.label = button.textContent;
-            const flash = label => {
-                clearTimeout(button._flashTimer);
-                button.textContent = label;
-                button._flashTimer = setTimeout(() => { button.textContent = button.dataset.label; }, 1800);
-            };
-            try {
-                if (navigator.share) { await navigator.share({ title: 'Minha semana no trycktrack', text }); return; }
-                await navigator.clipboard.writeText(text);
-                flash('Copiado');
-            } catch (error) {
-                if (error?.name === 'AbortError') return;
-                try { await navigator.clipboard.writeText(text); flash('Copiado'); } catch (_) { flash('Não foi possível'); }
+        // Cartão em formato Stories (1080×1920) com o desempenho: gera a imagem,
+        // mostra a prévia e deixa compartilhar (Web Share com arquivo) ou baixar.
+        function buildStoryData() {
+            const activity = getActivityDerived();
+            const todayIso = localIsoDate();
+            const goal = getDashboardDailyGoal();
+            const week = window.activityWeekSummary(activity.days, todayIso, goal);
+            const windows = window.activityRecentWindows(activity.days, todayIso, 7);
+            const dailyByDate = new Map([...activity.days].map(([date, day]) => [date, day.n]));
+            const streaks = computeStreaks(dailyByDate);
+            const hasRecent = windows.current.ne >= DASHBOARD_MIN_SAMPLE;
+            const pctOf = w => Math.round(window.activityWindowAccuracy(w) * 100);
+            const areaList = activeTrackCapsule === 'curso' ? DASHBOARD_AREAS_CURSO : DASHBOARD_AREAS;
+
+            const today = new Date(); today.setHours(12, 0, 0, 0);
+            const first = new Date(today); first.setDate(first.getDate() - today.getDay() - (DASHBOARD_HEAT_WEEKS - 1) * 7);
+            const heat = Array.from({ length: 7 }, () => []);
+            for (let i = 0; i < DASHBOARD_HEAT_WEEKS * 7; i++) {
+                const date = new Date(first); date.setDate(first.getDate() + i);
+                const count = dailyByDate.get(localIsoDate(date)) || 0, ratio = count / goal;
+                heat[i % 7].push(date > today ? -1 : count === 0 ? 0 : ratio >= 1 ? 4 : ratio >= 0.5 ? 3 : ratio >= 0.25 ? 2 : 1);
             }
+
+            const nowMs = Date.now(), perArea = new Map();
+            for (const e of getActivityLog().events) {
+                const w = classifyQuestionForDashboard(e.q);
+                if (!w || w.track !== activeTrackCapsule || nowMs - Date.parse(e.t) > 60 * 86400000) continue;
+                const row = perArea.get(w.key) || { n: 0, c: 0 }; row.n += 1; row.c += e.c; perArea.set(w.key, row);
+            }
+            const ranked = [...perArea].filter(([, r]) => r.n >= 15)
+                .map(([key, r]) => ({ name: areaList.find(([slug]) => slug === key)?.[1] || key, acc: Math.round(r.c / r.n * 100), n: r.n })).sort((a, b) => b.acc - a.acc);
+            const sunday = new Date(today); sunday.setDate(sunday.getDate() - today.getDay());
+            const saturday = new Date(sunday); saturday.setDate(sunday.getDate() + 6);
+            const short = d => d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '');
+            const minutes = Number(getQuestionStats().studyMinutes || 0);
+            const studyDays = [...activity.days.values()].filter(d => d.n > 0).length;
+            const style = getComputedStyle(document.body);
+            return {
+                period: `${short(sunday)} a ${short(saturday)}`,
+                weekTotal: week.total,
+                weekDiff: week.previous ? week.total - week.previous : null,
+                accuracy: hasRecent ? pctOf(windows.current) : null,
+                accuracyDelta: hasRecent && windows.previous.ne >= DASHBOARD_MIN_SAMPLE ? pctOf(windows.current) - pctOf(windows.previous) : null,
+                streak: streaks.current, bestStreak: streaks.best, hitDays: week.hitDays, goal,
+                weekDays: week.dots, heat,
+                months: window.activityMonthlySeries(activity.days, todayIso, 6, 1).map(r => ({ label: new Date(r.year, r.month, 1).toLocaleDateString('pt-BR', { month: 'short' }).replace('.', ''), n: r.n, partial: r.partial })),
+                answered: activity.answered,
+                overall: activity.answered ? Math.round(activity.correct / activity.answered * 100) : null,
+                studyDays, studyTime: minutes ? formatStudyTime(minutes) : '',
+                bestArea: ranked[0] || null,
+                weakArea: ranked.length > 1 ? ranked[ranked.length - 1] : null,
+                fonts: { base: style.fontFamily || 'sans-serif', display: getComputedStyle(document.querySelector('.logo-wordmark') || document.body).fontFamily }
+            };
+        }
+
+        let storyBlob = null;
+
+        async function openStoryShare(button) {
+            if (button && !button.dataset.label) button.dataset.label = button.textContent;
+            if (button) button.textContent = 'Gerando…';
+            try {
+                const data = buildStoryData();
+                await document.fonts.ready;
+                data.logo = await new Promise(resolve => { const img = new Image(); img.onload = () => resolve(img); img.onerror = () => resolve(null); img.src = 'logo-clean-v2.png'; });
+                const canvas = window.drawStoryCard(document.createElement('canvas'), data);
+                storyBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                const img = document.getElementById('storyPreview');
+                if (img.src.startsWith('blob:')) URL.revokeObjectURL(img.src);
+                img.src = URL.createObjectURL(storyBlob);
+                document.getElementById('storyDialog').showModal();
+            } catch (_) {
+                alert('Não foi possível gerar a imagem.');
+            } finally {
+                if (button) button.textContent = button.dataset.label;
+            }
+        }
+
+        async function shareStoryImage() {
+            if (!storyBlob) return;
+            const file = new File([storyBlob], 'meu-desempenho-trycktrack.png', { type: 'image/png' });
+            try {
+                if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: 'Meu desempenho no trycktrack' }); return; }
+            } catch (error) { if (error?.name === 'AbortError') return; }
+            downloadStoryImage();
+        }
+
+        function downloadStoryImage() {
+            if (!storyBlob) return;
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(storyBlob); a.download = 'meu-desempenho-trycktrack.png';
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(a.href), 4000);
         }
 
         // ---------- Evolução mensal ----------
