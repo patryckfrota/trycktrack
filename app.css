@@ -1043,6 +1043,7 @@
         .dashboard-insight { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-top: 1px solid var(--border-color); }
         .dashboard-insight:first-child { border-top: 0; }
         .dashboard-insight p { margin: 0; color: var(--text-main); font-size: 12px; line-height: 1.45; }
+        .dashboard-insights-empty { margin: 0; color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
         .dashboard-insight-mark { flex: none; width: 8px; height: 8px; margin-top: 5px; border-radius: 50%; background: var(--lavender-active); }
         .dashboard-insight.is-warn .dashboard-insight-mark { background: var(--warning); }
         .dashboard-insight.is-good .dashboard-insight-mark { background: var(--success); }
@@ -6923,7 +6924,3 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
     #metricasTab .dashboard > .dashboard-areas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* Sem insights (nenhuma regra com amostra suficiente), a Evolução ocupa a linha toda. */
-@media (min-width: 768px) {
-    #metricasTab .dashboard:has(#dashboardInsights[hidden]) > #dashboardEvo { grid-column: 1 / -1; }
-}

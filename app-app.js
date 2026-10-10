@@ -1986,10 +1986,10 @@
                 streakCurrent: streaks.current, track: activeTrackCapsule, classify: classifyQuestionForDashboard,
                 areaName: (track, key) => areaList.find(([slug]) => slug === key)?.[1] || key
             });
-            document.getElementById('dashboardInsights').hidden = !insights.length;
-            document.getElementById('dashboardInsightsList').innerHTML = insights.map(item =>
+            document.getElementById('dashboardInsights').hidden = false;
+            document.getElementById('dashboardInsightsList').innerHTML = insights.length ? insights.map(item =>
                 `<div class="dashboard-insight is-${item.kind}"><span class="dashboard-insight-mark"></span><p>${escapeHtml(item.text)}</p></div>`
-            ).join('');
+            ).join('') : '<p class="dashboard-insights-empty">Continue respondendo questões nos próximos dias: os insights aparecem quando há respostas suficientes para comparar seu desempenho por área, horário e dia da semana.</p>';
         }
 
         function renderDashboard() {
