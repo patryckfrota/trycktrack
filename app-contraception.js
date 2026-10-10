@@ -173,7 +173,9 @@
     }
 
     function familyNavHtml() {
-        return `<nav class="ct-fams" aria-label="Famílias de métodos">${FAMILIES.map(f => `<button type="button" class="ct-fam${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}">${f.title}</button>`).join('')}</nav>`;
+        const cur = FAMILIES.find(f => f.id === state.family);
+        const rows = FAMILIES.map(f => `<button type="button" class="ct-famrow${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}"><span><strong>${f.title}</strong><small>${f.sub}</small></span><i aria-hidden="true">✓</i></button>`).join('');
+        return `<details class="ct-famsel"><summary><span class="ct-famsel-label">Tipo de método</span><strong>${cur.title}</strong><small>${cur.sub}</small></summary><div class="ct-famlist">${rows}</div></details>`;
     }
 
     function lamHtml() {
@@ -246,7 +248,7 @@
             body = `${banner}${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
-        return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><p class="ct-fam-sub">${esc(fam.sub)}</p><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
+        return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
     }
 
     function resultBadge() {

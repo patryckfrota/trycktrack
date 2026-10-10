@@ -2051,11 +2051,24 @@
         .ct-source { margin: 0 2px; color: var(--color-caption); font-size: 11px; line-height: 1.55; }
 
         /* Famílias de métodos, explicações e selos (contracepção) */
-        .ct-fams { display: flex; flex-wrap: wrap; gap: 8px; }
-        .ct-fam { min-height: 44px; padding: 0 16px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; }
-        .ct-fam.on { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
-        .ct-fam:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
-        .ct-fam-sub { margin: 2px 0 8px; color: var(--text-secondary); font-size: 13px; }
+        .ct-famsel { border: 1px solid var(--glass-card-border); border-radius: 16px; background: var(--glass-card-bg); box-shadow: var(--glass-card-shadow); }
+        .ct-famsel > summary { position: relative; display: grid; gap: 2px; min-height: 44px; padding: 12px 44px 12px 16px; cursor: pointer; list-style: none; }
+        .ct-famsel > summary::-webkit-details-marker { display: none; }
+        .ct-famsel > summary::after { content: ''; position: absolute; right: 18px; top: 50%; width: 8px; height: 8px; margin-top: -6px; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: rotate(45deg); transition: transform .2s; }
+        .ct-famsel[open] > summary::after { transform: rotate(-135deg); margin-top: -2px; }
+        .ct-famsel > summary:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; border-radius: 16px; }
+        .ct-famsel-label { color: var(--text-muted); font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        .ct-famsel > summary strong { color: var(--text-main); font-size: 16px; font-weight: 700; }
+        .ct-famsel > summary small { color: var(--text-secondary); font-size: 12.5px; }
+        .ct-famlist { display: grid; border-top: 1px solid var(--glass-card-border); }
+        .ct-famrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 10px 16px; border: 0; border-top: 1px solid var(--glass-card-border); background: transparent; color: var(--text-secondary); font: inherit; text-align: left; cursor: pointer; }
+        .ct-famrow:first-child { border-top: 0; }
+        .ct-famrow span { display: grid; gap: 1px; }
+        .ct-famrow strong { color: var(--text-main); font-size: 14.5px; font-weight: 700; }
+        .ct-famrow small { font-size: 12px; }
+        .ct-famrow i { font-style: normal; font-weight: 800; color: transparent; }
+        .ct-famrow.on strong, .ct-famrow.on i { color: var(--lavender-active); }
+        .ct-famrow:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: -2px; }
         .ct-intro { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
         .ct-info { margin: 0; color: var(--text-secondary); font-size: 12.5px; line-height: 1.55; }
         .ct-notice { padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--warning); font-size: 12.5px; font-weight: 600; line-height: 1.5; }
