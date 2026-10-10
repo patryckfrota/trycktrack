@@ -23,18 +23,23 @@ export const MEC_SOURCE = {
     scope: 'Tabela-resumo, p. 159–175'
 };
 
-// Ordem = colunas da tabela da OMS.
+// Ordem = colunas da tabela da OMS (a coluna "coc" vale para pílula, adesivo e anel).
 export const METHOD_IDS = ['coc', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng'];
+
+// Métodos que aparecem como cartões, cada um ligado a uma coluna (column).
+export const METHOD_LIST = ['coc', 'patch', 'cvr', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng'];
 
 // efficacyRank: desempate por eficácia em uso típico (menor = mais eficaz).
 export const METHODS = {
-    coc: { id: 'coc', name: 'Combinado oral, adesivo ou anel vaginal', short: 'Combinado', hormonal: true, larc: false, efficacyRank: 5, note: 'Depende de uso regular. Contém estrogênio.' },
-    cic: { id: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, efficacyRank: 4, note: 'Aplicação a cada 4 semanas. Contém estrogênio.' },
-    pop: { id: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, efficacyRank: 6, note: 'Janela de 3 horas para tomar (12 horas na de desogestrel 75 µg).' },
-    dmpa: { id: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, efficacyRank: 3, note: 'A cada 3 meses (NET-EN, a cada 2). A ovulação pode demorar até 1 ano para voltar depois de parar.' },
-    imp: { id: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, efficacyRank: 0, note: 'Dura de 3 a 5 anos conforme o implante. Pode causar sangramento irregular.' },
-    cu: { id: 'cu', name: 'DIU de cobre', short: 'DIU de cobre', hormonal: false, larc: true, efficacyRank: 2, note: 'Sem hormônio. Pode aumentar o fluxo e a cólica.' },
-    lng: { id: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, efficacyRank: 1, note: 'Amenorreia e sangramento irregular são comuns. Costuma reduzir a dismenorreia.' }
+    coc: { id: 'coc', column: 'coc', name: 'Pílula combinada', short: 'Pílula combinada', hormonal: true, larc: false, efficacyRank: 5, note: 'Depende de uso diário regular. Contém estrogênio.' },
+    patch: { id: 'patch', column: 'coc', name: 'Adesivo combinado', short: 'Adesivo', hormonal: true, larc: false, efficacyRank: 5, note: 'Troca semanal, em ciclos de 3 semanas com 1 semana sem adesivo. Contém estrogênio.' },
+    cvr: { id: 'cvr', column: 'coc', name: 'Anel vaginal combinado', short: 'Anel vaginal', hormonal: true, larc: false, efficacyRank: 5, note: 'Fica 3 semanas na vagina, com 1 semana de intervalo. Contém estrogênio.' },
+    cic: { id: 'cic', column: 'cic', name: 'Injetável combinado mensal', short: 'Injetável mensal', hormonal: true, larc: false, efficacyRank: 4, note: 'Aplicação a cada 4 semanas. Contém estrogênio.' },
+    pop: { id: 'pop', column: 'pop', name: 'Pílula só de progestagênio', short: 'Minipílula', hormonal: true, larc: false, efficacyRank: 6, note: 'Janela de 3 horas para tomar (12 horas na de desogestrel 75 µg).' },
+    dmpa: { id: 'dmpa', column: 'dmpa', name: 'Injetável trimestral (DMPA / NET-EN)', short: 'Injetável trimestral', hormonal: true, larc: false, efficacyRank: 3, note: 'A cada 3 meses (NET-EN, a cada 2). A ovulação pode demorar até 1 ano para voltar depois de parar.' },
+    imp: { id: 'imp', column: 'imp', name: 'Implante subdérmico (levonorgestrel ou etonogestrel)', short: 'Implante', hormonal: true, larc: true, efficacyRank: 0, note: 'Dura de 3 a 5 anos conforme o implante. Pode causar sangramento irregular.' },
+    cu: { id: 'cu', column: 'cu', name: 'DIU de cobre', short: 'DIU de cobre', hormonal: false, larc: true, efficacyRank: 2, note: 'Sem hormônio. Pode aumentar o fluxo e a cólica.' },
+    lng: { id: 'lng', column: 'lng', name: 'DIU de levonorgestrel (SIU)', short: 'DIU-LNG', hormonal: true, larc: true, efficacyRank: 1, note: 'Amenorreia e sangramento irregular são comuns. Costuma reduzir a dismenorreia.' }
 };
 
 // Significado das categorias (Box 1 da OMS).

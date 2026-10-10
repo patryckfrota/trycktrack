@@ -104,19 +104,42 @@ export const NO_RECOMMENDATION = {
  */
 export const METHOD_INFO = {
     coc: {
-        subtitle: 'Pílula, adesivo ou anel vaginal',
+        subtitle: 'Pílula combinada oral (estrogênio + progestagênio)',
         about: [
-            'As recomendações da OMS valem para COC de baixa dose (até 35 µg de etinilestradiol) e são as mesmas para todas as formulações, qualquer que seja o progestagênio.',
-            'O TEV é raro em mulheres em idade reprodutiva, mas todos os COCs o aumentam em relação a não usar. Levonorgestrel, noretisterona e norgestimato associam-se ao menor risco, com diferenças absolutas muito pequenas. O risco arterial pequeno não parece variar com o tipo de progestagênio.',
-            'Adesivo e anel vaginal têm perfil de segurança e farmacocinética comparáveis aos COCs de formulação semelhante, por isso receberam as mesmas categorias (julgamento preliminar da OMS, a ser reavaliado).'
+            'As recomendações da OMS valem para pílulas de baixa dose (até 35 µg de etinilestradiol) e são as mesmas para todas as formulações, qualquer que seja o progestagênio.',
+            'O TEV é raro em mulheres em idade reprodutiva, mas todos os COCs o aumentam em relação a não usar. Levonorgestrel, noretisterona e norgestimato associam-se ao menor risco, com diferenças absolutas muito pequenas. O risco arterial pequeno não parece variar com o tipo de progestagênio.'
         ],
         points: [
-            'Adesivo: desconforto mamário e reação na pele no local, transitórios, em menos de 25% das usuárias.',
-            'Adesivo: evidência limitada sugere que a eficácia pode ser menor em mulheres com 90 kg ou mais.',
-            'Anel: em mulheres obesas (IMC ≥ 30), o ganho de peso não diferiu do observado com COC.',
-            'Se escolher COC com anticonvulsivante indutor ou rifamicina, use preparação com pelo menos 30 µg de etinilestradiol (e prefira outro método em uso prolongado).'
+            'Com anticonvulsivante indutor ou rifamicina, use preparação com pelo menos 30 µg de etinilestradiol (e prefira outro método em uso prolongado).',
+            'Usuárias de pílula costumam ter regime de 21 a 24 dias de hormônio e 4 a 7 dias sem hormônio; esquemas com menos ou nenhum dia sem hormônio também existem.'
         ],
         source: 'OMS, MEC 2025, seção 5.1 (p. 21–46)'
+    },
+    patch: {
+        subtitle: 'Adesivo transdérmico combinado',
+        about: [
+            'Libera 20 µg de etinilestradiol e 150 µg de norelgestromina por dia. Tem perfil de segurança e farmacocinética comparáveis aos COCs de formulação semelhante, por isso recebeu as mesmas categorias (julgamento preliminar da OMS, a ser reavaliado).',
+            'Costuma ser usado por 3 semanas seguidas, com 1 semana sem adesivo.'
+        ],
+        points: [
+            'Desconforto mamário e reação na pele no local do adesivo são transitórios e ocorrem em menos de 25% das usuárias.',
+            'Evidência limitada sugere que a eficácia pode ser menor em mulheres com 90 kg ou mais.',
+            'Há poucos dados sobre segurança em mulheres com condições médicas específicas e sobre efeitos a longo prazo.'
+        ],
+        source: 'OMS, MEC 2025, seção 5.1.3 (p. 22–23)'
+    },
+    cvr: {
+        subtitle: 'Anel vaginal combinado',
+        about: [
+            'Libera 15 µg de etinilestradiol e 120 µg de etonogestrel por dia. Em mulheres saudáveis tem perfil de segurança e efeitos sobre a função ovariana comparáveis aos COCs de formulação semelhante, por isso recebeu as mesmas categorias (julgamento preliminar da OMS, a ser reavaliado).',
+            'Costuma ser usado por 3 semanas, com 1 semana sem anel.'
+        ],
+        points: [
+            'Em mulheres obesas (IMC ≥ 30), o ganho de peso não diferiu do observado com COC.',
+            'Evidência limitada após aborto médico ou cirúrgico não mostrou eventos adversos graves nem infecção em 3 ciclos, e em mulheres com lesão intraepitelial escamosa de baixo grau o anel não piorou a condição.',
+            'Há poucos dados sobre segurança em mulheres com condições médicas específicas e sobre efeitos a longo prazo.'
+        ],
+        source: 'OMS, MEC 2025, seção 5.1.3 (p. 22–23)'
     },
     cic: {
         subtitle: 'Injetável combinado, a cada 4 semanas',

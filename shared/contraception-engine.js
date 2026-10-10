@@ -13,9 +13,10 @@
  * contraception-extensions.js (barreira, emergência, percepção da
  * fertilidade), que reaproveitam as mesmas respostas.
  */
-import { METHOD_IDS, METHODS, SECTIONS } from './contraception-data.js';
+import { METHOD_IDS, METHOD_LIST, METHODS, SECTIONS } from './contraception-data.js';
 import { EXTENSIONS, LAM } from './contraception-extensions.js';
 import { NO_RECOMMENDATION, METHOD_INFO } from './contraception-content.js';
+import { RATES, typicalRate, effectCategory } from './contraception-rates.js';
 import { normalizeSearchText } from './text-normalize.js';
 
 /* ---------- escalas de resultado ---------- */
@@ -147,10 +148,11 @@ export function countAnswered(answers, sectionId) {
 // Descreve de onde vêm as células de cada conjunto (principal ou extensão).
 function coreSet() {
     return {
-        id: 'core', scale: 'mec', methods: METHOD_IDS.map(id => METHODS[id]),
-        cellsFor(item, col) {
+        id: 'core', scale: 'mec', methods: METHOD_LIST.map(id => METHODS[id]),
+        // pílula, adesivo e anel compartilham a coluna "coc" da tabela da OMS
+        cellsFor(item, idx) {
             if (item.question.family) return [];
-            return [{ cell: item.option.cats[col], note: null }];
+            return [{ cell: item.option.cats[METHOD_IDS.indexOf(METHOD_LIST.map(id => METHODS[id])[idx].column)], note: null }];
         }
     };
 }
@@ -195,7 +197,9 @@ function evaluateSet(set, selected, phase, prefs) {
         }
         drivers.sort((a, b) => b.max - a.max);
         const misses = !!((prefs.noHormone && method.hormonal) || (prefs.longActing && !method.larc));
-        return { ...method, scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
+        const rates = RATES[method.id] || null;
+        const typical = typicalRate(method.id);
+        return { ...method, rates, typical, effectCategory: effectCategory(typical), efficacyRank: typical ?? method.efficacyRank ?? 99, scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
     }).sort((a, b) => sectionRank[a.section] - sectionRank[b.section]
         || a.misses - b.misses
         || a.category - b.category
@@ -212,6 +216,13 @@ function noticesFor(selected) {
 export function evaluate(answers = {}, { phase = 'start', prefs = {} } = {}) {
     const selected = selectedOptions(answers);
     const { methods, groups } = evaluateSet(coreSet(), selected, phase, prefs);
+    // "Maior eficácia entre os indicados": menor taxa de gravidez no uso típico (OMS, SPR 2025,
+    // tabela 1.1). Métodos sem taxa na tabela (injetável mensal) não concorrem. A OMS não define
+    // um método "melhor": é só um desempate de eficácia entre os que a paciente pode usar.
+    const ranked = methods.filter(m => m.section === 'indicated' && !m.misses && typeof m.typical === 'number')
+        .sort((a, b) => a.typical - b.typical || (a.rates[0].perfect ?? 99) - (b.rates[0].perfect ?? 99));
+    const top = ranked[0];
+    methods.forEach(m => { m.best = m === top && selected.some(s => !s.question.family); });
     return {
         id: 'core', phase, selected, methods, groups,
         notices: noticesFor(selected),
@@ -234,7 +245,7 @@ export function evaluateAll(answers = {}, opts = {}) {
 /* ---------- ficha do método ---------- */
 
 function setOf(methodId) {
-    if (METHOD_IDS.includes(methodId)) return coreSet();
+    if (METHOD_LIST.includes(methodId)) return coreSet();
     const ext = EXTENSIONS.find(x => x.methods.some(m => m.id === methodId));
     return ext ? extensionSet(ext) : null;
 }

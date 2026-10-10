@@ -31,7 +31,10 @@
         open: new Set(['perfil']),
         lam: { amenorrhea: false, fullBf: false, lt6m: false },
         legendOpen: false,
-        sheet: null
+        sheet: null,
+        sheetTab: 'summary',
+        useIdx: 0,
+        limitIdx: 0
     };
     let root = null;
 
@@ -103,8 +106,8 @@
             : '';
         const miss = m.misses ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
-        return `<article class="ct-method ${cls}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
-            <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4></div></div>
+        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
+            <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : ''}</div></div>
             <p class="ct-note">${esc(m.note)}</p>${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
     }
 
@@ -130,14 +133,18 @@
 
     function ciHtml() {
         const { COITUS_INTERRUPTUS: CI } = M();
-        return `<p class="ct-intro">${esc(CI.intro)}</p><section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
+        const r = M().TEXT_RATES.withdrawal;
+        const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${num(r.perfect)}</b> com uso perfeito, <b>${num(r.typical)}</b> no uso típico (EUA) e <b>${num(r.intl)}</b> no uso típico internacional (OMS, SPR 2025).</p>`;
+        return `<p class="ct-intro">${esc(CI.intro)}</p>${rate}<section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
     }
 
     function vasHtml() {
         const { VASECTOMY: V } = M();
         const when = V.when.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
         const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span>${esc(g.label)} (${g.cat})</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li><b>${g.cat}</b><span>${esc(it)}</span></li>`).join('')}</ul></details>`).join('');
-        return `<p class="ct-intro">${esc(V.intro)}</p><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+        const r = M().TEXT_RATES.vasectomy;
+        const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${num(r.perfect)}</b> com uso perfeito e <b>${num(r.typical)}</b> no uso típico (OMS, SPR 2025).</p>`;
+        return `<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {
@@ -189,37 +196,119 @@
         return null;
     }
 
-    function sheetHtml(id) {
-        const { methodConditions, STI_NOTE } = M();
-        const full = methodConditions(id);
-        const m = findEvaluated(id);
-        if (!full || !m) return '';
-        const info = full.info || { about: [], points: [], source: '' };
+    // Texto corrido -> frases em lista, e destaque do que decide a conduta.
+    function sentences(text) {
+        return String(text).split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9(])/).filter(Boolean);
+    }
+    function rich(raw) {
+        return esc(raw)
+            .replace(/Classe ([ABC])\b/g, (m, c) => `<mark class="ct-class ct-class-${c}">${m}</mark>`)
+            .replace(/(abstinência ou )?proteção adicional por \d+ dias?/gi, m => `<mark class="ct-warn">${m}</mark>`)
+            .replace(/sem proteção adicional/gi, m => `<mark class="ct-ok">${m}</mark>`)
+            .replace(/\bcategoria [1-4]\b/gi, m => `<b>${m}</b>`);
+    }
+    function bullets(text) {
+        const parts = sentences(text);
+        return parts.length > 1 ? `<ul class="ct-sent">${parts.map(p => `<li>${rich(p)}</li>`).join('')}</ul>` : `<p>${rich(text)}</p>`;
+    }
+    const num = (v) => (v == null ? '—' : String(v).replace('.', ','));
+
+    function ratesCard(id, m) {
+        const { RATES_SOURCE, EFFECT_CATEGORIES } = M();
+        const rows = M().RATES[id];
+        if (!rows) return `<section class="ct-card"><h3>Eficácia</h3><p class="ct-muted">A OMS não traz estimativa de eficácia para este método na tabela 1.1 do SPR 2025.</p></section>`;
+        const head = '<div class="ct-rt-row ct-rt-head"><span></span><span>Uso perfeito</span><span>Uso típico (EUA)</span><span>Uso típico (internac.)</span></div>';
+        const body = rows.map(r => `<div class="ct-rt-row">${r.label ? `<span class="ct-rt-label">${esc(r.label)}</span>` : '<span class="ct-rt-label">Taxa de gravidez</span>'}<span><b>${num(r.perfect)}</b></span><span><b>${num(r.typical)}</b></span><span><b>${num(r.intl)}</b></span></div>`).join('');
+        const cat = m && m.effectCategory ? `<p class="ct-rt-cat"><b>${EFFECT_CATEGORIES[m.effectCategory].title} de eficácia.</b> ${esc(EFFECT_CATEGORIES[m.effectCategory].text)}</p>` : '';
+        return `<section class="ct-card"><h3>Eficácia (Índice de Pearl)</h3><p class="ct-muted">Gravidezes por 100 mulheres no 1º ano de uso.</p><div class="ct-rt">${head}${body}</div>${cat}<p class="ct-fine">${esc(RATES_SOURCE.caveat)} Fonte: ${esc(RATES_SOURCE.title)}</p></section>`;
+    }
+
+    function summaryTab(id, full, m) {
+        const info = full.info || { about: [], points: [] };
         const hasProfile = M().selectedOptions(state.answers).length > 0;
         const secTitle = (m.section === 'na') ? 'Não se aplica' : ({ indicated: 'Indicado', depends: 'Depende do caso', discouraged: 'Desaconselhado', contraindicated: 'Contraindicado', caution: 'Com cautela', special: 'Serviço especializado', delay: 'Adiar' })[m.section];
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
-            : `<p class="ct-info">${hasProfile ? 'Nenhuma condição marcada restringe este método.' : 'Marque condições no perfil para ver o que se aplica a esta paciente.'}</p>`;
-        const status = `<section class="ct-sheet-sec"><div class="ct-sheet-status ct-cat${m.category}"><span class="ct-badge">${m.section === 'na' ? '—' : esc(m.display)}</span><div><strong>${esc(secTitle)}</strong><span>${state.phase === 'start' ? 'Para iniciar o método' : 'Para quem já usa (continuação)'}</span></div></div><h3>No perfil atual</h3>${reasons}</section>`;
-        const about = info.about.length ? `<section class="ct-sheet-sec"><h3>Sobre o método</h3>${info.about.map(t => `<p>${esc(t)}</p>`).join('')}</section>` : '';
-        const points = info.points.length ? `<section class="ct-sheet-sec"><h3>Pontos de atenção da OMS</h3><ul class="ct-points">${info.points.map(t => `<li>${esc(t)}</li>`).join('')}</ul></section>` : '';
-        const groups = full.groups.map((g, i) => `<details class="ct-cond"${i === 0 ? ' open' : ''}><summary><span>${esc(g.title)}</span><em>${g.items.length}</em></summary><p class="ct-cond-hint">${esc(g.hint)}</p><ul>${g.items.map(it => `<li><b>${esc(it.display)}</b><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</li>`).join('')}</ul></details>`).join('');
+            : `<p class="ct-muted">${hasProfile ? 'Nenhuma condição marcada restringe este método.' : 'Marque condições no perfil para ver o que se aplica a esta paciente.'}</p>`;
+        const best = m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : '';
+        const bestNote = m.best ? '<p class="ct-fine">Entre os métodos indicados para este perfil, é o de menor taxa de gravidez no uso típico (OMS, SPR 2025). A OMS não define um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p>' : '';
+        const status = `<section class="ct-card"><div class="ct-sheet-status ct-cat${m.category}"><span class="ct-badge">${m.section === 'na' ? '—' : esc(m.display)}</span><div><strong>${esc(secTitle)}</strong><span>${state.phase === 'start' ? 'Para iniciar o método' : 'Para quem já usa (continuação)'}</span>${best}</div></div>${bestNote}<h3>No perfil atual</h3>${reasons}</section>`;
+        const about = info.about.length ? `<section class="ct-card"><h3>Sobre o método</h3>${info.about.map(t => bullets(t)).join('')}</section>` : '';
+        const points = info.points.length ? `<section class="ct-card"><h3>Pontos de atenção</h3><ul class="ct-points">${info.points.map(t => `<li>${rich(t)}</li>`).join('')}</ul></section>` : '';
+        const sti = info.protects ? '' : `<p class="ct-sti">${esc(M().STI_NOTE)}</p>`;
+        return status + ratesCard(id, m) + about + points + sti;
+    }
+
+    function useTab(use) {
+        const i = Math.min(state.useIdx, use.sections.length - 1);
+        const pills = use.sections.map((s, k) => `<button type="button" class="ct-pill-btn${k === i ? ' on' : ''}" data-action="use-section" data-v="${k}">${esc(s.title)}</button>`).join('');
+        const sec = use.sections[i];
+        const rows = sec.items.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
+        return `<div class="ct-pills" role="tablist">${pills}</div><section class="ct-card ct-card-flush"><h3>${esc(sec.title)}</h3>${sec.intro ? `<p class="ct-callout">${rich(sec.intro)}</p>` : ''}<div class="ct-rows">${rows}</div></section><p class="ct-fine">${esc(use.source)}. Orientações para mulheres saudáveis; condições específicas podem pedir mais acompanhamento.</p>`;
+    }
+
+    function limitsTab(full) {
+        const groups = full.groups;
+        if (!groups.length) return '<section class="ct-card"><p class="ct-muted">Nenhuma condição da tabela restringe este método.</p></section>';
+        const i = Math.min(state.limitIdx, groups.length - 1);
+        const pills = groups.map((g, k) => `<button type="button" class="ct-pill-btn${k === i ? ' on' : ''}" data-action="limit-group" data-v="${k}">${esc(g.title)} <em>${g.items.length}</em></button>`).join('');
+        const g = groups[i];
+        const { SECTIONS } = M();
+        const byDomain = new Map();
+        g.items.forEach(it => { const d = it.sectionId === 'outros' ? 'Outras condições' : (SECTIONS.find(s => s.id === it.sectionId)?.title || 'Outras'); if (!byDomain.has(d)) byDomain.set(d, []); byDomain.get(d).push(it); });
+        const list = [...byDomain.entries()].map(([d, items]) => `<div class="ct-dom"><h4>${esc(d)}</h4>${items.map(it => `<div class="ct-lim"><b>${esc(it.display)}</b><div><span>${esc(it.option)}</span>${it.note ? `<small>${esc(it.note)}</small>` : ''}</div></div>`).join('')}</div>`).join('');
+        return `<p class="ct-muted ct-lead">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p><div class="ct-pills" role="tablist">${pills}</div><section class="ct-card ct-card-flush"><p class="ct-callout">${esc(g.hint)}</p>${list}</section>`;
+    }
+
+    function sheetBodyHtml() {
+        const id = state.sheet;
+        const full = M().methodConditions(id);
+        const m = findEvaluated(id);
+        if (!full || !m) return '';
         const use = M().METHOD_USE[id];
-        const useHtml = use ? `<section class="ct-sheet-sec"><h3>Como usar</h3><p class="ct-info">Orientações práticas da OMS (SPR 2025) para começar e usar o método.</p>${use.sections.map(sec => `<details class="ct-cond"><summary><span>${esc(sec.title)}</span><em>${sec.items.length}</em></summary>${sec.intro ? `<p class="ct-cond-hint">${esc(sec.intro)}</p>` : ''}<ul class="ct-use">${sec.items.map(it => `<li><b>${esc(it.k)}</b><span>${esc(it.t)}</span></li>`).join('')}</ul></details>`).join('')}</section>` : '';
-        const conds = `<section class="ct-sheet-sec"><h3>Quando evitar ou ter cautela</h3><p class="ct-info">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${groups || '<p class="ct-info">Nenhuma condição da tabela restringe este método.</p>'}</section>`;
-        const sti = (info.protects) ? '' : `<p class="ct-sti">${esc(STI_NOTE)}</p>`;
+        let body;
+        if (state.sheetTab === 'use' && use) body = useTab(use);
+        else if (state.sheetTab === 'limits') body = limitsTab(full);
+        else body = summaryTab(id, full, m);
+        const info = full.info || {};
+        return `${body}<p class="ct-fine">${esc(info.source || '')}. Material de apoio ao estudo: não substitui a avaliação clínica nem os protocolos locais.</p>`;
+    }
+
+    function sheetHtml(id) {
+        const full = M().methodConditions(id);
+        const m = findEvaluated(id);
+        if (!full || !m) return '';
+        const info = full.info || {};
+        const use = M().METHOD_USE[id];
+        const nLimits = full.groups.reduce((n, g) => n + g.items.length, 0);
+        const tab = (v, label, count) => `<button type="button" role="tab" class="ct-stab${state.sheetTab === v ? ' on' : ''}" aria-selected="${state.sheetTab === v}" data-action="sheet-tab" data-v="${v}">${label}${count ? ` <em>${count}</em>` : ''}</button>`;
         return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
-            <div class="ct-sheet-body">${status}${about}${useHtml}${points}${conds}${sti}<p class="ct-source">${esc(info.source)}${use ? `; ${esc(use.source)}` : ''}. Material de apoio ao estudo: não substitui a avaliação clínica nem os protocolos locais.</p></div>`;
+            <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${use ? tab('use', 'Como usar') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
+            <div class="ct-sheet-body" id="ctSheetBody">${sheetBodyHtml()}</div>`;
     }
 
     function openSheet(id) {
         const el = root && root.querySelector('#ctSheet');
         if (!el) return;
         state.sheet = id;
+        state.sheetTab = 'summary';
+        state.useIdx = 0;
+        state.limitIdx = 0;
         el.innerHTML = sheetHtml(id);
         el.hidden = false;
-        el.querySelector('.ct-sheet-body').scrollTop = 0;
+        el.querySelector('#ctSheetBody').scrollTop = 0;
         el.querySelector('[data-action="sheet-close"]')?.focus({ preventScroll: true });
+    }
+
+    // Atualiza só o corpo e o estado das abas, sem recriar o cabeçalho.
+    function refreshSheetBody({ keepScroll = false } = {}) {
+        const el = root && root.querySelector('#ctSheet');
+        if (!el || el.hidden) return;
+        const body = el.querySelector('#ctSheetBody');
+        const top = keepScroll ? body.scrollTop : 0;
+        body.innerHTML = sheetBodyHtml();
+        body.scrollTop = top;
+        el.querySelectorAll('.ct-stab').forEach(b => { const on = b.dataset.v === state.sheetTab; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
     }
 
     // Retorna true se havia ficha aberta (o Esc do app deixa a página aberta).
@@ -305,6 +394,15 @@
             openSheet(el.dataset.id);
         } else if (action === 'sheet-close') {
             closeSheet();
+        } else if (action === 'sheet-tab') {
+            state.sheetTab = v;
+            refreshSheetBody();
+        } else if (action === 'use-section') {
+            state.useIdx = Number(v);
+            refreshSheetBody();
+        } else if (action === 'limit-group') {
+            state.limitIdx = Number(v);
+            refreshSheetBody();
         } else if (action === 'toggle') {
             state.answers = M().toggleAnswer(state.answers, q, o);
             refresh();

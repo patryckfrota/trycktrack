@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { METHOD_IDS, SECTIONS } from './contraception-data.js';
+import { METHOD_IDS, METHOD_LIST, SECTIONS } from './contraception-data.js';
+import { RATES, RATES_SOURCE, effectCategory, typicalRate } from './contraception-rates.js';
 import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
 import { METHOD_USE, VASECTOMY, PREGNANCY_CHECK } from './contraception-use.js';
@@ -298,7 +299,7 @@ test('esterilização: nuliparidade é A com aviso de aconselhamento; jovem é C
 /* ---------- ficha do método ---------- */
 
 test('ficha: toda opção de método tem texto, ou seja, METHOD_INFO cobre todos os métodos', () => {
-    const ids = [...METHOD_IDS, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))];
+    const ids = [...METHOD_LIST, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))];
     for (const id of ids) {
         const info = METHOD_INFO[id];
         assert.ok(info && info.subtitle && info.about.length && info.source, id);
@@ -329,7 +330,7 @@ test('ficha do DIU de emergência herda a lista do DIU de cobre; a de esteriliza
 });
 
 test('como usar (SPR): só métodos reais, seções com itens, e vasectomia com as 4 classes', () => {
-    const ids = new Set([...METHOD_IDS, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
+    const ids = new Set([...METHOD_LIST, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
     for (const [id, use] of Object.entries(METHOD_USE)) {
         assert.ok(ids.has(id), id);
         assert.ok(use.source && use.sections.length, id);
@@ -338,7 +339,40 @@ test('como usar (SPR): só métodos reais, seções com itens, e vasectomia com 
             for (const it of sec.items) assert.ok(it.k && it.t, `${id}.${sec.title}`);
         }
     }
-    for (const id of ['coc', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_upa', 'ecp_lng', 'ecp_coc', 'eiud', 'fab_cal']) assert.ok(METHOD_USE[id], id);
+    for (const id of ['coc', 'patch', 'cvr', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_upa', 'ecp_lng', 'ecp_coc', 'eiud', 'fab_cal']) assert.ok(METHOD_USE[id], id);
     assert.deepEqual(VASECTOMY.conditions.map(c => c.cat), ['D', 'S', 'C', 'A']);
     assert.equal(PREGNANCY_CHECK.criteria.length, 6);
+});
+
+/* ---------- cartões separados, taxas de eficácia e "maior eficácia" ---------- */
+
+test('pílula, adesivo e anel são cartões diferentes que compartilham a coluna do combinado', () => {
+    const r = by(evaluate(pick(['headache', 'aura'])));
+    for (const id of ['coc', 'patch', 'cvr']) { assert.equal(r[id].category, 4, id); assert.equal(r[id].section, 'contraindicated'); }
+    assert.equal(evaluate({}).methods.length, METHOD_LIST.length);
+    assert.equal(new Set(evaluate({}).methods.map(m => m.name)).size, METHOD_LIST.length);
+});
+
+test('taxas (OMS SPR 2025, tabela 1.1): valores conferidos e categorias de eficácia', () => {
+    assert.deepEqual(RATES.lng[0], { perfect: 0.3, typical: 0.4, intl: null });
+    assert.deepEqual([RATES.imp[0].typical, RATES.dmpa[0].typical, RATES.coc[0].typical], [0.1, 4, 7]);
+    assert.equal(RATES.condom[0].typical, 13);
+    assert.deepEqual([0.8, 4, 7, 13, 23].map(effectCategory), [1, 2, 2, 3, 3]);
+    assert.equal(typicalRate('cic'), null);
+    assert.equal(RATES_SOURCE.noMethod, 85);
+    for (const rows of Object.values(RATES)) for (const r of rows) if (r.perfect != null) assert.ok(r.typical >= r.perfect - 0.001 || r.typical == null);
+});
+
+test('"maior eficácia entre os indicados": menor uso típico entre os indicados; muda quando o implante não é indicado', () => {
+    const none = evaluate(pick(['age', '20_39']));
+    assert.equal(none.methods.find(m => m.best).id, 'imp');
+    assert.equal(none.methods.filter(m => m.best).length, 1);
+    const noImplant = evaluate(pick(['breast', 'current']));   // implante e DIU-LNG categoria 4; sobra o DIU de cobre
+    assert.equal(noImplant.methods.find(m => m.best).id, 'cu');
+    assert.equal(evaluate({}).methods.some(m => m.best), false); // sem perfil não destaca
+});
+
+test('"maior eficácia" respeita preferência: sem hormônio → DIU de cobre', () => {
+    const r = evaluate(pick(['age', '20_39']), { prefs: { noHormone: true } });
+    assert.equal(r.methods.find(m => m.best).id, 'cu');
 });
