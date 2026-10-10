@@ -42,13 +42,21 @@ const MS_AOC_MISSED = [
 export const PRESCRIBE = {
     coc: {
         sources: ['ms2016', 'ciclo21', 'yasmin'],
-        products: [
-            { brand: 'Ciclo 21', substance: 'levonorgestrel 0,15 mg + etinilestradiol 0,03 mg', form: 'Comprimido; cartelas com 21 comprimidos', lab: 'União Química', sus: true },
-            { brand: 'Yasmin 21 e Yasmin 21+7', substance: 'drospirenona 3 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; 21 ativos, ou 21 ativos + 7 inativos (28)', lab: 'Bayer', sus: false }
+        substances: [
+            { name: 'Levonorgestrel 0,15 mg + etinilestradiol 0,03 mg', form: 'Comprimido; cartela de 21 comprimidos', sus: true, brands: ['Ciclo 21', 'Level', 'Microvlar', 'Nordette'] },
+            { name: 'Drospirenona 3 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; 21 ativos, ou 21 ativos + 7 inativos', sus: false, brands: ['Yasmin', 'Elani 28'] },
+            { name: 'Drospirenona 3 mg + etinilestradiol 0,02 mg', form: 'Comprimido revestido; 21 ativos, ou 24 ativos + 4 inativos', sus: false, brands: ['Yaz', 'Yasminelle'] },
+            { name: 'Gestodeno 0,075 mg + etinilestradiol 0,02 mg', form: 'Comprimido revestido; cartela de 21 ou 24 + 4', sus: false, brands: ['Femiane', 'Minesse', 'Tamisa 20', 'Harmonet'] },
+            { name: 'Gestodeno 0,075 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; cartela de 21', sus: false, brands: ['Gynera', 'Tamisa 30'] },
+            { name: 'Desogestrel 0,15 mg + etinilestradiol 0,02 ou 0,03 mg', form: 'Comprimido; cartela de 21', sus: false, brands: ['Mercilon (0,02 mg)', 'Microdiol (0,03 mg)'] },
+            { name: 'Dienogeste 2 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; cartela de 21', sus: false, brands: ['Valette'] },
+            { name: 'Clormadinona 2 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; cartela de 21', sus: false, brands: ['Belara'] },
+            { name: 'Valerato de estradiol + dienogeste (esquema dinâmico)', form: 'Comprimidos de 4 composições diferentes; cartela de 28', sus: false, brands: ['Qlaira'] },
+            { name: 'Ciproterona 2 mg + etinilestradiol 0,035 mg', form: 'Comprimido; cartela de 21', sus: false, brands: ['Diane 35', 'Selene', 'Ciprane'], note: 'Indicada sobretudo para acne e hirsutismo; a ação contraceptiva é secundária e o risco de tromboembolismo é maior que o das pílulas com levonorgestrel.' }
         ],
         rx: [
-            { title: 'Modelo com Ciclo 21 (21 comprimidos)', lines: ['USO ORAL', '1) Ciclo 21 (levonorgestrel 0,15 mg + etinilestradiol 0,03 mg) ........ ___ cartelas de 21 comprimidos', 'Tomar 1 comprimido por dia, sempre no mesmo horário, na ordem da cartela, por 21 dias seguidos.', 'Fazer pausa de 7 dias e iniciar a nova cartela no 8º dia, mesmo que ainda esteja menstruada.'] },
-            { title: 'Modelo com Yasmin 21+7 (28 comprimidos)', lines: ['USO ORAL', '1) Yasmin 21+7 (drospirenona 3 mg + etinilestradiol 0,03 mg) ........ ___ cartelas de 28 comprimidos', 'Tomar 1 comprimido por dia, aproximadamente à mesma hora, na ordem indicada pelas setas, sem pausa entre as cartelas.', 'Iniciar a nova cartela depois do último comprimido branco (inativo).'] }
+            { title: 'Modelo com Ciclo 21 (21 comprimidos)', lines: ['USO ORAL', '1) Ciclo 21 (levonorgestrel 0,15 mg + etinilestradiol 0,03 mg) — ___ cartelas de 21 comprimidos', 'Tomar 1 comprimido por dia, sempre no mesmo horário, na ordem da cartela, por 21 dias seguidos.', 'Fazer pausa de 7 dias e iniciar a nova cartela no 8º dia, mesmo que ainda esteja menstruada.'] },
+            { title: 'Modelo com Yasmin 21+7 (28 comprimidos)', lines: ['USO ORAL', '1) Yasmin 21+7 (drospirenona 3 mg + etinilestradiol 0,03 mg) — ___ cartelas de 28 comprimidos', 'Tomar 1 comprimido por dia, aproximadamente à mesma hora, na ordem indicada pelas setas, sem pausa entre as cartelas.', 'Iniciar a nova cartela depois do último comprimido branco (inativo).'] }
         ],
         dosing: [
             { k: 'Dose e via', t: 'Um comprimido por dia, por via oral, sempre no mesmo horário. Nos monofásicos de 21 comprimidos, a pausa entre as cartelas é de 7 dias.' },
@@ -63,11 +71,11 @@ export const PRESCRIBE = {
     },
     patch: {
         sources: ['evra', 'spr'],
-        products: [
-            { brand: 'Evra', substance: 'norelgestromina 6 mg + etinilestradiol 0,6 mg por adesivo (libera em média 203 mcg e 33,9 mcg em 24 h)', form: 'Adesivo transdérmico; caixa com 3 adesivos (1 ciclo)', lab: 'Gedeon Richter do Brasil (conforme a bula consultada)', sus: false }
+        substances: [
+            { name: 'Norelgestromina 6 mg + etinilestradiol 0,6 mg por adesivo', form: 'Adesivo transdérmico; caixa com 3 adesivos (1 ciclo)', sus: false, brands: ['Evra'] }
         ],
         rx: [
-            { title: 'Modelo com Evra', lines: ['USO TÓPICO (TRANSDÉRMICO)', '1) Evra (norelgestromina 6 mg + etinilestradiol 0,6 mg) ........ ___ caixas com 3 adesivos', 'Aplicar 1 adesivo por semana, por 3 semanas seguidas (dias 1, 8 e 15), sempre no mesmo dia da semana.', 'Na 4ª semana, não usar adesivo. Iniciar novo ciclo no dia seguinte ao dia 28, mesmo sem menstruação.'] }
+            { title: 'Modelo com Evra', lines: ['USO TÓPICO (TRANSDÉRMICO)', '1) Evra (norelgestromina 6 mg + etinilestradiol 0,6 mg) — ___ caixas com 3 adesivos', 'Aplicar 1 adesivo por semana, por 3 semanas seguidas (dias 1, 8 e 15), sempre no mesmo dia da semana.', 'Na 4ª semana, não usar adesivo. Iniciar novo ciclo no dia seguinte ao dia 28, mesmo sem menstruação.'] }
         ],
         dosing: [
             { k: 'Esquema', t: 'Um adesivo por semana, por 3 semanas (21 dias), com a 4ª semana sem adesivo, quando ocorre a menstruação. O novo ciclo começa no dia seguinte ao dia 28, não importando quando a menstruação comece ou termine. Nunca ficar mais de 7 dias seguidos sem adesivo.' },
@@ -79,11 +87,11 @@ export const PRESCRIBE = {
     },
     cvr: {
         sources: ['nuvaring'],
-        products: [
-            { brand: 'NuvaRing', substance: 'etonogestrel 11,7 mg + etinilestradiol 2,7 mg por anel (libera 0,120 mg + 0,015 mg por dia)', form: 'Anel vaginal; 1 anel e 1 aplicador opcional', lab: 'Organon', sus: false }
+        substances: [
+            { name: 'Etonogestrel 11,7 mg + etinilestradiol 2,7 mg por anel', form: 'Anel vaginal; libera 120 mcg + 15 mcg por dia', sus: false, brands: ['NuvaRing'] }
         ],
         rx: [
-            { title: 'Modelo com NuvaRing', lines: ['USO VAGINAL', '1) NuvaRing (etonogestrel 11,7 mg + etinilestradiol 2,7 mg) ........ ___ anéis vaginais', 'Inserir 1 anel na vagina e mantê-lo por 3 semanas seguidas.', 'Remover no mesmo dia da semana em que foi inserido, fazer 1 semana sem anel e inserir um novo anel.'] }
+            { title: 'Modelo com NuvaRing', lines: ['USO VAGINAL', '1) NuvaRing (etonogestrel 11,7 mg + etinilestradiol 2,7 mg) — ___ anéis vaginais', 'Inserir 1 anel na vagina e mantê-lo por 3 semanas seguidas.', 'Remover no mesmo dia da semana em que foi inserido, fazer 1 semana sem anel e inserir um novo anel.'] }
         ],
         dosing: [
             { k: 'Esquema', t: 'O anel fica na vagina continuamente por 3 semanas. É removido no mesmo dia da semana e na mesma hora aproximada em que foi inserido. Após 1 semana sem anel, insere-se um novo. O sangramento de privação costuma começar 2 a 3 dias após a retirada e pode não ter terminado quando o novo anel for colocado.' },
@@ -97,11 +105,13 @@ export const PRESCRIBE = {
     },
     cic: {
         sources: ['ms2016', 'mesigyna'],
-        products: [
-            { brand: 'Mesigyna', substance: 'enantato de noretisterona 50 mg + valerato de estradiol 5 mg por mL', form: 'Solução injetável; ampola ou seringa de 1 mL', lab: 'Bayer', sus: true }
+        substances: [
+            { name: 'Enantato de noretisterona 50 mg + valerato de estradiol 5 mg/mL', form: 'Solução injetável; ampola de 1 mL', sus: true, brands: ['Mesigyna'] },
+            { name: 'Acetato de medroxiprogesterona 25 mg + cipionato de estradiol 5 mg/0,5 mL', form: 'Suspensão injetável; ampola', sus: true, brands: ['Cyclofemina', 'Ciclofemina'], note: 'Citada no protocolo do Ministério da Saúde; confirme a disponibilidade no seu município.' },
+            { name: 'Algestona acetofenida 150 mg + enantato de estradiol 10 mg/mL', form: 'Solução injetável; ampola de 1 mL', sus: false, brands: ['Perlutan'] }
         ],
         rx: [
-            { title: 'Modelo com Mesigyna', lines: ['USO INTRAMUSCULAR', '1) Mesigyna (enantato de noretisterona 50 mg + valerato de estradiol 5 mg/mL) ........ ___ ampolas de 1 mL', 'Aplicar 1 mL por via intramuscular profunda, de preferência no glúteo (ou no braço), de forma extremamente lenta, a cada 30 dias.', 'Primeira aplicação no 1º dia da menstruação.'] }
+            { title: 'Modelo com Mesigyna', lines: ['USO INTRAMUSCULAR', '1) Mesigyna (enantato de noretisterona 50 mg + valerato de estradiol 5 mg/mL) — ___ ampolas de 1 mL', 'Aplicar 1 mL por via intramuscular profunda, de preferência no glúteo (ou no braço), de forma extremamente lenta, a cada 30 dias.', 'Primeira aplicação no 1º dia da menstruação.'] }
         ],
         dosing: [
             { k: 'Dose e via', t: '1 mL (50 mg de enantato de noretisterona + 5 mg de valerato de estradiol), por via intramuscular profunda, de preferência no glúteo, com o braço como alternativa. A injeção deve ser extremamente lenta e feita logo depois do preparo da solução.' },
@@ -113,13 +123,14 @@ export const PRESCRIBE = {
     },
     pop: {
         sources: ['ms2016', 'cerazette'],
-        products: [
-            { brand: 'Cerazette', substance: 'desogestrel 75 mcg', form: 'Comprimido revestido; cartelas com 28 ou 84', lab: 'Organon', sus: false },
-            { brand: 'Noretisterona 0,35 mg (minipílula)', substance: 'noretisterona 0,35 mg', form: 'Comprimido', lab: 'Genérico, ofertado pelo SUS', sus: true }
+        substances: [
+            { name: 'Noretisterona 0,35 mg', form: 'Comprimido; cartela de 35, sem pausa', sus: true, brands: ['Micronor'] },
+            { name: 'Desogestrel 75 mcg', form: 'Comprimido revestido; cartela de 28 ou 84, sem pausa', sus: false, brands: ['Cerazette', 'Nactali'] },
+            { name: 'Drospirenona 4 mg', form: 'Comprimido; cartela de 24 ativos + 4 inativos', sus: false, brands: ['Slinda'], note: 'Janela de esquecimento de 24 horas.' }
         ],
         rx: [
-            { title: 'Modelo com Cerazette', lines: ['USO ORAL', '1) Cerazette (desogestrel 75 mcg) ........ ___ cartelas de 28 comprimidos', 'Tomar 1 comprimido por dia, sempre no mesmo horário, na ordem das setas, por 28 dias consecutivos.', 'Iniciar a cartela seguinte logo após o término da anterior, sem pausa.'] },
-            { title: 'Modelo com noretisterona 0,35 mg (SUS)', lines: ['USO ORAL', '1) Noretisterona 0,35 mg ........ ___ cartelas', 'Tomar 1 comprimido por dia, sempre no mesmo horário, sem intervalo entre as cartelas.'] }
+            { title: 'Modelo com Cerazette', lines: ['USO ORAL', '1) Cerazette (desogestrel 75 mcg) — ___ cartelas de 28 comprimidos', 'Tomar 1 comprimido por dia, sempre no mesmo horário, na ordem das setas, por 28 dias consecutivos.', 'Iniciar a cartela seguinte logo após o término da anterior, sem pausa.'] },
+            { title: 'Modelo com noretisterona 0,35 mg (SUS)', lines: ['USO ORAL', '1) Noretisterona 0,35 mg — ___ cartelas', 'Tomar 1 comprimido por dia, sempre no mesmo horário, sem intervalo entre as cartelas.'] }
         ],
         dosing: [
             { k: 'Dose e via', t: 'Um comprimido ao dia, por via oral, sem pausa, de preferência no mesmo horário. Para o desogestrel, 28 dias consecutivos por cartela, e a cartela seguinte começa logo depois da anterior.' },
@@ -132,11 +143,11 @@ export const PRESCRIBE = {
     },
     dmpa: {
         sources: ['depo', 'ms2016'],
-        products: [
-            { brand: 'Depo-Provera 150 mg', substance: 'acetato de medroxiprogesterona 150 mg/mL', form: 'Suspensão injetável; frasco-ampola ou seringa preenchida de 1 mL', lab: 'Pfizer', sus: true }
+        substances: [
+            { name: 'Acetato de medroxiprogesterona 150 mg/mL', form: 'Suspensão injetável IM; frasco-ampola ou seringa de 1 mL', sus: true, brands: ['Depo-Provera', 'Contracep'] }
         ],
         rx: [
-            { title: 'Modelo com Depo-Provera', lines: ['USO INTRAMUSCULAR', '1) Depo-Provera 150 mg/mL (acetato de medroxiprogesterona) ........ ___ frascos-ampola ou seringas de 1 mL', 'Agitar vigorosamente e aplicar 1 mL (150 mg) por via intramuscular profunda, no glúteo ou no deltoide, a cada 12 a 13 semanas (no máximo a cada 13 semanas, ou 91 dias).', 'Primeira aplicação nos 5 primeiros dias da menstruação.'] }
+            { title: 'Modelo com Depo-Provera', lines: ['USO INTRAMUSCULAR', '1) Depo-Provera 150 mg/mL (acetato de medroxiprogesterona) — ___ frascos-ampola ou seringas de 1 mL', 'Agitar vigorosamente e aplicar 1 mL (150 mg) por via intramuscular profunda, no glúteo ou no deltoide, a cada 12 a 13 semanas (no máximo a cada 13 semanas, ou 91 dias).', 'Primeira aplicação nos 5 primeiros dias da menstruação.'] }
         ],
         dosing: [
             { k: 'Dose e via', t: '150 mg (1 mL), por injeção intramuscular profunda no glúteo ou no deltoide, a cada 12 a 13 semanas, no máximo a cada 13 semanas (91 dias). A suspensão intramuscular não foi formulada para a via subcutânea. A dose não precisa ser ajustada ao peso. Agitar o frasco ou a seringa com vigor antes do uso e nunca misturar com outro medicamento.' },
@@ -148,11 +159,11 @@ export const PRESCRIBE = {
     },
     imp: {
         sources: ['msImplante', 'implanon', 'spr'],
-        products: [
-            { brand: 'Implanon NXT', substance: 'etonogestrel 68 mg por implante (bastão de etileno vinil acetato de 4 cm por 2 mm)', form: 'Implante subdérmico de haste única, com aplicador pré-carregado descartável', lab: 'Organon. No SUS, incorporado em 2025 para mulheres de 14 a 49 anos', sus: true }
+        substances: [
+            { name: 'Etonogestrel 68 mg', form: 'Implante subdérmico de haste única, com aplicador pré-carregado', sus: true, brands: ['Implanon NXT'], note: 'Incorporado ao SUS em 2025 para mulheres de 14 a 49 anos.' }
         ],
         rx: [
-            { title: 'Modelo com Implanon NXT', lines: ['USO SUBDÉRMICO', '1) Implanon NXT (etonogestrel 68 mg) ........ 1 implante com aplicador', 'Inserir 1 implante, por via subdérmica, na face medial do braço não dominante, por médico(a) ou enfermeiro(a) treinado(a), com anestesia local (lidocaína 1% ou 2% sem vasoconstritor, 2 mL).', 'Permanência máxima de 3 anos; entregar o cartão com data da inserção, data limite de retirada, lote e braço.'] }
+            { title: 'Modelo com Implanon NXT', lines: ['USO SUBDÉRMICO', '1) Implanon NXT (etonogestrel 68 mg) — 1 implante com aplicador', 'Inserir 1 implante, por via subdérmica, na face medial do braço não dominante, por médico(a) ou enfermeiro(a) treinado(a), com anestesia local (lidocaína 1% ou 2% sem vasoconstritor, 2 mL).', 'Permanência máxima de 3 anos; entregar o cartão com data da inserção, data limite de retirada, lote e braço.'] }
         ],
         blocks: [
             { title: 'Como o SUS organiza o implante (Ministério da Saúde)', items: [
@@ -226,11 +237,11 @@ export const PRESCRIBE = {
     },
     cu: {
         sources: ['ms2016', 'spr'],
-        products: [
-            { brand: 'DIU T de cobre TCu 380A', substance: 'cobre (sem hormônio)', form: 'Dispositivo intrauterino', lab: 'Ofertado pelo SUS (MS 2016)', sus: true }
+        substances: [
+            { name: 'Cobre (T de cobre TCu 380A)', form: 'DIU sem hormônio; vida útil de até 10 anos', sus: true, brands: ['TCu 380A (Injeflex)', 'Mona Lisa Cu 380', 'Silver T'] }
         ],
         rx: [
-            { title: 'Modelo de solicitação', lines: ['USO INTRAUTERINO', '1) DIU de cobre TCu 380A ........ 1 unidade', 'Inserção intrauterina por médico(a) ou enfermeiro(a) treinado(a), após consulta de elegibilidade e exclusão de gravidez.', 'Retorno para revisão 3 a 6 semanas após a inserção, ou depois da primeira menstruação.'] }
+            { title: 'Modelo de solicitação', lines: ['USO INTRAUTERINO', '1) DIU de cobre TCu 380A — 1 unidade', 'Inserção intrauterina por médico(a) ou enfermeiro(a) treinado(a), após consulta de elegibilidade e exclusão de gravidez.', 'Retorno para revisão 3 a 6 semanas após a inserção, ou depois da primeira menstruação.'] }
         ],
         dosing: [
             { k: 'Quem insere', t: 'MS 2016: a inserção pode ser feita por médico(a) e enfermeiro(a); o enfermeiro, após treinamento e cumprindo a Resolução COFEN 358/2009, pode fazer a consulta clínica, prescrever e inserir o DIU. A inserção pós-parto exige profissional com treinamento específico.' },
@@ -243,12 +254,12 @@ export const PRESCRIBE = {
     },
     lng: {
         sources: ['mirena', 'kyleena', 'spr'],
-        products: [
-            { brand: 'Mirena', substance: 'levonorgestrel 52 mg (libera inicialmente 20 mcg/24 h)', form: 'Endoceptivo (DIU) com aplicador', lab: 'Bayer', sus: false },
-            { brand: 'Kyleena', substance: 'levonorgestrel 19,5 mg', form: 'DIU com aplicador', lab: 'Bayer', sus: false }
+        substances: [
+            { name: 'Levonorgestrel 52 mg (libera 20 mcg/dia)', form: 'SIU com aplicador; uso de até 5 anos (bula) ou 8 anos (atualização ANVISA 2024)', sus: false, brands: ['Mirena'], note: 'Oferta pelo SUS restrita a alguns serviços e protocolos locais; não consta como item geral da Rename.' },
+            { name: 'Levonorgestrel 19,5 mg', form: 'SIU com aplicador; uso de até 5 anos', sus: false, brands: ['Kyleena'] }
         ],
         rx: [
-            { title: 'Modelo com Mirena ou Kyleena', lines: ['USO INTRAUTERINO', '1) Mirena (levonorgestrel 52 mg) OU Kyleena (levonorgestrel 19,5 mg) ........ 1 unidade', 'Inserção intrauterina por profissional habilitado, nos 7 primeiros dias da menstruação (ou em qualquer momento do ciclo, se houver certeza de que não está grávida).', 'Revisão 4 a 12 semanas após a inserção e, depois, pelo menos 1 vez ao ano.'] }
+            { title: 'Modelo com Mirena ou Kyleena', lines: ['USO INTRAUTERINO', '1) Mirena (levonorgestrel 52 mg) OU Kyleena (levonorgestrel 19,5 mg) — 1 unidade', 'Inserção intrauterina por profissional habilitado, nos 7 primeiros dias da menstruação (ou em qualquer momento do ciclo, se houver certeza de que não está grávida).', 'Revisão 4 a 12 semanas após a inserção e, depois, pelo menos 1 vez ao ano.'] }
         ],
         dosing: [
             { k: 'Quando inserir', t: 'Bula: nos 7 dias seguintes ao início da menstruação, sem método de barreira adicional; ou em qualquer momento do ciclo, se houver certeza de que não está grávida. Depois de 7 dias do início do sangramento, usar barreira ou abstinência por 7 dias. Não é contracepção de emergência. Pode ser inserido logo após aborto do 1º trimestre sem infecção. Pós-parto: não antes de 6 semanas (bula). Pode ser substituído por outro a qualquer momento do ciclo.' },
@@ -261,13 +272,13 @@ export const PRESCRIBE = {
     },
     ecp_lng: {
         sources: ['ms2016', 'postinor', 'spr'],
-        products: [
-            { brand: 'Postinor Uno', substance: 'levonorgestrel 1,5 mg', form: 'Comprimido; embalagem com 1', lab: 'Gedeon Richter do Brasil', sus: false },
-            { brand: 'Levonorgestrel 0,75 mg', substance: 'levonorgestrel 0,75 mg', form: 'Comprimido', lab: 'Ofertado pelo SUS (MS 2016)', sus: true }
+        substances: [
+            { name: 'Levonorgestrel 1,5 mg', form: 'Comprimido único', sus: false, brands: ['Postinor Uno', 'Pozato', 'Diad'] },
+            { name: 'Levonorgestrel 0,75 mg', form: 'Comprimido; 2 comprimidos juntos ou 1 e outro 12 horas depois', sus: true, brands: ['Postinor-2'] }
         ],
         rx: [
-            { title: 'Modelo com Postinor Uno', lines: ['USO ORAL', '1) Postinor Uno (levonorgestrel 1,5 mg) ........ 1 comprimido', 'Tomar 1 comprimido em dose única, o mais rápido possível após a relação desprotegida (de preferência em até 72 horas; limite de 5 dias).'] },
-            { title: 'Modelo com levonorgestrel 0,75 mg (SUS)', lines: ['USO ORAL', '1) Levonorgestrel 0,75 mg ........ 2 comprimidos', 'Tomar 2 comprimidos juntos, em dose única (1,5 mg), o mais rápido possível, ou 1 comprimido agora e outro 12 horas depois.'] }
+            { title: 'Modelo com Postinor Uno', lines: ['USO ORAL', '1) Postinor Uno (levonorgestrel 1,5 mg) — 1 comprimido', 'Tomar 1 comprimido em dose única, o mais rápido possível após a relação desprotegida (de preferência em até 72 horas; limite de 5 dias).'] },
+            { title: 'Modelo com levonorgestrel 0,75 mg (SUS)', lines: ['USO ORAL', '1) Levonorgestrel 0,75 mg — 2 comprimidos', 'Tomar 2 comprimidos juntos, em dose única (1,5 mg), o mais rápido possível, ou 1 comprimido agora e outro 12 horas depois.'] }
         ],
         dosing: [
             { k: 'Dose', t: 'MS 2016: 1,5 mg de levonorgestrel em dose única, preferencialmente; ou 1 comprimido de 0,75 mg de 12 em 12 horas (total de 2). Bula do Postinor Uno: 1 comprimido de 1,5 mg em dose única, no máximo 1 comprimido ao dia, por via oral.' },
@@ -279,11 +290,11 @@ export const PRESCRIBE = {
     },
     ecp_upa: {
         sources: ['spr'],
-        products: [
-            { brand: 'Ulipristal 30 mg (por exemplo, ellaOne)', substance: 'acetato de ulipristal 30 mg', form: 'Comprimido', lab: 'Registro e disponibilidade no Brasil não verificados nas fontes consultadas: confira na ANVISA', sus: false }
+        substances: [
+            { name: 'Acetato de ulipristal 30 mg', form: 'Comprimido único', sus: false, brands: ['ellaOne'], note: 'Registro e disponibilidade no Brasil não verificados: confira na ANVISA.' }
         ],
         rx: [
-            { title: 'Modelo (conforme a OMS)', lines: ['USO ORAL', '1) Ulipristal 30 mg ........ 1 comprimido', 'Tomar 1 comprimido em dose única, o mais cedo possível após a relação desprotegida, em até 120 horas (5 dias).'] }
+            { title: 'Modelo (conforme a OMS)', lines: ['USO ORAL', '1) Ulipristal 30 mg — 1 comprimido', 'Tomar 1 comprimido em dose única, o mais cedo possível após a relação desprotegida, em até 120 horas (5 dias).'] }
         ],
         dosing: [
             { k: 'Dose', t: 'OMS 2025: 1 comprimido de 30 mg, em dose única.' },
@@ -295,8 +306,8 @@ export const PRESCRIBE = {
     },
     ecp_coc: {
         sources: ['spr'],
-        products: [
-            { brand: 'Pílula combinada com levonorgestrel e etinilestradiol (método de Yuzpe)', substance: 'levonorgestrel + etinilestradiol', form: 'Comprimidos, conforme a apresentação disponível', lab: 'Ajuste o número de comprimidos à apresentação, conforme o protocolo local', sus: false }
+        substances: [
+            { name: 'Levonorgestrel + etinilestradiol (método de Yuzpe)', form: 'Pílula combinada; número de comprimidos conforme a apresentação', sus: true, brands: ['Ciclo 21', 'Level', 'Microvlar', 'Nordette'], note: 'Use só se não houver levonorgestrel isolado nem ulipristal.' }
         ],
         rx: [
             { title: 'Esquema da OMS', lines: ['USO ORAL', 'Dose: 100 mcg de etinilestradiol + 0,50 mg de levonorgestrel, repetida 12 horas depois.', 'Tomar a 1ª dose o mais cedo possível, em até 120 horas (5 dias) da relação desprotegida.'] }
@@ -309,11 +320,11 @@ export const PRESCRIBE = {
     },
     eiud: {
         sources: ['ms2016', 'spr'],
-        products: [
-            { brand: 'DIU T de cobre TCu 380A', substance: 'cobre (sem hormônio)', form: 'Dispositivo intrauterino', lab: 'Ofertado pelo SUS (MS 2016)', sus: true }
+        substances: [
+            { name: 'Cobre (T de cobre TCu 380A)', form: 'DIU inserido até 120 horas após a relação', sus: true, brands: ['TCu 380A (Injeflex)', 'Mona Lisa Cu 380', 'Silver T'] }
         ],
         rx: [
-            { title: 'Modelo de solicitação', lines: ['USO INTRAUTERINO (EMERGÊNCIA)', '1) DIU de cobre TCu 380A ........ 1 unidade', 'Inserir em até 120 horas (5 dias) da relação desprotegida, por profissional habilitado, após excluir gravidez.'] }
+            { title: 'Modelo de solicitação', lines: ['USO INTRAUTERINO (EMERGÊNCIA)', '1) DIU de cobre TCu 380A — 1 unidade', 'Inserir em até 120 horas (5 dias) da relação desprotegida, por profissional habilitado, após excluir gravidez.'] }
         ],
         dosing: [
             { k: 'Quando', t: 'Em até 120 horas da relação desprotegida. Se a ovulação puder ser estimada, também depois de 5 dias, desde que no máximo 5 dias após a ovulação.' },
@@ -323,9 +334,9 @@ export const PRESCRIBE = {
     },
     condom: {
         sources: ['ms2016', 'spr'],
-        products: [
-            { brand: 'Preservativo masculino (látex)', substance: 'sem substância ativa', form: 'Dispositivo de barreira', lab: 'Ofertado pelo SUS', sus: true },
-            { brand: 'Preservativo feminino', substance: 'sem substância ativa', form: 'Dispositivo de barreira', lab: 'Ofertado pelo SUS', sus: true }
+        substances: [
+            { name: 'Preservativo masculino (látex)', form: 'Barreira; sem substância ativa', sus: true, brands: ['Jontex', 'Prudence', 'Blowtex'] },
+            { name: 'Preservativo feminino (nitrílico)', form: 'Barreira; sem substância ativa', sus: true, brands: [] }
         ],
         rx: [],
         dosing: [
@@ -336,8 +347,8 @@ export const PRESCRIBE = {
     },
     diaphragm: {
         sources: ['ms2016'],
-        products: [
-            { brand: 'Diafragma', substance: 'sem substância ativa (usado com espermicida)', form: 'Dispositivo de barreira', lab: 'Ofertado pelo SUS', sus: true }
+        substances: [
+            { name: 'Diafragma (com espermicida)', form: 'Barreira; sem substância ativa', sus: true, brands: [] }
         ],
         rx: [],
         dosing: [
@@ -347,8 +358,8 @@ export const PRESCRIBE = {
     },
     tubal: {
         sources: ['nt34', 'ms2016'],
-        products: [
-            { brand: 'Laqueadura tubária', substance: 'procedimento cirúrgico', form: 'Obstrução das tubas uterinas, com ou sem ressecção segmentar', lab: 'SUS: códigos 04.09.06.018-6 (laqueadura tubária) e 04.11.01.004-2 (parto cesariano com laqueadura tubária)', sus: true }
+        substances: [
+            { name: 'Laqueadura tubária', form: 'Procedimento cirúrgico; códigos SIGTAP 04.09.06.018-6 e 04.11.01.004-2', sus: true, brands: [] }
         ],
         rx: [],
         dosing: [

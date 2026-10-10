@@ -467,9 +467,9 @@ test('como prescrever: só métodos reais, fontes existentes, modelos de receita
     const ids = new Set([...METHOD_LIST, ...EXTENSIONS.flatMap(e => e.methods.map(m => m.id))]);
     for (const [id, p] of Object.entries(PRESCRIBE)) {
         assert.ok(ids.has(id), id);
-        assert.ok(p.products.length && (p.dosing || p.blocks).length && p.sources.length, id);
+        assert.ok(p.substances.length && (p.dosing || p.blocks).length && p.sources.length, id);
         for (const s of p.sources) assert.ok(SOURCES[s] && (SOURCES[s].url === null || /^https:\/\//.test(SOURCES[s].url)), `${id}: fonte ${s}`);
-        for (const pr of p.products) assert.ok(pr.brand && pr.substance && pr.form && pr.lab, `${id}.${pr.brand}`);
+        for (const pr of p.substances) assert.ok(pr.name && pr.form && typeof pr.sus === 'boolean' && Array.isArray(pr.brands), `${id}.${pr.name}`);
         for (const r of p.rx) { assert.ok(r.lines[0].startsWith('USO '), `${id}: ${r.title}`); assert.ok(r.lines.length >= 3, `${id}: ${r.title}`); }
         for (const d of p.dosing || p.blocks.flatMap(b => b.items)) assert.ok(d.k && d.t, id);
     }
