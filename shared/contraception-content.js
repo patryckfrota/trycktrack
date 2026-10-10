@@ -191,7 +191,7 @@ export const METHOD_INFO = {
         ],
         points: [
             'Pode causar padrão de sangramento irregular, sobretudo nos primeiros 3 a 6 meses, que pode persistir mais. Usuárias de etonogestrel têm mais amenorreia que as de levonorgestrel.',
-            'No SUS desde 2025 (Portarias SECTICS/MS 47 e 48), para mulheres de 14 a 49 anos, com oferta prioritária na atenção primária. O Ministério da Saúde descreve a inserção e a retirada na aba “Como prescrever”.',
+            'No SUS desde 2025 (Portarias SECTICS/MS 47 e 48), para mulheres de 14 a 49 anos, com oferta prioritária na atenção primária. O Ministério da Saúde descreve a inserção e a retirada na aba “Prescrição”.',
             'Há preocupação de que cefaleias intensas aumentem com implantes.',
             'Indutores enzimáticos e rifamicinas provavelmente reduzem a eficácia: incentive outros métodos em uso prolongado.',
             'Iniciar o implante antes de 6 semanas de pós-parto, em quem amamenta, não mostrou efeito nocivo sobre a amamentação nem sobre o crescimento do bebê.'

@@ -67,10 +67,9 @@
         const options = q.options.filter(o => !hits || hits.has(o.id));
         if (!options.length) return '';
         const help = q.help ? `<p class="ct-help">${esc(q.help)}</p>` : '';
-        const hint = q.type === 'single' ? 'Escolha uma' : 'Marque o que se aplica';
         const fam = q.family ? `<span class="ct-fam-tag">${esc(FAMILIES.find(f => f.id === q.family)?.title || '')}</span>` : '';
         const why = M().WHY[q.id] ? `<details class="ct-why"><summary>Por que isso importa</summary><p>${esc(M().WHY[q.id])}</p><small>OMS, MEC 2025, p. ${q.page}</small></details>` : '';
-        const legend = bare ? '' : `<legend>${esc(q.title)}${fam}<small>${hint}</small></legend>`;
+        const legend = bare ? '' : `<legend>${esc(q.title)}${fam}</legend>`;
         return `<fieldset class="ct-q">${legend}${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map((o, i) => optionHtml(q, o, selected, i === 0)).join('')}</div>${why}</fieldset>`;
     }
 
@@ -94,14 +93,12 @@
             const expanded = searching || choice || v === 'yes';
             const btn = (val, label) => `<button type="button" class="ct-yn-btn${v === val ? ' on' : ''}" aria-pressed="${v === val}" data-action="screen" data-item="${item.id}" data-v="${val}">${esc(label)}</button>`;
             const controls = (searching || choice) ? '' : `<div class="ct-yn" role="group" aria-label="${esc(item.prompt)}">${btn('no', item.noLabel || 'Não')}${btn('yes', item.yesLabel || 'Sim')}</div>`;
-            const hint = (!searching && v === 'yes' && !done) ? '<p class="ct-help">Marque abaixo o que se aplica.</p>' : '';
-            const body = expanded ? `${hint}${qs.map(q => questionHtml(q, hits && hits.get(q.id), choice && !searching)).join('')}` : '';
+            const body = expanded ? `${qs.map(q => questionHtml(q, hits && hits.get(q.id), choice && !searching)).join('')}` : '';
             return `<div class="ct-tri${done ? ' done' : ''}" data-item="${item.id}"><div class="ct-tri-head"><span class="ct-tri-check" aria-hidden="true">${done ? '✓' : ''}</span><strong>${esc(item.prompt)}</strong></div>${controls}${body ? `<div class="ct-tri-body">${body}</div>` : ''}</div>`;
         }).join('');
         if (!rows) return '';
         const pct = Math.round(prog.done / prog.total * 100);
-        const msg = prog.done === prog.total ? 'Triagem completa: o resultado tem alto grau de certeza.' : 'Responda estas perguntas: sem elas, o resultado é provisório. Em cada uma, “Não” já a conclui.';
-        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : `<p class="ct-muted">${msg}</p>`}<div class="ct-tris">${rows}</div></section>`;
+        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div><div class="ct-tris">${rows}</div></section>`;
     }
 
     function profileHtml() {
@@ -125,10 +122,7 @@
 
     function summaryHtml() {
         const sel = M().selectedOptions(state.answers);
-        const { SCREENING, itemDone } = M();
-        const pending = SCREENING.filter(i => state.screen[i.id] === 'yes' && !itemDone(i, state.screen, state.answers));
-        if (!sel.length && pending.length) return `<p class="ct-summary-empty">Falta marcar a opção que se aplica em: ${pending.map(i => esc(i.title || i.prompt)).join(', ')}.</p>`;
-        if (!sel.length) return '<p class="ct-summary-empty">Nenhuma condição marcada: todos os métodos aparecem sem restrição. Marque o que se aplica à paciente.</p>';
+        if (!sel.length) return '';
         const chips = sel.map(({ question, option }) => `<button type="button" class="ct-chip" data-action="toggle" data-q="${question.id}" data-o="${option.id}" aria-label="Remover: ${esc(option.label)}"><span>${esc(question.options.length === 1 ? question.title : option.label)}</span><i aria-hidden="true">×</i></button>`).join('');
         return `<div class="ct-chips">${chips}</div>`;
     }
@@ -330,7 +324,7 @@
         return `<p class="ct-muted ct-lead">Todas as condições da tabela da OMS que mudam a categoria deste método, da mais grave para a menos grave.</p>${cards}`;
     }
 
-    // Aba "Como prescrever": apresentações, modelo de receita (copiável), posologia e protocolos.
+    // Aba "Prescrição": apresentações, modelo de receita (copiável), posologia e protocolos.
     function prescribeTab(id) {
         const p = M().PRESCRIBE[id];
         const { SOURCES, PRESCRIBE_NOTICE } = M();
@@ -378,7 +372,7 @@
         const nLimits = full.groups.reduce((n, g) => n + g.items.length, 0);
         const tab = (v, label, count) => `<button type="button" role="tab" class="ct-stab${state.sheetTab === v ? ' on' : ''}" aria-selected="${state.sheetTab === v}" data-action="sheet-tab" data-v="${v}" aria-controls="ctSheetBody">${label}${count ? ` <em>${count}</em>` : ''}</button>`;
         return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
-            <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${M().PRESCRIBE[id] ? tab('prescribe', 'Como prescrever') : ''}${use ? tab('use', 'Como usar') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
+            <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${M().PRESCRIBE[id] ? tab('prescribe', 'Prescrição') : ''}${use ? tab('use', 'Uso') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
             <div class="ct-sheet-body" id="ctSheetBody" role="tabpanel">${sheetBodyHtml()}</div>`;
     }
 
@@ -439,7 +433,7 @@
                         <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da paciente</h2><button type="button" class="qt-ghost" data-action="clear">Limpar tudo</button></div>
                         <div id="ctSummary"></div>
                         <div class="qt-block"><h3>Preferências</h3><div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>
-                        <label class="ct-search"><span class="ct-sr">Buscar condição</span><input type="search" id="ctSearch" placeholder="Buscar condição ou medicamento (ex.: enxaqueca, rifampicina)" value="${esc(state.query)}" autocomplete="off" enterkeyhint="search"></label>
+                        <label class="ct-search"><span class="ct-sr">Buscar condição</span><input type="search" id="ctSearch" placeholder="Buscar condição ou medicamento" value="${esc(state.query)}" autocomplete="off" enterkeyhint="search"></label>
                     </div>
                     <div id="ctProfile"></div>
                 </section>
