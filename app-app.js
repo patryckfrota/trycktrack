@@ -1929,7 +1929,7 @@
         function renderDashboardEvolution() {
             const activity = getActivityDerived();
             const todayIso = localIsoDate();
-            const series = window.activityMonthlySeries(activity.days, todayIso, dashboardEvoMonths, DASHBOARD_MIN_SAMPLE);
+            const series = window.activityMonthlySeries(activity.days, todayIso, dashboardEvoMonths, 1);
             const isAccuracy = dashboardEvoMetric === 'acerto';
             const state = getTrailState();
             const goalAccuracy = getTrailGoal(getTrailTrack(state, state.active || 'enamed'));
@@ -1943,8 +1943,8 @@
             const plot = document.getElementById('dashboardEvoPlot');
             const summaryEl = document.getElementById('dashboardEvoSummary');
             const detailEl = document.getElementById('dashboardEvoDetail');
-            if (series.filter(r => r.n > 0).length < 2) {
-                plot.innerHTML = '<p class="dashboard-evo-empty">O gráfico aparece quando houver respostas em pelo menos 2 meses.</p>';
+            if (!series.some(r => r.n > 0)) {
+                plot.innerHTML = '<p class="dashboard-evo-empty">O gráfico aparece assim que você responder a primeira questão.</p>';
                 summaryEl.textContent = '';
                 detailEl.textContent = '';
                 return;
@@ -1975,7 +1975,7 @@
             }
             const row = series[selected];
             detailEl.textContent = isAccuracy
-                ? `${evoMonthTitle(row)} de ${row.year}: ${row.accuracy != null ? `${evoPct(row.accuracy)}% de acerto em ${row.ne.toLocaleString('pt-BR')} respostas` : row.n ? `${row.n} questões, mas só ${row.ne} com acerto registrado (mínimo ${DASHBOARD_MIN_SAMPLE})` : 'sem respostas'}`
+                ? `${evoMonthTitle(row)} de ${row.year}: ${row.accuracy != null ? `${evoPct(row.accuracy)}% de acerto em ${row.ne.toLocaleString('pt-BR')} respostas` : row.n ? `${row.n} questões, sem acerto registrado (dados antigos)` : 'sem respostas'}`
                 : `${evoMonthTitle(row)} de ${row.year}: ${row.n.toLocaleString('pt-BR')} ${row.n === 1 ? 'questão' : 'questões'}${row.partial ? ' (mês em andamento)' : ''}`;
         }
 
