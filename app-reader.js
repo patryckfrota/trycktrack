@@ -6407,7 +6407,21 @@
 
         // Acessibilidade: Enter/Espaço ativam [role=button]; Esc fecha painéis;
         // o foco entra no painel ao abrir e volta ao botão de origem ao fechar.
+        const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), textarea, select, [tabindex]:not([tabindex="-1"])';
         document.addEventListener('keydown', e => {
+            // foco preso no painel aberto (Tab / Shift+Tab circulam só dentro dele)
+            if (e.key === 'Tab') {
+                const panel = document.querySelector('.chapter-list-panel.active, .fontsize-sheet.active, .rx-dialog.active');
+                if (panel) {
+                    const items = Array.from(panel.querySelectorAll(FOCUSABLE)).filter(n => n.offsetParent !== null);
+                    if (!items.length) { e.preventDefault(); return; }
+                    const first = items[0], last = items[items.length - 1];
+                    if (!panel.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+                    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                }
+                return;
+            }
             const t = e.target;
             if ((e.key === 'Enter' || e.key === ' ') && t.matches && t.matches('[role="button"]:not(button)')) {
                 e.preventDefault(); t.click();
@@ -6418,10 +6432,12 @@
         });
         document.querySelectorAll('.chapter-list-panel, .fontsize-sheet').forEach(panel => {
             let opener = null, was = false;
+            panel.inert = true; panel.setAttribute('aria-hidden', 'true');   // fechado: fora da ordem de Tab e dos leitores de tela
             new MutationObserver(() => {
                 const on = panel.classList.contains('active');
                 if (on === was) return;
                 was = on;
+                panel.inert = !on; panel.setAttribute('aria-hidden', String(!on));
                 if (on) {
                     opener = document.activeElement;
                     setTimeout(() => (panel.querySelector('.current, [role="button"], input, button') || panel).focus?.(), 60);
@@ -6464,3 +6480,22 @@
             applyReadPrefs();
         }));
         applyReadPrefs();
+
+        // A faixa fora do leitor (status bar no topo e vão da barra inferior do iPad)
+        // mostra o fundo da página; enquanto um leitor está aberto, pinta esse fundo e a
+        // theme-color com a cor do leitor para não aparecer uma tarja de outro tema.
+        (function syncChromeBackground() {
+            const views = ['readerView', 'essentialsView', 'bulletsView'].map(id => document.getElementById(id));
+            const meta = document.querySelector('meta[name="theme-color"]');
+            const metaOrig = meta && meta.getAttribute('content');
+            const apply = () => {
+                const v = views.find(x => x && x.classList.contains('active'));
+                const color = v ? getComputedStyle(v).backgroundColor : '';
+                document.documentElement.style.backgroundColor = color;
+                document.body.style.backgroundColor = color;
+                if (meta) meta.setAttribute('content', color || metaOrig);
+            };
+            views.forEach(v => v && new MutationObserver(apply).observe(v, { attributes: true, attributeFilter: ['class', 'data-read-theme'] }));
+            document.addEventListener('visibilitychange', apply);
+            apply();
+        })();

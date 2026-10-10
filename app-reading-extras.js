@@ -14,11 +14,22 @@
 
     // ---------- Anotações e Meus grifos ----------
     const dlg = () => $('rxDialog'), back = () => $('rxBackdrop');
+    let dlgOpener = null;
+    dlg().inert = true; dlg().setAttribute('aria-hidden', 'true');
     function openDialog(html) {
+        if (!dlg().classList.contains('active')) dlgOpener = document.activeElement;
         dlg().innerHTML = html;
+        const t = dlg().querySelector('.rx-title');
+        if (t) dlg().setAttribute('aria-label', (t.firstChild ? t.firstChild.textContent : t.textContent).trim());
+        dlg().inert = false; dlg().setAttribute('aria-hidden', 'false');
         dlg().classList.add('active'); back().classList.add('active');
+        setTimeout(() => (dlg().querySelector('textarea, .rx-primary, button') || dlg()).focus(), 80);
     }
-    function closeDialog() { dlg().classList.remove('active'); back().classList.remove('active'); }
+    function closeDialog() {
+        dlg().classList.remove('active'); back().classList.remove('active');
+        dlg().inert = true; dlg().setAttribute('aria-hidden', 'true');
+        if (dlgOpener && dlgOpener.focus) { dlgOpener.focus(); dlgOpener = null; }
+    }
     window.rxCloseDialog = closeDialog;
 
     function docOfGroup(gid) {
