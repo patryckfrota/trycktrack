@@ -21,6 +21,7 @@
         { id: 'ci', title: 'Coito interrompido', sub: 'Retirada' }
     ];
 
+    let clearTimer = 0;
     const state = {
         answers: {},
         phase: 'start',
@@ -33,6 +34,7 @@
         legendOpen: false,
         sheet: null,
         sheetTab: 'summary',
+        clearArmed: false,
         screen: {}
     };
     let root = null;
@@ -53,10 +55,11 @@
 
     /* ---------- perfil (perguntas) ---------- */
 
-    function optionHtml(q, o, selected) {
+    function optionHtml(q, o, selected, first = false) {
         const on = selected.includes(o.id);
         const role = q.type === 'single' ? 'radio' : 'checkbox';
-        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}</span></button>`;
+        const tab = role === 'radio' ? ` tabindex="${on || (!selected.length && first) ? 0 : -1}"` : '';
+        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}"${tab} aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}</span></button>`;
     }
 
     function questionHtml(q, hits, bare = false) {
@@ -68,7 +71,7 @@
         const fam = q.family ? `<span class="ct-fam-tag">${esc(FAMILIES.find(f => f.id === q.family)?.title || '')}</span>` : '';
         const why = M().WHY[q.id] ? `<details class="ct-why"><summary>Por que isso importa</summary><p>${esc(M().WHY[q.id])}</p><small>OMS, MEC 2025, p. ${q.page}</small></details>` : '';
         const legend = bare ? '' : `<legend>${esc(q.title)}${fam}<small>${hint}</small></legend>`;
-        return `<fieldset class="ct-q">${legend}${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map(o => optionHtml(q, o, selected)).join('')}</div>${why}</fieldset>`;
+        return `<fieldset class="ct-q">${legend}${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map((o, i) => optionHtml(q, o, selected, i === 0)).join('')}</div>${why}</fieldset>`;
     }
 
     // Seções do perfil: as da OMS mais uma com as condições próprias de outros métodos.
@@ -122,6 +125,9 @@
 
     function summaryHtml() {
         const sel = M().selectedOptions(state.answers);
+        const { SCREENING, itemDone } = M();
+        const pending = SCREENING.filter(i => state.screen[i.id] === 'yes' && !itemDone(i, state.screen, state.answers));
+        if (!sel.length && pending.length) return `<p class="ct-summary-empty">Falta marcar a opção que se aplica em: ${pending.map(i => esc(i.title || i.prompt)).join(', ')}.</p>`;
         if (!sel.length) return '<p class="ct-summary-empty">Nenhuma condição marcada: todos os métodos aparecem sem restrição. Marque o que se aplica à paciente.</p>';
         const chips = sel.map(({ question, option }) => `<button type="button" class="ct-chip" data-action="toggle" data-q="${question.id}" data-o="${option.id}" aria-label="Remover: ${esc(option.label)}"><span>${esc(question.options.length === 1 ? question.title : option.label)}</span><i aria-hidden="true">×</i></button>`).join('');
         return `<div class="ct-chips">${chips}</div>`;
@@ -153,7 +159,7 @@
             : '';
         const miss = m.misses && (m.section === 'indicated' || m.section === 'depends') ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
-        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
+        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="${esc(m.name)}${m.section === 'na' ? '' : `, categoria ${esc(m.display)}`}. ${esc(m.note)} Abrir detalhes.">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : ''}</div></div>
             <p class="ct-note">${esc(m.note)}</p>${certChip(m)}${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
     }
@@ -329,7 +335,9 @@
         const prods = sorted.map(x => `<article class="ct-sub${x.sus ? ' sus' : ''}"><div class="ct-sub-head"><div class="ct-sub-name">${nameHtml(x.name)}</div>${x.sus ? '<span class="ct-sus">SUS</span>' : ''}</div><p class="ct-sub-form">${esc(x.form)}</p>${x.note ? `<p class="ct-fine">${esc(x.note)}</p>` : ''}${x.brands.length ? `<div class="ct-sub-brands"><small>Nomes comerciais</small>${x.brands.map(b => `<em>${esc(b)}</em>`).join('')}</div>` : ''}</article>`).join('');
         const rx = p.rx.length ? `<section class="ct-card"><h3>Exemplo de receita</h3>${p.rx.map((r, i) => `<div class="ct-rx"><div class="ct-rx-head"><strong>${esc(r.title)}</strong><button type="button" class="qt-ghost" data-action="copy-rx" data-id="${id}" data-i="${i}">Copiar</button></div><pre class="ct-rx-body">${esc(r.lines.join('\n'))}</pre></div>`).join('')}</section>` : '';
         const rowsOf = (items) => items.map(it => `<div class="ct-row"><div class="ct-row-k">${esc(it.k)}</div><div class="ct-row-t">${bullets(it.t)}</div></div>`).join('');
-        const blocks = (p.blocks || [{ title: 'Posologia e orientações', items: p.dosing }]).map(b => `<section class="ct-card ct-card-flush"><h3>${esc(b.title)}</h3><div class="ct-rows">${rowsOf(b.items)}</div></section>`).join('');
+        const blockList = p.blocks || [{ title: 'Posologia e orientações', items: p.dosing }];
+        // Muitos blocos (ex.: implante): só os dois primeiros abertos, o resto recolhido.
+        const blocks = blockList.map((b, i) => `<details class="ct-card ct-card-flush ct-fold"${blockList.length <= 3 || i < 2 ? ' open' : ''}><summary><h3>${esc(b.title)}</h3></summary><div class="ct-rows">${rowsOf(b.items)}</div></details>`).join('');
         const src = p.sources.map(k => `<li>${SOURCES[k].url ? `<a href="${esc(SOURCES[k].url)}" target="_blank" rel="noopener noreferrer">${esc(SOURCES[k].label)}</a>` : esc(SOURCES[k].label)}</li>`).join('');
         return `<section class="ct-card"><h3>Substâncias e apresentações</h3><div class="ct-prods">${prods}</div></section>${rx}${blocks}<section class="ct-card"><h3>Fontes</h3><ul class="ct-src">${src}</ul><p class="ct-fine">${esc(PRESCRIBE_NOTICE)}</p></section>`;
     }
@@ -364,10 +372,10 @@
         const info = full.info || {};
         const use = M().METHOD_USE[id];
         const nLimits = full.groups.reduce((n, g) => n + g.items.length, 0);
-        const tab = (v, label, count) => `<button type="button" role="tab" class="ct-stab${state.sheetTab === v ? ' on' : ''}" aria-selected="${state.sheetTab === v}" data-action="sheet-tab" data-v="${v}">${label}${count ? ` <em>${count}</em>` : ''}</button>`;
+        const tab = (v, label, count) => `<button type="button" role="tab" class="ct-stab${state.sheetTab === v ? ' on' : ''}" aria-selected="${state.sheetTab === v}" data-action="sheet-tab" data-v="${v}" aria-controls="ctSheetBody">${label}${count ? ` <em>${count}</em>` : ''}</button>`;
         return `<div class="ct-sheet-head"><button type="button" class="reader-back" data-action="sheet-close" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg></button><div class="ct-sheet-title"><strong>${esc(m.short)}</strong><span>${esc(info.subtitle || m.name)}</span></div></div>
             <nav class="ct-stabs" role="tablist" aria-label="Seções da ficha">${tab('summary', 'Resumo')}${M().PRESCRIBE[id] ? tab('prescribe', 'Como prescrever') : ''}${use ? tab('use', 'Como usar') : ''}${tab('limits', 'Restrições', nLimits)}</nav>
-            <div class="ct-sheet-body" id="ctSheetBody">${sheetBodyHtml()}</div>`;
+            <div class="ct-sheet-body" id="ctSheetBody" role="tabpanel">${sheetBodyHtml()}</div>`;
     }
 
     function openSheet(id) {
@@ -377,6 +385,7 @@
         state.sheetTab = 'summary';
         el.innerHTML = sheetHtml(id);
         el.hidden = false;
+        syncTabIndex();
         root.querySelectorAll('.ct-bar, .ct-layout').forEach(n => { n.inert = true; });
         el.querySelector('#ctSheetBody').scrollTop = 0;
         el.querySelector('[data-action="sheet-close"]')?.focus({ preventScroll: true });
@@ -391,6 +400,7 @@
         body.innerHTML = sheetBodyHtml();
         body.scrollTop = top;
         el.querySelectorAll('.ct-stab').forEach(b => { const on = b.dataset.v === state.sheetTab; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); if (on) b.scrollIntoView({ inline: 'nearest', block: 'nearest' }); });
+        syncTabIndex();
     }
 
     // Retorna true se havia ficha aberta (o Esc do app deixa a página aberta).
@@ -415,12 +425,12 @@
             <div class="ct-bar">
                 <div class="qt-segmented">${seg('start', 'Vai iniciar', 'Escolha do método')}${seg('continue', 'Já usa', 'Continuação')}</div>
                 <div class="ct-tabs" role="tablist">
-                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="profile" aria-selected="${state.tab === 'profile'}">Perfil <em id="ctProfileCount"></em></button>
-                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="result" aria-selected="${state.tab === 'result'}">Resultado <em id="ctResultCount"></em></button>
+                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="profile" aria-controls="ctPanelProfile" aria-selected="${state.tab === 'profile'}">Perfil <em id="ctProfileCount"></em></button>
+                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="result" aria-controls="ctResult" aria-selected="${state.tab === 'result'}">Resultado <em id="ctResultCount"></em></button>
                 </div>
             </div>
             <div class="ct-layout">
-                <section class="ct-profile" aria-label="Perfil da paciente">
+                <section class="ct-profile" id="ctPanelProfile" role="tabpanel" aria-label="Perfil da paciente">
                     <div class="qt-panel">
                         <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da paciente</h2><button type="button" class="qt-ghost" data-action="clear">Limpar tudo</button></div>
                         <div id="ctSummary"></div>
@@ -429,10 +439,16 @@
                     </div>
                     <div id="ctProfile"></div>
                 </section>
-                <section class="ct-result" id="ctResult" aria-label="Resultado" aria-live="polite"></section>
+                <section class="ct-result" id="ctResult" role="tabpanel" aria-label="Resultado"></section>
+                <div class="ct-sr" id="ctLive" aria-live="polite"></div>
             </div>
             <div class="ct-sheet" id="ctSheet" hidden role="dialog" aria-modal="true" aria-label="Detalhes do método"></div>
         </div>`;
+    }
+
+    // Abas com tabindex móvel: só a selecionada entra na ordem de Tab; setas trocam de aba.
+    function syncTabIndex() {
+        root.querySelectorAll('[role="tab"]').forEach(t => { t.tabIndex = (t.getAttribute('aria-selected') === 'true') ? 0 : -1; });
     }
 
     function refresh({ profile = true } = {}) {
@@ -451,6 +467,9 @@
         root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
         root.querySelector('#ctResultCount').textContent = (() => { const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
         root.querySelector('.ct').dataset.tab = state.tab;
+        const nInd = resultBadge();
+        root.querySelector('#ctLive').textContent = `Resultado atualizado: ${nInd} método${nInd === 1 ? '' : 's'} indicado${nInd === 1 ? '' : 's'}.`;
+        syncTabIndex();
         if (focusKey) root.querySelector(`[data-key="${focusKey}"]`)?.focus({ preventScroll: true });
     }
 
@@ -534,9 +553,20 @@
             state.tab = v;
             root.querySelectorAll('.ct-tab').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
             root.querySelector('.ct').dataset.tab = v;
+            syncTabIndex();
             root.scrollTop = 0;
         } else if (action === 'clear') {
+            if (!state.clearArmed) {
+                state.clearArmed = true;
+                el.textContent = 'Toque de novo para limpar';
+                clearTimeout(clearTimer);
+                clearTimer = setTimeout(() => { state.clearArmed = false; el.textContent = 'Limpar tudo'; }, 3000);
+                return;
+            }
+            state.clearArmed = false; clearTimeout(clearTimer); el.textContent = 'Limpar tudo';
             state.answers = {}; state.screen = {}; state.query = ''; state.lam = { amenorrhea: false, fullBf: false, lt6m: false };
+            state.prefs = { noHormone: false, longActing: false };
+            root.querySelectorAll('[data-action="pref"]').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
             root.querySelector('#ctSearch').value = '';
             refresh();
         } else if (action === 'copy') {
@@ -545,6 +575,18 @@
     }
 
     function onKey(event) {
+        const arrows = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+        const t = event.target;
+        if ((event.key in arrows || event.key === 'Home' || event.key === 'End') && t.matches?.('[role="tab"], [role="radio"]')) {
+            const group = [...t.parentElement.querySelectorAll(`[role="${t.getAttribute('role')}"]`)];
+            const i = group.indexOf(t);
+            const next = event.key === 'Home' ? group[0] : event.key === 'End' ? group[group.length - 1] : group[(i + arrows[event.key] + group.length) % group.length];
+            if (t.getAttribute('role') === 'tab' && event.key in arrows && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            next.focus();
+            next.click();
+            return;
+        }
         if (event.key !== 'Enter' && event.key !== ' ') return;
         const el = event.target.closest?.('[data-action="method"]');
         if (!el || event.target !== el) return;

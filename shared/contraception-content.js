@@ -150,7 +150,7 @@ export const METHOD_INFO = {
         points: [
             'Método relativamente novo, com poucos dados epidemiológicos de efeitos a longo prazo.',
             'Ao contrário da pílula, o efeito hormonal continua por algum tempo depois da última injeção.',
-            'As categorias ficam entre as do COC e as da minipílula, e são iguais às do COC nas condições graves (como doença isquêmica). A OMS as considera um julgamento preliminar.'
+            'Na maioria das condições as categorias são iguais às do COC (como na doença isquêmica). Em algumas, como tabagismo a partir dos 35 anos, doenças da vesícula e do fígado, são mais baixas. A OMS as considera um julgamento preliminar.'
         ],
         source: 'OMS, MEC 2025, seção 5.1.2 e tabelas de CHC (p. 22–43)'
     },
@@ -247,7 +247,7 @@ export const METHOD_INFO = {
             'A tabela da OMS imprime diafragma e espermicida em colunas separadas, mas as notas de apoio não deixam claro qual valor é de qual. Por isso este aplicativo mostra a categoria mais restritiva entre as duas.'
         ],
         points: [
-            'HIV: a categoria 4 do diafragma em quem tem alto risco de HIV vem do espermicida, não do diafragma. O uso repetido e em dose alta de nonoxinol-9 aumentou as lesões genitais e pode aumentar o risco de contrair HIV. No HIV leve, grave ou em uso de TARV, espermicida e diafragma podem lesar a mucosa do colo e aumentar a eliminação viral.',
+            'HIV: a categoria 4 do diafragma em quem tem alto risco de HIV provavelmente vem do espermicida, não do diafragma. O uso repetido e em dose alta de nonoxinol-9 aumentou as lesões genitais e pode aumentar o risco de contrair HIV. No HIV leve, grave ou em uso de TARV, espermicida e diafragma podem lesar a mucosa do colo e aumentar a eliminação viral.',
             'Síndrome do choque tóxico: já foi relatada com o diafragma, e o uso por quem a teve pode aumentar a recorrência.',
             'Infecção urinária: há risco potencial maior com diafragma e espermicida.',
             'Diafragma e capuz não servem até a involução uterina se completar (6 semanas de pós-parto) nem até 6 semanas após aborto do 2º trimestre.',
