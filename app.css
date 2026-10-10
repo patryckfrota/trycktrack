@@ -1977,8 +1977,13 @@
         }
         @media (min-width: 900px) {
             .qt-page .ct-tabs { display: none; }
-            .ct-layout { grid-template-columns: minmax(0, 1fr) minmax(380px, 460px); gap: 24px; }
-            .ct-result { position: sticky; top: 64px; max-height: calc(100vh - 150px); overflow-y: auto; padding-right: 4px; }
+            /* iPad/desktop: "Vai iniciar / Já usa" fica no topo da coluna do resultado, que é o que ele altera */
+            .ct { display: grid; grid-template-columns: minmax(0, 1fr) minmax(380px, 460px); column-gap: 24px; grid-template-rows: auto 1fr; align-items: start; }
+            .ct-layout { display: contents; }
+            .ct-bar { grid-column: 2; grid-row: 1; top: 0; padding: 4px 0 12px; }
+            .ct-bar .qt-segmented { width: 100%; }
+            .ct-profile { grid-column: 1; grid-row: 1 / span 2; }
+            .ct-result { grid-column: 2; grid-row: 2; position: sticky; top: 84px; max-height: calc(100vh - 168px); overflow-y: auto; padding-right: 4px; }
         }
         .ct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
         .ct-search input { box-sizing: border-box; width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-tertiary); color: var(--text-main); font: inherit; font-size: 16px; }
