@@ -38,16 +38,10 @@
 
     /* ---------- perfil (perguntas) ---------- */
 
-    function isRevised(q, o) {
-        const list = M().REVISED[q.id];
-        return !!(o.revised || (list && list.includes(o.id)));
-    }
-
     function optionHtml(q, o, selected) {
         const on = selected.includes(o.id);
         const role = q.type === 'single' ? 'radio' : 'checkbox';
-        const badge = isRevised(q, o) ? '<span class="ct-new">6ª ed.</span>' : '';
-        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}${badge}</span></button>`;
+        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}</span></button>`;
     }
 
     function questionHtml(q, hits) {
@@ -71,12 +65,12 @@
     function profileHtml() {
         const hits = M().searchQuestions(state.query);
         const searching = hits !== null;
-        const sections = profileSections().map((s, i) => {
+        const sections = profileSections().map((s) => {
             const body = s.questions.map(q => (!hits || hits.has(q.id)) ? questionHtml(q, hits && hits.get(q.id)) : '').join('');
             if (searching && !body) return '';
             const n = M().countAnswered(state.answers, s.id);
             const open = searching || state.open.has(s.id);
-            return `<details class="ct-sec" data-sec="${s.id}"${open ? ' open' : ''}><summary><span class="ct-sec-n">${i + 1}</span><span class="ct-sec-title">${esc(s.title)}</span>${n ? `<em class="ct-count">${n}</em>` : ''}</summary><div class="ct-sec-body">${body}</div></details>`;
+            return `<details class="ct-sec" data-sec="${s.id}"${open ? ' open' : ''}><summary><span class="ct-sec-title">${esc(s.title)}</span>${n ? `<em class="ct-count">${n}</em>` : ''}</summary><div class="ct-sec-body">${body}</div></details>`;
         }).join('');
         const empty = searching && !sections ? `<p class="ct-empty">Nenhuma condição encontrada para “${esc(state.query)}”.</p>` : '';
         return sections + empty;
@@ -91,15 +85,14 @@
 
     /* ---------- resultado ---------- */
 
-    function guidanceHtml(m) {
+    // Orientação da OMS: uma vez por bloco, com as categorias que aparecem nele.
+    function groupGuideHtml(g) {
         const { GUIDANCE, GUIDANCE_ACD } = M();
-        if (m.section === 'na') return '';
-        if (m.scale === 'acd' || m.scale === 'acds') {
-            const letters = m.display.split('/');
-            return `<ul class="ct-guide">${letters.map(l => `<li><b>${l}</b> ${esc(GUIDANCE_ACD[l])}</li>`).join('')}</ul>`;
-        }
-        const nums = m.ranged ? m.display.split('/').map(Number) : [m.category];
-        return `<ul class="ct-guide">${nums.map(n => `<li><b>${n}</b> ${esc(GUIDANCE[n])}</li>`).join('')}</ul>`;
+        if (g.id === 'na') return '';
+        const acd = g.methods[0].scale !== 'mec';
+        const keys = [...new Set(g.methods.flatMap(m => m.display.split('/')))].sort();
+        const lines = keys.map(k => acd ? GUIDANCE_ACD[k] : GUIDANCE[k]).filter(Boolean);
+        return lines.length ? `<p class="ct-gguide">${lines.map(esc).join(' ')}</p>` : '';
     }
 
     function methodHtml(m) {
@@ -111,11 +104,11 @@
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
         return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${best}</div></div>
-            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${guidanceHtml(m)}${reasons}${miss}</article>`;
+            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${reasons}${miss}</article>`;
     }
 
     function groupsHtml(res) {
-        return res.groups.map(g => `<section class="ct-group ct-group-${g.id}"><header><h3>${g.title}<em>${g.methods.length}</em></h3><span>${g.hint}</span></header>${g.methods.map(methodHtml).join('')}</section>`).join('');
+        return res.groups.map(g => `<section class="ct-group ct-group-${g.id}"><header><h3>${g.title}<em>${g.methods.length}</em></h3><span>${g.hint}</span></header>${groupGuideHtml(g)}${g.methods.map(methodHtml).join('')}</section>`).join('');
     }
 
     function familyNavHtml() {
@@ -145,7 +138,7 @@
         const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
                 <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
-            <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul><p>As opções do perfil marcadas com “6ª ed.” foram revisadas nesta edição.</p></details>
+            <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul></details>
             <details class="ct-legend"><summary>Fora desta ferramenta</summary><p>${OUT_OF_SCOPE_2.map(esc).join('; ')}.</p></details>
             <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
     }
