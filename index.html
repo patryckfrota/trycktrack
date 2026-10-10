@@ -196,7 +196,7 @@
         })();
     </script>
     <title>Trycktrack</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -292,7 +292,7 @@
 
             <!-- RAPID REVIEW -->
             <div class="tab-content" id="reviewTab">
-            <div class="rr-card" onclick="openRepoRapid()">
+            <div class="rr-card" role="button" tabindex="0" onclick="openRepoRapid()">
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 4 14 11.5 14 10.5 22 20 10 12.5 10 13 2"/></svg></div>
                 <div class="rr-card-content">
                     <div class="rr-card-header">
@@ -303,7 +303,7 @@
                 </div>
                 <div class="rr-card-arrow">›</div>
             </div>
-            <div class="rr-card" onclick="openBullets()">
+            <div class="rr-card" role="button" tabindex="0" onclick="openBullets()">
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="4" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg></div>
                 <div class="rr-card-content">
                     <div class="rr-card-header">
@@ -314,7 +314,7 @@
                 </div>
                 <div class="rr-card-arrow">›</div>
             </div>
-            <div class="rr-card" onclick="openEssentials()">
+            <div class="rr-card" role="button" tabindex="0" onclick="openEssentials()">
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7L12 3Z"/></svg></div>
                 <div class="rr-card-content">
                     <div class="rr-card-header">
@@ -558,23 +558,54 @@
     <!-- REPOSITÓRIO — Essentials (áreas + leitor próprio) -->
     <div class="reader-view" id="essentialsView">
         <div class="reader-header">
-            <button class="reader-back" onclick="essentialsBack()">
+            <button class="reader-back" onclick="essentialsBack()" aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
             </button>
             <div class="reader-header-title" id="essentialsTitle">Essentials</div>
+            <button class="reader-fontsize-btn" id="essSearchBtn" hidden onclick="essentialsFind(true)" aria-label="Buscar na aula" style="font-size:0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+            <button class="reader-pdf-btn is-locked" disabled aria-disabled="true" aria-label="Download bloqueado" title="Download bloqueado"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+            <button class="reader-fontsize-btn" onclick="openFontSizeSheet()" aria-label="Tamanho do texto">Aa</button>
         </div>
+        <div class="menu-search" data-scope="essentials" id="essMenuSearch"><input type="search" placeholder="Buscar palavra em todos os Essentials…" aria-label="Buscar em todos os Essentials" autocomplete="off"></div>
+        <div class="reader-content menu-search-results" id="essSearchResults" hidden></div>
+        <div class="ess-find" id="essFind" hidden role="search">
+            <input type="search" id="essFindInput" placeholder="Buscar nesta aula…" aria-label="Buscar nesta aula" oninput="essentialsFind()" onkeydown="if(event.key==='Enter'){essentialsFindStep(event.shiftKey?-1:1)}">
+            <span class="ess-find-count" id="essFindCount" aria-live="polite"></span>
+            <button type="button" onclick="essentialsFindStep(-1)" aria-label="Resultado anterior">‹</button>
+            <button type="button" onclick="essentialsFindStep(1)" aria-label="Próximo resultado">›</button>
+            <button type="button" onclick="essentialsFind(false)" aria-label="Fechar busca">×</button>
+        </div>
+        <div class="reader-progress-track" id="essProgressTrack" hidden role="progressbar" aria-label="Progresso da leitura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="reader-progress-fill" id="essProgressFill"></div></div>
         <div class="reader-content" id="essentialsContent"></div>
+        <div class="reader-footer" id="essFooter" hidden role="button" tabindex="0" aria-haspopup="dialog" aria-label="Trocar o tema" onclick="openEssentialsPanel()">
+            <div class="reader-footer-num" id="essFooterNum">1</div>
+            <div class="reader-footer-label">Trocar o tema</div>
+        </div>
+    </div>
+
+    <!-- ESSENTIALS — painel lateral de capítulos (mesmo padrão do Rapid Review) -->
+    <div class="chapter-list-backdrop" id="essPanelBackdrop" onclick="closeEssentialsPanel()"></div>
+    <div class="chapter-list-panel" id="essPanel" role="dialog" aria-modal="true" aria-label="Temas">
+        <div class="chapter-list-header">
+            <span>Temas</span>
+            <button class="reader-back" onclick="closeEssentialsPanel()" aria-label="Fechar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
+        </div>
+        <div class="chapter-list-body" id="essPanelBody"></div>
     </div>
 
     <!-- REPOSITÓRIO — Rapid Review (hub ENAMED / UEPA) -->
     <div class="reader-view" id="repoRapidView">
         <div class="reader-header">
-            <button class="reader-back" onclick="closeRepoRapid()">
+            <button class="reader-back" onclick="closeRepoRapid()" aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
             </button>
             <div class="reader-header-title">Rapid Review</div>
         </div>
         <div class="reader-content review-group-content">
+            <div class="menu-search" data-scope="rapid"><input type="search" placeholder="Buscar palavra em todos os Rapid Review…" aria-label="Buscar palavra em todos os Rapid Review…" autocomplete="off"></div>
+            <div class="menu-search-results" hidden></div>
             <div class="review-group-list">
             <div class="rr-card rr-hub-card" onclick="openReviewGroup('enamed')" data-topic="rr-hub-enamed">
                 <img src="assets/logo-enamed-sigla.png" alt="ENAMED" class="rr-hub-logo">
@@ -594,14 +625,16 @@
     <!-- RAPID REVIEW — grupo (hub ENAMED / UEPA) -->
     <div class="reader-view" id="reviewGroupView">
         <div class="reader-header">
-            <button class="reader-back" onclick="closeReviewGroup()">
+            <button class="reader-back" onclick="closeReviewGroup()" aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
             </button>
             <div class="reader-header-title" id="reviewGroupTitle">Rapid Review</div>
         </div>
         <div class="reader-content review-group-content">
+            <div class="menu-search" data-scope="rapid"><input type="search" placeholder="Buscar palavra em todos os Rapid Review…" aria-label="Buscar palavra em todos os Rapid Review…" autocomplete="off"></div>
+            <div class="menu-search-results" hidden></div>
             <div id="reviewGroupEnamed" class="review-group-list">
-            <div class="rr-card" onclick="openReader('infectologia')" data-topic="infectologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('infectologia')" data-topic="infectologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
                 <div class="rr-card-content">
@@ -620,7 +653,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('cardiologia')" data-topic="cardiologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('cardiologia')" data-topic="cardiologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.3c-3.7-2.5-7.8-5.7-7.8-9.9C4.2 7.2 6.3 5.3 8.8 5.3c1.5 0 2.7.8 3.2 1.9.5-1.1 1.7-1.9 3.2-1.9 2.5 0 4.6 1.9 4.6 5.1 0 4.2-4.1 7.4-7.8 9.9Z"/><path d="M5.8 12.5h2.6l1.3-2.6 1.7 5 1.3-3.4h3.4"/></svg></div>
                 <div class="rr-card-content">
@@ -639,7 +672,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('endocrinologia')" data-topic="endocrinologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('endocrinologia')" data-topic="endocrinologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8.7c-2.2 0-3.8 1.6-3.8 3.8S6.8 16.3 9 16.3c1.5 0 2.6-.8 3-2.1"/><path d="M15 8.7c2.2 0 3.8 1.6 3.8 3.8s-1.6 3.8-3.8 3.8c-1.5 0-2.6-.8-3-2.1"/><path d="M9 8.7c1.5 0 2.6.8 3 2.1M15 8.7c-1.5 0-2.6.8-3 2.1"/></svg></div>
                 <div class="rr-card-content">
@@ -658,7 +691,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('gastroenterologia')" data-topic="gastroenterologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('gastroenterologia')" data-topic="gastroenterologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.8 4.4c-1.7 0-2.9 1.3-2.9 3.1 0 1.4.8 2.1.8 3.4 0 1.9-1.7 2.5-1.7 4.6 0 2.8 2.3 4.9 5.7 4.9 4 0 6.5-2.5 6.5-6.9 0-3.2-1.5-5.2-3.7-5.9-.6-1.9-2.2-3.2-4.7-3.2Z"/><path d="M9 15.3c.7.9 1.7 1.4 2.9 1.4"/></svg></div>
                 <div class="rr-card-content">
@@ -677,7 +710,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('hepatologia')" data-topic="hepatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('hepatologia')" data-topic="hepatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 10.5c0-3.4 2.6-6 6.3-6 2 0 3.4 1 4.1 2.3.8-.5 1.7-.7 2.6-.5 2.3.5 3.6 2.7 3 5-.2.9-.7 1.6-1.3 2.1.6.7 1 1.6 1 2.7 0 2.3-1.9 4.1-4.4 4.1-1 0-1.9-.3-2.6-.8-.9.9-2.2 1.4-3.7 1.4-3.5 0-5.9-2.4-5.9-5.9 0-1.7.5-3 1.4-4-.3-.1-.4-.2-.5-.4Z"/></svg></div>
                 <div class="rr-card-content">
@@ -696,7 +729,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('pneumologia')" data-topic="pneumologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('pneumologia')" data-topic="pneumologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6.8"/><path d="M12 10.8c-1.3-1.5-3.2-1.9-4.4-.7C6.3 11.4 5.3 14 5.3 16.4c0 1.9 1.2 2.9 2.5 2.9 1.5 0 2.6-1.2 3-2.6"/><path d="M12 10.8c1.3-1.5 3.2-1.9 4.4-.7 1.3 1.3 2.3 3.9 2.3 6.3 0 1.9-1.2 2.9-2.5 2.9-1.5 0-2.6-1.2-3-2.6"/></svg></div>
                 <div class="rr-card-content">
@@ -715,7 +748,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('neurologia')" data-topic="neurologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('neurologia')" data-topic="neurologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.3 4.6a2.7 2.7 0 0 0-2.6 3.3A3 3 0 0 0 5.1 13a3 3 0 0 0 1.8 5.4 2.6 2.6 0 0 0 5-.9V6.9a2.6 2.6 0 0 0-2.6-2.3Z"/><path d="M14.7 4.6a2.7 2.7 0 0 1 2.6 3.3A3 3 0 0 1 18.9 13a3 3 0 0 1-1.8 5.4 2.6 2.6 0 0 1-5-.9"/></svg></div>
                 <div class="rr-card-content">
@@ -734,7 +767,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('reumatologia')" data-topic="reumatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('reumatologia')" data-topic="reumatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 8.4a2.1 2.1 0 1 1 2.9-2.9l10.7 10.7a2.1 2.1 0 1 1-2.9 2.9z"/><circle cx="4.6" cy="7.3" r="1.5"/><circle cx="7.3" cy="4.6" r="1.5"/><circle cx="19.4" cy="16.7" r="1.5"/><circle cx="16.7" cy="19.4" r="1.5"/></svg></div>
                 <div class="rr-card-content">
@@ -753,7 +786,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('nefrologia')" data-topic="nefrologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('nefrologia')" data-topic="nefrologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.3 3.7C6.3 3.7 4.2 6.9 4.2 10.9c0 5.6 3.1 10 6.9 10 2 0 3-1.4 3-3.4 0-1.6-1-2.4-1-3.8 0-1.9 1.7-2.2 1.7-4.1 0-3.4-1.9-5.9-5.5-5.9Z"/></svg></div>
                 <div class="rr-card-content">
@@ -772,7 +805,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('hematologia')" data-topic="hematologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('hematologia')" data-topic="hematologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-3 4.5-6 8-6 11.4a6 6 0 0 0 12 0c0-3.4-3-6.9-6-11.4Z"/></svg></div>
                 <div class="rr-card-content">
@@ -791,7 +824,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('dermatologia')" data-topic="dermatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('dermatologia')" data-topic="dermatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="8" rx="3.5"/><circle cx="9" cy="12" r="0.6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="0.6" fill="currentColor" stroke="none"/></svg></div>
                 <div class="rr-card-content">
@@ -810,7 +843,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('oftalmologia')" data-topic="oftalmologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('oftalmologia')" data-topic="oftalmologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.6 12 5.6 21.5 12 21.5 12 18 18.4 12 18.4 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
                 <div class="rr-card-content">
@@ -829,7 +862,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('otorrinolaringologia')" data-topic="otorrinolaringologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('otorrinolaringologia')" data-topic="otorrinolaringologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.2c-3 0-5.3 2.4-5.3 5.5v6.1a3.7 3.7 0 0 0 7.4 0"/><circle cx="17.4" cy="16.6" r="1.8"/></svg></div>
                 <div class="rr-card-content">
@@ -848,7 +881,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('obstetricia')" data-topic="obstetricia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('obstetricia')" data-topic="obstetricia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.6" r="5.1"/><path d="M12 13.7v6"/><path d="M9.1 17.2h5.8"/></svg></div>
                 <div class="rr-card-content">
@@ -867,7 +900,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('ginecologia')" data-topic="ginecologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('ginecologia')" data-topic="ginecologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 9.2c0-2.6 1.6-4.6 3.6-4.6s3.6 2 3.6 4.6c0 3.4-1.7 6-3.6 8.4-1.9-2.4-3.6-5-3.6-8.4Z"/><path d="M12 17.6V21M9.5 19.3h5"/></svg></div>
                 <div class="rr-card-content">
@@ -886,7 +919,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('psiquiatria')" data-topic="psiquiatria">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('psiquiatria')" data-topic="psiquiatria">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6v18.8"/><path d="M9.7 3.1a2.5 2.5 0 0 0-4.7 1.2v.1a2.9 2.9 0 0 0-2.5 3.3 2.9 2.9 0 0 0-1 5.1 2.7 2.7 0 0 0 1.1 4.1 2.6 2.6 0 0 0 2.5 3.3 2.5 2.5 0 0 0 4.6-1.4z"/><path d="M14.3 3.1a2.5 2.5 0 0 1 4.7 1.2v.1a2.9 2.9 0 0 1 2.5 3.3 2.9 2.9 0 0 1 1 5.1 2.7 2.7 0 0 1-1.1 4.1 2.6 2.6 0 0 1-2.5 3.3 2.5 2.5 0 0 1-4.6-1.4z"/><path d="M4.3 8a2 2 0 0 0 2.4 1.6"/><path d="M3.4 13.1a2.3 2.3 0 0 0 2.4 1"/><path d="M5.5 17.5a2.1 2.1 0 0 1 2.3-.8"/><path d="M19.7 8a2 2 0 0 1-2.4 1.6"/><path d="M20.6 13.1a2.3 2.3 0 0 1-2.4 1"/><path d="M18.5 17.5a2.1 2.1 0 0 0-2.3-.8"/></svg></div>
                 <div class="rr-card-content">
@@ -905,7 +938,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('pediatria-completo')" data-topic="pediatria-completo">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('pediatria-completo')" data-topic="pediatria-completo">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.6c0-1.4.8-2.6 1.9-2.6s1.9 1.2 1.9 2.6"/><path d="M10.3 4.6 8.8 7.3M13.9 4.6l1.5 2.7"/><rect x="7" y="7.3" width="10" height="14.2" rx="2.6"/><path d="M9.3 11.3h2.2M9.3 14.4h2.2M9.3 17.5h2.2"/></svg></div>
                 <div class="rr-card-content">
@@ -924,7 +957,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('medicina-preventiva')" data-topic="medicina-preventiva">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('medicina-preventiva')" data-topic="medicina-preventiva">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.1 5.7 5.4v5.2c0 4.9 2.8 8 6.3 9.6 3.5-1.6 6.3-4.7 6.3-9.6V5.4z"/><path d="m8.9 11.9 2.1 2.1 4.3-4.3"/></svg></div>
                 <div class="rr-card-content">
@@ -943,7 +976,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
             
-            <div class="rr-card" onclick="openReader('cirurgia-geral')" data-topic="cirurgia-geral">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('cirurgia-geral')" data-topic="cirurgia-geral">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.3 1.3 8 3.3 6.7 1.3"/><path d="M8 3.3 4.6 17.2"/><path d="M8 3.3 12.4 17.2"/><circle cx="4.3" cy="19" r="2.1"/><circle cx="13.6" cy="19" r="2.1"/><path d="M18.6 1.4c1.1-.5 2.3-.5 2.3.9v11.2"/><path d="M18.6 1.4v11.9"/><path d="M18.6 6.6h2.3M18.6 8.2h2.3M18.6 9.8h2.3"/><circle cx="19.75" cy="11.6" r="0.45"/><path d="M18.6 13.3v4.8c0 .9.5 1.7 1.3 2.1l.4.2 2.6-4.9c.3-.6-.1-1.3-.8-1.3z"/></svg></div>
                 <div class="rr-card-content">
@@ -964,7 +997,7 @@
             </div>
             <div id="reviewGroupUepa" class="review-group-list" style="display:none">
 
-            <div class="rr-card" onclick="openReader('uepa_hepatologia')" data-topic="uepa_hepatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_hepatologia')" data-topic="uepa_hepatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -981,7 +1014,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_nefrologia')" data-topic="uepa_nefrologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_nefrologia')" data-topic="uepa_nefrologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -998,7 +1031,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_dermatologia')" data-topic="uepa_dermatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_dermatologia')" data-topic="uepa_dermatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1015,7 +1048,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_endocrinologia')" data-topic="uepa_endocrinologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_endocrinologia')" data-topic="uepa_endocrinologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1032,7 +1065,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_gastroenterologia')" data-topic="uepa_gastroenterologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_gastroenterologia')" data-topic="uepa_gastroenterologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1049,7 +1082,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_reumatologia')" data-topic="uepa_reumatologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_reumatologia')" data-topic="uepa_reumatologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1066,7 +1099,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_hematologia')" data-topic="uepa_hematologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_hematologia')" data-topic="uepa_hematologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1083,7 +1116,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_ortopedia')" data-topic="uepa_ortopedia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_ortopedia')" data-topic="uepa_ortopedia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1100,7 +1133,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_psiquiatria')" data-topic="uepa_psiquiatria">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_psiquiatria')" data-topic="uepa_psiquiatria">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1117,7 +1150,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_pneumologia')" data-topic="uepa_pneumologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_pneumologia')" data-topic="uepa_pneumologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1134,7 +1167,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_otorrinolaringologia')" data-topic="uepa_otorrinolaringologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_otorrinolaringologia')" data-topic="uepa_otorrinolaringologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1151,7 +1184,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_neurologia')" data-topic="uepa_neurologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_neurologia')" data-topic="uepa_neurologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/></svg></div>
                 <div class="rr-card-content">
@@ -1168,7 +1201,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_infectologia')" data-topic="uepa_infectologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_infectologia')" data-topic="uepa_infectologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
                 <div class="rr-card-content">
@@ -1187,7 +1220,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_cardiologia')" data-topic="uepa_cardiologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_cardiologia')" data-topic="uepa_cardiologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></div>
                 <div class="rr-card-content">
@@ -1206,7 +1239,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_ginecologia')" data-topic="uepa_ginecologia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_ginecologia')" data-topic="uepa_ginecologia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 4.418 8 12 8 12s8-7.582 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg></div>
                 <div class="rr-card-content">
@@ -1225,7 +1258,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_obstetricia')" data-topic="uepa_obstetricia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_obstetricia')" data-topic="uepa_obstetricia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg></div>
                 <div class="rr-card-content">
@@ -1244,7 +1277,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_preventiva')" data-topic="uepa_preventiva">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_preventiva')" data-topic="uepa_preventiva">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
                 <div class="rr-card-content">
@@ -1263,7 +1296,7 @@
                 <div class="rr-card-arrow">›</div>
             </div>
 
-            <div class="rr-card" onclick="openReader('uepa_cirurgia')" data-topic="uepa_cirurgia">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_cirurgia')" data-topic="uepa_cirurgia">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
                 <div class="rr-card-content">
@@ -1281,7 +1314,7 @@
                 </div>
                 <div class="rr-card-arrow">›</div>
             </div>
-            <div class="rr-card" onclick="openReader('uepa_pediatria')" data-topic="uepa_pediatria">
+            <div class="rr-card" role="button" tabindex="0" onclick="openReader('uepa_pediatria')" data-topic="uepa_pediatria">
                 <div class="rr-continue-badge">Continuar</div>
                 <div class="rr-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div>
                 <div class="rr-card-content">
@@ -1308,31 +1341,16 @@
     <!-- RAPID REVIEW — leitor padronizado por grande área -->
     <div class="reader-view" id="readerView">
         <div class="reader-header">
-            <button class="reader-back" onclick="closeReader()">
+            <button class="reader-back" onclick="closeReader()" aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
             </button>
             <div class="reader-header-title" id="readerAreaTitle">Rapid Review</div>
-            <button class="reader-pdf-btn" onclick="downloadRapidReviewPdf()" aria-label="Baixar Rapid Review em PDF" title="Baixar PDF" style="--pdf-progress: 0%" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-            </button>
-            <div class="reader-highlight-wrap">
-                <button class="reader-highlight-btn" onclick="toggleHighlightPalette(event)" aria-label="Grifar conteúdo" title="Grifar conteúdo">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 4.5 5 5-9.8 9.8-5.2.2.2-5.2z"/><path d="m12.5 6.5 5 5M4.5 20h7"/></svg>
-                </button>
-                <div class="highlight-palette" id="highlightPalette" aria-label="Cores de marcação">
-                    <button class="highlight-color" type="button" data-color="#FDE68A" data-dark-color="#6B5A1A" aria-label="Amarelo pastel" title="Amarelo pastel" onclick="selectHighlightColor(this.dataset.color, this.dataset.darkColor)"></button>
-                    <button class="highlight-color" type="button" data-color="#FBCFE8" data-dark-color="#7A3F59" aria-label="Rosa pastel" title="Rosa pastel" onclick="selectHighlightColor(this.dataset.color, this.dataset.darkColor)"></button>
-                    <button class="highlight-color" type="button" data-color="#C4B5FD" data-dark-color="#59438F" aria-label="Lavanda pastel" title="Lavanda pastel" onclick="selectHighlightColor(this.dataset.color, this.dataset.darkColor)"></button>
-                    <button class="highlight-color" type="button" data-color="#BAE6FD" data-dark-color="#285A73" aria-label="Azul pastel" title="Azul pastel" onclick="selectHighlightColor(this.dataset.color, this.dataset.darkColor)"></button>
-                    <button class="highlight-color" type="button" data-color="#BBF7D0" data-dark-color="#2D6A4F" aria-label="Verde pastel" title="Verde pastel" onclick="selectHighlightColor(this.dataset.color, this.dataset.darkColor)"></button>
-                    <button class="highlight-disable" type="button" aria-label="Desativar marcação" title="Desativar marcação" onclick="disableHighlightMode()">×</button>
-                </div>
-            </div>
-            <button class="reader-fontsize-btn" onclick="openFontSizeSheet()">Aa</button>
+            <button class="reader-pdf-btn is-locked" disabled aria-disabled="true" aria-label="Download bloqueado" title="Download bloqueado"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+            <button class="reader-fontsize-btn" onclick="openFontSizeSheet()" aria-label="Tamanho do texto">Aa</button>
         </div>
-        <div class="reader-progress-track"><div class="reader-progress-fill" id="readerProgressFill"></div></div>
+        <div class="reader-progress-track" role="progressbar" aria-label="Progresso da leitura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="reader-progress-fill" id="readerProgressFill"></div></div>
         <div class="reader-content" id="readerContent"></div>
-        <div class="reader-footer" onclick="openChapterList()">
+        <div class="reader-footer" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Trocar o tema" onclick="openChapterList()">
             <div class="reader-footer-num" id="readerFooterNum">1.1</div>
             <div class="reader-footer-label">Trocar o tema</div>
         </div>
@@ -1353,10 +1371,11 @@
 
     <div class="reader-view" id="bulletsView">
         <div class="reader-header">
-            <button class="reader-back" onclick="closeBullets()">
+            <button class="reader-back" onclick="closeBullets()" aria-label="Voltar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
             </button>
             <div class="reader-header-title">Bullets</div>
+            <button class="reader-fontsize-btn" onclick="openFontSizeSheet()" aria-label="Tamanho do texto">Aa</button>
         </div>
         <div class="bullets-toolbar">
             <div class="bullets-search">
@@ -1370,10 +1389,10 @@
 
     <!-- RAPID REVIEW — painel lateral de temas (direita → esquerda) -->
     <div class="chapter-list-backdrop" id="chapterListBackdrop" onclick="closeChapterList()"></div>
-    <div class="chapter-list-panel" id="chapterListPanel">
+    <div class="chapter-list-panel" id="chapterListPanel" role="dialog" aria-modal="true" aria-label="Temas">
         <div class="chapter-list-header">
             <span>Temas</span>
-            <button class="reader-back" onclick="closeChapterList()">
+            <button class="reader-back" onclick="closeChapterList()" aria-label="Fechar">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
         </div>
@@ -1381,6 +1400,20 @@
     </div>
 
     <!-- RAPID REVIEW — mini menu de tamanho de texto (sobe de baixo) -->
+    <div class="hl-bar" id="hlBar" role="toolbar" aria-label="Grifar trecho selecionado" hidden>
+        <button type="button" class="hl-dot" style="--c:#FACC15" aria-label="Grifar amarelo" onclick="applyHighlightColor('yellow')"></button>
+        <button type="button" class="hl-dot" style="--c:#EC4899" aria-label="Grifar rosa" onclick="applyHighlightColor('pink')"></button>
+        <button type="button" class="hl-dot" style="--c:#8B5CF6" aria-label="Grifar lavanda" onclick="applyHighlightColor('lavender')"></button>
+        <button type="button" class="hl-dot" style="--c:#38BDF8" aria-label="Grifar azul" onclick="applyHighlightColor('blue')"></button>
+        <button type="button" class="hl-dot" style="--c:#34D399" aria-label="Grifar verde" onclick="applyHighlightColor('green')"></button>
+        <button type="button" class="hl-act" onclick="hlNote()">Nota</button>
+        <button type="button" class="hl-act" onclick="hlCopy()">Copiar</button>
+        <button type="button" class="hl-act hl-remove" hidden onclick="removeHighlightAtSelection()">Remover</button>
+    </div>
+
+    <div class="rx-backdrop" id="rxBackdrop"></div>
+    <div class="rx-dialog" id="rxDialog" role="dialog" aria-modal="true" aria-label="Anotações"></div>
+    <div class="rx-gloss" id="rxGloss" role="tooltip" hidden></div>
     <div class="fontsize-backdrop" id="fontsizeBackdrop" onclick="closeFontSizeSheet()"></div>
     <div class="fontsize-sheet" id="fontsizeSheet">
         <div class="fontsize-sheet-handle" id="fontsizeSheetHandle"></div>
@@ -1390,6 +1423,19 @@
                 <input type="range" class="fontsize-slider" id="fontsizeSlider" min="0" max="6" step="1" value="2" oninput="onFontSizeSlide(this.value)">
             </div>
             <span class="fontsize-icon fontsize-icon-lg">A</span>
+        </div>
+        <div class="fs-extra">
+            <div class="fs-row"><span class="fs-label">Tema</span><div class="fs-opts" data-pref="theme">
+                <button type="button" data-v="auto">Auto</button><button type="button" data-v="light">Claro</button><button type="button" data-v="sepia">Sépia</button><button type="button" data-v="dark">Escuro</button></div></div>
+            <div class="fs-row"><span class="fs-label">Entrelinha</span><div class="fs-opts" data-pref="lead">
+                <button type="button" data-v="1.5">Compacta</button><button type="button" data-v="1.7">Normal</button><button type="button" data-v="1.95">Ampla</button></div></div>
+            <div class="fs-row"><span class="fs-label">Largura</span><div class="fs-opts" data-pref="width">
+                <button type="button" data-v="58ch">Estreita</button><button type="button" data-v="70ch">Média</button><button type="button" data-v="86ch">Larga</button></div></div>
+            <div class="fs-row"><span class="fs-label">Recursos</span><div class="fs-opts fs-toggles">
+                <button type="button" data-tog="dys">Dislexia</button><button type="button" data-tog="focus">Foco</button></div></div>
+            <div class="fs-row"><div class="fs-opts">
+                <button type="button" onclick="rxOpenList()">Meus grifos</button></div></div>
+            <p class="fs-hint">Toque numa sigla (ex.: HIV, ECG) para ver o significado.</p>
         </div>
     </div>
 
@@ -1762,6 +1808,8 @@
     <script src="app-reader.js"></script>
     <script src="app-bullets.js"></script>
     <script src="app-essentials.js"></script>
+    <script src="app-search.js"></script>
+    <script src="app-reading-extras.js"></script>
     <script src="app-app.js"></script>
     <script src="app-osce.js"></script>
     <script>

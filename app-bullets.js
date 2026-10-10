@@ -71,6 +71,7 @@
         const nextSlice = filteredBullets.slice(renderedCount, renderedCount + BATCH_SIZE);
         nextSlice.forEach(b => content.insertAdjacentHTML('beforeend', cardHtml(b)));
         renderedCount += nextSlice.length;
+        if (window.restoreHighlights) restoreHighlights('bulletsContent');
 
         if (renderedCount >= filteredBullets.length) return;
 

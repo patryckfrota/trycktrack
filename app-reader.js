@@ -5481,6 +5481,7 @@
                 });
             });
             document.getElementById('readerContent').innerHTML = html;
+            if (window.restoreHighlights) restoreHighlights('readerContent');
         }
 
         function updateReaderIndicator() {
@@ -5518,6 +5519,7 @@
             const posIndex = flat.findIndex(f => f.sIdx === sIdx && f.subIdx === subIdx);
             const progressPct = ((posIndex + 1) / flat.length) * 100;
             document.getElementById('readerProgressFill').style.width = progressPct + '%';
+            document.getElementById('readerProgressFill').parentElement.setAttribute('aria-valuenow', Math.round(progressPct));
         }
 
         let readerScrollTicking = false;
@@ -5971,7 +5973,7 @@
             }
 
             container.innerHTML = `
-                <div class="rr-card highlighted" onclick="openReader('${topicKey}')" data-topic="${topicKey}-inicio">
+                <div class="rr-card highlighted" role="button" tabindex="0" onclick="openReader('${topicKey}')" data-topic="${topicKey}-inicio">
                     <div class="rr-continue-badge">Continuar</div>
                     <div class="rr-card-icon">${icon}</div>
                     <div class="rr-card-content">
@@ -6032,6 +6034,7 @@
 
 
         async function downloadRapidReviewPdf() {
+            return; // download bloqueado (Rapid Review e Essentials)
             const topic = RAPID_REVIEW_DATA[readerState.topicKey];
             if (!topic) return;
             const progress = document.querySelector('.reader-pdf-btn');
@@ -6078,70 +6081,138 @@
             }
         }
 
-        let activeHighlightColor = null;
+        // Grifo: selecionar um trecho mostra uma barra com as cores (e "Copiar");
+        // nada é aplicado sozinho. Os grifos ficam salvos por aula/capítulo.
+        const HL_KEY = 'trycktrack-highlights';
+        const HL_HOSTS = ['readerContent', 'essentialsContent', 'bulletsContent'];
+        const HL_BLOCK = 'p,li,td,th,h2,h3,h4,summary,figcaption,.reader-checklist-text';
+        const hlRead = () => { try { return JSON.parse(localStorage.getItem(HL_KEY) || '{}'); } catch (_) { return {}; } };
+        const hlWrite = d => { try { localStorage.setItem(HL_KEY, JSON.stringify(d)); } catch (_) {} };
+        const hlDocId = host => host.id === 'essentialsContent'
+            ? (window.essentialsDocId && window.essentialsDocId())
+            : host.id === 'bulletsContent' ? 'bullets'
+            : (readerState.topicKey ? 'rr:' + readerState.topicKey : null);
+        const hlHost = node => {
+            const el = node && (node.nodeType === 1 ? node : node.parentElement);
+            return el && el.closest('#readerContent, #essentialsContent, #bulletsContent');
+        };
+        const hlBlock = n => (n.nodeType === 1 ? n : n.parentElement).closest(HL_BLOCK);
 
-        function toggleHighlightPalette(event) {
-            event?.stopPropagation();
-            document.getElementById('highlightPalette')?.classList.toggle('active');
-        }
-
-        function selectHighlightColor(color, darkColor) {
-            activeHighlightColor = document.documentElement.dataset.theme === 'dark' ? darkColor : color;
-            document.querySelectorAll('.highlight-color').forEach(button => {
-                button.classList.toggle('active', button.dataset.color === color);
-            });
-            document.querySelector('.reader-highlight-btn')?.classList.add('is-selected');
-            const palette = document.getElementById('highlightPalette');
-            palette?.classList.remove('active');
-        }
-
-        function applyCurrentHighlight() {
-            if (!activeHighlightColor) return;
-            const selection = window.getSelection();
-            const content = document.getElementById('readerContent');
-            if (!selection || !selection.rangeCount || !selection.toString().trim() || !content) {
-                return;
-            }
-            const range = selection.getRangeAt(0);
-            if (!content.contains(range.commonAncestorContainer)) return;
-            const mark = document.createElement('span');
+        function hlWrap(textNode, from, to, color, id, g, note) {
+            const r = document.createRange();
+            r.setStart(textNode, from); r.setEnd(textNode, to);
+            const mark = document.createElement('mark');
             mark.className = 'reader-highlight-mark';
-            mark.style.backgroundColor = activeHighlightColor;
-            mark.style.color = document.documentElement.dataset.theme === 'dark' ? '#F8FAFC' : 'inherit';
-            try {
-                range.surroundContents(mark);
-            } catch (_) {
-                const fragment = range.extractContents();
-                mark.appendChild(fragment);
-                range.insertNode(mark);
-            }
-            selection.removeAllRanges();
-            const selectedRange = document.createRange();
-            selectedRange.selectNodeContents(mark);
-            selection.addRange(selectedRange);
+            mark.dataset.c = color; mark.dataset.id = id; mark.dataset.g = g || id;
+            if (note) mark.classList.add('has-note');
+            r.surroundContents(mark);
+            return mark;
         }
 
-        function disableHighlightMode() {
-            activeHighlightColor = null;
-            document.querySelector('.reader-highlight-btn')?.classList.remove('is-selected');
-            document.querySelectorAll('.highlight-color').forEach(button => button.classList.remove('active'));
-            document.getElementById('highlightPalette')?.classList.remove('active');
+        function applyHighlightColor(color) {
+            const sel = getSelection();
+            if (!sel.rangeCount || sel.isCollapsed) return;
+            const range = sel.getRangeAt(0), host = hlHost(range.commonAncestorContainer);
+            const docId = host && hlDocId(host);
+            if (!docId) return;
+            // um grifo por nó de texto tocado pela seleção (sobrevive a quebras de tag)
+            const walker = document.createTreeWalker(range.commonAncestorContainer.nodeType === 3
+                ? range.commonAncestorContainer.parentNode : range.commonAncestorContainer, NodeFilter.SHOW_TEXT);
+            const nodes = [];
+            for (let n = walker.nextNode(); n; n = walker.nextNode()) if (range.intersectsNode(n) && n.data.trim()) nodes.push(n);
+            const store = hlRead(), list = (store[docId] ||= []);
+            const gid = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+            nodes.forEach(n => {
+                const from = n === range.startContainer ? range.startOffset : 0;
+                const to = n === range.endContainer ? range.endOffset : n.data.length;
+                if (to <= from || !n.data.slice(from, to).trim()) return;
+                const block = hlBlock(n);
+                if (!block) return;
+                const pre = document.createRange();
+                pre.setStart(block, 0); pre.setEnd(n, from);
+                const entry = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                    t: n.data.slice(from, to), ctx: block.textContent.slice(0, 80), o: pre.toString().length, c: color, g: gid };
+                try { hlWrap(n, from, to, color, entry.id, gid); list.push(entry); } catch (_) {}
+            });
+            hlWrite(store);
+            sel.removeAllRanges();
+            hlHideBar();
+            return list.some(e => e.g === gid) ? gid : null;
         }
 
-        document.getElementById('readerContent').addEventListener('mouseup', () => {
-            window.setTimeout(applyCurrentHighlight, 180);
-        });
-        document.getElementById('readerContent').addEventListener('touchend', () => {
-            // Aguarda o iOS concluir a seleção e exibir seus controles antes
-            // de transformar o trecho em marcação, evitando roubar o gesto.
-            window.setTimeout(applyCurrentHighlight, 500);
-        }, { passive: true });
+        function removeHighlightAtSelection() {
+            const sel = getSelection();
+            const mark = sel.rangeCount && hlHost(sel.anchorNode) && (sel.anchorNode.parentElement || sel.anchorNode).closest('mark.reader-highlight-mark');
+            if (!mark) return;
+            const host = hlHost(mark), docId = hlDocId(host), store = hlRead();
+            const g = mark.dataset.g || mark.dataset.id;
+            if (docId && store[docId]) { store[docId] = store[docId].filter(e => (e.g || e.id) !== g); hlWrite(store); }
+            host.querySelectorAll('mark.reader-highlight-mark').forEach(m => {
+                if ((m.dataset.g || m.dataset.id) === g) { const p = m.parentNode; m.replaceWith(...m.childNodes); p.normalize(); }
+            });
+            sel.removeAllRanges(); hlHideBar();
+        }
 
-        document.addEventListener('click', event => {
-            if (!event.target.closest('.reader-highlight-wrap')) {
-                document.getElementById('highlightPalette')?.classList.remove('active');
-            }
+        // Reaplica os grifos salvos depois que a aula/capítulo é desenhado.
+        function restoreHighlights(hostId) {
+            const host = document.getElementById(hostId), docId = host && hlDocId(host);
+            const list = docId && hlRead()[docId];
+            if (!list) return;
+            const blocks = Array.from(host.querySelectorAll(HL_BLOCK));
+            list.forEach(e => {
+                const block = blocks.find(b => b.textContent.startsWith(e.ctx));
+                if (!block) return;
+                const w = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+                let pos = 0;
+                for (let n = w.nextNode(); n; n = w.nextNode()) {
+                    if (e.o >= pos && e.o + e.t.length <= pos + n.data.length) {
+                        const from = e.o - pos;
+                        if (n.data.substr(from, e.t.length) === e.t && !n.parentElement.closest('mark')) {
+                            try { hlWrap(n, from, from + e.t.length, e.c, e.id, e.g, e.note); } catch (_) {}
+                        }
+                        break;
+                    }
+                    pos += n.data.length;
+                }
+            });
+        }
+        window.restoreHighlights = restoreHighlights;
+
+        const hlBar = () => document.getElementById('hlBar');
+        function hlHideBar() { const b = hlBar(); if (b) b.hidden = true; }
+        let hlFrame = 0;
+        document.addEventListener('selectionchange', () => {
+            cancelAnimationFrame(hlFrame);
+            hlFrame = requestAnimationFrame(() => {
+                const bar = hlBar(), sel = getSelection();
+                if (!bar) return;
+                if (!sel.rangeCount || sel.isCollapsed || !sel.toString().trim() || !hlHost(sel.getRangeAt(0).commonAncestorContainer)) { bar.hidden = true; return; }
+                const rect = sel.getRangeAt(0).getBoundingClientRect();
+                const inMark = !!(sel.anchorNode && (sel.anchorNode.parentElement || sel.anchorNode).closest('mark.reader-highlight-mark'));
+                bar.querySelector('.hl-remove').hidden = !inMark;
+                bar.hidden = false;
+                const half = bar.offsetWidth / 2;
+                bar.style.left = Math.min(window.innerWidth - half - 8, Math.max(half + 8, rect.left + rect.width / 2)) + 'px';
+                bar.style.top = Math.min(window.innerHeight - bar.offsetHeight - 70, rect.bottom + 10) + 'px';
+            });
         });
+        // tocar num grifo seleciona o trecho → a barra oferece "Remover"
+        HL_HOSTS.forEach(id => document.getElementById(id).addEventListener('click', e => {
+            const m = e.target.closest && e.target.closest('mark.reader-highlight-mark');
+            if (!m || !getSelection().isCollapsed) return;
+            const r = document.createRange(); r.selectNodeContents(m);
+            const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        }));
+        document.addEventListener('pointerdown', e => {
+            if (e.target.closest && e.target.closest('#hlBar')) e.preventDefault();   // mantém a seleção
+        });
+        window.hlCopy = () => {
+            const t = getSelection().toString();
+            if (t && navigator.clipboard) navigator.clipboard.writeText(t).catch(() => {});
+            hlHideBar();
+        };
+        window.applyHighlightColor = applyHighlightColor;
+        window.removeHighlightAtSelection = removeHighlightAtSelection;
 
         document.getElementById('readerContent').addEventListener('scroll', watchReaderScroll);
         window.addEventListener('pagehide', saveCurrentReaderPosition);
@@ -6155,14 +6226,14 @@
                 const isCurrentSection = sIdx === readerState.sectionIndex;
                 const subitemsHtml = section.subchapters.map((sub, subIdx) => {
                     const isCurrent = isCurrentSection && subIdx === readerState.subIndex;
-                    return `<div class="chapter-subitem${isCurrent ? ' current' : ''}" onclick="selectSubchapter(${sIdx}, ${subIdx})">
+                    return `<div class="chapter-subitem${isCurrent ? ' current' : ''}" role="button" tabindex="0"${isCurrent ? ' aria-current="true"' : ''} onclick="selectSubchapter(${sIdx}, ${subIdx})">
                         <span class="chapter-subitem-num">${sub.num}</span>
                         <span>${sub.title}</span>
                     </div>`;
                 }).join('');
 
                 return `<div class="chapter-section${isCurrentSection ? ' expanded' : ''}" data-section="${sIdx}">
-                    <div class="chapter-section-title" onclick="toggleChapterSection(${sIdx})">
+                    <div class="chapter-section-title" role="button" tabindex="0" onclick="toggleChapterSection(${sIdx})">
                         <span>${section.title}</span>
                         <svg class="chapter-section-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                     </div>
@@ -6212,6 +6283,8 @@
 
         function applyReaderFontSize(px) {
             document.getElementById('readerContent').style.fontSize = px + 'px';
+            document.getElementById('essentialsContent').style.fontSize = px + 'px';
+            document.getElementById('bulletsContent').style.fontSize = px + 'px';
             syncFontSizeSlider(px);
         }
 
@@ -6330,3 +6403,64 @@
             document.getElementById('sidebarBackdrop').classList.toggle('active');
         }
 
+
+
+        // Acessibilidade: Enter/Espaço ativam [role=button]; Esc fecha painéis;
+        // o foco entra no painel ao abrir e volta ao botão de origem ao fechar.
+        document.addEventListener('keydown', e => {
+            const t = e.target;
+            if ((e.key === 'Enter' || e.key === ' ') && t.matches && t.matches('[role="button"]:not(button)')) {
+                e.preventDefault(); t.click();
+            } else if (e.key === 'Escape') {
+                const b = document.querySelector('.chapter-list-backdrop.active, .fontsize-backdrop.active');
+                if (b) b.click();
+            }
+        });
+        document.querySelectorAll('.chapter-list-panel, .fontsize-sheet').forEach(panel => {
+            let opener = null, was = false;
+            new MutationObserver(() => {
+                const on = panel.classList.contains('active');
+                if (on === was) return;
+                was = on;
+                if (on) {
+                    opener = document.activeElement;
+                    setTimeout(() => (panel.querySelector('.current, [role="button"], input, button') || panel).focus?.(), 60);
+                } else if (opener && opener.focus) { opener.focus(); opener = null; }
+            }).observe(panel, { attributes: true, attributeFilter: ['class'] });
+        });
+
+
+        // Preferências de leitura (tema, entrelinha, largura) — valem para
+        // Rapid Review, Essentials e Bullets; ficam salvas entre visitas.
+        const READ_PREFS_KEY = 'trycktrack-read-prefs';
+        const READ_VIEWS = ['readerView', 'essentialsView', 'bulletsView', 'essPanel', 'chapterListPanel', 'fontsizeSheet', 'rxDialog', 'rxGloss'];
+        const readPrefs = () => { try { return JSON.parse(localStorage.getItem(READ_PREFS_KEY) || '{}'); } catch (_) { return {}; } };
+        function applyReadPrefs() {
+            const p = readPrefs();
+            READ_VIEWS.forEach(id => {
+                const v = document.getElementById(id); if (!v) return;
+                if (p.theme && p.theme !== 'auto') v.dataset.readTheme = p.theme; else delete v.dataset.readTheme;
+                v.classList.toggle('read-dys', !!p.dys); v.classList.toggle('read-focus', !!p.focus);
+                p.lead ? v.style.setProperty('--read-leading', p.lead) : v.style.removeProperty('--read-leading');
+                p.width ? v.style.setProperty('--read-measure', p.width) : v.style.removeProperty('--read-measure');
+            });
+            document.querySelectorAll('.fs-toggles button[data-tog]').forEach(b => b.setAttribute('aria-pressed', String(!!p[b.dataset.tog])));
+            if (window.onReadPrefs) window.onReadPrefs();
+            document.querySelectorAll('.fs-opts[data-pref]').forEach(g => {
+                const cur = p[g.dataset.pref] || (g.dataset.pref === 'theme' ? 'auto' : g.dataset.pref === 'lead' ? '1.7' : '70ch');
+                g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === cur)));
+            });
+        }
+        document.querySelectorAll('.fs-opts[data-pref]').forEach(g => g.addEventListener('click', e => {
+            const b = e.target.closest('button'); if (!b) return;
+            const p = readPrefs(); p[g.dataset.pref] = b.dataset.v;
+            try { localStorage.setItem(READ_PREFS_KEY, JSON.stringify(p)); } catch (_) {}
+            applyReadPrefs();
+        }));
+        document.querySelectorAll('.fs-toggles').forEach(g => g.addEventListener('click', e => {
+            const b = e.target.closest('button[data-tog]'); if (!b) return;
+            const p = readPrefs(); p[b.dataset.tog] = !p[b.dataset.tog];
+            try { localStorage.setItem(READ_PREFS_KEY, JSON.stringify(p)); } catch (_) {}
+            applyReadPrefs();
+        }));
+        applyReadPrefs();
