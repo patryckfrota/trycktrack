@@ -5806,30 +5806,39 @@
             if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             let paused = false;
             let resumeTimer = null;
+            // scrollLeft é arredondado para inteiro no iOS/iPadOS e no Safari
+            // do Mac: somar 0,5 por quadro nunca saía do lugar e o carrossel
+            // ficava parado. A posição é acumulada em decimal e só então
+            // aplicada, em px/s para andar igual em telas de 60 e 120 Hz.
+            const SPEED = 28;
+            let pos = viewport.scrollLeft;
+            let last = 0;
             const pause = () => { paused = true; clearTimeout(resumeTimer); };
-            const scheduleResume = () => { clearTimeout(resumeTimer); resumeTimer = setTimeout(() => { paused = false; }, 1400); };
+            const scheduleResume = () => {
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(() => { pos = viewport.scrollLeft; paused = false; }, 1400);
+            };
             viewport.addEventListener('pointerdown', pause);
             viewport.addEventListener('touchstart', pause, { passive: true });
+            viewport.addEventListener('wheel', () => { pause(); scheduleResume(); }, { passive: true });
             ['pointerup', 'pointercancel', 'touchend', 'mouseleave'].forEach(evt => viewport.addEventListener(evt, scheduleResume));
-            function step() {
-                // Sai do loop de vez quando o elemento não existe mais —
-                // sem isso, o requestAnimationFrame ficava agendando o
-                // próximo quadro pra sempre, mesmo com a pessoa em outra
-                // aba do app.
+            function step(now) {
+                // Sai do loop de vez quando o elemento não existe mais.
                 if (!viewport.isConnected) return;
-                // offsetParent é null quando o elemento (ou um ancestral,
-                // como a aba "Início" enquanto outra aba está ativa) está
-                // com display:none — pausa o avanço sem depender de
-                // document.hidden, que no PWA instalado em modo standalone
-                // do iOS fica preso em "true" mesmo com o app em primeiro
-                // plano, travando o carrossel pra sempre (relatado: "não
-                // tá rodando mais sozinho").
+                const dt = last ? Math.min(now - last, 100) : 0;
+                last = now;
+                // offsetParent é null com a aba "Início" escondida: pausa sem
+                // depender de document.hidden, que no PWA do iOS fica preso em
+                // "true" mesmo com o app em primeiro plano.
                 if (!paused && viewport.offsetParent !== null) {
                     const half = track.scrollWidth / 2;
                     if (half > 0) {
-                        viewport.scrollLeft += 0.5;
-                        if (viewport.scrollLeft >= half) viewport.scrollLeft -= half;
+                        pos += SPEED * dt / 1000;
+                        if (pos >= half) pos -= half;
+                        viewport.scrollLeft = pos;
                     }
+                } else {
+                    last = 0;
                 }
                 requestAnimationFrame(step);
             }

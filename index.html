@@ -278,10 +278,10 @@
         <div class="content">
             <!-- INÍCIO -->
             <div class="tab-content active" id="inicioTab">
-                <div id="guestBannerSlot"></div>
-                <div id="feedbackBannerSlot"></div>
-                <div id="enamedCountdown"></div>
                 <div id="medUpdatesCarousel"></div>
+                <div id="guestBannerSlot"></div>
+                <div id="enamedCountdown"></div>
+                <div id="quickTools"></div>
                 <div id="inicioLastRead"></div>
             </div>
 
@@ -1695,6 +1695,9 @@
         import { buildStudyBlocks, studyCandidates } from "./shared/trail-blocks.js";
         window.buildStudyBlocks = buildStudyBlocks;
         window.studyCandidates = studyCandidates;
+        // Atalhos da tela inicial (app-quicktools.js).
+        import { gestationalAge, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS } from "./shared/quick-tools.js";
+        Object.assign(window, { gestationalAge, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS });
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
@@ -1842,6 +1845,7 @@
     </script>
     <script src="app-auth.js"></script>
     <script src="app-reader.js"></script>
+    <script src="app-quicktools.js"></script>
     <script src="app-bullets.js"></script>
     <script src="app-essentials.js"></script>
     <script src="app-search.js"></script>

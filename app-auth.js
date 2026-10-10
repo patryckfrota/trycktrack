@@ -317,7 +317,6 @@
             if (window.moveNavIndicator) window.moveNavIndicator(0, true);
             renderCurrentUser();
             updateHeaderTitle('inicio');
-            renderFeedbackBanner();
             renderGuestBanner();
             if (!hasSeenOnboarding()) openOnboarding();
         }
@@ -400,12 +399,11 @@
         }
 
         /* ============================================================
-           BANNER "APP NOVO" + CAIXA DE SUGESTÃO — as mensagens enviadas
+           CAIXA DE SUGESTÃO (menu lateral) — as mensagens enviadas
            vão para a coleção "feedback" no Firestore, visível no Console
            do Firebase (Firestore Database > feedback) para quem administra
            o projeto.
            ============================================================ */
-        const FEEDBACK_BANNER_KEY = 'trycktrack-feedback-banner-dismissed-v1';
 
         /* ============================================================
            MODO VISITANTE
@@ -448,31 +446,6 @@
             window.isGuestMode = false;
             showAuthScreen();
             revealLoginForm();
-        }
-
-        function renderFeedbackBanner() {
-            const slot = document.getElementById('feedbackBannerSlot');
-            if (!slot) return;
-            let dismissed = false;
-            try { dismissed = localStorage.getItem(FEEDBACK_BANNER_KEY) === '1'; } catch (_) { /* ignora */ }
-            if (dismissed) { slot.innerHTML = ''; return; }
-            slot.innerHTML = `<div class="feedback-banner">
-                <button type="button" class="feedback-banner-close" onclick="dismissFeedbackBanner()" aria-label="Dispensar aviso">×</button>
-                <div class="feedback-banner-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-13h-7z"/></svg></div>
-                <div class="feedback-banner-copy">
-                    <strong>O trycktrack é um app novo</strong>
-                    <p>Ainda estamos construindo e melhorando tudo. Se algo travou, ficou confuso ou faltou, seu retorno ajuda muito.</p>
-                    <div class="feedback-banner-actions">
-                        <button type="button" class="feedback-banner-btn" onclick="openFeedbackModal()">Enviar sugestão</button>
-                        <button type="button" class="feedback-banner-dismiss-btn" onclick="dismissFeedbackBanner()">Agora não</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function dismissFeedbackBanner() {
-            try { localStorage.setItem(FEEDBACK_BANNER_KEY, '1'); } catch (_) { /* ignora */ }
-            renderFeedbackBanner();
         }
 
         function openFeedbackModal() {
@@ -814,5 +787,5 @@
         updateHeaderTitle('inicio');
 
         // Inicializar progresso das cards quando a página carrega
-        setTimeout(() => { updateAllCardProgress(); renderLastReadCard(); startEnamedCountdown(); renderMedUpdatesCarousel(); }, 300);
+        setTimeout(() => { updateAllCardProgress(); renderLastReadCard(); startEnamedCountdown(); renderMedUpdatesCarousel(); renderQuickTools(); }, 300);
 
