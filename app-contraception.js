@@ -165,6 +165,18 @@
         return `<section class="ct-card ct-legal"><h3>Critério legal</h3>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
     }
 
+    // Leitura da esterilização (laqueadura e vasectomia): números-chave e etapas do pedido à cirurgia.
+    function sterReaderHtml(kind) {
+        const { STER_STEPS: S } = M();
+        const facts = S.facts[kind].map(([k, t, note]) => `<div class="ct-fact"><small>${esc(k)}</small><strong>${esc(t)}</strong>${note ? `<span>${esc(note)}</span>` : ''}</div>`).join('');
+        const steps = [...S.common, ...S[kind]].map((s, i) => `<li><span class="ct-step-n" aria-hidden="true">${i + 1}</span><div><b>${esc(s.k)}</b><p>${esc(s.t)}</p></div></li>`).join('');
+        return `<div class="ct-facts">${facts}</div><section class="ct-card"><h3>Do pedido à cirurgia</h3><ol class="ct-steps">${steps}</ol></section>`;
+    }
+
+    function attentionHtml(text) {
+        return `<section class="ct-card"><h3>Antes de indicar</h3><ul class="ct-points">${sentences(text).map(s => `<li>${esc(s)}</li>`).join('')}</ul></section>`;
+    }
+
     function certChip(m) {
         if (m.legalPending) return '<p class="ct-cert ct-cert-pending"><b>Provisório</b> · confirme idade e filhos vivos (critério legal)</p>';
         if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec' || m.category >= 4) return '';
@@ -218,10 +230,7 @@
         const { VASECTOMY: V } = M();
         const when = V.when.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
         const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span>${esc(g.label)} (${g.cat})</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li><b>${g.cat}</b><span>${esc(it)}</span></li>`).join('')}</ul></details>`).join('');
-        const r = M().TEXT_RATES.vasectomy;
-        const rate = `<p class="ct-info">Gravidezes por 100 mulheres no 1º ano: <b>${num(r.perfect)}</b> com uso perfeito e <b>${num(r.typical)}</b> no uso típico (OMS, SPR 2025).</p>`;
-        const law = M().VASECTOMY_LAW.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
-        return `${legalCardHtml()}<p class="ct-intro">${esc(V.intro)}</p>${rate}<section class="ct-group"><header><h3>Como pedir (Lei 14.443/2022)</h3></header>${law}</section><section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+        return `${legalCardHtml()}${sterReaderHtml('vas')}${attentionHtml(V.intro)}<section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {
@@ -262,8 +271,8 @@
             const warn = all.core.pregnancy ? '<div class="ct-alert" role="alert"><strong>Gravidez suspeita ou confirmada.</strong> Descarte ou confirme antes de escolher um método.</div>' : '';
             const notices = (all.core.notices || []).map(n => `<div class="ct-notice">${esc(n)}</div>`).join('');
             const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
-            const legal = state.family === 'ster' ? legalCardHtml() : '';
-            body = `${banner}${warn}${legal}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
+            const legal = state.family === 'ster' ? legalCardHtml() + sterReaderHtml('tubal') + attentionHtml(res.intro) : '';
+            body = `${banner}${warn}${legal}${notices}${state.family === 'ster' ? '' : intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
         return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;

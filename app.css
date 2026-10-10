@@ -7305,3 +7305,19 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
         }
         .ct-prefs { display: grid; gap: 8px; margin: 4px 0 8px; }
         .ct-prefs h3 { margin: 0; color: var(--text-main); font-size: 13px; font-weight: 700; }
+        .ct-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+        .ct-fact { display: grid; gap: 4px; align-content: start; padding: 14px; border: 1px solid var(--glass-card-border); border-radius: 16px; background: var(--glass-card-bg); }
+        .ct-fact small { color: var(--text-muted); font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        .ct-fact strong { color: var(--text-main); font-size: 13.5px; font-weight: 700; line-height: 1.35; }
+        .ct-steps { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+        .ct-steps li { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding-bottom: 16px; }
+        .ct-steps li:last-child { padding-bottom: 0; }
+        .ct-steps li:not(:last-child)::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 0; width: 2px; background: var(--border-color); }
+        .ct-step-n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--lavender-dark); color: var(--lavender-active); font-size: 13px; font-weight: 800; }
+        .ct-steps b { display: block; color: var(--text-main); font-size: 14.5px; line-height: 32px; }
+        .ct-steps p { margin: 0; }
+        .ct-facts { grid-template-columns: 1fr 1fr; }
+        .ct-fact:first-child { grid-column: 1 / -1; }
+        .ct-fact:first-child strong { font-size: 22px; }
+        .ct-fact span { color: var(--text-secondary); font-size: 12px; line-height: 1.4; }
+        @media (min-width: 560px) { .ct-facts { grid-template-columns: repeat(3, 1fr); } .ct-fact:first-child { grid-column: auto; } }

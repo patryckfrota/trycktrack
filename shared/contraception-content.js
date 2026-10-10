@@ -370,3 +370,24 @@ export const STER_LAW = {
         { k: 'Documentos', t: 'Registro da manifestação de vontade (Anexo I da Nota Técnica) e Termo de Consentimento Livre e Esclarecido, uma via para a pessoa e outra no prontuário. O termo informa que a esterilização não previne IST.' }
     ]
 };
+
+// Leitura da esterilização voluntária: etapas do pedido à cirurgia (Lei 14.443/2022 e Nota Técnica 34/2023).
+export const STER_STEPS = {
+    common: [
+        { k: 'Conversa e pedido', t: 'Aconselhamento sobre todos os métodos, inclusive os reversíveis de longa duração. A pessoa registra por escrito a manifestação expressa de vontade.' },
+        { k: '60 dias', t: 'Prazo mínimo obrigatório, com acompanhamento por equipe multidisciplinar para desencorajar a esterilização precoce. Pode desistir a qualquer momento, sem prejuízo do atendimento.' },
+        { k: 'Consentimento', t: 'Termo de Consentimento Livre e Esclarecido assinado, com uma via para a pessoa e outra no prontuário. O termo informa que a esterilização não previne IST.' }
+    ],
+    tubal: [
+        { k: 'Cirurgia', t: 'Em serviço adequado, com equipe treinada. Pode ser feita no parto, vaginal ou cesariano, se os 60 dias foram cumpridos antes. SUS: 04.09.06.018-6 (laqueadura) e 04.11.01.004-2 (cesariana com laqueadura).' },
+        { k: 'Depois', t: 'Preservativo continua indicado para prevenir IST.' }
+    ],
+    vas: [
+        { k: 'Cirurgia', t: 'Em ambulatório, geralmente com anestesia local e sem internação. SUS: 04.09.04.024-0.' },
+        { k: 'Depois', t: 'A vasectomia só vale após 3 meses: até lá, usar outro método. O espermograma confirma, quando disponível.' }
+    ],
+    facts: {
+        tubal: [['Eficácia', '0,5%', 'de gravidez no 1º ano, por 100 mulheres'], ['Duração', 'Permanente'], ['Local', 'Serviço cirúrgico com equipe treinada']],
+        vas: [['Eficácia', '0,1 a 0,15%', 'de gravidez no 1º ano, por 100 mulheres'], ['Duração', 'Permanente'], ['Efeito pleno', 'Só após 3 meses']]
+    }
+};
