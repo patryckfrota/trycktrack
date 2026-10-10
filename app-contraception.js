@@ -202,10 +202,14 @@
     }
 
     function legendHtml() {
-        const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE } = M();
+        const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE, GUIDANCE_ACD } = M();
         const cats = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
+        const letterCls = { A: 1, C: 2, D: 3, S: 3 };
+        const letters = ['A', 'C', 'D', 'S'].map(k => `<li><span class="ct-badge ct-cat${letterCls[k]}">${k}</span><div><span>${esc(GUIDANCE_ACD[k])}</span></div></li>`).join('');
         const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
         return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
+                <p><b>Com poucos recursos para julgamento clínico</b> (OMS, tabela 3.2): categorias 1 e 2 = pode usar; 3 e 4 = não usar. Quando aparece uma faixa (por exemplo 3/4), a categoria depende da gravidade da condição: avalie o caso.</p>
+                <p><b>Percepção da fertilidade (A, C, D) e esterilização (A, C, D, S)</b> usam letras em vez de números. D e S não são “piores” entre si: D adia o procedimento; S exige serviço especializado.</p><ul>${letters}</ul>
                 <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
             <details class="ct-legend"><summary>${esc(M().PREGNANCY_CHECK.title)}</summary><p>${esc(M().PREGNANCY_CHECK.intro)}</p><ul class="ct-points">${M().PREGNANCY_CHECK.criteria.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().PREGNANCY_CHECK.note)}</p></details>
             <details class="ct-legend"><summary>${esc(M().COUNSELLING.title)}</summary><ul class="ct-points">${M().COUNSELLING.items.map(c => `<li>${esc(c)}</li>`).join('')}</ul><p>${esc(M().COUNSELLING.note)}</p></details>
@@ -465,7 +469,7 @@
         if (nav) { nav.scrollLeft = navLeft; const on = nav.querySelector('.ct-fam.on'); if (on && (on.offsetLeft < navLeft || on.offsetLeft + on.offsetWidth > navLeft + nav.clientWidth)) nav.scrollLeft = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2; }
         const pr = M().screeningProgress(state.screen, state.answers);
         root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
-        root.querySelector('#ctResultCount').textContent = (() => { const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
+        root.querySelector('#ctResultCount').textContent = (() => { if (!M().selectedOptions(state.answers).length && !pr.done) return '—'; const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
         root.querySelector('.ct').dataset.tab = state.tab;
         const nInd = resultBadge();
         root.querySelector('#ctLive').textContent = `Resultado atualizado: ${nInd} método${nInd === 1 ? '' : 's'} indicado${nInd === 1 ? '' : 's'}.`;
