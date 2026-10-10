@@ -2052,6 +2052,35 @@
         .ct-legend p { margin: 8px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
         .ct-source { margin: 0 2px; color: var(--color-caption); font-size: 11px; line-height: 1.55; }
 
+        /* Famílias de métodos, explicações e selos (contracepção) */
+        .ct-fams { display: flex; gap: 8px; margin: 0 -2px; padding: 2px; overflow-x: auto; scrollbar-width: none; }
+        .ct-fams::-webkit-scrollbar { display: none; }
+        .ct-fam { flex: 0 0 auto; display: grid; gap: 1px; padding: 8px 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; text-align: left; cursor: pointer; }
+        .ct-fam strong { color: var(--text-main); font-size: 12.5px; font-weight: 700; }
+        .ct-fam span { font-size: 10.5px; }
+        .ct-fam.on { border-color: var(--lavender-active); background: var(--lavender-dark); }
+        .ct-fam.on strong { color: var(--lavender-active); }
+        .ct-intro { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
+        .ct-info { margin: 0; color: var(--text-secondary); font-size: 12.5px; line-height: 1.55; }
+        .ct-notice { padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--warning); font-size: 12.5px; font-weight: 600; line-height: 1.5; }
+        .ct-new { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 999px; background: var(--lavender-dark); color: var(--lavender-active); font-size: 10px; font-weight: 800; vertical-align: 1px; }
+        .ct-fam-tag { padding: 1px 8px; border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 10px; font-weight: 700; }
+        .ct-why { margin-top: 2px; }
+        .ct-why summary { color: var(--lavender-active); font-size: 12px; font-weight: 650; cursor: pointer; }
+        .ct-why p { margin: 8px 0 4px; color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
+        .ct-why small { color: var(--color-caption); font-size: 10.5px; }
+        .ct-guide { margin: 2px 0 0; padding: 0 0 0 46px; list-style: none; display: grid; gap: 4px; }
+        .ct-guide li { color: var(--text-secondary); font-size: 11.5px; line-height: 1.45; }
+        .ct-guide b { margin-right: 6px; color: var(--text-main); }
+        .ct-verdict { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
+        .ct-verdict strong { color: var(--text-main); }
+        .ct-verdict.ok { background: var(--success-soft); color: var(--success); }
+        .ct-verdict.ok strong { color: var(--success); }
+        .ct-changes { display: grid; gap: 10px; margin: 12px 0; padding: 0; list-style: none; }
+        .ct-changes li { display: grid; gap: 2px; }
+        .ct-changes b { color: var(--text-main); font-size: 12.5px; }
+        .ct-changes span { color: var(--text-secondary); font-size: 11.5px; line-height: 1.5; }
+
         .rr-card.highlighted {
             background: linear-gradient(135deg, rgba(196, 181, 253, 0.15), rgba(196, 181, 253, 0.06));
             border-color: var(--lavender-active);

@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { METHOD_IDS, SECTIONS } from './contraception-data.js';
-import { evaluate, resolveCell, toggleAnswer, searchQuestions, allQuestions } from './contraception-engine.js';
+import { evaluate, evaluateAll, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
+import { EXTENSIONS } from './contraception-extensions.js';
+import { WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
 const pick = (...pairs) => pairs.reduce((a, [q, o]) => toggleAnswer(a, q, o), {});
@@ -14,7 +16,7 @@ test('dados: ids únicos, 7 colunas por opção e toda célula é válida nas du
         assert.ok(!qids.has(q.id), `pergunta repetida: ${q.id}`);
         qids.add(q.id);
         assert.ok(['single', 'multi'].includes(q.type), q.id);
-        assert.ok(q.page >= 159 && q.page <= 175, `${q.id}: página fora da tabela-resumo`);
+        assert.ok(q.page === 12 || (q.page >= 159 && q.page <= 175), `${q.id}: página fora da fonte`);
         const oids = new Set();
         for (const o of q.options) {
             assert.ok(!oids.has(o.id), `${q.id}.${o.id} repetida`);
@@ -156,4 +158,139 @@ test('busca ignora acento e caixa e exige todos os termos', () => {
 
 test('busca encontra toda pergunta pelo título', () => {
     for (const q of allQuestions()) assert.ok(searchQuestions(q.title).has(q.id), q.id);
+});
+
+/* ---------- extensões: barreira, emergência e percepção da fertilidade ---------- */
+
+test('extensões: links apontam para opções que existem e as colunas batem com os métodos', () => {
+    for (const ext of EXTENSIONS) {
+        const ids = new Set(ext.methods.map(m => m.id));
+        assert.equal(ids.size, ext.methods.length, ext.id);
+        for (const l of ext.links) {
+            const q = getQuestion(l.q);
+            assert.ok(q && !q.family, `${ext.id}: pergunta ${l.q}`);
+            assert.ok(q.options.some(o => o.id === l.o), `${ext.id}: opção ${l.q}.${l.o}`);
+            assert.equal(l.cats.length, ext.methods.length, `${ext.id}.${l.q}.${l.o}`);
+            l.cats.forEach(c => resolveCell(c, 'start', ext.scale));
+        }
+        for (const q of ext.ownQuestions) {
+            assert.equal(getQuestion(q.id).family, ext.id);
+            for (const o of q.options) {
+                assert.equal(o.cats.length, ext.methods.length, `${q.id}.${o.id}`);
+                o.cats.forEach(c => resolveCell(c, 'start', ext.scale));
+            }
+        }
+    }
+});
+
+test('conteúdo: toda explicação e todo item "revisado" aponta para uma pergunta ou opção real', () => {
+    for (const id of Object.keys(WHY)) assert.ok(getQuestion(id), `WHY.${id}`);
+    for (const [q, opts] of Object.entries(REVISED)) for (const o of opts) assert.ok(getQuestion(q).options.some(x => x.id === o), `${q}.${o}`);
+    assert.deepEqual(Object.keys(GUIDANCE), ['1', '2', '3', '4']);
+    assert.equal(CHANGES_6TH.length, 6);
+});
+
+test('barreira: HIV de alto risco → espermicida/diafragma 4 e preservativo 1; alergia a látex → preservativo 3', () => {
+    const hiv = evaluateAll(pick(['hiv', 'highrisk'])).barrier;
+    const m = by(hiv);
+    assert.equal(m.condom.category, 1);
+    assert.equal(m.diaphragm.section, 'contraindicated');
+    const latex = by(evaluateAll(pick(['latex', 'yes'])).barrier);
+    assert.equal(latex.condom.category, 3);
+    assert.ok(latex.condom.drivers[0].note.includes('plástico'));
+});
+
+test('barreira: pós-parto <6 semanas → diafragma não se aplica', () => {
+    const m = by(evaluateAll(pick(['postpartum', 'bf_lt6w'])).barrier);
+    assert.equal(m.diaphragm.section, 'na');
+    assert.equal(m.condom.section, 'indicated');
+});
+
+test('emergência: DIU de cobre herda os critérios do DIU de cobre (DIP atual → 4) e a gravidez barra tudo', () => {
+    const pid = by(evaluateAll(pick(['pid', 'current'])).emergency);
+    assert.equal(pid.eiud.section, 'contraindicated');
+    assert.equal(pid.ecp_lng.section, 'indicated');
+    const preg = by(evaluateAll(pick(['pregnancy', 'yes'])).emergency);
+    assert.equal(preg.ecp_lng.section, 'na');
+    assert.equal(preg.eiud.section, 'contraindicated');
+});
+
+test('emergência: amamentando → ulipristal 2 com orientação; violência sexual com alto risco de IST → DIU 3', () => {
+    const bf = by(evaluateAll(pick(['postpartum', 'bf_gt6m'])).emergency);
+    assert.equal(bf.ecp_upa.category, 2);
+    assert.ok(bf.ecp_upa.drivers[0].note.includes('1 semana'));
+    assert.equal(bf.ecp_lng.category, 1);
+    assert.equal(bf.ecp_lng.drivers.length, 0); // a nota do ulipristal não vaza para os outros
+    const rape = by(evaluateAll(pick(['ecRape', 'high'])).emergency);
+    assert.equal(rape.eiud.category, 3);
+    assert.equal(rape.ecp_upa.category, 1);
+});
+
+test('emergência: efavirenz mantém categoria 1 mas avisa sobre eficácia (nota aparece mesmo na categoria 1)', () => {
+    const m = by(evaluateAll(pick(['art', 'efv'])).emergency);
+    assert.equal(m.ecp_lng.category, 1);
+    assert.ok(m.ecp_lng.drivers.some(d => d.note.includes('efavirenz')));
+});
+
+test('percepção da fertilidade (A/C/D): amamentando <6 sem → D/D; sem amamentar 3-6 sem → sintomas A/D (depende)', () => {
+    const bf = by(evaluateAll(pick(['postpartum', 'bf_lt6w'])).fab);
+    assert.deepEqual([bf.fab_sym.display, bf.fab_cal.display], ['D', 'D']);
+    assert.equal(bf.fab_sym.section, 'delay');
+    const nbf = by(evaluateAll(pick(['postpartum', 'nbf_21_42_no'])).fab);
+    assert.equal(nbf.fab_sym.display, 'A/D');
+    assert.equal(nbf.fab_sym.section, 'depends');
+    assert.equal(nbf.fab_cal.section, 'delay');
+});
+
+test('percepção da fertilidade: sem respostas tudo A; condições próprias entram só na sua família', () => {
+    const none = evaluateAll({});
+    assert.ok(none.fab.methods.every(m => m.section === 'indicated' && m.display === 'A'));
+    // pergunta própria da FAB não altera o núcleo nem a barreira
+    const a = pick(['fabDischarge', 'yes']);
+    assert.ok(evaluateAll(a).core.methods.every(m => m.category === 1));
+    assert.ok(evaluateAll(a).barrier.methods.every(m => m.category === 1));
+    const fab = by(evaluateAll(a).fab);
+    assert.equal(fab.fab_sym.section, 'delay');
+    assert.equal(fab.fab_cal.section, 'indicated');
+});
+
+test('DII: aviso de "sem recomendação" sem alterar nenhuma categoria', () => {
+    const r = evaluateAll(pick(['ibd', 'yes'])).core;
+    assert.equal(r.notices.length, 1);
+    assert.ok(r.methods.every(m => m.category === 1));
+});
+
+test('LAM: precisa dos 3 critérios ao mesmo tempo', () => {
+    assert.equal(lamStatus({ amenorrhea: true, fullBf: true, lt6m: true }).met, true);
+    const s = lamStatus({ amenorrhea: true, fullBf: false, lt6m: true });
+    assert.equal(s.met, false);
+    assert.deepEqual(s.missing, ['Amamentação exclusiva ou quase exclusiva']);
+});
+
+test('ids de perguntas são únicos entre a tabela-resumo e todas as extensões', () => {
+    const seen = new Set();
+    for (const s of SECTIONS) for (const q of s.questions) { assert.ok(!seen.has(q.id), q.id); seen.add(q.id); }
+    for (const ext of EXTENSIONS) for (const q of ext.ownQuestions) { assert.ok(!seen.has(q.id), q.id); seen.add(q.id); }
+    assert.equal(allQuestions().length, seen.size);
+});
+
+test('esterilização: pior situação vence (D > S > C > A) e faixa C/D cai em "depende"', () => {
+    const t = (...pairs) => by(evaluateAll(pick(...pairs)).ster).tubal;
+    assert.equal(t().section, 'indicated');
+    assert.equal(t(['htn', 'sbp160']).section, 'special');
+    assert.equal(t(['htn', 'controlled']).section, 'caution');
+    assert.equal(t(['pregnancy', 'yes']).section, 'delay');
+    assert.equal(t(['sterTime', '7_42']).section, 'delay');
+    assert.equal(t(['sterTime', 'lt7']).section, 'indicated');
+    assert.equal(t(['htn', 'sbp160'], ['sterObstetric', 'preSevere']).display, 'D');
+    assert.equal(t(['ihd', 'yes']).display, 'C/D');
+    assert.equal(t(['ihd', 'yes']).section, 'depends');
+    assert.equal(t(['sterConcurrent', 'cesarean']).section, 'indicated');
+});
+
+test('esterilização: nuliparidade é A com aviso de aconselhamento; jovem é C', () => {
+    const nul = by(evaluateAll(pick(['parity', 'nullip'])).ster).tubal;
+    assert.equal(nul.section, 'indicated');
+    assert.ok(nul.drivers[0].note.includes('permanência'));
+    assert.equal(by(evaluateAll(pick(['sterYoung', 'yes'])).ster).tubal.section, 'caution');
 });

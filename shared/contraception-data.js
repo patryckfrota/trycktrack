@@ -281,6 +281,8 @@ export const SECTIONS = [
                 { id: 'carrier', label: 'Portadora', cats: ALL1 },
                 { id: 'chronic', label: 'Crônica', cats: ALL1 }
             ] },
+            { id: 'ibd', type: 'multi', title: 'Doença inflamatória intestinal', page: 12,
+              options: [{ id: 'yes', label: 'Doença inflamatória intestinal (Crohn ou retocolite)', cats: [N, N, N, N, N, N, N], noRecommendation: true }] },
             { id: 'cirrhosis', type: 'single', title: 'Cirrose', page: 172, options: [
                 { id: 'mild', label: 'Leve (compensada)', cats: ALL1 },
                 { id: 'severe', label: 'Grave (descompensada)', cats: [4, 3, 3, 3, 3, 1, 3] }
@@ -302,7 +304,7 @@ export const SECTIONS = [
             { id: 'art', type: 'multi', title: 'Antirretrovirais (TARV)', page: 173,
               help: 'Nos DIUs, a faixa 2/3 acompanha o estágio clínico do HIV: 2 nos estágios 1 e 2; 3 nos estágios 3 e 4 (só na inserção).',
               options: [
-                { id: 'nrti', label: 'ITRN: abacavir, zidovudina, lamivudina, didanosina, entricitabina, tenofovir', cats: [1, 1, 1, 1, 1, ic('2/3', 2), ic('2/3', 2)] },
+                { id: 'nrti', label: 'ITRN: abacavir, zidovudina, lamivudina, didanosina, entricitabina, estavudina, tenofovir', cats: [1, 1, 1, 1, 1, ic('2/3', 2), ic('2/3', 2)] },
                 { id: 'efv', label: 'ITRNN: efavirenz', cats: [2, 2, 2, 1, 2, ic('2/3', 2), ic('2/3', 2)], note: 'Injetável trimestral: DMPA = 1; NET-EN = 2.' },
                 { id: 'nnrti', label: 'ITRNN: etravirina, nevirapina, rilpivirina', cats: [1, 1, 1, 1, 1, ic('2/3', 2), ic('2/3', 2)] },
                 { id: 'pi', label: 'Inibidores de protease: atazanavir/r, lopinavir/r, darunavir/r, ritonavir', cats: [1, 1, 1, 1, 1, ic('2/3', 2), ic('2/3', 2)] },

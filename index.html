@@ -1712,7 +1712,9 @@
         // Contracepção: dados da OMS + regras (app-contraception.js usa window.MEC).
         import * as mecData from "./shared/contraception-data.js";
         import * as mecEngine from "./shared/contraception-engine.js";
-        window.MEC = { ...mecData, ...mecEngine };
+        import * as mecExtensions from "./shared/contraception-extensions.js";
+        import * as mecContent from "./shared/contraception-content.js";
+        window.MEC = { ...mecData, ...mecExtensions, ...mecContent, ...mecEngine };
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto

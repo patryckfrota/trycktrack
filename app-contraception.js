@@ -1,33 +1,53 @@
 /* ============================================================
    CONTRACEPÇÃO — interface
-   Camadas:  shared/contraception-data.js    dados da OMS (tabela-resumo)
-             shared/contraception-engine.js  regras puras (evaluate)
-             app-contraception.js            esta interface
+   Camadas:  shared/contraception-data.js        tabela-resumo da OMS
+             shared/contraception-extensions.js  barreira, emergência, FAB, LAM
+             shared/contraception-content.js     textos explicativos
+             shared/contraception-engine.js      regras puras (evaluateAll)
+             app-contraception.js                esta interface
    O estado fica só em memória (dado clínico de paciente não é gravado).
    Eventos: um único listener delegado por data-action.
    Depende de window.MEC, exposto em index.html.
    ============================================================ */
 (function () {
+    const FAMILIES = [
+        { id: 'core', title: 'Rotina', sub: 'Hormonais e DIU' },
+        { id: 'barrier', title: 'Barreira', sub: 'Preservativo e diafragma' },
+        { id: 'emergency', title: 'Emergência', sub: 'Pílula e DIU de cobre' },
+        { id: 'fab', title: 'Fertilidade', sub: 'Percepção e calendário' },
+        { id: 'ster', title: 'Esterilização', sub: 'Laqueadura tubária' },
+        { id: 'lam', title: 'LAM', sub: 'Amenorreia da lactação' },
+        { id: 'ci', title: 'Coito interrompido', sub: 'Retirada' }
+    ];
+
     const state = {
         answers: {},
         phase: 'start',
         prefs: { noHormone: false, longActing: false },
         query: '',
         tab: 'profile',
+        family: 'core',
         open: new Set(['perfil']),
+        lam: { amenorrhea: false, fullBf: false, lt6m: false },
         legendOpen: false
     };
     let root = null;
 
     const esc = (v) => escapeHtml(v);
-    const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+    const M = () => window.MEC;
 
     /* ---------- perfil (perguntas) ---------- */
+
+    function isRevised(q, o) {
+        const list = M().REVISED[q.id];
+        return !!(o.revised || (list && list.includes(o.id)));
+    }
 
     function optionHtml(q, o, selected) {
         const on = selected.includes(o.id);
         const role = q.type === 'single' ? 'radio' : 'checkbox';
-        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}</span></button>`;
+        const badge = isRevised(q, o) ? '<span class="ct-new">6ª ed.</span>' : '';
+        return `<button type="button" class="ct-opt${on ? ' on' : ''}" role="${role}" aria-checked="${on}" data-action="toggle" data-q="${q.id}" data-o="${o.id}" data-key="${q.id}.${o.id}"><span class="ct-mark ct-mark-${role}" aria-hidden="true"></span><span class="ct-opt-label">${esc(o.label)}${badge}</span></button>`;
     }
 
     function questionHtml(q, hits) {
@@ -36,17 +56,25 @@
         if (!options.length) return '';
         const help = q.help ? `<p class="ct-help">${esc(q.help)}</p>` : '';
         const hint = q.type === 'single' ? 'Escolha uma' : 'Marque o que se aplica';
-        return `<fieldset class="ct-q"><legend>${esc(q.title)}<small>${hint}</small></legend>${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map(o => optionHtml(q, o, selected)).join('')}</div></fieldset>`;
+        const fam = q.family ? `<span class="ct-fam-tag">${esc(FAMILIES.find(f => f.id === q.family)?.title || '')}</span>` : '';
+        const why = M().WHY[q.id] ? `<details class="ct-why"><summary>Por que isso importa</summary><p>${esc(M().WHY[q.id])}</p><small>OMS, MEC 2025, p. ${q.page}</small></details>` : '';
+        return `<fieldset class="ct-q"><legend>${esc(q.title)}${fam}<small>${hint}</small></legend>${help}<div class="ct-opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}" aria-label="${esc(q.title)}">${options.map(o => optionHtml(q, o, selected)).join('')}</div>${why}</fieldset>`;
+    }
+
+    // Seções do perfil: as da OMS mais uma com as condições próprias de outros métodos.
+    function profileSections() {
+        const base = M().SECTIONS.map(s => ({ id: s.id, title: s.title, questions: s.questions }));
+        const own = M().allQuestions().filter(q => q.family);
+        return own.length ? [...base, { id: 'outros', title: 'Condições de outros métodos', questions: own }] : base;
     }
 
     function profileHtml() {
-        const { SECTIONS, searchQuestions, countAnswered } = window.MEC;
-        const hits = searchQuestions(state.query);
+        const hits = M().searchQuestions(state.query);
         const searching = hits !== null;
-        const sections = SECTIONS.map((s, i) => {
+        const sections = profileSections().map((s, i) => {
             const body = s.questions.map(q => (!hits || hits.has(q.id)) ? questionHtml(q, hits && hits.get(q.id)) : '').join('');
             if (searching && !body) return '';
-            const n = countAnswered(state.answers, s.id);
+            const n = M().countAnswered(state.answers, s.id);
             const open = searching || state.open.has(s.id);
             return `<details class="ct-sec" data-sec="${s.id}"${open ? ' open' : ''}><summary><span class="ct-sec-n">${i + 1}</span><span class="ct-sec-title">${esc(s.title)}</span>${n ? `<em class="ct-count">${n}</em>` : ''}</summary><div class="ct-sec-body">${body}</div></details>`;
         }).join('');
@@ -55,50 +83,95 @@
     }
 
     function summaryHtml() {
-        const sel = window.MEC.selectedOptions(state.answers);
+        const sel = M().selectedOptions(state.answers);
         if (!sel.length) return '<p class="ct-summary-empty">Nenhuma condição marcada: todos os métodos aparecem sem restrição. Marque o que se aplica à paciente.</p>';
-        const chips = sel.map(({ question, option }) => `<button type="button" class="ct-chip" data-action="toggle" data-q="${question.id}" data-o="${option.id}" aria-label="Remover: ${esc(option.label)}"><span>${esc(shortLabel(question, option))}</span><i aria-hidden="true">×</i></button>`).join('');
+        const chips = sel.map(({ question, option }) => `<button type="button" class="ct-chip" data-action="toggle" data-q="${question.id}" data-o="${option.id}" aria-label="Remover: ${esc(option.label)}"><span>${esc(question.options.length === 1 ? question.title : option.label)}</span><i aria-hidden="true">×</i></button>`).join('');
         return `<div class="ct-chips">${chips}</div>`;
     }
 
-    // Chip: título da pergunta quando ela só tem uma opção; senão o rótulo todo.
-    function shortLabel(q, o) {
-        return q.options.length === 1 ? q.title : o.label;
-    }
-
     /* ---------- resultado ---------- */
+
+    function guidanceHtml(m) {
+        const { GUIDANCE, GUIDANCE_ACD } = M();
+        if (m.section === 'na') return '';
+        if (m.scale === 'acd' || m.scale === 'acds') {
+            const letters = m.display.split('/');
+            return `<ul class="ct-guide">${letters.map(l => `<li><b>${l}</b> ${esc(GUIDANCE_ACD[l])}</li>`).join('')}</ul>`;
+        }
+        const nums = m.ranged ? m.display.split('/').map(Number) : [m.category];
+        return `<ul class="ct-guide">${nums.map(n => `<li><b>${n}</b> ${esc(GUIDANCE[n])}</li>`).join('')}</ul>`;
+    }
 
     function methodHtml(m) {
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
             : '';
         const miss = m.misses ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
-        const best = m.best ? '<span class="ct-best-tag">Melhor opção para este perfil</span>' : '';
-        const ranged = m.ranged ? '<p class="ct-ranged">Categoria varia conforme a gravidade ou o risco individual.</p>' : '';
-        return `<article class="ct-method ct-cat${m.category}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}">
+        const best = m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : '';
+        const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
+        return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${best}</div></div>
-            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${ranged}${reasons}${miss}</article>`;
+            <p class="ct-eff">${esc(m.efficacy)}</p><p class="ct-note">${esc(m.note)}</p>${guidanceHtml(m)}${reasons}${miss}</article>`;
+    }
+
+    function groupsHtml(res) {
+        return res.groups.map(g => `<section class="ct-group ct-group-${g.id}"><header><h3>${g.title}<em>${g.methods.length}</em></h3><span>${g.hint}</span></header>${g.methods.map(methodHtml).join('')}</section>`).join('');
+    }
+
+    function familyNavHtml() {
+        return `<nav class="ct-fams" aria-label="Famílias de métodos">${FAMILIES.map(f => `<button type="button" class="ct-fam${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}"><strong>${f.title}</strong><span>${f.sub}</span></button>`).join('')}</nav>`;
+    }
+
+    function lamHtml() {
+        const { LAM, lamStatus } = M();
+        const st = lamStatus(state.lam);
+        const checks = LAM.criteria.map(c => `<button type="button" class="ct-opt${state.lam[c.id] ? ' on' : ''}" role="checkbox" aria-checked="${state.lam[c.id]}" data-action="lam" data-v="${c.id}"><span class="ct-mark ct-mark-checkbox" aria-hidden="true"></span><span class="ct-opt-label">${esc(c.label)}</span></button>`).join('');
+        const verdict = st.met
+            ? '<div class="ct-verdict ok"><strong>Os 3 critérios estão presentes.</strong> O LAM pode oferecer proteção enquanto os 3 se mantiverem. Quando um deles deixar de valer, inicie outro método.</div>'
+            : `<div class="ct-verdict"><strong>O LAM não se aplica.</strong> Falta: ${st.missing.map(esc).join('; ')}. Ofereça outro método.</div>`;
+        return `<p class="ct-intro">${esc(LAM.intro)}</p><div class="qt-panel"><h3 class="qt-panel-title">Critérios (todos são necessários)</h3><div class="ct-opts">${checks}</div>${verdict}</div>
+            <section class="ct-group"><header><h3>Pontos de atenção</h3></header>${LAM.notes.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section>
+            <p class="ct-source">OMS, MEC 2025, p. ${LAM.page}.</p>`;
+    }
+
+    function ciHtml() {
+        const { COITUS_INTERRUPTUS: CI } = M();
+        return `<p class="ct-intro">${esc(CI.intro)}</p><section class="ct-group"><header><h3>O que a OMS diz</h3></header>${CI.points.map(n => `<p class="ct-info">${esc(n)}</p>`).join('')}</section><p class="ct-source">OMS, MEC 2025, p. ${CI.page}. A OMS não atribui categorias a este método.</p>`;
+    }
+
+    function legendHtml() {
+        const { CATEGORY_TEXT, CHANGES_6TH, OUT_OF_SCOPE_2, MEC_SOURCE } = M();
+        const cats = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
+        const changes = CHANGES_6TH.map(c => `<li><b>${esc(c.title)}</b><span>${esc(c.text)}</span></li>`).join('');
+        return `<details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${cats}</ul>
+                <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para dizer se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas. A OMS não indica um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p></details>
+            <details class="ct-legend"><summary>O que mudou na 6ª edição (2025)</summary><ul class="ct-changes">${changes}</ul><p>As opções do perfil marcadas com “6ª ed.” foram revisadas nesta edição.</p></details>
+            <details class="ct-legend"><summary>Fora desta ferramenta</summary><p>${OUT_OF_SCOPE_2.map(esc).join('; ')}.</p></details>
+            <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
     }
 
     function resultHtml() {
-        const { evaluate, CATEGORY_TEXT, OUT_OF_SCOPE, MEC_SOURCE } = window.MEC;
-        const r = evaluate(state.answers, { phase: state.phase, prefs: state.prefs });
-        const counts = r.groups.map(g => `<span class="ct-sum ct-sum-${g.id}">${g.methods.length} ${g.title.toLowerCase()}</span>`).join('');
-        const warn = r.pregnancy ? '<div class="ct-alert" role="alert"><strong>Gravidez suspeita ou confirmada.</strong> Descarte ou confirme antes de escolher um método. Os hormonais não se aplicam; os DIUs são categoria 4.</div>' : '';
-        const groups = r.groups.map(g => `<section class="ct-group ct-group-${g.id}"><header><h3>${g.title}<em>${g.methods.length}</em></h3><span>${g.hint}</span></header>${g.methods.map(methodHtml).join('')}</section>`).join('');
-        const legend = [1, 2, 3, 4].map(n => `<li><span class="ct-badge ct-cat${n}">${n}</span><div><b>${CATEGORY_TEXT[n].name}</b><span>${CATEGORY_TEXT[n].text}</span></div></li>`).join('');
-        return `<div class="ct-result-head"><div><h2>Resultado</h2><div class="ct-sums">${counts}</div></div><button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button></div>
-            ${warn}${groups}
-            <details class="ct-legend"${state.legendOpen ? ' open' : ''} data-legend><summary>Como ler as categorias</summary><ul>${legend}</ul>
-                <p>Início (I) e continuação (C) podem ter categorias diferentes: use a chave no topo para escolher se a mulher vai começar o método ou já o usa. A categoria final de cada método é a mais restritiva entre todas as condições marcadas.</p></details>
-            <details class="ct-legend"><summary>Fora do escopo desta versão</summary><p>${OUT_OF_SCOPE.map(esc).join('; ')}. A OMS trata esses métodos em tabelas próprias.</p></details>
-            <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} ${esc(MEC_SOURCE.scope)}. Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
+        const all = M().evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs });
+        const fam = FAMILIES.find(f => f.id === state.family);
+        let body;
+        let sums = '';
+        if (state.family === 'lam') body = lamHtml();
+        else if (state.family === 'ci') body = ciHtml();
+        else {
+            const res = all[state.family];
+            sums = res.groups.map(g => `<span class="ct-sum ct-sum-${g.id}">${g.title}: ${g.methods.length}</span>`).join('');
+            const warn = all.core.pregnancy ? '<div class="ct-alert" role="alert"><strong>Gravidez suspeita ou confirmada.</strong> Descarte ou confirme antes de escolher um método.</div>' : '';
+            const notices = (all.core.notices || []).map(n => `<div class="ct-notice">${esc(n)}</div>`).join('');
+            const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
+            body = `${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
+        }
+        const copy = (state.family === 'lam' || state.family === 'ci') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
+        return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
     }
 
     function resultBadge() {
-        const { evaluate } = window.MEC;
-        const r = evaluate(state.answers, { phase: state.phase, prefs: state.prefs });
-        return r.methods.filter(m => m.section === 'indicated').length;
+        const core = M().evaluate(state.answers, { phase: state.phase, prefs: state.prefs });
+        return core.methods.filter(m => m.section === 'indicated').length;
     }
 
     /* ---------- montagem e atualização ---------- */
@@ -134,8 +207,11 @@
         const focusKey = document.activeElement?.dataset?.key;
         if (profile) root.querySelector('#ctProfile').innerHTML = profileHtml();
         root.querySelector('#ctSummary').innerHTML = summaryHtml();
-        root.querySelector('#ctResult').innerHTML = resultHtml();
-        const n = window.MEC.selectedOptions(state.answers).length;
+        const resultEl = root.querySelector('#ctResult');
+        const keepTop = resultEl.scrollTop;
+        resultEl.innerHTML = resultHtml();
+        resultEl.scrollTop = keepTop;
+        const n = M().selectedOptions(state.answers).length;
         root.querySelector('#ctProfileCount').textContent = n ? String(n) : '';
         root.querySelector('#ctResultCount').textContent = `${resultBadge()} indicados`;
         root.querySelector('.ct').dataset.tab = state.tab;
@@ -143,11 +219,12 @@
     }
 
     function copySummary() {
-        const { evaluate, selectedOptions, MEC_SOURCE } = window.MEC;
-        const r = evaluate(state.answers, { phase: state.phase, prefs: state.prefs });
+        const { evaluateAll, selectedOptions, MEC_SOURCE } = M();
+        const fam = FAMILIES.find(f => f.id === state.family);
+        const res = evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs })[state.family];
         const profile = selectedOptions(state.answers).map(s => `- ${s.option.label}`).join('\n') || '- Nenhuma condição marcada';
-        const lines = r.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
-        const text = `Critérios de elegibilidade (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
+        const lines = res.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
+        const text = `${fam.title} (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
         navigator.clipboard?.writeText(text).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
     }
 
@@ -164,7 +241,7 @@
         if (!el || !root.contains(el)) return;
         const { action, v, q, o } = el.dataset;
         if (action === 'toggle') {
-            state.answers = window.MEC.toggleAnswer(state.answers, q, o);
+            state.answers = M().toggleAnswer(state.answers, q, o);
             refresh();
         } else if (action === 'phase') {
             state.phase = v;
@@ -175,13 +252,20 @@
             el.classList.toggle('active', state.prefs[v]);
             el.setAttribute('aria-pressed', state.prefs[v]);
             refresh({ profile: false });
+        } else if (action === 'family') {
+            state.family = v;
+            refresh({ profile: false });
+            root.querySelector('#ctResult').scrollTop = 0;
+        } else if (action === 'lam') {
+            state.lam[v] = !state.lam[v];
+            refresh({ profile: false });
         } else if (action === 'tab') {
             state.tab = v;
             root.querySelectorAll('.ct-tab').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
             root.querySelector('.ct').dataset.tab = v;
             root.scrollTop = 0;
         } else if (action === 'clear') {
-            state.answers = {}; state.query = '';
+            state.answers = {}; state.query = ''; state.lam = { amenorrhea: false, fullBf: false, lt6m: false };
             root.querySelector('#ctSearch').value = '';
             refresh();
         } else if (action === 'copy') {
