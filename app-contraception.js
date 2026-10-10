@@ -80,6 +80,11 @@
         return own.length ? [...base, { id: 'outros', title: 'Condições de outros métodos', questions: own }] : base;
     }
 
+    function phaseHtml() {
+        const seg = (value, label, hint) => `<button type="button" class="qt-seg${state.phase === value ? ' active' : ''}" aria-pressed="${state.phase === value}" data-action="phase" data-v="${value}"><strong>${label}</strong><span>${hint}</span></button>`;
+        return `<div class="qt-segmented ct-phase">${seg('start', 'Vai iniciar', 'Escolha do método')}${seg('continue', 'Já usa', 'Continuação')}</div>`;
+    }
+
     function triageHtml(hits) {
         const { SCREENING, itemDone, screeningProgress, getQuestion } = M();
         const searching = hits !== null;
@@ -98,7 +103,7 @@
         }).join('');
         if (!rows) return '';
         const pct = Math.round(prog.done / prog.total * 100);
-        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div><div class="ct-tris">${rows}</div></section>`;
+        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : phaseHtml()}<div class="ct-tris">${rows}</div></section>`;
     }
 
     function profileHtml() {
@@ -417,11 +422,9 @@
     /* ---------- montagem e atualização ---------- */
 
     function shellHtml() {
-        const seg = (value, label, hint) => `<button type="button" class="qt-seg${state.phase === value ? ' active' : ''}" aria-pressed="${state.phase === value}" data-action="phase" data-v="${value}"><strong>${label}</strong><span>${hint}</span></button>`;
         const pref = (key, label) => `<button type="button" class="qt-chip${state.prefs[key] ? ' active' : ''}" aria-pressed="${state.prefs[key]}" data-action="pref" data-v="${key}">${label}</button>`;
         return `<div class="ct" data-tab="${state.tab}">
             <div class="ct-bar">
-                <div class="qt-segmented">${seg('start', 'Vai iniciar', 'Escolha do método')}${seg('continue', 'Já usa', 'Continuação')}</div>
                 <div class="ct-tabs" role="tablist">
                     <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="profile" aria-controls="ctPanelProfile" aria-selected="${state.tab === 'profile'}">Perfil <em id="ctProfileCount"></em></button>
                     <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="result" aria-controls="ctResult" aria-selected="${state.tab === 'result'}">Resultado <em id="ctResultCount"></em></button>
