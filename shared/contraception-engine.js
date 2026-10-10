@@ -229,7 +229,7 @@ function evaluateSet(set, selected, phase, prefs) {
         const misses = !!((prefs.noHormone && method.hormonal) || (prefs.longActing && !method.larc));
         const rates = RATES[method.id] || null;
         const typical = typicalRate(method.id);
-        return { ...method, rates, typical, effectCategory: effectCategory(typical), efficacyRank: typical ?? method.efficacyRank ?? 99, scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
+        return { ...method, rates, typical, effectCategory: effectCategory(typical), efficacyRank: typical ?? 50 + (method.efficacyRank ?? 49), scale: set.scale, category: decisive.max, display: decisive.display, ranged: decisive.ranged, section: sc.sectionFor(decisive), drivers, misses, order: col };
     }).sort((a, b) => sectionRank[a.section] - sectionRank[b.section]
         || a.misses - b.misses
         || a.category - b.category
@@ -249,10 +249,11 @@ export function evaluate(answers = {}, { phase = 'start', prefs = {}, confirmed 
     // "Maior eficácia entre os indicados": menor taxa de gravidez no uso típico (OMS, SPR 2025,
     // tabela 1.1). Métodos sem taxa na tabela (injetável mensal) não concorrem. A OMS não define
     // um método "melhor": é só um desempate de eficácia entre os que a paciente pode usar.
-    const ranked = methods.filter(m => m.section === 'indicated' && !m.misses && typeof m.typical === 'number' && (!confirmed || confirmed.includes(m.id)))
+    const ranked = methods.filter(m => m.section === 'indicated' && !m.misses && typeof m.typical === 'number')
         .sort((a, b) => a.typical - b.typical || (a.rates[0].perfect ?? 99) - (b.rates[0].perfect ?? 99));
     const top = ranked[0];
-    methods.forEach(m => { m.best = m === top && (!!confirmed || selected.some(s => !s.question.family)); });
+    // O selo só aparece se o método de maior eficácia entre TODOS os indicados já estiver confirmado pela triagem.
+    methods.forEach(m => { m.best = m === top && (confirmed ? confirmed.includes(m.id) : selected.some(s => !s.question.family)); });
     return {
         id: 'core', phase, selected, methods, groups,
         notices: noticesFor(selected),

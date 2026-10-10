@@ -140,7 +140,7 @@
     }
 
     function certChip(m) {
-        if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec') return '';
+        if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec' || m.category >= 4) return '';
         const miss = missingTitles(m.id);
         return miss.length
             ? `<p class="ct-cert ct-cert-pending"><b>Provisório</b> · falta responder: ${miss.map(esc).join(', ')}</p>`
@@ -151,7 +151,7 @@
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
             : '';
-        const miss = m.misses ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
+        const miss = m.misses && (m.section === 'indicated' || m.section === 'depends') ? '<p class="ct-miss">Não atende à preferência marcada</p>' : '';
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
         return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : ''}</div></div>
@@ -272,7 +272,7 @@
         const { RATES_SOURCE, EFFECT_CATEGORIES } = M();
         const rows = M().RATES[id];
         if (!rows) return `<section class="ct-card"><h3>Eficácia</h3><p class="ct-muted">A OMS não traz estimativa de eficácia para este método na tabela 1.1 do SPR 2025.</p></section>`;
-        const head = '<div class="ct-rt-row ct-rt-head"><span></span><span>Uso perfeito</span><span>Uso típico (EUA)</span><span>Uso típico (internac.)</span></div>';
+        const head = '<div class="ct-rt-row ct-rt-head"><span></span><span>Perfeito</span><span>Típico EUA</span><span>Típico int.</span></div>';
         const body = rows.map(r => `<div class="ct-rt-row">${r.label ? `<span class="ct-rt-label">${esc(r.label)}</span>` : '<span class="ct-rt-label">Taxa de gravidez</span>'}<span><b>${num(r.perfect)}</b></span><span><b>${num(r.typical)}</b></span><span><b>${num(r.intl)}</b></span></div>`).join('');
         const cat = m && m.effectCategory ? `<p class="ct-rt-cat"><b>${EFFECT_CATEGORIES[m.effectCategory].title} de eficácia.</b> ${esc(EFFECT_CATEGORIES[m.effectCategory].text)}</p>` : '';
         return `<section class="ct-card"><h3>Eficácia (Índice de Pearl)</h3><p class="ct-muted">Gravidezes por 100 mulheres no 1º ano de uso.</p><div class="ct-rt">${head}${body}</div>${cat}<p class="ct-fine">${esc(RATES_SOURCE.caveat)} Fonte: ${esc(RATES_SOURCE.title)}</p></section>`;
@@ -339,7 +339,7 @@
         if (!r) return;
         const text = `${r.title}\n${r.lines.join('\n')}`;
         const old = btn.textContent;
-        navigator.clipboard?.writeText(text).then(() => { btn.textContent = 'Copiado'; }, () => { btn.textContent = 'Não copiou'; }).finally(() => setTimeout(() => { btn.textContent = old; }, 1500));
+        (navigator.clipboard?.writeText(text) ?? Promise.reject()).then(() => { btn.textContent = 'Copiado'; }, () => { btn.textContent = 'Não copiou'; }).finally(() => setTimeout(() => { btn.textContent = old; }, 1500));
     }
 
     function sheetBodyHtml() {
@@ -377,6 +377,7 @@
         state.sheetTab = 'summary';
         el.innerHTML = sheetHtml(id);
         el.hidden = false;
+        root.querySelectorAll('.ct-bar, .ct-layout').forEach(n => { n.inert = true; });
         el.querySelector('#ctSheetBody').scrollTop = 0;
         el.querySelector('[data-action="sheet-close"]')?.focus({ preventScroll: true });
     }
@@ -389,7 +390,7 @@
         const top = keepScroll ? body.scrollTop : 0;
         body.innerHTML = sheetBodyHtml();
         body.scrollTop = top;
-        el.querySelectorAll('.ct-stab').forEach(b => { const on = b.dataset.v === state.sheetTab; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+        el.querySelectorAll('.ct-stab').forEach(b => { const on = b.dataset.v === state.sheetTab; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); if (on) b.scrollIntoView({ inline: 'nearest', block: 'nearest' }); });
     }
 
     // Retorna true se havia ficha aberta (o Esc do app deixa a página aberta).
@@ -398,6 +399,7 @@
         if (!el || el.hidden) return false;
         el.hidden = true;
         el.innerHTML = '';
+        root.querySelectorAll('.ct-bar, .ct-layout').forEach(n => { n.inert = false; });
         const id = state.sheet;
         state.sheet = null;
         root.querySelector(`[data-action="method"][data-id="${id}"]`)?.focus({ preventScroll: true });
@@ -440,11 +442,14 @@
         root.querySelector('#ctSummary').innerHTML = summaryHtml();
         const resultEl = root.querySelector('#ctResult');
         const keepTop = resultEl.scrollTop;
+        const navLeft = resultEl.querySelector('.ct-fams')?.scrollLeft || 0;
         resultEl.innerHTML = resultHtml();
         resultEl.scrollTop = keepTop;
+        const nav = resultEl.querySelector('.ct-fams');
+        if (nav) { nav.scrollLeft = navLeft; const on = nav.querySelector('.ct-fam.on'); if (on && (on.offsetLeft < navLeft || on.offsetLeft + on.offsetWidth > navLeft + nav.clientWidth)) nav.scrollLeft = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2; }
         const pr = M().screeningProgress(state.screen, state.answers);
         root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
-        root.querySelector('#ctResultCount').textContent = `${resultBadge()} indicados`;
+        root.querySelector('#ctResultCount').textContent = (() => { const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
         root.querySelector('.ct').dataset.tab = state.tab;
         if (focusKey) root.querySelector(`[data-key="${focusKey}"]`)?.focus({ preventScroll: true });
     }
@@ -456,7 +461,7 @@
         const profile = selectedOptions(state.answers).map(s => `- ${s.option.label}`).join('\n') || '- Nenhuma condição marcada';
         const lines = res.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
         const text = `${fam.title} (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
-        navigator.clipboard?.writeText(text).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
+        (navigator.clipboard?.writeText(text) ?? Promise.reject()).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
     }
 
     function toast(message) {
@@ -578,7 +583,7 @@
             root.removeEventListener('input', onInput);
             root.removeEventListener('keydown', onKey);
             root.removeEventListener('toggle', onToggle, true);
-            state.sheet = null;
+            Object.assign(state, { answers: {}, screen: {}, phase: 'start', prefs: { noHormone: false, longActing: false }, query: '', tab: 'profile', family: 'core', lam: { amenorrhea: false, fullBf: false, lt6m: false }, sheet: null });
             root = null;
         }
     };

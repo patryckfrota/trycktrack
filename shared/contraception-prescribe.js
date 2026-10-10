@@ -35,8 +35,8 @@ export const PRESCRIBE_NOTICE = 'Exemplos de redação a partir de protocolos e 
 
 const MS_AOC_MISSED = [
     { k: 'Esqueceu 1 ou 2 comprimidos (ou atrasou a cartela 1 ou 2 dias)', t: 'Tomar um comprimido de imediato e o seguinte no horário regular. O risco de gravidez é muito baixo (MS 2016).' },
-    { k: 'Esqueceu 3 ou mais', t: 'Tomar um comprimido de imediato e usar método de apoio por 7 dias. Se teve relação nos últimos 5 dias, avaliar a anticoncepção de emergência. Se foi na 3ª semana da cartela, iniciar nova cartela após 7 dias (MS 2016).' },
-    { k: 'Vômito ou diarreia', t: 'Vomitou nas primeiras 2 horas: tomar outro comprimido assim que possível e continuar. Vômito ou diarreia por mais de 2 dias: seguir a conduta de 3 ou mais esquecidos (MS 2016).' }
+    { k: 'Esqueceu 3 ou mais', t: 'Tomar um comprimido de imediato e usar método de apoio por 7 dias. Se teve relação nos últimos 5 dias, avaliar a anticoncepção de emergência. Se foi na 3ª semana da cartela, iniciar nova cartela após 7 dias (MS 2016). A OMS 2025 orienta terminar os comprimidos ativos e começar a cartela seguinte sem pausa (veja Como usar): na dúvida, prefira a conduta da OMS, que evita a semana sem proteção.' },
+    { k: 'Vômito ou diarreia', t: 'Vomitou nas primeiras 2 horas: tomar outro comprimido assim que possível e continuar. Vômito ou diarreia por 2 dias ou mais: seguir a conduta de 3 ou mais esquecidos (MS 2016).' }
 ];
 
 export const PRESCRIBE = {
@@ -44,8 +44,8 @@ export const PRESCRIBE = {
         sources: ['ms2016', 'ciclo21', 'yasmin'],
         substances: [
             { name: 'Levonorgestrel 0,15 mg + etinilestradiol 0,03 mg', form: 'Comprimido; cartela de 21 comprimidos', sus: true, brands: ['Ciclo 21', 'Microvlar', 'Nordette'] },
-            { name: 'Drospirenona 3 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; 21 ativos, ou 21 ativos + 7 inativos', sus: false, brands: ['Yasmin', 'Elani 28'] },
-            { name: 'Drospirenona 3 mg + etinilestradiol 0,02 mg', form: 'Comprimido revestido; 21 ativos, ou 24 ativos + 4 inativos', sus: false, brands: ['Yaz'] },
+            { name: 'Drospirenona 3 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; cartela de 21 (Yasmin) ou 21 ativos + 7 inativos (Elani 28)', sus: false, brands: ['Yasmin', 'Elani 28'] },
+            { name: 'Drospirenona 3 mg + etinilestradiol 0,02 mg', form: 'Comprimido revestido; 24 ativos + 4 inativos', sus: false, brands: ['Yaz'] },
             { name: 'Gestodeno 0,075 mg + etinilestradiol 0,02 mg', form: 'Comprimido revestido; cartela de 21 ou 24 + 4', sus: false, brands: ['Femiane', 'Tamisa 20'] },
             { name: 'Gestodeno 0,075 mg + etinilestradiol 0,03 mg', form: 'Comprimido revestido; cartela de 21', sus: false, brands: ['Gynera'] },
             { name: 'Gestodeno 0,06 mg + etinilestradiol 0,015 mg', form: 'Comprimido revestido; 24 ativos + 4 inativos', sus: false, brands: ['Minesse', 'Tamisa 15'] },
@@ -57,7 +57,7 @@ export const PRESCRIBE = {
         ],
         rx: [
             { title: 'Modelo com Ciclo 21 (21 comprimidos)', lines: ['USO ORAL', '1) Ciclo 21 (levonorgestrel 0,15 mg + etinilestradiol 0,03 mg) — ___ cartelas de 21 comprimidos', 'Tomar 1 comprimido por dia, sempre no mesmo horário, na ordem da cartela, por 21 dias seguidos.', 'Fazer pausa de 7 dias e iniciar a nova cartela no 8º dia, mesmo que ainda esteja menstruada.'] },
-            { title: 'Modelo com Yasmin 21+7 (28 comprimidos)', lines: ['USO ORAL', '1) Yasmin 21+7 (drospirenona 3 mg + etinilestradiol 0,03 mg) — ___ cartelas de 28 comprimidos', 'Tomar 1 comprimido por dia, aproximadamente à mesma hora, na ordem indicada pelas setas, sem pausa entre as cartelas.', 'Iniciar a nova cartela depois do último comprimido branco (inativo).'] }
+            { title: 'Modelo com Yasmin (21 comprimidos)', lines: ['USO ORAL', '1) Yasmin (drospirenona 3 mg + etinilestradiol 0,03 mg) — ___ cartelas de 21 comprimidos', 'Tomar 1 comprimido por dia, aproximadamente à mesma hora, na ordem indicada pelas setas, por 21 dias.', 'Fazer pausa de 7 dias e iniciar a nova cartela no 8º dia (com Elani 28, sem pausa: o 22º ao 28º comprimido é inativo).'] }
         ],
         dosing: [
             { k: 'Dose e via', t: 'Um comprimido por dia, por via oral, sempre no mesmo horário. Nos monofásicos de 21 comprimidos, a pausa entre as cartelas é de 7 dias.' },
@@ -83,7 +83,7 @@ export const PRESCRIBE = {
             { k: 'Onde aplicar', t: 'Pele íntegra, limpa, seca e sem pelos, em nádegas, abdome, face externa superior do braço ou parte superior das costas, onde não haja fricção de roupa justa. Nunca nas mamas nem em pele avermelhada, irritada ou com cortes. Alternar o local a cada adesivo, sem cremes, loções ou pós na área. Pressionar com a palma por cerca de 10 segundos.' },
             { k: 'Quando começar', t: 'Primeira vez: esperar a próxima menstruação e aplicar o primeiro adesivo nas primeiras 24 horas dela (dia 1). Vindo de pílula combinada: no 1º dia do sangramento de privação; se não houver sangramento em 5 dias após o último comprimido ativo, excluir gravidez antes. Pós-parto sem amamentar: não antes de 4 semanas.' },
             { k: 'Troca de adesivo atrasada ou descolado', t: 'Solto por menos de 1 dia: reaplicar ou aplicar um novo, sem método adicional. Solto por mais de 1 dia ou sem certeza: iniciar um novo ciclo de 4 semanas com adesivo novo (novo dia 1 e novo dia de troca) e usar método adicional na 1ª semana (bula). A OMS dá as condutas por tempo de atraso (48 horas) na aba “Como usar”.' },
-            { k: 'Atenção', t: 'Em mulheres com mais de 90 kg o adesivo pode ser menos eficaz. Vômito e diarreia não alteram a absorção. Não protege contra IST. Descartar o adesivo usado dobrado ao meio, sem jogar no vaso sanitário.' }
+            { k: 'Atenção', t: 'Em mulheres com 90 kg ou mais o adesivo pode ser menos eficaz. Vômito e diarreia não alteram a absorção. Não protege contra IST. Descartar o adesivo usado dobrado ao meio, sem jogar no vaso sanitário.' }
         ]
     },
     cvr: {
@@ -136,7 +136,7 @@ export const PRESCRIBE = {
         dosing: [
             { k: 'Dose e via', t: 'Um comprimido ao dia, por via oral, sem pausa, de preferência no mesmo horário. Para o desogestrel, 28 dias consecutivos por cartela, e a cartela seguinte começa logo depois da anterior.' },
             { k: 'Quando começar', t: 'Cerazette (bula): no 1º dia da menstruação; é permitido entre o 2º e o 5º dia, com barreira nos primeiros 7 dias do 1º ciclo. Vindo de combinado: de preferência no dia seguinte ao último comprimido ativo (ou no dia da retirada do anel ou adesivo), sem método adicional. Vindo de minipílula: em qualquer dia. Vindo de implante ou SIU: no dia da retirada; de injetável: no dia da próxima injeção. Após aborto do 1º trimestre: imediatamente. Pós-parto ou aborto do 2º trimestre: nos dias 21 a 28.' },
-            { k: 'Atraso', t: 'Cerazette (bula): a proteção pode ficar reduzida com mais de 36 horas entre dois comprimidos. Menos de 12 horas de atraso: tomar o esquecido assim que lembrar e o próximo no horário. Mais de 12 horas: mesma conduta e método adicional por 7 dias. Para as minipílulas em geral (noretisterona), a OMS considera atraso acima de 3 horas.' },
+            { k: 'Atraso', t: 'Cerazette (bula): a proteção pode ficar reduzida com mais de 36 horas entre dois comprimidos. Menos de 12 horas de atraso: tomar o esquecido assim que lembrar e o próximo no horário. Mais de 12 horas: mesma conduta e método adicional por 7 dias (bula; a OMS 2025 recomenda 2 dias de proteção adicional, veja Como usar). Para as minipílulas em geral (noretisterona), a OMS considera atraso acima de 3 horas.' },
             { k: 'Vômito e diarreia', t: 'Cerazette (bula): vômito 3 a 4 horas após o comprimido ou distúrbio gastrintestinal grave pode reduzir a absorção; seguir a conduta de comprimidos esquecidos.' },
             { k: 'Amamentação', t: 'MS 2016: com mais de 6 semanas de pós-parto, amamentando ou não, iniciar a minipílula a qualquer momento se houver certeza razoável de que não está grávida, com método de apoio por 7 dias. Com menos de 4 semanas de parto e sem amamentar, pode começar a qualquer momento sem método de apoio, mas é um método pouco eficaz fora da lactação.' },
             { k: 'Atenção', t: 'Não protege contra IST. Efeitos comuns: sangramento irregular, acne, humor alterado, dor nas mamas, náusea e ganho de peso. Enxaqueca nova, com ou sem aura, pede suspender o método (MS 2016).' }
@@ -152,7 +152,7 @@ export const PRESCRIBE = {
         ],
         dosing: [
             { k: 'Dose e via', t: '150 mg (1 mL), por injeção intramuscular profunda no glúteo ou no deltoide, a cada 12 a 13 semanas, no máximo a cada 13 semanas (91 dias). A suspensão intramuscular não foi formulada para a via subcutânea. A dose não precisa ser ajustada ao peso. Agitar o frasco ou a seringa com vigor antes do uso e nunca misturar com outro medicamento.' },
-            { k: 'Primeira injeção', t: 'Nos 5 primeiros dias após o início de um ciclo menstrual normal; ou nos 5 primeiros dias pós-parto, se não amamenta. Em aleitamento exclusivo, apenas a partir da 6ª semana pós-parto (bula). MS 2016: pode começar a qualquer momento, se houver certeza razoável de que não está grávida, com método de apoio por 7 dias.' },
+            { k: 'Primeira injeção', t: 'Nos 5 primeiros dias após o início de um ciclo menstrual normal; ou nos 5 primeiros dias pós-parto, se não amamenta. Em aleitamento exclusivo, apenas a partir da 6ª semana pós-parto (bula; a OMS 2025 admite antes de 6 semanas, categoria 2: veja Restrições). MS 2016: pode começar a qualquer momento, se houver certeza razoável de que não está grávida, com método de apoio por 7 dias.' },
             { k: 'Injeções seguintes', t: 'Se passaram mais de 13 semanas (91 dias), a bula manda excluir gravidez (teste de sangue) antes de aplicar. MS 2016: pode adiantar ou atrasar em até 2 semanas; com atraso maior que 2 semanas, abstinência ou método de apoio até a injeção, e considerar a anticoncepção de emergência se houve relação desprotegida nos últimos 5 dias.' },
             { k: 'Troca de outro método', t: 'A troca deve garantir a proteção contínua. Vindo de pílula, a 1ª injeção deve ser dada em até 7 dias após o último comprimido (bula).' },
             { k: 'Atenção', t: 'Segurança e eficácia não estabelecidas em menores de 18 anos (bula). Pode reduzir a densidade mineral óssea. Retorno gradual da fertilidade, que pode demorar. Não protege contra IST. Efeitos comuns: alteração do sangramento, amenorreia, alteração de peso, cefaleia e mudança de humor ou da libido.' }
@@ -216,7 +216,7 @@ export const PRESCRIBE = {
                 { k: 'Alternativas da Febrasgo (2022), fora da Rename', t: 'Noretisterona 10 mg, 1 comprimido ao dia por 7, 14 ou 30 dias. Ácido mefenâmico 500 mg, 1 comprimido a cada 8 horas por 5 dias. Tamoxifeno 10 mg, 1 comprimido a cada 12 horas por 7 dias. Desogestrel 75 mcg, 1 comprimido ao dia por 30 a 90 dias.' },
                 { k: 'Acne', t: 'Pode chegar a 11% das usuárias (efeito androgênico leve do etonogestrel). Opções: terapia tópica (peróxido de benzoíla, ácido azelaico), antibiótico sistêmico, pílula combinada, espironolactona e isotretinoína (esta reservada a casos graves ou de difícil controle). Pela segurança e pela disponibilidade no Componente Básico da Assistência Farmacêutica, a espironolactona é a droga oral de 1ª escolha: iniciar com 50 a 100 mg ao dia por 3 a 6 meses e reavaliar. Mais de 60% melhoram nesse intervalo.' },
                 { k: 'Cistos foliculares', t: 'Cistos ovarianos benignos em 20 a 25% das usuárias, quase sempre sem sintomas nem necessidade de cirurgia, com regressão espontânea em 8 a 12 semanas. Pedir ultrassonografia só com sintomas (como dor pélvica persistente) ou com sangramento irregular que não respondeu ao tratamento.' },
-                { k: 'Gravidez com o implante', t: 'Retirar o quanto antes, por profissional habilitado. Informar que o etonogestrel não é abortivo nem teratogênico: não causa malformação se houver gravidez inadvertida.' },
+                { k: 'Gravidez com o implante', t: 'Retirar o quanto antes, por profissional habilitado. Informar que o etonogestrel não é abortivo nem teratogênico: não há evidência de aumento de malformações se houver gravidez inadvertida.' },
                 { k: 'Implante fraturado', t: 'Fissuras ou quebras (por esporte de contato ou acidente) podem mudar a liberação do etonogestrel e o padrão de sangramento. Discutir com a usuária manter ou trocar.' },
                 { k: 'Infecção local', t: 'Suspeitar com eritema, calor, dor e secreção purulenta no local. Orientar higiene local e avaliar antibiótico para infecção de pele; seguimento próximo, atento a necessidade de drenagem. Se houver sintomas sistêmicos, falta de resposta ou recidiva: retirar e inserir no braço contralateral.' }
             ] },
@@ -308,10 +308,10 @@ export const PRESCRIBE = {
     ecp_coc: {
         sources: ['spr'],
         substances: [
-            { name: 'Levonorgestrel + etinilestradiol (método de Yuzpe)', form: 'Pílula combinada; número de comprimidos conforme a apresentação', sus: true, brands: ['Ciclo 21', 'Microvlar', 'Nordette'], note: 'Use só se não houver levonorgestrel isolado nem ulipristal.' }
+            { name: 'Levonorgestrel + etinilestradiol (método de Yuzpe)', form: 'Pílula combinada; com comprimidos de 0,15 mg + 0,03 mg, cerca de 4 comprimidos por dose (aproximação do esquema da OMS)', sus: true, brands: ['Ciclo 21', 'Microvlar', 'Nordette'], note: 'Use só se não houver levonorgestrel isolado nem ulipristal.' }
         ],
         rx: [
-            { title: 'Esquema da OMS', lines: ['USO ORAL', 'Dose: 100 mcg de etinilestradiol + 0,50 mg de levonorgestrel, repetida 12 horas depois.', 'Tomar a 1ª dose o mais cedo possível, em até 120 horas (5 dias) da relação desprotegida.'] }
+            { title: 'Esquema da OMS', lines: ['USO ORAL', 'Dose: 100 mcg de etinilestradiol + 0,50 mg de levonorgestrel, repetida 12 horas depois (com comprimidos de levonorgestrel 0,15 mg + etinilestradiol 0,03 mg, aproximadamente 4 comprimidos por dose).', 'Tomar a 1ª dose o mais cedo possível, em até 120 horas (5 dias) da relação desprotegida.'] }
         ],
         dosing: [
             { k: 'Esquema', t: 'OMS 2025: 100 mcg de etinilestradiol + 0,50 mg de levonorgestrel, seguidos de uma segunda dose igual 12 horas depois.' },

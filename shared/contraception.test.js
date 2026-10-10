@@ -457,7 +457,9 @@ test('triagem: método só é confirmado quando todos os itens exigidos estão r
 test('"maior eficácia" só vale entre métodos confirmados', () => {
     const answers = pick(['age', '20_34']);
     assert.equal(evaluate(answers, { confirmed: [] }).methods.some(m => m.best), false);
-    assert.equal(evaluate(answers, { confirmed: ['cu', 'lng'] }).methods.find(m => m.best).id, 'lng');
+    // o implante é o de menor taxa entre todos os indicados: sem ele confirmado, nenhum selo
+    assert.equal(evaluate(answers, { confirmed: ['cu', 'lng'] }).methods.some(m => m.best), false);
+    assert.equal(evaluate(answers, { confirmed: ['coc'] }).methods.some(m => m.best), false);
     assert.equal(evaluate(answers, { confirmed: ['imp', 'cu'] }).methods.find(m => m.best).id, 'imp');
 });
 

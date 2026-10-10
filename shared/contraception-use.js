@@ -92,7 +92,7 @@ export const METHOD_USE = {
             CHC_START,
             examsSection,
             { title: 'Comprimidos esquecidos e atrasos', items: [
-                { k: 'Pílula de 30 a 35 µg: 1 ou 2 comprimidos ativos esquecidos (ou cartela começada 1 ou 2 dias atrasada)', t: 'Tomar um comprimido ativo o mais rápido possível e seguir 1 por dia. Se esqueceu 2 ou mais em sequência, pode tomar o primeiro esquecido e continuar os demais (1 por dia) ou descartá-los para manter o calendário. Sem proteção adicional.' },
+                { k: 'Pílula de 30 a 35 µg: 1 ou 2 comprimidos ativos esquecidos (ou cartela começada 1 ou 2 dias atrasada)', t: 'Tomar um comprimido ativo o mais rápido possível e seguir 1 por dia. Se esqueceu 2 em sequência, pode tomar o primeiro esquecido e continuar os demais (1 por dia) ou descartá-los para manter o calendário. Sem proteção adicional.' },
                 { k: 'Pílula de 30 a 35 µg: 3 ou mais comprimidos ativos esquecidos (ou cartela começada 3 ou mais dias atrasada)', t: 'Mesma conduta, e ainda usar preservativo ou abster-se até tomar 7 comprimidos ativos seguidos. Se esqueceu na 3ª semana, termine os ativos da cartela e comece outra no dia seguinte, sem tomar os 7 inativos. Se esqueceu na 1ª semana e teve relação desprotegida, considere a contracepção de emergência.' },
                 { k: 'Pílula de até 20 µg', t: 'Com 1 comprimido ativo esquecido (ou cartela 1 dia atrasada), siga a conduta de 1 ou 2 esquecidos. Com 2 ou mais esquecidos (ou cartela 2 ou mais dias atrasada), siga a conduta de 3 ou mais esquecidos da pílula de 30 a 35 µg.' },
                 { k: 'Comprimidos inativos esquecidos', t: 'Descarte-os e continue 1 por dia.' },
@@ -125,7 +125,7 @@ export const METHOD_USE = {
             { title: 'Erros de uso do anel', items: [
                 { k: 'Anel: intervalo sem anel prolongado', t: 'Até 48 horas além dos 7 dias: inserir um novo o mais rápido possível, mantendo o dia de retirada, sem proteção adicional. Mais de 48 horas: inserir um novo, manter o dia de retirada, e usar preservativo ou abstinência por 7 dias seguidos; se houve relação desprotegida nos 5 dias anteriores, considere a emergência.' },
                 { k: 'Anel: saiu antes do tempo', t: 'Fora por até 48 horas: reinserir o quanto antes e manter o dia de retirada, sem proteção adicional. Mais de 48 horas: reinserir, manter o dia de retirada e usar preservativo ou abstinência por 7 dias seguidos. Se foi na 3ª semana, pule o intervalo sem anel e comece um novo logo em seguida.' },
-                { k: 'Anel: uso estendido', t: 'O mesmo anel por até 28 dias (menos de 4 semanas): sem proteção adicional, e pode fazer um intervalo sem hormônio de até 7 dias. De 28 a 35 dias: inserir um novo e pular o intervalo, sem proteção adicional.' },
+                { k: 'Anel: uso estendido', t: 'O mesmo anel por até 4 semanas (28 dias): sem proteção adicional, e pode fazer um intervalo sem hormônio de até 7 dias. Entre 28 e 35 dias (mais de 4 e até 5 semanas): inserir um novo e pular o intervalo, sem proteção adicional.' },
                 { k: 'Se erra com frequência', t: 'Considere um método menos dependente da usuária, como DIU, implante ou injetável.' }
             ] },
             CHC_FOLLOWUP

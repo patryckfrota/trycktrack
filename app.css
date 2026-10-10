@@ -7269,3 +7269,8 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
 .story-btn { flex: 1; padding: 13px 14px; border: 1px solid var(--border-color); border-radius: 14px; background: transparent; color: var(--text-main); font: 700 13px/1 var(--font-family-base); cursor: pointer; }
 .story-btn.is-primary { border-color: transparent; background: var(--lavender-active); color: var(--bg-main); }
 .story-btn:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
+
+        /* alvos de toque (>= 44px) e rolagem da tabela de eficácia — contracepção */
+        .ct .ct-tab, .ct .ct-stab, .ct .qt-chip, .ct .qt-ghost, .ct-sheet .qt-ghost { min-height: 44px; }
+        .ct-sheet .reader-back { min-width: 44px; min-height: 44px; }
+        .ct-rt-row { grid-template-columns: minmax(96px, 1.3fr) repeat(3, minmax(56px, 1fr)); gap: 6px; }
