@@ -4103,7 +4103,7 @@
         const CARD_REVEAL_SELECTOR = [
             '.rr-card', '.exam-countdown-card', '.question-hero', '.question-mode',
             '.question-count-control', '.question-session', '.question-coming',
-            '.dashboard-hero', '.dashboard-kpi', '.dashboard-card', '.dashboard-area',
+            '.dashboard-card', '.dashboard-area',
             '.dashboard-empty', '.trail-switch-button', '.trail-status', '.trail-phase'
         ].join(', ');
 

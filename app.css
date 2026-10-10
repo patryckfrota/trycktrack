@@ -949,21 +949,21 @@
         .dashboard-period { display: flex; padding: 3px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); }
         .dashboard-period button { border: 0; padding: 7px 9px; border-radius: 9px; background: transparent; color: var(--text-secondary); font: 650 10px/1 var(--font-family-base); cursor: pointer; }
         .dashboard-period button.active { color: #19171f; background: var(--lavender-active); }
-        .dashboard-hero { position: relative; display: flex; align-items: center; gap: 18px; min-height: 150px; padding: 20px; border-radius: 24px; overflow: hidden; background: linear-gradient(145deg, rgba(91,74,117,.74), rgba(48,38,61,.72) 52%, var(--bg-secondary)); border: 1px solid rgba(196,181,253,.3); box-shadow: 0 16px 36px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.07); }
-        .dashboard-hero::after { content: ""; position: absolute; width: 130px; height: 130px; right: -55px; top: -55px; border-radius: 50%; border: 1px solid rgba(196,181,253,.18); box-shadow: 0 0 0 22px rgba(196,181,253,.025); }
-        .dashboard-score-ring { --score: 0; width: 92px; height: 92px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(var(--lavender-active) calc(var(--score) * 1%), rgba(255,255,255,.1) 0); position: relative; }
-        .dashboard-score-ring::before { content: ""; position: absolute; inset: 7px; border-radius: inherit; background: #27222f; }
-        .dashboard-score-value { position: relative; z-index: 1; color: var(--text-main); font-size: 22px; font-weight: 750; letter-spacing: -.5px; }
-        .dashboard-score-copy { position: relative; z-index: 1; min-width: 0; }
-        .dashboard-score-copy small { color: var(--lavender-active); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
-        .dashboard-score-copy h2 { margin: 7px 0 5px; color: var(--text-main); font-size: 18px; line-height: 1.2; }
-        .dashboard-score-copy p { margin: 0; color: var(--text-secondary); font-size: 11px; line-height: 1.45; }
-        .dashboard-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
-        .dashboard-kpi { min-width: 0; min-height: 92px; padding: 13px 11px; border-radius: 18px; border: 1px solid var(--border-color); background: var(--bg-secondary); }
-        .dashboard-kpi-icon { width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 10px; border-radius: 12px; color: var(--lavender-active); }
-        .dashboard-kpi-icon svg { width: 20px; height: 20px; }
-        .dashboard-kpi strong { display: block; color: var(--text-main); font-size: 17px; line-height: 1; }
-        .dashboard-kpi span { display: block; margin-top: 5px; color: var(--text-secondary); font-size: 9px; line-height: 1.25; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         .dashboard-delta { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; padding: 4px 9px; border-radius: 999px; font-size: 10px; font-weight: 700; line-height: 1.2; color: var(--text-secondary); background: var(--bg-tertiary); }
         .dashboard-delta[hidden] { display: none; }
         .dashboard-delta::before { content: ""; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; }
@@ -1057,11 +1057,11 @@
         .dashboard-now-row.is-primary .dashboard-now-copy em { color: var(--bg-secondary); opacity: .78; }
         .dashboard-now-row.is-primary .dashboard-now-icon { background: rgba(0, 0, 0, .14); color: var(--bg-secondary); }
         .dashboard-now-row.is-primary + .dashboard-now-row { border-top: 0; margin-top: 4px; }
-        .dashboard-score-copy .dashboard-delta, .dashboard-score-copy .dashboard-trail-link { display: flex; width: fit-content; max-width: 100%; }
-        .dashboard-score-copy .dashboard-delta[hidden], .dashboard-score-copy .dashboard-trail-link[hidden] { display: none; }
-        .dashboard-trail-link { align-items: center; gap: 6px; margin-top: 8px; padding: 6px 10px 6px 12px; border: 1px solid var(--border-color); border-radius: 999px; background: transparent; color: var(--text-secondary); font: 650 10.5px/1.2 var(--font-family-base); text-align: left; cursor: pointer; }
-        .dashboard-trail-link b { margin-left: 2px; color: var(--text-main); font-weight: 800; }
-        .dashboard-trail-link svg { flex: none; width: 12px; height: 12px; color: var(--lavender-active); }
+        
+        
+        
+        
+        
         .dashboard-evo .dashboard-card-head { margin-bottom: 12px; }
         .dashboard-evo-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
         .dashboard-evo-plot { position: relative; }
@@ -1094,8 +1094,13 @@
         }
         @media (min-width: 1200px) { #dashboardEvo, #dashboardConsistency { grid-column: span 2; } }
         .dashboard-week-share { margin-left: auto; padding: 6px 11px; border: 1px solid var(--border-color); border-radius: 999px; background: transparent; color: var(--lavender-active); font: 700 10px/1 var(--font-family-base); cursor: pointer; }
-        .dashboard-now-row:focus-visible, .dashboard-trail-link:focus-visible, button.dashboard-area-head:focus-visible,
-        .dashboard-subject-train:focus-visible, .dashboard-week-share:focus-visible, .heat-cell:focus-visible, .dashboard-period button:focus-visible, .dashboard-evo-col:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; border-radius: 10px; }
+        .dashboard-now-row:focus-visible,
+        button.dashboard-area-head:focus-visible,
+        .dashboard-subject-train:focus-visible,
+        .dashboard-week-share:focus-visible,
+        .heat-cell:focus-visible,
+        .dashboard-period button:focus-visible,
+        .dashboard-evo-col:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; border-radius: 10px; }
         .heat-cell:focus-visible { border-radius: 4px; outline-offset: 1px; }
         @media (prefers-reduced-motion: reduce) {
             .dashboard-today-bar > div, .dashboard-area-chevron, .dashboard-area-fill, .dashboard-bar { transition: none; }
@@ -1124,7 +1129,6 @@
             border-color: rgba(124, 92, 191, .48);
         }
         [data-theme="light"] .question-mode-icon,
-        [data-theme="light"] .dashboard-kpi-icon,
         [data-theme="light"] .dashboard-empty-icon,
         [data-theme="light"] .rr-card-icon {
             border: 1px solid rgba(124, 92, 191, .18);
@@ -1148,12 +1152,8 @@
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 6px 16px rgba(124, 92, 191, .12);
         }
         [data-theme="light"] .question-mode.question-mode-osce .question-mode-icon { margin: 0; }
-        [data-theme="light"] .dashboard-kpi-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 12px;
-        }
-        [data-theme="light"] .dashboard-kpi-icon svg { width: 20px; height: 20px; }
+        
+        
         [data-theme="light"] .dashboard-empty-icon {
             background: rgba(237, 233, 251, .54);
             color: var(--lavender-active);
@@ -1164,19 +1164,14 @@
         }
         [data-theme="light"] .question-hero,
         [data-theme="light"] .question-count-control,
-        [data-theme="light"] .dashboard-kpi,
         [data-theme="light"] .dashboard-card,
         [data-theme="light"] .dashboard-area {
             background: rgba(255, 255, 255, .72);
             border-color: rgba(76, 61, 101, .12);
             box-shadow: 0 8px 22px rgba(76, 61, 101, .06), inset 0 1px 0 rgba(255, 255, 255, .88);
         }
-        [data-theme="light"] .dashboard-hero {
-            background: linear-gradient(145deg, rgba(237, 233, 251, .92), rgba(255, 255, 255, .78));
-            border-color: rgba(124, 92, 191, .24);
-            box-shadow: 0 12px 28px rgba(76, 61, 101, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
-        }
-        [data-theme="light"] .dashboard-score-ring::before { background: rgba(255, 255, 255, .88); }
+        
+        
         [data-theme="light"] .dashboard-empty {
             background: rgba(255, 255, 255, .58);
             border-color: rgba(76, 61, 101, .18);
@@ -1189,7 +1184,6 @@
 
         /* Vidro líquido dos ícones internos — não inclui a navegação inferior. */
         .question-mode-icon,
-        .dashboard-kpi-icon,
         .dashboard-empty-icon,
         .rr-card-icon {
             position: relative;
@@ -1197,7 +1191,6 @@
             isolation: isolate;
         }
         .question-mode-icon::before,
-        .dashboard-kpi-icon::before,
         .dashboard-empty-icon::before,
         .rr-card-icon::before {
             content: "";
@@ -1211,7 +1204,6 @@
             pointer-events: none;
         }
         .question-mode-icon::after,
-        .dashboard-kpi-icon::after,
         .dashboard-empty-icon::after,
         .rr-card-icon::after {
             content: "";
@@ -1227,7 +1219,6 @@
             pointer-events: none;
         }
         .question-mode-icon svg,
-        .dashboard-kpi-icon svg,
         .dashboard-empty-icon svg,
         .rr-card-icon svg {
             position: relative;
@@ -1235,7 +1226,6 @@
             filter: drop-shadow(0 1px 1px rgba(0,0,0,.12));
         }
         [data-theme="dark"] .question-mode-icon,
-        [data-theme="dark"] .dashboard-kpi-icon,
         [data-theme="dark"] .dashboard-empty-icon,
         [data-theme="dark"] .rr-card-icon {
             border: 1px solid rgba(255,255,255,.12);
@@ -1245,7 +1235,6 @@
             -webkit-backdrop-filter: blur(12px) saturate(135%);
         }
         [data-theme="dark"] .question-mode-icon::before,
-        [data-theme="dark"] .dashboard-kpi-icon::before,
         [data-theme="dark"] .dashboard-empty-icon::before,
         [data-theme="dark"] .rr-card-icon::before {
             background:
@@ -1253,11 +1242,9 @@
                 linear-gradient(145deg, rgba(196,181,253,.13), rgba(255,255,255,.015) 54%, rgba(91,74,117,.09));
         }
         [data-theme="dark"] .question-mode-icon::after,
-        [data-theme="dark"] .dashboard-kpi-icon::after,
         [data-theme="dark"] .dashboard-empty-icon::after,
         [data-theme="dark"] .rr-card-icon::after { opacity: .38; }
         [data-theme="light"] .question-mode-icon,
-        [data-theme="light"] .dashboard-kpi-icon,
         [data-theme="light"] .dashboard-empty-icon,
         [data-theme="light"] .rr-card-icon {
             color: #7654b4;
@@ -1935,11 +1922,8 @@
         }
 
         /* No Dashboard, o vidro fica no painel inteiro — sem bolhas nos ícones. */
-        html .dashboard .dashboard-kpi-icon,
         html .dashboard .dashboard-empty-icon,
-        html[data-theme="dark"] .dashboard .dashboard-kpi-icon,
         html[data-theme="dark"] .dashboard .dashboard-empty-icon,
-        html[data-theme="light"] .dashboard .dashboard-kpi-icon,
         html[data-theme="light"] .dashboard .dashboard-empty-icon {
             border: 0 !important;
             border-radius: 0 !important;
@@ -1949,8 +1933,6 @@
             -webkit-backdrop-filter: none !important;
             overflow: visible;
         }
-        html .dashboard .dashboard-kpi-icon::before,
-        html .dashboard .dashboard-kpi-icon::after,
         html .dashboard .dashboard-empty-icon::before,
         html .dashboard .dashboard-empty-icon::after {
             content: none !important;
@@ -5399,9 +5381,9 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             .question-start { min-height: 100%; }
 
             .dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-            .dashboard-toolbar, .dashboard-hero, .dashboard-kpis { grid-column: 1 / -1; }
-            .dashboard-kpis { gap: 14px; }
-            .dashboard-kpi { min-height: 118px; padding: 17px; }
+            .dashboard-toolbar { grid-column: 1 / -1; }
+            
+            
             .dashboard-card { grid-column: 1; }
             .dashboard-card + .dashboard-section-title { grid-column: 2; grid-row: 4; align-self: end; }
             .dashboard-areas { grid-column: 2; grid-row: 5; }
@@ -5425,8 +5407,8 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             .rr-card { min-height: 158px; }
             .rr-hub-card { min-height: 170px; padding: 32px; }
             .rr-hub-logo { height: 56px; }
-            .dashboard-hero { min-height: 180px; padding: 28px; }
-            .dashboard-score-ring { width: 108px; height: 108px; }
+            
+            
         }
 
         /* Tablet, iPad e desktop: o app deixa de imitar uma coluna de celular
@@ -5466,7 +5448,7 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             .question-hub > .question-hero, .question-hub > .question-section-title, .question-hub > .question-modes, .question-hub > .question-area-scroll, .question-hub > .question-subarea-panel, .question-hub > .question-coming, .question-hub > .question-config-view { grid-column: 1 / -1; }
             .review-group-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             .dashboard { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .dashboard-toolbar, .dashboard-hero, .dashboard-kpis { grid-column: 1 / -1; }
+            .dashboard-toolbar { grid-column: 1 / -1; }
             .dashboard-card { grid-column: span 2; }
             .dashboard-card + .dashboard-section-title { grid-column: 3; grid-row: auto; }
             .dashboard-areas { grid-column: 3; grid-row: auto; }
@@ -5477,7 +5459,6 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
         /* Ícones do Dashboard: um único acabamento estável. As regras usam
            especificidade alta para neutralizar estilos legados sem afetar a
            barra inferior, o Rapid Review ou o Banco de Questões. */
-        html .dashboard .dashboard-kpi-icon,
         html .dashboard .dashboard-empty-icon {
             position: relative !important;
             width: 42px !important;
@@ -5493,20 +5474,15 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             -webkit-backdrop-filter: none !important;
             overflow: visible !important;
         }
-        /* Essa é a regra que realmente vale (a antiga .dashboard-kpi-icon
-           lá em cima, sem !important, nunca chegava a aplicar por causa
-           deste bloco) — por isso o ajuste de posição pedido entra aqui,
-           só na de questões/tempo/ofensiva, sem mexer no ícone do estado
-           vazio (empty-icon, que continua centrado em 0). */
-        html .dashboard .dashboard-kpi-icon { margin: -4px 0 8px -4px !important; }
-        html .dashboard .dashboard-kpi-icon::before,
-        html .dashboard .dashboard-kpi-icon::after,
+        /* Ícone do estado vazio do Dashboard: centrado em 0 e sem os
+           pseudo-elementos decorativos do ícone padrão. */
+        
         html .dashboard .dashboard-empty-icon::before,
         html .dashboard .dashboard-empty-icon::after { content: none !important; display: none !important; }
-        html .dashboard .dashboard-kpi-icon svg { width: 27px !important; height: 27px !important; color: var(--lavender-active) !important; filter: none !important; }
+        
         html .dashboard .dashboard-empty-icon { margin: 0 !important; }
         html .dashboard .dashboard-empty-icon svg { width: 25px !important; height: 25px !important; color: var(--lavender-active) !important; filter: none !important; }
-        html .dashboard .dashboard-kpi { display: flex; flex-direction: column; align-items: flex-start; }
+        
 
         /* Modos de prova: cards mais abertos e equilibrados, em 2×2 no
            celular/iPad e quatro colunas somente quando houver espaço real. */
@@ -5617,7 +5593,9 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
 
         /* Dashboard: grade previsível em todas as larguras, sem posicionamento
            manual por linha que possa deixar títulos e cartões sobrepostos. */
-        .dashboard-hero, .dashboard-kpi, .dashboard-card, .dashboard-area, .dashboard-empty {
+        .dashboard-card,
+        .dashboard-area,
+        .dashboard-empty {
             box-sizing: border-box;
         }
 
@@ -5778,10 +5756,14 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             line-height: 1;
         }
 
-        .dashboard-hero { flex-wrap: wrap; }
-        .dashboard-score-copy { flex: 1 1 220px; }
-        .dashboard-kpi, .dashboard-card, .dashboard-area, .dashboard-empty { box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.08); }
-        [data-theme="light"] .dashboard-kpi, [data-theme="light"] .dashboard-card, [data-theme="light"] .dashboard-area, [data-theme="light"] .dashboard-empty {
+        
+        
+        .dashboard-card,
+        .dashboard-area,
+        .dashboard-empty { box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.08); }
+        [data-theme="light"] .dashboard-card,
+        [data-theme="light"] .dashboard-area,
+        [data-theme="light"] .dashboard-empty {
             background: rgba(255,255,255,.72); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 24px rgba(76,61,101,.07);
         }
         @media (min-width: 768px) {
@@ -5846,7 +5828,6 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             .question-config-view,
             .question-count-control,
             .question-session,
-            .dashboard-kpi,
             .dashboard-card,
             .dashboard-area,
             .dashboard-empty,
@@ -5866,7 +5847,6 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
         :is(
             .rr-card.highlighted,
             .question-mode.active,
-            .dashboard-hero,
             .osce-door-card,
             .osce-task-active
         ) {
@@ -5884,7 +5864,6 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
             .question-config-view,
             .question-count-control,
             .question-session,
-            .dashboard-kpi,
             .dashboard-card,
             .dashboard-area,
             .dashboard-empty,
@@ -5902,7 +5881,6 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
         [data-theme="light"] :is(
             .rr-card.highlighted,
             .question-mode.active,
-            .dashboard-hero,
             .osce-door-card,
             .osce-task-active
         ) {
@@ -6111,9 +6089,7 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
         .dashboard-header-period[hidden] {
             display: none !important;
         }
-        .dashboard-hero {
-            padding-top: 62px !important;
-        }
+        
         .reader-header,
         .question-player-header {
             box-sizing: border-box;
@@ -6272,115 +6248,29 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
 
         /* Dashboard: uma única superfície de vidro, com percentual e leitura
            do desempenho no mesmo fluxo visual — sem caixas internas. */
-        #metricasTab .dashboard-hero {
-            display: block !important;
-            position: relative;
-            width: 100%;
-            min-height: 198px !important;
-            max-height: none !important;
-            height: auto !important;
-            padding: 50px 20px 20px !important;
-            box-sizing: border-box;
-            overflow: hidden;
-            background: var(--glass-card-bg-strong);
-        }
-        #metricasTab .dashboard-hero-grid {
-            display: grid;
-            grid-template-columns: 108px minmax(0, 1fr);
-            align-items: center;
-            min-height: 128px;
-            gap: 18px;
-            width: 100%;
-        }
-        #metricasTab .dashboard-hero-topline {
-            position: absolute;
-            z-index: 2;
-            top: 17px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-        #metricasTab .dashboard-hero-topline small {
-            color: var(--lavender-active);
-            font-size: 10px;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-        #metricasTab .dashboard-score-panel,
-        #metricasTab .dashboard-score-copy {
-            min-width: 0;
-            box-sizing: border-box;
-        }
-        #metricasTab .dashboard-score-panel {
-            display: grid;
-            place-items: center;
-            height: 100%;
-            padding: 0;
-            position: relative;
-        }
-        #metricasTab .dashboard-score-panel::after {
-            content: "";
-            position: absolute;
-            top: 12%;
-            right: -9px;
-            width: 1px;
-            height: 76%;
-            background: linear-gradient(to bottom, transparent, rgba(196,181,253,.46), transparent);
-            box-shadow: 0 0 10px rgba(196,181,253,.16);
-        }
-        #metricasTab .dashboard-score-copy {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 112px;
-            padding: 4px 0 4px 22px;
-        }
-        #metricasTab .dashboard-score-copy h2 {
-            margin: 0 0 5px;
-            font-size: clamp(18px, 2.2vw, 25px);
-            line-height: 1.12;
-        }
-        #metricasTab .dashboard-score-copy p {
-            margin: 0;
-            font-size: clamp(11px, 1.3vw, 14px);
-            line-height: 1.4;
-        }
-        [data-theme="light"] #metricasTab .dashboard-score-panel::after {
-            background: linear-gradient(to bottom, transparent, rgba(124,92,191,.42), transparent);
-            box-shadow: 0 0 10px rgba(124,92,191,.12);
-        }
-        @media (min-width: 768px) {
-            #metricasTab .dashboard-hero { min-height: 208px !important; padding: 54px 28px 24px !important; }
-            #metricasTab .dashboard-hero-grid { grid-template-columns: 124px minmax(0, 1fr); gap: 26px; min-height: 136px; }
-            #metricasTab .dashboard-score-copy { padding-left: 30px; min-height: 120px; }
-            #metricasTab .dashboard-score-ring { width: 112px; height: 112px; }
-        }
-        @media (min-width: 1200px) {
-            #metricasTab .dashboard-hero { min-height: 224px !important; padding: 58px 34px 28px !important; }
-            #metricasTab .dashboard-hero-grid { grid-template-columns: 138px minmax(0, 1fr); gap: 30px; min-height: 142px; }
-            #metricasTab .dashboard-score-copy { padding-left: 34px; min-height: 126px; }
-            #metricasTab .dashboard-score-ring { width: 124px; height: 124px; }
-        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         @media (max-width: 560px) {
-            #metricasTab .dashboard-hero { min-height: 178px !important; padding: 46px 16px 16px !important; }
-            #metricasTab .dashboard-hero-grid {
-                grid-template-columns: 88px minmax(0, 1fr);
-                min-height: 122px;
-                gap: 14px;
-            }
-            #metricasTab .dashboard-score-panel::after { right: -7px; }
-            #metricasTab .dashboard-score-copy { min-height: 104px; padding-left: 18px; }
-            #metricasTab .dashboard-hero-topline { top: 14px; left: 16px; right: 16px; gap: 8px; }
-            #metricasTab .dashboard-hero-topline small { font-size: 9px; }
+            
+            
+            
+            
+            
+            
             #metricasTab .dashboard-period { padding: 2px; border-radius: 10px; }
             #metricasTab .dashboard-period button { padding: 6px 7px; font-size: 9px; }
-            #metricasTab .dashboard-score-ring { width: 84px; height: 84px; }
+            
         }
 
         /* No iPad e no Mac, o Dashboard usa exatamente a mesma régua lateral
@@ -6482,9 +6372,7 @@ mark.reader-highlight-mark[data-c="green"] { background: rgba(52,211,153,.32); }
         .question-hero::before,
         .question-hero::after,
         .question-mode::before,
-        .dashboard-hero::after,
         .exam-countdown-card::before { content: none; }
-
 
         /* Resultado da sessão como cartão-resposta de prova. */
         #questionResultsView .question-results-score { text-align: left; margin-bottom: 0; }
