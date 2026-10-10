@@ -7292,3 +7292,5 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
             .ct-stab { font-size: 12.5px; }
             .ct-stab em { margin-left: 2px; padding: 1px 4px; }
         }
+        .ct-prefs { display: grid; gap: 8px; margin: 4px 0 8px; }
+        .ct-prefs h3 { margin: 0; color: var(--text-main); font-size: 13px; font-weight: 700; }
