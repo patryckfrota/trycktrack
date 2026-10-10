@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { METHOD_IDS, METHOD_LIST, SECTIONS } from './contraception-data.js';
+import { SCREENING, requiredItems, itemDone, screeningProgress, certainty, itemOfQuestion, screeningItem } from './contraception-screening.js';
 import { RATES, RATES_SOURCE, effectCategory, typicalRate } from './contraception-rates.js';
 import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
@@ -375,4 +376,57 @@ test('"maior eficácia entre os indicados": menor uso típico entre os indicados
 test('"maior eficácia" respeita preferência: sem hormônio → DIU de cobre', () => {
     const r = evaluate(pick(['age', '20_39']), { prefs: { noHormone: true } });
     assert.equal(r.methods.find(m => m.best).id, 'cu');
+});
+
+/* ---------- triagem: quais respostas dão certeza ao resultado ---------- */
+
+test('triagem: membros existem, não se repetem e cobrem toda pergunta decisiva (categoria 3, 4 ou NA)', () => {
+    const seen = new Set();
+    for (const item of SCREENING) for (const q of item.members) {
+        assert.ok(getQuestion(q) && !getQuestion(q).family, `${item.id}.${q}`);
+        assert.ok(!seen.has(q), `${q} em dois itens`);
+        seen.add(q);
+    }
+    const decisive = new Set();
+    for (const s of SECTIONS) for (const q of s.questions) for (const o of q.options) o.cats.forEach(c => {
+        for (const ph of ['start', 'continue']) { const r = resolveCell(c, ph); if (r && (r.na || r.max >= 3)) decisive.add(q.id); }
+    });
+    for (const q of decisive) assert.ok(itemOfQuestion(q), `${q} decisiva sem item de triagem`);
+    assert.equal(SCREENING.length, 16);
+});
+
+test('triagem: itens exigidos por método seguem a tabela (combinado x DIU)', () => {
+    const coc = requiredItems('coc');
+    assert.ok(['smoking', 'htn', 'headache', 'thrombosis', 'cardio', 'diabetes', 'breast', 'liver', 'lupus', 'drugs', 'postpartum', 'pregnancy'].every(i => coc.includes(i)));
+    assert.ok(!coc.includes('pelvic') && !coc.includes('uterus') && !coc.includes('hiv'));
+    const cu = requiredItems('cu');
+    assert.ok(['pelvic', 'uterus', 'hiv', 'bleeding', 'postpartum', 'pregnancy'].every(i => cu.includes(i)));
+    assert.ok(!cu.includes('smoking') && !cu.includes('htn') && !cu.includes('headache'));
+    assert.deepEqual(requiredItems('patch'), requiredItems('coc'));
+});
+
+test('triagem: "não" responde; "sim" só responde com opção marcada', () => {
+    const item = screeningItem('headache');
+    assert.equal(itemDone(item, {}, {}), false);
+    assert.equal(itemDone(item, { headache: 'no' }, {}), true);
+    assert.equal(itemDone(item, { headache: 'yes' }, {}), false);
+    assert.equal(itemDone(item, { headache: 'yes' }, pick(['headache', 'aura'])), true);
+    const p = screeningProgress({ headache: 'no', htn: 'no' }, {});
+    assert.deepEqual([p.done, p.total], [2, 16]);
+});
+
+test('triagem: método só é confirmado quando todos os itens exigidos estão respondidos', () => {
+    assert.equal(certainty({}, {}).cu.confirmed, false);
+    const screen = Object.fromEntries(requiredItems('cu').map(i => [i, 'no']));
+    const c = certainty(screen, {});
+    assert.equal(c.cu.confirmed, true);
+    assert.equal(c.coc.confirmed, false);
+    assert.deepEqual(c.coc.missing.sort(), requiredItems('coc').filter(i => !requiredItems('cu').includes(i)).sort());
+});
+
+test('"maior eficácia" só vale entre métodos confirmados', () => {
+    const answers = pick(['age', '20_39']);
+    assert.equal(evaluate(answers, { confirmed: [] }).methods.some(m => m.best), false);
+    assert.equal(evaluate(answers, { confirmed: ['cu', 'lng'] }).methods.find(m => m.best).id, 'lng');
+    assert.equal(evaluate(answers, { confirmed: ['imp', 'cu'] }).methods.find(m => m.best).id, 'imp');
 });

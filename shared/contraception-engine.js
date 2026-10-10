@@ -213,16 +213,16 @@ function noticesFor(selected) {
 }
 
 /** Família principal: os 7 métodos da tabela-resumo da OMS. */
-export function evaluate(answers = {}, { phase = 'start', prefs = {} } = {}) {
+export function evaluate(answers = {}, { phase = 'start', prefs = {}, confirmed = null } = {}) {
     const selected = selectedOptions(answers);
     const { methods, groups } = evaluateSet(coreSet(), selected, phase, prefs);
     // "Maior eficácia entre os indicados": menor taxa de gravidez no uso típico (OMS, SPR 2025,
     // tabela 1.1). Métodos sem taxa na tabela (injetável mensal) não concorrem. A OMS não define
     // um método "melhor": é só um desempate de eficácia entre os que a paciente pode usar.
-    const ranked = methods.filter(m => m.section === 'indicated' && !m.misses && typeof m.typical === 'number')
+    const ranked = methods.filter(m => m.section === 'indicated' && !m.misses && typeof m.typical === 'number' && (!confirmed || confirmed.includes(m.id)))
         .sort((a, b) => a.typical - b.typical || (a.rates[0].perfect ?? 99) - (b.rates[0].perfect ?? 99));
     const top = ranked[0];
-    methods.forEach(m => { m.best = m === top && selected.some(s => !s.question.family); });
+    methods.forEach(m => { m.best = m === top && (!!confirmed || selected.some(s => !s.question.family)); });
     return {
         id: 'core', phase, selected, methods, groups,
         notices: noticesFor(selected),

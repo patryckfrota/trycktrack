@@ -32,11 +32,23 @@
         lam: { amenorrhea: false, fullBf: false, lt6m: false },
         legendOpen: false,
         sheet: null,
-        sheetTab: 'summary'
+        sheetTab: 'summary',
+        screen: {}
     };
     let root = null;
 
     const esc = (v) => escapeHtml(v);
+
+    // Métodos do núcleo cujo resultado está confirmado pela triagem.
+    function confirmedIds() {
+        const c = M().certainty(state.screen, state.answers);
+        return Object.keys(c).filter(id => c[id].confirmed);
+    }
+    function evalOpts() { return { phase: state.phase, prefs: state.prefs, confirmed: confirmedIds() }; }
+    function missingTitles(methodId) {
+        const c = M().certainty(state.screen, state.answers)[methodId];
+        return c ? c.missing.map(id => M().screeningItem(id).title) : [];
+    }
     const M = () => window.MEC;
 
     /* ---------- perfil (perguntas) ---------- */
@@ -65,18 +77,45 @@
         return own.length ? [...base, { id: 'outros', title: 'Condições de outros métodos', questions: own }] : base;
     }
 
+    function triageHtml(hits) {
+        const { SCREENING, itemDone, screeningProgress, getQuestion } = M();
+        const searching = hits !== null;
+        const prog = screeningProgress(state.screen, state.answers);
+        const rows = SCREENING.map(item => {
+            const qs = item.members.map(getQuestion).filter(q => !hits || hits.has(q.id));
+            if (searching && !qs.length) return '';
+            const v = state.screen[item.id];
+            const done = itemDone(item, state.screen, state.answers);
+            const expanded = searching || v === 'yes';
+            const btn = (val, label) => `<button type="button" class="ct-yn-btn${v === val ? ' on' : ''}" aria-pressed="${v === val}" data-action="screen" data-item="${item.id}" data-v="${val}">${esc(label)}</button>`;
+            const controls = searching ? '' : `<div class="ct-yn" role="group" aria-label="${esc(item.prompt)}">${btn('no', item.noLabel || 'Não')}${btn('yes', item.yesLabel || 'Sim')}</div>`;
+            const hint = (!searching && v === 'yes' && !done) ? '<p class="ct-help">Marque abaixo o que se aplica.</p>' : '';
+            const body = expanded ? `${hint}${qs.map(q => questionHtml(q, hits && hits.get(q.id))).join('')}` : '';
+            return `<div class="ct-tri${done ? ' done' : ''}" data-item="${item.id}"><div class="ct-tri-head"><span class="ct-tri-check" aria-hidden="true">${done ? '✓' : ''}</span><strong>${esc(item.prompt)}</strong></div>${controls}${body ? `<div class="ct-tri-body">${body}</div>` : ''}</div>`;
+        }).join('');
+        if (!rows) return '';
+        const pct = Math.round(prog.done / prog.total * 100);
+        const msg = prog.done === prog.total ? 'Triagem completa: o resultado tem alto grau de certeza.' : 'Responda estas perguntas: sem elas, o resultado é provisório. Em cada uma, “Não” já a conclui.';
+        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : `<p class="ct-muted">${msg}</p>`}<div class="ct-tris">${rows}</div></section>`;
+    }
+
     function profileHtml() {
         const hits = M().searchQuestions(state.query);
         const searching = hits !== null;
+        const { itemOfQuestion } = M();
         const sections = profileSections().map((s) => {
-            const body = s.questions.map(q => (!hits || hits.has(q.id)) ? questionHtml(q, hits && hits.get(q.id)) : '').join('');
-            if (searching && !body) return '';
-            const n = M().countAnswered(state.answers, s.id);
+            // as perguntas da triagem aparecem só na triagem
+            const qs = s.questions.filter(q => !itemOfQuestion(q.id));
+            const body = qs.map(q => (!hits || hits.has(q.id)) ? questionHtml(q, hits && hits.get(q.id)) : '').join('');
+            if (!body) return '';
+            const n = M().selectedOptions(state.answers).filter(x => qs.some(q => q.id === x.question.id)).length;
             const open = searching || state.open.has(s.id);
             return `<details class="ct-sec" data-sec="${s.id}"${open ? ' open' : ''}><summary><span class="ct-sec-title">${esc(s.title)}</span>${n ? `<em class="ct-count">${n}</em>` : ''}</summary><div class="ct-sec-body">${body}</div></details>`;
         }).join('');
-        const empty = searching && !sections ? `<p class="ct-empty">Nenhuma condição encontrada para “${esc(state.query)}”.</p>` : '';
-        return sections + empty;
+        const tri = triageHtml(hits);
+        const empty = searching && !sections && !tri ? `<p class="ct-empty">Nenhuma condição encontrada para “${esc(state.query)}”.</p>` : '';
+        const more = !searching ? '<h3 class="ct-more-title">Outras condições</h3>' : '';
+        return tri + (sections ? more + sections : '') + empty;
     }
 
     function summaryHtml() {
@@ -98,6 +137,14 @@
         return lines.length ? `<p class="ct-gguide">${lines.map(esc).join(' ')}</p>` : '';
     }
 
+    function certChip(m) {
+        if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec') return '';
+        const miss = missingTitles(m.id);
+        return miss.length
+            ? `<p class="ct-cert ct-cert-pending"><b>Provisório</b> · falta responder: ${miss.map(esc).join(', ')}</p>`
+            : '<p class="ct-cert ct-cert-ok"><b>Confirmado</b> · todas as perguntas que podem restringir este método foram respondidas</p>';
+    }
+
     function methodHtml(m) {
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
@@ -106,7 +153,7 @@
         const cls = m.scale === 'acd' ? `ct-cat${m.category}` : `ct-cat${m.category}`;
         return `<article class="ct-method ${cls}${m.best ? ' ct-best' : ''}${m.section === 'na' ? ' ct-na' : ''}" role="button" tabindex="0" data-action="method" data-id="${m.id}" aria-label="Ver detalhes: ${esc(m.name)}">
             <div class="ct-method-head"><span class="ct-badge" title="Categoria ${esc(m.display)}">${m.section === 'na' ? '—' : esc(m.display)}</span><div><h4>${esc(m.name)}</h4>${m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : ''}</div></div>
-            <p class="ct-note">${esc(m.note)}</p>${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
+            <p class="ct-note">${esc(m.note)}</p>${certChip(m)}${reasons}${miss}<span class="ct-more" aria-hidden="true">Ver detalhes <i>›</i></span></article>`;
     }
 
     function groupsHtml(res) {
@@ -158,8 +205,14 @@
             <p class="ct-source">Fonte: ${esc(MEC_SOURCE.title)} Material de apoio ao estudo e à decisão: não substitui a avaliação clínica nem os protocolos locais. As respostas não são salvas.</p>`;
     }
 
+    function certBanner() {
+        const p = M().screeningProgress(state.screen, state.answers);
+        if (p.done === p.total) return '<div class="ct-banner ok"><strong>Triagem completa.</strong> O resultado tem alto grau de certeza para os métodos de rotina.</div>';
+        return `<div class="ct-banner"><div><strong>Resultado provisório.</strong> ${p.done} de ${p.total} perguntas essenciais respondidas: sem elas, uma restrição pode não aparecer.</div><button type="button" class="qt-ghost" data-action="go-triage">Continuar triagem</button></div>`;
+    }
+
     function resultHtml() {
-        const all = M().evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs });
+        const all = M().evaluateAll(state.answers, evalOpts());
         const fam = FAMILIES.find(f => f.id === state.family);
         let body;
         let sums = '';
@@ -169,24 +222,25 @@
         else {
             const res = all[state.family];
             sums = res.groups.map(g => `<span class="ct-sum ct-sum-${g.id}">${g.title}: ${g.methods.length}</span>`).join('');
+            const banner = state.family === 'core' ? certBanner() : '';
             const warn = all.core.pregnancy ? '<div class="ct-alert" role="alert"><strong>Gravidez suspeita ou confirmada.</strong> Descarte ou confirme antes de escolher um método.</div>' : '';
             const notices = (all.core.notices || []).map(n => `<div class="ct-notice">${esc(n)}</div>`).join('');
             const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
-            body = `${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
+            body = `${banner}${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
         return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
     }
 
     function resultBadge() {
-        const core = M().evaluate(state.answers, { phase: state.phase, prefs: state.prefs });
+        const core = M().evaluate(state.answers, evalOpts());
         return core.methods.filter(m => m.section === 'indicated').length;
     }
 
     /* ---------- ficha do método (abre ao tocar no cartão) ---------- */
 
     function findEvaluated(id) {
-        const all = M().evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs });
+        const all = M().evaluateAll(state.answers, evalOpts());
         for (const f of Object.values(all)) {
             const m = f.methods && f.methods.find(x => x.id === id);
             if (m) return m;
@@ -230,7 +284,11 @@
             : `<p class="ct-muted">${hasProfile ? 'Nenhuma condição marcada restringe este método.' : 'Marque condições no perfil para ver o que se aplica a esta paciente.'}</p>`;
         const best = m.best ? '<span class="ct-best-tag">Maior eficácia entre os indicados</span>' : '';
         const bestNote = m.best ? '<p class="ct-fine">Entre os métodos indicados para este perfil, é o de menor taxa de gravidez no uso típico (OMS, SPR 2025). A OMS não define um método “melhor”: a escolha leva em conta preferência, contexto e disponibilidade.</p>' : '';
-        const status = `<section class="ct-card"><div class="ct-sheet-status ct-cat${m.category}"><span class="ct-badge">${m.section === 'na' ? '—' : esc(m.display)}</span><div><strong>${esc(secTitle)}</strong><span>${state.phase === 'start' ? 'Para iniciar o método' : 'Para quem já usa (continuação)'}</span>${best}</div></div>${bestNote}<h3>No perfil atual</h3>${reasons}</section>`;
+        const miss = M().METHOD_LIST.includes(id) ? missingTitles(id) : null;
+        const certLine = miss === null ? '' : miss.length
+            ? `<p class="ct-cert ct-cert-pending"><b>Provisório.</b> Para confirmar este resultado, responda na triagem: ${miss.map(esc).join(', ')}.</p>`
+            : '<p class="ct-cert ct-cert-ok"><b>Confirmado.</b> Todas as perguntas que podem restringir este método foram respondidas.</p>';
+        const status = `<section class="ct-card"><div class="ct-sheet-status ct-cat${m.category}"><span class="ct-badge">${m.section === 'na' ? '—' : esc(m.display)}</span><div><strong>${esc(secTitle)}</strong><span>${state.phase === 'start' ? 'Para iniciar o método' : 'Para quem já usa (continuação)'}</span>${best}</div></div>${bestNote}${certLine}<h3>No perfil atual</h3>${reasons}</section>`;
         const about = info.about.length ? `<section class="ct-card"><h3>Sobre o método</h3>${info.about.map(t => bullets(t)).join('')}</section>` : '';
         const points = info.points.length ? `<section class="ct-card"><h3>Pontos de atenção</h3><ul class="ct-points">${info.points.map(t => `<li>${rich(t)}</li>`).join('')}</ul></section>` : '';
         const sti = info.protects ? '' : `<p class="ct-sti">${esc(M().STI_NOTE)}</p>`;
@@ -358,8 +416,8 @@
         const keepTop = resultEl.scrollTop;
         resultEl.innerHTML = resultHtml();
         resultEl.scrollTop = keepTop;
-        const n = M().selectedOptions(state.answers).length;
-        root.querySelector('#ctProfileCount').textContent = n ? String(n) : '';
+        const pr = M().screeningProgress(state.screen, state.answers);
+        root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
         root.querySelector('#ctResultCount').textContent = `${resultBadge()} indicados`;
         root.querySelector('.ct').dataset.tab = state.tab;
         if (focusKey) root.querySelector(`[data-key="${focusKey}"]`)?.focus({ preventScroll: true });
@@ -368,7 +426,7 @@
     function copySummary() {
         const { evaluateAll, selectedOptions, MEC_SOURCE } = M();
         const fam = FAMILIES.find(f => f.id === state.family);
-        const res = evaluateAll(state.answers, { phase: state.phase, prefs: state.prefs })[state.family];
+        const res = evaluateAll(state.answers, evalOpts())[state.family];
         const profile = selectedOptions(state.answers).map(s => `- ${s.option.label}`).join('\n') || '- Nenhuma condição marcada';
         const lines = res.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
         const text = `${fam.title} (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
@@ -383,11 +441,35 @@
         setTimeout(() => { btn.textContent = old; }, 1600);
     }
 
+    // "Não": limpa as opções do item. "Sim": abre as perguntas (e já marca quando só há uma opção).
+    function setScreen(itemId, v) {
+        const item = M().screeningItem(itemId);
+        if (!item) return;
+        if (state.screen[itemId] === v) { delete state.screen[itemId]; refresh(); return; }
+        state.screen[itemId] = v;
+        if (v === 'no') {
+            item.members.forEach(qid => { (state.answers[qid] || []).slice().forEach(oid => { state.answers = M().toggleAnswer(state.answers, qid, oid); }); });
+        } else if (item.members.length === 1) {
+            const q = M().getQuestion(item.members[0]);
+            if (q.options.length === 1 && !(state.answers[q.id] || []).length) state.answers = M().toggleAnswer(state.answers, q.id, q.options[0].id);
+        }
+        refresh();
+    }
+
     function onClick(event) {
         const el = event.target.closest('[data-action]');
         if (!el || !root.contains(el)) return;
         const { action, v, q, o } = el.dataset;
-        if (action === 'method') {
+        if (action === 'screen') {
+            setScreen(el.dataset.item, v);
+        } else if (action === 'go-triage') {
+            state.tab = 'profile';
+            root.querySelectorAll('.ct-tab').forEach(t => t.setAttribute('aria-selected', t.dataset.v === 'profile'));
+            root.querySelector('.ct').dataset.tab = 'profile';
+            refresh({ profile: false });
+            const target = root.querySelector(`.ct-tri:not(.done)`) || root.querySelector('#ctTriage');
+            target?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        } else if (action === 'method') {
             openSheet(el.dataset.id);
         } else if (action === 'sheet-close') {
             closeSheet();
@@ -396,6 +478,8 @@
             refreshSheetBody();
         } else if (action === 'toggle') {
             state.answers = M().toggleAnswer(state.answers, q, o);
+            const itemId = M().itemOfQuestion(q);
+            if (itemId && (state.answers[q] || []).length) state.screen[itemId] = 'yes';
             refresh();
         } else if (action === 'phase') {
             state.phase = v;
@@ -419,7 +503,7 @@
             root.querySelector('.ct').dataset.tab = v;
             root.scrollTop = 0;
         } else if (action === 'clear') {
-            state.answers = {}; state.query = ''; state.lam = { amenorrhea: false, fullBf: false, lt6m: false };
+            state.answers = {}; state.screen = {}; state.query = ''; state.lam = { amenorrhea: false, fullBf: false, lt6m: false };
             root.querySelector('#ctSearch').value = '';
             refresh();
         } else if (action === 'copy') {

@@ -2139,6 +2139,34 @@
         .ct-lim span { color: var(--text-main); font-size: 14px; line-height: 1.5; }
         .ct-lim small { color: var(--color-caption); font-size: 12.5px; line-height: 1.5; }
 
+        /* Triagem essencial e certeza do resultado */
+        .ct-triage { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--glass-card-border); border-radius: 20px; background: var(--glass-card-bg); box-shadow: var(--glass-card-shadow); }
+        .ct-triage header { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+        .ct-triage h3 { margin: 0; color: var(--text-main); font-size: 16px; font-weight: 700; }
+        .ct-triage header span { color: var(--lavender-active); font-size: 13px; font-weight: 800; }
+        .ct-prog { height: 8px; border-radius: 999px; background: var(--bg-tertiary); overflow: hidden; }
+        .ct-prog i { display: block; height: 100%; border-radius: 999px; background: var(--lavender-active); transition: width .25s ease; }
+        .ct-tris { display: grid; gap: 4px; }
+        .ct-tri { display: grid; gap: 10px; padding: 14px 0; border-top: 1px solid var(--border-color); }
+        .ct-tri-head { display: flex; align-items: flex-start; gap: 10px; }
+        .ct-tri-head strong { color: var(--text-main); font-size: 14px; font-weight: 650; line-height: 1.45; }
+        .ct-tri-check { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; display: grid; place-items: center; border: 2px solid var(--border-color); border-radius: 50%; color: var(--on-action); font-size: 12px; font-weight: 800; }
+        .ct-tri.done .ct-tri-check { border-color: var(--success); background: var(--success); }
+        .ct-yn { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-left: 30px; }
+        .ct-yn-btn { min-height: 44px; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; font-size: 13.5px; font-weight: 650; cursor: pointer; }
+        .ct-yn-btn.on { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
+        .ct-yn-btn:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
+        .ct-tri-body { display: grid; gap: 16px; margin-left: 30px; padding: 12px; border-radius: 14px; background: var(--bg-tertiary); }
+        .ct-more-title { margin: 8px 2px 0; color: var(--text-secondary); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+        .ct-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 14px; padding: 14px 16px; border-radius: 16px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+        .ct-banner strong { color: var(--text-main); }
+        .ct-banner.ok { background: var(--success-soft); color: var(--success); }
+        .ct-banner.ok strong { color: var(--success); }
+        .ct-cert { margin: 0; padding-left: 46px; font-size: 12px; line-height: 1.45; }
+        .ct-cert-pending { color: var(--warning); }
+        .ct-cert-ok { color: var(--success); }
+        .ct-card p.ct-cert { padding: 10px 12px; border-radius: 12px; background: var(--bg-tertiary); font-size: 13px; }
+
         .ct-gguide { margin: 0; padding: 0 2px; color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
         .ct-verdict { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
         .ct-verdict strong { color: var(--text-main); }
