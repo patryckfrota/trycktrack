@@ -1895,43 +1895,94 @@
         .quick-tool-copy strong { font-size: 14px; font-weight: 700; }
         .quick-tool-copy span { color: var(--text-secondary); font-size: 11.5px; line-height: 1.35; }
 
-        /* Painéis das ferramentas (calculadora de IG e contracepção) */
-        .qt-card { display: grid; gap: 12px; margin-bottom: 12px; }
-        .qt-segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: var(--bg-tertiary); }
-        .qt-seg { border: 0; padding: 9px 8px; border-radius: 9px; background: transparent; color: var(--text-secondary); font: inherit; font-size: 12.5px; font-weight: 650; cursor: pointer; }
+        /* Página das ferramentas (calculadora de IG e contracepção) */
+        .qt-page { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 4px 16px max(32px, env(safe-area-inset-bottom)); }
+        .qt-layout { display: grid; gap: 14px; width: min(1080px, 100%); margin: 0 auto; align-items: start; }
+        @media (min-width: 900px) {
+            .qt-page { padding-inline: 32px; }
+            .qt-layout { grid-template-columns: minmax(340px, 400px) minmax(0, 1fr); gap: 22px; }
+            .qt-layout > .qt-panel { position: sticky; top: 0; }
+        }
+        .qt-panel, .qt-hero, .qt-stats > div, .qt-method { border: 1px solid var(--glass-card-border); background: var(--glass-card-bg); box-shadow: var(--glass-card-shadow); }
+        .qt-panel { display: grid; gap: 14px; padding: 18px; border-radius: 20px; }
+        .qt-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .qt-panel-title { margin: 0; font-size: 15px; font-weight: 700; color: var(--text-main); }
+        .qt-note, .qt-disclaimer { margin: 0; color: var(--color-caption); font-size: 11.5px; line-height: 1.55; }
+        .qt-disclaimer { width: min(1080px, 100%); margin: 16px auto 0; }
+        .qt-segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 14px; background: var(--bg-tertiary); }
+        .qt-seg { display: grid; gap: 2px; padding: 10px 8px; border: 0; border-radius: 11px; background: transparent; color: var(--text-secondary); font: inherit; text-align: center; cursor: pointer; }
+        .qt-seg strong { font-size: 13px; font-weight: 700; }
+        .qt-seg span { font-size: 10.5px; opacity: .85; }
         .qt-seg.active { background: var(--lavender-active); color: var(--on-action); }
-        .qt-field { display: grid; gap: 6px; min-width: 0; }
-        .qt-field > span { color: var(--text-secondary); font-size: 11.5px; font-weight: 600; }
-        .qt-field input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-tertiary); color: var(--text-main); font: inherit; font-size: 16px; }
+        .qt-field { display: grid; gap: 7px; min-width: 0; }
+        .qt-field > span { color: var(--text-secondary); font-size: 12px; font-weight: 650; }
+        .qt-field input { box-sizing: border-box; width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-tertiary); color: var(--text-main); font: inherit; font-size: 16px; }
         .qt-field input:focus { outline: 2px solid var(--lavender-active); outline-offset: 1px; }
-        .qt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .qt-result { margin-bottom: 12px; }
-        .qt-big { margin-bottom: 12px; padding: 18px 16px; border-radius: 18px; background: var(--lavender-dark); color: var(--brand-deep); font-family: var(--font-family-reading); font-size: 26px; font-weight: 700; line-height: 1.15; }
-        .qt-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; }
-        .qt-facts > div { padding: 12px; border: 1px solid var(--border-color); border-radius: 14px; background: var(--bg-secondary); }
-        .qt-facts dt { color: var(--color-caption); font-size: 10.5px; font-weight: 650; text-transform: uppercase; letter-spacing: .05em; }
-        .qt-facts dd { margin: 4px 0 0; color: var(--text-main); font-size: 14px; font-weight: 700; }
-        .qt-facts small { display: block; margin-top: 2px; color: var(--text-secondary); font-size: 11px; font-weight: 500; }
-        .qt-alert { padding: 12px 14px; border-radius: 14px; background: var(--danger-soft); color: var(--danger); font-size: 12.5px; font-weight: 600; }
-        .qt-disclaimer { margin: 0 2px 8px; color: var(--color-caption); font-size: 11px; line-height: 1.5; }
-        .qt-group { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; border: 0; min-width: 0; }
-        .qt-group legend { width: 100%; margin-bottom: 7px; padding: 0; color: var(--color-caption); font-size: 10.5px; font-weight: 650; text-transform: uppercase; letter-spacing: .05em; }
-        .qt-chips { display: flex; flex-wrap: wrap; gap: 7px; }
-        .qt-chip { padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font: inherit; font-size: 12px; font-weight: 600; line-height: 1.3; text-align: left; cursor: pointer; }
+        .qt-row { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+        .qt-inline { display: flex; gap: 8px; }
+        .qt-inline input { flex: 1; }
+        .qt-ghost { flex: 0 0 auto; min-height: 36px; padding: 0 14px; border: 1px solid var(--border-color); border-radius: 12px; background: transparent; color: var(--lavender-active); font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+        .qt-inline .qt-ghost { min-height: 48px; }
+        .qt-output { display: grid; gap: 14px; min-width: 0; }
+        .qt-hero { display: grid; justify-items: start; gap: 8px; padding: 22px 20px; border-radius: 22px; background: var(--lavender-dark); border-color: transparent; box-shadow: none; }
+        .qt-hero-eyebrow { color: var(--text-secondary); font-size: 12px; font-weight: 650; }
+        .qt-hero-value { color: var(--brand-deep); font-family: var(--font-family-reading); font-size: 46px; font-weight: 700; line-height: 1.05; }
+        .qt-hero-value small { margin: 0 8px 0 4px; font-family: var(--font-family-base); font-size: 15px; font-weight: 650; }
+        .qt-hero-empty strong { color: var(--text-main); font-family: var(--font-family-reading); font-size: 20px; }
+        .qt-hero-empty p { margin: 0; color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
+        .qt-pill { padding: 5px 12px; border-radius: 999px; background: var(--lavender-active); color: var(--on-action); font-size: 12px; font-weight: 700; }
+        .qt-track { position: relative; width: 100%; height: 10px; margin-top: 10px; border-radius: 999px; background: var(--bg-main); overflow: visible; }
+        .qt-track i { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--lavender-active); }
+        .qt-track b { position: absolute; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border: 3px solid var(--lavender-dark); border-radius: 50%; background: var(--brand-deep); }
+        .qt-track-legend { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; color: var(--color-caption); font-size: 11px; font-weight: 650; }
+        .qt-track-legend span.on { color: var(--brand-deep); font-weight: 800; }
+        .qt-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .qt-stats > div { display: grid; gap: 4px; padding: 14px; border-radius: 16px; }
+        .qt-stats span { color: var(--color-caption); font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+        .qt-stats strong { color: var(--text-main); font-size: 16px; font-weight: 700; }
+        .qt-alert { padding: 14px 16px; border-radius: 16px; background: var(--danger-soft); color: var(--danger); font-size: 13px; font-weight: 650; }
+        .qt-marks { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+        .qt-mark { position: relative; display: flex; gap: 14px; padding: 0 0 16px; }
+        .qt-mark:last-child { padding-bottom: 0; }
+        .qt-mark::before { content: ""; position: absolute; left: 6px; top: 16px; bottom: 0; width: 2px; background: var(--border-color); }
+        .qt-mark:last-child::before { display: none; }
+        .qt-mark-dot { flex: 0 0 auto; width: 14px; height: 14px; margin-top: 2px; border: 2px solid var(--border-color); border-radius: 50%; background: var(--bg-secondary); z-index: 1; }
+        .qt-mark-past .qt-mark-dot { border-color: var(--lavender-active); background: var(--lavender-active); }
+        .qt-mark-next .qt-mark-dot { border-color: var(--lavender-active); box-shadow: 0 0 0 4px var(--lavender-dark); }
+        .qt-mark div { display: grid; gap: 2px; }
+        .qt-mark strong { color: var(--text-main); font-size: 13.5px; font-weight: 700; }
+        .qt-mark span { color: var(--text-secondary); font-size: 12px; line-height: 1.4; }
+        .qt-mark-past strong, .qt-mark-past span { opacity: .6; }
+        .qt-block { display: grid; gap: 10px; }
+        .qt-block h3 { margin: 0; color: var(--text-main); font-size: 13px; font-weight: 700; }
+        .qt-acc { border-top: 1px solid var(--border-color); padding: 4px 0; }
+        .qt-acc summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 0; color: var(--text-secondary); font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; list-style: none; }
+        .qt-acc summary::-webkit-details-marker { display: none; }
+        .qt-acc summary em { color: var(--lavender-active); font-style: normal; letter-spacing: 0; text-transform: none; }
+        .qt-acc .qt-chips { padding-bottom: 10px; }
+        .qt-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .qt-chip { padding: 9px 13px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-tertiary); color: var(--text-secondary); font: inherit; font-size: 12.5px; font-weight: 600; line-height: 1.3; text-align: left; cursor: pointer; }
         .qt-chip.active { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
-        .qt-heading { margin: 4px 2px 10px; font-size: 14px; }
-        .qt-method { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; padding: 13px; border: 1px solid var(--border-color); border-radius: 16px; background: var(--bg-secondary); }
+        .qt-group-out { display: grid; gap: 10px; }
+        .qt-group-out header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 6px 2px 0; }
+        .qt-group-out h3 { margin: 0; color: var(--text-main); font-size: 15px; font-weight: 700; }
+        .qt-group-out header span { color: var(--color-caption); font-size: 11.5px; }
+        .qt-method { display: grid; gap: 6px; padding: 15px; border-radius: 18px; }
+        .qt-method-top { display: flex; gap: 12px; align-items: center; }
+        .qt-method h4 { margin: 0; color: var(--text-main); font-size: 14px; font-weight: 700; line-height: 1.3; }
+        .qt-method p { margin: 0; }
+        .qt-method-eff { padding-left: 40px; color: var(--text-main); font-size: 12px; font-weight: 600; }
+        .qt-method-note { padding-left: 40px; color: var(--text-secondary); font-size: 12px; line-height: 1.45; }
         .qt-badge { flex: 0 0 auto; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-main); font-size: 13px; font-weight: 800; }
         .qt-cat1 .qt-badge, .qt-cat2 .qt-badge { background: var(--success-soft); color: var(--success); }
         .qt-cat3 .qt-badge { background: var(--bg-tertiary); color: var(--warning); }
         .qt-cat4 .qt-badge { background: var(--danger-soft); color: var(--danger); }
-        .qt-cat4 { opacity: .8; }
-        .qt-method-copy { display: grid; gap: 3px; min-width: 0; }
-        .qt-method-copy strong { font-size: 13px; line-height: 1.3; }
-        .qt-method-copy span { color: var(--text-main); font-size: 11.5px; line-height: 1.4; }
-        .qt-method-copy small { color: var(--text-secondary); font-size: 11px; line-height: 1.4; }
-        .qt-method-copy .qt-why { color: var(--danger); }
+        .qt-cat4 { opacity: .85; }
+        .qt-best { border-color: var(--lavender-active); background: var(--lavender-dark); }
+        .qt-best-tag { justify-self: start; margin-left: 40px; padding: 3px 10px; border-radius: 999px; background: var(--lavender-active); color: var(--on-action); font-size: 10.5px; font-weight: 750; }
+        .qt-why { padding-left: 40px; color: var(--danger); font-size: 11.5px; line-height: 1.4; }
         .qt-cat3 .qt-why { color: var(--warning); }
+        .qt-why-soft { color: var(--color-caption) !important; }
 
         .rr-card.highlighted {
             background: linear-gradient(135deg, rgba(196, 181, 253, 0.15), rgba(196, 181, 253, 0.06));

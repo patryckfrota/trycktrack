@@ -68,10 +68,34 @@ export function gestationalAge(input) {
         weeks,
         days: totalDays % 7,
         dpp,
+        start: dpp - 280 * DAY, // "DUM equivalente": base dos marcos por semana
         daysToDpp: Math.round((dpp - ref) / DAY),
         trimester: weeks < 14 ? 1 : weeks < 28 ? 2 : 3,
         term: termLabel(weeks)
     };
+}
+
+// Marcos de referência para o pré-natal (semana completa → data).
+const MILESTONES = [
+    [14, 'Início do 2º trimestre'],
+    [20, 'Ultrassom morfológico (20 a 24 sem) e dTpa a partir daqui'],
+    [24, 'Início da janela do TOTG 75 g (24 a 28 sem)'],
+    [28, 'Início do 3º trimestre'],
+    [37, 'Termo: parto deixa de ser pré-termo'],
+    [40, 'Data provável do parto'],
+    [42, 'Pós-termo']
+];
+
+export function gestationalMilestones(start, ref) {
+    const refDay = parseDay(ref);
+    let nextMarked = false;
+    return MILESTONES.map(([week, label]) => {
+        const date = start + week * 7 * DAY;
+        const past = date <= refDay;
+        const next = !past && !nextMarked;
+        if (next) nextMarked = true;
+        return { week, label, date, status: past ? 'past' : next ? 'next' : 'later' };
+    });
 }
 
 /* ---------- Contracepção: critérios de elegibilidade (MEC, OMS) ---------- */

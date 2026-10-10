@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { gestationalAge, recommendContraception, parseDay, CONTRACEPTIVE_CONDITIONS } from './quick-tools.js';
+import { gestationalMilestones, gestationalAge, recommendContraception, parseDay, CONTRACEPTIVE_CONDITIONS } from './quick-tools.js';
 
 test('DUM: 280 dias = 40s0d e DPP em +280', () => {
     const r = gestationalAge({ method: 'dum', dum: '2026-01-01', ref: '2026-10-08' });
@@ -60,4 +60,12 @@ test('toda condição tem 6 categorias entre 1 e 4', () => {
         assert.equal(c.cats.length, 6, c.id);
         assert.ok(c.cats.every(n => n >= 1 && n <= 4), c.id);
     }
+});
+
+test('marcos: 20s cai em start+140 dias e só um é "next"', () => {
+    const r = gestationalAge({ method: 'dum', dum: '2026-01-01', ref: '2026-04-11' }); // 14s2d
+    const m = gestationalMilestones(r.start, '2026-04-11');
+    assert.equal(r.start, parseDay('2026-01-01'));
+    assert.equal(m.find(x => x.week === 20).date, parseDay('2026-01-01') + 140 * 86400000);
+    assert.deepEqual(m.map(x => x.status), ['past', 'next', 'later', 'later', 'later', 'later', 'later']);
 });

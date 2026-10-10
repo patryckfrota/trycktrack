@@ -2,7 +2,7 @@
    ACESSO RÁPIDO (tela inicial)
    Calculadora de idade gestacional e escolha de método
    contraceptivo. A lógica está em shared/quick-tools.js; aqui só há
-   interface, reaproveitando o painel lateral de detalhes.
+   interface. Cada ferramenta abre numa página cheia (#quickToolView).
    ============================================================ */
 const QUICK_TOOLS = [
     {
@@ -35,74 +35,109 @@ function renderQuickTools() {
 function openQuickTool(id) {
     document.getElementById('sidebar')?.classList.remove('active');
     document.getElementById('sidebarBackdrop')?.classList.remove('active');
-    const panel = document.getElementById('sidebarDetailPanel');
-    const backdrop = document.getElementById('sidebarDetailBackdrop');
-    const title = document.getElementById('sidebarDetailTitle');
-    const subtitle = document.getElementById('sidebarDetailSubtitle');
-    const body = document.getElementById('sidebarDetailBody');
-    if (!panel || !backdrop || !title || !subtitle || !body) return;
+    const view = document.getElementById('quickToolView');
+    const body = document.getElementById('quickToolBody');
+    if (!view || !body) return;
+    quickToolState.open = id;
     if (id === 'ig') {
         if (!quickToolState.ig.ref) quickToolState.ig.ref = todayIso();
-        title.textContent = 'Idade gestacional';
-        subtitle.textContent = 'Calculadora por DUM ou ultrassom';
-        body.innerHTML = renderGestationalForm();
+        document.getElementById('quickToolTitle').textContent = 'Idade gestacional';
+        body.innerHTML = renderGestationalPage();
         updateGestationalResult();
     } else {
-        title.textContent = 'Contracepção';
-        subtitle.textContent = 'Métodos adequados ao perfil da mulher';
-        body.innerHTML = renderContraceptionForm();
+        document.getElementById('quickToolTitle').textContent = 'Contracepção';
+        body.innerHTML = renderContraceptionPage();
         updateContraceptionResult();
     }
-    panel.classList.add('active');
-    backdrop.classList.add('active');
-    panel.setAttribute('aria-hidden', 'false');
+    body.scrollTop = 0;
+    view.classList.add('active');
+    view.setAttribute('aria-hidden', 'false');
 }
+
+function closeQuickTool() {
+    const view = document.getElementById('quickToolView');
+    view?.classList.remove('active');
+    view?.setAttribute('aria-hidden', 'true');
+    quickToolState.open = null;
+}
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && quickToolState.open) closeQuickTool();
+});
 
 /* ---------- Idade gestacional ---------- */
 
-function renderGestationalForm() {
+function renderGestationalPage() {
     const s = quickToolState.ig;
-    const seg = (value, label) => `<button type="button" class="qt-seg${s.method === value ? ' active' : ''}" onclick="setGestationalMethod('${value}')">${label}</button>`;
-    const dumFields = `<label class="qt-field"><span>Data da última menstruação (DUM)</span><input type="date" id="qtDum" value="${s.dum}" oninput="quickToolState.ig.dum = this.value; updateGestationalResult()"></label>`;
-    const usFields = `<label class="qt-field"><span>Data do ultrassom</span><input type="date" id="qtUsDate" value="${s.usDate}" oninput="quickToolState.ig.usDate = this.value; updateGestationalResult()"></label>
-        <div class="qt-row"><label class="qt-field"><span>IG no exame: semanas</span><input type="number" inputmode="numeric" min="0" max="44" id="qtUsWeeks" value="${s.usWeeks}" oninput="quickToolState.ig.usWeeks = this.value; updateGestationalResult()"></label>
-        <label class="qt-field"><span>dias</span><input type="number" inputmode="numeric" min="0" max="6" id="qtUsDays" value="${s.usDays}" oninput="quickToolState.ig.usDays = this.value; updateGestationalResult()"></label></div>`;
-    return `<div class="sidebar-detail-card qt-card">
-        <div class="qt-segmented">${seg('dum', 'Pela DUM')}${seg('us', 'Pelo ultrassom')}</div>
-        ${s.method === 'dum' ? dumFields : usFields}
-        <label class="qt-field"><span>Calcular para a data</span><input type="date" id="qtRef" value="${s.ref}" oninput="quickToolState.ig.ref = this.value; updateGestationalResult()"></label>
-    </div>
-    <div class="qt-result" id="qtResult" aria-live="polite"></div>
-    <p class="qt-disclaimer">DPP pela regra de Naegele (DUM + 280 dias). Com ultrassom, a DPP parte da IG medida no exame. Em geral, o ultrassom do 1º trimestre prevalece sobre a DUM quando a diferença passa de 5 a 7 dias.</p>`;
+    const seg = (value, label, hint) => `<button type="button" class="qt-seg${s.method === value ? ' active' : ''}" aria-pressed="${s.method === value}" onclick="setGestationalMethod('${value}')"><strong>${label}</strong><span>${hint}</span></button>`;
+    const dateInput = (id, key, label, extra = '') => `<label class="qt-field"><span>${label}</span><input type="date" id="${id}" value="${s[key]}" oninput="quickToolState.ig.${key} = this.value; updateGestationalResult()">${extra}</label>`;
+    const fields = s.method === 'dum'
+        ? dateInput('qtDum', 'dum', 'Primeiro dia da última menstruação')
+        : `${dateInput('qtUsDate', 'usDate', 'Data do ultrassom')}
+           <div class="qt-row">
+               <label class="qt-field"><span>Semanas no exame</span><input type="number" inputmode="numeric" min="0" max="44" id="qtUsWeeks" placeholder="ex.: 8" value="${s.usWeeks}" oninput="quickToolState.ig.usWeeks = this.value; updateGestationalResult()"></label>
+               <label class="qt-field"><span>Dias</span><input type="number" inputmode="numeric" min="0" max="6" id="qtUsDays" value="${s.usDays}" oninput="quickToolState.ig.usDays = this.value; updateGestationalResult()"></label>
+           </div>`;
+    return `<div class="qt-layout">
+        <section class="qt-panel" aria-label="Dados">
+            <h2 class="qt-panel-title">Como datar a gestação</h2>
+            <div class="qt-segmented">${seg('dum', 'Pela DUM', 'Última menstruação')}${seg('us', 'Pelo ultrassom', 'IG medida no exame')}</div>
+            ${fields}
+            <label class="qt-field"><span>Calcular para o dia</span>
+                <div class="qt-inline"><input type="date" id="qtRef" value="${s.ref}" oninput="quickToolState.ig.ref = this.value; updateGestationalResult()"><button type="button" class="qt-ghost" onclick="setGestationalToday()">Hoje</button></div>
+            </label>
+            <p class="qt-note">DUM: DPP pela regra de Naegele (DUM + 280 dias). Ultrassom: a DPP parte da IG medida no exame. Em geral, o ultrassom do 1º trimestre prevalece sobre a DUM quando a diferença passa de 5 a 7 dias.</p>
+        </section>
+        <section class="qt-output" id="qtOutput" aria-live="polite"></section>
+    </div>`;
 }
 
 function setGestationalMethod(method) {
     quickToolState.ig.method = method;
-    document.getElementById('sidebarDetailBody').innerHTML = renderGestationalForm();
+    document.getElementById('quickToolBody').innerHTML = renderGestationalPage();
+    updateGestationalResult();
+}
+
+function setGestationalToday() {
+    quickToolState.ig.ref = todayIso();
+    const input = document.getElementById('qtRef');
+    if (input) input.value = quickToolState.ig.ref;
     updateGestationalResult();
 }
 
 function updateGestationalResult() {
-    const out = document.getElementById('qtResult');
+    const out = document.getElementById('qtOutput');
     if (!out) return;
     const s = quickToolState.ig;
     const empty = s.method === 'us' ? !s.usDate || s.usWeeks === '' : !s.dum;
-    if (empty) { out.innerHTML = ''; return; }
+    if (empty) {
+        out.innerHTML = `<div class="qt-hero qt-hero-empty"><span class="qt-hero-eyebrow">Idade gestacional</span><strong>Informe a data para calcular</strong><p>O resultado, a DPP e os marcos do pré-natal aparecem aqui.</p></div>`;
+        return;
+    }
     const r = gestationalAge(s);
-    if (r.error) { out.innerHTML = `<div class="qt-alert">${escapeHtml(r.error)}</div>`; return; }
-    const sign = r.daysToDpp >= 0 ? `faltam ${r.daysToDpp} dias` : `${-r.daysToDpp} dias após a DPP`;
-    out.innerHTML = `<div class="qt-big">${r.weeks} semanas${r.days ? ` e ${r.days} ${r.days === 1 ? 'dia' : 'dias'}` : ''}</div>
-        <dl class="qt-facts">
-            <div><dt>DPP</dt><dd>${formatDay(r.dpp)} <small>${sign}</small></dd></div>
-            <div><dt>Trimestre</dt><dd>${r.trimester}º</dd></div>
-            <div><dt>Classificação</dt><dd>${r.term}</dd></div>
-            <div><dt>Total</dt><dd>${r.totalDays} dias</dd></div>
-        </dl>`;
+    if (r.error) { out.innerHTML = `<div class="qt-alert" role="alert">${escapeHtml(r.error)}</div>`; return; }
+    const ga = `${r.weeks}<small>sem</small>${r.days ? ` ${r.days}<small>${r.days === 1 ? 'dia' : 'dias'}</small>` : ''}`;
+    const pct = Math.min(100, r.totalDays / 294 * 100).toFixed(1);
+    const left = r.daysToDpp >= 0 ? `${r.daysToDpp} ${r.daysToDpp === 1 ? 'dia' : 'dias'}` : `${-r.daysToDpp} d após`;
+    const marks = gestationalMilestones(r.start, s.ref).map(m => `<li class="qt-mark qt-mark-${m.status}"><span class="qt-mark-dot"></span><div><strong>${m.week} sem · ${formatDay(m.date)}</strong><span>${escapeHtml(m.label)}</span></div></li>`).join('');
+    out.innerHTML = `<div class="qt-hero">
+            <span class="qt-hero-eyebrow">Idade gestacional em ${formatDay(parseDay(s.ref))}</span>
+            <div class="qt-hero-value">${ga}</div>
+            <span class="qt-pill">${r.term}</span>
+            <div class="qt-track" role="img" aria-label="${r.weeks} semanas de 42, ${r.trimester}º trimestre"><i style="width:${pct}%"></i><b style="left:${pct}%"></b></div>
+            <div class="qt-track-legend"><span class="${r.trimester === 1 ? 'on' : ''}">1º tri</span><span class="${r.trimester === 2 ? 'on' : ''}">2º tri</span><span class="${r.trimester === 3 ? 'on' : ''}">3º tri</span></div>
+        </div>
+        <div class="qt-stats">
+            <div><span>DPP</span><strong>${formatDay(r.dpp)}</strong></div>
+            <div><span>${r.daysToDpp >= 0 ? 'Faltam' : 'Passou'}</span><strong>${left}</strong></div>
+            <div><span>Trimestre</span><strong>${r.trimester}º</strong></div>
+        </div>
+        <section class="qt-panel"><h2 class="qt-panel-title">Marcos do pré-natal</h2><ol class="qt-marks">${marks}</ol></section>`;
 }
 
 /* ---------- Contracepção ---------- */
 
-function renderContraceptionForm() {
+function renderContraceptionPage() {
     const s = quickToolState.contra;
     const groups = [];
     CONTRACEPTIVE_CONDITIONS.forEach(c => {
@@ -110,19 +145,25 @@ function renderContraceptionForm() {
         if (!g) groups.push(g = { name: c.group, items: [] });
         g.items.push(c);
     });
-    const chips = groups.map(g => `<fieldset class="qt-group"><legend>${g.name}</legend>${g.items.map(c => `<button type="button" class="qt-chip${s.selected.has(c.id) ? ' active' : ''}" aria-pressed="${s.selected.has(c.id)}" onclick="toggleContraCondition('${c.id}', this)">${escapeHtml(c.label)}</button>`).join('')}</fieldset>`).join('');
+    const chip = (c) => `<button type="button" class="qt-chip${s.selected.has(c.id) ? ' active' : ''}" aria-pressed="${s.selected.has(c.id)}" onclick="toggleContraCondition('${c.id}', this)">${escapeHtml(c.label)}</button>`;
+    const sections = groups.map(g => `<details class="qt-acc" open data-group="${g.name}"><summary><span>${g.name}</span><em data-count></em></summary><div class="qt-chips">${g.items.map(chip).join('')}</div></details>`).join('');
     const pref = (key, label) => `<button type="button" class="qt-chip${s[key] ? ' active' : ''}" aria-pressed="${s[key]}" onclick="toggleContraPref('${key}', this)">${label}</button>`;
-    return `<div class="sidebar-detail-card qt-card">
-        <h3>Preferências</h3>
-        <div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração, sem lembrar')}</div>
+    return `<div class="qt-layout">
+        <section class="qt-panel" aria-label="Perfil da mulher">
+            <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da mulher</h2><button type="button" class="qt-ghost" onclick="clearContraception()">Limpar</button></div>
+            <div class="qt-block"><h3>Preferências</h3><div class="qt-chips">${pref('noHormone', 'Sem hormônio')}${pref('longActing', 'Longa duração')}</div></div>
+            <div class="qt-block"><h3>Condições clínicas</h3><p class="qt-note">Marque só o que se aplica. Sem nada marcado, nenhum método tem restrição.</p>${sections}</div>
+        </section>
+        <section class="qt-output" id="qtOutput" aria-live="polite"></section>
     </div>
-    <div class="sidebar-detail-card qt-card">
-        <h3>Condições da paciente</h3>
-        <p>Marque o que se aplica. Sem nada marcado, todos os métodos aparecem sem restrição.</p>
-        ${chips}
-    </div>
-    <div class="qt-result" id="qtResult" aria-live="polite"></div>
-    <p class="qt-disclaimer">Ferramenta de apoio ao estudo, baseada nos Critérios Médicos de Elegibilidade da OMS (categorias 1 a 4). Quando a OMS separa início e continuação, usamos a categoria mais restritiva. Não cobre puerpério imediato, HIV, anemia falciforme nem outras situações: avalie cada caso. Preservativo continua indicado para prevenir IST.</p>`;
+    <p class="qt-disclaimer">Apoio ao estudo, baseado nos Critérios Médicos de Elegibilidade da OMS (categorias 1 a 4). Quando a OMS separa início e continuação, usamos a categoria mais restritiva. Não cobre puerpério imediato, HIV nem anemia falciforme. Preservativo continua indicado para prevenir IST.</p>`;
+}
+
+function clearContraception() {
+    const s = quickToolState.contra;
+    s.selected.clear(); s.noHormone = false; s.longActing = false;
+    document.getElementById('quickToolBody').innerHTML = renderContraceptionPage();
+    updateContraceptionResult();
 }
 
 function toggleContraCondition(id, el) {
@@ -141,22 +182,37 @@ function toggleContraPref(key, el) {
 }
 
 function updateContraceptionResult() {
-    const out = document.getElementById('qtResult');
+    const out = document.getElementById('qtOutput');
     if (!out) return;
     const s = quickToolState.contra;
+    document.querySelectorAll('.qt-acc').forEach(d => {
+        const n = d.querySelectorAll('.qt-chip.active').length;
+        d.querySelector('[data-count]').textContent = n ? `${n} marcada${n > 1 ? 's' : ''}` : '';
+    });
     const list = recommendContraception([...s.selected], s);
-    const rows = list.map(m => {
-        const why = m.drivers.length ? `<small class="qt-why">Por causa de: ${m.drivers.map(escapeHtml).join('; ')}</small>` : '';
-        const miss = m.misses ? '<small class="qt-why">Não atende à preferência marcada.</small>' : '';
-        return `<div class="qt-method qt-cat${m.category}"><span class="qt-badge">${m.category}</span><div class="qt-method-copy"><strong>${m.name}</strong><span>${m.label} · ${m.efficacy}</span><small>${m.note}</small>${why}${miss}</div></div>`;
-    }).join('');
-    out.innerHTML = `<h3 class="qt-heading">Métodos, do mais ao menos adequado</h3>${rows}`;
+    const card = (m, best) => {
+        const why = m.drivers.length ? `<p class="qt-why">Restrição: ${m.drivers.map(escapeHtml).join('; ')}</p>` : '';
+        const miss = m.misses ? '<p class="qt-why qt-why-soft">Não atende à preferência marcada</p>' : '';
+        return `<article class="qt-method qt-cat${m.category}${best ? ' qt-best' : ''}">
+            <div class="qt-method-top"><span class="qt-badge" title="Categoria ${m.category}">${m.category}</span><h4>${m.name}</h4></div>
+            ${best ? '<span class="qt-best-tag">Melhor opção para este perfil</span>' : ''}
+            <p class="qt-method-eff">${m.efficacy}</p>
+            <p class="qt-method-note">${m.note}</p>${why}${miss}</article>`;
+    };
+    const section = (title, hint, items, bestFirst) => items.length ? `<section class="qt-group-out"><header><h3>${title}</h3><span>${hint}</span></header>${items.map((m, i) => card(m, bestFirst && i === 0 && !m.misses)).join('')}</section>` : '';
+    out.innerHTML =
+        section('Indicados', 'Categorias 1 e 2', list.filter(m => m.category <= 2), true) +
+        section('Desaconselhados', 'Categoria 3: risco costuma superar o benefício', list.filter(m => m.category === 3), false) +
+        section('Contraindicados', 'Categoria 4: risco inaceitável', list.filter(m => m.category === 4), false);
 }
 
 window.openQuickTool = openQuickTool;
+window.closeQuickTool = closeQuickTool;
 window.setGestationalMethod = setGestationalMethod;
+window.setGestationalToday = setGestationalToday;
 window.updateGestationalResult = updateGestationalResult;
 window.toggleContraCondition = toggleContraCondition;
 window.toggleContraPref = toggleContraPref;
+window.clearContraception = clearContraception;
 window.quickToolState = quickToolState;
 window.renderQuickTools = renderQuickTools;

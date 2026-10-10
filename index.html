@@ -1388,6 +1388,17 @@
         <div class="reader-content trail-dash-content" id="trailDashContent"></div>
     </div>
 
+    <!-- ACESSO RÁPIDO — página cheia das ferramentas (app-quicktools.js) -->
+    <div class="reader-view" id="quickToolView" aria-hidden="true">
+        <div class="reader-header">
+            <button class="reader-back" onclick="closeQuickTool()" aria-label="Voltar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+            </button>
+            <div class="reader-header-title" id="quickToolTitle"></div>
+        </div>
+        <div class="qt-page" id="quickToolBody"></div>
+    </div>
+
     <div class="reader-view" id="bulletsView">
         <div class="reader-header">
             <button class="reader-back" onclick="closeBullets()" aria-label="Voltar">
@@ -1696,8 +1707,8 @@
         window.buildStudyBlocks = buildStudyBlocks;
         window.studyCandidates = studyCandidates;
         // Atalhos da tela inicial (app-quicktools.js).
-        import { gestationalAge, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS } from "./shared/quick-tools.js";
-        Object.assign(window, { gestationalAge, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS });
+        import { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS } from "./shared/quick-tools.js";
+        Object.assign(window, { gestationalAge, gestationalMilestones, parseDay, todayIso, formatDay, recommendContraception, CONTRACEPTIVE_CONDITIONS });
         window.buildSchedule = buildSchedule;
         window.minimumDailyCapacity = minimumDailyCapacity;
         // Mesma ideia para as duas funções de pontuação/casamento de texto
