@@ -2051,13 +2051,11 @@
         .ct-source { margin: 0 2px; color: var(--color-caption); font-size: 11px; line-height: 1.55; }
 
         /* Famílias de métodos, explicações e selos (contracepção) */
-        .ct-fams { display: flex; gap: 8px; margin: 0 -2px; padding: 2px; overflow-x: auto; scrollbar-width: none; }
-        .ct-fams::-webkit-scrollbar { display: none; }
-        .ct-fam { flex: 0 0 auto; display: grid; gap: 1px; padding: 8px 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; text-align: left; cursor: pointer; }
-        .ct-fam strong { color: var(--text-main); font-size: 12.5px; font-weight: 700; }
-        .ct-fam span { font-size: 10.5px; }
-        .ct-fam.on { border-color: var(--lavender-active); background: var(--lavender-dark); }
-        .ct-fam.on strong { color: var(--lavender-active); }
+        .ct-fams { display: flex; flex-wrap: wrap; gap: 8px; }
+        .ct-fam { min-height: 44px; padding: 0 16px; border: 1px solid var(--border-color); border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+        .ct-fam.on { border-color: var(--lavender-active); background: var(--lavender-dark); color: var(--lavender-active); }
+        .ct-fam:focus-visible { outline: 2px solid var(--lavender-active); outline-offset: 2px; }
+        .ct-fam-sub { margin: 2px 0 8px; color: var(--text-secondary); font-size: 13px; }
         .ct-intro { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
         .ct-info { margin: 0; color: var(--text-secondary); font-size: 12.5px; line-height: 1.55; }
         .ct-notice { padding: 12px 14px; border-radius: 14px; background: var(--bg-tertiary); color: var(--warning); font-size: 12.5px; font-weight: 600; line-height: 1.5; }

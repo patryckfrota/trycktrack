@@ -173,7 +173,7 @@
     }
 
     function familyNavHtml() {
-        return `<nav class="ct-fams" aria-label="Famílias de métodos">${FAMILIES.map(f => `<button type="button" class="ct-fam${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}"><strong>${f.title}</strong><span>${f.sub}</span></button>`).join('')}</nav>`;
+        return `<nav class="ct-fams" aria-label="Famílias de métodos">${FAMILIES.map(f => `<button type="button" class="ct-fam${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}">${f.title}</button>`).join('')}</nav>`;
     }
 
     function lamHtml() {
@@ -246,7 +246,7 @@
             body = `${banner}${warn}${notices}${intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
-        return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
+        return `${familyNavHtml()}<div class="ct-result-head"><div><h2>${esc(fam.title)}</h2><p class="ct-fam-sub">${esc(fam.sub)}</p><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
     }
 
     function resultBadge() {
@@ -462,11 +462,8 @@
         root.querySelector('#ctSummary').innerHTML = summaryHtml();
         const resultEl = root.querySelector('#ctResult');
         const keepTop = resultEl.scrollTop;
-        const navLeft = resultEl.querySelector('.ct-fams')?.scrollLeft || 0;
         resultEl.innerHTML = resultHtml();
         resultEl.scrollTop = keepTop;
-        const nav = resultEl.querySelector('.ct-fams');
-        if (nav) { nav.scrollLeft = navLeft; const on = nav.querySelector('.ct-fam.on'); if (on && (on.offsetLeft < navLeft || on.offsetLeft + on.offsetWidth > navLeft + nav.clientWidth)) nav.scrollLeft = on.offsetLeft - (nav.clientWidth - on.offsetWidth) / 2; }
         const pr = M().screeningProgress(state.screen, state.answers);
         root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
         root.querySelector('#ctResultCount').textContent = (() => { if (!M().selectedOptions(state.answers).length && !pr.done) return '—'; const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
