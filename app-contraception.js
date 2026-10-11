@@ -186,24 +186,14 @@
         return `<div class="ct-facts">${facts}</div><section class="ct-card"><h3>Do pedido à cirurgia</h3><ol class="ct-steps">${steps}</ol></section>`;
     }
 
-    // Todas as condições da tabela da OMS para a laqueadura, com a classificação de cada uma (mesmo as que não são da paciente).
+    // Citação geral das classificações da OMS para a laqueadura (a lista completa de condições está na aba Restrições da ficha).
     function sterConditionsHtml() {
-        const { methodConditions, STER_CLASSES, selectedOptions } = M();
-        const mine = new Set(selectedOptions(state.answers).map(s => `${s.question.id}.${s.option.id}`));
-        const groups = methodConditions('tubal', { includeMinimum: true }).groups
-            .map(g => ({ ...g, items: g.items.filter(i => i.questionId !== 'sterLegal') }))
-            .filter(g => STER_CLASSES[g.id] && g.items.length);
-        const total = groups.reduce((n, g) => n + g.items.length, 0);
-        const body = groups.map(g => {
-            const c = STER_CLASSES[g.id];
-            const hit = g.items.filter(i => mine.has(`${i.questionId}.${i.optionId}`)).length;
-            const items = g.items.map(i => {
-                const on = mine.has(`${i.questionId}.${i.optionId}`);
-                return `<li${on ? ' class="ct-mine"' : ''}><b>${esc(i.question)}</b><span>${esc(i.option)}${on ? ' <em>no perfil</em>' : ''}</span>${i.note ? `<small>${esc(i.note)}</small>` : ''}</li>`;
-            }).join('');
-            return `<details class="ct-cond"${hit ? ' open' : ''}><summary><span class="ct-badge ct-let-${c.letter === 'C/D' ? 'X' : c.letter}" aria-hidden="true">${c.letter}</span><span class="ct-cond-title">${esc(c.title)}</span>${hit ? `<em class="ct-cond-hit">${hit} no perfil</em>` : ''}<em>${g.items.length}</em></summary><div class="ct-cond-help"><p><b>O que significa.</b> ${esc(c.meaning)}</p><p><b>O que fazer.</b> ${esc(c.action)}</p></div><ul class="ct-cond-list">${items}</ul></details>`;
+        const { STER_CLASSES } = M();
+        const rows = ['delay', 'special', 'caution', 'indicated'].map(id => {
+            const c = STER_CLASSES[id];
+            return `<div class="ct-row"><div class="ct-row-k"><span class="ct-badge ct-let-${c.letter}" aria-hidden="true">${c.letter}</span> ${esc(c.title)}</div><div class="ct-row-t">${esc(c.meaning)} ${esc(c.action)}</div></div>`;
         }).join('');
-        return `<section class="ct-card"><h3>Classificação de cada condição</h3><p class="ct-muted">Todas as ${total} condições da tabela da OMS para a laqueadura, com a classificação de cada uma, mesmo as que não são da paciente. As que ela tem, pelo perfil, aparecem destacadas.</p><div class="ct-conds">${body}</div></section>`;
+        return `<section class="ct-card ct-card-flush"><h3>Classificação da OMS</h3><div class="ct-rows">${rows}</div><p class="ct-fine">As condições de saúde de cada classe estão na tabela 5.11.1 do MEC 2025 (p. 136–152) e na aba Restrições da ficha da laqueadura.</p></section>`;
     }
 
     function attentionHtml(text) {

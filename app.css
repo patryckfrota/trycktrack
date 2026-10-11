@@ -7366,3 +7366,4 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
             .ct-stab { font-size: 12px; }
             .ct-stab em { margin-left: 2px; padding: 1px 4px; font-size: 10px; }
         }
+        .ct-row-k .ct-badge { display: inline-grid; vertical-align: middle; margin-right: 8px; }
