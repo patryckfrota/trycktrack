@@ -615,6 +615,37 @@
         }
     }
 
+    /* ---------- arrastar o dedo para trocar de aba ---------- */
+    // Vale para Perfil/Resultado (celular e iPad em pé) e para as abas da ficha do método.
+    let swipe = null;
+    function inHorizontalScroller(el) {
+        for (let n = el; n && n !== root; n = n.parentElement) {
+            if (n.matches?.('input, textarea, select, [contenteditable]')) return true;
+            const s = getComputedStyle(n);
+            if ((s.overflowX === 'auto' || s.overflowX === 'scroll') && n.scrollWidth > n.clientWidth + 1) return true;
+        }
+        return false;
+    }
+    function onTouchStart(event) {
+        if (event.touches.length !== 1 || inHorizontalScroller(event.target)) { swipe = null; return; }
+        const t = event.touches[0];
+        swipe = { x: t.clientX, y: t.clientY, at: Date.now() };
+    }
+    function onTouchEnd(event) {
+        const s = swipe; swipe = null;
+        if (!s || !event.changedTouches.length) return;
+        const t = event.changedTouches[0];
+        const dx = t.clientX - s.x, dy = t.clientY - s.y;
+        if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6 || Date.now() - s.at > 700) return;
+        const step = dx < 0 ? 1 : -1;
+        const tabs = state.sheet
+            ? [...root.querySelectorAll('.ct-stab')]
+            : (window.matchMedia('(max-width: 899px)').matches ? [...root.querySelectorAll('.ct-tab')] : []);
+        const i = tabs.findIndex(b => b.getAttribute('aria-selected') === 'true');
+        const next = tabs[i + step];
+        if (i >= 0 && next) next.click();
+    }
+
     function onKey(event) {
         const arrows = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
         const t = event.target;
@@ -657,6 +688,8 @@
             root.addEventListener('input', onInput);
             root.addEventListener('keydown', onKey);
             root.addEventListener('toggle', onToggle, true);
+            root.addEventListener('touchstart', onTouchStart, { passive: true });
+            root.addEventListener('touchend', onTouchEnd, { passive: true });
             refresh();
         },
         closeSheet,
@@ -666,6 +699,8 @@
             root.removeEventListener('input', onInput);
             root.removeEventListener('keydown', onKey);
             root.removeEventListener('toggle', onToggle, true);
+            root.removeEventListener('touchstart', onTouchStart);
+            root.removeEventListener('touchend', onTouchEnd);
             Object.assign(state, { answers: {}, screen: {}, phase: 'start', prefs: { noHormone: false, longActing: false }, query: '', tab: 'profile', family: 'core', lam: { amenorrhea: false, fullBf: false, lt6m: false }, sheet: null, sheetTab: 'summary', clearArmed: false, legendOpen: false, open: new Set(['perfil']) });
             clearTimeout(clearTimer);
             root = null;
