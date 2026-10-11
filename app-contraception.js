@@ -173,6 +173,26 @@
         return `<div class="ct-facts">${facts}</div><section class="ct-card"><h3>Do pedido à cirurgia</h3><ol class="ct-steps">${steps}</ol></section>`;
     }
 
+    // Todas as condições da tabela da OMS para a laqueadura, com a classificação de cada uma (mesmo as que não são da paciente).
+    function sterConditionsHtml() {
+        const { methodConditions, STER_CLASSES, selectedOptions } = M();
+        const mine = new Set(selectedOptions(state.answers).map(s => `${s.question.id}.${s.option.id}`));
+        const groups = methodConditions('tubal', { includeMinimum: true }).groups
+            .map(g => ({ ...g, items: g.items.filter(i => i.questionId !== 'sterLegal') }))
+            .filter(g => STER_CLASSES[g.id] && g.items.length);
+        const total = groups.reduce((n, g) => n + g.items.length, 0);
+        const body = groups.map(g => {
+            const c = STER_CLASSES[g.id];
+            const hit = g.items.filter(i => mine.has(`${i.questionId}.${i.optionId}`)).length;
+            const items = g.items.map(i => {
+                const on = mine.has(`${i.questionId}.${i.optionId}`);
+                return `<li${on ? ' class="ct-mine"' : ''}><b>${esc(i.question)}</b><span>${esc(i.option)}${on ? ' <em>no perfil</em>' : ''}</span>${i.note ? `<small>${esc(i.note)}</small>` : ''}</li>`;
+            }).join('');
+            return `<details class="ct-cond"${hit ? ' open' : ''}><summary><span class="ct-badge ct-let-${c.letter === 'C/D' ? 'X' : c.letter}" aria-hidden="true">${c.letter}</span><span class="ct-cond-title">${esc(c.title)}</span>${hit ? `<em class="ct-cond-hit">${hit} no perfil</em>` : ''}<em>${g.items.length}</em></summary><div class="ct-cond-help"><p><b>O que significa.</b> ${esc(c.meaning)}</p><p><b>O que fazer.</b> ${esc(c.action)}</p></div><ul class="ct-cond-list">${items}</ul></details>`;
+        }).join('');
+        return `<section class="ct-card"><h3>Classificação de cada condição</h3><p class="ct-muted">Todas as ${total} condições da tabela da OMS para a laqueadura, com a classificação de cada uma, mesmo as que não são da paciente. As que ela tem, pelo perfil, aparecem destacadas.</p><div class="ct-conds">${body}</div></section>`;
+    }
+
     function attentionHtml(text) {
         return `<section class="ct-card"><h3>Antes de indicar</h3><ul class="ct-points">${sentences(text).map(s => `<li>${esc(s)}</li>`).join('')}</ul></section>`;
     }
@@ -272,7 +292,8 @@
             const notices = (all.core.notices || []).map(n => `<div class="ct-notice">${esc(n)}</div>`).join('');
             const intro = res.intro ? `<p class="ct-intro">${esc(res.intro)}</p>` : '';
             const legal = state.family === 'ster' ? legalCardHtml() + sterReaderHtml('tubal') + attentionHtml(res.intro) : '';
-            body = `${banner}${warn}${legal}${notices}${state.family === 'ster' ? '' : intro}${groupsHtml(res)}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
+            const sterConds = state.family === 'ster' ? sterConditionsHtml() : '';
+            body = `${banner}${warn}${legal}${notices}${state.family === 'ster' ? '' : intro}${groupsHtml(res)}${sterConds}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
         const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
         return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;

@@ -391,3 +391,12 @@ export const STER_STEPS = {
         vas: [['Eficácia', '0,1 a 0,15%', 'de gravidez no 1º ano, por 100 mulheres'], ['Duração', 'Permanente'], ['Efeito pleno', 'Só após 3 meses']]
     }
 };
+
+// Esterilização feminina: o que cada classificação da OMS significa na prática (MEC 2025, seção 5.11.1).
+export const STER_CLASSES = {
+    delay: { letter: 'D', title: 'Adiar', meaning: 'A cirurgia deve esperar até a condição ser avaliada ou corrigida.', action: 'Ofereça um método temporário de contracepção enquanto isso e reavalie depois.' },
+    special: { letter: 'S', title: 'Serviço especializado', meaning: 'A cirurgia pode ser feita, mas só em ambiente com cirurgião e equipe experientes, equipamento para anestesia geral e suporte clínico.', action: 'Encaminhe se o seu serviço não tiver essa estrutura. A equipe decide o procedimento e a anestesia mais adequados. Ofereça método temporário enquanto aguarda.' },
+    depends: { letter: 'C/D', title: 'Depende do caso', meaning: 'A classificação varia conforme a gravidade ou o momento da condição.', action: 'Avalie o caso para decidir entre fazer com cautela ou adiar.' },
+    caution: { letter: 'C', title: 'Cautela', meaning: 'A cirurgia pode ser feita no serviço de rotina, com preparo e precauções adicionais.', action: 'Avalie o risco, prepare a paciente e redobre o cuidado cirúrgico e anestésico. Em algumas condições, encaminhar a um serviço de maior nível é a melhor opção.' },
+    indicated: { letter: 'A', title: 'Aceitar', meaning: 'Não há razão médica para negar a esterilização.', action: 'Siga o fluxo normal: critério legal, aconselhamento, prazo de 60 dias e consentimento.' }
+};

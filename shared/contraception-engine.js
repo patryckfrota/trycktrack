@@ -289,7 +289,7 @@ function setOf(methodId) {
  * todas as condições com categoria acima da mínima, agrupadas pela seção do
  * resultado. Início e continuação diferentes viram "início X · continuação Y".
  */
-export function methodConditions(methodId) {
+export function methodConditions(methodId, { includeMinimum = false } = {}) {
     const set = setOf(methodId);
     if (!set) return null;
     const sc = SCALES[set.scale];
@@ -320,7 +320,7 @@ export function methodConditions(methodId) {
             if (!main) continue;
             const { start, cont, worst } = main;
             if (start.na && cont.na && !main.note) continue;
-            if (!worst.na && worst.max <= 1 && !worst.ranged) continue;
+            if (!worst.na && worst.max <= 1 && !worst.ranged && !includeMinimum) continue;
             // categoria 2 da escala MEC não é "indicado": vira grupo próprio de cautela
             const id = worst.na ? 'na' : (set.scale === 'mec' && sc.sectionFor(worst) === 'indicated') ? 'care' : sc.sectionFor(worst);
             let display = showDisplay(start, cont);
@@ -334,13 +334,13 @@ export function methodConditions(methodId) {
                 note = [parts.join(' · '), note].filter(Boolean).join('. ');
             }
             if (!buckets.has(id)) buckets.set(id, []);
-            buckets.get(id).push({ sectionId: q.sectionId, question: q.title, option: option.label, display, note, rank: worst.max });
+            buckets.get(id).push({ sectionId: q.sectionId, questionId: q.id, optionId: option.id, question: q.title, option: option.label, display, note, rank: worst.max });
         }
     }
     const careMeta = { id: 'care', title: 'Cautela', hint: 'Categoria 2: em geral pode usar, com acompanhamento cuidadoso' };
-    const order = [...sc.sections.filter(s => s.id !== 'indicated' && s.id !== 'na'), careMeta, ...sc.sections.filter(s => s.id === 'na')];
+    const order = [...sc.sections.filter(s => s.id !== 'indicated' && s.id !== 'na'), careMeta, ...(includeMinimum ? sc.sections.filter(s => s.id === 'indicated') : []), ...sc.sections.filter(s => s.id === 'na')];
     // do mais grave ao menos grave: contraindicado, desaconselhado, depende, cautela
-    const sev = (id) => ({ contraindicated: 0, delay: 0, special: 1, discouraged: 1, depends: 2, caution: 3, care: 3, na: 4 }[id] ?? 5);
+    const sev = (id) => ({ contraindicated: 0, delay: 0, special: 1, discouraged: 1, depends: 2, caution: 3, care: 3, indicated: 4, na: 5 }[id] ?? 6);
     const groups = order
         .map(g => ({ ...g, items: (buckets.get(g.id) || []).sort((a, b) => b.rank - a.rank) }))
         .filter(g => g.items.length)

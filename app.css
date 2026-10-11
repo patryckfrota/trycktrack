@@ -7341,3 +7341,12 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
         .ct-cond-help { display: grid; gap: 6px; margin: 0 14px 10px; padding: 12px 14px; border-radius: 12px; background: var(--bg-secondary); }
         .ct-cond-help p { margin: 0; color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; }
         .ct-cond-help b { color: var(--text-main); }
+        .ct-cond-list li { display: grid; gap: 2px; }
+        .ct-cond-list li b { color: var(--text-main); font-size: 13px; font-weight: 700; }
+        .ct-cond-list li small { color: var(--text-secondary); font-size: 12.5px; line-height: 1.5; }
+        .ct-cond-list li.ct-mine { margin: 0 -8px; padding-inline: 26px 8px; border-radius: 10px; background: var(--lavender-dark); }
+        .ct-cond-list li.ct-mine::before { left: 10px; background: var(--lavender-active); }
+        .ct-cond-list em { margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--lavender-active); color: var(--on-action); font-style: normal; font-size: 10.5px; font-weight: 800; }
+        .ct-cond > summary em.ct-cond-hit { background: var(--lavender-dark); color: var(--lavender-active); }
+        .ct-badge.ct-let-X { background: var(--bg-secondary); color: var(--warning); font-size: 11px; }
+        .ct-cond-list li span { color: var(--text-main); font-size: 14px; line-height: 1.5; }
