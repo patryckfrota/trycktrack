@@ -229,8 +229,8 @@
     function vasHtml() {
         const { VASECTOMY: V } = M();
         const when = V.when.map(w => `<div class="ct-row"><div class="ct-row-k">${esc(w.k)}</div><div class="ct-row-t">${esc(w.t)}</div></div>`).join('');
-        const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span class="ct-badge ct-let-${g.cat}" aria-hidden="true">${g.cat}</span><span class="ct-cond-title">${esc(g.label)}</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li>${esc(it)}</li>`).join('')}</ul></details>`).join('');
-        return `${legalCardHtml()}${sterReaderHtml('vas')}${attentionHtml(V.intro)}<section class="ct-card ct-card-flush"><h3>Depois do procedimento</h3><div class="ct-rows">${when}</div></section><section class="ct-card"><h3>Condições de saúde do homem</h3><p class="ct-muted">Classificação da OMS: A aceitar, C cautela, D adiar e S serviço especializado.</p><div class="ct-conds">${groups}</div></section><p class="ct-source">${esc(V.source)}.</p>`;
+        const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span class="ct-badge ct-let-${g.cat}" aria-hidden="true">${g.cat}</span><span class="ct-cond-title">${esc(g.label)}</span><em>${g.items.length}</em></summary><div class="ct-cond-help"><p><b>O que significa.</b> ${esc(g.meaning)}</p><p><b>O que fazer.</b> ${esc(g.action)}</p></div><ul>${g.items.map(it => `<li>${esc(it)}</li>`).join('')}</ul></details>`).join('');
+        return `${legalCardHtml()}${sterReaderHtml('vas')}${attentionHtml(V.intro)}<section class="ct-card ct-card-flush"><h3>Depois do procedimento</h3><div class="ct-rows">${when}</div></section><section class="ct-card"><h3>Condições de saúde do homem</h3><p class="ct-muted">Nenhuma condição impede a vasectomia de forma absoluta (OMS). Cada grupo diz como e onde fazer: A aceitar, C cautela, D adiar e S serviço especializado. Toque para ver o que significa e as condições.</p><div class="ct-conds">${groups}</div></section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {

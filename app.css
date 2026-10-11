@@ -7338,3 +7338,6 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
         .ct-badge.ct-let-D, .ct-badge.ct-cat5 { background: var(--danger-soft); color: var(--danger); }
         .ct-badge.ct-let-S { background: var(--lavender-dark); color: var(--lavender-active); }
         .ct-row-t { color: var(--text-secondary); font-size: 14px; line-height: 1.65; }
+        .ct-cond-help { display: grid; gap: 6px; margin: 0 14px 10px; padding: 12px 14px; border-radius: 12px; background: var(--bg-secondary); }
+        .ct-cond-help p { margin: 0; color: var(--text-secondary); font-size: 13.5px; line-height: 1.6; }
+        .ct-cond-help b { color: var(--text-main); }
