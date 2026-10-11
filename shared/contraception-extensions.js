@@ -144,7 +144,7 @@ export const EXTENSIONS = [
         scale: 'acds',
         requires: 'sterLegal',
         page: '136–152',
-        intro: 'Procedimento cirúrgico pensado para ser permanente: toda mulher deve escolher de forma voluntária e informada, com orientação sobre a permanência e sobre métodos de longa duração muito eficazes. Atenção especial a jovens, nulíparas e mulheres com problemas de saúde mental, inclusive depressão. Considere as leis e normas nacionais. A OMS não restringe de forma absoluta nenhuma condição: usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado). Não protege contra IST nem HIV.',
+        intro: 'Método cirúrgico permanente: toda mulher deve escolher de forma voluntária e informada, com orientação sobre a permanência e sobre métodos de longa duração muito eficazes. Atenção especial a jovens, nulíparas e mulheres com problemas de saúde mental, inclusive depressão. Considere as leis e normas nacionais. A OMS não restringe de forma absoluta nenhuma condição: usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado). Não protege contra IST nem HIV.',
         methods: [
             { id: 'tubal', name: 'Esterilização cirúrgica feminina (laqueadura tubária)', short: 'Laqueadura', hormonal: false, larc: true, efficacyRank: 0, note: 'Deve ser feita por equipe treinada, em serviço adequado, com protocolos de prevenção de infecção.' }
         ],
@@ -209,14 +209,14 @@ export const EXTENSIONS = [
                 { id: 'ge21', label: '21 anos ou mais', cats: ['A'], note: 'Atende ao critério de idade. Falta cumprir o prazo de 60 dias e o aconselhamento.' },
                 { id: 'u21_2kids', label: '18 a 20 anos, 2 ou mais filhos vivos', cats: ['A'], note: 'Atende à lei: menor de 21 anos com pelo menos 2 filhos vivos e capacidade civil plena. Falta cumprir o prazo de 60 dias e o aconselhamento.' },
                 { id: 'em_2kids', label: 'Menor de 18 anos, emancipado(a), 2 ou mais filhos vivos', cats: ['A'], note: 'Atende à lei somente com a emancipação comprovada (capacidade civil plena). Falta cumprir o prazo de 60 dias e o aconselhamento.' },
-                { id: 'u21_lt2', label: '18 a 20 anos, menos de 2 filhos vivos', cats: ['L'], note: 'A lei não permite: é preciso ter 21 anos ou pelo menos 2 filhos vivos. A única exceção é o risco à vida ou à saúde, com relatório escrito e assinado por 2 médicos. Ofereça métodos reversíveis de longa duração.' },
-                { id: 'lt18', label: 'Menor de 18 anos, sem emancipação ou com menos de 2 filhos', cats: ['L'], note: 'A lei não permite: antes dos 18 anos só com emancipação, e mesmo assim é preciso ter 2 filhos vivos. A única exceção é o risco à vida ou à saúde, com relatório de 2 médicos. Ofereça métodos reversíveis de longa duração.' }
+                { id: 'u21_lt2', label: '18 a 20 anos, menos de 2 filhos vivos', cats: ['L'], note: 'A lei não permite: é preciso ter 21 anos ou pelo menos 2 filhos vivos. A única exceção prevista é o risco à vida ou à saúde da mulher ou do futuro concepto, com relatório escrito e assinado por 2 médicos. Ofereça métodos reversíveis de longa duração.' },
+                { id: 'lt18', label: 'Menor de 18 anos, sem emancipação ou com menos de 2 filhos', cats: ['L'], note: 'A lei não permite: antes dos 18 anos só com emancipação, e mesmo assim é preciso ter 2 filhos vivos. A única exceção prevista é o risco à vida ou à saúde da mulher ou do futuro concepto, com relatório de 2 médicos. Ofereça métodos reversíveis de longa duração.' }
             ] },
             { id: 'sterYoung', type: 'multi', title: 'Idade jovem', page: 137, options: [
                 { id: 'yes', label: 'Idade jovem', cats: ['C'], note: 'Como toda mulher, deve ser aconselhada sobre a permanência. Até 20% das mulheres esterilizadas jovens se arrependem depois, e a idade jovem é um dos preditores mais fortes de arrependimento.' }
             ] },
             { id: 'sterTime', type: 'single', title: 'Tempo de pós-parto', page: 137, options: [
-                { id: 'lt7', label: 'Menos de 7 dias de pós-parto', cats: ['A'], note: 'A esterilização pode ser feita com segurança logo após o parto.' },
+                { id: 'lt7', label: 'Menos de 7 dias de pós-parto', cats: ['A'], note: 'A esterilização pode ser feita com segurança antes de 7 dias de pós-parto, desde que os 60 dias da manifestação de vontade tenham sido cumpridos antes do parto (Lei 9.263/1996, art. 10, § 2º).' },
                 { id: '7_42', label: '7 a menos de 42 dias de pós-parto', cats: ['D'], note: 'Há mais risco de complicações enquanto o útero não involuiu totalmente.' },
                 { id: 'ge42', label: '42 dias ou mais de pós-parto', cats: ['A'] }
             ] },
@@ -258,7 +258,7 @@ export const EXTENSIONS = [
                 { id: 'elective', label: 'Junto com cirurgia abdominal eletiva', cats: ['C'] },
                 { id: 'emergency', label: 'Junto com cirurgia de emergência, sem aconselhamento prévio', cats: ['D'] },
                 { id: 'infectious', label: 'Junto com cirurgia, em condição infecciosa', cats: ['D'] },
-                { id: 'cesarean', label: 'Junto com cesariana', cats: ['A'], note: 'Não há aumento de complicações em paciente cirurgicamente estável.' }
+                { id: 'cesarean', label: 'Junto com cesariana', cats: ['A'], note: 'Não há aumento de complicações em paciente cirurgicamente estável. A cesariana não pode ter como indicação principal a laqueadura, e o prazo de 60 dias também vale aqui.' }
             ] }
         ]
     }

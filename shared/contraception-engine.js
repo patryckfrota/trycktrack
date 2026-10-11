@@ -38,6 +38,7 @@ const ACD_SECTIONS = [
 ];
 
 const ACDS_SECTIONS = [
+    { id: 'pending', title: 'Falta o critério legal', hint: 'Informe idade e filhos vivos (Lei 9.263/1996) para confirmar' },
     { id: 'indicated', title: 'Pode fazer', hint: 'A: não há razão médica para negar' },
     { id: 'caution', title: 'Com cautela', hint: 'C: rotina com preparo e precauções extras' },
     { id: 'special', title: 'Serviço especializado', hint: 'S: cirurgião e equipe experientes, anestesia geral e suporte clínico' },
@@ -270,8 +271,12 @@ export function evaluateAll(answers = {}, opts = {}) {
     for (const ext of EXTENSIONS) {
         const { methods, groups } = evaluateSet(extensionSet(ext), selected, phase, prefs);
         // Pergunta obrigatória da família (ex.: critério legal da esterilização): sem resposta, o resultado é provisório.
-        if (ext.requires) methods.forEach(m => { m.legalPending = !selected.some(s => s.question.id === ext.requires); });
-        result[ext.id] = { id: ext.id, title: ext.title, scale: ext.scale, intro: ext.intro, page: ext.page, methods, groups, pregnancy: result.core.pregnancy };
+        let shown = groups;
+        if (ext.requires) {
+            methods.forEach(m => { m.legalPending = !selected.some(s => s.question.id === ext.requires); if (m.legalPending && m.section === 'indicated') m.section = 'pending'; });
+            shown = SCALES[ext.scale].sections.map(s => ({ ...s, methods: methods.filter(m => m.section === s.id) })).filter(g => g.methods.length);
+        }
+        result[ext.id] = { id: ext.id, title: ext.title, scale: ext.scale, intro: ext.intro, page: ext.page, methods, groups: shown, pregnancy: result.core.pregnancy };
     }
     return result;
 }
@@ -322,7 +327,7 @@ export function methodConditions(methodId, { includeMinimum = false } = {}) {
             if (start.na && cont.na && !main.note) continue;
             if (!worst.na && worst.max <= 1 && !worst.ranged && !includeMinimum) continue;
             // categoria 2 da escala MEC não é "indicado": vira grupo próprio de cautela
-            const id = worst.na ? 'na' : (set.scale === 'mec' && sc.sectionFor(worst) === 'indicated') ? 'care' : sc.sectionFor(worst);
+            const id = worst.na ? 'na' : (set.scale === 'mec' && worst.max === 2 && !worst.ranged) ? 'care' : sc.sectionFor(worst);
             let display = showDisplay(start, cont);
             let note = main.note || option.note || null;
             if (option.byAge) {
@@ -340,7 +345,7 @@ export function methodConditions(methodId, { includeMinimum = false } = {}) {
     const careMeta = { id: 'care', title: 'Cautela', hint: 'Categoria 2: em geral pode usar, com acompanhamento cuidadoso' };
     const order = [...sc.sections.filter(s => s.id !== 'indicated' && s.id !== 'na'), careMeta, ...(includeMinimum ? sc.sections.filter(s => s.id === 'indicated') : []), ...sc.sections.filter(s => s.id === 'na')];
     // do mais grave ao menos grave: contraindicado, desaconselhado, depende, cautela
-    const sev = (id) => ({ contraindicated: 0, delay: 0, special: 1, discouraged: 1, depends: 2, caution: 3, care: 3, indicated: 4, na: 5 }[id] ?? 6);
+    const sev = (id) => ({ contraindicated: 0, delay: 0, special: 1, discouraged: 1, depends: 2, caution: 3, care: 3, indicated: 4, na: 5, legal: -1 }[id] ?? 6);
     const groups = order
         .map(g => ({ ...g, items: (buckets.get(g.id) || []).sort((a, b) => b.rank - a.rank) }))
         .filter(g => g.items.length)

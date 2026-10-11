@@ -6,7 +6,7 @@ import { RATES, RATES_SOURCE, effectCategory, typicalRate } from './contraceptio
 import { evaluate, evaluateAll, methodConditions, lamStatus, resolveCell, toggleAnswer, searchQuestions, allQuestions, getQuestion } from './contraception-engine.js';
 import { EXTENSIONS } from './contraception-extensions.js';
 import { METHOD_USE, VASECTOMY, PREGNANCY_CHECK } from './contraception-use.js';
-import { PRESCRIBE, SOURCES, VASECTOMY_LAW } from './contraception-prescribe.js';
+import { PRESCRIBE, SOURCES } from './contraception-prescribe.js';
 import { METHOD_INFO, WHY, REVISED, GUIDANCE, CHANGES_6TH } from './contraception-content.js';
 
 const by = (r) => Object.fromEntries(r.methods.map(m => [m.id, m]));
@@ -302,7 +302,8 @@ test('ids de perguntas são únicos entre a tabela-resumo e todas as extensões'
 });
 
 test('esterilização: pior situação vence (D > S > C > A) e faixa C/D cai em "depende"', () => {
-    const t = (...pairs) => by(evaluateAll(pick(...pairs)).ster).tubal;
+    const t = (...pairs) => by(evaluateAll(pick(['sterLegal', 'ge21'], ...pairs)).ster).tubal;
+    assert.equal(by(evaluateAll({}).ster).tubal.section, 'pending');
     assert.equal(t().section, 'indicated');
     assert.equal(t(['htn', 'sbp160']).section, 'special');
     assert.equal(t(['htn', 'controlled']).section, 'caution');
@@ -316,10 +317,10 @@ test('esterilização: pior situação vence (D > S > C > A) e faixa C/D cai em 
 });
 
 test('esterilização: nuliparidade é A com aviso de aconselhamento; jovem é C', () => {
-    const nul = by(evaluateAll(pick(['parity', 'nullip'])).ster).tubal;
+    const nul = by(evaluateAll(pick(['sterLegal', 'ge21'], ['parity', 'nullip'])).ster).tubal;
     assert.equal(nul.section, 'indicated');
     assert.ok(nul.drivers[0].note.includes('permanência'));
-    assert.equal(by(evaluateAll(pick(['sterYoung', 'yes'])).ster).tubal.section, 'caution');
+    assert.equal(by(evaluateAll(pick(['sterLegal', 'ge21'], ['sterYoung', 'yes'])).ster).tubal.section, 'caution');
 });
 
 /* ---------- ficha do método ---------- */
@@ -352,7 +353,11 @@ test('ficha do DIU de emergência herda a lista do DIU de cobre; a de esteriliza
     const e = methodConditions('eiud');
     assert.ok(e.groups.flatMap(x => x.items).some(i => i.option.includes('DIP atual')));
     const t = methodConditions('tubal');
-    assert.deepEqual(t.groups.map(g => g.id).slice(0, 2), ['delay', 'special']);
+    assert.deepEqual(t.groups.map(g => g.id).slice(0, 3), ['legal', 'delay', 'special']);
+    // categoria 1 só aparece com includeMinimum, no grupo certo (não em "cautela")
+    const c = methodConditions('condom', { includeMinimum: true });
+    assert.ok(c.groups.find(g => g.id === 'indicated').items.length > 0);
+    assert.ok(c.groups.find(g => g.id === 'care')?.items.every(i => i.rank === 2) ?? true);
 });
 
 test('como usar (SPR): só métodos reais, seções com itens, e vasectomia com as 4 classes', () => {
@@ -476,7 +481,6 @@ test('como prescrever: só métodos reais, fontes existentes, modelos de receita
         for (const d of p.dosing || p.blocks.flatMap(b => b.items)) assert.ok(d.k && d.t, id);
     }
     for (const id of ['coc', 'patch', 'cvr', 'cic', 'pop', 'dmpa', 'imp', 'cu', 'lng', 'ecp_lng', 'eiud', 'tubal']) assert.ok(PRESCRIBE[id], id);
-    assert.equal(VASECTOMY_LAW.length, 3);
 });
 
 test('como prescrever: doses conferidas nas bulas e protocolos oficiais', () => {

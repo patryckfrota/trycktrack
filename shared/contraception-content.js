@@ -347,7 +347,7 @@ export const METHOD_INFO = {
             'Nenhuma condição restringe de forma absoluta a esterilização, mas algumas pedem precauções: C (cautela), D (adiar) ou S (serviço especializado, com cirurgião e equipe experientes, anestesia geral e suporte clínico).',
             'Deve ser feita por equipe bem treinada, em serviço adequado, com equipamento e protocolos de prevenção de infecção.',
             'Se for preciso encaminhar ou houver atraso, ofereça método temporário.',
-            'Pós-parto: pode ser feita com segurança nos primeiros 7 dias; de 7 a menos de 42 dias há mais risco porque o útero não involuiu totalmente. Junto com a cesariana, não há aumento de complicações em paciente estável.'
+            'Pós-parto: pode ser feita com segurança antes de 7 dias de pós-parto, se os 60 dias da manifestação de vontade já foram cumpridos; de 7 a menos de 42 dias há mais risco porque o útero não involuiu totalmente. Junto com a cesariana, não há aumento de complicações em paciente estável.'
         ],
         source: 'OMS, MEC 2025, seção 5.11 (p. 136–152 e 155–156)'
     }
@@ -365,9 +365,9 @@ export const STER_LAW = {
         { k: 'Prazo e aconselhamento', t: 'Mínimo de 60 dias entre a manifestação de vontade, registrada por escrito, e a cirurgia. Nesse período a pessoa tem aconselhamento por equipe multidisciplinar, para desencorajar a esterilização precoce.' },
         { k: 'Cônjuge', t: 'O consentimento do cônjuge não é mais exigido.' },
         { k: 'Estado de discernimento', t: 'Não vale a manifestação de vontade dada sob álcool, drogas, estados emocionais alterados ou incapacidade mental, temporária ou permanente (art. 10, § 3º).' },
-        { k: 'No parto', t: 'A laqueadura durante o parto é garantida se os 60 dias foram cumpridos antes do parto e as condições médicas forem adequadas (art. 10, § 2º). Não se exige mais histórico de cesarianas sucessivas.' },
-        { k: 'Risco à vida ou à saúde', t: 'Também é permitida, em qualquer idade, quando há risco à vida ou à saúde da mulher ou do futuro concepto, em relatório escrito e assinado por 2 médicos (art. 10, inciso II).' },
-        { k: 'Documentos', t: 'Registro da manifestação de vontade (Anexo I da Nota Técnica) e Termo de Consentimento Livre e Esclarecido, uma via para a pessoa e outra no prontuário. O termo informa que a esterilização não previne IST.' }
+        { k: 'No parto', t: 'A laqueadura durante o parto é garantida se os 60 dias foram cumpridos antes do parto e as condições médicas forem adequadas (art. 10, § 2º). Não se exige mais histórico de cesarianas sucessivas. A cesariana nunca pode ter a laqueadura como indicação principal; havendo indicação clínica, a laqueadura pode ser feita no mesmo ato (Nota Técnica, Anexo III).' },
+        { k: 'Risco à vida ou à saúde', t: 'Também é permitida quando há risco à vida ou à saúde da mulher ou do futuro concepto, em relatório escrito e assinado por 2 médicos (art. 10, inciso II). Esse inciso não menciona idade nem filhos; as regras de capacidade civil e de autorização judicial seguem valendo. Confirme caso a caso com o jurídico do serviço.' },
+        { k: 'Documentos', t: 'Registro da manifestação de vontade (Anexo I da Nota Técnica) e Termo de Consentimento Livre e Esclarecido, uma via para a pessoa e outra no prontuário. O termo registra também o risco de arrependimento, a chance de falha, as alternativas reversíveis do SUS e que a esterilização não previne IST.' }
     ]
 };
 
@@ -376,14 +376,14 @@ export const STER_STEPS = {
     common: [
         { k: 'Conversa e pedido', t: 'Aconselhamento sobre todos os métodos, inclusive os reversíveis de longa duração. A pessoa registra por escrito a manifestação expressa de vontade.' },
         { k: '60 dias', t: 'Prazo mínimo obrigatório, com acompanhamento por equipe multidisciplinar para desencorajar a esterilização precoce. Pode desistir a qualquer momento, sem prejuízo do atendimento.' },
-        { k: 'Consentimento', t: 'Termo de Consentimento Livre e Esclarecido assinado, com uma via para a pessoa e outra no prontuário. O termo informa que a esterilização não previne IST.' }
+        { k: 'Consentimento', t: 'Termo de Consentimento Livre e Esclarecido assinado, com uma via para a pessoa e outra no prontuário. O termo registra também o risco de arrependimento, a chance de falha, as alternativas reversíveis do SUS e que a esterilização não previne IST.' }
     ],
     tubal: [
-        { k: 'Cirurgia', t: 'Em serviço adequado, com equipe treinada. Pode ser feita no parto, vaginal ou cesariano, se os 60 dias foram cumpridos antes. SUS: 04.09.06.018-6 (laqueadura) e 04.11.01.004-2 (cesariana com laqueadura).' },
+        { k: 'Cirurgia', t: 'Em serviço adequado, com equipe treinada. Pode ser feita no parto, vaginal ou cesariano, se os 60 dias foram cumpridos antes. A cesariana não pode ser indicada principalmente para a laqueadura. SUS: 04.09.06.018-6 (laqueadura) e 04.11.01.004-2 (cesariana com laqueadura).' },
         { k: 'Depois', t: 'Preservativo continua indicado para prevenir IST.' }
     ],
     vas: [
-        { k: 'Cirurgia', t: 'Em ambulatório, geralmente com anestesia local e sem internação. SUS: 04.09.04.024-0.' },
+        { k: 'Cirurgia', t: 'Em ambulatório, geralmente com anestesia local e, na maioria dos casos, sem internação. SUS: 04.09.04.024-0.' },
         { k: 'Depois', t: 'A vasectomia só vale após 3 meses: até lá, usar outro método. O espermograma confirma, quando disponível.' }
     ],
     facts: {

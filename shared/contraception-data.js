@@ -338,6 +338,5 @@ export const OUT_OF_SCOPE = [
     'Preservativos e outros métodos de barreira',
     'Métodos de percepção da fertilidade',
     'Amenorreia da lactação (LAM) e coito interrompido',
-    'Esterilização cirúrgica feminina e masculina',
     'Anticoncepção de emergência (pílula e DIU de cobre)'
 ];

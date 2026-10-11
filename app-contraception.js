@@ -101,14 +101,14 @@
             const done = itemDone(item, state.screen, state.answers);
             const choice = item.kind === 'choice';
             const expanded = searching || choice || v === 'yes';
-            const btn = (val, label) => `<button type="button" class="ct-yn-btn${v === val ? ' on' : ''}" aria-pressed="${v === val}" data-action="screen" data-item="${item.id}" data-v="${val}">${esc(label)}</button>`;
+            const btn = (val, label) => `<button type="button" class="ct-yn-btn${v === val ? ' on' : ''}" aria-pressed="${v === val}" data-key="yn.${item.id}.${val}" data-action="screen" data-item="${item.id}" data-v="${val}">${esc(label)}</button>`;
             const controls = (searching || choice) ? '' : `<div class="ct-yn" role="group" aria-label="${esc(item.prompt)}">${btn('no', item.noLabel || 'Não')}${btn('yes', item.yesLabel || 'Sim')}</div>`;
             const body = expanded ? `${qs.map(q => questionHtml(q, hits && hits.get(q.id), choice && !searching)).join('')}` : '';
             return `<div class="ct-tri${done ? ' done' : ''}" data-item="${item.id}"><div class="ct-tri-head"><span class="ct-tri-check" aria-hidden="true">${done ? '✓' : ''}</span><strong>${esc(item.prompt)}</strong></div>${controls}${body ? `<div class="ct-tri-body">${body}</div>` : ''}</div>`;
         }).join('');
         if (!rows) return '';
         const pct = Math.round(prog.done / prog.total * 100);
-        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : phaseHtml() + prefsHtml()}<div class="ct-tris">${rows}</div></section>`;
+        return `<section class="ct-triage" id="ctTriage"><header><h3>Triagem essencial</h3><span>${prog.done} de ${prog.total}</span></header><div class="ct-prog" role="progressbar" aria-label="Triagem essencial" aria-valuetext="${prog.done} de ${prog.total} perguntas" aria-valuemin="0" aria-valuemax="${prog.total}" aria-valuenow="${prog.done}"><i style="width:${pct}%"></i></div>${searching ? '' : phaseHtml() + prefsHtml()}<div class="ct-tris">${rows}</div></section>`;
     }
 
     function profileHtml() {
@@ -159,13 +159,26 @@
         const verdict = !sel
             ? '<p class="ct-cert ct-cert-pending"><b>Pendente.</b> Informe a idade e os filhos vivos: sem isso o resultado não vale.</p>'
             : LEGAL_OK.includes(sel)
-                ? '<p class="ct-cert ct-cert-ok"><b>Atende à lei quanto a idade e filhos.</b> Falta cumprir o prazo de 60 dias, o aconselhamento e o termo de consentimento.</p>'
+                ? '<p class="ct-cert ct-cert-ok"><b>Atende à lei quanto a idade e filhos.</b> Falta cumprir o prazo de 60 dias, o aconselhamento e o termo de consentimento. A manifestação não vale sob álcool, drogas ou estado emocional alterado, e absolutamente incapazes só com autorização judicial.</p>'
                 : `<div class="ct-alert" role="alert"><strong>Não atende à lei.</strong> ${esc(q.options.find(o => o.id === sel).note)}</div>`;
         const rules = STER_LAW.items.map(i => `<li><b>${esc(i.k)}.</b> ${esc(i.t)}</li>`).join('');
         return `<section class="ct-card ct-legal"><h3>Critério legal</h3>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
     }
 
     // Leitura da esterilização (laqueadura e vasectomia): números-chave e etapas do pedido à cirurgia.
+    // Copia com a API moderna e, sem ela, com execCommand (HTTP, WebView antigo).
+    function copyText(text) {
+        if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+        return new Promise((resolve, reject) => {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
+            document.body.appendChild(ta); ta.select();
+            const ok = document.execCommand && document.execCommand('copy');
+            ta.remove();
+            ok ? resolve() : reject(new Error('copy'));
+        });
+    }
+
     function sterReaderHtml(kind) {
         const { STER_STEPS: S } = M();
         const facts = S.facts[kind].map(([k, t, note]) => `<div class="ct-fact"><small>${esc(k)}</small><strong>${esc(t)}</strong>${note ? `<span>${esc(note)}</span>` : ''}</div>`).join('');
@@ -199,10 +212,10 @@
 
     function certChip(m) {
         if (m.legalPending) return '<p class="ct-cert ct-cert-pending"><b>Provisório</b> · confirme idade e filhos vivos (critério legal)</p>';
-        if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec' || m.category >= 4) return '';
+        if (!M().METHOD_LIST.includes(m.id) || m.scale !== 'mec' || m.category >= 4 || m.section === 'na') return '';
         const miss = missingTitles(m.id);
         return miss.length
-            ? `<p class="ct-cert ct-cert-pending"><b>Provisório</b> · falta responder: ${miss.map(esc).join(', ')}</p>`
+            ? `<p class="ct-cert ct-cert-pending"><b>Provisório</b> · falta responder: ${miss.length > 4 ? `${miss.length} perguntas da triagem` : miss.map(esc).join(', ')}</p>`
             : '<p class="ct-cert ct-cert-ok"><b>Confirmado</b> · todas as perguntas que podem restringir este método foram respondidas</p>';
     }
 
@@ -223,7 +236,7 @@
 
     function familyNavHtml() {
         const cur = FAMILIES.find(f => f.id === state.family);
-        const rows = FAMILIES.map(f => `<button type="button" class="ct-famrow${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}"><span><strong>${f.title}</strong><small>${f.sub}</small></span><i aria-hidden="true">✓</i></button>`).join('');
+        const rows = FAMILIES.map(f => `<button type="button" class="ct-famrow${state.family === f.id ? ' on' : ''}" aria-pressed="${state.family === f.id}" data-action="family" data-v="${f.id}" data-key="fam.${f.id}"><span><strong>${f.title}</strong><small>${f.sub}</small></span><i aria-hidden="true">✓</i></button>`).join('');
         return `<details class="ct-famsel"><summary><span class="ct-famsel-label">Tipo de método</span><strong>${cur.title}</strong><small>${cur.sub}</small></summary><div class="ct-famlist">${rows}</div></details>`;
     }
 
@@ -345,7 +358,7 @@
     function summaryTab(id, full, m) {
         const info = full.info || { about: [], points: [] };
         const hasProfile = M().selectedOptions(state.answers).length > 0;
-        const secTitle = (m.section === 'na') ? 'Não se aplica' : ({ indicated: 'Indicado', depends: 'Depende do caso', discouraged: 'Desaconselhado', contraindicated: 'Contraindicado', caution: 'Com cautela', special: 'Serviço especializado', delay: 'Adiar' })[m.section];
+        const secTitle = (m.section === 'na') ? 'Não se aplica' : ({ indicated: 'Indicado', depends: 'Depende do caso', discouraged: 'Desaconselhado', contraindicated: 'Contraindicado', caution: 'Com cautela', special: 'Serviço especializado', delay: 'Adiar', legal: 'Não permitido pela lei', pending: 'Falta o critério legal' })[m.section];
         const reasons = m.drivers.length
             ? `<ul class="ct-reasons">${m.drivers.map(d => `<li><b>${esc(d.display)}</b> ${esc(d.optionLabel)}${d.note ? `<small>${esc(d.note)}</small>` : ''}</li>`).join('')}</ul>`
             : `<p class="ct-muted">${hasProfile ? 'Nenhuma condição marcada restringe este método.' : 'Marque condições no perfil para ver o que se aplica a esta paciente.'}</p>`;
@@ -359,7 +372,8 @@
         const about = info.about.length ? `<section class="ct-card"><h3>Sobre o método</h3>${info.about.map(t => bullets(t)).join('')}</section>` : '';
         const points = info.points.length ? `<section class="ct-card"><h3>Pontos de atenção</h3><ul class="ct-points">${info.points.map(t => `<li>${rich(t)}</li>`).join('')}</ul></section>` : '';
         const sti = info.protects ? '' : `<p class="ct-sti">${esc(M().STI_NOTE)}</p>`;
-        return status + ratesCard(id, m) + about + points + sti;
+        const legalNote = m.legalPending ? '<section class="ct-card"><p class="ct-cert ct-cert-pending"><b>Provisório</b> · confirme idade e filhos vivos (critério legal, Lei 9.263/1996) na tela da Esterilização.</p></section>' : '';
+        return status + legalNote + ratesCard(id, m) + about + points + sti;
     }
 
     // Todas as seções em sequência, em texto corrido: sem menu interno para rolar.
@@ -405,7 +419,7 @@
         if (!r) return;
         const text = `${r.title}\n${r.lines.join('\n')}`;
         const old = btn.textContent;
-        (navigator.clipboard?.writeText(text) ?? Promise.reject()).then(() => { btn.textContent = 'Copiado'; }, () => { btn.textContent = 'Não copiou'; }).finally(() => setTimeout(() => { btn.textContent = old; }, 1500));
+        copyText(text).then(() => { btn.textContent = 'Copiado'; }, () => { btn.textContent = 'Não copiou'; }).finally(() => setTimeout(() => { btn.textContent = old; }, 1500));
     }
 
     function sheetBodyHtml() {
@@ -445,6 +459,7 @@
         el.hidden = false;
         syncTabIndex();
         root.querySelectorAll('.ct-bar, .ct-layout').forEach(n => { n.inert = true; });
+        const hdr = root.closest('#quickToolView')?.querySelector('.reader-header'); if (hdr) hdr.inert = true;
         el.querySelector('#ctSheetBody').scrollTop = 0;
         el.querySelector('[data-action="sheet-close"]')?.focus({ preventScroll: true });
     }
@@ -468,6 +483,7 @@
         el.hidden = true;
         el.innerHTML = '';
         root.querySelectorAll('.ct-bar, .ct-layout').forEach(n => { n.inert = false; });
+        const hdr = root.closest('#quickToolView')?.querySelector('.reader-header'); if (hdr) hdr.inert = false;
         const id = state.sheet;
         state.sheet = null;
         root.querySelector(`[data-action="method"][data-id="${id}"]`)?.focus({ preventScroll: true });
@@ -531,7 +547,7 @@
         const profile = selectedOptions(state.answers).map(s => `- ${s.option.label}`).join('\n') || '- Nenhuma condição marcada';
         const lines = res.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
         const text = `${fam.title} (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
-        (navigator.clipboard?.writeText(text) ?? Promise.reject()).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
+        copyText(text).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
     }
 
     function toast(message) {
@@ -597,6 +613,7 @@
             state.family = v;
             refresh({ profile: false });
             root.querySelector('#ctResult').scrollTop = 0;
+            root.querySelector('.ct-famsel summary')?.focus({ preventScroll: true });
         } else if (action === 'lam') {
             state.lam[v] = !state.lam[v];
             refresh({ profile: false });
@@ -609,7 +626,7 @@
         } else if (action === 'clear') {
             if (!state.clearArmed) {
                 state.clearArmed = true;
-                el.textContent = 'Toque de novo para limpar';
+                el.textContent = 'Toque de novo para limpar'; el.setAttribute('aria-live', 'polite');
                 clearTimeout(clearTimer);
                 clearTimer = setTimeout(() => { state.clearArmed = false; el.textContent = 'Limpar tudo'; }, 3000);
                 return;
@@ -676,7 +693,8 @@
             root.removeEventListener('input', onInput);
             root.removeEventListener('keydown', onKey);
             root.removeEventListener('toggle', onToggle, true);
-            Object.assign(state, { answers: {}, screen: {}, phase: 'start', prefs: { noHormone: false, longActing: false }, query: '', tab: 'profile', family: 'core', lam: { amenorrhea: false, fullBf: false, lt6m: false }, sheet: null });
+            Object.assign(state, { answers: {}, screen: {}, phase: 'start', prefs: { noHormone: false, longActing: false }, query: '', tab: 'profile', family: 'core', lam: { amenorrhea: false, fullBf: false, lt6m: false }, sheet: null, sheetTab: 'summary', clearArmed: false, legendOpen: false, open: new Set(['perfil']) });
+            clearTimeout(clearTimer);
             root = null;
         }
     };

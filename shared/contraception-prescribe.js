@@ -359,26 +359,19 @@ export const PRESCRIBE = {
         ]
     },
     tubal: {
-        sources: ['nt34', 'ms2016'],
+        sources: ['nt34'],
         substances: [
             { name: 'Laqueadura tubária', form: 'Procedimento cirúrgico; códigos SIGTAP 04.09.06.018-6 e 04.11.01.004-2', sus: true, brands: [] }
         ],
         rx: [],
         dosing: [
-            { k: 'Quem pode (Lei 9.263/1996, art. 10, com a Lei 14.443/2022)', t: 'Mulheres e homens com capacidade civil plena e maiores de 21 anos ou, pelo menos, com 2 filhos vivos, respeitado o prazo mínimo de 60 dias entre a manifestação da vontade e o ato cirúrgico. Nesse período a pessoa recebe acesso a serviço de regulação da fecundidade, inclusive aconselhamento por equipe multidisciplinar, para desencorajar a esterilização precoce. Também é permitida em caso de risco à vida ou à saúde da mulher ou do futuro concepto, atestado em relatório escrito e assinado por 2 médicos.' },
+            { k: 'Quem pode (Lei 9.263/1996, art. 10, com a Lei 14.443/2022)', t: 'Mulheres e homens com capacidade civil plena e maiores de 21 anos ou, pelo menos, com 2 filhos vivos, respeitado o prazo mínimo de 60 dias entre a manifestação da vontade e o ato cirúrgico. Nesse período a pessoa recebe acesso ao serviço de planejamento reprodutivo, inclusive aconselhamento por equipe multidisciplinar, para desencorajar a esterilização precoce. Também é permitida em caso de risco à vida ou à saúde da mulher ou do futuro concepto, atestado em relatório escrito e assinado por 2 médicos.' },
             { k: 'O que mudou em 2022', t: 'A idade mínima passou de 25 para 21 anos. Há prazo mínimo de 60 dias. Não é mais necessário o consentimento do cônjuge. Não se exige mais o histórico de cesarianas sucessivas para a laqueadura durante a cesárea.' },
             { k: 'No parto', t: 'A esterilização cirúrgica durante o parto é garantida à solicitante se for observado o prazo mínimo de 60 dias entre a manifestação da vontade e o parto e houver condições médicas adequadas. O parto, vaginal ou cesariano, é momento propício, e também permite inserir DIU sem prolongar a internação.' },
             { k: 'Passo a passo no serviço', t: 'Registrar a manifestação expressa de vontade (modelo no Anexo I da Nota Técnica 34/2023), o que inicia os 60 dias. Acompanhar por equipe multiprofissional, com avaliação de riscos e benefícios de cada método e oferta dos reversíveis de longa duração. Se a decisão se mantiver, registrar o Termo de Consentimento Livre e Esclarecido (TCLE), com uma via para a pessoa e outra no prontuário. O TCLE deve dizer que a esterilização não previne IST e destacar o uso do preservativo.' },
             { k: 'Restrições legais', t: 'Antes dos 18 anos, só com emancipação, mesmo com 2 filhos vivos. Não vale a manifestação de vontade expressa sob álcool, drogas, estados emocionais alterados ou incapacidade mental temporária ou permanente. Em pessoas absolutamente incapazes, só com autorização judicial.' },
-            { k: 'Prazo para métodos', t: 'O SUS deve disponibilizar qualquer método ou técnica de contracepção em no máximo 30 dias (art. 9º, § 2º). Lembre que a escolha deve ser compartilhada, nunca imposta.' },
+            { k: 'Prazo do serviço (30 dias)', t: 'Não confundir com os 60 dias da pessoa: o serviço de saúde tem no máximo 30 dias para oferecer qualquer método ou técnica de contracepção (art. 9º, § 2º). A escolha deve ser compartilhada, nunca imposta.' },
             { k: 'Critérios clínicos', t: 'Veja a aba Restrições (A, C, D e S da OMS) e os cuidados de cada condição.' }
         ]
     }
 };
-
-// Lei 14.443/2022 na vasectomia (mesmas regras da laqueadura).
-export const VASECTOMY_LAW = [
-    { k: 'Quem pode', t: 'Homens com capacidade civil plena e maiores de 21 anos ou, pelo menos, com 2 filhos vivos, com prazo mínimo de 60 dias entre a manifestação da vontade e a cirurgia e aconselhamento por equipe multidisciplinar (Lei 9.263/1996, art. 10, com a Lei 14.443/2022).' },
-    { k: 'Consentimento', t: 'Não é mais necessário o consentimento do cônjuge. Registrar a manifestação de vontade e o TCLE (modelos na Nota Técnica 34/2023 do Ministério da Saúde).' },
-    { k: 'SUS', t: 'Procedimento 04.09.04.024-0 (vasectomia). Costuma ser feita com anestesia local, em ambulatório, sem internação na maioria dos casos.' }
-];
