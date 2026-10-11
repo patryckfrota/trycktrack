@@ -162,7 +162,7 @@
                 ? '<p class="ct-cert ct-cert-ok"><b>Atende à lei quanto a idade e filhos.</b> Falta cumprir o prazo de 60 dias, o aconselhamento e o termo de consentimento. A manifestação não vale sob álcool, drogas ou estado emocional alterado, e absolutamente incapazes só com autorização judicial.</p>'
                 : `<div class="ct-alert" role="alert"><strong>Não atende à lei.</strong> ${esc(q.options.find(o => o.id === sel).note)}</div>`;
         const rules = STER_LAW.items.map(i => `<li><b>${esc(i.k)}.</b> ${esc(i.t)}</li>`).join('');
-        return `<section class="ct-card ct-legal"><h3>Critério legal</h3>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
+        return `<section class="ct-card ct-legal"><h3>Critério legal</h3><p class="ct-muted">Idade e filhos vivos da pessoa</p>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
     }
 
     // Leitura da esterilização (laqueadura e vasectomia): números-chave e etapas do pedido à cirurgia.
@@ -496,12 +496,12 @@
         return `<div class="ct" data-tab="${state.tab}">
             <div class="ct-bar">
                 <div class="ct-tabs" role="tablist">
-                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="profile" aria-controls="ctPanelProfile" aria-selected="${state.tab === 'profile'}">Perfil <em id="ctProfileCount"></em></button>
-                    <button type="button" role="tab" class="ct-tab" data-action="tab" data-v="result" aria-controls="ctResult" aria-selected="${state.tab === 'result'}">Resultado <em id="ctResultCount"></em></button>
+                    <button type="button" role="tab" id="ctTabProfile" class="ct-tab" data-action="tab" data-v="profile" aria-controls="ctPanelProfile" aria-selected="${state.tab === 'profile'}">Perfil <em id="ctProfileCount"></em></button>
+                    <button type="button" role="tab" id="ctTabResult" class="ct-tab" data-action="tab" data-v="result" aria-controls="ctResult" aria-selected="${state.tab === 'result'}">Resultado <em id="ctResultCount"></em></button>
                 </div>
             </div>
             <div class="ct-layout">
-                <section class="ct-profile" id="ctPanelProfile" role="tabpanel" aria-label="Perfil da paciente">
+                <section class="ct-profile" id="ctPanelProfile" role="tabpanel" aria-labelledby="ctTabProfile">
                     <div class="qt-panel">
                         <div class="qt-panel-head"><h2 class="qt-panel-title">Perfil da paciente</h2><button type="button" class="qt-ghost" data-action="clear">Limpar tudo</button></div>
                         <div id="ctSummary"></div>
@@ -509,7 +509,7 @@
                     </div>
                     <div id="ctProfile"></div>
                 </section>
-                <section class="ct-result" id="ctResult" role="tabpanel" aria-label="Resultado"></section>
+                <section class="ct-result" id="ctResult" role="tabpanel" aria-labelledby="ctTabResult"></section>
                 <div class="ct-sr" id="ctLive" aria-live="polite"></div>
             </div>
             <div class="ct-sheet" id="ctSheet" hidden role="dialog" aria-modal="true" aria-label="Detalhes do método"></div>
@@ -528,14 +528,18 @@
         root.querySelector('#ctSummary').innerHTML = summaryHtml();
         const resultEl = root.querySelector('#ctResult');
         const keepTop = resultEl.scrollTop;
+        const openKeys = new Set([...resultEl.querySelectorAll('details.ct-cond[open], details.ct-legend[open]')].map(d => d.querySelector('summary')?.innerText.trim()));
         resultEl.innerHTML = resultHtml();
+        resultEl.querySelectorAll('details.ct-cond, details.ct-legend').forEach(d => { if (openKeys.has(d.querySelector('summary')?.innerText.trim())) d.open = true; });
         resultEl.scrollTop = keepTop;
         const pr = M().screeningProgress(state.screen, state.answers);
         root.querySelector('#ctProfileCount').textContent = `${pr.done}/${pr.total}`;
         root.querySelector('#ctResultCount').textContent = (() => { if (!M().selectedOptions(state.answers).length && !pr.done) return '—'; const n = resultBadge(); return `${n} indicado${n === 1 ? '' : 's'}`; })();
         root.querySelector('.ct').dataset.tab = state.tab;
         const nInd = resultBadge();
-        root.querySelector('#ctLive').textContent = `Resultado atualizado: ${nInd} método${nInd === 1 ? '' : 's'} indicado${nInd === 1 ? '' : 's'}.`;
+        const liveEl = root.querySelector('#ctLive');
+        const liveMsg = `Resultado atualizado: ${nInd} método${nInd === 1 ? '' : 's'} indicado${nInd === 1 ? '' : 's'}.`;
+        if (liveEl.textContent !== liveMsg) liveEl.textContent = liveMsg;
         syncTabIndex();
         if (focusKey) root.querySelector(`[data-key="${focusKey}"]`)?.focus({ preventScroll: true });
     }
