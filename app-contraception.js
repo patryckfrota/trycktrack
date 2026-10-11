@@ -298,8 +298,7 @@
             const sterConds = state.family === 'ster' ? sterConditionsHtml() : '';
             body = `${banner}${warn}${legal}${notices}${state.family === 'ster' ? '' : intro}${groupsHtml(res)}${sterConds}${res.page ? `<p class="ct-source">OMS, MEC 2025, p. ${res.page}.</p>` : ''}`;
         }
-        const copy = (state.family === 'lam' || state.family === 'ci' || state.family === 'vas') ? '' : '<button type="button" class="qt-ghost" data-action="copy">Copiar resumo</button>';
-        return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div>${copy}</div>${body}${legendHtml()}`;
+        return `${familyNavHtml()}<div class="ct-result-head"><div><h2 class="ct-sr">${esc(fam.title)}</h2><div class="ct-sums">${sums}</div></div></div>${body}${legendHtml()}`;
     }
 
     function resultBadge() {
@@ -534,24 +533,6 @@
         if (focusKey) root.querySelector(`[data-key="${focusKey}"]`)?.focus({ preventScroll: true });
     }
 
-    function copySummary() {
-        const { evaluateAll, selectedOptions, MEC_SOURCE } = M();
-        const fam = FAMILIES.find(f => f.id === state.family);
-        const res = evaluateAll(state.answers, evalOpts())[state.family];
-        const profile = selectedOptions(state.answers).map(s => `- ${s.option.label}`).join('\n') || '- Nenhuma condição marcada';
-        const lines = res.groups.map(g => `${g.title}:\n${g.methods.map(m => `  ${m.display} · ${m.short}`).join('\n')}`).join('\n');
-        const text = `${fam.title} (${state.phase === 'start' ? 'início' : 'continuação'}) · ${MEC_SOURCE.short}\nPerfil:\n${profile}\n\n${lines}`;
-        copyText(text).then(() => toast('Resumo copiado'), () => toast('Não foi possível copiar'));
-    }
-
-    function toast(message) {
-        const btn = root?.querySelector('[data-action="copy"]');
-        if (!btn) return;
-        const old = btn.textContent;
-        btn.textContent = message;
-        setTimeout(() => { btn.textContent = old; }, 1600);
-    }
-
     // "Não": limpa as opções do item. "Sim": abre as perguntas (e já marca quando só há uma opção).
     function setScreen(itemId, v) {
         const item = M().screeningItem(itemId);
@@ -631,8 +612,6 @@
             root.querySelectorAll('[data-action="pref"]').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
             root.querySelector('#ctSearch').value = '';
             refresh();
-        } else if (action === 'copy') {
-            copySummary();
         }
     }
 
