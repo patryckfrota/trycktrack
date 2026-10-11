@@ -161,8 +161,8 @@
             : LEGAL_OK.includes(sel)
                 ? '<p class="ct-cert ct-cert-ok"><b>Atende à lei quanto a idade e filhos.</b> Falta cumprir o prazo de 60 dias, o aconselhamento e o termo de consentimento. A manifestação não vale sob álcool, drogas ou estado emocional alterado, e absolutamente incapazes só com autorização judicial.</p>'
                 : `<div class="ct-alert" role="alert"><strong>Não atende à lei.</strong> ${esc(q.options.find(o => o.id === sel).note)}</div>`;
-        const rules = STER_LAW.items.map(i => `<li><b>${esc(i.k)}.</b> ${esc(i.t)}</li>`).join('');
-        return `<section class="ct-card ct-legal"><h3>Critério legal</h3><p class="ct-muted">Idade e filhos vivos da pessoa</p>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-points">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
+        const rules = STER_LAW.items.map(i => `<li><b>${esc(i.k)}</b><span>${esc(i.t)}</span></li>`).join('');
+        return `<section class="ct-card ct-legal"><h3>Critério legal</h3><p class="ct-muted">Idade e filhos vivos da pessoa</p>${questionHtml(q, null, true)}${verdict}<details class="ct-legend"><summary>${esc(STER_LAW.title)}</summary><ul class="ct-law">${rules}</ul><p class="ct-fine">${esc(STER_LAW.source)}</p></details></section>`;
     }
 
     // Leitura da esterilização (laqueadura e vasectomia): números-chave e etapas do pedido à cirurgia.

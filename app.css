@@ -7367,3 +7367,16 @@ mark.reader-highlight-mark.has-note { text-decoration: underline dotted; text-un
             .ct-stab em { margin-left: 2px; padding: 1px 4px; font-size: 10px; }
         }
         .ct-row-k .ct-badge { display: inline-grid; vertical-align: middle; margin-right: 8px; }
+        /* listas dentro das legendas recolhíveis: o flex da legenda de categorias não vale para texto corrido */
+        .ct-legend .ct-points { list-style: disc; padding-left: 20px; gap: 8px; margin: 10px 0; }
+        .ct-legend .ct-points li { display: list-item; font-size: 13.5px; line-height: 1.6; }
+        .ct-law { display: grid; margin: 8px 0 4px; padding: 0; list-style: none; }
+        .ct-legend .ct-law li { display: grid; gap: 4px; align-items: start; padding: 12px 0; border-top: 1px solid var(--border-color); }
+        .ct-legend .ct-law li:first-child { border-top: 0; }
+        .ct-legend .ct-law b { color: var(--text-main); font-size: 14px; font-weight: 700; }
+        .ct-legend .ct-law span:not(.ct-badge) { color: var(--text-secondary); font-size: 13.5px; line-height: 1.65; }
+        .ct-legend .ct-changes { gap: 0; margin: 8px 0 4px; }
+        .ct-legend .ct-changes li { display: grid; gap: 4px; align-items: start; padding: 12px 0; border-top: 1px solid var(--border-color); }
+        .ct-legend .ct-changes li:first-child { border-top: 0; }
+        .ct-legend .ct-changes li b { font-size: 14px; font-weight: 700; }
+        .ct-legend .ct-changes li span:not(.ct-badge) { font-size: 13.5px; line-height: 1.65; }
