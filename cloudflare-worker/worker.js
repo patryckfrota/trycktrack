@@ -36,6 +36,7 @@ const FICHAS = Object.fromEntries([fichaSindromesCoronarianas].map(ficha => [fic
 // localhost cobre o teste local do app (python3 -m http.server).
 const ALLOWED_ORIGINS = [
     'https://patryckfrota.github.io',
+    'https://trycktrack.vercel.app',
 ];
 
 function corsHeaders(origin) {

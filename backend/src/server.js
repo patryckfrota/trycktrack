@@ -27,6 +27,7 @@ autoWrapAsyncRoutes(app);
 // do primeiro deploy.
 const ALLOWED_ORIGINS = new Set([
   'https://patryckfrota.github.io',
+  'https://trycktrack.vercel.app',
 ]);
 function isAllowedOrigin(origin) {
   if (!origin) return false;
