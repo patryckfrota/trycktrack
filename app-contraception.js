@@ -228,9 +228,9 @@
 
     function vasHtml() {
         const { VASECTOMY: V } = M();
-        const when = V.when.map(w => `<p class="ct-info"><b>${esc(w.k)}.</b> ${esc(w.t)}</p>`).join('');
-        const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span>${esc(g.label)} (${g.cat})</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li><b>${g.cat}</b><span>${esc(it)}</span></li>`).join('')}</ul></details>`).join('');
-        return `${legalCardHtml()}${sterReaderHtml('vas')}${attentionHtml(V.intro)}<section class="ct-group"><header><h3>Depois do procedimento</h3></header>${when}</section><section class="ct-group"><header><h3>Condições do homem</h3><span>A OMS usa A (aceitar), C (cautela), D (adiar) e S (serviço especializado)</span></header>${groups}</section><p class="ct-source">${esc(V.source)}.</p>`;
+        const when = V.when.map(w => `<div class="ct-row"><div class="ct-row-k">${esc(w.k)}</div><div class="ct-row-t">${esc(w.t)}</div></div>`).join('');
+        const groups = V.conditions.map((g, i) => `<details class="ct-cond"${i < 2 ? ' open' : ''}><summary><span class="ct-badge ct-let-${g.cat}" aria-hidden="true">${g.cat}</span><span class="ct-cond-title">${esc(g.label)}</span><em>${g.items.length}</em></summary><ul>${g.items.map(it => `<li>${esc(it)}</li>`).join('')}</ul></details>`).join('');
+        return `${legalCardHtml()}${sterReaderHtml('vas')}${attentionHtml(V.intro)}<section class="ct-card ct-card-flush"><h3>Depois do procedimento</h3><div class="ct-rows">${when}</div></section><section class="ct-card"><h3>Condições de saúde do homem</h3><p class="ct-muted">Classificação da OMS: A aceitar, C cautela, D adiar e S serviço especializado.</p><div class="ct-conds">${groups}</div></section><p class="ct-source">${esc(V.source)}.</p>`;
     }
 
     function legendHtml() {
